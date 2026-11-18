@@ -71,19 +71,37 @@ def youtube(spec, path):
         except Exception as e: note += f"; thumbnail skipped ({e})"
     return f"https://youtube.com/shorts/{vid}", vid, f"Uploaded video {vid}{note}"
 
+def mp4_boxes(path):
+    """Top-level MP4 box order and the raw moov box."""
+    order, moov = [], b""
+    with open(path, "rb") as f:
+        while True:
+            h = f.read(8)
+            if len(h) < 8: break
+            n, typ = int.from_bytes(h[:4], "big"), h[4:].decode("latin-1"); hdr = 8
+            if n == 1: n = int.from_bytes(f.read(8), "big"); hdr = 16
+            order.append(typ)
+            if typ == "moov": moov = f.read(n - hdr)
+            elif n == 0: break
+            else: f.seek(n - hdr, 1)
+    return order, moov
+
 def instagram_fit(path):
     """Instagram Reels API delivery spec: H.264 High, 4:2:0, closed GOP, <=25 Mbps video, AAC 128 kbps 48 kHz stereo,
-    <=300 MB, faststart. Re-encode from our master at the best quality that stays inside those limits."""
+    <=300 MB, moov atom at the front, NO edit lists (so no B-frames: they make ffmpeg write one). Re-encode from our master at the best quality that stays inside those limits."""
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]).strip())
     cap_k = min(18_000, int((IG_MAX * 0.93 * 8 / dur - 128_000) / 1000))      # every second under 25 Mbps, file under 300 MB
     report(step="preparing Instagram file", log=f"Encoding to Instagram's Reels spec (H.264, ≤{cap_k} kb/s, AAC 128k/48k, ≤300 MB)")
     out = path.replace(".mp4", "_ig.mp4")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-c:v", "libx264", "-preset", "slow", "-tune", "grain", "-crf", "14",
                     "-maxrate", f"{cap_k}k", "-bufsize", f"{cap_k}k", "-pix_fmt", "yuv420p", "-profile:v", "high", "-level:v", "4.2",
-                    "-g", "48", "-keyint_min", "24", "-sc_threshold", "0", "-flags", "+cgop", "-r", "24",
+                    "-bf", "0", "-g", "48", "-keyint_min", "24", "-sc_threshold", "0", "-flags", "+cgop", "-r", "24",
                     "-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-ac", "2",
-                    "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", out], check=True)
+                    "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", "-use_editlist", "0", out], check=True)
     size = os.path.getsize(out)
+    order, moov = mp4_boxes(out)
+    if "moov" not in order or "mdat" not in order or order.index("moov") > order.index("mdat"): raise RuntimeError(f"moov atom is not at the front ({order})")
+    if b"elst" in moov: raise RuntimeError("Instagram file still has an MP4 edit list (Reels spec forbids it)")
     if size > IG_MAX: raise RuntimeError(f"Instagram file is still {size / 1e6:.0f} MB (limit 300 MB)")
     return out
 
@@ -92,33 +110,46 @@ def instagram(spec, path):
     IG = ig.get("api_base") or IG_API; ver = IG.rsplit("/", 1)[-1]
     path = instagram_fit(path); size = os.path.getsize(path)
     print(f"Instagram file: {size / 1e6:.0f} MB")
-    report(step="creating Instagram reel", log=f"Creating Reels container ({size / 1e6:.0f} MB)")
-    params = {"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok}
-    if spec.get("cover_url"): params["cover_url"] = spec["cover_url"]      # our designed cover instead of a random frame
-    try: c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
-    except RuntimeError as e:
-        if "cover_url" not in params: raise
-        report(log=f"Instagram refused the cover ({e}); posting with its default cover")
-        params.pop("cover_url"); c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
-    cid, uri = c["id"], c.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{ver}/{c['id']}"
-    report(step="uploading to Instagram", log=f"Container {cid} created; uploading {size / 1e6:.0f} MB")
-    try:
-        with open(path, "rb") as f:
-            req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": "0", "file_size": str(size),
-                                                                               "Content-Length": str(size), "Content-Type": "application/octet-stream"})
-            with urllib.request.urlopen(req, timeout=1800) as r: up = json.loads(r.read() or b"{}")
-    except urllib.error.HTTPError as e:
-        body = e.read().decode(errors="replace")[:600]
-        st = call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
-        raise RuntimeError(f"Instagram refused the upload ({e.code}): {body} | container status: {st}")
-    if not up.get("success", True): raise RuntimeError(f"Instagram upload failed: {up}")
-    for i in range(90):                                   # Instagram processes the video (up to ~15 min)
-        s = call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
-        report(step=f"Instagram processing ({s.get('status_code')})")
-        if s.get("status_code") == "FINISHED": break
-        if s.get("status_code") in ("ERROR", "EXPIRED"): raise RuntimeError(f"Instagram could not process the video: {s.get('status')}")
-        time.sleep(10)
-    else: raise RuntimeError("Instagram processing timed out")
+    q = lambda cid: call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
+    errors = []
+    for attempt in (1, 2):                                # Meta: retry the upload; if it still fails, start a new container
+        report(step="creating Instagram reel", log=f"Creating Reels container ({size / 1e6:.0f} MB){' (new container, attempt 2)' if attempt > 1 else ''}")
+        params = {"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok}
+        if spec.get("cover_url"): params["cover_url"] = spec["cover_url"]      # our designed cover instead of a random frame
+        try: c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
+        except RuntimeError as e:
+            if "cover_url" not in params: raise
+            report(log=f"Instagram refused the cover ({e}); posting with its default cover")
+            params.pop("cover_url"); c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
+        cid, uri = c["id"], c.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{ver}/{c['id']}"
+        uploaded = False
+        for tryno in (1, 2):
+            report(step="uploading to Instagram", log=f"Container {cid}: uploading {size / 1e6:.0f} MB (try {tryno})")
+            try:
+                with open(path, "rb") as f:
+                    req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": "0", "file_size": str(size),
+                                                                                       "Content-Length": str(size), "Content-Type": "application/octet-stream"})
+                    with urllib.request.urlopen(req, timeout=1800) as r: up = json.loads(r.read() or b"{}")
+                if up.get("success", True): uploaded = True; break
+                errors.append(f"upload response {up}")
+            except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as e:
+                body = e.read().decode(errors="replace")[:400] if isinstance(e, urllib.error.HTTPError) else str(e)
+                st = q(cid); errors.append(f"container {cid} try {tryno}: {body} | status {st.get('status_code')}: {st.get('status')}")
+                report(log=f"Upload answered with an error: {body} | container status: {st.get('status_code')}")
+                if st.get("status_code") in ("IN_PROGRESS", "FINISHED"):     # the bytes arrived anyway; let Instagram finish
+                    uploaded = True; break
+            time.sleep(30)
+        if not uploaded: continue
+        for i in range(90):                               # Instagram processes the video (up to ~15 min)
+            st = q(cid)
+            report(step=f"Instagram processing ({st.get('status_code')})")
+            if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED"): break
+            time.sleep(10)
+        if st.get("status_code") == "FINISHED": break
+        errors.append(f"container {cid} processing: {st.get('status_code')}: {st.get('status')}")
+        report(log=f"Instagram could not process container {cid}: {st.get('status')}")
+    else:
+        raise RuntimeError("Instagram did not accept the video after 2 containers: " + " || ".join(errors)[:1500])
     p = call("POST", f"{IG}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
     mid = p["id"]
     link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or "https://www.instagram.com/untoldgranth.official/"
