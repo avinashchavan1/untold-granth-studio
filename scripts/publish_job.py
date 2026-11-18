@@ -58,31 +58,40 @@ def youtube(spec, path):
     return f"https://youtube.com/shorts/{vid}", vid, f"Uploaded video {vid}{note}"
 
 def instagram_fit(path):
-    """Instagram's API accepts Reels up to 300 MB: re-encode the master (two-pass, max quality that fits) if needed."""
-    size = os.path.getsize(path)
-    if size <= IG_MAX * 0.97: return path
+    """Instagram Reels API delivery spec: H.264 High, 4:2:0, closed GOP, <=25 Mbps video, AAC 128 kbps 48 kHz stereo,
+    <=300 MB, faststart. Re-encode from our master at the best quality that stays inside those limits."""
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]).strip())
-    vbit = int((IG_MAX * 0.94 * 8 / dur - 320_000) / 1000)
-    report(step="fitting Instagram's 300 MB limit", log=f"Master is {size / 1e6:.0f} MB; re-encoding at {vbit} kb/s (two-pass, veryslow) to fit Instagram's 300 MB API limit")
-    out = path.replace(".mp4", "_ig.mp4"); log = "/tmp/ig2pass"
-    common = ["-c:v", "libx264", "-preset", "veryslow", "-tune", "grain", "-b:v", f"{vbit}k", "-pix_fmt", "yuv420p", "-profile:v", "high", "-g", "24", "-passlogfile", log]
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, *common, "-pass", "1", "-an", "-f", "null", "/dev/null"], check=True)
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, *common, "-pass", "2", "-c:a", "aac", "-b:a", "320k", "-ar", "48000",
+    cap_k = min(18_000, int((IG_MAX * 0.93 * 8 / dur - 128_000) / 1000))      # every second under 25 Mbps, file under 300 MB
+    report(step="preparing Instagram file", log=f"Encoding to Instagram's Reels spec (H.264, ≤{cap_k} kb/s, AAC 128k/48k, ≤300 MB)")
+    out = path.replace(".mp4", "_ig.mp4")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-c:v", "libx264", "-preset", "slow", "-tune", "grain", "-crf", "14",
+                    "-maxrate", f"{cap_k}k", "-bufsize", f"{cap_k}k", "-pix_fmt", "yuv420p", "-profile:v", "high", "-level:v", "4.2",
+                    "-g", "48", "-keyint_min", "24", "-sc_threshold", "0", "-flags", "+cgop", "-r", "24",
+                    "-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-ac", "2",
                     "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", out], check=True)
+    size = os.path.getsize(out)
+    if size > IG_MAX: raise RuntimeError(f"Instagram file is still {size / 1e6:.0f} MB (limit 300 MB)")
     return out
 
 def instagram(spec, path):
     ig = spec["instagram"]; tok = ig["access_token"]; uid = ig["user_id"]; print(f"::add-mask::{tok}")
     IG = ig.get("api_base") or IG_API; ver = IG.rsplit("/", 1)[-1]
     path = instagram_fit(path); size = os.path.getsize(path)
+    print(f"Instagram file: {size / 1e6:.0f} MB")
     report(step="creating Instagram reel", log=f"Creating Reels container ({size / 1e6:.0f} MB)")
     q = urllib.parse.urlencode({"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok})
     c = call("POST", f"{IG}/{uid}/media?{q}")
     cid, uri = c["id"], c.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{ver}/{c['id']}"
-    report(step="uploading to Instagram")
-    with open(path, "rb") as f:
-        req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": "0", "file_size": str(size), "Content-Length": str(size)})
-        with urllib.request.urlopen(req, timeout=1800) as r: up = json.loads(r.read() or b"{}")
+    report(step="uploading to Instagram", log=f"Container {cid} created; uploading {size / 1e6:.0f} MB")
+    try:
+        with open(path, "rb") as f:
+            req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": "0", "file_size": str(size),
+                                                                               "Content-Length": str(size), "Content-Type": "application/octet-stream"})
+            with urllib.request.urlopen(req, timeout=1800) as r: up = json.loads(r.read() or b"{}")
+    except urllib.error.HTTPError as e:
+        body = e.read().decode(errors="replace")[:600]
+        st = call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
+        raise RuntimeError(f"Instagram refused the upload ({e.code}): {body} | container status: {st}")
     if not up.get("success", True): raise RuntimeError(f"Instagram upload failed: {up}")
     for i in range(90):                                   # Instagram processes the video (up to ~15 min)
         s = call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
