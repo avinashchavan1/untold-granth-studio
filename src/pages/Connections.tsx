@@ -128,7 +128,7 @@ function ConnectButton({ provider, label, disabled, connected }: { provider: str
     <div className="flex flex-wrap items-center gap-3">
       <Button variant="primary" disabled={disabled} onClick={async () => {
         setErr("");
-        try { const r = await studio<{ url: string }>("oauth_start", { provider }); window.location.href = r.url; } catch (e) { setErr((e as Error).message); }
+        try { const r = await studio<{ url: string }>("oauth_start", { provider, return_to: window.location.origin }); window.location.href = r.url; } catch (e) { setErr((e as Error).message); }
       }}><Link2 size={15} /> {connected ? `Reconnect ${provider}` : label}</Button>
       {disabled && <span className="text-xs text-ink-soft">Save the app keys above first.</span>}
       {err && <span className="text-sm text-vermilion">{err}</span>}

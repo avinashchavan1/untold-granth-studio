@@ -2,7 +2,7 @@
 
 Production studio + publishing app for **Untold Granth** (Instagram @untoldgranth.official · YouTube @untoldgranth).
 
-**App:** https://untold-granth-studio.netlify.app (sign in with an allowed email)
+**App:** https://untold-granth-studio.avinashchavan.com (sign in with an allowed email)
 
 | Part | Where |
 |---|---|

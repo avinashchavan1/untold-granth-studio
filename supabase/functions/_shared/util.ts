@@ -4,7 +4,7 @@ import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2.4
 export const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 export const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 export const ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
-export const APP_URL = "https://untold-granth-studio.netlify.app";
+export const APP_URL = "https://untold-granth-studio.avinashchavan.com";
 export const FN_URL = `${SUPABASE_URL}/functions/v1`;
 export const REPO = "avinashchavan1/untold-granth-studio";
 export const HF_REPO = "Avinash1443/untold-granth-masters";
