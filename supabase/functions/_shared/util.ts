@@ -74,17 +74,25 @@ export async function instagramToken(): Promise<{ token: string; user_id: string
   return { token: ig.access_token, user_id: ig.user_id, api_base: ig.api_base ?? IG_API };
 }
 
-/** Find + verify the Instagram professional account a Meta system-user token can publish to. */
+/** Find + verify the Instagram professional account a Meta token can publish to.
+ *  Order: account ID given by the user → assets granted to this token (debug_token granular scopes)
+ *  → Pages' linked Instagram accounts → Instagram accounts owned by the token's business portfolios. */
 export async function resolveInstagramFromToken(token: string, givenId?: string): Promise<{ user_id: string; username: string | null }> {
-  const g = async (path: string) => { const r = await fetch(`${FB_GRAPH}/${path}${path.includes("?") ? "&" : "?"}access_token=${encodeURIComponent(token)}`); return r.json(); };
+  const g = async (path: string, tok = token) => { const r = await fetch(`${FB_GRAPH}/${path}${path.includes("?") ? "&" : "?"}access_token=${encodeURIComponent(tok)}`); return r.json(); };
   const me = await g("me?fields=id,name");
   if (me.error) throw new Error(`Meta refused this token: ${me.error.message}`);
   const candidates: string[] = [];
+  const notes: string[] = [];
   if (givenId) candidates.push(givenId.trim());
-  // 1) Pages the token can see, with their linked Instagram accounts
+  const app = await getIntegration("meta_app");
+  if (app?.app_id && app?.app_secret) {
+    const dbg = await (await fetch(`${FB_GRAPH}/debug_token?input_token=${encodeURIComponent(token)}&access_token=${encodeURIComponent(`${app.app_id}|${app.app_secret}`)}`)).json();
+    const scopes = (dbg.data?.granular_scopes ?? []) as { scope: string; target_ids?: string[] }[];
+    notes.push(`granted: ${scopes.map((x) => `${x.scope}(${(x.target_ids ?? []).length})`).join(", ") || dbg.error?.message || "none"}`);
+    for (const sc of scopes) if (/^instagram/.test(sc.scope)) for (const id of sc.target_ids ?? []) candidates.push(id);
+  }
   const pages = await g("me/accounts?fields=instagram_business_account{id,username}&limit=50");
   for (const p of pages.data ?? []) if (p.instagram_business_account?.id) candidates.push(p.instagram_business_account.id);
-  // 2) Instagram accounts owned by the token's business portfolios
   const biz = await g("me/businesses?fields=id&limit=10");
   for (const b of biz.data ?? []) {
     for (const edge of ["owned_instagram_accounts", "instagram_business_accounts", "instagram_accounts"]) {
@@ -95,6 +103,7 @@ export async function resolveInstagramFromToken(token: string, givenId?: string)
   for (const id of [...new Set(candidates)]) {
     const a = await g(`${id}?fields=id,username`);
     if (a.id && !a.error) return { user_id: String(a.id), username: a.username ?? null };
+    notes.push(`${id}: ${a.error?.message ?? "no access"}`);
   }
-  throw new Error("The token works, but no Instagram account is attached to it. In the Meta configuration, select @untoldgranth.official under Business assets, generate a new token, or paste the Instagram account ID too.");
+  throw new Error(`No Instagram account is attached to this login. When Meta asks which assets to share, pick @untoldgranth.official under "Instagram account". (${notes.join("; ").slice(0, 300)})`);
 }
