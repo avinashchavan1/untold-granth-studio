@@ -137,6 +137,7 @@ function MasterLink({ f }: { f: FileRow }) {
     <div className="grid gap-1.5 rounded-lg bg-black/[.04] p-2.5 text-xs dark:bg-white/5">
       <div className="font-mono break-all">{f.path?.split("/").pop() ?? f.url?.split("/").pop()}</div>
       <div className="text-ink-soft dark:text-parchment/60">{[f.spec, fmtBytes(f.bytes)].filter(Boolean).join(" · ")}</div>
+      {f.store === "external" && <div className="text-ink-soft dark:text-parchment/60">Stored privately on Hugging Face; be signed in there.</div>}
       <Button size="sm" disabled={busy} onClick={async () => { setBusy(true); const u = await mediaUrl(f, true); setBusy(false); if (u) window.open(u, "_blank", "noopener"); }}><Download size={14} /> Download master</Button>
     </div>
   );
@@ -196,7 +197,7 @@ function FilesTab({ files, loading }: { files: FileRow[]; loading: boolean }) {
       {files.map((f) => (
         <li key={f.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-parchment-deep p-3 dark:border-night-700">
           <div className="min-w-0"><div className="flex items-center gap-2 text-sm font-semibold"><FileText size={15} /> <span className="break-all">{f.path?.split("/").pop() ?? f.url}</span></div>
-            <div className="text-xs text-ink-soft dark:text-parchment/60">{f.kind.replace("_", " ")} · {[f.spec, fmtBytes(f.bytes), f.store === "github_release" ? "GitHub release" : "studio storage"].filter(Boolean).join(" · ")}</div></div>
+            <div className="text-xs text-ink-soft dark:text-parchment/60">{f.kind.replace("_", " ")} · {[f.spec, fmtBytes(f.bytes), f.store === "external" ? "Hugging Face (sign in there to download)" : f.store === "github_release" ? "GitHub release" : "studio storage"].filter(Boolean).join(" · ")}</div></div>
           <Button size="sm" onClick={async () => { const u = await mediaUrl(f, true); if (u) window.open(u, "_blank", "noopener"); }}><Download size={14} /> Download</Button>
         </li>
       ))}

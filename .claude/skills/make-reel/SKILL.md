@@ -35,7 +35,7 @@ Read `studio/STYLE_GUIDE.md` first (truth rules, reel anatomy, voice, visual, so
    loudness (−14 LUFS) + 6–8 stills.
 9. **Deliver** — send `out/<ID>_final.mp4`, the citation sheet (claims + refs) and caption; ask for human
    review before posting. Never post/publish to any platform yourself without explicit approval.
-10. **Persist + publish desk** — `python3 scripts/sync.py studio` (set the reel's stage in `studio/series/<series>/reels/stages.json` first), `python3 scripts/media.py <ID> preview|poster|citations|caption <file>`, attach masters with `python3 scripts/release.py <ID>` (GitHub Release), then commit and push. The reel then appears in the Untold Granth Studio app for review and posting.
+10. **Persist + publish desk** — `python3 scripts/sync.py studio` (set the reel's stage in `studio/series/<series>/reels/stages.json` first), `python3 scripts/media.py <ID> preview|poster|citations|caption <file>`, attach masters with `python3 scripts/masters.py <ID>` (private Hugging Face repo Avinash1443/untold-granth-masters), then commit and push. The reel then appears in the Untold Granth Studio app for review and posting.
 
 ## Rules that bit us before
 - Don't speed up the narrator; cut words instead. Keep music low. No added dialogue (A01 "भाभी" incident).
