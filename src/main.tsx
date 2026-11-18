@@ -12,6 +12,7 @@ import ReelDetail from "./pages/ReelDetail";
 import Reels from "./pages/Reels";
 import SettingsPage from "./pages/Settings";
 import World from "./pages/World";
+import { About, Privacy, Terms } from "./pages/Legal";
 
 const qc = new QueryClient({ defaultOptions: { queries: { staleTime: 30_000, refetchOnWindowFocus: true, retry: 1 } } });
 
@@ -19,8 +20,12 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={qc}>
       <BrowserRouter>
-        <AuthGate>
-          <Routes>
+        <Routes>
+          {/* public pages (needed by Google and Meta app review) */}
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="*" element={<AuthGate><Routes>
             <Route element={<Layout />}>
               <Route index element={<Dashboard />} />
               <Route path="reels" element={<Reels />} />
@@ -32,8 +37,8 @@ createRoot(document.getElementById("root")!).render(
               <Route path="settings" element={<SettingsPage />} />
               <Route path="*" element={<div className="py-20 text-center">Page not found.</div>} />
             </Route>
-          </Routes>
-        </AuthGate>
+          </Routes></AuthGate>} />
+        </Routes>
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>,
