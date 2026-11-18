@@ -22,7 +22,7 @@ export default function Connections() {
       {flash && <div className={clsx("rounded-xl p-3 text-sm", flash.ok ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-300" : "bg-vermilion/10 text-vermilion")}>{flash.ok ? `${flash.provider} connected.` : `${flash.provider} didn't connect: ${flash.msg}`}</div>}
       <div className="grid gap-2 sm:grid-cols-2">
         <Ready label="Post to YouTube from the app" ok={ready(["github", "huggingface", "google_app", "youtube"])} />
-        <Ready label="Post to Instagram from the app" ok={ready(["github", "huggingface", "meta_app", "instagram"])} />
+        <Ready label="Post to Instagram from the app" ok={ready(["github", "huggingface", "instagram"])} />
       </div>
 
       <Step n={1} title="Publisher (GitHub)" done={!!p.github?.connected} detail={p.github?.connected ? "Can start the publisher" : undefined}>
@@ -60,18 +60,18 @@ export default function Connections() {
       </Step>
 
       <Step n={4} title="Instagram" done={!!p.instagram?.connected} detail={p.instagram?.name ? `@${p.instagram.name}` : undefined}>
-        <p>One-time Meta setup (about 10 minutes):</p>
+        <p>One-time Meta setup (Instagram must be a professional/Creator account):</p>
         <ol className="list-decimal space-y-1 pl-5">
-          <li>In the Instagram app: Settings → <b>Account type and tools → Switch to professional account</b> (Creator).</li>
-          <li><A href="https://developers.facebook.com/apps/creation/">Meta for Developers → Create app</A> → use case <b>Manage messaging & content on Instagram</b>.</li>
-          <li>In the app: <b>Instagram → API setup with Instagram login</b> → copy the <b>Instagram app ID</b> and <b>Instagram app secret</b>.</li>
-          <li>Same page → <b>Set up Instagram business login</b> → Redirect URL:
+          <li><A href="https://developers.facebook.com/apps/">Meta for Developers → My Apps</A> → <b>Untold Granth Studio</b> → Use cases → <b>Customize</b> → <b>API setup with Unified login</b>.</li>
+          <li>Under <b>1. Configure your app</b>, keep the "Instagram API (unified login)" configuration selected and copy its <b>Configuration ID</b>.</li>
+          <li>Same section → <b>Register a new redirect URL</b> → paste and <b>Save</b>:
             <Copyable text={c.data!.redirect_uris.instagram} /></li>
-          <li>App roles → Roles → <b>Add Instagram tester</b> → @untoldgranth.official, then accept the invite in Instagram (Settings → Website permissions → Tester invites).</li>
-          <li>Paste the app ID and secret below, then press <b>Connect Instagram</b>.</li>
+          <li>Left menu → <b>App settings → Basic</b> → copy <b>App ID</b> and <b>App secret</b> (Show).</li>
+          <li>Paste all three below → <b>Save</b> → <b>Connect Instagram</b> → log in and choose <b>@untoldgranth.official</b>.</li>
         </ol>
-        <SaveForm provider="meta_app" fields={[["app_id", "Instagram app ID"], ["app_secret", "Instagram app secret"]]} saved={!!p.meta_app?.connected} />
+        <SaveForm provider="meta_app" fields={[["app_id", "App ID"], ["app_secret", "App secret"], ["config_id", "Configuration ID"]]} saved={!!p.meta_app?.connected} />
         <ConnectButton provider="instagram" label="Connect Instagram" disabled={!p.meta_app?.connected} connected={!!p.instagram?.connected} />
+        <p className="text-xs text-ink-soft dark:text-parchment/60">This creates a system-user token that never expires, so you won't need to reconnect.</p>
       </Step>
       <p className="text-xs text-ink-soft dark:text-parchment/60">Tokens are stored only on the studio's server; this page never shows them again. Facebook Reels stays a manual post for now.</p>
     </section>

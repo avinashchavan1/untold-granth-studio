@@ -1,5 +1,5 @@
 // OAuth callbacks: /functions/v1/oauth/youtube and /functions/v1/oauth/instagram
-import { admin, APP_URL, FN_URL, getIntegration, IG_API, setIntegration } from "../_shared/util.ts";
+import { admin, APP_URL, FB_GRAPH, FN_URL, getIntegration, resolveInstagramFromToken, setIntegration } from "../_shared/util.ts";
 
 const back = (status: string, provider: string, msg = "") =>
   Response.redirect(`${APP_URL}/settings?${new URLSearchParams({ connect: provider, status, msg }).toString()}#connections`, 302);
@@ -24,15 +24,11 @@ Deno.serve(async (req) => {
       await setIntegration("youtube", { refresh_token: t.refresh_token, channel_id: ch.items?.[0]?.id ?? null, channel_title: ch.items?.[0]?.snippet?.title ?? null });
     } else if (provider === "instagram") {
       const app = await getIntegration("meta_app");
-      const r = await fetch("https://api.instagram.com/oauth/access_token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ client_id: app!.app_id, client_secret: app!.app_secret, grant_type: "authorization_code", redirect_uri: `${FN_URL}/oauth/instagram`, code }) });
-      const short = await r.json();
-      if (!short.access_token) return back("error", provider, short.error_message ?? "Instagram returned no token");
-      const ll = await (await fetch(`https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${encodeURIComponent(app!.app_secret)}&access_token=${encodeURIComponent(short.access_token)}`)).json();
-      const token = ll.access_token ?? short.access_token;
-      const me = await (await fetch(`${IG_API}/me?fields=user_id,username,account_type&access_token=${encodeURIComponent(token)}`)).json();
-      await setIntegration("instagram", { access_token: token, user_id: String(me.user_id ?? short.user_id), username: me.username ?? null, account_type: me.account_type ?? null,
-        refreshed_at: Date.now(), expires_at: Date.now() + (ll.expires_in ?? 3600) * 1000 });
+      const q = new URLSearchParams({ client_id: app!.app_id, client_secret: app!.app_secret, redirect_uri: `${FN_URL}/oauth/instagram`, code });
+      const t = await (await fetch(`${FB_GRAPH}/oauth/access_token?${q}`)).json();
+      if (!t.access_token) return back("error", provider, t.error?.message ?? "Meta returned no token");
+      const ig = await resolveInstagramFromToken(t.access_token);
+      await setIntegration("instagram", { access_token: t.access_token, user_id: ig.user_id, username: ig.username, api_base: FB_GRAPH, system_user: true });
     } else return back("error", provider, "unknown provider");
     await admin.from("activity").insert({ actor: "owner", action: `connected ${provider}` });
     return back("ok", provider);

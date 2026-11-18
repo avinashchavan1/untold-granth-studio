@@ -28,7 +28,7 @@ Deno.serve(async (req) => {
           tags: (reel!.hashtags ?? []).map((t: string) => t.replace(/^#/, "")) };
       } else {
         const ig = await instagramToken();
-        out.instagram = { access_token: ig.token, user_id: ig.user_id, caption: caps.instagram || "" };
+        out.instagram = { access_token: ig.token, user_id: ig.user_id, api_base: ig.api_base, caption: caps.instagram || "" };
       }
       await admin.from("publish_jobs").update({ status: "running", started_at: new Date().toISOString(), step: "starting" }).eq("id", job.id);
       return json(out);

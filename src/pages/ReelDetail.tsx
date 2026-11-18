@@ -80,7 +80,7 @@ function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
   const p = conn.data?.providers ?? {};
   const canAuto: Record<string, boolean> = {
     youtube: ["github", "huggingface", "google_app", "youtube"].every((k) => p[k]?.connected),
-    instagram: ["github", "huggingface", "meta_app", "instagram"].every((k) => p[k]?.connected),
+    instagram: ["github", "huggingface", "instagram"].every((k) => p[k]?.connected),
   };
   return (
     <div className="grid gap-4">

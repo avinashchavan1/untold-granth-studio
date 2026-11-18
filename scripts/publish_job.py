@@ -73,26 +73,27 @@ def instagram_fit(path):
 
 def instagram(spec, path):
     ig = spec["instagram"]; tok = ig["access_token"]; uid = ig["user_id"]; print(f"::add-mask::{tok}")
+    IG = ig.get("api_base") or IG_API; ver = IG.rsplit("/", 1)[-1]
     path = instagram_fit(path); size = os.path.getsize(path)
     report(step="creating Instagram reel", log=f"Creating Reels container ({size / 1e6:.0f} MB)")
     q = urllib.parse.urlencode({"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok})
-    c = call("POST", f"{IG_API}/{uid}/media?{q}")
-    cid, uri = c["id"], c.get("uri") or f"https://rupload.facebook.com/ig-api-upload/v21.0/{c['id']}"
+    c = call("POST", f"{IG}/{uid}/media?{q}")
+    cid, uri = c["id"], c.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{ver}/{c['id']}"
     report(step="uploading to Instagram")
     with open(path, "rb") as f:
         req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": "0", "file_size": str(size), "Content-Length": str(size)})
         with urllib.request.urlopen(req, timeout=1800) as r: up = json.loads(r.read() or b"{}")
     if not up.get("success", True): raise RuntimeError(f"Instagram upload failed: {up}")
     for i in range(90):                                   # Instagram processes the video (up to ~15 min)
-        s = call("GET", f"{IG_API}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
+        s = call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
         report(step=f"Instagram processing ({s.get('status_code')})")
         if s.get("status_code") == "FINISHED": break
         if s.get("status_code") in ("ERROR", "EXPIRED"): raise RuntimeError(f"Instagram could not process the video: {s.get('status')}")
         time.sleep(10)
     else: raise RuntimeError("Instagram processing timed out")
-    p = call("POST", f"{IG_API}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
+    p = call("POST", f"{IG}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
     mid = p["id"]
-    link = call("GET", f"{IG_API}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or f"https://www.instagram.com/"
+    link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or "https://www.instagram.com/untoldgranth.official/"
     return link, mid, f"Published reel {mid}"
 
 def main():

@@ -59,15 +59,42 @@ export async function youtubeAccessToken(): Promise<string> {
   return t.access_token;
 }
 
-// ---------- Instagram (Instagram API with Instagram Login) ----------
-export async function instagramToken(): Promise<{ token: string; user_id: string }> {
+// ---------- Instagram ----------
+// Two ways to connect: a Meta system-user token from "API setup with Unified login" (graph.facebook.com, never expires),
+// or the older Instagram Login OAuth (graph.instagram.com, 60-day token, refreshed here).
+export const FB_GRAPH = "https://graph.facebook.com/v21.0";
+export async function instagramToken(): Promise<{ token: string; user_id: string; api_base: string }> {
   const ig = await getIntegration("instagram");
   if (!ig?.access_token) throw new Error("Instagram is not connected");
-  // long-lived tokens last 60 days; refresh when older than 7 days
-  if (Date.now() - (ig.refreshed_at ?? 0) > 7 * 864e5) {
+  if (!ig.system_user && Date.now() - (ig.refreshed_at ?? 0) > 7 * 864e5) {
     const r = await fetch(`https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${encodeURIComponent(ig.access_token)}`);
     const t = await r.json();
     if (t.access_token) { ig.access_token = t.access_token; ig.refreshed_at = Date.now(); ig.expires_at = Date.now() + (t.expires_in ?? 5184000) * 1000; await setIntegration("instagram", ig); }
   }
-  return { token: ig.access_token, user_id: ig.user_id };
+  return { token: ig.access_token, user_id: ig.user_id, api_base: ig.api_base ?? IG_API };
+}
+
+/** Find + verify the Instagram professional account a Meta system-user token can publish to. */
+export async function resolveInstagramFromToken(token: string, givenId?: string): Promise<{ user_id: string; username: string | null }> {
+  const g = async (path: string) => { const r = await fetch(`${FB_GRAPH}/${path}${path.includes("?") ? "&" : "?"}access_token=${encodeURIComponent(token)}`); return r.json(); };
+  const me = await g("me?fields=id,name");
+  if (me.error) throw new Error(`Meta refused this token: ${me.error.message}`);
+  const candidates: string[] = [];
+  if (givenId) candidates.push(givenId.trim());
+  // 1) Pages the token can see, with their linked Instagram accounts
+  const pages = await g("me/accounts?fields=instagram_business_account{id,username}&limit=50");
+  for (const p of pages.data ?? []) if (p.instagram_business_account?.id) candidates.push(p.instagram_business_account.id);
+  // 2) Instagram accounts owned by the token's business portfolios
+  const biz = await g("me/businesses?fields=id&limit=10");
+  for (const b of biz.data ?? []) {
+    for (const edge of ["owned_instagram_accounts", "instagram_business_accounts", "instagram_accounts"]) {
+      const r = await g(`${b.id}/${edge}?fields=id,username&limit=25`);
+      for (const a of r.data ?? []) if (a.id) candidates.push(a.id);
+    }
+  }
+  for (const id of [...new Set(candidates)]) {
+    const a = await g(`${id}?fields=id,username`);
+    if (a.id && !a.error) return { user_id: String(a.id), username: a.username ?? null };
+  }
+  throw new Error("The token works, but no Instagram account is attached to it. In the Meta configuration, select @untoldgranth.official under Business assets, generate a new token, or paste the Instagram account ID too.");
 }

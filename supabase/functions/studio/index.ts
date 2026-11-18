@@ -1,11 +1,11 @@
 // Admin actions from the app: connections, OAuth start, and "Post now".
-import { admin, cors, FN_URL, getIntegration, json, randomToken, REPO, requireAdmin, setIntegration, sha256 } from "../_shared/util.ts";
+import { admin, cors, FB_GRAPH, FN_URL, getIntegration, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256 } from "../_shared/util.ts";
 
 const SIMPLE: Record<string, string[]> = {
   github: ["token"],                         // fine-grained PAT: Actions read & write on the repo
   huggingface: ["token"],                    // read access to the masters repo
   google_app: ["client_id", "client_secret"],// Google Cloud OAuth client (Web)
-  meta_app: ["app_id", "app_secret"],        // Meta app with "Instagram API with Instagram Login"
+  meta_app: ["app_id", "app_secret", "config_id"], // Meta app (App settings → Basic) + Unified-login configuration ID
 };
 
 Deno.serve(async (req) => {
@@ -41,6 +41,16 @@ Deno.serve(async (req) => {
         await admin.from("activity").insert({ actor: email, action: `connected ${body.provider}` });
         return json({ ok: true });
       }
+      case "instagram_token": {
+        const token = String(body.values?.token ?? "").trim();
+        if (!token) return json({ error: "Paste the system-user token" }, 400);
+        try {
+          const ig = await resolveInstagramFromToken(token, body.values?.ig_user_id ? String(body.values.ig_user_id) : undefined);
+          await setIntegration("instagram", { access_token: token, user_id: ig.user_id, username: ig.username, api_base: FB_GRAPH, system_user: true });
+          await admin.from("activity").insert({ actor: email, action: "connected instagram", detail: { username: ig.username } });
+          return json({ ok: true, username: ig.username });
+        } catch (e) { return json({ error: e instanceof Error ? e.message : String(e) }, 400); }
+      }
       case "disconnect": {
         await admin.from("integrations").delete().eq("provider", body.provider);
         await admin.from("activity").insert({ actor: email, action: `disconnected ${body.provider}` });
@@ -59,9 +69,10 @@ Deno.serve(async (req) => {
         }
         if (body.provider === "instagram") {
           const app = await getIntegration("meta_app");
-          if (!app?.app_id) return json({ error: "Add the Instagram app ID and secret first" }, 400);
-          const u = new URL("https://www.instagram.com/oauth/authorize");
-          u.search = new URLSearchParams({ client_id: app.app_id, redirect_uri: `${FN_URL}/oauth/instagram`, response_type: "code", scope: "instagram_business_basic,instagram_business_content_publish", state }).toString();
+          if (!app?.app_id) return json({ error: "Add the Meta app ID, secret and configuration ID first" }, 400);
+          // Facebook Login for Business with the Unified-login configuration → system-user token (never expires)
+          const u = new URL("https://www.facebook.com/v21.0/dialog/oauth");
+          u.search = new URLSearchParams({ client_id: app.app_id, redirect_uri: `${FN_URL}/oauth/instagram`, state, config_id: app.config_id, response_type: "code", override_default_response_type: "true" }).toString();
           return json({ url: u.toString() });
         }
         return json({ error: "unknown provider" }, 400);
@@ -75,7 +86,7 @@ Deno.serve(async (req) => {
         const kind = platform === "youtube" ? "master_youtube" : "master_instagram";
         const { data: master } = await admin.from("files").select("id").eq("reel_id", reel_id).eq("kind", kind).maybeSingle();
         if (!master) return json({ error: `No ${platform} master attached to ${reel.code}` }, 400);
-        const need = platform === "youtube" ? ["github", "huggingface", "google_app", "youtube"] : ["github", "huggingface", "meta_app", "instagram"];
+        const need = platform === "youtube" ? ["github", "huggingface", "google_app", "youtube"] : ["github", "huggingface", "instagram"];
         for (const p of need) if (!(await getIntegration(p))) return json({ error: `Connect ${p.replace("_app", "")} first (Settings → Connections)` }, 400);
         const { data: running } = await admin.from("publish_jobs").select("id").eq("reel_id", reel_id).eq("platform", platform).in("status", ["queued", "running"]).maybeSingle();
         if (running) return json({ error: "Already posting this reel to " + platform }, 409);
