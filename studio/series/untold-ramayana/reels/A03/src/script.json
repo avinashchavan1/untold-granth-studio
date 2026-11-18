@@ -1,0 +1,38 @@
+{
+ "reel": "A03",
+ "title": "Ahalya Was Never Stone",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 — key verses checked in CE Sanskrit; review before posting",
+ "source": "Valmiki Ramayana, Bala Kanda 1(47-48) (Critical Edition; vulgate 1.48-49)",
+ "source_card": { "title": ["VALMIKI", "RAMAYANA"], "sub": "BALA KANDA  ·  CHAPTERS 47–48", "edition": "CRITICAL EDITION" },
+ "claims": [
+  { "claim": "Gautama's curse: she will live in the hermitage on air, without food, in penance, sleeping on ashes, invisible to all beings — no stone", "ref": "1.47.29", "quote_sa": "वायुभक्षा निराहारा तप्यन्ती भस्मशायिनी । अदृश्या सर्वभूतानामाश्रमे ऽस्मिन्निवत्स्यसि ॥", "verified": true, "sources": ["enjoylearningsanskrit (CE text)", "Shastri tr. ch.48 (vulgate)"] },
+  { "claim": "She will be purified when Rama, son of Dasharatha, comes to this forest", "ref": "1.47.30", "quote_sa": "यदा चैतद्वनं घोरं रामो दशरथात्मजः । आगमिष्यति दुर्धर्षस्तदा पूता भविष्यसि ॥", "verified": true },
+  { "claim": "When Rama arrives she is seen radiant, like the full moon veiled by smoke / frost and cloud", "ref": "1.48.14-15", "verified": true },
+  { "claim": "Rama and Lakshmana took hold of (touched) Ahalya's feet; remembering Gautama's words she received them", "ref": "1.48.17", "quote_sa": "राघवौ तु ततस्तस्याः पादौ जगृहतुस्तदा । स्मरन्ती गौतमवचः प्रतिजग्राह सा च तौ ॥", "verified": true },
+  { "claim": "She offered padya, arghya and hospitality; Rama accepted", "ref": "1.48.18", "verified": true },
+  { "claim": "A great rain of flowers fell, with the sound of divine drums", "ref": "1.48.19", "quote_sa": "पुष्पवृष्टिर्महत्यासीद्देवदुन्दुभिनिस्वनैः ।", "verified": true },
+  { "claim": "The stone (petrification) version is a later development: credited first to Kalidasa's Raghuvamsha, then Puranas, Kamban, Adhyatma Ramayana, Ramcharitmanas", "ref": "absent from Valmiki CE 1.47-48", "verified": true, "sources": ["Wikipedia 'Ahalya' citing Patel 1994, Goldman 1990"] }
+ ],
+ "avoid": ["sensational treatment of the Indra episode (Valmiki says she knowingly consented — we only say 'Indra's deceit and Ahalya's lapse')", "'thousands of years' (not checked in CE)", "naming Kalidasa on screen without a second source"],
+ "verify_note": "Bala Kanda is a later layer by scholarly consensus; source card shows BALA KANDA. All verse numbers checked against the CE Sanskrit (enjoylearningsanskrit); recheck against Debroy/Goldman before posting.",
+ "caption": "We grew up hearing that Ahalya was a stone until Rama's foot touched her. Valmiki's Ramayana tells it differently: she lived unseen in the hermitage, on air, in penance — and when Rama came, it was Rama and Lakshmana who touched HER feet.",
+ "hashtags": ["#UntoldGranth", "#Ahalya", "#Ramayana", "#Valmiki", "#UntoldRamayana", "#IndianMythology"],
+ "shots": [
+  { "id": 1, "voice": "narrator", "hi": "क्या राम के पैर लगते ही, एक पत्थर स्त्री बन गया था?", "en": "Did a stone really turn into a woman at the touch of Rama's foot?", "units": ["[curious] क्या राम के पैर लगते ही… एक पत्थर स्त्री बन गया था?"], "card": [["AHALYA", null], ["A STONE?", "#f6c244"]], "lead": 0.28, "tail": 0.6, "min": 2.6 },
+  { "id": 2, "voice": "narrator", "hi": "वाल्मीकि रामायण, बाल कांड, सर्ग सैंतालीस और अड़तालीस। ये है असली कहानी।", "en": "Valmiki Ramayana, Bala Kanda, chapters 47 and 48. Here's the real story.", "units": ["वाल्मीकि रामायण, बाल कांड, सर्ग सैंतालीस और अड़तालीस।", "[dramatically] ये है असली कहानी।"], "unit_gap": 0.28, "lead": 0.18, "tail": 0.12 },
+  { "id": 3, "voice": "narrator", "hi": "मिथिला के रास्ते, विश्वामित्र राम और लक्ष्मण को एक सूने आश्रम में ले आते हैं। गौतम ऋषि का आश्रम।", "en": "On the way to Mithila, Vishvamitra brings Rama and Lakshmana to an empty hermitage. Sage Gautama's.", "units": ["[softly] मिथिला के रास्ते, विश्वामित्र राम और लक्ष्मण को एक सूने आश्रम में ले आते हैं।", "गौतम ऋषि का आश्रम।"], "unit_gap": 0.32, "cite": "1.47", "lead": 0.18, "tail": 0.15 },
+  { "id": 4, "voice": "narrator", "hi": "बरसों पहले, इंद्र के छल और अहल्या की भूल पर, गौतम ने श्राप दिया था।", "en": "Long ago, after Indra's deceit and Ahalya's lapse, Gautama had laid a curse.", "units": ["[cautiously] बरसों पहले, इंद्र के छल और अहल्या की भूल पर, गौतम ने श्राप दिया था।"], "cite": "1.47", "lead": 0.18, "tail": 0.15 },
+  { "id": 5, "voice": "gautama", "hi": "तुम हवा पीकर, बिना भोजन, राख पर सोकर, तप करोगी। सबसे अदृश्य होकर, इसी आश्रम में रहोगी।", "en": "\"Living on air, without food, sleeping on ashes, you will do penance. Unseen by all beings, you will stay in this hermitage.\"", "units": [{ "say": "तुम हवा पीकर, बिना भोजन, राख पर सोकर, तप करोगी।", "ex": 0.7, "cfg": 0.35 }, { "say": "सबसे अदृश्य होकर, इसी आश्रम में रहोगी।", "ex": 0.7, "cfg": 0.35 }], "unit_gap": 0.3, "cite": "1.47.29", "lead": 0.23, "tail": 0.2 },
+  { "id": 6, "voice": "gautama", "hi": "जब दशरथ के पुत्र राम इस वन में आएँगे, तब तुम पवित्र हो जाओगी।", "en": "\"When Rama, son of Dasharatha, comes to this forest, you will be purified.\"", "units": [{ "say": "जब दशरथ के पुत्र राम इस वन में आएँगे, तब तुम पवित्र हो जाओगी।", "ex": 0.55, "cfg": 0.35 }], "cite": "1.47.30", "lead": 0.23, "tail": 0.3 },
+  { "id": 7, "voice": "narrator", "hi": "पत्थर नहीं। अदृश्य। तपस्या में लीन।", "en": "", "units": ["[dramatically] पत्थर नहीं। [pause] अदृश्य। [pause] तपस्या में लीन।"], "sentences": 3, "sentence_gap": 0.4, "card": [["NOT STONE.", null], ["INVISIBLE.", null], ["IN PENANCE.", "#f6c244"]], "cite": "1.47.29", "lead": 0.23, "tail": 0.3 },
+  { "id": 8, "voice": "narrator", "hi": "राम आश्रम में कदम रखते हैं… और अहल्या दिखाई देती हैं, धुएँ में घिरे पूनम के चाँद-सी।", "en": "Rama steps into the hermitage… and Ahalya appears, like a full moon veiled in smoke.", "units": ["[softly] राम आश्रम में कदम रखते हैं… और अहल्या दिखाई देती हैं, धुएँ में घिरे पूनम के चाँद-सी।"], "cite": "1.48.14-15", "lead": 0.2, "tail": 0.2 },
+  { "id": 9, "voice": "narrator", "hi": "और तब, राम और लक्ष्मण, अहल्या के चरण छूते हैं।", "en": "And then, Rama and Lakshmana touch Ahalya's feet.", "units": ["[dramatically] और तब… राम और लक्ष्मण, अहल्या के चरण छूते हैं।"], "cite": "1.48.17", "lead": 0.25, "tail": 0.45 },
+  { "id": 10, "voice": "narrator", "hi": "गौतम की बात याद करके, अहल्या उनका आदर-सत्कार करती हैं।", "en": "Remembering Gautama's words, Ahalya receives them with honour.", "units": ["[warmly] गौतम की बात याद करके, अहल्या उनका आदर-सत्कार करती हैं।"], "cite": "1.48.17-18", "lead": 0.18, "tail": 0.12 },
+  { "id": 11, "voice": "narrator", "hi": "आसमान से फूल बरसते हैं, और देवताओं के नगाड़े बज उठते हैं।", "en": "Flowers rain from the sky, and the drums of the gods sound.", "units": ["आसमान से फूल बरसते हैं… और देवताओं के नगाड़े बज उठते हैं।"], "cite": "1.48.19", "lead": 0.2, "tail": 0.35 },
+  { "id": 12, "voice": "narrator", "hi": "कोई पत्थर नहीं। कोई चरण-धूल नहीं। राम ने ख़ुद, उनके चरण छुए।", "en": "", "units": ["कोई पत्थर नहीं। [pause] कोई चरण-धूल नहीं। [pause] राम ने ख़ुद… उनके चरण छुए।"], "sentences": 3, "sentence_gap": 0.42, "card": [["NO STONE.", null], ["NO DUST OF FEET.", null], ["RAMA TOUCHED HERS.", "#f6c244"]], "lead": 0.23, "tail": 0.31 },
+  { "id": 13, "voice": "narrator", "hi": "पत्थर बनी अहल्या, बाद की कथाओं में आईं। वाल्मीकि में नहीं।", "en": "", "units": ["पत्थर बनी अहल्या, बाद की कथाओं में आईं।", "[dramatically] वाल्मीकि में नहीं।"], "unit_gap": 0.32, "card": [["AHALYA OF STONE", null], ["NOT IN VALMIKI", "#f6c244"]], "lead": 0.28, "tail": 0.31 },
+  { "id": 14, "voice": "narrator", "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।", "en": "", "units": ["[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"], "lead": 0.43, "tail": 0.68, "min": 3.7 }
+ ]
+}

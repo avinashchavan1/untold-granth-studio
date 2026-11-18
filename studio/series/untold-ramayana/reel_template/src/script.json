@@ -1,0 +1,18 @@
+{
+ "reel": "AXX",
+ "title": "TITLE",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT — not verified",
+ "source": "Valmiki Ramayana, <Kanda> <sarga range> (Critical Edition)",
+ "source_card": { "title": ["VALMIKI", "RAMAYANA"], "sub": "<KANDA> KANDA  ·  CHAPTERS X–Y", "edition": "CRITICAL EDITION" },
+ "claims": [
+  { "claim": "<one factual claim the reel makes>", "ref": "<kanda.sarga.verse>", "quote_sa": "<Sanskrit of the verse>", "verified": false }
+ ],
+ "shots": [
+  { "id": 1, "voice": "narrator", "hi": "<HOOK QUESTION>?", "en": "<hook in English>", "units": ["[curious] <HOOK QUESTION>?"], "card": [["<BIG>", null], ["<WORDS>?", "#f6c244"]], "lead": 0.28, "tail": 0.6, "min": 2.6 },
+  { "id": 2, "voice": "narrator", "hi": "वाल्मीकि रामायण, <कांड>, सर्ग <X> से <Y>। ये है असली कहानी।", "en": "Valmiki Ramayana, <Kanda>, chapters X to Y. Here's the real story.", "units": ["वाल्मीकि रामायण, <कांड>, सर्ग <X> से <Y>।", "[dramatically] ये है असली कहानी।"], "unit_gap": 0.28, "lead": 0.18, "tail": 0.12 },
+  { "id": 3, "voice": "narrator", "hi": "<STORY BEAT>", "en": "<story beat>", "cite": "<k.s.v>", "card": [["<LABEL>", null]], "lead": 0.18, "tail": 0.12 },
+  { "id": 4, "voice": "narrator", "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।", "en": "", "units": ["[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"], "lead": 0.43, "tail": 0.68, "min": 3.7 }
+ ]
+}

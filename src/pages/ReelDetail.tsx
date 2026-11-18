@@ -1,0 +1,222 @@
+import clsx from "clsx";
+import { ArrowLeft, CheckCircle2, Download, ExternalLink, FileText, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Button, Card, Code, CopyButton, Empty, ErrorNote, LinkButton, PubBadge, SectionTitle, Spinner, StageBadge, fmtBytes, fmtDate, fmtLen } from "../components/ui";
+import { mediaUrl, useClaims, useFiles, useMediaUrl, usePublications, useReel, useSetStage, useUpdateReel, useUpsertPublication } from "../lib/api";
+import { KIND_LABEL, PLATFORMS, STAGES, type FileRow, type Publication, type Reel, type Stage } from "../lib/types";
+
+const TABS = ["Publish", "Script", "Citations", "Files", "Notes"] as const;
+type Tab = (typeof TABS)[number];
+
+export default function ReelDetail() {
+  const { code = "" } = useParams();
+  const reel = useReel(code);
+  const [tab, setTab] = useState<Tab>("Publish");
+  const files = useFiles(reel.data?.id);
+  const setStage = useSetStage();
+  if (reel.isLoading) return <Spinner />;
+  if (reel.error || !reel.data) return <ErrorNote error={reel.error ?? "Reel not found"} />;
+  const r = reel.data;
+  const preview = files.data?.find((f) => f.kind === "preview");
+  const poster = files.data?.find((f) => f.kind === "poster");
+  const produced = !["idea", "researching"].includes(r.stage) && !!r.script;
+
+  return (
+    <div className="grid gap-6">
+      <Link to="/reels" className="flex w-fit items-center gap-1.5 text-sm font-semibold text-ink-soft hover:text-ink dark:text-parchment/60"><ArrowLeft size={16} /> All reels</Link>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2"><Code>{r.code}</Code>{r.kind && <span className="text-sm text-ink-soft dark:text-parchment/60">{KIND_LABEL[r.kind]}</span>}<span className="text-sm text-ink-soft dark:text-parchment/60">· {r.source_ref}</span></div>
+          <h1 className="mt-1 font-display text-2xl font-extrabold tracking-wide sm:text-3xl" style={{ textWrap: "balance" } as React.CSSProperties}>{r.title}</h1>
+          {r.hook_hi && <p className="mt-2 text-lg">{r.hook_hi}</p>}
+          {r.hook_en && <p className="text-sm text-ink-soft dark:text-parchment/60">{r.hook_en}</p>}
+        </div>
+        <label className="grid gap-1 text-xs font-semibold uppercase tracking-wider text-ink-soft dark:text-parchment/60">
+          Stage
+          <select id="stage" value={r.stage} onChange={(e) => setStage(r, e.target.value as Stage)} className="rounded-xl border border-parchment-deep bg-white/80 px-3 py-2 text-sm font-semibold normal-case tracking-normal text-ink dark:border-night-700 dark:bg-night-900 dark:text-parchment">
+            {STAGES.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(240px,320px)_minmax(0,1fr)]">
+        <div className="grid content-start gap-3">
+          <Preview preview={preview} poster={poster} />
+          <div className="flex flex-wrap items-center gap-2 text-sm text-ink-soft dark:text-parchment/60"><StageBadge stage={r.stage} /> <span className="tabular">{fmtLen(r.length_s)}</span> {r.updated_at && <span>· updated {fmtDate(r.updated_at)}</span>}</div>
+        </div>
+        <div className="min-w-0">
+          <div className="mb-4 flex flex-wrap gap-1 border-b border-parchment-deep dark:border-night-700" role="tablist">
+            {TABS.map((t) => (
+              <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)}
+                className={clsx("-mb-px border-b-2 px-3 py-2 text-sm font-semibold", tab === t ? "border-gold-deep text-ink dark:border-gold dark:text-parchment" : "border-transparent text-ink-soft hover:text-ink dark:text-parchment/60")}>{t}</button>
+            ))}
+          </div>
+          {tab === "Publish" && (produced ? <PublishTab r={r} files={files.data ?? []} /> : <Empty>This reel is still in the plan. Publishing opens once it's rendered.</Empty>)}
+          {tab === "Script" && (r.script ? <ScriptTab r={r} /> : <Empty>No script yet. Plan note: {r.plan_note || "—"}</Empty>)}
+          {tab === "Citations" && <ClaimsTab r={r} />}
+          {tab === "Files" && <FilesTab files={files.data ?? []} loading={files.isLoading} />}
+          {tab === "Notes" && <NotesTab r={r} />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Preview({ preview, poster }: { preview?: FileRow; poster?: FileRow }) {
+  const v = useMediaUrl(preview);
+  const p = useMediaUrl(poster);
+  if (!preview) return <div className="grid aspect-[9/16] w-full place-items-center rounded-2xl border border-dashed border-parchment-deep text-sm text-ink-soft dark:border-night-700">No video yet</div>;
+  if (v.isLoading) return <div className="aspect-[9/16] w-full animate-pulse rounded-2xl bg-night-800" />;
+  return <video controls playsInline preload="metadata" poster={p.data ?? undefined} src={v.data ?? undefined} className="aspect-[9/16] w-full rounded-2xl bg-black" />;
+}
+
+function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
+  const pubs = usePublications(r.id);
+  const update = useUpdateReel();
+  const masters = { instagram: files.find((f) => f.kind === "master_instagram"), youtube: files.find((f) => f.kind === "master_youtube") };
+  return (
+    <div className="grid gap-4">
+      <label className={clsx("flex items-start gap-3 rounded-2xl border p-4", r.reviewed ? "border-emerald-300 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40" : "border-amber-300 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/40")}>
+        <input id="reviewed" type="checkbox" className="mt-1 h-5 w-5 accent-[#a8741a]" checked={r.reviewed}
+          onChange={(e) => update.mutate({ reel: r, patch: { reviewed: e.target.checked, reviewed_at: e.target.checked ? new Date().toISOString() : null, stage: e.target.checked && r.stage === "review" ? "approved" : r.stage }, action: e.target.checked ? "citations reviewed" : "review cleared" })} />
+        <span className="text-sm">
+          <b className="flex items-center gap-1.5"><ShieldCheck size={16} /> I checked the citations against the text</b>
+          {r.reviewed ? <span className="text-emerald-800 dark:text-emerald-300">Reviewed {fmtDate(r.reviewed_at)}. Posting is unlocked.</span> : <span>Open the Citations tab, read each claim against its verse, then tick this. Posting stays locked until then.</span>}
+        </span>
+      </label>
+      <div className="grid gap-4 xl:grid-cols-3">
+        {PLATFORMS.map((p) => <Lane key={p.key} r={r} platform={p} pub={pubs.data?.find((x) => x.platform === p.key)} master={masters[p.master]} />)}
+      </div>
+    </div>
+  );
+}
+
+function Lane({ r, platform, pub, master }: { r: Reel; platform: (typeof PLATFORMS)[number]; pub?: Publication; master?: FileRow }) {
+  const upsert = useUpsertPublication();
+  const [url, setUrl] = useState(pub?.post_url ?? "");
+  useEffect(() => setUrl(pub?.post_url ?? ""), [pub?.post_url]);
+  const state = pub?.state ?? "todo";
+  const caption = r.captions?.[platform.capField] ?? "";
+  const title = platform.titleField ? r.captions?.[platform.titleField] ?? "" : "";
+  return (
+    <Card className="grid content-start gap-3 !p-4">
+      <div className="flex items-center justify-between gap-2"><h3 className="font-bold">{platform.label}</h3><PubBadge state={state} /></div>
+      {master ? <MasterLink f={master} /> : <div className="rounded-lg bg-black/[.04] p-2 text-xs text-ink-soft dark:bg-white/5">Master file: not attached yet</div>}
+      {state === "posted" ? (
+        <div className="grid gap-2 text-sm">
+          <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300"><CheckCircle2 size={16} /> Posted {fmtDate(pub?.posted_at)}</div>
+          {pub?.post_url && <a href={pub.post_url} target="_blank" rel="noreferrer" className="break-all text-gold-deep underline dark:text-gold">{pub.post_url}</a>}
+          <Button size="sm" variant="ghost" onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "todo", posted_at: null } })}>Undo</Button>
+        </div>
+      ) : (
+        <>
+          <div className="flex flex-wrap gap-2">
+            {title && <CopyButton text={title} label="Copy title" />}
+            <CopyButton text={caption} label={platform.titleField ? "Copy description" : "Copy caption"} />
+            <LinkButton href={platform.uploadUrl}><ExternalLink size={14} /> Open</LinkButton>
+          </div>
+          <details className="text-sm"><summary className="cursor-pointer font-semibold">Preview text</summary>
+            <pre className="mt-2 max-h-60 overflow-auto whitespace-pre-wrap rounded-lg bg-black/[.04] p-3 font-sans text-[13px] dark:bg-white/5">{title ? `${title}\n\n` : ""}{caption}</pre>
+          </details>
+          <div className="flex gap-2">
+            <input id={`url-${platform.key}`} value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste post link (optional)" aria-label={`${platform.label} post link`}
+              className="min-w-0 flex-1 rounded-lg border border-parchment-deep bg-white/80 px-2.5 py-1.5 text-sm dark:border-night-700 dark:bg-night-950" />
+            <Button size="sm" variant="primary" disabled={!r.reviewed || upsert.isPending} title={r.reviewed ? "" : "Tick the citation check first"}
+              onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "posted", post_url: url.trim() || null, posted_at: new Date().toISOString() } })}>Mark posted</Button>
+          </div>
+        </>
+      )}
+    </Card>
+  );
+}
+
+function MasterLink({ f }: { f: FileRow }) {
+  const [busy, setBusy] = useState(false);
+  return (
+    <div className="grid gap-1.5 rounded-lg bg-black/[.04] p-2.5 text-xs dark:bg-white/5">
+      <div className="font-mono break-all">{f.path?.split("/").pop() ?? f.url?.split("/").pop()}</div>
+      <div className="text-ink-soft dark:text-parchment/60">{[f.spec, fmtBytes(f.bytes)].filter(Boolean).join(" · ")}</div>
+      <Button size="sm" disabled={busy} onClick={async () => { setBusy(true); const u = await mediaUrl(f, true); setBusy(false); if (u) window.open(u, "_blank", "noopener"); }}><Download size={14} /> Download master</Button>
+    </div>
+  );
+}
+
+function ScriptTab({ r }: { r: Reel }) {
+  const shots = r.script?.shots ?? [];
+  return (
+    <div className="grid gap-2">
+      {r.script?.source && <p className="text-sm text-ink-soft dark:text-parchment/60">Source: {r.script.source}</p>}
+      <div className="overflow-x-auto rounded-2xl border border-parchment-deep dark:border-night-700">
+        <table className="w-full min-w-[640px] text-sm">
+          <thead className="bg-black/[.03] text-left text-xs uppercase tracking-wider text-ink-soft dark:bg-white/5 dark:text-parchment/60"><tr><th className="p-3">#</th><th className="p-3">Voice</th><th className="p-3">Line (Hindi / English)</th><th className="p-3">Verse</th></tr></thead>
+          <tbody>
+            {shots.map((s) => (
+              <tr key={s.id} className="border-t border-parchment-deep align-top dark:border-night-800">
+                <td className="tabular p-3 text-ink-soft">{s.id}</td>
+                <td className="p-3 font-semibold capitalize">{s.voice ?? <span className="text-ink-soft">music</span>}</td>
+                <td className="p-3"><div className="text-[15px]">{s.hi || <span className="text-ink-soft">—</span>}</div>{s.en && <div className="text-ink-soft dark:text-parchment/60">{s.en}</div>}</td>
+                <td className="p-3 font-mono text-xs text-gold-deep dark:text-gold">{s.cite ?? ""}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function ClaimsTab({ r }: { r: Reel }) {
+  const claims = useClaims(r.id);
+  if (claims.isLoading) return <Spinner />;
+  if (!claims.data?.length) return <Empty>No claims recorded yet. Every factual claim needs a verse reference before the reel can be scripted.</Empty>;
+  return (
+    <div className="grid gap-3">
+      {claims.data.map((c) => (
+        <Card key={c.id} className="!p-4">
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <p className="font-semibold">{c.claim}</p>
+            <span className={clsx("shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold", c.verified ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300" : "bg-amber-100 text-amber-900")}>{c.verified ? "Verified" : "Unverified"}</span>
+          </div>
+          <div className="mt-1 font-mono text-xs text-gold-deep dark:text-gold">{c.ref}</div>
+          {c.quote_sa && <p className="mt-2 rounded-lg bg-black/[.04] p-3 text-[15px] leading-relaxed dark:bg-white/5">{c.quote_sa}</p>}
+          {c.sources.length > 0 && <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Checked against: {c.sources.join(" · ")}</p>}
+        </Card>
+      ))}
+      {r.verify_note && <p className="text-sm text-ink-soft dark:text-parchment/60">{r.verify_note}</p>}
+    </div>
+  );
+}
+
+function FilesTab({ files, loading }: { files: FileRow[]; loading: boolean }) {
+  if (loading) return <Spinner />;
+  if (!files.length) return <Empty>No files yet.</Empty>;
+  return (
+    <ul className="grid gap-2">
+      {files.map((f) => (
+        <li key={f.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-parchment-deep p-3 dark:border-night-700">
+          <div className="min-w-0"><div className="flex items-center gap-2 text-sm font-semibold"><FileText size={15} /> <span className="break-all">{f.path?.split("/").pop() ?? f.url}</span></div>
+            <div className="text-xs text-ink-soft dark:text-parchment/60">{f.kind.replace("_", " ")} · {[f.spec, fmtBytes(f.bytes), f.store === "github_release" ? "GitHub release" : "studio storage"].filter(Boolean).join(" · ")}</div></div>
+          <Button size="sm" onClick={async () => { const u = await mediaUrl(f, true); if (u) window.open(u, "_blank", "noopener"); }}><Download size={14} /> Download</Button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function NotesTab({ r }: { r: Reel }) {
+  const update = useUpdateReel();
+  const [notes, setNotes] = useState(r.notes ?? "");
+  return (
+    <div className="grid gap-4">
+      {r.plan_note && <Card className="!p-4"><SectionTitle>From the plan</SectionTitle><p className="text-sm">{r.plan_note}</p></Card>}
+      {r.script?.avoid?.length ? <Card className="!p-4"><SectionTitle>Deliberately left out</SectionTitle><ul className="list-disc pl-5 text-sm">{r.script.avoid.map((a) => <li key={a}>{a}</li>)}</ul></Card> : null}
+      <Card className="!p-4">
+        <SectionTitle>Your notes</SectionTitle>
+        <textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} rows={6} placeholder="Feedback for the next version, ideas, reminders…"
+          className="w-full rounded-xl border border-parchment-deep bg-white/80 p-3 text-sm dark:border-night-700 dark:bg-night-950" />
+        <Button className="mt-2" variant="primary" disabled={update.isPending || notes === (r.notes ?? "")} onClick={() => update.mutate({ reel: r, patch: { notes }, action: "notes edited" })}>{update.isPending ? "Saving…" : "Save notes"}</Button>
+      </Card>
+    </div>
+  );
+}

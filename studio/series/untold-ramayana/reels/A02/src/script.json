@@ -1,0 +1,325 @@
+{
+ "reel": "A02",
+ "title": "Shabari Never Tasted the Berries",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 — script verified at chapter level; review before posting",
+ "source": "Valmiki Ramayana, Aranya Kanda 3(69-70) (Critical Edition; vulgate 3.73-74)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "ARANYA KANDA  ·  CHAPTERS 69–70",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "Kabandha directs Rama west to Lake Pampa and Matanga's hermitage, where the ascetic Shabari lives",
+   "ref": "3.69 (CE) — Shabari described as an ascetic devoted to dharma, servant of the sages, 3.69.19-20",
+   "verified": true,
+   "sources": [
+    "Lutgendorf, 'Dining Out at Lake Pampa' (cites Baroda CE)",
+    "Shastri tr., wisdomlib ch.73"
+   ]
+  },
+  {
+   "claim": "On seeing the princes she rises with joined palms and clasps the feet of Rama and Lakshmana",
+   "ref": "3.70.6 (CE)",
+   "verified": true,
+   "sources": [
+    "Lutgendorf (quotes 3.70.6)"
+   ]
+  },
+  {
+   "claim": "Rama asks whether her austerities are unhindered and her service to her teachers fruitful",
+   "ref": "3.70 (CE)",
+   "verified": true,
+   "sources": [
+    "Shastri tr., wisdomlib ch.74"
+   ]
+  },
+  {
+   "claim": "Her teachers told her to await Rama; she gathered forest produce from the banks of the Pampa for him",
+   "ref": "3.70.10-13 (CE)",
+   "verified": true,
+   "sources": [
+    "Lutgendorf 3.70.10-13",
+    "Shastri tr. ch.74"
+   ]
+  },
+  {
+   "claim": "Valmiki does not name berries (ber) and has no tasting; the tasted-fruit story appears in later devotional literature (17th-18th c. Vaishnava hagiography, e.g. Priyadas's Bhaktirasbodhini c.1712)",
+   "ref": "absent from Valmiki; also absent from Kamban, Adhyatma Ramayana and Ramcharitmanas",
+   "verified": true,
+   "sources": [
+    "Lutgendorf, sections 1-2"
+   ]
+  },
+  {
+   "claim": "She shows them the Matanga forest: the teachers' altar still glows, their bark garments are still wet, their flowers unwithered",
+   "ref": "3.70 (CE)",
+   "verified": true,
+   "sources": [
+    "Shastri tr. ch.74",
+    "Lutgendorf"
+   ]
+  },
+  {
+   "claim": "With Rama's leave she enters the fire and rises to the realm of her teachers",
+   "ref": "3.70 (CE), end of chapter",
+   "verified": true,
+   "sources": [
+    "Shastri tr. ch.74",
+    "Lutgendorf"
+   ]
+  }
+ ],
+ "avoid": [
+  "'my penance has borne fruit / life fulfilled' (omitted from the Baroda CE)",
+  "Rama: 'you gave me great hospitality' (not in CE)",
+  "showing or saying Rama ate the fruit (Valmiki never shows it)",
+  "caste framing beyond the text"
+ ],
+ "verify_note": "Verse numbers follow Lutgendorf's citations of the Baroda Critical Edition (3.69.19-20, 3.70.6, 3.70.10-13); other refs are chapter-level. Recheck against Debroy vol. 2 before posting.",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Shabari",
+  "#Ramayana",
+  "#Valmiki",
+  "#UntoldRamayana",
+  "#IndianMythology"
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या शबरी ने सच में, बेर चखकर राम को दिए थे?",
+   "en": "Did Shabari really taste the berries before giving them to Rama?",
+   "units": [
+    "[curious] क्या शबरी ने सच में… बेर चखकर राम को दिए थे?"
+   ],
+   "card": [
+    [
+     "SHABARI'S",
+     null
+    ],
+    [
+     "BERRIES?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 2.6
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, अरण्य कांड, सर्ग उनहत्तर और सत्तर। ये है असली कहानी।",
+   "en": "Valmiki Ramayana, Aranya Kanda, chapters 69 and 70. Here's the real story.",
+   "units": [
+    "वाल्मीकि रामायण, अरण्य कांड, सर्ग उनहत्तर और सत्तर।",
+    "[dramatically] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.28,
+   "lead": 0.18,
+   "tail": 0.12
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "सीता को खोजते राम और लक्ष्मण, पश्चिम की ओर चलते हैं… पम्पा सरोवर की ओर।",
+   "en": "Searching for Sita, Rama and Lakshmana head west… towards Lake Pampa.",
+   "units": [
+    "[softly] सीता को खोजते राम और लक्ष्मण, पश्चिम की ओर चलते हैं… पम्पा सरोवर की ओर।"
+   ],
+   "cite": "3.69",
+   "lead": 0.18,
+   "tail": 0.12
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "वहाँ, मतंग ऋषि के सूने आश्रम में, एक बूढ़ी तपस्विनी राम की राह देख रही है। शबरी।",
+   "en": "There, in sage Matanga's empty hermitage, an old ascetic is waiting for Rama. Shabari.",
+   "units": [
+    "वहाँ, मतंग ऋषि के सूने आश्रम में, एक बूढ़ी तपस्विनी राम की राह देख रही है।",
+    "[warmly] शबरी।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "3.69.19-20",
+   "lead": 0.18,
+   "tail": 0.3
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "उन्हें देखते ही वो हाथ जोड़कर उठती है, और दोनों भाइयों के चरण छूती है।",
+   "en": "Seeing them, she rises with joined palms and touches the feet of both brothers.",
+   "units": [
+    "[softly] उन्हें देखते ही वो हाथ जोड़कर उठती है… और दोनों भाइयों के चरण छूती है।"
+   ],
+   "cite": "3.70.6",
+   "lead": 0.18,
+   "tail": 0.12
+  },
+  {
+   "id": 6,
+   "voice": "rama",
+   "hi": "क्या आपकी तपस्या में कोई विघ्न तो नहीं? क्या गुरु-सेवा सफल हुई?",
+   "en": "\"Is your penance free of obstacles? Has your service to your teachers borne fruit?\"",
+   "units": [
+    {
+     "say": "क्या आपकी तपस्या में कोई विघ्न तो नहीं? क्या गुरु-सेवा सफल हुई?",
+     "ex": 0.5,
+     "cfg": 0.4
+    }
+   ],
+   "cite": "3.70",
+   "lead": 0.23,
+   "tail": 0.2
+  },
+  {
+   "id": 7,
+   "voice": "shabari",
+   "hi": "मेरे गुरुओं ने कहा था, राम आएँगे। आपके लिए मैंने पम्पा के किनारे से, वन के फल इकट्ठा किए हैं।",
+   "en": "\"My teachers said Rama would come. For you, I have gathered forest fruits from the banks of the Pampa.\"",
+   "units": [
+    {
+     "say": "मेरे गुरुओं ने कहा था, राम आएँगे।",
+     "ex": 0.6,
+     "cfg": 0.35
+    },
+    {
+     "say": "आपके लिए मैंने पम्पा के किनारे से, वन के फल इकट्ठा किए हैं।",
+     "ex": 0.6,
+     "cfg": 0.35
+    }
+   ],
+   "unit_gap": 0.35,
+   "cite": "3.70.10-13",
+   "lead": 0.23,
+   "tail": 0.25
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "बस इतना। वन के फल। बेर का नाम तक नहीं।",
+   "en": "That's all. Forest fruit. Berries aren't even named.",
+   "units": [
+    "[dramatically] बस इतना। [pause] वन के फल। [pause] बेर का नाम तक नहीं।"
+   ],
+   "sentences": 3,
+   "sentence_gap": 0.38,
+   "cite": "3.70",
+   "lead": 0.23,
+   "tail": 0.3
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "hi": "फिर शबरी उन्हें मतंग वन दिखाती है। गुरुओं की वेदी आज भी दमक रही है, और उनके वल्कल वस्त्र अब तक गीले हैं।",
+   "en": "Then Shabari shows them the Matanga forest. Her teachers' altar still glows, and their bark robes are still wet.",
+   "units": [
+    "फिर शबरी उन्हें मतंग वन दिखाती है।",
+    "[softly] गुरुओं की वेदी आज भी दमक रही है… और उनके वल्कल वस्त्र, अब तक गीले हैं।"
+   ],
+   "unit_gap": 0.32,
+   "cite": "3.70",
+   "lead": 0.18,
+   "tail": 0.15
+  },
+  {
+   "id": 10,
+   "voice": "shabari",
+   "hi": "अब मुझे आज्ञा दीजिए। मैं अपने गुरुओं के पास जाना चाहती हूँ।",
+   "en": "\"Now give me leave. I wish to go to my teachers.\"",
+   "units": [
+    {
+     "say": "अब मुझे आज्ञा दीजिए। मैं अपने गुरुओं के पास जाना चाहती हूँ।",
+     "ex": 0.5,
+     "cfg": 0.3
+    }
+   ],
+   "cite": "3.70",
+   "lead": 0.23,
+   "tail": 0.26
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "राम की आज्ञा से, शबरी अग्नि में प्रवेश करती है… और एक ज्योति बनकर, अपने गुरुओं के लोक में चली जाती है।",
+   "en": "With Rama's leave, Shabari enters the fire… and rises like a flame, to the world of her teachers.",
+   "units": [
+    "[softly] राम की आज्ञा से, शबरी अग्नि में प्रवेश करती है… और एक ज्योति बनकर, अपने गुरुओं के लोक में चली जाती है।"
+   ],
+   "cite": "3.70",
+   "lead": 0.2,
+   "tail": 0.45
+  },
+  {
+   "id": 12,
+   "voice": "narrator",
+   "hi": "कोई बेर नहीं। कोई जूठन नहीं। बस, एक प्रतीक्षा।",
+   "en": "",
+   "units": [
+    "कोई बेर नहीं। [pause] कोई जूठन नहीं। [pause] बस… एक प्रतीक्षा।"
+   ],
+   "sentences": 3,
+   "sentence_gap": 0.42,
+   "card": [
+    [
+     "NO BERRIES.",
+     null
+    ],
+    [
+     "NO TASTING.",
+     null
+    ],
+    [
+     "JUST A WAIT.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.23,
+   "tail": 0.31
+  },
+  {
+   "id": 13,
+   "voice": "narrator",
+   "hi": "जूठे बेर की कथा, बाद की भक्ति-परंपरा में जुड़ी। वाल्मीकि में नहीं।",
+   "en": "",
+   "units": [
+    "जूठे बेर की कथा, बाद की भक्ति-परंपरा में जुड़ी।",
+    "[dramatically] वाल्मीकि में नहीं।"
+   ],
+   "unit_gap": 0.32,
+   "card": [
+    [
+     "NOT IN",
+     null
+    ],
+    [
+     "VALMIKI",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.31
+  },
+  {
+   "id": 14,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7
+  }
+ ],
+ "caption": "Everyone knows Shabari tasted each ber before giving it to Rama. Valmiki's Ramayana says something simpler: she gathered forest fruit from the banks of the Pampa, for the guest her teachers told her would come. The tasted-berry story is a beautiful later bhakti tradition — just not Valmiki's."
+}

@@ -1,0 +1,100 @@
+// ===== Series templates & shared helpers (Untold Ramayana) — reusable by every reel =====
+
+const L_DUSK = { rim: '#f4b48c', rimA: 0.85, dir: 1, tint: '#262060', tintA: 0.2 };
+const L_NIGHT = { rim: '#c2ccff', rimA: 0.85, dir: 1, tint: '#141c5c', tintA: 0.3 };
+const L_FOREST = { rim: '#f0bfe0', rimA: 0.85, dir: 1, tint: '#1c1456', tintA: 0.28 };
+const L_LAMP = { rim: '#ffc878', rimA: 0.9, dir: 1, tint: '#40182c', tintA: 0.14 };
+const L_FIRE = { rim: '#ff6a34', rimA: 0.95, dir: 1, tint: '#4a0810', tintA: 0.34 };
+
+function leaves(ctx, tau, seed, n, col = '#2e6068') {
+  for (let i = 0; i < n; i++) {
+    const h1 = hash(seed + i * 2.1), h2 = hash(seed + i * 6.3), h3 = hash(seed + i * 9.9);
+    const x = ((h1 * 1300 - 100 - tau * (40 + h2 * 60)) % 1300 + 1300) % 1300 - 110 + Math.sin(tau * 2 + i) * 30, y = ((h2 * 1500 + tau * (90 + h3 * 80)) % 1500) + 60, a = tau * (1.5 + h3 * 2) + i;
+    dab(ctx, x, y, 13 + h3 * 9, 5 + h1 * 3, a, mix(col, '#0a1a28', h3 * 0.6), 0.9);
+  }
+}
+function arrow(ctx, x1, y1, x2, y2, a = 1) {
+  const ang = Math.atan2(y2 - y1, x2 - x1); ctx.save(); ctx.globalAlpha = a;
+  stroke(ctx, x1, y1, x2, y2, 6, '#d8c8a8'); ctx.translate(x2, y2); ctx.rotate(ang); poly(ctx, [[10, 0], [-18, -10], [-18, 10]], '#e8ecf4'); ctx.restore();
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(x1, y1); ctx.rotate(ang); poly(ctx, [[0, 0], [-10, -13], [34, -13], [44, 0]], '#c81e1e'); poly(ctx, [[0, 0], [-10, 13], [34, 13], [44, 0]], '#e8e0d0'); ctx.restore();
+}
+function tongue(ctx, x, y, w, h, sway, col, a = 1) { ctx.globalAlpha = a; ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(x - w, y); ctx.bezierCurveTo(x - w * 1.2, y - h * 0.45, x + sway - w * 0.2, y - h * 0.7, x + sway, y - h); ctx.bezierCurveTo(x + sway + w * 0.3, y - h * 0.6, x + w * 1.2, y - h * 0.4, x + w, y); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1; }
+function fire(ctx, cx, base, w, h, t, seed, n, a = 1) {
+  if (a <= 0) return;
+  glow(ctx, cx, base - h * 0.4, Math.max(w, h) * 1.25, '#ff3a14', 0.5 * a);
+  [['#8a1010', 1.0, 1.0], ['#d6301a', 0.85, 0.85], ['#f2741e', 0.62, 0.66], ['#ffc64a', 0.38, 0.44], ['#fff0b0', 0.16, 0.2]].forEach(([col, hs, ws], li) => {
+    for (let i = 0; i < n; i++) {
+      const h1 = hash(seed + i * 3.7 + li * 13), px = cx + (i / (n - 1) - 0.5) * w * 2 * (0.95 - li * 0.08) + noise1(t * 2 + i * 5 + li) * 22, env = 1 - Math.pow(Math.abs(i / (n - 1) - 0.5) * 2, 2) * 0.55;
+      const hh = h * hs * env * (0.62 + 0.38 * (0.5 + 0.5 * noise1(t * (5 + h1 * 4) + i * 9 + li * 3)));
+      tongue(ctx, px, base, w / n * 1.7 * ws + 12, hh, noise1(t * 3.5 + i * 2.2 + li) * w * 0.14, col, a * 0.95);
+    }
+  });
+}
+function embers(ctx, t, seed, n, cx, base, spread, a = 1) {
+  for (let i = 0; i < n; i++) { const h1 = hash(seed + i * 1.9), h2 = hash(seed + i * 4.1), life = (t * (0.35 + h2 * 0.5) + h1 * 5) % 1, x = cx + (h1 - 0.5) * spread * 2 + Math.sin(t * 3 + i) * 40 * life, y = base - life * (700 + h2 * 700); dab(ctx, x, y, 3 + h2 * 4, 3 + h2 * 4, 0, life < 0.4 ? '#ffe08a' : '#ff6a2a', (1 - life) * a); }
+}
+function ringEcho(ctx, x, y, t, a) { for (let i = 0; i < 4; i++) { const p = (t * 0.9 + i / 4) % 1, r = 70 + p * 520; ctx.globalAlpha = (1 - p) * 0.6 * a; ctx.strokeStyle = '#f6e6ff'; ctx.lineWidth = 10 * (1 - p) + 3; ctx.beginPath(); ctx.arc(x, y, r, -1.25, 0.35); ctx.stroke(); } ctx.globalAlpha = 1; }
+function hermitage(ctx, bg, cam, t, mid, motion = 1, tau) {
+  drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); withCam(ctx, cam, bg.far.depth, c => riverLive(c, tau === undefined ? t : tau, bg.tod, motion)); drawLayer(ctx, cam, bg.mid);
+  if (mid) withCam(ctx, cam, 0.6, mid);
+}
+const stand = o => P(o);
+
+
+function ensureScene(key, make) { if (!BG[key]) BG[key] = make(); return BG[key]; }
+
+// SOURCE CARD — palm-leaf manuscript with the reel's citation. opts: {title:[l1,l2], sub, edition}
+function sourceCard(ctx, u, p, sh, t, post, opts) {
+  const bg = ensureScene('ms', buildManuscript), cam = { z: lerp(1.0, 1.11, p), y: lerp(-20, 30, p) };
+  drawLayer(ctx, cam, bg.bg); drawLayer(ctx, cam, bg.ms);
+  withCam(ctx, cam, 0.8, c => { flame(c, bg.lamp[0], bg.lamp[1], 26, t, 3); for (let i = 0; i < 26; i++) { const h1 = hash(i * 2.9), h2 = hash(i * 8.1); dab(c, 120 + h1 * 840 + Math.sin(t * 0.5 + i) * 30, 700 + ((h2 * 800 - t * (10 + h1 * 16)) % 800 + 800) % 800, 2.5, 2.5, 0, '#ffd890', 0.25 + 0.3 * Math.sin(t * 2 + i * 3) ** 2); } });
+  ctx.fillStyle = rgba('#f4a03a', 0.05 + 0.03 * noise1(t * 8)); ctx.fillRect(0, 0, W, H);
+  post.ui = c => {
+    const a = ease(u, 0.15, 0.6), dy = (1 - easeOut(map(u, 0.15, 0.7))) * 30;
+    text(c, opts.title[0], 540, 400 + dy, { size: 104, weight: 900, color: C_GOLD, ls: 8, alpha: a, stroke: 8, shadow: 30 });
+    text(c, opts.title[1], 540, 506 + dy, { size: 104, weight: 900, color: C_GOLD, ls: 8, alpha: a, stroke: 8, shadow: 30 });
+    const w = 380 * ease(u, 0.4, 1.0); c.fillStyle = rgba(C_IVORY, 0.8 * a); c.fillRect(540 - w, 548, w * 2, 3);
+    text(c, opts.sub, 540, 618, { size: 39, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 4, alpha: ease(u, 0.5, 1.0), stroke: 6 });
+    if (opts.edition) text(c, opts.edition, 540, 672, { size: 30, font: 'Montserrat', weight: 700, color: C_GOLD, ls: 6, alpha: ease(u, 0.7, 1.2), stroke: 5 });
+  };
+}
+
+// END CARD — Rama, Sita, Lakshmana at the hermitage + series title, tagline and FOLLOW button (all from SERIES)
+function endCard(ctx, u, p, sh, t, post) {
+  const bg = ensureScene('herE', () => buildHermitage('end')), cam = { z: lerp(1.03, 1.08, p), y: 40 };
+  hermitage(ctx, bg, cam, t);
+  withCam(ctx, cam, 0.9, c => {
+    const br = Math.sin(t * 1.6) * 0.012, L = Object.assign({}, L_NIGHT, { tint: '#2a1c58', tintA: 0.16, rim: '#e6dcff' });
+    drawFigure(c, CH.lak, P({ bow: 'B', eye: blink(t, 1), smile: 0.6, gaze: [0.5, 0], pleat: br, head: -0.02 }), { x: 262, y: 1404, s: 575, face: 1 }, L);
+    drawFigure(c, CH.sita, P({ aN: [0.06, 0.25], aF: [0.085, 0.25], eye: blink(t, 4), smile: 0.75, gaze: [0.5, 0], head: -0.02 }), { x: 820, y: 1402, s: 555, face: -1 }, L);
+    drawFigure(c, CH.rama, P({ bow: 'F', aF: [0.17, 0.15], handF: 'hold', eye: blink(t, 7), smile: 0.7, gaze: [0.3, 0], pleat: br * 1.4, head: -0.03 }), { x: 545, y: 1412, s: 610, face: 1 }, L);
+    fireflies(c, t, 5, 18, [40, 800, 1000, 700], 0.9);
+  });
+  drawLayer(ctx, cam, bg.fg);
+  const g = ctx.createLinearGradient(0, 0, 0, 760); g.addColorStop(0, 'rgba(5,6,22,0.72)'); g.addColorStop(1, 'rgba(5,6,22,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, 760);
+  post.noLogo = true;
+  post.ui = c => {
+    const a = ease(u, 0.1, 0.6), s = lerp(1.12, 1, easeOut(map(u, 0.1, 0.7)));
+    c.save(); c.translate(540, 360); c.scale(s, s); glow(c, 0, 30, 520, '#f6c244', 0.14 * a);
+    text(c, SERIES.title[0], 0, 0, { size: 122, weight: 900, color: C_GOLD, ls: 14, alpha: a, stroke: 9, shadow: 34 }); text(c, SERIES.title[1], 0, 128, { size: 122, weight: 900, color: C_GOLD, ls: 6, alpha: a, stroke: 9, shadow: 34 }); c.restore();
+    const w = 300 * ease(u, 0.5, 1.0); c.fillStyle = rgba(C_IVORY, 0.85); c.fillRect(540 - w, 528, w * 2, 3);
+    if (SERIES.series_name) { const q = ease(u, 0.3, 0.8); text(c, SERIES.series_name + ' SERIES', 540, 210, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 8, alpha: q, stroke: 6 }); c.fillStyle = rgba(C_GOLD, 0.8 * q); c.fillRect(380, 232, 320, 3); }
+    text(c, SERIES.tagline, 540, 598, { size: 39, font: 'Montserrat', weight: 600, italic: true, color: C_IVORY, alpha: ease(u, 0.6, 1.1), stroke: 6 });
+    const b = backOut(map(u, 0.9, 1.35)); if (b > 0) { const pu = 1 + Math.sin(u * 5) * 0.025; c.save(); c.translate(540, 1560); c.scale(b * pu, b * pu); c.shadowColor = 'rgba(0,0,0,0.6)'; c.shadowBlur = 26; c.shadowOffsetY = 8; c.fillStyle = C_RED; c.beginPath(); c.roundRect(-230, -62, 460, 124, 62); c.fill(); c.shadowColor = 'transparent'; c.strokeStyle = C_GOLD; c.lineWidth = 5; c.stroke();
+      c.fillStyle = C_IVORY; c.fillRect(-190, -5, 44, 10); c.fillRect(-173, -22, 10, 44); text(c, 'FOLLOW', 36, 20, { size: 56, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 7, shadow: 0 }); c.restore(); }
+    if (SERIES.handles_line) [].concat(SERIES.handles_line).forEach((l, i) => text(c, l, 540, 1680 + i * 44, { size: 30, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 2, alpha: ease(u, 1.1, 1.6), stroke: 5 }));
+  };
+}
+
+// TITLE SHOT — generic painted backdrop + big staggered lines (hooks, reveals, "NOT IN VALMIKI" beats).
+// lines: [[text, colour?], ...]  · appear on the narrator's sentence starts when the shot has several sentences
+function titleShot(ctx, u, p, sh, t, post, lines, scene = 'herN') {
+  const bg = ensureScene(scene, () => buildHermitage(scene === 'herD' ? 'dusk' : scene === 'herE' ? 'end' : 'night')), cam = { z: lerp(1.0, 1.08, p), y: lerp(0, 24, p) };
+  hermitage(ctx, bg, cam, t); drawLayer(ctx, cam, bg.fg);
+  ctx.fillStyle = rgba('#05061a', 0.35); ctx.fillRect(0, 0, W, H);
+  const st = sentenceStarts(sh, Math.min(lines.length, (sh.sent || [0]).length || 1));
+  post.ui = c => lines.forEach(([s, col], i) => {
+    const a = ease(u, (st[Math.min(i, st.length - 1)] || 0.2) + 0.08 * i - 0.05, (st[Math.min(i, st.length - 1)] || 0.2) + 0.08 * i + 0.35);
+    if (a > 0) text(c, s, 540, 760 + i * 118 + (1 - a) * 22, { size: 92, weight: 900, color: col || C_IVORY, ls: 5, alpha: a, stroke: 9, shadow: 30 });
+  });
+}

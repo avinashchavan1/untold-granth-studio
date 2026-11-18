@@ -1,0 +1,90 @@
+{
+ "id": "untold-ramayana",
+ "logo": "UNTOLD GRANTH",
+ "title": [
+  "UNTOLD",
+  "GRANTH"
+ ],
+ "tagline": "Stories from Valmiki you were never told.",
+ "cta_hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+ "source": {
+  "book": "Valmiki Ramayana",
+  "edition": "Critical Edition (Baroda); English: Bibek Debroy",
+  "cite_format": "Kanda.Sarga.Verse, e.g. 3.43.22",
+  "check_against": [
+   "enjoylearningsanskrit.com (CE Sanskrit + translation)",
+   "wisdomlib.org Shastri translation (vulgate numbering = CE + ~2 in Aranya)"
+  ]
+ },
+ "language": {
+  "narration": "Hinglish/Hindi in Devanagari",
+  "screen_text": "English"
+ },
+ "palette": {
+  "gold": "#f6c244",
+  "ivory": "#fbf3df",
+  "red": "#c81e1e",
+  "ink": "#07061a"
+ },
+ "fonts": {
+  "title": "Cinzel",
+  "body": "Montserrat"
+ },
+ "loudness_lufs": -14,
+ "mix": {
+  "music_under_speech_db_below_voice": 18,
+  "music_gain": 0.2,
+  "duck_depth": 0.86
+ },
+ "major_characters": {
+  "rule": "User picks the voice (audition with options) ONLY for major, recurring characters. Minor / one-episode characters: Claude auditions 3-5 openly-licensed candidates, picks the best by fit + pronunciation, locks it, and notes it in cast.json.",
+  "locked": [
+   "narrator",
+   "rama",
+   "sita",
+   "lakshmana"
+  ],
+  "ask_user_when_first_needed": [
+   "hanuman",
+   "ravana",
+   "bharata",
+   "dasharatha",
+   "kaikeyi",
+   "kaushalya",
+   "sugriva",
+   "vali",
+   "vibhishana",
+   "kumbhakarna",
+   "mandodari",
+   "indrajit",
+   "vishvamitra",
+   "jambavan",
+   "tara",
+   "angada",
+   "shurpanakha"
+  ],
+  "minor_examples": [
+   "shabari",
+   "maricha",
+   "jatayu",
+   "kabandha",
+   "guha",
+   "ahalya",
+   "gautama",
+   "sampati",
+   "trijata",
+   "jabali",
+   "rishis, guards, messengers"
+  ]
+ },
+ "series_name": "UNTOLD RAMAYANA",
+ "channel": {
+  "name": "Untold Granth",
+  "instagram": "@untoldgranth.official",
+  "youtube": "@untoldgranth"
+ },
+ "handles_line": [
+  "INSTAGRAM  @untoldgranth.official",
+  "YOUTUBE  @untoldgranth"
+ ]
+}

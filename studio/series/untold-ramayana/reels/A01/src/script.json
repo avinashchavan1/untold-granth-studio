@@ -1,0 +1,337 @@
+{
+ "reel": "A01",
+ "title": "There Was No Lakshmana Rekha",
+ "source": "Valmiki Ramayana, Aranya Kanda 3(42-47)",
+ "fps": 24,
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "emo": "intrigue",
+   "hi": "क्या लक्ष्मण रेखा, सच में खींची गई थी?",
+   "en": "Was the Lakshmana Rekha ever really drawn?",
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 2.6,
+   "units": [
+    "[curious] क्या लक्ष्मण रेखा… सच में खींची गई थी?"
+   ],
+   "gain_db": -0.5
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "emo": "neutral",
+   "hi": "वाल्मीकि रामायण, अरण्य कांड, सर्ग बयालीस से सैंतालीस। ये है असली कहानी।",
+   "en": "Valmiki Ramayana, Aranya Kanda, chapters 42 to 47. Here's the real story.",
+   "lead": 0.18,
+   "tail": 0.12,
+   "units": [
+    "वाल्मीकि रामायण, अरण्य कांड, सर्ग बयालीस से सैंतालीस।",
+    "[dramatically] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.28
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "emo": "urgent",
+   "hi": "सोने का एक हिरण, राम को जंगल में दूर… बहुत दूर ले जाता है।",
+   "en": "A golden deer lures Rama away. Far, far away.",
+   "lead": 0.18,
+   "tail": 0.12,
+   "units": [
+    "सोने का एक हिरण, राम को जंगल में दूर… बहुत दूर ले जाता है।"
+   ],
+   "gain_db": 1.0,
+   "cite": "3.42"
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "emo": "dramatic",
+   "hi": "तीर लगते ही, मरता हुआ मारीच, राम की ही आवाज़ में चीख़ता है।",
+   "en": "Struck by the arrow, the dying Maricha cries out in Rama's own voice:",
+   "lead": 0.18,
+   "tail": 0.12,
+   "units": [
+    "[intense] तीर लगते ही, मरता हुआ मारीच, राम की ही आवाज़ में चीख़ता है।"
+   ],
+   "gain_db": 1.0,
+   "cite": "3.42"
+  },
+  {
+   "id": 5,
+   "voice": "maricha",
+   "emo": "scream",
+   "hi": "हा सीते! हा लक्ष्मण!",
+   "en": "\"Ha Sita! Ha Lakshmana!\"",
+   "lead": 0.18,
+   "tail": 0.46,
+   "units": [
+    {
+     "say": "हा सीते! हा लक्ष्मण!",
+     "ex": 1.1,
+     "cfg": 0.3
+    }
+   ],
+   "gain_db": 2.0,
+   "cite": "3.42"
+  },
+  {
+   "id": 6,
+   "voice": "sita",
+   "emo": "urgent",
+   "hi": "जाओ लक्ष्मण! तुम्हारे भाई मदद के लिए पुकार रहे हैं!",
+   "en": "\"Go, Lakshmana! Your brother is calling for help!\"",
+   "lead": 0.28,
+   "tail": 0.12,
+   "units": [
+    {
+     "say": "जाओ लक्ष्मण! तुम्हारे भाई मदद के लिए पुकार रहे हैं!",
+     "ex": 0.85,
+     "cfg": 0.4
+    }
+   ],
+   "gain_db": 1.5,
+   "cite": "3.43"
+  },
+  {
+   "id": 7,
+   "voice": "lakshmana",
+   "emo": "firm",
+   "hi": "राम को युद्ध में कोई नहीं हरा सकता। ये उस राक्षस की माया है।",
+   "en": "\"No one can defeat Rama in battle. This is that demon's illusion.\"",
+   "lead": 0.23,
+   "tail": 0.23,
+   "units": [
+    {
+     "say": "राम को युद्ध में कोई नहीं हरा सकता। ये उस राक्षस की माया है।",
+     "ex": 0.5,
+     "cfg": 0.45
+    }
+   ],
+   "cite": "3.43"
+  },
+  {
+   "id": 8,
+   "voice": "sita",
+   "emo": "anger",
+   "hi": "तुम मेरे लिए ही राम के साथ आए हो… या भरत ने भेजा है तुम्हें?",
+   "en": "\"You came with Rama only for me… or did Bharata send you?\"",
+   "lead": 0.23,
+   "tail": 0.28,
+   "units": [
+    {
+     "say": "तुम मेरे लिए ही राम के साथ आए हो… या भरत ने भेजा है तुम्हें?",
+     "ex": 0.95,
+     "cfg": 0.35
+    }
+   ],
+   "gain_db": 1.5,
+   "cite": "3.43.21-22"
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "emo": "sad",
+   "hi": "हाथ जोड़कर लक्ष्मण कहते हैं, आप मेरे लिए देवी हैं… मैं आपको जवाब नहीं दे सकता।",
+   "en": "Joining his palms, Lakshmana says: you are a goddess to me… I cannot answer you.",
+   "lead": 0.18,
+   "tail": 0.12,
+   "units": [
+    "[softly] हाथ जोड़कर लक्ष्मण कहते हैं, आप मेरे लिए देवी हैं… मैं आपको जवाब नहीं दे सकता।"
+   ],
+   "gain_db": -1.5,
+   "cite": "3.43"
+  },
+  {
+   "id": 10,
+   "voice": "lakshmana",
+   "emo": "sad",
+   "hi": "सभी वन-देवता आपकी रक्षा करें। मैं लौटकर, आपको राम के साथ फिर देख पाऊँ।",
+   "en": "\"May all the forest deities protect you. May I return and see you again, with Rama.\"",
+   "lead": 0.23,
+   "tail": 0.26,
+   "units": [
+    {
+     "say": "सभी वन-देवता आपकी रक्षा करें। मैं लौटकर, आपको राम के साथ फिर देख पाऊँ।",
+     "ex": 0.45,
+     "cfg": 0.3
+    }
+   ],
+   "gain_db": -1.0,
+   "force_take": {
+    "0": 1
+   },
+   "cite": "3.43.30-31"
+  },
+  {
+   "id": 11,
+   "voice": null,
+   "emo": null,
+   "hi": "",
+   "en": "",
+   "min": 2.7
+  },
+  {
+   "id": 12,
+   "voice": "narrator",
+   "emo": "dramatic_sad",
+   "hi": "कोई रेखा नहीं। कोई मंत्र नहीं। बस, एक प्रार्थना।",
+   "en": "",
+   "lead": 0.23,
+   "tail": 0.31,
+   "units": [
+    "कोई रेखा नहीं। [pause] कोई मंत्र नहीं। [pause] बस… एक प्रार्थना।"
+   ],
+   "gain_db": -0.5,
+   "sentences": 3,
+   "sentence_gap": 0.42,
+   "cite": "3.43"
+  },
+  {
+   "id": 13,
+   "voice": "narrator",
+   "emo": "fear",
+   "hi": "और ठीक उसी पल, साधु के भेस में, रावण आता है।",
+   "en": "At that very moment, Ravana arrives, disguised as a holy man.",
+   "lead": 0.18,
+   "tail": 0.12,
+   "units": [
+    "[cautiously] और ठीक उसी पल, साधु के भेस में, रावण आता है।"
+   ],
+   "gain_db": -1.0,
+   "cite": "3.44"
+  },
+  {
+   "id": 14,
+   "voice": "narrator",
+   "emo": "fear",
+   "hi": "पेड़ थम जाते हैं। हवा रुक जाती है। गोदावरी डर से धीमी हो जाती है।",
+   "en": "The trees freeze. The wind stops. The Godavari slows in fear.",
+   "lead": 0.23,
+   "tail": 0.16,
+   "units": [
+    "पेड़ थम जाते हैं। [pause] हवा रुक जाती है। [pause] गोदावरी डर से धीमी हो जाती है।"
+   ],
+   "gain_db": -1.5,
+   "sentences": 3,
+   "sentence_gap": 0.3,
+   "cite": "3.44"
+  },
+  {
+   "id": 15,
+   "voice": "narrator",
+   "emo": "warm",
+   "hi": "सीता उसे साधु समझकर पानी देती हैं… उसी को, जो उन्हें छीनने आया है।",
+   "en": "Thinking him a sage, Sita offers him water… to the very man who came to take her.",
+   "lead": 0.18,
+   "tail": 0.12,
+   "units": [
+    "[softly] सीता उसे साधु समझकर पानी देती हैं… [pause] उसी को, जो उन्हें छीनने आया है।"
+   ],
+   "gain_db": -0.5,
+   "cite": "3.44"
+  },
+  {
+   "id": 16,
+   "voice": "narrator",
+   "emo": "dramatic",
+   "hi": "और तब, वो अपना असली रूप दिखाता है। दस सिरों वाला रावण।",
+   "en": "Then he shows his true form: ten-headed Ravana.",
+   "lead": 0.38,
+   "tail": 0.4,
+   "units": [
+    "[dramatically] और तब, वो अपना असली रूप दिखाता है।",
+    "[deep voice] दस सिरों वाला रावण।"
+   ],
+   "unit_gap": 0.38,
+   "cite": "3.47"
+  },
+  {
+   "id": 17,
+   "voice": "narrator",
+   "emo": "dramatic",
+   "hi": "लक्ष्मण रेखा, बाद की कथाओं में जुड़ी। वाल्मीकि में नहीं।",
+   "en": "",
+   "lead": 0.28,
+   "tail": 0.31,
+   "units": [
+    "लक्ष्मण रेखा, बाद की कथाओं में जुड़ी।",
+    "[dramatically] वाल्मीकि में नहीं।"
+   ],
+   "unit_gap": 0.32
+  },
+  {
+   "id": 18,
+   "voice": "narrator",
+   "emo": "warm",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ]
+  }
+ ],
+ "series": "untold-ramayana",
+ "status": "PUBLISHED-READY v10",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "ARANYA KANDA  ·  CHAPTERS 42–47",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "No line (rekha) is drawn by Lakshmana",
+   "ref": "3.43 (CE): Lakshmana leaves after a blessing; no line, no mantra",
+   "verified": true
+  },
+  {
+   "claim": "Maricha cries 'Ha Sita! Ha Lakshmana!' in Rama's voice",
+   "ref": "3.42",
+   "verified": true
+  },
+  {
+   "claim": "Sita accuses Lakshmana of coming for her / being sent by Bharata",
+   "ref": "3.43.21-22",
+   "verified": true
+  },
+  {
+   "claim": "Blessing: may the forest deities protect you; may I see you again with Rama",
+   "ref": "3.43.30-31",
+   "verified": true
+  },
+  {
+   "claim": "Ravana arrives as a mendicant; trees and Godavari still in fear",
+   "ref": "3.44",
+   "verified": true
+  },
+  {
+   "claim": "Sita offers him water/hospitality",
+   "ref": "3.44",
+   "verified": true
+  },
+  {
+   "claim": "Lakshmana Rekha appears in later retellings, not Valmiki",
+   "ref": "absent from Valmiki CE 3.42-47",
+   "verified": true
+  }
+ ],
+ "verify_note": "Verse-level refs (3.43.21-22, 3.43.30-31) were checked against the CE Sanskrit; others are chapter-level. Recheck against Debroy before publishing.",
+ "hashtags": [
+  "#UntoldGranth",
+  "#LakshmanaRekha",
+  "#Ramayana",
+  "#Valmiki",
+  "#UntoldRamayana",
+  "#IndianMythology"
+ ],
+ "caption": "Everyone 'knows' Lakshmana drew a line Sita must not cross. In Valmiki's Ramayana there is no line and no spell — Lakshmana leaves with a prayer to the forest deities. The Rekha came from later retellings."
+}

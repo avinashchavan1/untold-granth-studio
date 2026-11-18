@@ -1,0 +1,107 @@
+{
+ "model": "Chatterbox Multilingual (ResembleAI/chatterbox, MIT), language_id=hi — for every voice with engine=chatterbox",
+ "voices": {
+  "narrator": {
+   "engine": "elevenlabs",
+   "voice_id": "vIdhHAZdn1bGjKe1dFw8",
+   "name": "Rudra – Intense Documentary Narrator",
+   "model": "eleven_v4",
+   "language": "hi",
+   "delivery": "eleven_v4 audio tags per line, e.g. [curious], [dramatically], [softly], [intense], [deep voice], [pause]",
+   "processing": "light polish only: highpass 45Hz, gentle 2:1 compression, tiny room",
+   "chosen": "2026-11-18 narrator shortlist option 8",
+   "fx": "highpass=f=45,acompressor=threshold=-20dB:ratio=2:attack=15:release=200:makeup=1,aecho=0.9:0.12:35|60:0.05|0.03",
+   "mix_gain": 1.0
+  },
+  "sita": {
+   "ref": "voices/sita.wav",
+   "source": "Google FLEURS hi_in test (CC-BY-4.0), female speaker",
+   "source_clip": "flf_test_6452456317001922868",
+   "character": "lower, mature, warm; rises to fear and anger",
+   "chosen": "audition option 4",
+   "engine": "chatterbox",
+   "ex": 0.85,
+   "cfg": 0.4,
+   "fx": "highpass=f=110,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.25:55|97:0.12|0.07",
+   "mix_gain": 0.95
+  },
+  "lakshmana": {
+   "ref": "voices/lakshmana.wav",
+   "source": "Google FLEURS hi_in (CC-BY-4.0), male speaker",
+   "source_clip": "fl_m_10691214664103820058",
+   "text": "इतालवी भाषा में उच्चारण करना तुलनात्मक रूप से आसान है क्योंकि ज़्यादातर शब्दों का उच्चारण वैसे ही किया जाता है जैसे उन्हें लिखा जाता है",
+   "dur": 9.24,
+   "f0_hz": 129,
+   "character": "younger male, firm and earnest; clearly different from the narrator",
+   "engine": "chatterbox",
+   "ex": 0.5,
+   "cfg": 0.4,
+   "fx": "highpass=f=70,bass=g=1.5:f=140,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.25:55|97:0.12|0.07",
+   "mix_gain": 0.95
+  },
+  "maricha": {
+   "ref": "voices/rama.wav",
+   "same_as": "rama",
+   "character": "Maricha cries out IN RAMA'S VOICE (Valmiki 3(42)): Rama's voice + faint octave-down demon shadow + long forest echo",
+   "chosen": "audition option 3",
+   "engine": "chatterbox",
+   "ex": 1.1,
+   "cfg": 0.3,
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=3:attack=6:release=120:makeup=2,aecho=0.8:0.7:260|520|900:0.38|0.24|0.14",
+   "mix_gain": 1.0,
+   "post": [
+    "demon_shadow",
+    "forest_echo"
+   ],
+   "asr_cut": false
+  },
+  "rama": {
+   "ref": "voices/rama.wav",
+   "source": "Google FLEURS hi_in test (CC-BY-4.0), male speaker",
+   "source_clip": "flm_test_5636625969852704727",
+   "character": "young, noble prince",
+   "chosen": "audition option 3 (Maricha's cry)",
+   "engine": "chatterbox",
+   "ex": 0.6,
+   "cfg": 0.4,
+   "fx": "highpass=f=70,bass=g=1.5:f=130,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.25:55|97:0.12|0.07",
+   "mix_gain": 0.95
+  },
+  "shabari": {
+   "engine": "chatterbox",
+   "ref": "voices/shabari.wav",
+   "source": "Google FLEURS hi_in test (CC-BY-4.0), female speaker 1724",
+   "source_clip": "fl_test_2721526147232986835",
+   "character": "aged woman ascetic, gentle, unhurried, devoted",
+   "ex": 0.6,
+   "cfg": 0.35,
+   "fx": "highpass=f=90,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.25:55|97:0.12|0.07",
+   "mix_gain": 0.95,
+   "chosen": "audition option 3 (A02) — picked by Claude (minor character, per user rule 2026-11-18)",
+   "alternates": "cast/audition/SHABARI_VOICE_AUDITION.mp4 options 1-7"
+  },
+  "gautama": {
+   "engine": "elevenlabs",
+   "voice_id": "PboFIQ6kckfADmG3UQYF",
+   "name": "Sanjay - Mature Hindi Storyteller (ElevenLabs library)",
+   "model": "eleven_v4",
+   "language": "hi",
+   "character": "aged sage, grave and measured; delivers the curse",
+   "fx": "highpass=f=60,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.3:60|110:0.14|0.08",
+   "mix_gain": 1.0,
+   "chosen": "Claude, A03 audition (5 candidates: 3 Chatterbox/FLEURS + 2 ElevenLabs); ASR 0.91, oldest timbre — minor character rule",
+   "audition": "cast/audition/gautama/"
+  }
+ },
+ "fx": {
+  "maricha": "Rama voice + octave-down shadow at 45% + compression + long forest echo"
+ },
+ "note": "LOCKED cast after voice audition. Every reel must use these exact reference clips.",
+ "previous_cast": "voices_v1/ (first cast), voices_v2/ (IndicTTS narrator used up to v8)",
+ "alternates": {
+  "narrator_option4": "audition/refs/narr4.wav (IndicVoices-R) — rejected: rambles past line ends"
+ },
+ "previous_narrators": "voices_v1/ (IndicTTS), voices_v2/ (IndicTTS), IndicVoices-R v6 option F (cast/voices/narrator.wav), audition alternates",
+ "how_to_add_a_character": "1) find a natural CC-BY/CC0 reference clip (8-12 s, clean, one speaker; FLEURS/IndicVoices-R) 2) make_reel.py audition 3) lock: copy to voices/<name>.wav and add an entry here with source + licence. Never clone a real person's voice without written consent.",
+ "voice_choice_rule": "User chooses voices only for major characters (series.json → major_characters). Claude chooses minor characters' voices."
+}

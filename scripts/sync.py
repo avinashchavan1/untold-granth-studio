@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Sync the studio folder -> Untold Granth Studio database (Supabase REST, upserts on natural keys).
+   python3 scripts/sync.py [studio_dir]          everything (series, channels, cast, locations, docs, plan, produced reels)
+   python3 scripts/sync.py [studio_dir] A04      also mark/refresh one produced reel
+The Supabase secret key is injected by the environment proxy (header apikey); never put it in code."""
+import json, os, re, sys, urllib.request
+URL = "https://spsrryrycowxmgiofyxo.supabase.co/rest/v1/"
+ST = sys.argv[1] if len(sys.argv) > 1 else "/home/user/studio"; SER = os.path.join(ST, "series", "untold-ramayana")
+H = {"apikey": os.environ.get("SUPABASE_SECRET", "proxy-injected"), "Content-Type": "application/json"}
+def api(method, path, body=None, prefer=None):
+    h = dict(H); h["Prefer"] = prefer or "return=representation"
+    rq = urllib.request.Request(URL + path, json.dumps(body, ensure_ascii=False).encode() if body is not None else None, h, method=method)
+    try: r = urllib.request.urlopen(rq, timeout=60).read(); return json.loads(r) if r else None
+    except urllib.error.HTTPError as e: sys.exit(f"{method} {path}: {e.code} {e.read().decode()[:400]}")
+def upsert(table, rows, on): return api("POST", f"{table}?on_conflict={on}", rows, "resolution=merge-duplicates,return=representation")
+
+sj = json.load(open(os.path.join(SER, "series.json")))
+upsert("series", [{"id": "untold-ramayana", "name": "Untold Ramayana", "book": "Valmiki Ramayana", "edition": sj["source"]["edition"], "config": sj}], "id")
+upsert("channels", [{"platform": "instagram", "handle": "@untoldgranth.official", "url": "https://www.instagram.com/untoldgranth.official/"},
+                    {"platform": "youtube", "handle": "@untoldgranth", "url": "https://www.youtube.com/@untoldgranth"}], "platform")
+# cast
+cast = json.load(open(os.path.join(SER, "cast", "cast.json")))["voices"]; mc = sj.get("major_characters", {})
+major = set(mc.get("locked", [])) | set(mc.get("ask_user_when_first_needed", []))
+NAMES = {"narrator": "Narrator (Rudra)", "lakshmana": "Lakshmana"}; FIRST = {"narrator": "A01", "rama": "A01", "sita": "A01", "lakshmana": "A01", "maricha": "A01", "shabari": "A02", "gautama": "A03"}
+looks = {m.group(1): m.group(2) for m in re.finditer(r"^\s+(\w+):\s+(\{ kind:[^\n]*\}),", open(os.path.join(SER, "art", "chars.js")).read(), re.M)}
+rows = [{"series_id": "untold-ramayana", "key": k, "name": NAMES.get(k, k.title()), "tier": "major" if k in major else "minor",
+         "status": "provisional" if "PROVISIONAL" in str(v.get("chosen", "")) else "locked", "voice": v, "look": {"rig": looks.get({"lakshmana": "lak"}.get(k, k), "")},
+         "first_reel": FIRST.get(k)} for k, v in cast.items()]
+rows += [{"series_id": "untold-ramayana", "key": k, "name": k.title(), "tier": "major", "status": "needed", "voice": {}, "look": {}, "first_reel": None} for k in sorted(major - set(cast))]
+upsert("characters", rows, "series_id,key")
+upsert("locations", [{"series_id": "untold-ramayana", "key": k, "name": n, "builder": b, "description": d} for k, n, b, d in [
+    ("hermitage", "Panchavati hermitage (dusk / night / end)", "buildHermitage(tod)", "Hut, mango tree, Godavari river band, moon; A01 and the end card."),
+    ("hook", "Hook ground shot", "buildHook()", "Low angle on the ground before the hut, dusk."),
+    ("forest", "Dandaka forest", "buildForest()", "Layered trunks with mist; chases and walks."),
+    ("doorway", "Hut doorway", "buildDoorway(tod)", "Close on the door and thatch fringe."),
+    ("manuscript", "Palm-leaf manuscript", "buildManuscript()", "Source card and 'not in Valmiki' card."),
+    ("pampa", "Shabari's hermitage, Lake Pampa", "buildPampa(tod)", "Lotus lake, hut, sages' glowing altar, wet bark robes, fruit basket.")]], "series_id,key")
+upsert("docs", [{"series_id": sid, "slug": slug, "title": t, "kind": kind, "body_md": open(p).read()} for slug, t, kind, p, sid in [
+    ("style-guide", "Studio style guide", "style_guide", os.path.join(ST, "STYLE_GUIDE.md"), None),
+    ("make-reel-skill", "make-reel workflow", "skill", os.path.join(ST, ".claude/skills/make-reel/SKILL.md"), None),
+    ("studio-readme", "Studio engine README", "readme", os.path.join(ST, "README.md"), None),
+    ("plan-100", "Untold Ramayana — the next 100 reels", "plan", os.path.join(SER, "PLAN_100.md"), "untold-ramayana")]], "slug")
+# plan rows
+KIND = {"M": "myth_buster", "R": "reveal", "D": "dialogue"}; rows = []
+for n, r in enumerate([r for r in open(os.path.join(SER, "PLAN_100.md")).read().splitlines() if re.match(r"^\| A\d{2,3} \|", r)], 1):
+    c = [x.strip() for x in r.strip("|").split("|")]
+    rows.append({"series_id": "untold-ramayana", "code": c[0], "plan_no": n, "title": c[1], "kind": KIND.get(c[2]), "source_ref": c[3], "art_cost": c[4], "plan_note": c[5] if len(c) > 5 else ""})
+upsert("reels", rows, "series_id,code")
+# produced reels
+STAGE = json.load(open(os.path.join(SER, "reels", "stages.json"))) if os.path.exists(os.path.join(SER, "reels", "stages.json")) else {}
+for code, stage in STAGE.items():
+    s = json.load(open(os.path.join(SER, "reels", code, "src", "script.json"), encoding="utf-8"))
+    tlp = os.path.join(SER, "reels", code, "src", "timeline.json"); tl = json.load(open(tlp)) if os.path.exists(tlp) else {}
+    rowp = os.path.join(ST, "publish", "desk", "rows", code + ".json"); caps = json.load(open(rowp))["captions"] if os.path.exists(rowp) else {}
+    rendered = stage not in ("idea", "researching", "scripted", "voiced")
+    rec = upsert("reels", [{"series_id": "untold-ramayana", "code": code, "title": s["title"], "stage": stage, "hook_hi": s["shots"][0]["hi"], "hook_en": s["shots"][0]["en"],
+                            "length_s": round(tl.get("total", 0), 2) if rendered else None, "script": s, "captions": caps, "hashtags": s.get("hashtags", []), "verify_note": s.get("verify_note")}], "series_id,code")[0]
+    api("DELETE", f"claims?reel_id=eq.{rec['id']}", prefer="return=minimal")
+    if s.get("claims"): api("POST", "claims", [{"reel_id": rec["id"], "position": i, "claim": c["claim"], "ref": c["ref"], "quote_sa": c.get("quote_sa"), "verified": bool(c.get("verified")), "sources": c.get("sources", [])} for i, c in enumerate(s["claims"])], "return=minimal")
+    if rendered:
+        api("POST", "publications?on_conflict=reel_id,platform", [{"reel_id": rec["id"], "platform": p, "state": "todo"} for p in ("instagram", "youtube", "facebook")], "resolution=ignore-duplicates,return=minimal")
+    print("synced", code, stage, len(s.get("claims", [])), "claims")
+api("POST", "activity", [{"actor": "claude", "action": "sync", "detail": {"reels": list(STAGE)}}], "return=minimal")
+print("SYNC OK")

@@ -164,20 +164,24 @@ create table public.activity (
 create index activity_at_idx on public.activity (at desc);
 
 -- ---------- updated_at ----------
-create or replace function public.touch_updated_at() returns trigger language plpgsql as $$
+create or replace function public.touch_updated_at() returns trigger language plpgsql set search_path = public as $$
 begin new.updated_at = now(); return new; end; $$;
 create trigger reels_touch before update on public.reels for each row execute function public.touch_updated_at();
 create trigger series_touch before update on public.series for each row execute function public.touch_updated_at();
 create trigger docs_touch before update on public.docs for each row execute function public.touch_updated_at();
 
 -- ---------- row level security: admins only ----------
+create index files_series_idx on public.files (series_id);
+create index publications_reel_idx on public.publications (reel_id);
+create index characters_series_idx on public.characters (series_id);
+create index docs_series_idx on public.docs (series_id);
+create index activity_reel_idx on public.activity (reel_id);
 do $$
 declare t text;
 begin
   foreach t in array array['app_admins','series','channels','characters','locations','reels','claims','files','publications','docs','activity'] loop
     execute format('alter table public.%I enable row level security', t);
-    execute format('create policy "%s admins read" on public.%I for select to authenticated using (public.is_admin())', t, t);
-    execute format('create policy "%s admins write" on public.%I for all to authenticated using (public.is_admin()) with check (public.is_admin())', t, t);
+    execute format('create policy "%s admins all" on public.%I for all to authenticated using ((select public.is_admin())) with check ((select public.is_admin()))', t, t);
   end loop;
 end $$;
 
@@ -186,7 +190,10 @@ insert into storage.buckets (id, name, public, file_size_limit)
 values ('reel-media', 'reel-media', false, 52428800)
 on conflict (id) do nothing;
 
-create policy "reel-media admins read" on storage.objects for select to authenticated using (bucket_id = 'reel-media' and public.is_admin());
-create policy "reel-media admins insert" on storage.objects for insert to authenticated with check (bucket_id = 'reel-media' and public.is_admin());
-create policy "reel-media admins update" on storage.objects for update to authenticated using (bucket_id = 'reel-media' and public.is_admin());
-create policy "reel-media admins delete" on storage.objects for delete to authenticated using (bucket_id = 'reel-media' and public.is_admin());
+create policy "reel-media admins read" on storage.objects for select to authenticated using (bucket_id = 'reel-media' and (select public.is_admin()));
+create policy "reel-media admins insert" on storage.objects for insert to authenticated with check (bucket_id = 'reel-media' and (select public.is_admin()));
+create policy "reel-media admins update" on storage.objects for update to authenticated using (bucket_id = 'reel-media' and (select public.is_admin()));
+create policy "reel-media admins delete" on storage.objects for delete to authenticated using (bucket_id = 'reel-media' and (select public.is_admin()));
+
+-- owner login (add more editors with: insert into public.app_admins(email) values ('...'))
+insert into public.app_admins (email) values ('avinashchavan1433@gmail.com');
