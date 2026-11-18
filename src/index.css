@@ -34,3 +34,6 @@ body { font-family: "Mukta", "Noto Sans Devanagari", system-ui, sans-serif; -web
   .prose-studio a { color: #e6b450; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Grid items never force the page wider than the screen (long titles, links, IDs wrap or truncate instead) */
+.grid > * { min-width: 0; }

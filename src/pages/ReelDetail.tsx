@@ -3,7 +3,8 @@ import { ArrowLeft, CheckCircle2, Download, ExternalLink, FileText, Loader2, Pen
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Card, Code, CopyButton, Empty, ErrorNote, LinkButton, PubBadge, SectionTitle, Spinner, StageBadge, fmtBytes, fmtDate, fmtLen } from "../components/ui";
-import { mediaUrl, useClaims, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
+import { mediaUrl, type ProviderStatus, useClaims, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
+import { Target } from "../components/Target";
 import { KIND_LABEL, PLATFORMS, STAGES, type FileRow, type Publication, type Reel, type Stage } from "../lib/types";
 
 const TABS = ["Publish", "Script", "Citations", "Files", "Notes"] as const;
@@ -23,7 +24,7 @@ export default function ReelDetail() {
   const produced = !["idea", "researching"].includes(r.stage) && !!r.script;
 
   return (
-    <div className="grid gap-6">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <Link to="/reels" className="flex w-fit items-center gap-1.5 text-sm font-semibold text-ink-soft hover:text-ink dark:text-parchment/60"><ArrowLeft size={16} /> All reels</Link>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
@@ -32,24 +33,24 @@ export default function ReelDetail() {
           {r.hook_hi && <p className="mt-2 text-lg">{r.hook_hi}</p>}
           {r.hook_en && <p className="text-sm text-ink-soft dark:text-parchment/60">{r.hook_en}</p>}
         </div>
-        <label className="grid gap-1 text-xs font-semibold uppercase tracking-wider text-ink-soft dark:text-parchment/60">
+        <label className="grid w-full gap-1 text-xs font-semibold uppercase tracking-wider text-ink-soft sm:w-auto dark:text-parchment/60">
           Stage
-          <select id="stage" value={r.stage} onChange={(e) => setStage(r, e.target.value as Stage)} className="rounded-xl border border-parchment-deep bg-white/80 px-3 py-2 text-sm font-semibold normal-case tracking-normal text-ink dark:border-night-700 dark:bg-night-900 dark:text-parchment">
+          <select id="stage" value={r.stage} onChange={(e) => setStage(r, e.target.value as Stage)} className="w-full rounded-xl border border-parchment-deep bg-white/80 px-3 py-2 text-sm font-semibold normal-case tracking-normal text-ink dark:border-night-700 dark:bg-night-900 dark:text-parchment">
             {STAGES.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
           </select>
         </label>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(240px,320px)_minmax(0,1fr)]">
-        <div className="grid content-start gap-3">
+        <div className="mx-auto grid w-full max-w-[300px] content-start gap-3 lg:mx-0 lg:max-w-none">
           <Preview preview={preview} poster={poster} />
           <div className="flex flex-wrap items-center gap-2 text-sm text-ink-soft dark:text-parchment/60"><StageBadge stage={r.stage} /> <span className="tabular">{fmtLen(r.length_s)}</span> {r.updated_at && <span>· updated {fmtDate(r.updated_at)}</span>}</div>
         </div>
         <div className="min-w-0">
-          <div className="mb-4 flex flex-wrap gap-1 border-b border-parchment-deep dark:border-night-700" role="tablist">
+          <div className="-mx-4 mb-4 flex gap-1 overflow-x-auto whitespace-nowrap border-b border-parchment-deep px-4 sm:mx-0 sm:px-0 dark:border-night-700" role="tablist">
             {TABS.map((t) => (
               <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)}
-                className={clsx("-mb-px border-b-2 px-3 py-2 text-sm font-semibold", tab === t ? "border-gold-deep text-ink dark:border-gold dark:text-parchment" : "border-transparent text-ink-soft hover:text-ink dark:text-parchment/60")}>{t}</button>
+                className={clsx("-mb-px shrink-0 border-b-2 px-3 py-2.5 text-sm font-semibold", tab === t ? "border-gold-deep text-ink dark:border-gold dark:text-parchment" : "border-transparent text-ink-soft hover:text-ink dark:text-parchment/60")}>{t}</button>
             ))}
           </div>
           {tab === "Publish" && (produced ? <PublishTab r={r} files={files.data ?? []} /> : <Empty>This reel is still in the plan. Publishing opens once it's rendered.</Empty>)}
@@ -97,13 +98,13 @@ function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
       )}
       <div className="grid gap-4 xl:grid-cols-3">
         {PLATFORMS.map((pl) => <Lane key={pl.key} r={r} platform={pl} pub={pubs.data?.find((x) => x.platform === pl.key)} master={masters[pl.master]}
-          auto={!!canAuto[pl.key]} job={jobs.data?.find((j) => j.platform === pl.key)} />)}
+          auto={!!canAuto[pl.key]} job={jobs.data?.find((j) => j.platform === pl.key)} providers={p} />)}
       </div>
     </div>
   );
 }
 
-function Lane({ r, platform, pub, master, auto, job }: { r: Reel; platform: (typeof PLATFORMS)[number]; pub?: Publication; master?: FileRow; auto: boolean; job?: PublishJob }) {
+function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; platform: (typeof PLATFORMS)[number]; pub?: Publication; master?: FileRow; auto: boolean; job?: PublishJob; providers: Record<string, ProviderStatus | undefined> }) {
   const upsert = useUpsertPublication();
   const publish = usePublishNow();
   const saveCaptions = useSaveCaptions();
@@ -147,7 +148,7 @@ function Lane({ r, platform, pub, master, auto, job }: { r: Reel; platform: (typ
       ) : (
         <>
           <details className="text-sm"><summary className="cursor-pointer font-semibold">{platform.titleField ? "Title & description" : "Caption"}</summary>
-            <pre className="mt-2 max-h-60 overflow-auto whitespace-pre-wrap rounded-lg bg-black/[.04] p-3 font-sans text-[13px] dark:bg-white/5">{title ? `${title}\n\n` : ""}{caption}</pre>
+            <pre className="mt-2 max-h-60 overflow-auto whitespace-pre-wrap break-words rounded-lg bg-black/[.04] p-3 font-sans text-[13px] dark:bg-white/5">{title ? `${title}\n\n` : ""}{caption}</pre>
           </details>
           <div className="flex flex-wrap gap-2">
             <Button size="sm" onClick={startEdit} disabled={!!active}><Pencil size={14} /> Edit</Button>
@@ -157,6 +158,7 @@ function Lane({ r, platform, pub, master, auto, job }: { r: Reel; platform: (typ
 
           {auto && platform.key !== "facebook" ? (
             <div className="grid gap-2 rounded-xl border border-gold-deep/40 bg-gold-soft/40 p-3 dark:border-gold/30 dark:bg-gold/5">
+              {(platform.key === "instagram" || platform.key === "youtube") && <Target platform={platform.key} providers={providers} />}
               {platform.key === "youtube" && (
                 <label className="flex items-center gap-2 text-xs font-semibold">Visibility
                   <select id="yt-privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} className="rounded-md border border-parchment-deep bg-white/80 px-2 py-1 text-xs dark:border-night-700 dark:bg-night-950">
@@ -165,6 +167,7 @@ function Lane({ r, platform, pub, master, auto, job }: { r: Reel; platform: (typ
               )}
               <Button variant="primary" disabled={!r.reviewed || !master || !!active || publish.isPending} title={!r.reviewed ? "Tick the citation check first" : ""}
                 onClick={() => publish.mutate({ reel: r, platform: platform.key, privacy })}><Send size={15} /> {active ? "Posting…" : publish.isPending ? "Starting…" : state === "failed" ? "Try again" : "Post now"}</Button>
+              {!r.reviewed && <p className="text-xs font-semibold text-amber-800 dark:text-amber-300">Tick "I checked the citations" at the top to unlock posting.</p>}
               {publish.error && <p className="text-xs text-vermilion">{(publish.error as Error).message}</p>}
               <p className="text-[11px] text-ink-soft dark:text-parchment/60">Uploads the full-quality master with this {platform.titleField ? "title and description" : "caption"}. Takes 3–10 minutes; you can leave this page.</p>
             </div>
@@ -172,7 +175,7 @@ function Lane({ r, platform, pub, master, auto, job }: { r: Reel; platform: (typ
             <details className="text-sm" open={platform.key === "facebook"}><summary className="cursor-pointer font-semibold">Post manually</summary>
               <div className="mt-2 grid gap-2">
                 <LinkButton href={platform.uploadUrl}><ExternalLink size={14} /> Open {platform.label.split(" ")[0]}</LinkButton>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <input id={`url-${platform.key}`} value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste post link (optional)" aria-label={`${platform.label} post link`}
                     className="min-w-0 flex-1 rounded-lg border border-parchment-deep bg-white/80 px-2.5 py-1.5 text-sm dark:border-night-700 dark:bg-night-950" />
                   <Button size="sm" variant="primary" disabled={!r.reviewed || upsert.isPending} title={r.reviewed ? "" : "Tick the citation check first"}

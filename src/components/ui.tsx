@@ -12,7 +12,7 @@ export function Button({ variant = "default", size = "md", className, ...p }: Bu
       {...p}
       className={clsx(
         "inline-flex items-center justify-center gap-1.5 rounded-lg font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:cursor-not-allowed disabled:opacity-45",
-        size === "sm" ? "px-2.5 py-1 text-[13px]" : "px-3.5 py-2 text-sm",
+        size === "sm" ? "px-3 py-1.5 text-[13px] sm:px-2.5 sm:py-1" : "px-3.5 py-2.5 text-sm sm:py-2",
         variant === "primary" && "bg-night-800 text-parchment hover:bg-night-700 dark:bg-gold dark:text-night-950 dark:hover:bg-gold-soft",
         variant === "default" && "border border-parchment-deep bg-white/70 text-ink hover:bg-white dark:border-night-700 dark:bg-night-800 dark:text-parchment dark:hover:bg-night-700",
         variant === "ghost" && "text-ink-soft hover:bg-black/5 dark:text-parchment/70 dark:hover:bg-white/5",
@@ -24,7 +24,7 @@ export function Button({ variant = "default", size = "md", className, ...p }: Bu
 }
 
 export const LinkButton = ({ href, children, className }: { href: string; children: ReactNode; className?: string }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className={clsx("inline-flex items-center gap-1.5 rounded-lg border border-parchment-deep bg-white/70 px-2.5 py-1 text-[13px] font-semibold hover:bg-white dark:border-night-700 dark:bg-night-800 dark:hover:bg-night-700", className)}>
+  <a href={href} target="_blank" rel="noopener noreferrer" className={clsx("inline-flex items-center gap-1.5 rounded-lg border border-parchment-deep bg-white/70 px-3 py-1.5 text-[13px] sm:px-2.5 sm:py-1 font-semibold hover:bg-white dark:border-night-700 dark:bg-night-800 dark:hover:bg-night-700", className)}>
     {children}
   </a>
 );

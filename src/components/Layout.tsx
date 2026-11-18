@@ -51,7 +51,7 @@ export default function Layout() {
             </div>
           </div>
         )}
-        <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:px-10 lg:py-10"><Outlet /></main>
+        <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:px-10 lg:py-10" style={{ paddingBottom: "max(24px, env(safe-area-inset-bottom))" }}><Outlet /></main>
       </div>
     </div>
   );

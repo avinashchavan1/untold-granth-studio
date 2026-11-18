@@ -18,7 +18,7 @@ export default function Plan() {
   const done = reels.filter((r) => r.stage === "published").length;
 
   return (
-    <div className="grid gap-6">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl font-extrabold tracking-wide">The plan</h1>

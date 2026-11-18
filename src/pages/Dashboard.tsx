@@ -1,7 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, Empty, ErrorNote, SectionTitle, Spinner, StageBadge, fmtDate } from "../components/ui";
-import { useActivity, useChannels, usePublications, useReels } from "../lib/api";
+import { Target } from "../components/Target";
+import { useActivity, useChannels, useConnections, usePublications, useReels } from "../lib/api";
 import { STAGES, type Stage } from "../lib/types";
 
 export default function Dashboard() {
@@ -9,6 +10,7 @@ export default function Dashboard() {
   const pubs = usePublications();
   const act = useActivity();
   const ch = useChannels();
+  const conn = useConnections();
   if (reels.isLoading) return <Spinner />;
   if (reels.error) return <ErrorNote error={reels.error} />;
   const all = reels.data ?? [];
@@ -21,17 +23,23 @@ export default function Dashboard() {
   const nextUp = all.filter((r) => r.stage === "idea").slice(0, 5);
 
   return (
-    <div className="grid gap-8">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-deep dark:text-gold">Untold Ramayana · Valmiki, Critical Edition</div>
+        <div className="min-w-0">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-deep sm:text-xs sm:tracking-[0.25em] dark:text-gold">Untold Ramayana · Valmiki, Critical Edition</div>
           <h1 className="mt-1 font-display text-3xl font-extrabold tracking-wide sm:text-4xl">Today in the studio</h1>
         </div>
-        <div className="flex flex-wrap gap-2 font-mono text-xs text-ink-soft dark:text-parchment/60">
+        <div className="flex min-w-0 flex-wrap gap-2 font-mono text-xs text-ink-soft dark:text-parchment/60">
           {(ch.data ?? []).map((c) => <a key={c.platform} href={c.url ?? "#"} target="_blank" rel="noreferrer" className="rounded-full border border-parchment-deep px-3 py-1 hover:border-gold dark:border-night-700">{c.platform} {c.handle}</a>)}
         </div>
       </div>
 
+      {conn.data && (conn.data.providers.instagram?.connected || conn.data.providers.youtube?.connected) && (
+        <div className="grid gap-2 sm:grid-cols-2">
+          <Target platform="instagram" providers={conn.data.providers} className="border border-parchment-deep dark:border-night-700" />
+          <Target platform="youtube" providers={conn.data.providers} className="border border-parchment-deep dark:border-night-700" />
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
         {[["Reels made", made.length], ["In production", inProd.length], ["Waiting for your check", needsReview.length], ["On Instagram", posted("instagram")], ["On YouTube", posted("youtube")]].map(([l, v]) => (
           <Card key={l as string} className="!p-4"><div className="tabular text-3xl font-bold">{v}</div><div className="mt-1 text-xs font-semibold uppercase tracking-wider text-ink-soft dark:text-parchment/60">{l}</div></Card>

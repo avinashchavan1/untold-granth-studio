@@ -141,7 +141,7 @@ export async function studio<T = Record<string, unknown>>(action: string, body: 
   return data as T;
 }
 
-export interface ProviderStatus { connected: boolean; at: string | null; name: string | null; expires_at: number | null; has_values: boolean; }
+export interface ProviderStatus { connected: boolean; at: string | null; name: string | null; account_id: string | null; expires_at: number | null; has_values: boolean; }
 export interface Connections { providers: Record<string, ProviderStatus | undefined>; redirect_uris: { youtube: string; instagram: string }; }
 export const useConnections = () => useQuery({ queryKey: ["connections"], queryFn: () => studio<Connections>("status") });
 

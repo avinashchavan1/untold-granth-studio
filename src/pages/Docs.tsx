@@ -18,14 +18,16 @@ export default function Docs() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
-      <nav className="grid content-start gap-1">
-        <h1 className="mb-2 font-display text-2xl font-extrabold tracking-wide">Style & docs</h1>
+      <nav className="grid min-w-0 content-start gap-2">
+        <h1 className="font-display text-2xl font-extrabold tracking-wide">Style & docs</h1>
+        <div className="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 lg:mx-0 lg:grid lg:overflow-visible lg:px-0">
         {(docs.data ?? []).map((d) => (
-          <Link key={d.id} to={`/docs/${d.slug}`} className={clsx("rounded-xl px-3 py-2 text-sm font-semibold", d.id === current?.id ? "bg-night-800 text-parchment dark:bg-gold dark:text-night-950" : "hover:bg-black/5 dark:hover:bg-white/5")}>{d.title}</Link>
+          <Link key={d.id} to={`/docs/${d.slug}`} className={clsx("shrink-0 rounded-xl px-3 py-2 text-sm font-semibold", d.id === current?.id ? "bg-night-800 text-parchment dark:bg-gold dark:text-night-950" : "hover:bg-black/5 dark:hover:bg-white/5")}>{d.title}</Link>
         ))}
+        </div>
       </nav>
       {current && (
-        <Card className="min-w-0">
+        <Card className="min-w-0 !px-4 sm:!px-5">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-parchment-deep pb-3 dark:border-night-700">
             <span className="text-xs text-ink-soft dark:text-parchment/60">Last updated {fmtDate(current.updated_at)}</span>
             {edit ? (

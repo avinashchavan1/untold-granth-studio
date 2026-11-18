@@ -19,7 +19,8 @@ Deno.serve(async (req) => {
         const out: Record<string, unknown> = {};
         for (const row of data ?? []) {
           const d = row.data as Record<string, any>;
-          out[row.provider] = { connected: !!row.connected_at, at: row.connected_at, name: d.channel_title ?? d.username ?? d.login ?? null, expires_at: d.expires_at ?? null, has_values: Object.keys(d).length > 0 };
+          out[row.provider] = { connected: !!row.connected_at, at: row.connected_at, name: d.channel_title ?? d.username ?? d.login ?? null,
+            account_id: d.user_id ?? d.channel_id ?? null, expires_at: d.expires_at ?? null, has_values: Object.keys(d).length > 0 };
         }
         return json({ providers: out, redirect_uris: { youtube: `${FN_URL}/oauth/youtube`, instagram: `${FN_URL}/oauth/instagram` } });
       }

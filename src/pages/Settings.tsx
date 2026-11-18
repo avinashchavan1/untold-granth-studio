@@ -17,7 +17,7 @@ export default function SettingsPage() {
   const palette = (cfg.palette ?? {}) as Record<string, string>;
 
   return (
-    <div className="grid gap-6">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <h1 className="font-display text-3xl font-extrabold tracking-wide">Settings</h1>
       <Card><Connections /></Card>
       <div className="grid gap-6 lg:grid-cols-2">

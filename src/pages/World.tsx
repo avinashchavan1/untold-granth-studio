@@ -18,7 +18,7 @@ export default function World() {
   const all = chars.data ?? [];
   const group = (tier: "major" | "minor") => all.filter((c) => c.tier === tier);
   return (
-    <div className="grid gap-8">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-8">
       <div>
         <h1 className="font-display text-3xl font-extrabold tracking-wide">Cast & world</h1>
         <p className="mt-1 max-w-2xl text-sm text-ink-soft dark:text-parchment/60">Locked voices and looks keep every reel consistent. You choose voices for major characters; minor, one-episode characters are cast by Claude and noted here.</p>

@@ -10,7 +10,7 @@ export default function Reels() {
   const { data, isLoading, error } = useReels();
   const [params, setParams] = useSearchParams();
   const [q, setQ] = useState("");
-  const view = params.get("view") ?? "board";
+  const view = params.get("view") ?? (typeof window !== "undefined" && window.innerWidth < 640 ? "list" : "board");
   const stage = (params.get("stage") as Stage | null) ?? null;
   const rows = useMemo(() => (data ?? []).filter((r) => (!stage || r.stage === stage) && (!q || `${r.code} ${r.title} ${r.source_ref ?? ""}`.toLowerCase().includes(q.toLowerCase()))), [data, stage, q]);
   if (isLoading) return <Spinner />;
@@ -18,14 +18,14 @@ export default function Reels() {
   const set = (k: string, v: string | null) => { const p = new URLSearchParams(params); v ? p.set(k, v) : p.delete(k); setParams(p, { replace: true }); };
 
   return (
-    <div className="grid gap-6">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <h1 className="font-display text-3xl font-extrabold tracking-wide">Reels</h1>
-        <div className="flex flex-wrap items-center gap-2">
-          <label className="relative">
+        <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+          <label className="relative w-full sm:w-auto">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft" />
             <input id="reel-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search title, code, kanda…" aria-label="Search reels"
-              className="w-64 max-w-full rounded-xl border border-parchment-deep bg-white/80 py-2 pl-9 pr-3 text-sm outline-none focus:border-gold dark:border-night-700 dark:bg-night-900" />
+              className="w-full rounded-xl sm:w-64 border border-parchment-deep bg-white/80 py-2 pl-9 pr-3 text-sm outline-none focus:border-gold dark:border-night-700 dark:bg-night-900" />
           </label>
           <select id="stage-filter" aria-label="Filter by stage" value={stage ?? ""} onChange={(e) => set("stage", e.target.value || null)}
             className="rounded-xl border border-parchment-deep bg-white/80 px-3 py-2 text-sm dark:border-night-700 dark:bg-night-900">
@@ -59,7 +59,9 @@ export default function Reels() {
           </div>
         </div>
       ) : (
-        <Card className="overflow-x-auto !p-0">
+        <>
+        <ul className="grid gap-2 sm:hidden">{rows.map((r) => <li key={r.id}><ReelCard r={r} /></li>)}</ul>
+        <Card className="hidden overflow-x-auto !p-0 sm:block">
           <table className="w-full min-w-[720px] text-sm">
             <thead className="text-left text-xs uppercase tracking-wider text-ink-soft dark:text-parchment/60">
               <tr className="border-b border-parchment-deep dark:border-night-700"><th className="p-3">#</th><th className="p-3">Reel</th><th className="p-3">Type</th><th className="p-3">Source</th><th className="p-3">Length</th><th className="p-3">Stage</th></tr>
@@ -78,6 +80,7 @@ export default function Reels() {
             </tbody>
           </table>
         </Card>
+        </>
       )}
     </div>
   );

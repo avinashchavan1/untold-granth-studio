@@ -3,6 +3,7 @@ import { CheckCircle2, CircleDashed, ExternalLink, Link2 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button, Card, CopyButton, SectionTitle, Spinner } from "../components/ui";
+import { Target } from "../components/Target";
 import { studio, useConnections, type Connections as Conn } from "../lib/api";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -24,6 +25,9 @@ export default function Connections() {
         <Ready label="Post to YouTube from the app" ok={ready(["github", "huggingface", "google_app", "youtube"])} />
         <Ready label="Post to Instagram from the app" ok={ready(["github", "huggingface", "instagram"])} />
       </div>
+      {(p.instagram?.connected || p.youtube?.connected) && (
+        <div className="grid gap-2 sm:grid-cols-2"><Target platform="instagram" providers={p} className="border border-parchment-deep dark:border-night-700" /><Target platform="youtube" providers={p} className="border border-parchment-deep dark:border-night-700" /></div>
+      )}
 
       <Step n={1} title="Publisher (GitHub)" done={!!p.github?.connected} detail={p.github?.connected ? "Can start the publisher" : undefined}>
         <p>Lets the app start the publisher that uploads your full-quality files.</p>
@@ -44,7 +48,7 @@ export default function Connections() {
         <SaveForm provider="huggingface" fields={[["token", "Hugging Face token"]]} />
       </Step>
 
-      <Step n={3} title="YouTube" done={!!p.youtube?.connected} detail={p.youtube?.name ? `Channel: ${p.youtube.name}` : undefined}>
+      <Step n={3} title="YouTube" done={!!p.youtube?.connected} detail={p.youtube?.connected ? `${p.youtube.name ?? "Channel"}${p.youtube.account_id ? ` · ${p.youtube.account_id}` : ""}` : undefined}>
         <p>One-time Google setup (about 10 minutes):</p>
         <ol className="list-decimal space-y-1 pl-5">
           <li>Open <A href="https://console.cloud.google.com/projectcreate">Google Cloud → new project</A> named <code>untold-granth</code>.</li>
@@ -59,7 +63,7 @@ export default function Connections() {
         <p className="text-xs text-ink-soft dark:text-parchment/60">Until Google audits the app, YouTube keeps API uploads <b>private</b>; open YouTube Studio and set them to Public (one tap). You can request the free audit later.</p>
       </Step>
 
-      <Step n={4} title="Instagram" done={!!p.instagram?.connected} detail={p.instagram?.name ? `@${p.instagram.name}` : undefined}>
+      <Step n={4} title="Instagram" done={!!p.instagram?.connected} detail={p.instagram?.connected ? `@${p.instagram.name ?? "account"}${p.instagram.account_id ? ` · ID ${p.instagram.account_id}` : ""}` : undefined}>
         <p>One-time Meta setup (Instagram must be a professional/Creator account):</p>
         <ol className="list-decimal space-y-1 pl-5">
           <li><A href="https://developers.facebook.com/apps/">Meta for Developers → My Apps</A> → <b>Untold Granth Studio</b> → Use cases → <b>Customize</b> → <b>API setup with Unified login</b>.</li>
@@ -92,8 +96,8 @@ function Step({ n, title, done, detail, children }: { n: number; title: string; 
     <Card className="!p-4">
       <button className="flex w-full items-center justify-between gap-3 text-left" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
         <span className="flex items-center gap-3"><span className={clsx("grid h-7 w-7 place-items-center rounded-full text-sm font-bold", done ? "bg-emerald-600 text-white" : "bg-night-800 text-parchment dark:bg-gold dark:text-night-950")}>{done ? "✓" : n}</span>
-          <span><span className="font-bold">{title}</span>{detail && <span className="ml-2 text-sm text-ink-soft dark:text-parchment/60">{detail}</span>}</span></span>
-        <span className="text-sm text-ink-soft">{open ? "Hide" : done ? "Change" : "Set up"}</span>
+          <span className="min-w-0"><span className="font-bold">{title}</span>{detail && <span className="block break-all text-sm text-ink-soft sm:ml-2 sm:inline dark:text-parchment/60">{detail}</span>}</span></span>
+        <span className="shrink-0 text-sm text-ink-soft">{open ? "Hide" : done ? "Change" : "Set up"}</span>
       </button>
       {open && <div className="mt-3 grid gap-3 text-sm leading-relaxed">{children}</div>}
     </Card>
