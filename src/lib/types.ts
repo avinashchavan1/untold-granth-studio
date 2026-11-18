@@ -1,7 +1,7 @@
 export type Stage = "idea" | "researching" | "scripted" | "voiced" | "rendered" | "review" | "approved" | "published";
 export type ReelKind = "myth_buster" | "reveal" | "dialogue";
 export type Platform = "instagram" | "youtube" | "facebook" | "threads" | "moj" | "sharechat" | "josh" | "whatsapp";
-export type PubState = "todo" | "scheduled" | "posted" | "skipped";
+export type PubState = "todo" | "scheduled" | "posting" | "posted" | "failed" | "skipped";
 
 export const STAGES: { key: Stage; label: string; hint: string }[] = [
   { key: "idea", label: "Idea", hint: "In the plan, not started" },

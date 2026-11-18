@@ -129,3 +129,40 @@ export async function isAdmin(): Promise<boolean> {
   const { data, error } = await supabase.rpc("is_admin");
   return !error && data === true;
 }
+
+// ---------- publishing (server functions) ----------
+export async function studio<T = Record<string, unknown>>(action: string, body: Record<string, unknown> = {}): Promise<T> {
+  const { data, error } = await supabase.functions.invoke("studio", { body: { action, ...body } });
+  if (error) {
+    let msg = error.message;
+    try { const ctx = (error as { context?: Response }).context; if (ctx) msg = (await ctx.json()).error ?? msg; } catch { /* keep message */ }
+    throw new Error(msg);
+  }
+  return data as T;
+}
+
+export interface ProviderStatus { connected: boolean; at: string | null; name: string | null; expires_at: number | null; has_values: boolean; }
+export interface Connections { providers: Record<string, ProviderStatus | undefined>; redirect_uris: { youtube: string; instagram: string }; }
+export const useConnections = () => useQuery({ queryKey: ["connections"], queryFn: () => studio<Connections>("status") });
+
+export interface PublishJob { id: string; reel_id: string; platform: string; status: "queued" | "running" | "done" | "failed"; step: string | null; log: string; result_url: string | null; created_at: string; finished_at: string | null; }
+export const useJobs = (reelId?: string) =>
+  useQuery({
+    enabled: !!reelId, queryKey: ["jobs", reelId],
+    queryFn: () => must<PublishJob[]>(supabase.from("publish_jobs").select("id,reel_id,platform,status,step,log,result_url,created_at,finished_at").eq("reel_id", reelId!).order("created_at", { ascending: false }).limit(20)),
+    refetchInterval: (q) => ((q.state.data as PublishJob[] | undefined)?.some((j) => j.status === "queued" || j.status === "running") ? 4000 : false),
+  });
+
+export function usePublishNow() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ reel, platform, privacy }: { reel: Reel; platform: string; privacy?: string }) => studio("publish", { reel_id: reel.id, platform, options: { privacy } }),
+    onSuccess: (_d, v) => { qc.invalidateQueries({ queryKey: ["jobs", v.reel.id] }); qc.invalidateQueries({ queryKey: ["pubs"] }); },
+    onSettled: (_d, _e, v) => qc.invalidateQueries({ queryKey: ["jobs", v.reel.id] }),
+  });
+}
+
+export function useSaveCaptions() {
+  const up = useUpdateReel();
+  return (reel: Reel, captions: Record<string, string>) => up.mutateAsync({ reel, patch: { captions }, action: "captions edited" });
+}

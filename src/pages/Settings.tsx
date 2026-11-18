@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSession } from "../components/Auth";
 import { Button, Card, SectionTitle, Spinner, fmtDate } from "../components/ui";
 import { useAdminMutations, useAdmins, useChannels, useSeries } from "../lib/api";
+import Connections from "./Connections";
 
 export default function SettingsPage() {
   const series = useSeries();
@@ -18,6 +19,7 @@ export default function SettingsPage() {
   return (
     <div className="grid gap-6">
       <h1 className="font-display text-3xl font-extrabold tracking-wide">Settings</h1>
+      <Card><Connections /></Card>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <SectionTitle>Brand</SectionTitle>

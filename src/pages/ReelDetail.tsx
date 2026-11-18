@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { ArrowLeft, CheckCircle2, Download, ExternalLink, FileText, ShieldCheck } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Download, ExternalLink, FileText, Loader2, Pencil, Send, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Card, Code, CopyButton, Empty, ErrorNote, LinkButton, PubBadge, SectionTitle, Spinner, StageBadge, fmtBytes, fmtDate, fmtLen } from "../components/ui";
-import { mediaUrl, useClaims, useFiles, useMediaUrl, usePublications, useReel, useSetStage, useUpdateReel, useUpsertPublication } from "../lib/api";
+import { mediaUrl, useClaims, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
 import { KIND_LABEL, PLATFORMS, STAGES, type FileRow, type Publication, type Reel, type Stage } from "../lib/types";
 
 const TABS = ["Publish", "Script", "Citations", "Files", "Notes"] as const;
@@ -74,7 +74,14 @@ function Preview({ preview, poster }: { preview?: FileRow; poster?: FileRow }) {
 function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
   const pubs = usePublications(r.id);
   const update = useUpdateReel();
+  const jobs = useJobs(r.id);
+  const conn = useConnections();
   const masters = { instagram: files.find((f) => f.kind === "master_instagram"), youtube: files.find((f) => f.kind === "master_youtube") };
+  const p = conn.data?.providers ?? {};
+  const canAuto: Record<string, boolean> = {
+    youtube: ["github", "huggingface", "google_app", "youtube"].every((k) => p[k]?.connected),
+    instagram: ["github", "huggingface", "meta_app", "instagram"].every((k) => p[k]?.connected),
+  };
   return (
     <div className="grid gap-4">
       <label className={clsx("flex items-start gap-3 rounded-2xl border p-4", r.reviewed ? "border-emerald-300 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40" : "border-amber-300 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/40")}>
@@ -85,49 +92,109 @@ function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
           {r.reviewed ? <span className="text-emerald-800 dark:text-emerald-300">Reviewed {fmtDate(r.reviewed_at)}. Posting is unlocked.</span> : <span>Open the Citations tab, read each claim against its verse, then tick this. Posting stays locked until then.</span>}
         </span>
       </label>
+      {!canAuto.youtube && !canAuto.instagram && !conn.isLoading && (
+        <div className="rounded-2xl border border-parchment-deep p-3 text-sm dark:border-night-700">Want one-tap posting? Finish <Link to="/settings#connections" className="font-semibold text-gold-deep underline dark:text-gold">Settings → Connections</Link> once; then <b>Post now</b> appears here.</div>
+      )}
       <div className="grid gap-4 xl:grid-cols-3">
-        {PLATFORMS.map((p) => <Lane key={p.key} r={r} platform={p} pub={pubs.data?.find((x) => x.platform === p.key)} master={masters[p.master]} />)}
+        {PLATFORMS.map((pl) => <Lane key={pl.key} r={r} platform={pl} pub={pubs.data?.find((x) => x.platform === pl.key)} master={masters[pl.master]}
+          auto={!!canAuto[pl.key]} job={jobs.data?.find((j) => j.platform === pl.key)} />)}
       </div>
     </div>
   );
 }
 
-function Lane({ r, platform, pub, master }: { r: Reel; platform: (typeof PLATFORMS)[number]; pub?: Publication; master?: FileRow }) {
+function Lane({ r, platform, pub, master, auto, job }: { r: Reel; platform: (typeof PLATFORMS)[number]; pub?: Publication; master?: FileRow; auto: boolean; job?: PublishJob }) {
   const upsert = useUpsertPublication();
+  const publish = usePublishNow();
+  const saveCaptions = useSaveCaptions();
   const [url, setUrl] = useState(pub?.post_url ?? "");
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState({ title: "", caption: "" });
+  const [privacy, setPrivacy] = useState("public");
   useEffect(() => setUrl(pub?.post_url ?? ""), [pub?.post_url]);
   const state = pub?.state ?? "todo";
   const caption = r.captions?.[platform.capField] ?? "";
   const title = platform.titleField ? r.captions?.[platform.titleField] ?? "" : "";
+  const active = job && (job.status === "queued" || job.status === "running");
+  const startEdit = () => { setDraft({ title, caption }); setEditing(true); };
+  const save = async () => {
+    const next = { ...(r.captions ?? {}), [platform.capField]: draft.caption };
+    if (platform.titleField) next[platform.titleField] = draft.title;
+    if (platform.key === "instagram" && (r.captions?.facebook ?? "") === caption) next.facebook = draft.caption.replace("@untoldgranth.official", "Untold Granth");
+    await saveCaptions(r, next); setEditing(false);
+  };
   return (
     <Card className="grid content-start gap-3 !p-4">
-      <div className="flex items-center justify-between gap-2"><h3 className="font-bold">{platform.label}</h3><PubBadge state={state} /></div>
+      <div className="flex items-center justify-between gap-2"><h3 className="font-bold">{platform.label}</h3><PubBadge state={active ? "posting" : state} /></div>
       {master ? <MasterLink f={master} /> : <div className="rounded-lg bg-black/[.04] p-2 text-xs text-ink-soft dark:bg-white/5">Master file: not attached yet</div>}
-      {state === "posted" ? (
+
+      {job && (job.status !== "done" || state !== "posted") && <JobCard job={job} />}
+
+      {state === "posted" && !active ? (
         <div className="grid gap-2 text-sm">
           <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300"><CheckCircle2 size={16} /> Posted {fmtDate(pub?.posted_at)}</div>
           {pub?.post_url && <a href={pub.post_url} target="_blank" rel="noreferrer" className="break-all text-gold-deep underline dark:text-gold">{pub.post_url}</a>}
-          <Button size="sm" variant="ghost" onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "todo", posted_at: null } })}>Undo</Button>
+          <Button size="sm" variant="ghost" onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "todo", posted_at: null } })}>Mark as not posted</Button>
+        </div>
+      ) : editing ? (
+        <div className="grid gap-2">
+          {platform.titleField && <label className="grid gap-1 text-xs font-semibold">Title ({draft.title.length}/100)
+            <input id={`title-${platform.key}`} value={draft.title} maxLength={100} onChange={(e) => setDraft({ ...draft, title: e.target.value })} className="rounded-lg border border-parchment-deep bg-white/80 px-2.5 py-1.5 text-sm font-normal dark:border-night-700 dark:bg-night-950" /></label>}
+          <label className="grid gap-1 text-xs font-semibold">{platform.titleField ? "Description" : "Caption"} ({draft.caption.length}/{platform.key === "youtube" ? 5000 : 2200})
+            <textarea id={`cap-${platform.key}`} rows={10} value={draft.caption} onChange={(e) => setDraft({ ...draft, caption: e.target.value })} className="rounded-lg border border-parchment-deep bg-white/80 p-2.5 text-[13px] font-normal dark:border-night-700 dark:bg-night-950" /></label>
+          <div className="flex gap-2"><Button size="sm" variant="primary" onClick={save}>Save</Button><Button size="sm" variant="ghost" onClick={() => setEditing(false)}>Cancel</Button></div>
         </div>
       ) : (
         <>
-          <div className="flex flex-wrap gap-2">
-            {title && <CopyButton text={title} label="Copy title" />}
-            <CopyButton text={caption} label={platform.titleField ? "Copy description" : "Copy caption"} />
-            <LinkButton href={platform.uploadUrl}><ExternalLink size={14} /> Open</LinkButton>
-          </div>
-          <details className="text-sm"><summary className="cursor-pointer font-semibold">Preview text</summary>
+          <details className="text-sm"><summary className="cursor-pointer font-semibold">{platform.titleField ? "Title & description" : "Caption"}</summary>
             <pre className="mt-2 max-h-60 overflow-auto whitespace-pre-wrap rounded-lg bg-black/[.04] p-3 font-sans text-[13px] dark:bg-white/5">{title ? `${title}\n\n` : ""}{caption}</pre>
           </details>
-          <div className="flex gap-2">
-            <input id={`url-${platform.key}`} value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste post link (optional)" aria-label={`${platform.label} post link`}
-              className="min-w-0 flex-1 rounded-lg border border-parchment-deep bg-white/80 px-2.5 py-1.5 text-sm dark:border-night-700 dark:bg-night-950" />
-            <Button size="sm" variant="primary" disabled={!r.reviewed || upsert.isPending} title={r.reviewed ? "" : "Tick the citation check first"}
-              onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "posted", post_url: url.trim() || null, posted_at: new Date().toISOString() } })}>Mark posted</Button>
+          <div className="flex flex-wrap gap-2">
+            <Button size="sm" onClick={startEdit} disabled={!!active}><Pencil size={14} /> Edit</Button>
+            {title && <CopyButton text={title} label="Copy title" />}
+            <CopyButton text={caption} label={platform.titleField ? "Copy description" : "Copy caption"} />
           </div>
+
+          {auto && platform.key !== "facebook" ? (
+            <div className="grid gap-2 rounded-xl border border-gold-deep/40 bg-gold-soft/40 p-3 dark:border-gold/30 dark:bg-gold/5">
+              {platform.key === "youtube" && (
+                <label className="flex items-center gap-2 text-xs font-semibold">Visibility
+                  <select id="yt-privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} className="rounded-md border border-parchment-deep bg-white/80 px-2 py-1 text-xs dark:border-night-700 dark:bg-night-950">
+                    <option value="public">Public</option><option value="unlisted">Unlisted</option><option value="private">Private</option>
+                  </select></label>
+              )}
+              <Button variant="primary" disabled={!r.reviewed || !master || !!active || publish.isPending} title={!r.reviewed ? "Tick the citation check first" : ""}
+                onClick={() => publish.mutate({ reel: r, platform: platform.key, privacy })}><Send size={15} /> {active ? "Posting…" : publish.isPending ? "Starting…" : state === "failed" ? "Try again" : "Post now"}</Button>
+              {publish.error && <p className="text-xs text-vermilion">{(publish.error as Error).message}</p>}
+              <p className="text-[11px] text-ink-soft dark:text-parchment/60">Uploads the full-quality master with this {platform.titleField ? "title and description" : "caption"}. Takes 3–10 minutes; you can leave this page.</p>
+            </div>
+          ) : (
+            <details className="text-sm" open={platform.key === "facebook"}><summary className="cursor-pointer font-semibold">Post manually</summary>
+              <div className="mt-2 grid gap-2">
+                <LinkButton href={platform.uploadUrl}><ExternalLink size={14} /> Open {platform.label.split(" ")[0]}</LinkButton>
+                <div className="flex gap-2">
+                  <input id={`url-${platform.key}`} value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste post link (optional)" aria-label={`${platform.label} post link`}
+                    className="min-w-0 flex-1 rounded-lg border border-parchment-deep bg-white/80 px-2.5 py-1.5 text-sm dark:border-night-700 dark:bg-night-950" />
+                  <Button size="sm" variant="primary" disabled={!r.reviewed || upsert.isPending} title={r.reviewed ? "" : "Tick the citation check first"}
+                    onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "posted", post_url: url.trim() || null, posted_at: new Date().toISOString() } })}>Mark posted</Button>
+                </div>
+              </div>
+            </details>
+          )}
         </>
       )}
     </Card>
+  );
+}
+
+function JobCard({ job }: { job: PublishJob }) {
+  const running = job.status === "queued" || job.status === "running";
+  return (
+    <div className={clsx("grid gap-1 rounded-xl p-3 text-xs", job.status === "failed" ? "bg-vermilion/10 text-vermilion" : job.status === "done" ? "bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300" : "bg-sky-50 text-sky-900 dark:bg-sky-950/40 dark:text-sky-300")}>
+      <div className="flex items-center gap-1.5 font-semibold">{running && <Loader2 size={13} className="animate-spin" />}{job.status === "failed" ? "Posting failed" : job.status === "done" ? "Posted" : job.step ?? "Starting"}</div>
+      {job.result_url && <a href={job.result_url} target="_blank" rel="noreferrer" className="break-all underline">{job.result_url}</a>}
+      <details><summary className="cursor-pointer">Details</summary><pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap font-mono text-[11px]">{job.log}</pre></details>
+    </div>
   );
 }
 

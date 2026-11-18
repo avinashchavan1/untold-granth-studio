@@ -1,0 +1,139 @@
+import clsx from "clsx";
+import { CheckCircle2, CircleDashed, ExternalLink, Link2 } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Button, Card, CopyButton, SectionTitle, Spinner } from "../components/ui";
+import { studio, useConnections, type Connections as Conn } from "../lib/api";
+import { useQueryClient } from "@tanstack/react-query";
+
+export default function Connections() {
+  const c = useConnections();
+  const [params, setParams] = useSearchParams();
+  const flash = params.get("connect") ? { provider: params.get("connect")!, ok: params.get("status") === "ok", msg: params.get("msg") ?? "" } : null;
+  useEffect(() => { if (flash) setTimeout(() => setParams({}, { replace: true }), 8000); }, [flash, setParams]);
+  useEffect(() => { if (window.location.hash === "#connections" && !c.isLoading) document.getElementById("connections")?.scrollIntoView({ behavior: "smooth" }); }, [c.isLoading]);
+  if (c.isLoading) return <Spinner label="Checking connections…" />;
+  if (c.error) return <p className="text-sm text-vermilion">Couldn't load connections: {(c.error as Error).message}</p>;
+  const p = c.data!.providers;
+  const ready = (keys: string[]) => keys.every((k) => p[k]?.connected);
+  return (
+    <section id="connections" className="grid gap-4">
+      <SectionTitle>Posting connections</SectionTitle>
+      {flash && <div className={clsx("rounded-xl p-3 text-sm", flash.ok ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-300" : "bg-vermilion/10 text-vermilion")}>{flash.ok ? `${flash.provider} connected.` : `${flash.provider} didn't connect: ${flash.msg}`}</div>}
+      <div className="grid gap-2 sm:grid-cols-2">
+        <Ready label="Post to YouTube from the app" ok={ready(["github", "huggingface", "google_app", "youtube"])} />
+        <Ready label="Post to Instagram from the app" ok={ready(["github", "huggingface", "meta_app", "instagram"])} />
+      </div>
+
+      <Step n={1} title="Publisher (GitHub)" done={!!p.github?.connected} detail={p.github?.connected ? "Can start the publisher" : undefined}>
+        <p>Lets the app start the publisher that uploads your full-quality files.</p>
+        <ol className="list-decimal space-y-1 pl-5">
+          <li>Open <A href="https://github.com/settings/personal-access-tokens/new">GitHub → new fine-grained token</A>.</li>
+          <li>Name <code>untold-granth-publisher</code>, expiration up to 1 year, Repository access → <b>Only select repositories</b> → <code>untold-granth-studio</code>.</li>
+          <li>Permissions → Repository → <b>Actions: Read and write</b>. Generate, copy, paste below.</li>
+        </ol>
+        <SaveForm provider="github" fields={[["token", "GitHub token"]]} />
+      </Step>
+
+      <Step n={2} title="Master files (Hugging Face)" done={!!p.huggingface?.connected} detail={p.huggingface?.name ? `Signed in as ${p.huggingface.name}` : undefined}>
+        <p>Lets the publisher read the masters in your private repo.</p>
+        <ol className="list-decimal space-y-1 pl-5">
+          <li>Open <A href="https://huggingface.co/settings/tokens/new?tokenType=read">Hugging Face → new token</A>, type <b>Read</b>, name <code>untold-granth-publisher</code>.</li>
+          <li>Copy and paste below.</li>
+        </ol>
+        <SaveForm provider="huggingface" fields={[["token", "Hugging Face token"]]} />
+      </Step>
+
+      <Step n={3} title="YouTube" done={!!p.youtube?.connected} detail={p.youtube?.name ? `Channel: ${p.youtube.name}` : undefined}>
+        <p>One-time Google setup (about 10 minutes):</p>
+        <ol className="list-decimal space-y-1 pl-5">
+          <li>Open <A href="https://console.cloud.google.com/projectcreate">Google Cloud → new project</A> named <code>untold-granth</code>.</li>
+          <li>Enable <A href="https://console.cloud.google.com/apis/library/youtube.googleapis.com">YouTube Data API v3</A>.</li>
+          <li><A href="https://console.cloud.google.com/auth/overview">Google Auth Platform</A> → Get started: app name <i>Untold Granth Studio</i>, audience <b>External</b>, your email. Then <b>Audience → Publish app</b> (keeps you signed in permanently; Google shows an "unverified" warning you can click through).</li>
+          <li><A href="https://console.cloud.google.com/auth/clients/create">Clients → Create client</A> → <b>Web application</b> → Authorized redirect URI:
+            <Copyable text={c.data!.redirect_uris.youtube} /></li>
+          <li>Paste the Client ID and Client secret below, then press <b>Connect YouTube</b> and choose your @untoldgranth channel.</li>
+        </ol>
+        <SaveForm provider="google_app" fields={[["client_id", "Client ID"], ["client_secret", "Client secret"]]} saved={!!p.google_app?.connected} />
+        <ConnectButton provider="youtube" label="Connect YouTube" disabled={!p.google_app?.connected} connected={!!p.youtube?.connected} />
+        <p className="text-xs text-ink-soft dark:text-parchment/60">Until Google audits the app, YouTube keeps API uploads <b>private</b>; open YouTube Studio and set them to Public (one tap). You can request the free audit later.</p>
+      </Step>
+
+      <Step n={4} title="Instagram" done={!!p.instagram?.connected} detail={p.instagram?.name ? `@${p.instagram.name}` : undefined}>
+        <p>One-time Meta setup (about 10 minutes):</p>
+        <ol className="list-decimal space-y-1 pl-5">
+          <li>In the Instagram app: Settings → <b>Account type and tools → Switch to professional account</b> (Creator).</li>
+          <li><A href="https://developers.facebook.com/apps/creation/">Meta for Developers → Create app</A> → use case <b>Manage messaging & content on Instagram</b>.</li>
+          <li>In the app: <b>Instagram → API setup with Instagram login</b> → copy the <b>Instagram app ID</b> and <b>Instagram app secret</b>.</li>
+          <li>Same page → <b>Set up Instagram business login</b> → Redirect URL:
+            <Copyable text={c.data!.redirect_uris.instagram} /></li>
+          <li>App roles → Roles → <b>Add Instagram tester</b> → @untoldgranth.official, then accept the invite in Instagram (Settings → Website permissions → Tester invites).</li>
+          <li>Paste the app ID and secret below, then press <b>Connect Instagram</b>.</li>
+        </ol>
+        <SaveForm provider="meta_app" fields={[["app_id", "Instagram app ID"], ["app_secret", "Instagram app secret"]]} saved={!!p.meta_app?.connected} />
+        <ConnectButton provider="instagram" label="Connect Instagram" disabled={!p.meta_app?.connected} connected={!!p.instagram?.connected} />
+      </Step>
+      <p className="text-xs text-ink-soft dark:text-parchment/60">Tokens are stored only on the studio's server; this page never shows them again. Facebook Reels stays a manual post for now.</p>
+    </section>
+  );
+}
+
+const A = ({ href, children }: { href: string; children: ReactNode }) => <a href={href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-0.5 font-semibold text-gold-deep underline dark:text-gold">{children}<ExternalLink size={12} /></a>;
+const Copyable = ({ text }: { text: string }) => <span className="mt-1 flex flex-wrap items-center gap-2"><code className="break-all rounded bg-black/5 px-2 py-1 text-xs dark:bg-white/10">{text}</code><CopyButton text={text} label="Copy" /></span>;
+const Ready = ({ label, ok }: { label: string; ok: boolean }) => (
+  <div className={clsx("flex items-center gap-2 rounded-xl border p-3 text-sm font-semibold", ok ? "border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300" : "border-parchment-deep text-ink-soft dark:border-night-700 dark:text-parchment/60")}>
+    {ok ? <CheckCircle2 size={18} /> : <CircleDashed size={18} />} {label}: {ok ? "ready" : "not yet"}
+  </div>
+);
+
+function Step({ n, title, done, detail, children }: { n: number; title: string; done: boolean; detail?: string; children: ReactNode }) {
+  const [open, setOpen] = useState(!done);
+  return (
+    <Card className="!p-4">
+      <button className="flex w-full items-center justify-between gap-3 text-left" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+        <span className="flex items-center gap-3"><span className={clsx("grid h-7 w-7 place-items-center rounded-full text-sm font-bold", done ? "bg-emerald-600 text-white" : "bg-night-800 text-parchment dark:bg-gold dark:text-night-950")}>{done ? "✓" : n}</span>
+          <span><span className="font-bold">{title}</span>{detail && <span className="ml-2 text-sm text-ink-soft dark:text-parchment/60">{detail}</span>}</span></span>
+        <span className="text-sm text-ink-soft">{open ? "Hide" : done ? "Change" : "Set up"}</span>
+      </button>
+      {open && <div className="mt-3 grid gap-3 text-sm leading-relaxed">{children}</div>}
+    </Card>
+  );
+}
+
+function SaveForm({ provider, fields, saved }: { provider: string; fields: [string, string][]; saved?: boolean }) {
+  const qc = useQueryClient();
+  const [vals, setVals] = useState<Record<string, string>>({});
+  const [state, setState] = useState<{ busy?: boolean; err?: string; ok?: boolean }>({});
+  return (
+    <form className="grid gap-2 sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))_auto]" onSubmit={async (e) => {
+      e.preventDefault(); setState({ busy: true });
+      try { await studio("save", { provider, values: vals }); setVals({}); setState({ ok: true }); qc.invalidateQueries({ queryKey: ["connections"] }); }
+      catch (err) { setState({ err: (err as Error).message }); }
+    }}>
+      {fields.map(([k, label]) => (
+        <input key={k} id={`${provider}-${k}`} type={k.includes("secret") || k === "token" ? "password" : "text"} autoComplete="off" required placeholder={saved ? `${label} (saved — enter to replace)` : label} aria-label={label}
+          value={vals[k] ?? ""} onChange={(e) => setVals({ ...vals, [k]: e.target.value })}
+          className="min-w-0 rounded-lg border border-parchment-deep bg-white/80 px-3 py-2 text-sm dark:border-night-700 dark:bg-night-950" />
+      ))}
+      <Button type="submit" variant="primary" disabled={state.busy}>{state.busy ? "Checking…" : "Save"}</Button>
+      {state.err && <p className="text-sm text-vermilion sm:col-span-full">{state.err}</p>}
+      {state.ok && <p className="text-sm text-emerald-700 sm:col-span-full dark:text-emerald-300">Saved.</p>}
+    </form>
+  );
+}
+
+function ConnectButton({ provider, label, disabled, connected }: { provider: string; label: string; disabled: boolean; connected: boolean }) {
+  const [err, setErr] = useState("");
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button variant="primary" disabled={disabled} onClick={async () => {
+        setErr("");
+        try { const r = await studio<{ url: string }>("oauth_start", { provider }); window.location.href = r.url; } catch (e) { setErr((e as Error).message); }
+      }}><Link2 size={15} /> {connected ? `Reconnect ${provider}` : label}</Button>
+      {disabled && <span className="text-xs text-ink-soft">Save the app keys above first.</span>}
+      {err && <span className="text-sm text-vermilion">{err}</span>}
+    </div>
+  );
+}
+
+export type { Conn };
