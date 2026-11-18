@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
       const q = new URLSearchParams({ client_id: app!.app_id, client_secret: app!.app_secret, redirect_uri: `${FN_URL}/oauth/instagram`, code });
       const t = await (await fetch(`${FB_GRAPH}/oauth/access_token?${q}`)).json();
       if (!t.access_token) return back("error", provider, t.error?.message ?? "Meta returned no token");
-      const ig = await resolveInstagramFromToken(t.access_token);
+      const ig = await resolveInstagramFromToken(t.access_token, app!.ig_user_id);
       await setIntegration("instagram", { access_token: t.access_token, user_id: ig.user_id, username: ig.username, api_base: FB_GRAPH, system_user: true });
     } else return back("error", provider, "unknown provider");
     await admin.from("activity").insert({ actor: "owner", action: `connected ${provider}` });
