@@ -33,9 +33,14 @@ Read `studio/STYLE_GUIDE.md` first (truth rules, reel anatomy, voice, visual, so
    (expect music ≈ −18 dB under voice).
 8. **Render** — `nohup python3 make_reel.py render <reel> &` (≈25–40 min for 60–90 s). Verify with ffprobe +
    loudness (−14 LUFS) + 6–8 stills.
+8b. **Thumbnail (every reel)** — `make_reel.py thumb <reel> 3s,15s,30s,45s,60s` renders art-only candidates
+   (`frames/thumb_candidates.jpg`); pick the frame that shows the story at a glance with faces clear of the top third,
+   fill `script.json → thumbnail` (frame, `title_hi` = the myth in 2–4 words, `stamp_hi` "वाल्मीकि में नहीं" for
+   myth-busters, `title_en`, `badge` = "Valmiki Ramayana · <Kanda> <sarga range>" matching the claims), then
+   `make_reel.py thumb <reel>` → `out/<ID>_cover.jpg`. Look at it; text must sit inside y 240–1680.
 9. **Deliver** — send `out/<ID>_final.mp4`, the citation sheet (claims + refs) and caption; ask for human
    review before posting. Never post/publish to any platform yourself without explicit approval.
-10. **Persist + publish desk** — `python3 scripts/sync.py studio` (set the reel's stage in `studio/series/<series>/reels/stages.json` first), `python3 scripts/media.py <ID> preview|poster|citations|caption <file>`, attach masters with `python3 scripts/masters.py <ID>` (private Hugging Face repo Avinash1443/untold-granth-masters), then commit and push. The reel then appears in the Untold Granth Studio app for review and posting.
+10. **Persist + publish desk** — `python3 scripts/sync.py studio` (set the reel's stage in `studio/series/<series>/reels/stages.json` first), `python3 scripts/media.py <ID> preview|poster|thumbnail|citations|caption <file>` (thumbnail = `out/<ID>_cover.jpg`; the publisher sends it as the Instagram cover and YouTube thumbnail), attach masters with `python3 scripts/masters.py <ID>` (private Hugging Face repo Avinash1443/untold-granth-masters), then commit and push. The reel then appears in the Untold Granth Studio app for review and posting.
 
 ## Rules that bit us before
 - Don't speed up the narrator; cut words instead. Keep music low. No added dialogue (A01 "भाभी" incident).

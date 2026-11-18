@@ -20,7 +20,8 @@ export default function ReelDetail() {
   if (reel.error || !reel.data) return <ErrorNote error={reel.error ?? "Reel not found"} />;
   const r = reel.data;
   const preview = files.data?.find((f) => f.kind === "preview");
-  const poster = files.data?.find((f) => f.kind === "poster");
+  const cover = files.data?.find((f) => f.kind === "thumbnail");
+  const poster = cover ?? files.data?.find((f) => f.kind === "poster");
   const produced = !["idea", "researching"].includes(r.stage) && !!r.script;
 
   return (
@@ -44,6 +45,7 @@ export default function ReelDetail() {
       <div className="grid gap-6 lg:grid-cols-[minmax(240px,320px)_minmax(0,1fr)]">
         <div className="mx-auto grid w-full max-w-[300px] content-start gap-3 lg:mx-0 lg:max-w-none">
           <Preview preview={preview} poster={poster} />
+          <Cover cover={cover} />
           <div className="flex flex-wrap items-center gap-2 text-sm text-ink-soft dark:text-parchment/60"><StageBadge stage={r.stage} /> <span className="tabular">{fmtLen(r.length_s)}</span> {r.updated_at && <span>· updated {fmtDate(r.updated_at)}</span>}</div>
         </div>
         <div className="min-w-0">
@@ -70,6 +72,25 @@ function Preview({ preview, poster }: { preview?: FileRow; poster?: FileRow }) {
   if (!preview) return <div className="grid aspect-[9/16] w-full place-items-center rounded-2xl border border-dashed border-parchment-deep text-sm text-ink-soft dark:border-night-700">No video yet</div>;
   if (v.isLoading) return <div className="aspect-[9/16] w-full animate-pulse rounded-2xl bg-night-800" />;
   return <video controls playsInline preload="metadata" poster={p.data ?? undefined} src={v.data ?? undefined} className="aspect-[9/16] w-full rounded-2xl bg-black" />;
+}
+
+function Cover({ cover }: { cover?: FileRow }) {
+  const img = useMediaUrl(cover);
+  const dl = useMediaUrl(cover, true);
+  if (!cover) return <p className="rounded-xl border border-dashed border-parchment-deep p-3 text-xs text-ink-soft dark:border-night-700">No cover yet. Every reel gets one (<code>make_reel.py thumb</code>).</p>;
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-parchment-deep p-2.5 dark:border-night-700">
+      {img.data ? <img src={img.data} alt="Reel cover" className="aspect-[9/16] w-16 shrink-0 rounded-lg object-cover" /> : <div className="aspect-[9/16] w-16 shrink-0 animate-pulse rounded-lg bg-night-800" />}
+      <div className="min-w-0 text-sm">
+        <p className="font-semibold">Cover · thumbnail</p>
+        <p className="text-xs text-ink-soft dark:text-parchment/60">Sent automatically as the Instagram cover and the YouTube thumbnail.</p>
+        <div className="mt-1.5 flex gap-3 text-xs font-semibold">
+          {img.data && <a href={img.data} target="_blank" rel="noreferrer" className="text-gold-deep underline dark:text-gold">View</a>}
+          {dl.data && <a href={dl.data} className="text-gold-deep underline dark:text-gold">Download</a>}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {

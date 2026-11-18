@@ -62,6 +62,13 @@ def youtube(spec, path):
                  {"Authorization": f"Bearer {tok}", "Content-Type": "application/json"})
             note += "; added to the series playlist"
         except Exception as e: note += f"; playlist add skipped ({e})"
+    if spec.get("cover_url"):                       # custom thumbnail (needs a phone-verified channel); never fails the post
+        try:
+            img = urllib.request.urlopen(spec["cover_url"], timeout=120).read()
+            call("POST", f"https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId={vid}&uploadType=media", img,
+                 {"Authorization": f"Bearer {tok}", "Content-Type": "image/jpeg"})
+            note += "; thumbnail set"
+        except Exception as e: note += f"; thumbnail skipped ({e})"
     return f"https://youtube.com/shorts/{vid}", vid, f"Uploaded video {vid}{note}"
 
 def instagram_fit(path):
@@ -86,8 +93,13 @@ def instagram(spec, path):
     path = instagram_fit(path); size = os.path.getsize(path)
     print(f"Instagram file: {size / 1e6:.0f} MB")
     report(step="creating Instagram reel", log=f"Creating Reels container ({size / 1e6:.0f} MB)")
-    q = urllib.parse.urlencode({"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok})
-    c = call("POST", f"{IG}/{uid}/media?{q}")
+    params = {"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok}
+    if spec.get("cover_url"): params["cover_url"] = spec["cover_url"]      # our designed cover instead of a random frame
+    try: c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
+    except RuntimeError as e:
+        if "cover_url" not in params: raise
+        report(log=f"Instagram refused the cover ({e}); posting with its default cover")
+        params.pop("cover_url"); c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
     cid, uri = c["id"], c.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{ver}/{c['id']}"
     report(step="uploading to Instagram", log=f"Container {cid} created; uploading {size / 1e6:.0f} MB")
     try:

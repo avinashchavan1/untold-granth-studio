@@ -333,5 +333,12 @@
   "#UntoldRamayana",
   "#IndianMythology"
  ],
- "caption": "Everyone 'knows' Lakshmana drew a line Sita must not cross. In Valmiki's Ramayana there is no line and no spell — Lakshmana leaves with a prayer to the forest deities. The Rekha came from later retellings."
+ "caption": "Everyone 'knows' Lakshmana drew a line Sita must not cross. In Valmiki's Ramayana there is no line and no spell — Lakshmana leaves with a prayer to the forest deities. The Rekha came from later retellings.",
+ "thumbnail": {
+  "frame": "3s",
+  "title_hi": "लक्ष्मण रेखा",
+  "stamp_hi": "वाल्मीकि में नहीं",
+  "title_en": "There was no Lakshmana Rekha",
+  "badge": "Valmiki Ramayana · Aranya 3.42–47"
+ }
 }

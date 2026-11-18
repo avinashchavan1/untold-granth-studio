@@ -23,6 +23,9 @@ Deno.serve(async (req) => {
       const hf = await getIntegration("huggingface");
       const caps = (reel!.captions ?? {}) as Record<string, string>;
       const out: Record<string, unknown> = { job_id: job.id, platform: job.platform, options: job.options, code: reel!.code, master: master, hf_token: hf?.token ?? null };
+      // cover (out/<ID>_cover.jpg): Instagram fetches it by URL, YouTube gets it via thumbnails.set; signed for the job's lifetime
+      const { data: thumb } = await admin.from("files").select("path").eq("reel_id", job.reel_id).eq("kind", "thumbnail").eq("store", "supabase").order("created_at", { ascending: false }).limit(1).maybeSingle();
+      if (thumb?.path) out.cover_url = (await admin.storage.from("reel-media").createSignedUrl(thumb.path, 3 * 3600)).data?.signedUrl ?? null;
       if (job.platform === "youtube") {
         out.youtube = { access_token: await youtubeAccessToken(), title: caps.youtube_title || `${reel!.title} #Shorts`, description: caps.youtube_description || caps.instagram || "",
           tags: (reel!.hashtags ?? []).map((t: string) => t.replace(/^#/, "")), playlist_id: (await getIntegration("youtube"))?.playlist_id ?? null };

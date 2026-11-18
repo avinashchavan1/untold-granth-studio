@@ -11,3 +11,4 @@ studio/**/out/
 studio/**/audio/raw/
 studio/**/audio/proc/
 studio/**/audio/mix*.wav
+__pycache__/

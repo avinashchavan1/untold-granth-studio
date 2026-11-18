@@ -5,7 +5,8 @@ description: Produce one "Untold" scripture reel (9:16, Hindi narration, English
 
 # make-reel
 
-Read `studio/STYLE_GUIDE.md` first (truth rules, reel anatomy, voice, visual, sound, checklist). Work inside `studio/` of the untold-granth-studio repo. One reel = `series/<series>/reels/<ID>/`.
+Read `STYLE_GUIDE.md` first (truth rules, reel anatomy, voice, visual, sound, checklist). Work inside
+`/home/user/studio` (or wherever the studio folder lives). One reel = `series/<series>/reels/<ID>/`.
 
 ## Steps (report progress + time estimates to the user after each)
 
@@ -33,9 +34,14 @@ Read `studio/STYLE_GUIDE.md` first (truth rules, reel anatomy, voice, visual, so
    (expect music ≈ −18 dB under voice).
 8. **Render** — `nohup python3 make_reel.py render <reel> &` (≈25–40 min for 60–90 s). Verify with ffprobe +
    loudness (−14 LUFS) + 6–8 stills.
+8b. **Thumbnail (every reel)** — `make_reel.py thumb <reel> 3s,15s,30s,45s,60s` renders art-only candidates
+   (`frames/thumb_candidates.jpg`); pick the frame that shows the story at a glance with faces clear of the top third,
+   fill `script.json → thumbnail` (frame, `title_hi` = the myth in 2–4 words, `stamp_hi` "वाल्मीकि में नहीं" for
+   myth-busters, `title_en`, `badge` = "Valmiki Ramayana · <Kanda> <sarga range>" matching the claims), then
+   `make_reel.py thumb <reel>` → `out/<ID>_cover.jpg`. Look at it; text must sit inside y 240–1680.
 9. **Deliver** — send `out/<ID>_final.mp4`, the citation sheet (claims + refs) and caption; ask for human
    review before posting. Never post/publish to any platform yourself without explicit approval.
-10. **Persist + publish desk** — `python3 scripts/sync.py studio` (set the reel's stage in `studio/series/<series>/reels/stages.json` first), `python3 scripts/media.py <ID> preview|poster|citations|caption <file>`, attach masters with `python3 scripts/masters.py <ID>` (private Hugging Face repo Avinash1443/untold-granth-masters), then commit and push. The reel then appears in the Untold Granth Studio app for review and posting.
+10. **Persist** — the container is ephemeral: commit/push to the user's repo (if attached) or send a backup tarball.
 
 ## Rules that bit us before
 - Don't speed up the narrator; cut words instead. Keep music low. No added dialogue (A01 "भाभी" incident).

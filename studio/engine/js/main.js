@@ -25,9 +25,11 @@ function renderFrame(n, q) {
   const cut = 1 - map(u, 0, 3 / FPS); if (cut > 0 && i > 0) { fctx.fillStyle = `rgba(4,4,14,${cut * 0.5})`; fctx.fillRect(0, 0, W, H); }
   if (t < 0.25) { fctx.fillStyle = `rgba(0,0,0,${1 - t / 0.25})`; fctx.fillRect(0, 0, W, H); }
   // UI on top (crisp): shot labels, subtitles, logo
-  if (post.ui) post.ui(fctx);
-  subtitle(fctx, sh, u);
-  if (!post.noLogo) logo(fctx, 0.95);
+  if (!window.CLEAN) {          // CLEAN = art only (thumbnails): no cards, subtitles or logo
+    if (post.ui) post.ui(fctx);
+    subtitle(fctx, sh, u);
+    if (!post.noLogo) logo(fctx, 0.95);
+  }
   return fin.toDataURL('image/jpeg', q || 0.92);
 }
 init().catch(e => console.log('INIT ERROR', e.message, e.stack));

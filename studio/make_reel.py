@@ -11,6 +11,8 @@
   python3 make_reel.py audio    <reel dir>      score + sfx + voice mix -> audio/mix.wav (-14 LUFS)
   python3 make_reel.py render   <reel dir>      frames (3 parallel) + mix -> out/<ID>_final.mp4
   python3 make_reel.py master   <reel dir>      BEST-QUALITY upload masters: lossless PNG re-render -> Instagram 1080p CRF12 + YouTube 4K
+  python3 make_reel.py thumb    <reel dir> [3s,26s,...]   cover/thumbnail from script.json "thumbnail" -> out/<ID>_cover.jpg;
+                                                with times: art-only candidates -> frames/thumb_candidates.jpg to pick the frame
   python3 make_reel.py desk     <reel dir> [preview_asset_id] [poster_asset_id]   publishing-desk entry (captions per platform)
   python3 make_reel.py sheet    <reel dir>      citation sheet + caption -> out/<ID>_citations.md, out/<ID>_caption.txt
   python3 make_reel.py all      <reel dir>      narration import -> pick -> audio + render
@@ -38,6 +40,8 @@ def check(reel):
             if v != "narrator" and not sh.get("cite"): probs.append(f"shot {sh['id']}: dialogue without a verse citation ('cite')")
     est = chars / 14.5 + sum(sh.get("lead", 0.3) + sh.get("tail", 0.3) for sh in s["shots"]) + sum(sh.get("min", 0) for sh in s["shots"] if not sh.get("voice"))
     if not s.get("claims"): probs.append("no 'claims' list: every factual claim needs a reference")
+    th = s.get("thumbnail") or {}
+    if not (th.get("title_hi") and th.get("title_en") and th.get("badge")): probs.append("no 'thumbnail' block (title_hi, title_en, badge, frame): every reel ships with a cover")
     for c in s.get("claims", []):
         if not c.get("verified"): probs.append(f"UNVERIFIED claim: {c['claim']} ({c.get('ref')})")
     print(f"{s['reel']} — {s['title']}\n  shots {len(s['shots'])} · est. length {est:.0f}s (target 45-65, hard max ~90) · ElevenLabs chars/take {narr}")
@@ -112,7 +116,23 @@ def render(reel):
                     "-af", "alimiter=limit=0.80:attack=3:release=60:level=disabled", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", "-shortest", final], check=True)
     for i in range(3): os.remove(f"{out}/seg{i}.mp4")
     master(reel)
+    if (json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8")).get("thumbnail") or {}).get("frame"): thumb(reel)
+    else: print("⚠ no thumbnail.frame in script.json: run make_reel.py thumb <reel> <times> to pick one, then make_reel.py thumb <reel>")
     print("FINAL", final)
+
+def thumb(reel, times=None):
+    """Cover / thumbnail. With times: render art-only candidates and a contact sheet to choose script.json thumbnail.frame."""
+    if times:
+        run(["node", os.path.join(JS, "render.js"), "clean", times], reel)
+        from PIL import Image, ImageDraw
+        fs = sorted(f for f in os.listdir(os.path.join(reel, "frames")) if f.startswith("clean_"))
+        sh = Image.new("RGB", (270 * len(fs), 510), "white"); d = ImageDraw.Draw(sh)
+        for i, f in enumerate(fs):
+            sh.paste(Image.open(os.path.join(reel, "frames", f)).convert("RGB").resize((270, 480)), (i * 270, 0)); d.text((i * 270 + 8, 488), f"{int(f[6:10]) / 24:.1f}s", fill="black")
+        p = os.path.join(reel, "frames", "thumb_candidates.jpg"); sh.save(p, quality=90); print("candidates", p); return
+    th = json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8")).get("thumbnail") or {}
+    if not th.get("frame"): sys.exit('set script.json thumbnail.frame first (pick one with: make_reel.py thumb <reel> 3s,20s,40s,...)')
+    run(["python3", os.path.join(PY, "thumbnail.py")], reel)
 
 def master(reel):
     """BEST-QUALITY UPLOAD MASTERS (big on purpose; platforms re-encode, so the cleaner the upload the better viewers see):
@@ -150,6 +170,7 @@ if __name__ == "__main__":
     elif cmd == "draft": draft(reel)
     elif cmd == "sheet": sheet(reel)
     elif cmd == "master": master(reel)
+    elif cmd == "thumb": thumb(reel, rest[0] if rest else None)
     elif cmd == "desk": desk_row(reel, *(rest + ["", ""])[:2])
     elif cmd == "pick": run(["python3", os.path.join(PY, "build_voice.py")], reel)
     elif cmd == "stills": run(["node", os.path.join(JS, "render.js"), "stills"] + rest, reel)

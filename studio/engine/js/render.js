@@ -1,4 +1,4 @@
-// REEL=<reel dir> node render.js stills 10,200,4.5s,...   |   REEL=<reel dir> node render.js range <start> <end> <out.mp4>
+// REEL=<reel dir> node render.js stills 10,200,4.5s,...   |   REEL=<reel dir> node render.js clean 51s,72.5s  (art-only PNGs for thumbnails)   |   REEL=<reel dir> node render.js range <start> <end> <out.mp4>
 // Serves one virtual folder /x/ that layers: reel/src  >  series/art  >  engine/js   (first match wins),
 // plus /x/series.js generated from series.json, and /fonts/ (series/fonts > engine/fonts).
 const { chromium } = require('playwright'); const http = require('http'); const fs = require('fs'); const path = require('path'); const { spawn } = require('child_process');
@@ -19,7 +19,12 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'applica
   const mode = process.argv[2];
   const LOSSLESS = process.env.LOSSLESS === '1';   // masters: PNG frames -> lossless x264 (no JPEG step anywhere)
   const grab = async (n, q) => Buffer.from((await pg.evaluate(([n, q, L]) => L ? (renderFrame(n, q), document.getElementById('final').toDataURL('image/png')) : renderFrame(n, q), [n, q, LOSSLESS])).split(',')[1], 'base64');
-  if (mode === 'stills') {
+  if (mode === 'clean') {
+    await pg.evaluate(() => { window.CLEAN = true; });
+    for (const tok of process.argv[3].split(',')) { const n = tok.includes('s') ? await pg.evaluate(s => Math.round(parseFloat(s) * FPS), tok.replace('s', '')) : +tok;
+      await pg.evaluate(n => renderFrame(n, 1), n); const png = await pg.evaluate(() => document.getElementById('final').toDataURL('image/png'));
+      const f = path.join(REEL, 'frames', `clean_${String(n).padStart(4, '0')}.png`); fs.writeFileSync(f, Buffer.from(png.split(',')[1], 'base64')); console.log('clean', f); }
+  } else if (mode === 'stills') {
     for (const tok of process.argv[3].split(',')) { const n = tok.includes('s') ? await pg.evaluate(s => Math.round(parseFloat(s) * FPS), tok.replace('s', '')) : +tok; const t0 = Date.now(); fs.writeFileSync(path.join(REEL, 'frames', `f${String(n).padStart(4, '0')}.jpg`), await grab(n, 0.9)); console.log('frame', n, Date.now() - t0, 'ms'); }
   } else {
     const a = +process.argv[3], b = +process.argv[4], out = process.argv[5];

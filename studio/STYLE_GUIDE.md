@@ -106,6 +106,11 @@ retellings, we never mock the tradition or the people who believe them.
   - **`<ID>_INSTAGRAM_MASTER.mp4`:** 1080×1920 (Instagram's maximum), 24 fps, H.264 High@4.2, preset veryslow, CRF 12, tune grain (keeps the gouache paper texture), 1 s GOP, BT.709, AAC-LC 320 kbps at 48 kHz. Also used for Facebook Reels.
   - **`<ID>_YOUTUBE_MASTER.mp4`:** 2160×3840 (4K, Lanczos upscale), so YouTube serves its higher-bitrate VP9/AV1 version to every viewer. H.264 High@5.2, CRF 14, tune grain, 0.5 s GOP, BT.709, AAC-LC 384 kbps (YouTube's recommended audio bitrate).
   - **Size:** several hundred MB per reel, on purpose. Platforms re-encode everything, so the cleaner the upload, the better viewers see it.
+- **Cover / thumbnail (every reel):** `out/<ID>_cover.jpg` (1080×1920 JPEG, under 2 MB), from `make_reel.py thumb` (also run by `render`).
+  - Art: one clean frame from the reel (no subtitles, cards or logo), chosen so the story reads at a glance and faces stay clear of the title.
+  - Type: series label in gold Cinzel; the myth in big ivory Hindi (Mukta Bold, one line where possible); a red "वाल्मीकि में नहीं" stamp on myth-busters; the English title in gold Cinzel; a verse badge that matches the reel's claims.
+  - Every word sits inside y 240–1680, the Instagram profile-grid crop (3:4) and clear of the Reels UI.
+  - The publisher sends it as the Instagram Reels cover and the YouTube thumbnail.
 - **`out/<ID>_final.mp4`:** small preview and sharing copy (WhatsApp, review). Never upload this one.
 - **Loudness:** −14 LUFS integrated, true peak ≤ −1.5 dBFS.
 - **Paperwork:** `<ID>_citations.md` and `<ID>_caption.txt`; `make_reel.py desk` builds the publishing-desk entry with per-platform captions.
@@ -120,6 +125,7 @@ retellings, we never mock the tradition or the people who believe them.
 - [ ] `pick_log.txt`: every "heard" line matches "said" (no babble, no missing words)
 - [ ] Stills checked: hook, source card, every character's first appearance, the reveal, the end card
 - [ ] Length 45–65 s (≤ 90 s); −14 LUFS; the voice is clearly audible over the music on a phone speaker
+- [ ] Cover checked (frame, Hindi spelling, badge = claims, inside the grid crop)
 - [ ] Instagram + YouTube masters built; desk entry added; posted only after the citation box is ticked
 - [ ] Respect pass: nothing mocking, gory or sexualised; sensitive topic handled with context
 - [ ] A person read the citation sheet against the text
