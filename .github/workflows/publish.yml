@@ -1,0 +1,23 @@
+name: publish-reel
+# Triggered by the studio app (Supabase function `publish`) to post one reel to one platform.
+on:
+  workflow_dispatch:
+    inputs:
+      job_id: { description: "publish_jobs row id", required: true }
+      job_token: { description: "one-time job token (expires in 3 h)", required: true }
+      api: { description: "studio job API base URL", required: true }
+concurrency: { group: "publish-${{ github.event.inputs.job_id }}", cancel-in-progress: false }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: python3 scripts/publish_job.py
+        env:
+          JOB_ID: ${{ github.event.inputs.job_id }}
+          JOB_TOKEN: ${{ github.event.inputs.job_token }}
+          JOB_API: ${{ github.event.inputs.api }}
