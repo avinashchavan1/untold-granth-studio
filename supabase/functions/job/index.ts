@@ -25,7 +25,7 @@ Deno.serve(async (req) => {
       const out: Record<string, unknown> = { job_id: job.id, platform: job.platform, options: job.options, code: reel!.code, master: master, hf_token: hf?.token ?? null };
       if (job.platform === "youtube") {
         out.youtube = { access_token: await youtubeAccessToken(), title: caps.youtube_title || `${reel!.title} #Shorts`, description: caps.youtube_description || caps.instagram || "",
-          tags: (reel!.hashtags ?? []).map((t: string) => t.replace(/^#/, "")) };
+          tags: (reel!.hashtags ?? []).map((t: string) => t.replace(/^#/, "")), playlist_id: (await getIntegration("youtube"))?.playlist_id ?? null };
       } else {
         const ig = await instagramToken();
         out.instagram = { access_token: ig.token, user_id: ig.user_id, api_base: ig.api_base, caption: caps.instagram || "" };

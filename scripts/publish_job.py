@@ -55,6 +55,13 @@ def youtube(spec, path):
             report(step=f"uploading to YouTube {sent * 100 // size}%")
     vid = video["id"]; st = video.get("status", {})
     note = "" if st.get("privacyStatus") == privacy else f" (YouTube set privacy to {st.get('privacyStatus')}; unverified API apps upload as private until Google audits the app)"
+    if yt.get("playlist_id"):                       # series playlist (created by "Apply brand to YouTube"); never fails the post
+        try:
+            call("POST", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet",
+                 {"snippet": {"playlistId": yt["playlist_id"], "resourceId": {"kind": "youtube#video", "videoId": vid}}},
+                 {"Authorization": f"Bearer {tok}", "Content-Type": "application/json"})
+            note += "; added to the series playlist"
+        except Exception as e: note += f"; playlist add skipped ({e})"
     return f"https://youtube.com/shorts/{vid}", vid, f"Uploaded video {vid}{note}"
 
 def instagram_fit(path):

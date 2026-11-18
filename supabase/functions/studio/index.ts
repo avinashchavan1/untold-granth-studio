@@ -1,5 +1,72 @@
-// Admin actions from the app: connections, OAuth start, and "Post now".
-import { admin, cors, FB_GRAPH, FN_URL, getIntegration, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256 } from "../_shared/util.ts";
+// Admin actions from the app: connections, OAuth start, "Post now", and "Apply brand to YouTube".
+import { admin, cors, FB_GRAPH, FN_URL, getIntegration, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256, youtubeAccessToken } from "../_shared/util.ts";
+
+const YT = "https://www.googleapis.com/youtube/v3";
+const YT_UP = "https://www.googleapis.com/upload/youtube/v3";
+type Step = { step: string; ok: boolean; detail?: string };
+
+/** Push the channel profile (channels.profile for youtube) and the brand kit (storage brand/) to the connected channel. */
+async function applyYouTubeBrand(email: string): Promise<Step[]> {
+  const steps: Step[] = [];
+  const token = await youtubeAccessToken();
+  const info = await (await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(token)}`)).json();
+  if (!String(info.scope ?? "").split(" ").some((s: string) => /auth\/youtube(\.force-ssl)?$/.test(s)))
+    throw new Error("YouTube is connected for uploads only. Press “Reconnect YouTube” once (Settings → Connections) to allow channel edits, then try again.");
+  const H = { Authorization: `Bearer ${token}` };
+  const yt = async (method: string, url: string, body?: BodyInit, ctype = "application/json") => {
+    const r = await fetch(url, { method, headers: { ...H, ...(body ? { "Content-Type": ctype } : {}) }, body });
+    const t = await r.text(); const j = t ? JSON.parse(t) : {};
+    if (!r.ok) throw new Error(j.error?.message ?? `${r.status}`);
+    return j;
+  };
+  const file = async (name: string) => { const { data, error } = await admin.storage.from("reel-media").download(`brand/${name}`); if (error || !data) throw new Error(`brand/${name} missing — run scripts/brand.py`); return data; };
+  const run = async (step: string, fn: () => Promise<string | undefined>) => {
+    try { steps.push({ step, ok: true, detail: await fn() }); } catch (e) { steps.push({ step, ok: false, detail: e instanceof Error ? e.message : String(e) }); }
+  };
+  const { data: row } = await admin.from("channels").select("profile").eq("platform", "youtube").single();
+  const p = (row?.profile ?? {}) as Record<string, any>;
+  if (!p.description) throw new Error("No YouTube profile saved yet — run scripts/brand.py");
+
+  const ch = (await yt("GET", `${YT}/channels?part=brandingSettings&mine=true`)).items?.[0];
+  if (!ch) throw new Error("No channel on this Google account");
+  let bannerUrl: string | undefined;
+  await run("Upload banner (2560×1440)", async () => {
+    const r = await yt("POST", `${YT_UP}/channelBanners/insert?uploadType=media`, await file("youtube_banner_2560x1440.jpg"), "image/jpeg");
+    bannerUrl = r.url; return "uploaded";
+  });
+  await run("Description, keywords, country, language" + (bannerUrl ? " and banner" : ""), async () => {
+    const b = ch.brandingSettings ?? {};
+    const kw = (p.keywords as string[]).map((k) => (/\s/.test(k) ? `"${k}"` : k)).join(" ");
+    const channel = { ...(b.channel ?? {}), description: p.description, keywords: kw, country: p.country, defaultLanguage: p.default_language };
+    delete channel.title;
+    const image = bannerUrl ? { ...(b.image ?? {}), bannerExternalUrl: bannerUrl } : b.image;
+    await yt("PUT", `${YT}/channels?part=brandingSettings`, JSON.stringify({ id: ch.id, brandingSettings: { ...b, channel, ...(image ? { image } : {}) } }));
+    return `${p.description.length} chars, ${p.keywords.length} keywords`;
+  });
+  await run("Video watermark (diya, top-right corner)", async () => {
+    const img = new Uint8Array(await (await file("youtube_watermark_300.png")).arrayBuffer());
+    const meta = JSON.stringify({ timing: { type: "offsetFromStart", offsetMs: 0 }, position: { type: "corner", cornerPosition: "topRight" } });
+    const boundary = "ugb" + randomToken(8);
+    const head = new TextEncoder().encode(`--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${meta}\r\n--${boundary}\r\nContent-Type: image/png\r\n\r\n`);
+    const tail = new TextEncoder().encode(`\r\n--${boundary}--\r\n`);
+    const body = new Uint8Array(head.length + img.length + tail.length); body.set(head); body.set(img, head.length); body.set(tail, head.length + img.length);
+    await yt("POST", `${YT_UP}/watermarks/set?channelId=${ch.id}&uploadType=multipart`, body, `multipart/related; boundary=${boundary}`);
+    return "set";
+  });
+  await run(`Playlist “${p.playlist?.title}”`, async () => {
+    const yti = await getIntegration("youtube");
+    const mine = (await yt("GET", `${YT}/playlists?part=snippet&mine=true&maxResults=50`)).items ?? [];
+    let pl = mine.find((x: any) => x.id === yti?.playlist_id) ?? mine.find((x: any) => x.snippet?.title === p.playlist.title);
+    const snippet = { title: p.playlist.title, description: p.playlist.description, defaultLanguage: p.default_language };
+    if (pl) await yt("PUT", `${YT}/playlists?part=snippet`, JSON.stringify({ id: pl.id, snippet }));
+    else pl = await yt("POST", `${YT}/playlists?part=snippet,status`, JSON.stringify({ snippet, status: { privacyStatus: "public" } }));
+    if (yti) await setIntegration("youtube", { ...yti, playlist_id: pl.id });
+    return `${pl.id} · new uploads are added automatically`;
+  });
+  await admin.from("channels").update({ applied: { at: new Date().toISOString(), by: email, steps } }).eq("platform", "youtube");
+  await admin.from("activity").insert({ actor: email, action: "youtube: brand applied", detail: { ok: steps.filter((s) => s.ok).length, of: steps.length } });
+  return steps;
+}
 
 const SIMPLE: Record<string, string[]> = {
   github: ["token"],                         // fine-grained PAT: Actions read & write on the repo
@@ -65,7 +132,8 @@ Deno.serve(async (req) => {
           if (!app?.client_id) return json({ error: "Add the Google OAuth client first" }, 400);
           const u = new URL("https://accounts.google.com/o/oauth2/v2/auth");
           u.search = new URLSearchParams({ client_id: app.client_id, redirect_uri: `${FN_URL}/oauth/youtube`, response_type: "code", access_type: "offline", prompt: "consent", include_granted_scopes: "true",
-            scope: "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly", state }).toString();
+            // youtube = manage the channel (banner, description, watermark, playlists); youtube.upload = post videos
+            scope: "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube", state }).toString();
           return json({ url: u.toString() });
         }
         if (body.provider === "instagram") {
@@ -113,6 +181,10 @@ Deno.serve(async (req) => {
         }
         await admin.from("activity").insert({ actor: email, reel_id, action: `${platform}: posting started`, detail: { code: reel.code, job: job.id } });
         return json({ ok: true, job_id: job.id });
+      }
+      case "youtube_brand": {
+        const steps = await applyYouTubeBrand(email);
+        return json({ ok: steps.every((s) => s.ok), steps });
       }
       default:
         return json({ error: "unknown action" }, 400);

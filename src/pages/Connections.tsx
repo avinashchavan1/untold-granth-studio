@@ -60,6 +60,7 @@ export default function Connections() {
         </ol>
         <SaveForm provider="google_app" fields={[["client_id", "Client ID"], ["client_secret", "Client secret"]]} saved={!!p.google_app?.connected} />
         <ConnectButton provider="youtube" label="Connect YouTube" disabled={!p.google_app?.connected} connected={!!p.youtube?.connected} />
+        <p className="text-xs text-ink-soft dark:text-parchment/60">Connected YouTube before the Profiles page existed? Press <b>Reconnect YouTube</b> once so the app can also edit the channel (banner, description, playlist) from the <b>Profiles</b> page.</p>
         <p className="text-xs text-ink-soft dark:text-parchment/60">Until Google audits the app, YouTube keeps API uploads <b>private</b>; open YouTube Studio and set them to Public (one tap). You can request the free audit later.</p>
       </Step>
 

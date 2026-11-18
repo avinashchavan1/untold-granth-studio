@@ -1,0 +1,34 @@
+{
+  "instagram": {
+    "username": "untoldgranth.official",
+    "name": "Untold Granth | Ramayana Stories",
+    "category": "Digital creator",
+    "bio": "🪔 रामायण की अनसुनी कहानियाँ, सीधे वाल्मीकि से\n📜 Every reel shows its verse (Critical Edition)\n🎧 Hindi narration · English subtitles",
+    "link": "https://www.youtube.com/@untoldgranth",
+    "link_title": "YouTube",
+    "settings": [
+      "Account type stays Professional → Creator; turn on “Display category label” (Edit profile → Profile display).",
+      "Edit profile → Links → Add external link → the YouTube link above, title “YouTube”.",
+      "Settings → Sharing and remixes: allow remixes of reels (more reach); turn off “Share to Facebook” unless you also run a Facebook Page.",
+      "After the first reel is live, pin it to the top of the grid (… → Pin to your profile)."
+    ]
+  },
+  "youtube": {
+    "handle": "@untoldgranth",
+    "name": "Untold Granth",
+    "description": "रामायण की वो कहानियाँ जो अक्सर सुनाई नहीं जातीं, सीधे वाल्मीकि रामायण से।\n\nUntold Granth tells short stories from the original texts, starting with the Valmiki Ramayana (Critical Edition). Every video shows the kanda, sarga and verse it comes from, so you can check it yourself. Hindi narration, English subtitles, hand-painted gouache art.\n\nSeries: Untold Ramayana | अनसुनी रामायण\n\nInstagram: @untoldgranth.official",
+    "keywords": ["Untold Granth", "Valmiki Ramayana", "Ramayana in Hindi", "Ramayan", "रामायण", "वाल्मीकि रामायण", "Ramayana stories", "untold stories", "Sanskrit verses", "Hindi kahani", "Sita", "Shri Ram", "Shabari", "Ahalya", "Indian epics", "Itihasa"],
+    "country": "IN",
+    "default_language": "hi",
+    "playlist": {
+      "title": "Untold Ramayana | अनसुनी रामायण",
+      "description": "Stories from the Valmiki Ramayana (Critical Edition), in order. Every video shows the verse it comes from. Hindi narration · English subtitles."
+    },
+    "manual": [
+      "Profile picture: YouTube Studio → Customization → Branding → Picture → Upload → youtube_profile_800.png (the API can't set this).",
+      "Customization → Basic info → Links → add Instagram: https://www.instagram.com/untoldgranth.official/",
+      "Settings → Upload defaults: Category Education · Video language Hindi · Title/description language Hindi · License Standard YouTube.",
+      "Settings → Channel → Advanced: Audience “No, not made for kids”; country India."
+    ]
+  }
+}

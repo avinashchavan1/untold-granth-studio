@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { BookOpen, Clapperboard, LayoutDashboard, ListOrdered, LogOut, Menu, Settings, Users, X } from "lucide-react";
+import { BadgeCheck, BookOpen, Clapperboard, LayoutDashboard, ListOrdered, LogOut, Menu, Settings, Users, X } from "lucide-react";
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { supabase } from "../lib/supabase";
@@ -10,6 +10,7 @@ const NAV = [
   { to: "/reels", label: "Reels", icon: Clapperboard },
   { to: "/plan", label: "Plan", icon: ListOrdered },
   { to: "/world", label: "Cast & world", icon: Users },
+  { to: "/profiles", label: "Profiles", icon: BadgeCheck },
   { to: "/docs", label: "Style & docs", icon: BookOpen },
   { to: "/settings", label: "Settings", icon: Settings },
 ];

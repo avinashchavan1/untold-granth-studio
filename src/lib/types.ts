@@ -36,5 +36,5 @@ export interface Character { id: string; series_id: string; key: string; name: s
 export interface Location { id: string; key: string; name: string; builder: string | null; description: string | null; }
 export interface Doc { id: string; series_id: string | null; slug: string; title: string; kind: string; body_md: string; updated_at: string; }
 export interface Series { id: string; name: string; book: string; edition: string | null; config: Record<string, unknown>; }
-export interface Channel { platform: Platform; handle: string; url: string | null; }
+export interface Channel { platform: Platform; handle: string; url: string | null; profile?: Record<string, unknown>; applied?: Record<string, unknown>; }
 export interface Activity { id: number; at: string; actor: string | null; reel_id: string | null; action: string; detail: Record<string, unknown>; }

@@ -23,3 +23,6 @@ python3 scripts/masters.py A02 studio     # Instagram + YouTube masters → Hugg
 scripts/deploy.sh                         # build + deploy the app
 ```
 Secrets (Supabase secret key, Hugging Face and Netlify tokens) are injected by the cloud environment's proxy and never stored in the repo.
+
+## Brand kit and profiles
+`brand/make_brand.py` renders the profile pictures, YouTube banner (2560×1440, text inside the 1546×423 phone-safe area) and watermark from engine frames; `brand/profiles.json` holds the profile copy for Instagram and YouTube. `python3 scripts/brand.py` re-renders, uploads to storage `reel-media/brand/` and refreshes the **Profiles** page. On that page, **Apply brand to YouTube** pushes banner, description, keywords, watermark and the series playlist (new uploads are added to it automatically). Instagram profiles can't be edited by apps, so the page gives copy buttons for each field.
