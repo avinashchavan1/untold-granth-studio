@@ -140,6 +140,19 @@ cue = os.path.join(ROOT, "src", "sound.py")
 if os.path.exists(cue): exec(open(cue, encoding="utf-8").read())
 else: default_bed()
 
+# ---------------- composed score (ElevenLabs Music): audio/score.mp3|wav replaces the synthesized music ----------------
+# Same loudness as the synthesized bed the mix was tuned for; still ducked under every line; sfx (sound.py) stay.
+for _f in ("score.wav", "score.mp3"):
+    _p = os.path.join(ROOT, "audio", _f)
+    if not os.path.exists(_p): continue
+    _raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", _p, "-f", "f32le", "-ac", "2", "-ar", str(SR), "-"], capture_output=True, check=True).stdout
+    _sc = np.frombuffer(_raw, dtype=np.float32).astype(np.float64).reshape(-1, 2)
+    if len(_sc) < N: _sc = np.concatenate([_sc, np.zeros((N - len(_sc), 2))])     # shorter score: silence after it (end fade covers it)
+    _sc = _sc[:N]; _sc[: int(0.25 * SR)] *= np.linspace(0, 1, int(0.25 * SR))[:, None]
+    _ref = np.sqrt(np.mean(music ** 2)); _ref = _ref if _ref > 1e-5 else 0.05
+    music = _sc / (np.sqrt(np.mean(_sc[: int(TOTAL * SR)] ** 2)) + 1e-9) * _ref * float(json.load(open(os.path.join(ROOT, "src", "script.json"), encoding="utf-8")).get("score", {}).get("gain", 1.0))
+    print("score:", _f, f"{len(_raw) / 8 / SR:.1f}s, level matched to the synthesized bed"); break
+
 # ---------------- voices ----------------
 def rd(p):
     w = wave.open(p); x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64) / 32768; return x

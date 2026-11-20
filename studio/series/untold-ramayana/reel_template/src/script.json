@@ -92,5 +92,12 @@
   "stamp": "Not in Valmiki",
   "line": "",
   "badge": "Valmiki Ramayana · <Kanda> <sarga range>"
+ },
+ "score": {
+  "engine": "elevenlabs eleven_music_v2_5",
+  "file": "audio/score.mp3",
+  "duration_s": 75,
+  "gain": 1.4,
+  "prompt": "<genre, mood arc (hook hit → tension → reveal lift → warm resolve), instruments, tempo; instrumental, sits under narration>"
  }
 }

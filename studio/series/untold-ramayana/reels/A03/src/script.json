@@ -322,5 +322,14 @@
   "stamp": "Not in Valmiki",
   "line": "No stone. Rama touched her feet.",
   "badge": "Valmiki Ramayana · Bala 1.47–48"
+ },
+ "score": {
+  "engine": "elevenlabs eleven_music_v2_5",
+  "file": "audio/score.mp3",
+  "duration_s": 75,
+  "gain": 1.4,
+  "flow": "rc9HMFZ0yiWyzH3idDFf",
+  "prompt": "Cinematic Indian devotional underscore, instrumental only, built to sit under a spoken voice. Opens with a sudden low taiko-and-tabla hit and a sustained tanpura drone with a mysterious, hushed bansuri phrase; the middle grows tense and dark with low cellos, a slow heartbeat pulse and soft frame drums at about 70 BPM; around two thirds through it blooms into a radiant, sacred lift with shimmering santoor, warm strings and rolling nagara drums; it ends in a gentle, warm resolution on the drone. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
+  "take": "take 1 of 4 (only take with a hit in the first second); alternates in audio/score_takes/"
  }
 }

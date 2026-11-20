@@ -99,6 +99,12 @@ retellings, we never mock the tradition or the people who believe them.
   - SFX are subtle and literal: footsteps, crickets, lamp crackle, arrow, fire.
 - **Loudness and format:** −14 LUFS integrated, true peak ≤ −1.5 dBFS. Stereo AAC 192k.
 
+## 6a. Score (ElevenLabs Music)
+
+- Every reel gets a composed instrumental score from ElevenLabs Music (`eleven_music_v2_5`), saved as `audio/score.mp3`; `build_audio` uses it instead of the synthesized bed, at the same level, ducked under every line. Sound effects from `sound.py` stay.
+- Prompt it as sound, not story: a hook hit in the first second, tension through the setup, a lift at the reveal (about two thirds in), a warm resolve on the end card. Instrumental, sparse mid-range, nothing that fights the voice. Length = reel length + 10 s. Kept in `script.json → score`.
+- About 1,100 credits per take; generate 1–2 takes per reel and pick by ear.
+
 ## 6b. Language
 
 - **English is the main language for every written word:** on-screen cards, subtitles, covers, titles, captions, descriptions, profiles.

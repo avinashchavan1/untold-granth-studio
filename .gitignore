@@ -12,3 +12,4 @@ studio/**/audio/raw/
 studio/**/audio/proc/
 studio/**/audio/mix*.wav
 __pycache__/
+studio/**/audio/score_takes/
