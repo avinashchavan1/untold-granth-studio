@@ -5,11 +5,6 @@ function buildScenes() { BG.gn = buildGanga('night'); BG.gd = buildGanga('dawn')
 const MEMORY = { tint: '#c89a5a', tintA: 0.55, rim: '#ffe0a0', rimA: 0.7, dir: 1, shadow: 0.3 };   // the popular image, as a fading memory
 const L_DAWN = { rim: '#ffc890', rimA: 0.9, dir: -1, tint: '#40284a', tintA: 0.12 };
 
-function lying(c, ch, x, y, s, pose, light) {           // a figure asleep on the ground: feet at (x, y), head to the left
-  c.save(); c.translate(x, y - s * 0.07); c.rotate(-Math.PI / 2);
-  drawFigure(c, ch, P(Object.assign({ eye: 0.05, smile: 0.1, aN: [0.04, 0.3], aF: [0.05, 0.3] }, pose)), { x: 0, y: 0, s, face: 1 }, Object.assign({}, light, { shadow: 0 }));
-  c.restore();
-}
 function drops(c, x, y, t, a = 1) { for (let i = 0; i < 10; i++) { const k = (t * 1.6 + i / 10) % 1; dab(c, x + Math.sin(i * 2.3) * 14, y + k * 50, 3, 4, 0, '#cfe6ff', a * (1 - k)); } }
 
 const SHOTS = {

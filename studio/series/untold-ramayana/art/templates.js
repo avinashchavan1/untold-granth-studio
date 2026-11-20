@@ -101,3 +101,10 @@ function titleShot(ctx, u, p, sh, t, post, lines, scene = 'herN') {
     if (a > 0) text(c, s, 540, 760 + i * 118 + (1 - a) * 22, { size: 92, weight: 900, color: col || C_IVORY, ls: 5, alpha: a, stroke: 9, shadow: 30 });
   });
 }
+
+// a figure asleep on the ground or a couch: feet at (x, y), head to the left (rotated rig; no ground shadow)
+function lying(c, ch, x, y, s, pose, light) {
+  c.save(); c.translate(x, y - s * 0.07); c.rotate(-Math.PI / 2);
+  drawFigure(c, ch, P(Object.assign({ eye: 0.05, smile: 0.1, aN: [0.04, 0.3], aF: [0.05, 0.3] }, pose)), { x: 0, y: 0, s, face: 1 }, Object.assign({}, light, { shadow: 0 }));
+  c.restore();
+}

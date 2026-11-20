@@ -14,6 +14,8 @@ const CH = {
   sagara:  { kind: 'man', god: true, skin: '#3f78b4', skinSh: '#22487a', cloth: '#b4201c', clothSh: '#6e1420', sash: '#e6b450', hair: '#0e1a34' },   // A04: the Ocean — lapis-blue, gold, red garlands and garments (CE 6.15.2)
   guha:    { kind: 'man', skin: '#8e5e40', skinSh: '#5a3a30', cloth: '#7a5232', clothSh: '#4a321e', sash: '#a8302a', hair: '#0e0c18', bow: true },   // A06: king of the Nishadas, forest hunter-chief
   boatman: { kind: 'man', skin: '#9a6a48', skinSh: '#62423a', cloth: '#d8ccb4', clothSh: '#988c76', sash: '#7a6a52', hair: '#14101c' },
+  hanuman: { kind: 'man', vanara: true, crown: true, skin: '#c8743a', skinSh: '#86482a', muzzle: '#f2d4a8', cloth: '#b4201c', clothSh: '#6e1420', sash: '#e6b450', hair: '#a85a24' },   // A07: crowned, red-orange, red cloth
+  mandodari: { kind: 'woman', skin: '#ecc8a0', skinSh: '#b08a86', cloth: '#7a1e4a', clothSh: '#4a1030', border: '#e6b450', blouse: '#a8304a', hair: '#0d0a16' },     // A07: Ravana's chief queen, 'radiant like gold'
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';
@@ -80,6 +82,7 @@ function drawHead(x, ch, p) {
     pts.push([0.38, -0.2], [0.3, -0.28], [0.1, -0.3], [-0.1, -0.2], [-0.22, 0.12], [-0.4, 0.26]); blob(x, pts, ch.hair, 1, 0.2);
     blob(x, [[0.08, 0.02], [0.3, -0.02], [0.5, 0.08], [0.54, 0.24], [0.44, 0.42], [0.24, 0.48], [0.06, 0.38], [0.02, 0.18]], ch.muzzle, 1, 0.35);
     dab(x, 0.47, 0.16, 0.035, 0.025, 0, '#2a1a12'); line(x, [[0.0, -0.17], [0.2, -0.22], [0.42, -0.16]], 0.05, mix(ch.hair, '#000000', 0.35), 0.8);
+    if (ch.crown) { blob(x, [[-0.36, -0.46], [-0.3, -0.78], [-0.12, -0.98], [0.04, -0.8], [0.12, -0.5]], GOLD, 1, 0.3); blob(x, [[-0.3, -0.5], [-0.24, -0.74], [-0.12, -0.86], [-0.08, -0.5]], GOLDSH, 0.7); dab(x, -0.12, -0.64, 0.045, 0.055, 0, '#c41e1e'); stroke(x, -0.38, -0.47, 0.14, -0.5, 0.05, GOLD, 1, 0.1); }
   } else if (k === 'man') {
     blob(x, [[0.36, -0.3], [0.22, -0.5], [-0.05, -0.58], [-0.34, -0.48], [-0.5, -0.2], [-0.5, 0.1], [-0.4, 0.3], [-0.24, 0.28], [-0.215, 0.08], [-0.2, -0.08], [-0.03, -0.21], [0.18, -0.31]], ch.hair);
     dab(x, -0.1, -0.7, 0.2, 0.19, 0, ch.hair); stroke(x, -0.25, -0.56, 0.05, -0.56, 0.035, GOLD, 0.95, -0.15);

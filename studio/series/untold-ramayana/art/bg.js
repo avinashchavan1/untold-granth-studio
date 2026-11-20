@@ -446,3 +446,33 @@ function boat(ctx, x, y, s, riders) {
   stroke(ctx, x - s * 1.04, y - s * 0.15, x + s * 1.04, y - s * 0.15, s * 0.03, '#a0703c', 0.9);
   for (let i = 0; i < 6; i++) stroke(ctx, x - s * 0.9 + i * s * 0.36, y - s * 0.12, x - s * 0.88 + i * s * 0.36, y + s * 0.08, s * 0.012, '#3a2414', 0.6);
 }
+
+// ---- A07: Ravana's palace, inner chamber at night — gold pillars, hanging lamps, a crystal couch (Mandodari asleep) ----
+const PAL_FLOOR = 1420;
+function buildPalace() {
+  const r = rng(707);
+  const sky = newLayer(0.05), far = newLayer(0.3), mid = newLayer(0.6), fg = newLayer(1.25);
+  wash(sky.x, r, -M, -M, W + 2 * M, H + 2 * M, [[0, '#120a1e'], [.5, '#22102a'], [1, '#1a0c1c']], { n: 300, alpha: 0.6, th: [20, 60], len: [200, 600] });
+  // back wall: carved panels + arches
+  for (let i = 0; i < 6; i++) { const x = -40 + i * 230; blob(far.x, [[x, PAL_FLOOR - 60], [x, 520], [x + 90, 400], [x + 180, 520], [x + 180, PAL_FLOOR - 60]], jit('#3a1a30', r, 8), 0.9, 0.2); stroke(far.x, x + 10, 530, x + 170, 530, 6, '#8a6a30', 0.6); for (let k = 0; k < 5; k++) dab(far.x, x + 30 + k * 30, 600 + k * 70, 10, 10, 0, '#c8a040', 0.35); }
+  // floor: polished tiles
+  wash(mid.x, r, -M, PAL_FLOOR - 40, W + 2 * M, H + M - PAL_FLOOR + 40, [[0, '#4a2a2a'], [.3, '#2a1820'], [1, '#100810']], { n: 260, alpha: 0.6, th: [10, 30], len: [200, 500] });
+  for (let i = 0; i < 14; i++) stroke(mid.x, 540 + (i - 7) * 40, PAL_FLOOR - 30, 540 + (i - 7) * 220, H + M, 2, '#6a4a30', 0.35);
+  // gold pillars (5.7.20-21: jewelled, many, tall)
+  [[40, 1.0], [1060, 1.0], [230, 0.7], [890, 0.7]].forEach(([px, k]) => { const w = 34 * k + 12;      // fewer, slimmer, darker: the room, not the pillars, is the subject
+    blob(mid.x, [[px - w, PAL_FLOOR], [px - w * 0.8, 120], [px + w * 0.8, 120], [px + w, PAL_FLOOR]], '#7a5826', 1, 0.15); blob(mid.x, [[px - w * 0.8, PAL_FLOOR], [px - w * 0.6, 120], [px - w * 0.1, 120], [px - w * 0.2, PAL_FLOOR]], '#4a3418', 0.75);
+    for (let y = 240; y < PAL_FLOOR; y += 240) { stroke(mid.x, px - w, y, px + w, y, 6, '#c8a048', 0.8); dab(mid.x, px, y + 26, 6, 8, 0, ['#c41e1e', '#1e8a8a', '#f8dc86'][(y / 240) % 3 | 0], 0.85); } });
+  // the crystal couch (5.8.1) with a gold frame and a silk cover
+  const cx = 560, cy = PAL_FLOOR - 150;
+  blob(mid.x, [[cx - 330, cy + 90], [cx - 320, cy - 10], [cx + 320, cy - 10], [cx + 330, cy + 90]], '#c8d4e4', 0.85, 0.1); stroke(mid.x, cx - 330, cy - 10, cx + 330, cy - 10, 8, '#e0b850', 1);
+  for (let i = 0; i < 4; i++) stroke(mid.x, cx - 300 + i * 200, cy + 90, cx - 300 + i * 200, cy + 170, 14, '#8a6428', 1);
+  blob(mid.x, [[cx - 320, cy - 6], [cx + 320, cy - 6], [cx + 310, cy + 50], [cx - 310, cy + 50]], '#5a1a4a', 1, 0.2);
+  const f = fg.x; for (let i = 0; i < 60; i++) dab(f, -M + r() * (W + 2 * M), H - 20 + r() * 80, 80, 30, 0, '#06030a', 0.9);
+  return { layers: [sky, far, mid, fg], sky, far, mid, fg, couch: [cx, cy] };
+}
+function lamps(ctx, t) {      // hanging oil lamps, flickering
+  [[180, 260], [430, 200], [690, 200], [940, 260]].forEach(([x, y], i) => { stroke(ctx, x, 0, x, y - 20, 3, '#8a6a30', 0.8); dab(ctx, x, y, 22, 12, 0, '#c89a40'); flame(ctx, x, y - 14, 14, t, i); glow(ctx, x, y, 260, '#ffb860', 0.16 + 0.04 * Math.sin(t * 7 + i)); });
+}
+function palace(ctx, bg, cam, t, mid) {
+  drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); drawLayer(ctx, cam, bg.mid); withCam(ctx, cam, 0.6, c => lamps(c, t)); if (mid) withCam(ctx, cam, 0.6, mid);
+}

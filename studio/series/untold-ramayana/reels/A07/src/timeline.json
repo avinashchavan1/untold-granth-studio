@@ -1,0 +1,197 @@
+{
+ "fps": 24,
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "en": "Did Hanuman once mistake Mandodari for Sita?",
+   "hi": "क्या हनुमान ने, एक बार मंदोदरी को सीता समझ लिया था?",
+   "card": [
+    [
+     "HANUMAN'S",
+     null
+    ],
+    [
+     "MISTAKE?",
+     "#f6c244"
+    ]
+   ],
+   "start": 0.0,
+   "dur": 4.416666666666667,
+   "vStart": 0.28,
+   "speech": 3.545,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "en": "Valmiki Ramayana, Sundara Kanda, chapters 8 and 9. Here's the real story.",
+   "hi": "वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ। ये है असली कहानी।",
+   "start": 4.4167,
+   "dur": 4.5,
+   "vStart": 4.5967,
+   "speech": 4.182,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "en": "At night, searching for Sita, Hanuman reaches Ravana's palace.",
+   "hi": "रात में, सीता को खोजते हुए, हनुमान रावण के महल में पहुँचते हैं।",
+   "cite": "5.7.1-3",
+   "start": 8.9167,
+   "dur": 4.916666666666667,
+   "vStart": 9.1667,
+   "speech": 4.364,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "en": "There, on a gleaming couch, a queen lies asleep, radiant like gold, full of beauty and youth: Mandodari.",
+   "hi": "वहाँ एक सुनहरे पलंग पर, एक रानी सो रही है, सोने जैसी दमकती, रूप और यौवन से भरी। मंदोदरी।",
+   "cite": "5.8.48",
+   "start": 13.8333,
+   "dur": 6.458333333333333,
+   "vStart": 14.0833,
+   "speech": 5.909,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "en": "Hanuman thinks: this is Sita!",
+   "hi": "हनुमान सोचते हैं, यही सीता हैं!",
+   "cite": "5.8.49",
+   "start": 20.2917,
+   "dur": 2.75,
+   "vStart": 20.5417,
+   "speech": 2.182,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 6,
+   "voice": "narrator",
+   "en": "Overjoyed, he slaps his arms, kisses his tail, sings, climbs the pillars and leaps down.",
+   "hi": "ख़ुशी से वे बाँहें ठोकते हैं, पूँछ चूमते हैं, गाते हैं, खंभों पर चढ़ते और कूद पड़ते हैं।",
+   "cite": "5.8.50",
+   "start": 23.0417,
+   "dur": 6.625,
+   "vStart": 23.2917,
+   "speech": 6.091,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 7,
+   "voice": "hanuman",
+   "en": "\"Wait. Apart from Rama, Sita would neither sleep nor adorn herself.\"",
+   "hi": "रुको। राम से बिछड़कर, सीता न सोएँगी, न श्रृंगार करेंगी।",
+   "cite": "5.9.1-2",
+   "start": 29.6667,
+   "dur": 4.333333333333333,
+   "vStart": 29.9167,
+   "speech": 3.818,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 8,
+   "voice": "hanuman",
+   "en": "\"And she would go to no one but Rama, not even to Indra, king of the gods. This is not Sita.\"",
+   "hi": "और वे राम के सिवा किसी के पास नहीं जाएँगी, देवराज इंद्र के पास भी नहीं। ये सीता नहीं हैं।",
+   "cite": "5.9.3",
+   "start": 34.0,
+   "dur": 6.625,
+   "vStart": 34.25,
+   "speech": 6.091,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "en": "",
+   "hi": "एक पल की ख़ुशी। फिर, सीता के चरित्र ने, सच बता दिया।",
+   "card": [
+    [
+     "A MOMENT'S JOY.",
+     null
+    ],
+    [
+     "HER CHARACTER TOLD THE TRUTH.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "5.9.1-3",
+   "start": 40.625,
+   "dur": 3.9166666666666665,
+   "vStart": 40.875,
+   "speech": 3.364,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "en": "",
+   "hi": "ये अनसुना पल, वाल्मीकि रामायण में ही है।",
+   "card": [
+    [
+     "IT'S IN",
+     null
+    ],
+    [
+     "VALMIKI",
+     "#f6c244"
+    ]
+   ],
+   "cite": "5.8.48-50",
+   "start": 44.5417,
+   "dur": 3.4583333333333335,
+   "vStart": 44.8217,
+   "speech": 2.818,
+   "sent": [
+    0.0
+   ]
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "en": "",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "start": 48.0,
+   "dur": 4.125,
+   "vStart": 48.43,
+   "speech": 3.0,
+   "sent": [
+    0.0
+   ]
+  }
+ ],
+ "total": 52.125,
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "SUNDARA KANDA  ·  CHAPTERS 8–9",
+  "edition": "CRITICAL EDITION"
+ },
+ "reel": "A07",
+ "draft": true
+}
