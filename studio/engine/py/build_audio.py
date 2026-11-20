@@ -12,9 +12,10 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reel import REEL as ROOT, CAST
 SR = 48000
-TL = json.load(open(os.path.join(ROOT, "src/timeline.json")))
+SHORT = os.environ.get("SHORT") == "1"          # the short cut (src/timeline_short.json) -> audio/mix_short*.wav
+TL = json.load(open(os.path.join(ROOT, "src/timeline_short.json" if SHORT else "src/timeline.json")))
 VARIANT = os.environ.get("VARIANT", "")          # "youtube": the subscribe call to action -> audio/mix_youtube.wav
-SUFFIX = "_youtube" if VARIANT == "youtube" else ""
+SUFFIX = ("_short" if SHORT else "") + ("_youtube" if VARIANT == "youtube" else "")
 FPS = TL["fps"]; TOTAL = TL["total"]; N = int((TOTAL + 0.6) * SR)
 S = {s["id"]: s for s in TL["shots"]}
 st = lambda i: S[i]["start"]

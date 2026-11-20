@@ -11,6 +11,8 @@
   python3 make_reel.py audio    <reel dir>      score + sfx + voice mix -> audio/mix.wav (-14 LUFS)
   python3 make_reel.py render   <reel dir>      frames (3 parallel) + mix -> out/<ID>_final.mp4
   python3 make_reel.py master   <reel dir>      BEST-QUALITY upload masters: lossless PNG re-render -> Instagram 1080p CRF12 + YouTube 4K
+  python3 make_reel.py short    <reel dir>      SHORT CUT from script.json "short" (drop shots / keep units): timeline_short.json,
+                                                short mixes, out/<ID>_INSTAGRAM_SHORT.mp4 (1080p) + <ID>_YOUTUBE_SHORT.mp4 (4K)
   python3 make_reel.py thumb    <reel dir> [3s,26s,...]   cover/thumbnail from script.json "thumbnail" -> out/<ID>_cover.jpg;
                                                 with times: art-only candidates -> frames/thumb_candidates.jpg to pick the frame
   python3 make_reel.py desk     <reel dir> [preview_asset_id] [poster_asset_id]   publishing-desk entry (captions per platform)
@@ -87,12 +89,13 @@ def desk_row(reel, preview_id="", poster_id=""):
     hook_hi = s["shots"][0]["hi"]; hook_en = s["shots"][0]["en"]; src = s.get("source", ""); cap = s.get("caption", "")
     refs = "\n".join(f"• {c['claim']} — {c['ref'].split(' — ')[0]}" for c in s.get("claims", []) if c.get("verified"))
     tl = json.load(open(os.path.join(reel, "src", "timeline.json"))); secs = round(tl["total"])
+    ask = s.get("comment_prompt", "")                                                            # ends the caption with a question to drive comments
     # English is the main language for every written word (captions, titles, covers); the narration stays Hindi
-    ig = f"{hook_en}\n\n{cap}\n\n📜 Source: {src}\n🎧 Hindi narration · English subtitles\n\nFollow @untoldgranth.official for more untold stories from the original texts.\n\n{tags}"
-    yt_title = f"{s['title']} | Valmiki Ramayana #Shorts"[:100]
-    yt = f"{hook_en}\n\n{cap}\n\nSource: {src}\nVerses:\n{refs}\n\nHindi narration · English subtitles.\nSubscribe to Untold Granth for real stories from the original texts, with the verse on screen.\n\n{tags} #Shorts"
+    ig = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}📜 Source: {src}\n🎧 Hindi narration · English subtitles\n\nFollow @untoldgranth.official for more untold stories from the original texts.\n\n{tags}"
+    yt_title = (s.get("youtube_title") or f"{s['title']} | Valmiki Ramayana #Shorts")[:100]   # a question title beats a statement
+    yt = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}Source: {src}\nVerses:\n{refs}\n\nHindi narration · English subtitles.\nSubscribe to Untold Granth for real stories from the original texts, with the verse on screen.\n\n{tags} #Shorts"
     row = {"title": s["title"], "series": ser.get("series_name", "").title(), "source": src, "length": f"{secs // 60}:{secs % 60:02d}",
-           "captions": {"instagram": ig, "facebook": ig.replace("@untoldgranth.official", "Untold Granth"), "youtube_title": yt_title, "youtube_description": yt},
+           "captions": {"instagram": ig, "facebook": ig.replace("@untoldgranth.official", "Untold Granth"), "youtube_title": yt_title, "youtube_description": yt, **({"first_comment": ask} if ask else {})},
            "claims": [{"claim": c["claim"], "ref": c["ref"]} for c in s.get("claims", [])], "verify_note": s.get("verify_note", ""),
            "masters": {"instagram": {"file": f"{rid}_INSTAGRAM_MASTER.mp4", "spec": "1080×1920 · H.264 CRF 12 · AAC 320k"},
                        "facebook": {"file": f"{rid}_INSTAGRAM_MASTER.mp4", "spec": "1080×1920 · H.264 CRF 12 · AAC 320k"},
@@ -147,7 +150,16 @@ def thumb(reel, times=None):
     if not th.get("frame"): sys.exit('set script.json thumbnail.frame first (pick one with: make_reel.py thumb <reel> 3s,20s,40s,...)')
     run(["python3", os.path.join(PY, "thumbnail.py")], reel)
 
-def master(reel):
+def short(reel):
+    """Short cut: re-time the picked takes (shortcut.py), build both short mixes, render lossless (end-card third per platform),
+    encode Instagram 1080p + YouTube 4K short masters with the same settings as the full masters."""
+    run(["python3", os.path.join(PY, "shortcut.py")], reel)
+    for var in ("", "youtube"):
+        env = dict(os.environ, REEL=os.path.abspath(reel), SHORT="1", VARIANT=var); print(f"$ SHORT=1 VARIANT={var} build_audio.py", flush=True)
+        subprocess.run(["python3", os.path.join(PY, "build_audio.py")], env=env, check=True)
+    master(reel, short=True)
+
+def master(reel, short=False):
     """BEST-QUALITY UPLOAD MASTERS (big on purpose; platforms re-encode, so the cleaner the upload the better viewers see):
       1. every frame re-rendered as PNG -> lossless RGB x264 intermediate (no JPEG anywhere)
       2. <ID>_INSTAGRAM_MASTER.mp4  1080x1920, H.264 High, veryslow, CRF 12, tune grain, GOP 1 s, BT.709, AAC 320k/48k
@@ -156,9 +168,10 @@ def master(reel):
                                     H.264 High, slow, CRF 14, tune grain, GOP 0.5 s, BT.709, AAC 384k/48k
     out/<ID>_final.mp4 stays the small preview / WhatsApp copy."""
     out = os.path.join(os.path.abspath(reel), "out"); rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]
-    tl = json.load(open(os.path.join(reel, "src", "timeline.json"))); nf = round(tl["total"] * 24); cuts = [0, nf // 3, 2 * nf // 3, nf]
-    tmp = os.path.join(out, "lossless"); os.makedirs(tmp, exist_ok=True)
-    env = lambda plat: dict(os.environ, REEL=os.path.abspath(reel), LOSSLESS="1", PLATFORM=plat)
+    tlname = "timeline_short.json" if short else "timeline.json"; sfx = "_short" if short else ""
+    tl = json.load(open(os.path.join(reel, "src", tlname))); nf = round(tl["total"] * 24); cuts = [0, nf // 3, 2 * nf // 3, nf]
+    tmp = os.path.join(out, "lossless" + sfx); os.makedirs(tmp, exist_ok=True)
+    env = lambda plat: dict(os.environ, REEL=os.path.abspath(reel), LOSSLESS="1", PLATFORM=plat, **({"TIMELINE": tlname} if short else {}))
     # segments 0-1 are shared; the last third holds the end card, so it is rendered once per platform (FOLLOW / SUBSCRIBE)
     jobs = [(0, "instagram", "seg0"), (1, "instagram", "seg1"), (2, "instagram", "seg2"), (2, "youtube", "seg2_youtube")]
     ps = [subprocess.Popen(["node", os.path.join(JS, "render.js"), "range", str(cuts[i]), str(cuts[i + 1]), f"{tmp}/{name}.mkv"], env=env(plat), stdout=open(f"{tmp}/{name}.log", "w"), stderr=subprocess.STDOUT) for i, plat, name in jobs]
@@ -166,16 +179,16 @@ def master(reel):
         if p.wait(): sys.exit("lossless render failed, see out/lossless/*.log")
     open(f"{tmp}/list.txt", "w").write("file 'seg0.mkv'\nfile 'seg1.mkv'\nfile 'seg2.mkv'\n")
     open(f"{tmp}/list_youtube.txt", "w").write("file 'seg0.mkv'\nfile 'seg1.mkv'\nfile 'seg2_youtube.mkv'\n")
-    yt_mix = os.path.join(reel, "audio", "mix_youtube.wav")
-    if not os.path.exists(yt_mix): print("⚠ no audio/mix_youtube.wav (no YouTube CTA takes): the YouTube master says 'follow' in the narration"); yt_mix = os.path.join(reel, "audio", "mix.wav")
-    src = ["-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt", "-i", os.path.join(reel, "audio", "mix.wav"), "-map", "0:v", "-map", "1:a"]
+    yt_mix = os.path.join(reel, "audio", f"mix{sfx}_youtube.wav")
+    if not os.path.exists(yt_mix): print(f"⚠ no audio/mix{sfx}_youtube.wav (no YouTube CTA takes): the YouTube master says 'follow' in the narration"); yt_mix = os.path.join(reel, "audio", f"mix{sfx}.wav")
+    src = ["-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt", "-i", os.path.join(reel, "audio", f"mix{sfx}.wav"), "-map", "0:v", "-map", "1:a"]
     src_yt = ["-f", "concat", "-safe", "0", "-i", f"{tmp}/list_youtube.txt", "-i", yt_mix, "-map", "0:v", "-map", "1:a"]
     tags = ["-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", "-shortest"]
     lim = ["-af", "alimiter=limit=0.80:attack=3:release=60:level=disabled", "-ar", "48000", "-ac", "2", "-c:a", "aac"]
-    ig = f"{out}/{rid}_INSTAGRAM_MASTER.mp4"
+    ig = f"{out}/{rid}_INSTAGRAM_{'SHORT' if short else 'MASTER'}.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *src, "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "veryslow", "-crf", "12", "-tune", "grain",
                     "-profile:v", "high", "-level:v", "4.2", "-g", "24", "-keyint_min", "24", "-bf", "2", *lim, "-b:a", "320k", *tags, ig], check=True)
-    yt = f"{out}/{rid}_YOUTUBE_MASTER.mp4"
+    yt = f"{out}/{rid}_YOUTUBE_{'SHORT' if short else 'MASTER'}.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *src_yt, "-vf", "scale=2160:3840:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "14", "-tune", "grain",
                     "-profile:v", "high", "-level:v", "5.2", "-g", "12", "-keyint_min", "12", "-bf", "2", *lim, "-b:a", "384k", *tags, yt], check=True)
     for f in (ig, yt): print("MASTER", f, f"{os.path.getsize(f) / 1e6:.0f} MB")
@@ -191,6 +204,7 @@ if __name__ == "__main__":
     elif cmd == "draft": draft(reel)
     elif cmd == "sheet": sheet(reel)
     elif cmd == "master": master(reel)
+    elif cmd == "short": short(reel)
     elif cmd == "thumb": thumb(reel, rest[0] if rest else None)
     elif cmd == "desk": desk_row(reel, *(rest + ["", ""])[:2])
     elif cmd == "pick": run(["python3", os.path.join(PY, "build_voice.py")], reel)

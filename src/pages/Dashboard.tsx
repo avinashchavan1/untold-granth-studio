@@ -1,8 +1,11 @@
-import { ArrowRight } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { ArrowRight, RefreshCw } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Empty, ErrorNote, SectionTitle, Spinner, StageBadge, fmtDate } from "../components/ui";
+import { Button, Card, Empty, ErrorNote, SectionTitle, Spinner, StageBadge, fmtDate } from "../components/ui";
 import { Target } from "../components/Target";
-import { useActivity, useChannels, useConnections, usePublications, useReels } from "../lib/api";
+import { studio, useActivity, useChannels, useConnections, usePublications, useReels } from "../lib/api";
+import type { Publication, Reel } from "../lib/types";
 import { STAGES, type Stage } from "../lib/types";
 
 export default function Dashboard() {
@@ -33,6 +36,8 @@ export default function Dashboard() {
           {(ch.data ?? []).map((c) => <a key={c.platform} href={c.url ?? "#"} target="_blank" rel="noreferrer" className="rounded-full border border-parchment-deep px-3 py-1 hover:border-gold dark:border-night-700">{c.platform} {c.handle}</a>)}
         </div>
       </div>
+
+      <Results reels={all} pubs={pubs.data ?? []} />
 
       {conn.data && (conn.data.providers.instagram?.connected || conn.data.providers.youtube?.connected) && (
         <div className="grid gap-2 sm:grid-cols-2">
@@ -102,3 +107,38 @@ const Row = ({ code, title, note, stage }: { code: string; title: string; note: 
     </Link>
   </li>
 );
+
+// How each posted reel is doing, per platform. A04–A06 are the trial: short cut (~55 s), question title,
+// question caption + auto first comment. Compare them with A01–A03 (full length).
+function Results({ reels, pubs }: { reels: Reel[]; pubs: Publication[] }) {
+  const qc = useQueryClient();
+  const [st, setSt] = useState<{ busy?: boolean; err?: string }>({});
+  const posted = reels.filter((r) => pubs.some((p) => p.reel_id === r.id && p.state === "posted"));
+  if (!posted.length) return null;
+  const cell = (r: Reel, pl: string, k: string) => { const p = pubs.find((x) => x.reel_id === r.id && x.platform === pl && x.state === "posted"); const v = (p?.stats as Record<string, number> | undefined)?.[k]; return p ? (v == null ? "–" : v.toLocaleString()) : ""; };
+  const trial = (r: Reel) => ["A04", "A05", "A06"].includes(r.code);
+  const last = pubs.map((p) => p.stats_at).filter(Boolean).sort().pop();
+  return (
+    <Card>
+      <SectionTitle right={<Button size="sm" disabled={st.busy} onClick={async () => { setSt({ busy: true }); try { await studio("refresh_stats"); setSt({}); qc.invalidateQueries({ queryKey: ["publications"] }); } catch (e) { setSt({ err: (e as Error).message }); } }}><RefreshCw size={14} className={st.busy ? "animate-spin" : ""} /> {st.busy ? "Updating…" : "Refresh stats"}</Button>}>How the reels are doing</SectionTitle>
+      <div className="-mx-1 overflow-x-auto">
+        <table className="w-full min-w-[560px] text-sm">
+          <thead className="text-left text-xs uppercase tracking-wider text-ink-soft dark:text-parchment/60">
+            <tr><th className="p-2">Reel</th><th className="p-2">Length</th><th className="p-2 text-right">IG views</th><th className="p-2 text-right">IG likes</th><th className="p-2 text-right">IG comments</th><th className="p-2 text-right">IG shares</th><th className="p-2 text-right">YT views</th><th className="p-2 text-right">YT likes</th><th className="p-2 text-right">YT comments</th></tr>
+          </thead>
+          <tbody className="tabular">
+            {posted.map((r) => (
+              <tr key={r.id} className="border-t border-parchment-deep dark:border-night-700">
+                <td className="p-2"><Link to={`/reels/${r.code}`} className="font-semibold hover:underline"><span className="mr-1.5 font-mono text-xs text-gold-deep dark:text-gold">{r.code}</span>{r.title}</Link>{trial(r) && <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase text-amber-900 dark:bg-amber-950 dark:text-amber-300">trial</span>}</td>
+                <td className="p-2">{r.length_s ? `${Math.round(r.length_s)} s` : ""}</td>
+                {["views", "likes", "comments", "shares"].map((k) => <td key={k} className="p-2 text-right">{cell(r, "instagram", k)}</td>)}
+                {["views", "likes", "comments"].map((k) => <td key={k} className="p-2 text-right">{cell(r, "youtube", k)}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Trial (A04–A06): ~55 s short cut on both platforms, question title, question in the caption and as the first comment. {last ? `Updated ${fmtDate(last)}.` : "Press Refresh stats after posting."}{st.err && <span className="text-vermilion"> {st.err}</span>}</p>
+    </Card>
+  );
+}

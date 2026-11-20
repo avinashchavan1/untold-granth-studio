@@ -116,6 +116,14 @@ retellings, we never mock the tradition or the people who believe them.
 - Instagram and Facebook: the narrator says **follow** and the end card says **FOLLOW**. YouTube: **subscribe** / **SUBSCRIBE**.
 - The closing shot is marked `"cta": true`. `narration api` also generates its YouTube line (`series.json → cta.youtube.say`) as takes `s<ID>y_*`; `pick` builds both; `audio` writes `mix.wav` and `mix_youtube.wav`; `master` renders the end card per platform, so the YouTube master gets SUBSCRIBE and the subscribe narration.
 
+## 6d. Reach (trial on A04–A06, then decide)
+
+- **Short cut:** `script.json → short` drops whole shots or keeps only some narration units; `make_reel.py short` builds a ~50–60 s version from the same takes. During the trial the short cut is posted on both Instagram and YouTube (`masters.py <ID> --short`); the full-length masters are kept as backups.
+- **Question title** (`youtube_title`), e.g. "Did a Squirrel Really Help Build Ram Setu?" — the phrase people search, as a question.
+- **Question for the comments** (`comment_prompt`): asks which version the viewer grew up with. It ends the caption and is posted automatically as the first comment; pin it by hand.
+- **Respect:** never call a loved story "fake"; say where it comes from.
+- **Measure:** Dashboard → "How the reels are doing" → Refresh stats (views, likes, comments, shares). Compare A04–A06 with A01–A03 after 7 days.
+
 ## 7. Delivery
 
 - **Upload masters (best quality; these are what you post).** `make_reel.py render` makes them automatically, or run `make_reel.py master`.

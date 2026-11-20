@@ -12,6 +12,7 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'applica
 (async () => {
   const srv = http.createServer((q, s) => { const u = decodeURIComponent(q.url.split('?')[0]);
     if (u === '/x/series.js') { s.writeHead(200, { 'Content-Type': 'text/javascript' }); s.end('const SERIES = ' + fs.readFileSync(path.join(SERIES, 'series.json'), 'utf8') + ';\nconst PLATFORM = ' + JSON.stringify(process.env.PLATFORM || 'instagram') + ';'); return; }
+    if (u === '/x/timeline.json' && process.env.TIMELINE) { s.writeHead(200, { 'Content-Type': 'application/json' }); s.end(fs.readFileSync(path.join(REEL, 'src', process.env.TIMELINE))); return; }   // short cut
     const f = resolve(u); if (!f) { s.writeHead(404); s.end(); return; } fs.readFile(f, (e, d) => { if (e) { s.writeHead(404); s.end(); return; } s.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream' }); s.end(d); }); });
   await new Promise(r => srv.listen(0, '127.0.0.1', r)); const port = srv.address().port;
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 } });

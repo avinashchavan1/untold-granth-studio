@@ -33,6 +33,7 @@ Deno.serve(async (req) => {
         const ig = await instagramToken();
         out.instagram = { access_token: ig.token, user_id: ig.user_id, api_base: ig.api_base, caption: caps.instagram || "" };
       }
+      out.first_comment = caps.first_comment || null;            // posted under the reel right after it goes live
       await admin.from("publish_jobs").update({ status: "running", started_at: new Date().toISOString(), step: "starting" }).eq("id", job.id);
       return json(out);
     }

@@ -27,7 +27,8 @@
   "#Ramayana",
   "#Valmiki",
   "#UntoldRamayana",
-  "#Nala"
+  "#Nala",
+  "#JaiShriRam"
  ],
  "thumbnail": {
   "frame": "",
@@ -333,5 +334,26 @@
     "Amar Chitra Katha: The Ramayana's Different Versions"
    ]
   }
- ]
+ ],
+ "youtube_title": "Did a Squirrel Really Help Build Ram Setu? | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Which version did you grow up with: the squirrel, the stones with Rama's name, or Nala's bridge? Tell us where you heard it 👇",
+ "short": {
+  "drop": [
+   5,
+   7,
+   9
+  ],
+  "units": {
+   "6": [
+    1
+   ],
+   "8": [
+    0
+   ]
+  },
+  "en": {
+   "6": "They uproot sal, mango and ashoka trees, and hurl rocks like mountains into the sea.",
+   "8": "Nala built a great bridge, a hundred yojanas long and ten wide."
+  }
+ }
 }

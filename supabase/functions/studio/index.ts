@@ -1,5 +1,5 @@
 // Admin actions from the app: connections, OAuth start, "Post now", and "Apply brand to YouTube".
-import { admin, cors, FB_GRAPH, FN_URL, getIntegration, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256, youtubeAccessToken } from "../_shared/util.ts";
+import { admin, cors, FB_GRAPH, FN_URL, getIntegration, instagramToken, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256, youtubeAccessToken } from "../_shared/util.ts";
 
 const YT = "https://www.googleapis.com/youtube/v3";
 const YT_UP = "https://www.googleapis.com/upload/youtube/v3";
@@ -133,7 +133,7 @@ Deno.serve(async (req) => {
           const u = new URL("https://accounts.google.com/o/oauth2/v2/auth");
           u.search = new URLSearchParams({ client_id: app.client_id, redirect_uri: `${FN_URL}/oauth/youtube`, response_type: "code", access_type: "offline", prompt: "consent", include_granted_scopes: "true",
             // youtube = manage the channel (banner, description, watermark, playlists); youtube.upload = post videos
-            scope: "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube", state }).toString();
+            scope: "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl", state }).toString();
           return json({ url: u.toString() });
         }
         if (body.provider === "instagram") {
@@ -198,6 +198,31 @@ Deno.serve(async (req) => {
         }
         await admin.from("activity").insert({ actor: email, reel_id: reel.id, action: "youtube: title/description updated", detail: { code: reel.code } });
         return json({ ok: true });
+      }
+      case "refresh_stats": {       // views / likes / comments for every posted reel (trial comparison on the Dashboard)
+        const { data: pubs } = await admin.from("publications").select("id,platform,external_id").eq("state", "posted").not("external_id", "is", null);
+        const out: Record<string, unknown>[] = [];
+        let ytTok: string | null = null, ig: { token: string; api_base: string } | null = null;
+        for (const p of pubs ?? []) {
+          try {
+            let stats: Record<string, number | null> = {};
+            if (p.platform === "youtube") {
+              ytTok ??= await youtubeAccessToken();
+              const v = (await (await fetch(`${YT}/videos?part=statistics&id=${p.external_id}`, { headers: { Authorization: `Bearer ${ytTok}` } })).json()).items?.[0]?.statistics ?? {};
+              stats = { views: +v.viewCount || 0, likes: +v.likeCount || 0, comments: +v.commentCount || 0 };
+            } else if (p.platform === "instagram") {
+              if (!ig) { const t = await instagramToken(); ig = { token: t.token, api_base: t.api_base }; }
+              const q = (path: string) => fetch(`${ig!.api_base}/${path}${path.includes("?") ? "&" : "?"}access_token=${encodeURIComponent(ig!.token)}`).then((r) => r.json());
+              const m = await q(`${p.external_id}?fields=like_count,comments_count`);
+              stats = { likes: m.like_count ?? null, comments: m.comments_count ?? null };
+              const ins = await q(`${p.external_id}/insights?metric=views,reach,saved,shares`);
+              for (const d of ins.data ?? []) stats[d.name] = d.values?.[0]?.value ?? d.total_value?.value ?? null;
+            } else continue;
+            await admin.from("publications").update({ stats, stats_at: new Date().toISOString() }).eq("id", p.id);
+            out.push({ id: p.id, ...stats });
+          } catch (e) { out.push({ id: p.id, error: e instanceof Error ? e.message : String(e) }); }
+        }
+        return json({ ok: true, updated: out });
       }
       case "youtube_brand": {
         const steps = await applyYouTubeBrand(email);

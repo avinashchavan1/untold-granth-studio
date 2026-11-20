@@ -155,6 +155,23 @@ def instagram(spec, path):
     link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or "https://www.instagram.com/untoldgranth.official/"
     return link, mid, f"Published reel {mid}"
 
+def first_comment(spec, ext_id):
+    """Post the reel's question as the first comment (starts the conversation in the first minutes). Never fails the post."""
+    text = (spec.get("first_comment") or "").strip()
+    if not text: return ""
+    try:
+        if spec["platform"] == "youtube":
+            tok = spec["youtube"]["access_token"]
+            call("POST", "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet",
+                 {"snippet": {"videoId": ext_id, "topLevelComment": {"snippet": {"textOriginal": text[:9000]}}}},
+                 {"Authorization": f"Bearer {tok}", "Content-Type": "application/json"})
+        else:
+            ig = spec["instagram"]; IG = ig.get("api_base") or IG_API
+            call("POST", f"{IG}/{ext_id}/comments?{urllib.parse.urlencode({'message': text[:2200], 'access_token': ig['access_token']})}")
+        return "; first comment posted (pin it in the app)"
+    except Exception as e:
+        return f"; first comment skipped ({str(e)[:200]})"
+
 def main():
     try:
         spec = call("GET", f"{API}?job_id={JOB_ID}", headers={"x-job-token": TOKEN})
@@ -162,6 +179,7 @@ def main():
             if spec.get(k): print(f"::add-mask::{spec[k]}")
         path = download(spec, f"/tmp/{spec['code']}_{spec['platform']}.mp4")
         url, ext_id, msg = (youtube if spec["platform"] == "youtube" else instagram)(spec, path)
+        msg += first_comment(spec, ext_id)
         report(status="done", step="posted", result_url=url, external_id=ext_id, log=f"{msg} → {url}")
     except Exception as e:
         report(status="failed", step="failed", log=f"FAILED: {e}")
