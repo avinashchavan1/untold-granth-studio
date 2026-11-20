@@ -8,7 +8,7 @@ Uploads to storage reel-media/untold-ramayana/cast/, writes <series>/cast/looks.
 """
 import glob, json, os, re, subprocess, sys, tempfile, urllib.request
 
-STUDIO = sys.argv[1] if len(sys.argv) > 1 else "/home/user/studio"
+STUDIO = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "studio")
 SER = os.path.join(STUDIO, "series", "untold-ramayana")
 BASE = "https://spsrryrycowxmgiofyxo.supabase.co"; H = {"apikey": "proxy-injected"}   # key injected by the environment proxy
 

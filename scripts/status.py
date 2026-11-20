@@ -58,7 +58,7 @@ def watch_render(code, studio):
         time.sleep(20)
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("code", nargs="?"); ap.add_argument("studio", nargs="?", default="/home/user/studio")
+    ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("code", nargs="?"); ap.add_argument("studio", nargs="?", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "studio"))
     for k in ("reel", "task", "detail", "state"): ap.add_argument("--" + k)
     ap.add_argument("--step", type=int); ap.add_argument("--pct", type=float); ap.add_argument("--eta", type=float)
     a = ap.parse_args()

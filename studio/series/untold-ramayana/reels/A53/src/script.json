@@ -46,7 +46,8 @@
   "file": "audio/score.mp3",
   "duration_s": 70,
   "gain": 1.4,
-  "take": "take 1 of 2"
+  "take": "take 1 of 2 (same prompt as A92)",
+  "prompt": "Epic Indian battle underscore, instrumental only, built to sit under a spoken voice. Opens with a sharp low taiko-and-dhol hit and a dark, tense drone with low brass and cellos; a driving war rhythm with dhol and frame drums at about 100 BPM builds tension; around one third through a held breath, then a single huge impact hit and rising choir pads; then a sombre, quiet aftermath with a slow drone and soft strings; it ends in a calm, solemn resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production."
  },
  "shots": [
   {

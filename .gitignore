@@ -13,3 +13,11 @@ studio/**/audio/proc/
 studio/**/audio/mix*.wav
 __pycache__/
 studio/**/audio/score_takes/
+# reel audio lives in the Hugging Face audio packs (scripts/audiopack.py), not in git
+studio/**/audio/narrator/
+studio/**/audio/cb/
+studio/**/audio/score.mp3
+studio/**/audio/pick_log.txt
+studio/**/audio/pick.out
+studio/**/audio/*.log
+studio/series/untold-ramayana/cast/audition/
