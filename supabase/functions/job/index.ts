@@ -52,11 +52,7 @@ Deno.serve(async (req) => {
         if (b.status === "done") { pub.post_url = b.result_url ?? null; pub.posted_at = new Date().toISOString(); pub.external_id = b.external_id ?? null; }
         await admin.from("publications").upsert(pub, { onConflict: "reel_id,platform" });
         await admin.from("activity").insert({ actor: "publisher", reel_id: job.reel_id, action: `${job.platform}: ${b.status === "done" ? "posted" : "posting failed"}`, detail: { url: b.result_url ?? null } });
-        if (b.status === "done") {
-          const { data: pubs } = await admin.from("publications").select("platform,state").eq("reel_id", job.reel_id);
-          if (["instagram", "youtube", "facebook"].every((p) => pubs?.find((x) => x.platform === p)?.state === "posted"))
-            await admin.from("reels").update({ stage: "published" }).eq("id", job.reel_id);
-        }
+        // "published" is set by the database trigger publications_mark_published once Instagram AND YouTube are posted
       }
       await admin.from("publish_jobs").update(patch).eq("id", job.id);
       return json({ ok: true });

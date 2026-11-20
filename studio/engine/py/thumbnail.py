@@ -12,6 +12,7 @@ script.json:
 English is the main language for every written word (covers included); the narration stays Hindi.
 Layout keeps every word inside the Instagram profile-grid crop (centre 1080x1440) and above the Reels UI."""
 import json, os, subprocess, sys
+import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 REEL = os.path.abspath(os.environ.get("REEL") or sys.argv[1]); SERIES = os.path.dirname(os.path.dirname(REEL))
@@ -69,7 +70,10 @@ def diya(d, cx, cy, s, col):
 img = clean_frame().resize((W, H), Image.LANCZOS)
 if T.get("art_shift", 0):          # push the art down so faces clear the title block; the sky stretches to fill the top
     sh_ = int(T["art_shift"]); src = img; img = Image.new("RGBA", (W, H)); img.alpha_composite(src.crop((0, 0, W, H - sh_)), (0, sh_))
-    img.alpha_composite(src.crop((0, 0, W, 240)).resize((W, sh_ + 2)), (0, 0))
+    top = np.array(src.crop((0, 0, W, 12)).convert("RGB")).reshape(-1, 3).mean(0); mid = np.array(img.crop((0, sh_, W, sh_ + 12)).convert("RGB")).reshape(-1, 3).mean(0)
+    band = Image.new("RGBA", (W, sh_ + 2)); bd = ImageDraw.Draw(band)                      # plain sky gradient (no duplicated moon or trees)
+    for yy in range(sh_ + 2): k = yy / max(1, sh_); bd.line([(0, yy), (W, yy)], fill=tuple(int(top[j] * (1 - k) + mid[j] * k) for j in range(3)) + (255,))
+    img.alpha_composite(band, (0, 0))
 # legibility: night gradient behind the title (top) and the English line + badge (bottom)
 g = Image.new("L", (1, H))
 for y in range(H):

@@ -31,12 +31,12 @@
   "#JaiShriRam"
  ],
  "thumbnail": {
-  "frame": "",
+  "frame": "22s",
   "hook": "Did a squirrel really help build Rama's bridge?",
   "stamp": "Not in Valmiki",
   "line": "No squirrel. The Ocean held the bridge.",
   "badge": "Valmiki Ramayana · Yuddha 6.15",
-  "art_shift": 0
+  "art_shift": 200
  },
  "score": {
   "engine": "elevenlabs eleven_music_v2_5",
@@ -76,7 +76,7 @@
    "en": "Valmiki Ramayana, Yuddha Kanda, chapter 15. Here's the real story.",
    "units": [
     "वाल्मीकि रामायण, युद्ध कांड, सर्ग पंद्रह।",
-    "[dramatically] ये है असली कहानी।"
+    "[serious] ये है असली कहानी।"
    ],
    "unit_gap": 0.28,
    "lead": 0.18,
@@ -130,7 +130,7 @@
    "hi": "लाखों वानर जंगल में दौड़ पड़ते हैं। साल, आम, अशोक के पेड़ उखाड़ते हैं, और पहाड़ जैसी चट्टानें सागर में फेंकते हैं।",
    "en": "Hundreds of thousands of monkeys rush into the forest. They uproot sal, mango and ashoka trees, and hurl rocks like mountains into the sea.",
    "units": [
-    "[excited] लाखों वानर जंगल में दौड़ पड़ते हैं।",
+    "लाखों वानर जंगल में दौड़ पड़ते हैं।",
     "साल, आम, अशोक के पेड़ उखाड़ते हैं… और पहाड़ जैसी चट्टानें सागर में फेंकते हैं।"
    ],
    "unit_gap": 0.3,
@@ -144,7 +144,7 @@
    "hi": "पेड़। चट्टानें। पहाड़।",
    "en": "",
    "units": [
-    "[dramatically] पेड़। [pause] चट्टानें। [pause] पहाड़।"
+    "[serious] पेड़। [pause] चट्टानें। [pause] पहाड़।"
    ],
    "sentences": 3,
    "sentence_gap": 0.4,
@@ -203,7 +203,7 @@
    "hi": "कोई गिलहरी नहीं। पत्थरों पर कोई नाम नहीं। सेतु को सागर ने थामा था।",
    "en": "",
    "units": [
-    "[dramatically] कोई गिलहरी नहीं। [pause] पत्थरों पर कोई नाम नहीं। [pause] सेतु को… सागर ने थामा था।"
+    "[serious] कोई गिलहरी नहीं। [pause] पत्थरों पर कोई नाम नहीं। [pause] सेतु को… सागर ने थामा था।"
    ],
    "sentences": 3,
    "sentence_gap": 0.4,
@@ -232,7 +232,7 @@
    "en": "",
    "units": [
     "गिलहरी की कथा, बाद की कथाओं में आई… जैसे तेलुगु रंगनाथ रामायण।",
-    "[dramatically] वाल्मीकि में नहीं।"
+    "[serious] वाल्मीकि में नहीं।"
    ],
    "unit_gap": 0.32,
    "card": [

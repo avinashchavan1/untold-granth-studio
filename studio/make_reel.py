@@ -42,6 +42,12 @@ def check(reel):
             if v != "narrator" and not sh.get("cite"): probs.append(f"shot {sh['id']}: dialogue without a verse citation ('cite')")
     est = chars / 14.5 + sum(sh.get("lead", 0.3) + sh.get("tail", 0.3) for sh in s["shots"]) + sum(sh.get("min", 0) for sh in s["shots"] if not sh.get("voice"))
     if not s.get("claims"): probs.append("no 'claims' list: every factual claim needs a reference")
+    CALM = {"softly", "warmly", "curious", "serious", "thoughtfully", "pause", "sadly", "gently", "whispers"}   # the narrator is a calm storyteller: no shouting
+    for sh in s["shots"]:
+        if sh.get("voice") != "narrator": continue
+        for u in sh.get("units") or []:
+            for tag in re.findall(r"\[([^\]]+)\]", u if isinstance(u, str) else u.get("say", "")):
+                if tag.strip().lower() not in CALM: probs.append(f"shot {sh['id']}: narrator tag [{tag}] makes him shout; use one of {sorted(CALM)}")
     th = s.get("thumbnail") or {}
     if not (th.get("hook") and th.get("line") and th.get("badge")): probs.append("no 'thumbnail' block (hook, stamp, line, badge, frame): every reel ships with a cover")
     if not any(sh.get("cta") for sh in s["shots"]): probs.append("no call-to-action shot (\"cta\": true on the closing line): YouTube needs its 'subscribe' version")

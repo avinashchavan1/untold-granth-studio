@@ -106,7 +106,7 @@
    "en": "Valmiki Ramayana, Bala Kanda, chapters 47 and 48. Here's the real story.",
    "units": [
     "वाल्मीकि रामायण, बाल कांड, सर्ग सैंतालीस और अड़तालीस।",
-    "[dramatically] ये है असली कहानी।"
+    "[serious] ये है असली कहानी।"
    ],
    "unit_gap": 0.28,
    "lead": 0.18,
@@ -132,7 +132,7 @@
    "hi": "बरसों पहले, इंद्र के छल और अहल्या की भूल पर, गौतम ने श्राप दिया था।",
    "en": "Long ago, after Indra's deceit and Ahalya's lapse, Gautama had laid a curse.",
    "units": [
-    "[cautiously] बरसों पहले, इंद्र के छल और अहल्या की भूल पर, गौतम ने श्राप दिया था।"
+    "[thoughtfully] बरसों पहले, इंद्र के छल और अहल्या की भूल पर, गौतम ने श्राप दिया था।"
    ],
    "cite": "1.47",
    "lead": 0.18,
@@ -182,7 +182,7 @@
    "hi": "पत्थर नहीं। अदृश्य। तपस्या में लीन।",
    "en": "",
    "units": [
-    "[dramatically] पत्थर नहीं। [pause] अदृश्य। [pause] तपस्या में लीन।"
+    "[serious] पत्थर नहीं। [pause] अदृश्य। [pause] तपस्या में लीन।"
    ],
    "sentences": 3,
    "sentence_gap": 0.4,
@@ -222,7 +222,7 @@
    "hi": "और तब, राम और लक्ष्मण, अहल्या के चरण छूते हैं।",
    "en": "And then, Rama and Lakshmana touch Ahalya's feet.",
    "units": [
-    "[dramatically] और तब… राम और लक्ष्मण, अहल्या के चरण छूते हैं।"
+    "[serious] और तब… राम और लक्ष्मण, अहल्या के चरण छूते हैं।"
    ],
    "cite": "1.48.17",
    "lead": 0.25,
@@ -286,7 +286,7 @@
    "en": "",
    "units": [
     "पत्थर बनी अहल्या, बाद की कथाओं में आईं।",
-    "[dramatically] वाल्मीकि में नहीं।"
+    "[serious] वाल्मीकि में नहीं।"
    ],
    "unit_gap": 0.32,
    "card": [
