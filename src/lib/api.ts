@@ -8,7 +8,7 @@ async function must<T>(p: PromiseLike<{ data: unknown; error: { message: string 
   return data as T;
 }
 
-const REEL_LIST = "id,series_id,code,plan_no,title,kind,stage,source_ref,art_cost,plan_note,hook_hi,hook_en,length_s,reviewed,reviewed_at,updated_at,created_at,hashtags,captions,verify_note,notes";
+const REEL_LIST = "id,series_id,code,plan_no,title,kind,stage,source_ref,art_cost,plan_note,hook_hi,hook_en,length_s,reviewed,reviewed_at,updated_at,created_at,hashtags,captions,verify_note,notes,follows:script->>follows";
 
 // the pipeline: every reel except dropped / merged ones
 export const useReels = () =>

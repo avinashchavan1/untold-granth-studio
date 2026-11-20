@@ -28,6 +28,7 @@ export interface Reel {
   source_ref: string | null; art_cost: string | null; plan_note: string | null; hook_hi: string | null; hook_en: string | null;
   length_s: number | null; script: Script | null; captions: Record<string, string>; hashtags: string[]; verify_note: string | null;
   reviewed: boolean; reviewed_at: string | null; notes: string | null; created_at: string; updated_at: string;
+  follows?: string | null;   // script.json "follows": post the day after this reel
 }
 export interface Claim { id: string; reel_id: string; position: number; claim: string; ref: string; quote_sa: string | null; verified: boolean; sources: string[]; }
 export interface FileRow { id: string; reel_id: string | null; kind: string; store: "supabase" | "github_release" | "github_repo" | "external"; path: string | null; url: string | null; bytes: number | null; spec: string | null; created_at: string; }

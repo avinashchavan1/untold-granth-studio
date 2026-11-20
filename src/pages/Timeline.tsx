@@ -1,16 +1,15 @@
 import clsx from "clsx";
-import { CalendarClock, CheckCircle2, Clapperboard, Hammer, Lightbulb } from "lucide-react";
+import { CalendarClock, CheckCircle2, Clapperboard, Clock, Hammer, Lightbulb } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ErrorNote, Spinner, StageBadge, fmtLen } from "../components/ui";
 import { useAllFiles, useMediaUrl, usePublications, useReels } from "../lib/api";
 import { KIND_LABEL, type FileRow, type Publication, type Reel } from "../lib/types";
+import { bestHour, confidence, dayName, fmtHour, istParts, observations, planDays, type Main, type Obs } from "../lib/bestTime";
 
-// All dates are shown in India time: posts go out 7–9 PM IST, one a day.
+// All dates are India time. Posting days and times are suggestions from lib/bestTime.ts.
 const TZ = "Asia/Kolkata";
-const dayKey = (d: Date) => d.toLocaleDateString("en-CA", { timeZone: TZ }); // YYYY-MM-DD
 const dayLabel = (d: Date) => d.toLocaleDateString("en-IN", { timeZone: TZ, weekday: "short", day: "numeric", month: "short" });
-const addDays = (d: Date, n: number) => new Date(d.getTime() + n * 86_400_000);
 const PRODUCTION = ["researching", "scripted", "voiced", "rendered"];
 const MAIN = ["youtube", "instagram"] as const;
 
@@ -38,23 +37,21 @@ export default function Timeline() {
   const making = all.filter((r) => PRODUCTION.includes(r.stage));
   const ideas = all.filter((r) => r.stage === "idea");
 
-  // suggested slots: one a day from the first free evening
+  // suggested days (one a day; Hanuman reels on Tue/Sat; paired reels back to back) and best times per platform
   const now = new Date();
-  const today = dayKey(now);
-  const lastDay = live.length ? dayKey(firstPost(live[live.length - 1])) : "";
-  let slot = lastDay >= today ? addDays(now, 1) : now;
-  const slots = ready.map((r) => {
-    const sch = (byReel[r.id] ?? []).map((p) => p.scheduled_for).filter(Boolean).sort()[0];
-    if (sch) return new Date(sch);
-    const d = slot; slot = addDays(slot, 1); return d;
-  });
+  const obs = observations(pubs.data ?? [], all);
+  const todayN = istParts(now).day, lastDayN = live.length ? istParts(firstPost(live[live.length - 1])).day : -1;
+  const eveningLeft = bestHour("instagram", todayN, obs, now) !== null;
+  const firstDay = lastDayN >= todayN || !eveningLeft ? todayN + 1 : todayN;
+  const fixedFor = (r: Reel) => { const sch = (byReel[r.id] ?? []).map((p) => p.scheduled_for).filter(Boolean).sort()[0]; return sch ? new Date(sch) : null; };
+  const plan = planDays(ready, firstDay, fixedFor).map((s) => ({ ...s, ig: bestHour("instagram", s.day, obs, now), yt: bestHour("youtube", s.day, obs, now) }));
 
   const total = all.length;
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <div>
         <h1 className="font-display text-3xl font-extrabold tracking-wide">Timeline</h1>
-        <p className="mt-1 text-sm text-ink-soft dark:text-parchment/60">Where the series stands today and what comes next, in posting order. Dates are India time; one reel a day at 7–9 PM.</p>
+        <p className="mt-1 text-sm text-ink-soft dark:text-parchment/60">Where the series stands today and what comes next, in posting order. Dates and times are India time, one reel a day, at the suggested best time for each platform.</p>
       </div>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -82,7 +79,9 @@ export default function Timeline() {
 
         <Phase icon={<CalendarClock size={16} />} tone="amber" title="Ready to post" note="Watch it, check the citations, then post from the reel page" />
         {ready.length === 0 && <Empty>Nothing waiting. The next reel is in production.</Empty>}
-        {ready.map((r, i) => <Item key={r.id} r={r} cover={covers[r.id]} when={`Post ${dayLabel(slots[i])}`} pubs={byReel[r.id]} dot="amber" hint={!r.reviewed ? "Waiting for your check" : undefined} />)}
+        {ready.length > 0 && <BestTimeCard obs={obs} />}
+        {plan.map((s) => <Item key={s.reel.id} r={s.reel} cover={covers[s.reel.id]} when={`Post ${dayName(s.day)}`} pubs={byReel[s.reel.id]} dot="amber" hint={!s.reel.reviewed ? "Waiting for your check" : undefined}
+          best={<BestTimes ig={s.ig} yt={s.yt} why={s.why} />} />)}
 
         <Phase icon={<Hammer size={16} />} tone="violet" title="In production" note="Being researched, voiced or rendered now" />
         {making.length === 0 && <Empty>Starting the next one from the plan.</Empty>}
@@ -124,7 +123,7 @@ const Phase = ({ icon, title, note, tone }: { icon: ReactNode; title: string; no
 
 const Empty = ({ children }: { children: ReactNode }) => <li className="mb-2 rounded-xl border border-dashed border-parchment-deep p-3 text-sm text-ink-soft dark:border-night-700">{children}</li>;
 
-function Item({ r, cover, when, pubs, dot, hint, compact }: { r: Reel; cover?: FileRow; when: string; pubs?: Publication[]; dot: Tone; hint?: string; compact?: boolean }) {
+function Item({ r, cover, when, pubs, dot, hint, compact, best }: { r: Reel; cover?: FileRow; when: string; pubs?: Publication[]; dot: Tone; hint?: string; compact?: boolean; best?: ReactNode }) {
   const img = useMediaUrl(cover);
   return (
     <li className="relative mb-2">
@@ -147,9 +146,51 @@ function Item({ r, cover, when, pubs, dot, hint, compact }: { r: Reel; cover?: F
               })}
             </div>
           )}
+          {best}
           {hint && <div className="mt-1.5 inline-block rounded-lg bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-900 dark:bg-amber-950 dark:text-amber-300">{hint}</div>}
         </div>
       </Link>
+    </li>
+  );
+}
+
+const PLAT: Record<Main, string> = { instagram: "Instagram", youtube: "YouTube" };
+function BestTimes({ ig, yt, why }: { ig: number | null; yt: number | null; why: string[] }) {
+  return (
+    <div className="mt-1.5 grid gap-1">
+      <div className="flex flex-wrap items-center gap-1.5 text-[12px] font-semibold">
+        <Clock size={13} className="text-gold-deep dark:text-gold" />
+        {ig !== null && <span className="rounded-full bg-gold/15 px-2 py-0.5 text-gold-deep dark:text-gold">Instagram {fmtHour(ig)}</span>}
+        {yt !== null && <span className="rounded-full bg-gold/15 px-2 py-0.5 text-gold-deep dark:text-gold">YouTube {fmtHour(yt)}</span>}
+      </div>
+      {why.map((w) => <div key={w} className="text-[11px] text-ink-soft dark:text-parchment/60">• {w}</div>)}
+    </div>
+  );
+}
+function BestTimeCard({ obs }: { obs: Obs[] }) {
+  const rows = (["youtube", "instagram"] as Main[]).map((p) => ({ p, list: obs.filter((o) => o.platform === p).sort((a, b) => b.ratio - a.ratio), conf: confidence(obs, p) }));
+  return (
+    <li className="mb-3 rounded-xl border border-gold/50 bg-gold/5 p-3 text-sm">
+      <div className="flex items-center gap-2 font-semibold"><Clock size={15} className="text-gold-deep dark:text-gold" /> How the best times are picked</div>
+      <p className="mt-1 text-xs leading-relaxed text-ink-soft dark:text-parchment/70">
+        A starting pattern for Indian, Hindi-speaking viewers (evening peak, a lunch bump, late mornings at weekends), adjusted by how your own posts did:
+        each post's reach is divided by the square root of its age, so a 6-hour-old post compares fairly with a 2-day-old one. The more you post, the more your own results count.
+        Hanuman reels go on Tuesday or Saturday. Press <b>Refresh stats</b> on the Dashboard to update.
+      </p>
+      <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+        {rows.map(({ p, list, conf }) => (
+          <div key={p} className="rounded-lg bg-white/60 p-2 text-xs dark:bg-night-900">
+            <div className="mb-1 flex items-center justify-between font-semibold"><span>{PLAT[p]} so far</span><span className="text-[11px] font-normal text-ink-soft">confidence: {conf}</span></div>
+            {list.length === 0 && <div className="text-ink-soft">No stats yet.</div>}
+            {list.map((o) => (
+              <div key={o.code} className="flex justify-between gap-2 tabular">
+                <span><span className="font-mono text-gold-deep dark:text-gold">{o.code}</span> posted {fmtHour(Math.round(o.hour * 2) / 2)}</span>
+                <span className={clsx(o.ratio >= 1.2 ? "font-semibold text-emerald-700 dark:text-emerald-300" : o.ratio < 0.8 ? "text-ink-soft" : "")}>{o.metric} {o.metricName} · {o.ratio.toFixed(1)}× avg speed</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </li>
   );
 }
