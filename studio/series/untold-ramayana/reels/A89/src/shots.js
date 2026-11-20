@@ -3,6 +3,8 @@
 // Uttara: Vayu keeps him cool, reaches the sun (7.35.28-30); Rahu, then Airavata (7.35.32-44); Indra's thunderbolt,
 // falls on the mountain, left jaw broken (4.65.21-22, 7.35.46-47); hence "Hanuman" (7.36.11). No swallowing anywhere.
 // The jaw is shown only as a flash and a gentle fall: no injury detail.
+// opening śloka (CE 4.65.22), Devanagari copied from the CE page
+const SLOKA = {"lines": ["ततः शैलाग्रशिखरे वामो हनुरभज्यत ।", "ततो हि नामधेयं ते हनुमानिति कीर्त्यते ॥"], "ref": "KISHKINDHA KANDA 4.65.22", "en": "“Then, on a mountain peak, your left jaw was broken. That is why you are called Hanuman.”"};
 function buildScenes() { BG.dawn = buildDawn(); BG.sky = buildSkyHigh(); BG.ms = buildManuscript(); }
 const BAL_STYLE = 'g';
 const BH = (c, x, y, s, t, o = {}) => drawBalHanuman(c, x, y, s, t, Object.assign({ style: BAL_STYLE }, o));
@@ -40,7 +42,7 @@ const SHOTS = {
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => { (sh.card || []).forEach(([s, col], i) => { const q = ease(u, 0.15 + i * 0.25, 0.55 + i * 0.25); if (q > 0) textFit(c, s, 540, 470 + i * 124 + (1 - q) * 22, { size: 108, weight: 900, color: col || C_IVORY, ls: 6, alpha: q, stroke: 10, shadow: 34 }); }); };
   },
-  2(ctx, u, p, sh, t, post) { sourceCard(ctx, u, p, sh, t, post, TL.source_card); },
+  2(ctx, u, p, sh, t, post) { slokaSource(ctx, u, p, sh, t, post, SLOKA); },
   // 3 — Valmiki tells it twice; first, Jambavan tells it to Hanuman himself
   3(ctx, u, p, sh, t, post) {
     const cam = { z: lerp(1.0, 1.05, p), y: 30 }, st = sentenceStarts(sh, 2);

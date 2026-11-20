@@ -1,6 +1,8 @@
 // ===== Reel A07 — "Hanuman Thought Mandodari Was Sita" — 11 shots (CE Sundara 5.7–5.9) =====
 // Hanuman searches Ravana's palace (5.7.1-3); sees Mandodari asleep, radiant like gold (5.8.48); thinks "This is Sita"
 // and dances for joy (5.8.49-50); then reasons from Sita's character that it is not she (5.9.1-3). Kept modest throughout.
+// opening śloka (CE 5.9.2), Devanagari copied from the CE page
+const SLOKA = {"lines": ["न रामेण वियुक्ता सा स्वप्तुमर्हति भामिनी ।", "न भोक्तुं नाप्यलंकर्तुं न पानमुपसेवितुम् ॥"], "ref": "SUNDARA KANDA 5.9.2", "en": "“Separated from Rama, that lady would not sleep, nor eat, nor adorn herself, nor drink.”"};
 function buildScenes() { BG.pal = buildPalace(); BG.ms = buildManuscript(); }
 const L_LAMPLIT = { rim: '#ffc878', rimA: 0.9, dir: 1, tint: '#3a1830', tintA: 0.16 };
 const HS = 520;                                         // Hanuman's scale in the palace
@@ -24,7 +26,7 @@ const SHOTS = {
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => { (sh.card || []).forEach(([s, col], i) => { const q = ease(u, 0.15 + i * 0.25, 0.55 + i * 0.25); if (q > 0) textFit(c, s, 540, 560 + i * 124 + (1 - q) * 22, { size: 112, weight: 900, color: col || C_IVORY, ls: 6, alpha: q, stroke: 10, shadow: 34 }); }); };
   },
-  2(ctx, u, p, sh, t, post) { sourceCard(ctx, u, p, sh, t, post, TL.source_card); },
+  2(ctx, u, p, sh, t, post) { slokaSource(ctx, u, p, sh, t, post, SLOKA); },
   // 3 — at night, searching for Sita, Hanuman moves between the gold pillars of Ravana's palace
   3(ctx, u, p, sh, t, post) {
     const bg = BG.pal, cam = { z: lerp(1.0, 1.06, p), x: lerp(-60, 40, p), y: 40 };

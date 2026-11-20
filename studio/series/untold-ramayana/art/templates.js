@@ -128,3 +128,19 @@ function chariot(c, x, y, s, face = 1, col = '#8a5a2a', flag = '#c41e1e') {
   blob(c, [[-1.0, -1.9], [-0.5, -1.8], [-0.62, -1.68], [-0.5, -1.55], [-1.0, -1.6]], flag, 1, 0.2);
   c.restore();
 }
+
+// Opening śloka + source card (shot 2 of every reel). S = { lines: [two Devanagari half-verses], ref: 'SUNDARA KANDA 5.9.2', en: 'translation' }.
+// Unit 1 (the verse, recited) shows the verse card; from unit 2 on ("वाल्मीकि रामायण, ...") the usual source card takes over.
+function slokaSource(ctx, u, p, sh, t, post, S) {
+  const st = sentenceStarts(sh, 3), cut = Math.max(1.5, st[1] - 0.25);
+  if (u >= cut) return sourceCard(ctx, u - cut, p, sh, t, post, TL.source_card);
+  const bg = ensureScene('ms', buildManuscript), cam = { z: lerp(1.02, 1.1, u / cut), y: 10 };
+  drawLayer(ctx, cam, bg.bg); withCam(ctx, cam, 0.8, c => { glow(c, 540, 700, 560, '#ffd890', 0.14); flame(c, bg.lamp[0], bg.lamp[1], 26, t, 3); });
+  ctx.fillStyle = rgba('#05061a', 0.45); ctx.fillRect(0, 0, W, H);
+  post.ui = c => {
+    const q0 = ease(u, 0.05, 0.45); if (q0 > 0) { text(c, 'VALMIKI RAMAYANA', 540, 330, { size: 70, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); text(c, S.ref, 540, 392, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }); }
+    const q1 = ease(u, 0.25, 0.8); if (q1 > 0) S.lines.forEach((l, i) => textFit(c, l, 540, 540 + i * 112 + (1 - q1) * 14, { size: 76, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, 980));
+    const q2 = ease(u, Math.min(cut * 0.45, 2.5), Math.min(cut * 0.45, 2.5) + 0.5); if (q2 > 0) { const w = S.en.split(' '), h = Math.ceil(w.length / 2);
+      [w.slice(0, h).join(' '), w.slice(h).join(' ')].forEach((l, i) => textFit(c, l, 540, 800 + i * 60, { size: 44, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: q2, stroke: 6, shadow: 20 }, 960)); }
+  };
+}

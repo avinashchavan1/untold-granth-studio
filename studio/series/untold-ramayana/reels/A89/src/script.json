@@ -76,15 +76,25 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, किष्किंधा कांड और उत्तर कांड। ये है असली कहानी।",
-   "en": "Valmiki Ramayana, Kishkindha Kanda and Uttara Kanda. Here's the real story.",
+   "hi": "ततः शैलाग्रशिखरे, वामो हनुरभज्यत। ततो हि नामधेयं ते, हनुमानिति कीर्त्यते॥ वाल्मीकि रामायण, किष्किंधा कांड और उत्तर कांड। ये है असली कहानी।",
+   "en": "",
    "units": [
+    "[softly] ततः शैलाग्रशिखरे, वामो हनुरभज्यत। ततो हि नामधेयं ते, हनुमानिति कीर्त्यते॥",
     "वाल्मीकि रामायण, किष्किंधा कांड और उत्तर कांड।",
     "[serious] ये है असली कहानी।"
    ],
-   "unit_gap": 0.28,
+   "unit_gap": 0.45,
    "lead": 0.18,
-   "tail": 0.12
+   "tail": 0.12,
+   "sloka": {
+    "lines": [
+     "ततः शैलाग्रशिखरे वामो हनुरभज्यत ।",
+     "ततो हि नामधेयं ते हनुमानिति कीर्त्यते ॥"
+    ],
+    "ref": "KISHKINDHA KANDA 4.65.22",
+    "en": "“Then, on a mountain peak, your left jaw was broken. That is why you are called Hanuman.”"
+   },
+   "cite": "4.65.22"
   },
   {
    "id": 3,
@@ -340,6 +350,14 @@
    "verified": true,
    "sources": [
     "Hanuman Chalisa (standard text)"
+   ]
+  },
+  {
+   "claim": "Opening śloka: “Then, on a mountain peak, your left jaw was broken. That is why you are called Hanuman.”",
+   "ref": "4.65.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE), Devanagari copied from the page"
    ]
   }
  ]
