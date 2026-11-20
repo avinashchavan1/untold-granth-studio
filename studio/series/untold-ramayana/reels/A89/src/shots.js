@@ -20,6 +20,9 @@ function dawn(ctx, cam, t, sunY, mid, sunX = 700) {
   if (mid) withCam(ctx, cam, 0.6, mid);
   drawLayer(ctx, cam, bg.fg);
 }
+// Hanuman Chalisa, chaupai 18 (same text as script.json shot 11 "quote")
+const CHALISA = { lines: ['जुग सहस्र जोजन पर भानू।', 'लील्यो ताहि मधुर फल जानू॥'], translit: 'Jug sahasra jojan par bhānū, līlyo tāhi madhur phal jānū',
+  en: '“The sun, yug-sahasra yojanas away, he swallowed, taking it for a sweet fruit.”' };
 const PEAK_SEAT = [DAWN_PEAK[0] + 10, DAWN_PEAK[1] - 70];
 
 const SHOTS = {
@@ -141,6 +144,24 @@ const SHOTS = {
     };
   },
   // 11 — that beautiful line is from the Hanuman Chalisa, sung with devotion
-  11(ctx, u, p, sh, t, post) { sourceCard(ctx, u, p, sh, t, post, { title: ['HANUMAN', 'CHALISA'], sub: 'VERSE 18  ·  A HYMN OF DEVOTION', edition: 'NOT PART OF VALMIKI' }); },
-  12(ctx, u, p, sh, t, post) { endCard(ctx, u, p, sh, t, post); },
+  // 11 — the line itself: Hanuman Chalisa, chaupai 18, in Devanagari + transliteration + English (the narrator reads it)
+  11(ctx, u, p, sh, t, post) {
+    const bg = BG.ms, cam = { z: lerp(1.04, 1.12, p), y: 20 }, st = sentenceStarts(sh, 3), Q = CHALISA;
+    drawLayer(ctx, cam, bg.bg); withCam(ctx, cam, 0.8, c => { glow(c, 540, 700, 520, '#ffd890', 0.12); flame(c, bg.lamp[0], bg.lamp[1], 26, t, 3); });   // no scroll: its verse is Valmiki's, not the Chalisa's
+    ctx.fillStyle = rgba('#05061a', 0.45); ctx.fillRect(0, 0, W, H);
+    post.ui = c => {
+      const q0 = ease(u, 0.1, 0.5); if (q0 > 0) { text(c, 'HANUMAN CHALISA', 540, 330, { size: 78, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); text(c, 'CHAUPAI 18  ·  A HYMN OF DEVOTION', 540, 395, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }); }
+      const q1 = ease(u, st[1] - 0.2, st[1] + 0.4);
+      if (q1 > 0) { Q.lines.forEach((l, i) => textFit(c, l, 540, 560 + i * 120 + (1 - q1) * 16, { size: 92, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, 960));
+        textFit(c, Q.translit, 540, 800, { size: 34, font: 'Montserrat', weight: 600, color: C_IVORY, alpha: 0.85 * q1, stroke: 5 }, 960); }
+      const q2 = ease(u, st[2] - 0.1, st[2] + 0.4); if (q2 > 0) { const words = Q.en.split(' '), half = Math.ceil(words.length / 2);
+        [words.slice(0, half).join(' '), words.slice(half).join(' ')].forEach((l, i) => textFit(c, l, 540, 920 + i * 62, { size: 46, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: q2, stroke: 6, shadow: 20 }, 960)); }
+    };
+  },
+  // 12 — "we sing it with devotion; Valmiki tells it differently": baby Hanuman at dawn, glowing
+  12(ctx, u, p, sh, t, post) {
+    const cam = { z: lerp(1.3, 1.4, p), x: -170, y: 220 };
+    dawn(ctx, cam, t, HORIZON - 210, c => BH(c, PEAK_SEAT[0], PEAK_SEAT[1], 150, t, { pose: 'sit', smile: 1, eye: blink(t, 4), glow: 0.6 }));
+  },
+  13(ctx, u, p, sh, t, post) { endCard(ctx, u, p, sh, t, post); },
 };

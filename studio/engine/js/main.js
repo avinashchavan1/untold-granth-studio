@@ -2,7 +2,7 @@
 let TL, BG = {}; const scene = mk(W, H), sctx = scene.getContext('2d'), fin = document.getElementById('final'), fctx = fin.getContext('2d');
 async function init() {
   TL = await (await fetch('timeline.json')).json();
-  await Promise.all(['900 40px Cinzel', '700 40px Cinzel', '800 40px Cinzel', '800 40px Montserrat', '600 40px Montserrat', 'italic 600 40px Montserrat', '700 40px Montserrat'].map(f => document.fonts.load(f))); await document.fonts.ready;
+  await Promise.all(['900 40px Cinzel', '700 40px Cinzel', '800 40px Cinzel', '800 40px Montserrat', '600 40px Montserrat', 'italic 600 40px Montserrat', '700 40px Montserrat', '700 40px Mukta'].map(f => document.fonts.load(f))); await document.fonts.ready;
   makeTextures();
   buildScenes();   // defined by the reel's shots.js
   window.READY = true;

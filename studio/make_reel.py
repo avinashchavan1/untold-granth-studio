@@ -64,7 +64,7 @@ def check(reel):
     if not s["shots"][0].get("card"): probs.append("shot 1 has no 'card': the hook must be on screen in the first second, not only in the subtitle")
     for c in s.get("claims", []):
         if not c.get("verified"): probs.append(f"UNVERIFIED claim: {c['claim']} ({c.get('ref')})")
-    print(f"{s['reel']} — {s['title']}\n  shots {len(s['shots'])} · est. length {est:.0f}s (target 45-65, hard max ~90) · ElevenLabs chars/take {narr}")
+    print(f"{s['reel']} — {s['title']}\n  shots {len(s['shots'])} · est. length {est:.0f}s (target 60-90, up to ~120 when the evidence needs it) · ElevenLabs chars/take {narr}")
     for p in probs: print("  ⚠", p)
     if not probs: print("  ✓ script passes")
     return not probs

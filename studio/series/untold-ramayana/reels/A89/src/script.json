@@ -15,13 +15,13 @@
  },
  "avoid": [
   "any disrespect to the Hanuman Chalisa: it is a hymn of devotion; we only say Valmiki tells the episode differently",
-  "naming the Chalisa's author (traditional attribution only); just say 'Hanuman Chalisa'",
   "pain or injury detail: the jaw breaking is shown as a flash and a gentle fall, no wound",
   "the curse that made him forget his powers (that is A38, the follow-up)",
-  "saying he 'reached and grabbed' the sun as fact in Kishkindha: there he is pushed back; only Uttara has him reach the sun's chariot"
+  "saying he 'reached and grabbed' the sun as fact in Kishkindha: there he is pushed back; only Uttara has him reach the sun's chariot",
+  "naming the Chalisa's author (traditional attribution only); quote the line itself, chaupai 18"
  ],
  "verify_note": "CE 4.65.19: as a child he saw the rising sun, wanted to seize it as a fruit, and leapt into the sky. 4.65.20: after 300 yojanas, driven back by its radiance, not dejected. 4.65.21-22: Indra hurls the thunderbolt; on a mountain peak his left jaw breaks; hence the name Hanuman. (Narrated by Jambavan to Hanuman, 4.65.1-2.) CE 7.35.23-24: sees the rising sun like hibiscus, flies up wanting the fruit. 7.35.28-30: Vayu keeps him cool; he comes near the sun; the sun does not burn him. 7.35.31-44: meets Rahu on the sun's chariot; chases Rahu, then Airavata ('this too is a great fruit'). 7.35.46-47: Indra's thunderbolt; falls on the mountain; left jaw broken. 7.36.11: Indra: named Hanuman because his jaw (hanu) was injured. No swallowing of the sun in either telling. Hanuman Chalisa: 'जुग सहस्र जोजन पर भानू। लील्यो ताहि मधुर फल जानू॥'",
- "caption": "Many of us grew up singing that baby Hanuman swallowed the sun, thinking it was a sweet fruit. Valmiki tells this story twice. In the Kishkindha Kanda, Jambavan tells Hanuman that as a child he leapt at the rising sun, flew three hundred yojanas, and was pushed back by its heat, without losing heart. In the Uttara Kanda, the Wind god keeps him cool, he reaches the sun's chariot, then chases Rahu and even Indra's elephant Airavata. In both, Indra's thunderbolt breaks his left jaw, and that is how he got his name: Hanuman. Neither telling has him swallow the sun. That beautiful line comes from the Hanuman Chalisa, sung with devotion.",
+ "caption": "Many of us grew up singing that baby Hanuman swallowed the sun, thinking it was a sweet fruit. Valmiki tells this story twice. In the Kishkindha Kanda, Jambavan tells Hanuman that as a child he leapt at the rising sun, flew three hundred yojanas, and was pushed back by its heat, without losing heart. In the Uttara Kanda, the Wind god keeps him cool, he reaches the sun's chariot, then chases Rahu and even Indra's elephant Airavata. In both, Indra's thunderbolt breaks his left jaw, and that is how he got his name: Hanuman. Neither telling has him swallow the sun. That comes from a beautiful line of the Hanuman Chalisa (chaupai 18): “Jug sahasra jojan par bhanu, leelyo tahi madhur phal janu”, the sun, yug-sahasra yojanas away, swallowed as a sweet fruit. We sing it with devotion; Valmiki tells it differently.",
  "youtube_title": "Did Baby Hanuman Really Swallow the Sun? | Valmiki Ramayana #Shorts",
  "comment_prompt": "Did you know how Hanuman got his name? Next: why Hanuman forgot his own powers 👇",
  "hashtags": [
@@ -221,16 +221,42 @@
   {
    "id": 11,
    "voice": "narrator",
-   "hi": "वो सुंदर पंक्ति हनुमान चालीसा की है, जिसे हम भक्ति से गाते हैं।",
-   "en": "That beautiful line is from the Hanuman Chalisa, which we sing with devotion.",
+   "hi": "सूर्य को निगलने की बात, हनुमान चालीसा की इस सुंदर पंक्ति से आती है: जुग सहस्र जोजन पर भानू, लील्यो ताहि मधुर फल जानू। यानी, युग सहस्र योजन दूर के सूर्य को, मीठा फल जानकर निगल लिया।",
+   "en": "",
    "units": [
-    "[warmly] वो सुंदर पंक्ति हनुमान चालीसा की है… जिसे हम भक्ति से गाते हैं।"
+    "[warmly] सूर्य को निगलने की बात, हनुमान चालीसा की इस सुंदर पंक्ति से आती है:",
+    "[softly] जुग सहस्र जोजन पर भानू… लील्यो ताहि मधुर फल जानू।",
+    "यानी, युग सहस्र योजन दूर के सूर्य को… मीठा फल जानकर निगल लिया।"
    ],
+   "unit_gap": 0.45,
+   "cite": "Hanuman Chalisa, chaupai 18",
    "lead": 0.25,
-   "tail": 0.35
+   "tail": 0.4,
+   "quote": {
+    "source": "HANUMAN CHALISA · CHAUPAI 18",
+    "lines": [
+     "जुग सहस्र जोजन पर भानू।",
+     "लील्यो ताहि मधुर फल जानू॥"
+    ],
+    "translit": "Jug sahasra jojan par bhānū, līlyo tāhi madhur phal jānū",
+    "en": "“The sun, yug-sahasra yojanas away, he swallowed, taking it for a sweet fruit.”"
+   }
   },
   {
    "id": 12,
+   "voice": "narrator",
+   "hi": "इसे हम भक्ति से गाते हैं। पर वाल्मीकि की कथा, अलग है।",
+   "en": "We sing it with devotion. But Valmiki tells it differently.",
+   "units": [
+    "[warmly] इसे हम भक्ति से गाते हैं।",
+    "[serious] पर वाल्मीकि की कथा… अलग है।"
+   ],
+   "unit_gap": 0.4,
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 13,
    "voice": "narrator",
    "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
    "en": "",
@@ -309,8 +335,8 @@
    ]
   },
   {
-   "claim": "The swallowing line is from the Hanuman Chalisa ('लील्यो ताहि मधुर फल जानू')",
-   "ref": "Hanuman Chalisa, verse 18",
+   "claim": "The swallowing comes from the Hanuman Chalisa: 'जुग सहस्र जोजन पर भानू। लील्यो ताहि मधुर फल जानू॥'",
+   "ref": "Hanuman Chalisa, chaupai 18",
    "verified": true,
    "sources": [
     "Hanuman Chalisa (standard text)"

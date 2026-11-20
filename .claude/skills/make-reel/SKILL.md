@@ -19,6 +19,9 @@ R = `series/untold-ramayana/reels/<ID>`. Keep the owner posted: one-line chat up
 ## 2. Script (step 2)
 - `python3 make_reel.py new untold-ramayana <ID> "<Title>"`, then write `R/src/script.json` (copy A53/A89 as the model):
   shot 1 hook question + `card`; shot 2 source card; 6–9 story shots (each with `cite`); 1–2 payoff cards; last shot `"cta": true`.
+  QUOTE CARDS: for every source the reel names (the popular version's text, and the key Valmiki verse), a shot where the narrator
+  reads the exact line and the screen shows source + verse no., Devanagari (`font: 'Mukta'`), transliteration, English (copy A89 shot 11).
+  Length 60–120 s: let the evidence breathe; never drop a quote to save time.
   Narrator `units` with calm tags only; `unit_gap` between units; short shots get `"min"`.
   Also: `source`, `source_card`, `avoid`, `verify_note`, `caption`, `youtube_title`, `comment_prompt`, `hashtags`,
   `thumbnail{hook,stamp,line,badge,frame:"",art_shift:0}`, `score{engine,file,duration_s,gain}`, optional `"follows": "<ID>"`.

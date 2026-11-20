@@ -16,6 +16,12 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
 - **Accuracy first.** Every claim cites CE kanda.sarga.verse, read in the text itself (enjoylearningsanskrit.com
   book-N/chapter-M is the CE source we use). Absence claims ("not in Valmiki") need the whole episode read. When unsure, drop the claim.
   Name later sources with respect (Tulsidas's Ramcharitmanas, Hanuman Chalisa): "both are told with devotion", never mockery.
+- **Show the audience the actual words.** Whenever a reel names a source, quote it: the popular version's exact line
+  (e.g. Hanuman Chalisa chaupai 18 "जुग सहस्र जोजन पर भानू। लील्यो ताहि मधुर फल जानू॥") AND the key Valmiki verse it is compared with,
+  each as a quote card: source + verse number, Devanagari (font Mukta), transliteration, English translation; the narrator reads it.
+  Devanagari quotes are the one exception to "English on screen". Reference: A89 shot 11.
+- **Length follows the information:** 60–90 s is typical, up to ~120 s is fine when the evidence needs it. Never cut a quote,
+  a citation or a step of the story just to be shorter.
 - **Ask before choosing anything about a MAJOR character** (look OR voice). Major = `series.json → major_characters`
   (`locked` + `ask_user_when_first_needed`, e.g. Ravana, Mandodari, Vibhishana, Sugriva, Jambavan...). Show stills/audio
   options with AskUserQuestion BEFORE rendering. Locked looks: `series.json → character_looks` (baby Hanuman = style 'g':
