@@ -7,6 +7,13 @@ function text(ctx, str, x, y, o = {}) {
   if (stroke) { ctx.strokeStyle = strokeCol; ctx.lineWidth = stroke; ctx.strokeText(str, x, y); }
   ctx.fillStyle = color; ctx.fillText(str, x, y); ctx.restore();
 }
+// text() that shrinks the size until the line fits maxW (cards with long lines never run off the screen)
+function textFit(ctx, str, x, y, o = {}, maxW = 960) {
+  let size = o.size || 60; const fnt = o.font || 'Cinzel', wt = o.weight || 800;
+  ctx.save(); ctx.letterSpacing = (o.ls || 0) + 'px';
+  for (; size > 28; size -= 2) { ctx.font = `${o.italic ? 'italic ' : ''}${wt} ${size}px ${fnt}`; if (ctx.measureText(str).width <= maxW) break; }
+  ctx.restore(); text(ctx, str, x, y, Object.assign({}, o, { size }));
+}
 function logo(ctx, a = 1) {
   ctx.save(); ctx.globalAlpha = a;
   // small diya mark

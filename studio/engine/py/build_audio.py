@@ -146,7 +146,8 @@ else: default_bed()
 for _f in ("score.wav", "score.mp3"):
     _p = os.path.join(ROOT, "audio", _f)
     if not os.path.exists(_p): continue
-    _raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", _p, "-f", "f32le", "-ac", "2", "-ar", str(SR), "-"], capture_output=True, check=True).stdout
+    _off = float(json.load(open(os.path.join(ROOT, "src", "script.json"), encoding="utf-8")).get("score", {}).get("offset_s", 0))   # skip a quiet intro
+    _raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", str(_off), "-i", _p, "-f", "f32le", "-ac", "2", "-ar", str(SR), "-"], capture_output=True, check=True).stdout
     _sc = np.frombuffer(_raw, dtype=np.float32).astype(np.float64).reshape(-1, 2)
     _L = min(len(_sc), N); _sc = np.concatenate([_sc[:_L], np.zeros((N - _L, 2))]); _sc[: int(0.25 * SR)] *= np.linspace(0, 1, int(0.25 * SR))[:, None]
     _ref = np.sqrt(np.mean(music ** 2)); _ref = _ref if _ref > 1e-5 else 0.05

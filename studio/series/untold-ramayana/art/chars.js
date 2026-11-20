@@ -12,6 +12,8 @@ const CH = {
   vanara:  { kind: 'man', vanara: true, skin: '#8a6038', skinSh: '#553a24', muzzle: '#dcbc96', cloth: '#5a3a22', clothSh: '#3a2416', sash: '#8a5a2a', hair: '#5a3a1e' },     // generic monkey of the army
   vanara2: { kind: 'man', vanara: true, skin: '#b08a5a', skinSh: '#76583a', muzzle: '#eedcbc', cloth: '#6a4a2a', clothSh: '#42301c', sash: '#a07040', hair: '#806040' },
   sagara:  { kind: 'man', god: true, skin: '#3f78b4', skinSh: '#22487a', cloth: '#b4201c', clothSh: '#6e1420', sash: '#e6b450', hair: '#0e1a34' },   // A04: the Ocean — lapis-blue, gold, red garlands and garments (CE 6.15.2)
+  guha:    { kind: 'man', skin: '#8e5e40', skinSh: '#5a3a30', cloth: '#7a5232', clothSh: '#4a321e', sash: '#a8302a', hair: '#0e0c18', bow: true },   // A06: king of the Nishadas, forest hunter-chief
+  boatman: { kind: 'man', skin: '#9a6a48', skinSh: '#62423a', cloth: '#d8ccb4', clothSh: '#988c76', sash: '#7a6a52', hair: '#14101c' },
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';

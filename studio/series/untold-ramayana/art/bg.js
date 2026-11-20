@@ -405,3 +405,44 @@ function shore(ctx, bg, cam, t, mid, prog = 0, glowA = 0) {
   drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); withCam(ctx, cam, bg.far.depth, c => seaLive(c, t)); withCam(ctx, cam, bg.far.depth, c => bridge(c, prog, t, glowA));
   drawLayer(ctx, cam, bg.mid); if (mid) withCam(ctx, cam, 0.6, mid);
 }
+
+// ---- A06: the Ganga at Shringaverapura — wide river, far bank, an ingudi tree on the near bank ----
+// tod: 'night' (the camp: Lakshmana washes Rama's feet, Guha keeps watch) | 'dawn' (the boat)
+const GANGA_BANK = 1330;
+function buildGanga(tod = 'night') {
+  const r = rng(tod === 'night' ? 606 : 607);
+  const sky = newLayer(0.05), far = newLayer(0.25), mid = newLayer(0.6), fg = newLayer(1.25);
+  paintSky(sky.x, r, tod === 'night' ? 'night' : 'dusk', [760, 300, 52]);
+  if (tod === 'dawn') { glow(sky.x, 300, HORIZON - 40, 520, '#ffc890', 0.45); glow(sky.x, 300, HORIZON - 20, 200, '#fff0c8', 0.5); }
+  for (let i = 0; i < 12; i++) paintTree(far.x, r, -60 + i * 110 + r() * 50, HORIZON + 28, 160 + r() * 90, 80, { n: 34, litDir: 1 });    // far bank
+  const rv = tod === 'night' ? [[0, '#3c3a7c'], [.3, '#262c66'], [1, '#121844']] : [[0, '#c89a8a'], [.25, '#7a6a9a'], [.6, '#3e4a86'], [1, '#1e2a5c']];
+  wash(far.x, r, -M, HORIZON + 30, W + 2 * M, GANGA_BANK - HORIZON, rv, { n: 480, alpha: 0.55, th: [6, 18], len: [160, 520] });
+  for (let i = 0; i < 130; i++) { const t = Math.pow(r(), 1.5), y = lerp(HORIZON + 36, GANGA_BANK - 20, t); stroke(far.x, -M + r() * (W + 2 * M), y, -M + r() * (W + 2 * M) + 40 + t * 200, y, 2 + t * 5, jit(tod === 'night' ? '#8a90d8' : '#f0c8a8', r, 12), 0.25 + t * 0.25); }
+  const m = mid.x;
+  m.save(); m.beginPath(); m.moveTo(-M, GANGA_BANK); for (let i = 0; i <= 20; i++) m.lineTo(-M + i * (W + 2 * M) / 20, GANGA_BANK + Math.sin(i * 1.9) * 12); m.lineTo(W + M, H + M); m.lineTo(-M, H + M); m.closePath(); m.clip();
+  wash(m, r, -M, GANGA_BANK - 10, W + 2 * M, H + M - GANGA_BANK, tod === 'night' ? [[0, '#2a3048'], [1, '#0a1020']] : [[0, '#6a5a4e'], [.3, '#3e3a3e'], [1, '#141824']], { n: 360, alpha: 0.5, th: [12, 40], len: [120, 380] });
+  for (let i = 0; i < 500; i++) { const px = -M + r() * (W + 2 * M), py = GANGA_BANK + 10 + Math.pow(r(), 0.8) * 560, hh = 8 + r() * 26; stroke(m, px, py, px + (r() - .5) * 10, py - hh, 2 + r() * 2, jit(r() < .3 ? '#3f7a70' : '#1f4a4c', r, 10), 0.7); }
+  m.restore();
+  paintTree(m, r, 140, GANGA_BANK + 120, 1050, 380, { n: 340, litDir: 1 });       // the ingudi tree they sleep under
+  // a bed of grass under the tree
+  for (let i = 0; i < 90; i++) stroke(m, 160 + r() * 420, GANGA_BANK + 150 + r() * 40, 160 + r() * 420, GANGA_BANK + 150 + r() * 40, 5, jit('#6a7a4a', r, 14), 0.6);
+  const f = fg.x;
+  for (let i = 0; i < 180; i++) { const px = -M + r() * (W + 2 * M), py = H + 40 + r() * 60, hh = 90 + r() * 150; stroke(f, px, py, px + (r() - .5) * 120, py - hh, 6 + r() * 9, jit(r() < .15 ? '#18404a' : '#0a0c18', r, 6), 1, (r() - .5) * .5); }
+  return { tod, layers: [sky, far, mid, fg], sky, far, mid, fg };
+}
+function gangaLive(ctx, t, tod, a = 1) {
+  for (let i = 0; i < 80; i++) { const h1 = hash(i * 3.1), h2 = hash(i * 7.7), y = HORIZON + 40 + Math.pow(h2, 1.4) * (GANGA_BANK - HORIZON - 60), x = h1 * (W + 200) - 100 + ((t * (20 + h2 * 30)) % 200);
+    stroke(ctx, x, y, x + 20 + h2 * 70, y, 2 + h2 * 4, tod === 'night' ? '#c8ccf8' : '#ffe0c0', a * (0.15 + 0.45 * Math.pow(0.5 + 0.5 * Math.sin(t * (1 + h1 * 2) + i * 2.1), 2))); }
+}
+function ganga(ctx, bg, cam, t, river, mid) {
+  drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); withCam(ctx, cam, bg.far.depth, c => { gangaLive(c, t, bg.tod); if (river) river(c); });
+  drawLayer(ctx, cam, bg.mid); if (mid) withCam(ctx, cam, 0.6, mid);
+}
+// a wooden river boat; draws its hull, then the riders (callback), then the near gunwale over their legs
+function boat(ctx, x, y, s, riders) {
+  blob(ctx, [[x - s, y - s * 0.12], [x + s, y - s * 0.12], [x + s * 0.82, y + s * 0.12], [x - s * 0.8, y + s * 0.12]], '#4a2e1e', 1, 0.2);
+  if (riders) riders(ctx);
+  blob(ctx, [[x - s * 1.06, y - s * 0.16], [x + s * 1.06, y - s * 0.16], [x + s * 0.86, y + s * 0.1], [x - s * 0.84, y + s * 0.1]], '#6a4428', 1, 0.2);
+  stroke(ctx, x - s * 1.04, y - s * 0.15, x + s * 1.04, y - s * 0.15, s * 0.03, '#a0703c', 0.9);
+  for (let i = 0; i < 6; i++) stroke(ctx, x - s * 0.9 + i * s * 0.36, y - s * 0.12, x - s * 0.88 + i * s * 0.36, y + s * 0.08, s * 0.012, '#3a2414', 0.6);
+}

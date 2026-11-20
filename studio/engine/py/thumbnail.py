@@ -68,7 +68,12 @@ def diya(d, cx, cy, s, col):
     d.polygon([(cx, cy - s * 1.25), (cx + s * 0.32, cy - s * 0.55), (cx, cy - s * 0.25), (cx - s * 0.32, cy - s * 0.55)], fill=col)
 
 img = clean_frame().resize((W, H), Image.LANCZOS)
-if T.get("art_shift", 0):          # push the art down so faces clear the title block; the sky stretches to fill the top
+if T.get("art_shift", 0) < 0:      # pull the art UP (figures low in the frame would sit under the payoff line); ground gradient fills the bottom
+    up = -int(T["art_shift"]); src = img; img = Image.new("RGBA", (W, H)); img.alpha_composite(src.crop((0, up, W, H)), (0, 0))
+    bot = np.array(src.crop((0, H - 12, W, H)).convert("RGB")).reshape(-1, 3).mean(0); band = Image.new("RGBA", (W, up)); bd = ImageDraw.Draw(band)
+    for yy in range(up): bd.line([(0, yy), (W, yy)], fill=tuple(int(v) for v in bot) + (255,))
+    img.alpha_composite(band, (0, H - up))
+elif T.get("art_shift", 0):          # push the art down so faces clear the title block; the sky stretches to fill the top
     sh_ = int(T["art_shift"]); src = img; img = Image.new("RGBA", (W, H)); img.alpha_composite(src.crop((0, 0, W, H - sh_)), (0, sh_))
     top = np.array(src.crop((0, 0, W, 12)).convert("RGB")).reshape(-1, 3).mean(0); mid = np.array(img.crop((0, sh_, W, sh_ + 12)).convert("RGB")).reshape(-1, 3).mean(0)
     band = Image.new("RGBA", (W, sh_ + 2)); bd = ImageDraw.Draw(band)                      # plain sky gradient (no duplicated moon or trees)

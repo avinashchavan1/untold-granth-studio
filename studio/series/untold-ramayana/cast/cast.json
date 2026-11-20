@@ -118,6 +118,18 @@
    "mix_gain": 1.0,
    "chosen": "Claude, A04 audition (Viraj/Sudhir/Abhii, ElevenLabs): ASR 0.88, youngest timbre (f0 158 Hz), distinct from narrator — minor character rule",
    "audition": "cast/audition/nala/"
+  },
+  "guha": {
+   "engine": "elevenlabs",
+   "voice_id": "m5qndnI7u4OAdXhH0Mr5",
+   "name": "Krishna - Energetic and Expressive (ElevenLabs library)",
+   "model": "eleven_v4",
+   "language": "hi",
+   "character": "Guha, king of the Nishadas, Rama's dearest friend: warm, eager to help",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "chosen": "Claude, A06 audition (Ranga/Yatin/Krishna): ASR 0.87, f0 150 Hz — distinct from narrator (125) and Sagara (113); minor character rule",
+   "audition": "cast/audition/guha/"
   }
  },
  "fx": {

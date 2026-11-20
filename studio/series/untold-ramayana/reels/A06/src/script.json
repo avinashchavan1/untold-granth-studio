@@ -1,0 +1,338 @@
+{
+ "reel": "A06",
+ "title": "No Boatman Washed Rama's Feet",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 — every verse checked in the CE Sanskrit/translation (enjoylearningsanskrit, Ayodhya 2.44–2.46); review before posting",
+ "source": "Valmiki Ramayana, Ayodhya Kanda 2(44-46) (Critical Edition; vulgate 2.50-52)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "AYODHYA KANDA  ·  CHAPTERS 44–46",
+  "edition": "CRITICAL EDITION"
+ },
+ "avoid": [
+  "the hunting verse after the crossing (2.46.79): in the text but not needed and sensitive",
+  "calling Guha a 'boatman' — Valmiki calls him a king (raja) of the Nishadas",
+  "an exact Ramcharitmanas doha number (sources disagree)",
+  "mocking the Kevat story: we only say where it comes from"
+ ],
+ "verify_note": "CE 2.44–2.46 read: Guha is king and Rama's friend (2.44.9-12); Lakshmana washes Rama's feet that night (2.44.25); Guha keeps watch (2.44.26); at dawn Rama sees a boat, boards, boatmen row across (2.46.61-66); Sita prays to Ganga mid-stream (2.46.67-71). Kevat's foot-washing at the boat: Tulsidas, Ramcharitmanas, Ayodhya Kand.",
+ "caption": "Many of us know the boatman Kevat who washed Rama's feet before taking him across the Ganga. Valmiki's Ramayana tells it differently: Guha is a king and Rama's dearest friend, the one who washes Rama's feet that night is Lakshmana, and at dawn Rama simply boards a boat and the boatmen row them across. The Kevat story comes from Tulsidas's Ramcharitmanas.",
+ "youtube_title": "Did a Boatman Really Wash Rama's Feet? | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Which version did you grow up with: Kevat washing Rama's feet, or Lakshmana? Tell us where you heard it 👇",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Ramayana",
+  "#Valmiki",
+  "#UntoldRamayana",
+  "#Kevat",
+  "#Guha",
+  "#JaiShriRam"
+ ],
+ "thumbnail": {
+  "frame": "32s",
+  "hook": "Did a boatman really wash Rama's feet?",
+  "stamp": "Not in Valmiki",
+  "line": "It was Lakshmana, the night before.",
+  "badge": "Valmiki Ramayana · Ayodhya 2.44–46",
+  "art_shift": -330
+ },
+ "score": {
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "duration_s": 80,
+  "gain": 1.4,
+  "prompt": "Gentle Indian cinematic underscore, instrumental only, built to sit under a spoken voice. Opens with a soft but clear low tabla-and-tanpura hit and a flowing river-like harp and santoor figure; a quiet, intimate night section with bansuri flute and a slow drone at about 70 BPM; at dawn it brightens with warm strings and a gentle rhythmic pulse like oars on water; around two thirds through a tender, devotional lift; it ends in a calm, warm resolution on the drone. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
+  "take": "take 2 of 2, from 8.5 s (both takes open quietly; offset starts on the swell)",
+  "offset_s": 8.5
+ },
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या एक केवट ने, गंगा पार कराने से पहले, राम के पैर धोए थे?",
+   "en": "Did a boatman really wash Rama's feet before taking him across the Ganga?",
+   "units": [
+    "[curious] क्या एक केवट ने… गंगा पार कराने से पहले, राम के पैर धोए थे?"
+   ],
+   "card": [
+    [
+     "THE BOATMAN",
+     null
+    ],
+    [
+     "WHO WASHED HIS FEET?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 2.6
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, अयोध्या कांड, सर्ग चौवालीस से छियालीस। ये है असली कहानी।",
+   "en": "Valmiki Ramayana, Ayodhya Kanda, chapters 44 to 46. Here's the real story.",
+   "units": [
+    "वाल्मीकि रामायण, अयोध्या कांड, सर्ग चौवालीस से छियालीस।",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.28,
+   "lead": 0.18,
+   "tail": 0.12
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "वनवास के रास्ते, राम गंगा किनारे पहुँचते हैं। यहाँ निषादों का राजा गुह रहता है, राम का प्राणों जैसा मित्र।",
+   "en": "On the way to exile, Rama reaches the Ganga. Here lives Guha, king of the Nishadas, a friend as dear to Rama as his own life.",
+   "units": [
+    "[softly] वनवास के रास्ते, राम गंगा किनारे पहुँचते हैं।",
+    "यहाँ निषादों का राजा गुह रहता है… राम का प्राणों जैसा मित्र।"
+   ],
+   "unit_gap": 0.32,
+   "cite": "2.44.1-9",
+   "lead": 0.25,
+   "tail": 0.25
+  },
+  {
+   "id": 4,
+   "voice": "guha",
+   "hi": "राम, ये धरती भी आपकी है, जैसे अयोध्या। कहिए, मैं आपके लिए क्या करूँ?",
+   "en": "\"Rama, this land is yours, just as Ayodhya is. Tell me, what may I do for you?\"",
+   "units": [
+    "राम, ये धरती भी आपकी है, जैसे अयोध्या।",
+    "कहिए, मैं आपके लिए क्या करूँ?"
+   ],
+   "unit_gap": 0.3,
+   "cite": "2.44.12",
+   "lead": 0.25,
+   "tail": 0.25
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "उस रात, राम और सीता ज़मीन पर सोते हैं, और लक्ष्मण, राम के पैर धोते हैं।",
+   "en": "That night, Rama and Sita sleep on the bare ground, and Lakshmana washes Rama's feet.",
+   "units": [
+    "[softly] उस रात, राम और सीता ज़मीन पर सोते हैं…",
+    "और लक्ष्मण, राम के पैर धोते हैं।"
+   ],
+   "unit_gap": 0.32,
+   "cite": "2.44.25",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 6,
+   "voice": "narrator",
+   "hi": "गुह और लक्ष्मण, धनुष लिए, रात भर पहरा देते हैं।",
+   "en": "Guha and Lakshmana, bows in hand, keep watch all night.",
+   "units": [
+    "गुह और लक्ष्मण, धनुष लिए, रात भर पहरा देते हैं।"
+   ],
+   "cite": "2.44.26",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 7,
+   "voice": "narrator",
+   "hi": "पैर धोने वाले थे, लक्ष्मण।",
+   "en": "",
+   "units": [
+    "[serious] पैर धोने वाले थे… [pause] लक्ष्मण।"
+   ],
+   "sentences": 2,
+   "sentence_gap": 0.4,
+   "card": [
+    [
+     "WHO WASHED HIS FEET?",
+     null
+    ],
+    [
+     "LAKSHMANA.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "2.44.25",
+   "lead": 0.23,
+   "tail": 0.35
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "सुबह, राम किनारे पर एक नाव देखते हैं। मल्लाह पतवार चलाते हैं, और नाव गंगा पार करने लगती है।",
+   "en": "At dawn, Rama sees a boat at the bank. The boatmen row, and the boat sets out across the Ganga.",
+   "units": [
+    "सुबह, राम किनारे पर एक नाव देखते हैं।",
+    "मल्लाह पतवार चलाते हैं… और नाव गंगा पार करने लगती है।"
+   ],
+   "unit_gap": 0.3,
+   "cite": "2.46.61-66",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "hi": "बीच गंगा में, सीता हाथ जोड़कर गंगा से प्रार्थना करती हैं।",
+   "en": "In the middle of the Ganga, Sita joins her palms and prays to the river.",
+   "units": [
+    "[softly] बीच गंगा में, सीता हाथ जोड़कर गंगा से प्रार्थना करती हैं।"
+   ],
+   "cite": "2.46.67-68",
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "कोई मोल-भाव नहीं। नाव पर पैर धुलाई नहीं। बस एक मित्र, और एक नाव।",
+   "en": "",
+   "units": [
+    "[serious] कोई मोल-भाव नहीं। [pause] नाव पर पैर धुलाई नहीं। [pause] बस एक मित्र… और एक नाव।"
+   ],
+   "sentences": 3,
+   "sentence_gap": 0.4,
+   "card": [
+    [
+     "NO BARGAIN.",
+     null
+    ],
+    [
+     "NO FOOT-WASHING AT THE BOAT.",
+     null
+    ],
+    [
+     "JUST A FRIEND AND A BOAT.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "2.46.61-66",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "केवट की कथा, तुलसीदास के रामचरितमानस से आई। वाल्मीकि में नहीं।",
+   "en": "",
+   "units": [
+    "केवट की कथा, तुलसीदास के रामचरितमानस से आई।",
+    "[serious] वाल्मीकि में नहीं।"
+   ],
+   "unit_gap": 0.32,
+   "card": [
+    [
+     "THE KEVAT STORY",
+     null
+    ],
+    [
+     "NOT IN VALMIKI",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.31
+  },
+  {
+   "id": 12,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Guha, king of the Nishadas, Rama's friend dear as his own self, lived at the Ganga",
+   "ref": "2.44.9",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Guha embraced Rama: 'This place is yours just as Ayodhya; what may I do for you?'",
+   "ref": "2.44.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "That night Rama and Sita lay on the ground; Lakshmana washed Rama's feet",
+   "ref": "2.44.25",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Guha, bow in hand, stayed awake with Lakshmana guarding Rama",
+   "ref": "2.44.26",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "At dawn Rama saw a boat at the bank, boarded with Sita and Lakshmana; boatmen rowed them across",
+   "ref": "2.46.61-66",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Mid-river Sita joined her palms and prayed to the Ganga",
+   "ref": "2.46.67-68",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "No boatman washes Rama's feet and there is no bargaining at the boat in the CE crossing (2.46)",
+   "ref": "2.46 (chapter)",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit CE 2.46, read in full"
+   ]
+  },
+  {
+   "claim": "Kevat washing Rama's feet before the crossing is from Tulsidas's Ramcharitmanas (Ayodhya Kand)",
+   "ref": "secondary",
+   "verified": true,
+   "sources": [
+    "Daily Excelsior: Ram on his way to jungle (cites Manas, Ayodhya Kand 99)",
+    "Bhakti Bharat: Ramcharitmanas Ayodhya Kand pad 100"
+   ]
+  }
+ ],
+ "short": {
+  "drop": [
+   6,
+   9
+  ],
+  "units": {
+   "3": [
+    1
+   ]
+  },
+  "en": {
+   "3": "Here lives Guha, king of the Nishadas, a friend as dear to Rama as his own life."
+  }
+ }
+}
