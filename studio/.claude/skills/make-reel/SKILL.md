@@ -22,6 +22,9 @@ R = `series/untold-ramayana/reels/<ID>`. Keep the owner posted: one-line chat up
   QUOTE CARDS: for every source the reel names (the popular version's text, and the key Valmiki verse), a shot where the narrator
   reads the exact line and the screen shows source + verse no., Devanagari (`font: 'Mukta'`), transliteration, English (copy A89 shot 11).
   Length 60–120 s: let the evidence breathe; never drop a quote to save time.
+  SHOT 2 = ŚLOKA + SOURCE: units = [the Sanskrit verse (Devanagari from the CE page, `[softly]`), then "वाल्मीकि रामायण, <kanda>, सर्ग <n>।",
+  "[serious] ये है असली कहानी।"]; `en` = the verse's English translation; the card shows the Devanagari (Mukta) + "VALMIKI RAMAYANA · <KANDA> k.s.v".
+  The CE page holds each verse's Devanagari next to its translation: save both when you research (pick the verse in step 1).
   Narrator `units` with calm tags only; `unit_gap` between units; short shots get `"min"`.
   Also: `source`, `source_card`, `avoid`, `verify_note`, `caption`, `youtube_title`, `comment_prompt`, `hashtags`,
   `thumbnail{hook,stamp,line,badge,frame:"",art_shift:0}`, `score{engine,file,duration_s,gain}`, optional `"follows": "<ID>"`.
