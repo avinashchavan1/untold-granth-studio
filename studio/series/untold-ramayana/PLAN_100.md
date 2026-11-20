@@ -30,11 +30,11 @@
 | A01 | There Was No Lakshmana Rekha | M | Aranya · 45 (CE 43) | — | ✅ done |
 | A02 | Shabari never tasted the berries first | M | Aranya · 74 (CE 69–70) | ●● Shabari, ashram | ✅ v1 rendered. CE 3.70.6, 3.70.10–13; tasting first in 17th–18th c. hagiography (Lutgendorf) |
 | A03 | Ahalya was never turned to stone | M | Bala · 48–49 (CE ~47–48) | ●●● Gautama, Ahalya | Researched: cursed to be invisible, living on air (Shastri ch.48); freed when Rama comes, and **Rama and Lakshmana touch HER feet** (ch.49); gods shower flowers. Stone first in Kalidasa's Raghuvamsha (Patel 1994), then Puranas/Kamban/Adhyatma/Tulsidas. ⚠ CE verse numbers (Goldman pp.215–218); ⚠ Valmiki says she knowingly consented to Indra: don't sensationalise, keep focus on stone vs. invisible + Rama's reverence |
-| A04 | The squirrel who helped build the bridge isn't in Valmiki | M | Yuddha · 22 | ●● monkeys, ocean | Valmiki: Nala's bridge of trees and rocks; no squirrel |
-| A06 | No boatman washing Rama's feet | M | Ayodhya · 52 | ●● Guha | Guha is a friend and king; the foot-washing is from Tulsidas ⚠ check Valmiki crossing sarga |
-| A07 | Hanuman thought Mandodari was Sita | R | Sundara · 10–11 | ●●● Lanka palace | Shows Hanuman's joy, then his self-correction |
-| A92 | Ravana teaching Lakshmana at death isn't in Valmiki | M | (whole text) | ● | ★★★ Viral WhatsApp story; huge recognition. Absence claim: full search |
-| A53 | How Ravana actually died | R | Yuddha · 108 | ●●● | ★★★ Navel-nectar arrow is famous; pairs with A92 (same chapters). The Brahmastra to the chest; no navel-nectar arrow ⚠ the navel story is later |
+| A04 | The squirrel who helped build the bridge isn't in Valmiki | M | Yuddha · 22 (CE 15) | ●● monkeys, ocean | Valmiki: Nala's bridge of trees and rocks; no squirrel |
+| A06 | No boatman washing Rama's feet | M | Ayodhya · 50–52 (CE 44–46) | ●● Guha | Guha is a friend and king; the foot-washing is from Tulsidas ⚠ check Valmiki crossing sarga |
+| A07 | Hanuman thought Mandodari was Sita | R | Sundara · 10–11 (CE 8–9) | ●●● Lanka palace | Shows Hanuman's joy, then his self-correction |
+| A92 | Ravana teaching Lakshmana at death isn't in Valmiki | M | Yuddha · 108 (CE 97, 100) | ● | ★★★ Viral WhatsApp story; huge recognition. Absence claim: full search |
+| A53 | How Ravana actually died | R | Yuddha · 107–108 (CE 96–97) | ●●● | ★★★ Navel-nectar arrow is famous; pairs with A92 (same chapters). The Brahmastra to the chest; no navel-nectar arrow ⚠ the navel story is later |
 | A89 | Baby Hanuman leapt at the sun | R | Kishkindha · 66; Uttara · 35 | ●● | ★★★ Everyone knows it; reveal what Valmiki actually says. |
 | A23 | Hanuman brought the mountain twice | R | Yuddha · 74, 101 | ●●● | ★★★ Sanjeevani is iconic; Hanuman. Two herb-mountain trips ⚠ verify both in CE |
 | A17 | Urmila's 14-year sleep isn't in Valmiki | M | (whole text) | ● | ★★★ Urmila's sleep is widely shared; absence claim needs full search. Absence claim: needs a full search; Nidra legend is later |
