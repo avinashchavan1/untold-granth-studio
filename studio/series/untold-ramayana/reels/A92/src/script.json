@@ -33,12 +33,12 @@
   "#JaiShriRam"
  ],
  "thumbnail": {
-  "frame": "",
+  "frame": "30s",
   "hook": "Did dying Ravana really teach Lakshmana?",
   "stamp": "Not in Valmiki",
   "line": "One arrow. He fell lifeless.",
   "badge": "Valmiki Ramayana · Yuddha 6.97",
-  "art_shift": 0
+  "art_shift": -330
  },
  "score": {
   "engine": "elevenlabs music_v1",
