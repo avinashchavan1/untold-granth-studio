@@ -440,3 +440,72 @@ function drawAiravata(ctx, cx, base, s, t, face = -1) {
   dab(x, 1.02, -1.0, 0.035, 0.035, 0, '#1a1018');
   x.restore();
 }
+
+// ---- A89 v2: Bal Hanuman: a little human child with a monkey face and tail (pick a style with the user)
+// style 'a' = the A07 Hanuman as a child (fur cap, cream muzzle, no crown); 'b' = traditional Bal Hanuman (small gold mukut, tilak, earrings);
+// 'c' = mostly human child (black hair, light muzzle, monkey ears and tail). pose: 'sit' | 'reach' | 'fly' | 'fall'. Faces +x.
+function drawBalHanuman(ctx, cx, cy, s, t, o = {}) {
+  const x = ctx, st = o.style || 'a', pose = o.pose || 'sit', eye = o.eye === undefined ? 1 : o.eye;
+  const human = st === 'd' || st === 'e' || st === 'f' || st === 'g';
+  const skin = st === 'c' ? '#d89a62' : st === 'd' ? '#e48e52' : st === 'e' || st === 'f' || st === 'g' ? '#c98d62' : '#d8783a', sh = st === 'c' ? '#9a6440' : st === 'd' ? '#a85e34' : st === 'e' || st === 'f' || st === 'g' ? '#8e5e40' : '#96502a', muz = '#f4d6ae', GOLD_ = '#f0c050', dhoti = '#c41e1e';
+  x.save(); x.translate(cx, cy); if (o.rot) x.rotate(o.rot); x.scale(s * (o.face || 1), s);
+  if (o.glow) glow(x, 0, -0.4, 1.5, '#ffe0a0', 0.5 * o.glow);
+  const sw = Math.sin(t * 3);
+  // tail
+  const tail = pose === 'fly' || pose === 'fall' ? [[-0.12, 0.12], [-0.5, 0.2], [-0.82, 0.02 + sw * 0.04], [-0.95, -0.22], [-0.82, -0.34], [-0.72, -0.24]] : [[-0.12, 0.2], [-0.42, 0.28], [-0.62, 0.05 + sw * 0.04], [-0.6, -0.28], [-0.48, -0.36], [-0.4, -0.26]];
+  line(x, tail, 0.065, sh); line(x, tail, 0.042, skin);
+  // legs (human child legs with feet)
+  const legs = { sit: [[[-0.08, 0.2], [-0.26, 0.38], [0.02, 0.46]], [[0.08, 0.2], [0.3, 0.36], [0.1, 0.48]]],
+    reach: [[[-0.07, 0.22], [-0.1, 0.48], [-0.08, 0.7]], [[0.07, 0.22], [0.12, 0.48], [0.14, 0.7]]],
+    fly: [[[-0.07, 0.2], [-0.36, 0.34], [-0.62, 0.36]], [[0.07, 0.2], [-0.22, 0.42], [-0.48, 0.5]]],
+    fall: [[[-0.07, 0.2], [-0.16, 0.46], [-0.02, 0.6]], [[0.07, 0.2], [0.28, 0.4], [0.36, 0.26]]] }[pose];
+  legs.forEach(L => { line(x, L, 0.13, sh); line(x, L, 0.105, skin); const f = L[2], b = L[1]; const an = Math.atan2(f[1] - b[1], f[0] - b[0]); dab(x, f[0] + Math.cos(an) * 0.03, f[1] + Math.sin(an) * 0.03 + 0.015, 0.075, 0.04, an * 0.3, skin); if (st === 'b') dab(x, lerp(b[0], f[0], 0.85), lerp(b[1], f[1], 0.85), 0.05, 0.025, an, GOLD_); });
+  // torso: a child's chest and round belly
+  blob(x, [[-0.17, -0.3], [0.17, -0.3], [0.21, -0.05], [0.18, 0.16], [0, 0.22], [-0.18, 0.16], [-0.21, -0.05]], skin, 1, 0.5);
+  blob(x, [[-0.17, -0.3], [-0.05, -0.3], [-0.1, 0.0], [-0.08, 0.2], [-0.18, 0.16], [-0.21, -0.05]], sh, 0.35, 0.5);
+  dab(x, 0.02, 0.0, 0.1, 0.12, 0, muz, st === 'c' || human ? 0 : 0.35);   // light belly fur
+  // dhoti
+  blob(x, [[-0.2, 0.08], [0.2, 0.08], [0.22, 0.26], [0.04, 0.3], [-0.2, 0.26]], dhoti, 1, 0.4); line(x, [[-0.2, 0.08], [0.2, 0.08]], 0.035, GOLD_);
+  if (st === 'b' || human) { line(x, [[-0.14, -0.28], [0.0, -0.12], [0.14, -0.28]], 0.022, GOLD_); dab(x, 0, -0.12, 0.03, 0.035, 0, '#c41e1e'); }   // necklace
+  if (st !== 'c' && !human) line(x, [[-0.15, -0.3], [0.04, -0.05], [0.17, 0.08]], 0.028, '#f6e6c0', 0.9);   // sacred thread
+  // arms with hands
+  const arms = { sit: [[[-0.17, -0.25], [-0.26, -0.02], [-0.16, 0.14]], [[0.17, -0.25], [0.28, -0.04], [0.2, 0.12]]],
+    reach: [[[-0.16, -0.26], [0.0, -0.56], [0.12, -0.82]], [[0.17, -0.25], [0.32, -0.52], [0.4, -0.78]]],
+    fly: [[[-0.16, -0.25], [0.14, -0.42], [0.46, -0.5]], [[0.17, -0.25], [0.42, -0.3], [0.7, -0.32]]],
+    fall: [[[-0.16, -0.25], [-0.36, -0.46], [-0.42, -0.66]], [[0.17, -0.25], [0.4, -0.4], [0.54, -0.58]]] }[pose];
+  arms.forEach(A => { line(x, A, 0.095, sh); line(x, A, 0.075, skin); dab(x, A[2][0], A[2][1], 0.055, 0.06, 0, skin); const m = [lerp(A[1][0], A[2][0], .7), lerp(A[1][1], A[2][1], .7)]; dab(x, m[0], m[1], 0.04, 0.03, 0, GOLD_); });
+  // head: a child's head (human shape) with a monkey muzzle
+  const hx = 0.03, hy = -0.56;
+  dab(x, hx - 0.01, hy + 0.22, 0.07, 0.06, 0, skin);   // neck
+  if (st === 'f') [-1, 1].forEach(k => { dab(x, hx + k * 0.265, hy + 0.03, 0.045, 0.07, 0, skin); dab(x, hx + k * 0.27, hy + 0.03, 0.022, 0.042, 0, sh, 0.5); });   // human ears
+  else if (st === 'g') [-1, 1].forEach(k => { dab(x, hx + k * 0.27, hy + 0.0, 0.06, 0.08, 0, sh); dab(x, hx + k * 0.27, hy + 0.0, 0.035, 0.05, 0, '#e8b896'); });   // slightly monkey ears
+  else [-1, 1].forEach(k => { dab(x, hx + k * 0.27, hy + 0.02, 0.075, 0.09, 0, sh); dab(x, hx + k * 0.27, hy + 0.02, 0.045, 0.06, 0, muz); });   // ears
+  dab(x, hx, hy, 0.27, 0.29, 0, skin);
+  if (st === 'a') { blob(x, [[hx - 0.27, hy - 0.02], [hx - 0.2, hy - 0.24], [hx, hy - 0.32], [hx + 0.2, hy - 0.24], [hx + 0.27, hy - 0.02], [hx + 0.14, hy - 0.12], [hx, hy - 0.14], [hx - 0.14, hy - 0.12]], sh, 0.8, 0.4); for (let i = 0; i < 7; i++) stroke(x, hx - 0.21 + i * 0.07, hy - 0.13, hx - 0.2 + i * 0.07, hy - 0.08, 0.02, sh, 0.8); }
+  if (st === 'b') { blob(x, [[hx - 0.24, hy - 0.12], [hx - 0.12, hy - 0.27], [hx + 0.12, hy - 0.27], [hx + 0.24, hy - 0.12], [hx, hy - 0.18]], '#1a1018', 0.85, 0.4);
+    blob(x, [[hx - 0.17, hy - 0.2], [hx - 0.12, hy - 0.42], [hx, hy - 0.54], [hx + 0.12, hy - 0.42], [hx + 0.17, hy - 0.2]], GOLD_, 1, 0.3); dab(x, hx, hy - 0.33, 0.035, 0.045, 0, '#c41e1e'); stroke(x, hx - 0.19, hy - 0.2, hx + 0.19, hy - 0.2, 0.035, GOLD_);
+    [-1, 1].forEach(k => dab(x, hx + k * 0.27, hy + 0.12, 0.03, 0.04, 0, GOLD_)); stroke(x, hx + 0.02, hy - 0.16, hx + 0.02, hy - 0.08, 0.03, '#c41e1e'); }
+  if (st === 'c') { blob(x, [[hx - 0.27, hy - 0.02], [hx - 0.18, hy - 0.26], [hx + 0.04, hy - 0.33], [hx + 0.24, hy - 0.2], [hx + 0.26, hy - 0.04], [hx + 0.1, hy - 0.16], [hx - 0.12, hy - 0.14]], '#1a1018', 0.95, 0.4); line(x, [[hx, hy - 0.3], [hx + 0.06, hy - 0.4], [hx + 0.12, hy - 0.36]], 0.035, '#1a1018'); }
+  if (human) {   // a little human child's face: black hair with a top-knot, eyebrows, nose, lips; only a hint of muzzle, monkey ears and the tail stay
+    blob(x, [[hx - 0.27, hy + 0.02], [hx - 0.2, hy - 0.24], [hx + 0.02, hy - 0.32], [hx + 0.22, hy - 0.22], [hx + 0.27, hy - 0.02], [hx + 0.16, hy - 0.15], [hx - 0.02, hy - 0.18], [hx - 0.16, hy - 0.12]], '#15101a', 1, 0.4);
+    dab(x, hx - 0.02, hy - 0.36, 0.07, 0.06, 0, '#15101a'); dab(x, hx - 0.02, hy - 0.36, 0.075, 0.02, 0, GOLD_, 0.9);   // top-knot with a gold band
+    stroke(x, hx + 0.035, hy - 0.13, hx + 0.035, hy - 0.06, 0.022, '#c41e1e');   // small tilak
+    if (st === 'd' || st === 'e') dab(x, hx + 0.07, hy + 0.12, 0.12, 0.08, 0, muz, 0.45);   // just a hint of muzzle (D/E only)
+    [-0.06, 0.13].forEach(ex => line(x, [[hx + ex - 0.05, hy - 0.09], [hx + ex, hy - 0.11], [hx + ex + 0.05, hy - 0.095]], 0.016, '#15101a'));   // eyebrows
+    [-0.06, 0.13].forEach(ex => { if (eye > 0.2) { dab(x, hx + ex, hy - 0.025, 0.05, 0.035 * eye, 0, '#fbf3ea'); dab(x, hx + ex + 0.008, hy - 0.025, 0.03, 0.032 * eye, 0, '#2a1a14'); dab(x, hx + ex + 0.018, hy - 0.035, 0.01, 0.01, 0, '#ffffff'); } else line(x, [[hx + ex - 0.04, hy - 0.02], [hx + ex, hy - 0.005], [hx + ex + 0.04, hy - 0.02]], 0.016, '#2a1a14'); });
+    line(x, [[hx + 0.06, hy + 0.0], [hx + 0.09, hy + 0.06], [hx + 0.06, hy + 0.075]], 0.014, sh);   // nose
+    const smh = o.smile === undefined ? 0.6 : o.smile; line(x, [[hx + 0.0, hy + 0.13], [hx + 0.065, hy + 0.13 + 0.035 * smh], [hx + 0.13, hy + 0.125]], 0.02, '#a8443a');
+    if (o.mouthO) dab(x, hx + 0.065, hy + 0.15, 0.03, 0.035 * o.mouthO, 0, '#7a2a2a');
+    dab(x, hx - 0.1, hy + 0.07, 0.045, 0.028, 0, '#f07a6a', 0.3); dab(x, hx + 0.2, hy + 0.07, 0.035, 0.025, 0, '#f07a6a', 0.25);
+    x.restore(); return;
+  }
+  // muzzle: monkey mouth area (smaller for style c)
+  const mz = st === 'c' ? 0.7 : 1; dab(x, hx + 0.07, hy + 0.11, 0.15 * mz, 0.11 * mz, 0, muz);
+  [-0.06, 0.12].forEach(ex => { if (eye > 0.2) { dab(x, hx + ex, hy - 0.03, 0.045, 0.055 * eye, 0, '#1a1018'); dab(x, hx + ex + 0.013, hy - 0.05, 0.015, 0.015, 0, '#ffffff'); } else line(x, [[hx + ex - 0.04, hy - 0.02], [hx + ex, hy], [hx + ex + 0.04, hy - 0.02]], 0.018, '#1a1018'); });
+  if (st !== 'c') line(x, [[hx - 0.12, hy - 0.1], [hx + 0.03, hy - 0.11], [hx + 0.19, hy - 0.1]], 0.025, sh, 0.8);   // little brow ridge
+  dab(x, hx + 0.08, hy + 0.06, 0.025, 0.018, 0, '#5a2a1a');
+  const sm = o.smile === undefined ? 0.6 : o.smile; line(x, [[hx + 0.0, hy + 0.13], [hx + 0.08, hy + 0.13 + 0.04 * sm], [hx + 0.16, hy + 0.12]], 0.018, '#5a2a1a');
+  if (o.mouthO) dab(x, hx + 0.08, hy + 0.15, 0.035, 0.04 * o.mouthO, 0, '#7a2a2a');
+  dab(x, hx - 0.12, hy + 0.08, 0.04, 0.025, 0, '#e86a5a', 0.35);
+  x.restore();
+}

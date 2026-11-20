@@ -4,6 +4,8 @@
 // falls on the mountain, left jaw broken (4.65.21-22, 7.35.46-47); hence "Hanuman" (7.36.11). No swallowing anywhere.
 // The jaw is shown only as a flash and a gentle fall: no injury detail.
 function buildScenes() { BG.dawn = buildDawn(); BG.sky = buildSkyHigh(); BG.ms = buildManuscript(); }
+const BAL_STYLE = 'g';
+const BH = (c, x, y, s, t, o = {}) => drawBalHanuman(c, x, y, s, t, Object.assign({ style: BAL_STYLE }, o));
 const SUNHI = [800, 470];                                   // the sun high in the open sky
 function skyHigh(ctx, cam, t, mid, drift = 1) {
   const bg = BG.sky; drawLayer(ctx, cam, bg.sky);
@@ -26,7 +28,7 @@ const SHOTS = {
     const B1 = Math.max(1.6, sh.vStart - sh.start + sh.speech - 0.1), cam = { z: lerp(1.05, 1.12, p), y: 40 }, fade = ease(u, B1, B1 + 1.0);
     skyHigh(ctx, cam, t, c => {
       if (fade < 1) { c.save(); c.globalAlpha = 1 - fade;
-        drawBabyHanuman(c, 470, 1000, 300, t, { pose: 'fly', smile: 0.2, mouthO: 1, rot: -0.15 });
+        BH(c, 470, 1000, 300, t, { pose: 'fly', smile: 0.2, mouthO: 1, rot: -0.15 });
         sunDisc(c, 640, 860, 70 * lerp(1, 0.85, p), t);
         c.restore(); }
       if (fade > 0) embers(c, t, 9, 30, 560, 1300, 500, 1 - fade);
@@ -54,7 +56,7 @@ const SHOTS = {
       const reach = ease(u, st[0] + 1.2, st[0] + 1.8), pose = leap > 0.02 ? 'fly' : reach > 0.5 ? 'reach' : 'sit';
       const bx = lerp(PEAK_SEAT[0], 470, easeIn(leap)), by = lerp(PEAK_SEAT[1], sunY + 120, leap) - Math.sin(leap * Math.PI) * 160;
       if (leap > 0) for (let i = 0; i < 12; i++) { const k = Math.max(0, leap - i * 0.03); dab(c, lerp(PEAK_SEAT[0], 470, easeIn(k)), lerp(PEAK_SEAT[1], sunY + 120, k) - Math.sin(k * Math.PI) * 160, 10 - i * 0.6, 10 - i * 0.6, 0, '#ffe0a0', 0.4 * (1 - i / 12)); }
-      drawBabyHanuman(c, bx, by, 150, t, { pose, smile: 0.9, rot: pose === 'fly' ? -0.6 : 0, eye: blink(t, 3) });
+      BH(c, bx, by, 150, t, { pose, smile: 0.9, rot: pose === 'fly' ? -0.6 : 0, eye: blink(t, 3) });
     }, 470);
     post.ui = c => { const q = ease(u, st[0] + 1.0, st[0] + 1.4) * (1 - ease(u, st[1] - 0.2, st[1] + 0.2)); if (q > 0) text(c, 'A FRUIT?', 540, 330, { size: 100, weight: 900, color: C_GOLD, ls: 8, alpha: q, stroke: 10, shadow: 34 }); };
   },
@@ -64,7 +66,7 @@ const SHOTS = {
     skyHigh(ctx, cam, t, c => {
       sunDisc(c, SUNHI[0], SUNHI[1], 110, t); heatRings(c, SUNHI[0], SUNHI[1], 110, t, 0.3 + 0.7 * push);
       const fx = lerp(lerp(160, 520, ease(u, 0, st[1])), 300, push), fy = lerp(lerp(1150, 800, ease(u, 0, st[1])), 1000, push);
-      drawBabyHanuman(c, fx, fy, 170, t, { pose: push > 0.1 && cheer < 0.5 ? 'fall' : 'fly', rot: push > 0.1 && cheer < 0.5 ? -0.5 - push * 0.8 : -0.45, smile: lerp(0.9, 0.2, push) + cheer, eye: push > 0.2 && cheer < 0.5 ? 0.6 : 1 });
+      BH(c, fx, fy, 170, t, { pose: push > 0.1 && cheer < 0.5 ? 'fall' : 'fly', rot: push > 0.1 && cheer < 0.5 ? -0.5 - push * 0.8 : -0.45, smile: lerp(0.9, 0.2, push) + cheer, eye: push > 0.2 && cheer < 0.5 ? 0.6 : 1 });
     }, 2.2);
     post.ui = c => {
       const q = ease(u, st[0] + 0.1, st[0] + 0.5) * (1 - ease(u, st[1] - 0.3, st[1])); if (q > 0) { text(c, '300', 540, 470, { size: 150, weight: 900, color: C_GOLD, ls: 6, alpha: q, stroke: 12, shadow: 36 }); text(c, 'YOJANAS', 540, 560, { size: 56, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 10, alpha: q, stroke: 6, shadow: 20 }); }
@@ -77,7 +79,7 @@ const SHOTS = {
       sunDisc(c, SUNHI[0], SUNHI[1], lerp(110, 150, near), t);
       const fx = lerp(220, SUNHI[0] - 230, near), fy = lerp(1050, SUNHI[1] + 150, near);
       windSwirl(c, fx, fy, 200, t, ease(u, 0.3, 1.0));
-      drawBabyHanuman(c, fx, fy, 170, t, { pose: 'fly', rot: -0.4, smile: 1, eye: blink(t, 3) });
+      BH(c, fx, fy, 170, t, { pose: 'fly', rot: -0.4, smile: 1, eye: blink(t, 3) });
     }, 1.2);
     ctx.fillStyle = rgba('#7ab8e8', 0.08 * ease(u, 0.3, 1.0)); ctx.fillRect(0, 0, W, H);
     post.ui = c => {
@@ -93,7 +95,7 @@ const SHOTS = {
       if (rahu > 0) drawRahu(c, lerp(1250, 760, rahu), 760, 260, t, rahu);
       if (ele > 0) { const ex = lerp(1300, 820, ele); drawAiravata(c, ex, 1300, 230, t, -1); drawFigure(c, CH.indra, P({ sit: 1, handN: 'hold', aN: [0.2, -0.05], aF: [0.2, 0.05], handF: 'fist', eye: blink(t, 5), brow: 0.5, gaze: [-0.6, 0] }), { x: ex + 10, y: 1300 - 230 * 1.05, s: 300, face: -1 }, { rim: '#ffe0a0', rimA: 0.6, dir: -1 }); }
       const tgt = ele > 0.5 ? [560, 1080] : [500, 860], k = ease(u, 0.6, 1.4);
-      drawBabyHanuman(c, lerp(200, tgt[0], k), lerp(1100, tgt[1], k), 160, t, { pose: 'reach', rot: 0.5, smile: 1, eye: 1 });
+      BH(c, lerp(200, tgt[0], k), lerp(1100, tgt[1], k), 160, t, { pose: 'reach', rot: 0.5, smile: 1, eye: 1 });
     }, 0.6);
     post.ui = c => {
       if (rahu > 0.2) text(c, 'RAHU', 540, 470, { size: 96, weight: 900, color: C_IVORY, ls: 10, alpha: rahu, stroke: 9, shadow: 30 });
@@ -109,12 +111,12 @@ const SHOTS = {
       skyHigh(ctx, { z: 1.0, y: 0 }, t, c => {
         sunDisc(c, 900, 360, 90, t, 0.8);
         vajra(c, 1100, -60, 520, 860, k, t);
-        drawBabyHanuman(c, lerp(520, 420, fall), lerp(880, 1700, easeIn(fall)), 160, t, { pose: u > 0.75 ? 'fall' : 'reach', rot: u > 0.75 ? 1.2 + fall * 3 : 0.5, eye: u > 0.75 ? 0 : 1, smile: 0.3 });
+        BH(c, lerp(520, 420, fall), lerp(880, 1700, easeIn(fall)), 160, t, { pose: u > 0.75 ? 'fall' : 'reach', rot: u > 0.75 ? 1.2 + fall * 3 : 0.5, eye: u > 0.75 ? 0 : 1, smile: 0.3 });
       }, 0.4);
     } else {
       const v = u - st[1], cam = { z: lerp(1.5, 1.6, p), x: -230, y: 300 };
       dawn(ctx, cam, t, HORIZON - 160, c => {
-        drawBabyHanuman(c, PEAK_SEAT[0] + 20, PEAK_SEAT[1] + 40, 140, t, { pose: 'sit', rot: -1.45, eye: 0, smile: 0, glow: 0.4 + 0.2 * Math.sin(t * 2) });
+        BH(c, PEAK_SEAT[0] + 20, PEAK_SEAT[1] + 40, 140, t, { pose: 'sit', rot: -1.45, eye: 0, smile: 0, glow: 0.4 + 0.2 * Math.sin(t * 2) });
         glow(c, PEAK_SEAT[0] + 20, PEAK_SEAT[1] + 20, 160, '#ffe0c0', 0.25 * ease(v, 0, 0.6));
       });
       ctx.fillStyle = rgba('#0a0a24', 0.25); ctx.fillRect(0, 0, W, H);
@@ -124,7 +126,7 @@ const SHOTS = {
   // 9 — HANU = JAW. HANUMAN. (4.65.22; 7.36.11): the child sits up, blessed, glowing
   9(ctx, u, p, sh, t, post) {
     const st = sentenceStarts(sh, 2), cam = { z: lerp(1.4, 1.48, p), x: -200, y: 260 };
-    dawn(ctx, cam, t, HORIZON - 200, c => drawBabyHanuman(c, PEAK_SEAT[0], PEAK_SEAT[1], 150, t, { pose: 'sit', smile: 1, eye: blink(t, 4), glow: 0.5 + 0.5 * ease(u, st[1], st[1] + 0.8) }));
+    dawn(ctx, cam, t, HORIZON - 200, c => BH(c, PEAK_SEAT[0], PEAK_SEAT[1], 150, t, { pose: 'sit', smile: 1, eye: blink(t, 4), glow: 0.5 + 0.5 * ease(u, st[1], st[1] + 0.8) }));
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => (sh.card || []).forEach(([s, col], i) => { const q = ease(u, st[i] - 0.05, st[i] + 0.3); if (q > 0) textFit(c, s, 540, 470 + i * 140 + (1 - q) * 22, { size: i ? 120 : 96, weight: 900, color: col || C_IVORY, ls: 6, alpha: q, stroke: 10, shadow: 32 }); });
   },
