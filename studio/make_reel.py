@@ -36,6 +36,7 @@ def check(reel):
     for sh in s["shots"]:
         v = sh.get("voice")
         if v and v not in cast: probs.append(f"shot {sh['id']}: voice '{v}' is not in the locked cast")
+        elif v and cast[v].get("engine") != "elevenlabs": probs.append(f"shot {sh['id']}: voice '{v}' uses {cast[v].get('engine')}; every voice must be ElevenLabs (cast.json)")
         if v:
             n = len(re.sub(r"[\s,।?!…]|\[[^\]]*\]", "", sh["hi"])); chars += n
             if cast.get(v, {}).get("engine") == "elevenlabs": narr += sum(len(u if isinstance(u, str) else u["say"]) for u in (sh.get("units") or [sh["hi"]]))

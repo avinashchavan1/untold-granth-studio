@@ -25,6 +25,8 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   Sita: "आर्यपुत्र / स्वामी"; others in `address.forms`. `make_reel.py check` flags violations. The narrator may say "राम".
 - **Calm narrator:** only the tags [softly] [warmly] [curious] [serious] [thoughtfully] [pause]. Never [dramatically] or [excited]
   (they made him shout). The picker drops takes that rise more than 40 Hz above 125 Hz.
+- **Every voice is ElevenLabs** (narrator and all characters; `cast/cast.json`). `make_reel.py check` fails otherwise.
+  Posted reels keep the audio they went out with.
 - **English** for every written word (cards, subtitles, titles, covers, captions); Hindi narration only.
 - **Endings:** Instagram/Facebook say FOLLOW ("फ़ॉलो करें"); YouTube says SUBSCRIBE ("सब्सक्राइब करें"). Both masters
   are checked by transcribing their last 4 s.

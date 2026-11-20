@@ -65,6 +65,13 @@ def main():
             out[k]["voice_line"] = {"reel": code, "shot": sh["id"], "hi": sh["hi"], "en": sh.get("en", "")}
             out[k].setdefault("appears_in", sorted(set(voiced_in.get(k, []))))
             print("voice", k, code, sh["id"]); break
+    # voices re-cast on ElevenLabs after their reels were posted: play the new voice (audition on the same line), not the old take
+    for k, v in cast.items():
+        aud = os.path.join(SER, "cast", "audition", "el_minor", f"{k}.mp3")
+        if v.get("previous_chatterbox") and os.path.exists(aud):
+            out.setdefault(k, {})["voice_sample"] = up(aud, f"untold-ramayana/cast/voice_{k}.mp3", "audio/mpeg")
+            line = out[k].get("voice_line") or {}; out[k]["voice_line"] = {**line, "reel": "new ElevenLabs voice", "note": "posted reels keep the old take"}
+            print("voice (new ElevenLabs)", k)
     json.dump(out, open(os.path.join(SER, "cast", "looks.json"), "w"), ensure_ascii=False, indent=1)
     print("wrote cast/looks.json", len(out))
 

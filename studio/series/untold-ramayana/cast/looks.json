@@ -141,10 +141,11 @@
   "note": null,
   "voice_sample": "untold-ramayana/cast/voice_maricha.mp3",
   "voice_line": {
-   "reel": "A01",
+   "reel": "new ElevenLabs voice",
    "shot": 5,
    "hi": "हा सीते! हा लक्ष्मण!",
-   "en": "\"Ha Sita! Ha Lakshmana!\""
+   "en": "\"Ha Sita! Ha Lakshmana!\"",
+   "note": "posted reels keep the old take"
   }
  },
  "matali": {
@@ -249,10 +250,11 @@
   "note": null,
   "voice_sample": "untold-ramayana/cast/voice_shabari.mp3",
   "voice_line": {
-   "reel": "A02",
+   "reel": "new ElevenLabs voice",
    "shot": 7,
    "hi": "मेरे गुरुओं ने कहा था, राम आएँगे। आपके लिए मैंने पम्पा के किनारे से, वन के फल इकट्ठा किए हैं।",
-   "en": "\"My teachers said Rama would come. For you, I have gathered forest fruits from the banks of the Pampa.\""
+   "en": "\"My teachers said Rama would come. For you, I have gathered forest fruits from the banks of the Pampa.\"",
+   "note": "posted reels keep the old take"
   }
  },
  "sita": {
