@@ -35,12 +35,12 @@
   "#JaiShriRam"
  ],
  "thumbnail": {
-  "frame": "",
+  "frame": "27s",
   "hook": "Did baby Hanuman swallow the sun?",
   "stamp": "Not in Valmiki",
   "line": "He leapt for it. The sun pushed him back.",
   "badge": "Valmiki Ramayana · Kishkindha 4.65",
-  "art_shift": 0
+  "art_shift": 320
  },
  "score": {
   "engine": "elevenlabs music_v1",
