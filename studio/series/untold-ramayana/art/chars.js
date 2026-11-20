@@ -352,7 +352,7 @@ function ravanaHead(x, cx, cy, r, t, i, eyeGlow) {
   dab(x, -0.68, 0.2, 0.09, 0.12, 0, '#f0c050'); dab(x, 0.68, 0.2, 0.09, 0.12, 0, '#f0c050');
   x.restore();
 }
-function drawRavana(ctx, cx, base, s, t, eyeGlow, rise) {
+function drawRavana(ctx, cx, base, s, t, eyeGlow, rise, hs) {   // hs: optional i -> head scale (0 = gone, 1 = whole), for the severed-and-regrown heads (Yuddha 6.96)
   const x = ctx, skin = '#8e5c42', sh = '#553442';
   x.save(); x.translate(cx, base); x.scale(s, s);
   const br = 1 + Math.sin(t * 2.2) * 0.012;
@@ -377,6 +377,6 @@ function drawRavana(ctx, cx, base, s, t, eyeGlow, rise) {
   blob(x, [[-1.0, -1.2], [-0.6, -1.3], [0, -1.32], [0.6, -1.3], [1.0, -1.2], [0.9, -1.06], [0.4, -1.0], [0, -0.98], [-0.4, -1.0], [-0.9, -1.06]], sh, 1, 0.4);
   line(x, [[-0.95, -1.12], [0, -1.04], [0.95, -1.12]], 0.05, '#f0c050');
   const order = [0, 9, 1, 8, 2, 7, 3, 6, 4, 5];
-  order.forEach(i => { const d = i - 4.5, ad = Math.abs(d), hx = d * 0.208, r = 0.168 - ad * 0.009, hy = (-1.4 + ad * ad * 0.004 + Math.sin(t * 1.6 + i * 0.9) * 0.008) * br; ravanaHead(x, hx, hy, r, t, i, eyeGlow); });
+  order.forEach(i => { const d = i - 4.5, ad = Math.abs(d), hx = d * 0.208, r = 0.168 - ad * 0.009, hy = (-1.4 + ad * ad * 0.004 + Math.sin(t * 1.6 + i * 0.9) * 0.008) * br; const k = hs ? hs(i) : 1; if (k > 0.01) ravanaHead(x, hx, hy, r * k, t, i, eyeGlow); });
   x.restore();
 }

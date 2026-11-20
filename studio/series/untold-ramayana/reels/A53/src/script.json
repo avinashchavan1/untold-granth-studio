@@ -1,0 +1,300 @@
+{
+ "reel": "A53",
+ "title": "How Ravana Actually Died",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 — CE Yuddha 6.96-97 read (vulgate 6.107-108 agrees); Ramcharitmanas Lanka 101.3-102 read; review before posting",
+ "source": "Valmiki Ramayana, Yuddha Kanda 6(96-97) (Critical Edition; vulgate 6.107-108)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "YUDDHA KANDA  ·  CHAPTERS 96–97",
+  "edition": "CRITICAL EDITION"
+ },
+ "avoid": [
+  "any disrespect to Goswami Tulsidas or the Ramcharitmanas: we only say where the navel scene comes from, and that both are told with devotion",
+  "gore: severed heads are shown as a flash of light and a head re-forming, never blood or wounds",
+  "saying the navel motif is in 'no Ramayana' — only that it is not in Valmiki's account of the death",
+  "the number of heads Ravana has (Valmiki here says 'a hundred heads' were cut, one after another): don't say 'ten heads grew back'"
+ ],
+ "verify_note": "CE 6.96.20-21: Rama severs Ravana's head with a razor arrow; an identical head appears at once. 6.96.22-24: again and again, a hundred heads of equal splendour are severed, yet Ravana's end is not seen. 6.97.1-3: Matali reminds Rama ('why prolong this, as if you do not know?') and urges the Brahmastra; Rama takes up the blazing arrow. 6.97.16-17: it falls on Ravana's chest and pierces his heart. 6.97.20-21: bow falls, he falls lifeless. No navel, no nectar, no secret from Vibhishana in CE 6.96-97; vulgate 6.108 also has the arrow tear through the heart. Ramcharitmanas Lanka Kand 101.3: Vibhishana tells Rama nectar dwells in Ravana's navel; doha 102 and 103.1: Rama looses 31 arrows, one dries up the navel. Ramcharitmanas: Tulsidas, 16th century (begun 1574 CE).",
+ "caption": "Many of us grew up with the scene where Vibhishana tells Rama that Ravana keeps nectar in his navel, and Rama's arrow dries it up. In Valmiki's Ramayana, Rama does cut off Ravana's head again and again, and it grows back, a hundred times. But the one who reminds Rama is Matali, Indra's charioteer. The Brahmastra strikes Ravana's chest and pierces his heart. The navel nectar and the thirty-one arrows come from Goswami Tulsidas's Ramcharitmanas, written in the 16th century. Both are told with devotion. Valmiki simply tells it differently.",
+ "youtube_title": "Did Rama Really Shoot Ravana's Navel? | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Which version did you grow up with: the navel arrow, or the arrow to the heart? 👇",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Ravana",
+  "#Rama",
+  "#Ramayana",
+  "#Valmiki",
+  "#Ramcharitmanas",
+  "#UntoldRamayana",
+  "#JaiShriRam"
+ ],
+ "thumbnail": {
+  "frame": "",
+  "hook": "Did Rama really shoot Ravana's navel?",
+  "stamp": "Not in Valmiki",
+  "line": "The arrow went to his heart.",
+  "badge": "Valmiki Ramayana · Yuddha 6.96–97",
+  "art_shift": 0
+ },
+ "score": {
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "duration_s": 70,
+  "gain": 1.4,
+  "take": "take 1 of 2"
+ },
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या राम ने, रावण की नाभि में बाण मारा था?",
+   "en": "Did Rama really shoot Ravana in the navel?",
+   "units": [
+    "[curious] क्या राम ने… रावण की नाभि में बाण मारा था?"
+   ],
+   "card": [
+    [
+     "THE NAVEL",
+     null
+    ],
+    [
+     "ARROW?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 2.6
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग छियानवे और सत्तानवे। ये है असली कहानी।",
+   "en": "Valmiki Ramayana, Yuddha Kanda, chapters 96 and 97. Here's the real story.",
+   "units": [
+    "वाल्मीकि रामायण, युद्ध कांड, सर्ग छियानवे और सत्तानवे।",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.28,
+   "lead": 0.18,
+   "tail": 0.12
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "राम एक बाण से रावण का सिर काटते हैं, और तुरंत, वैसा ही नया सिर आ जाता है।",
+   "en": "Rama cuts off Ravana's head with an arrow, and at once, an identical head appears.",
+   "units": [
+    "[serious] राम एक बाण से रावण का सिर काटते हैं…",
+    "और तुरंत, वैसा ही नया सिर आ जाता है।"
+   ],
+   "unit_gap": 0.3,
+   "cite": "6.96.20-21",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "फिर से, और फिर से। सौ सिर कटते हैं, पर रावण का अंत नहीं होता।",
+   "en": "",
+   "units": [
+    "फिर से… और फिर से।",
+    "[serious] सौ सिर कटते हैं… पर रावण का अंत नहीं होता।"
+   ],
+   "unit_gap": 0.35,
+   "card": [
+    [
+     "A HUNDRED HEADS.",
+     null
+    ],
+    [
+     "NO END.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "6.96.22-24",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "यहाँ तक, कथा वही है जो हमने सुनी है। पर राम को उपाय कौन बताता है?",
+   "en": "So far, it's the story we know. But who tells Rama what to do?",
+   "units": [
+    "यहाँ तक, कथा वही है जो हमने सुनी है।",
+    "[curious] पर राम को उपाय कौन बताता है?"
+   ],
+   "unit_gap": 0.32,
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 6,
+   "voice": "narrator",
+   "hi": "विभीषण नहीं। इंद्र के सारथि मातलि, राम को याद दिलाते हैं: ब्रह्मास्त्र।",
+   "en": "Not Vibhishana. Matali, Indra's charioteer, reminds Rama: the Brahmastra.",
+   "units": [
+    "[serious] विभीषण नहीं।",
+    "इंद्र के सारथि मातलि, राम को याद दिलाते हैं… ब्रह्मास्त्र।"
+   ],
+   "unit_gap": 0.32,
+   "cite": "6.97.1-3",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 7,
+   "voice": "narrator",
+   "hi": "बाण रावण की छाती पर गिरता है, और उसका हृदय चीर देता है।",
+   "en": "The arrow strikes Ravana's chest, and pierces his heart.",
+   "units": [
+    "[serious] बाण रावण की छाती पर गिरता है… और उसका हृदय चीर देता है।"
+   ],
+   "cite": "6.97.16-17",
+   "lead": 0.25,
+   "tail": 0.5
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "नाभि नहीं। हृदय।",
+   "en": "",
+   "units": [
+    "[serious] नाभि नहीं।",
+    "[serious] हृदय।"
+   ],
+   "card": [
+    [
+     "NOT THE NAVEL.",
+     null
+    ],
+    [
+     "THE HEART.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "6.97.17",
+   "lead": 0.25,
+   "tail": 0.4,
+   "min": 2.9,
+   "unit_gap": 0.5
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "hi": "नाभि में अमृत, और इकतीस बाण, ये प्रसंग गोस्वामी तुलसीदास जी के रामचरितमानस का है।",
+   "en": "The nectar in the navel and the thirty-one arrows: that scene is from Goswami Tulsidas's Ramcharitmanas.",
+   "units": [
+    "नाभि में अमृत, और इकतीस बाण…",
+    "ये प्रसंग, गोस्वामी तुलसीदास जी के रामचरितमानस का है।"
+   ],
+   "unit_gap": 0.32,
+   "cite": "Ramcharitmanas, Lanka 101.3, 102",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "दोनों कथाएँ भक्ति से भरी हैं। पर नाभि वाला बाण, वाल्मीकि में नहीं।",
+   "en": "",
+   "units": [
+    "[warmly] दोनों कथाएँ भक्ति से भरी हैं।",
+    "[serious] पर नाभि वाला बाण… वाल्मीकि में नहीं।"
+   ],
+   "unit_gap": 0.35,
+   "card": [
+    [
+     "NAVEL ARROW",
+     null
+    ],
+    [
+     "NOT IN VALMIKI",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.31
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Rama severs Ravana's head with an arrow; an identical head appears at once",
+   "ref": "6.96.20-21",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "A hundred heads are severed one after another, yet Ravana's end is not seen",
+   "ref": "6.96.22-24",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Matali, Indra's charioteer, reminds Rama and urges the Brahmastra",
+   "ref": "6.97.1-3",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)",
+    "wisdomlib (Shastri tr., vulgate 6.108)"
+   ]
+  },
+  {
+   "claim": "The arrow falls on Ravana's chest and pierces his heart",
+   "ref": "6.97.16-17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)",
+    "valmikiramayan.net prose (vulgate 6.108)"
+   ]
+  },
+  {
+   "claim": "No navel, nectar, or secret from Vibhishana in Valmiki's account of the death",
+   "ref": "6.96-6.97 (chapters, read)",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "In the Ramcharitmanas, Vibhishana tells Rama that nectar dwells in Ravana's navel",
+   "ref": "Ramcharitmanas, Lanka Kand 101.3",
+   "verified": true,
+   "sources": [
+    "ramcharit.in (Gita Press tr.)"
+   ]
+  },
+  {
+   "claim": "In the Ramcharitmanas, Rama looses thirty-one arrows; one dries up the navel",
+   "ref": "Ramcharitmanas, Lanka Kand doha 102, 103.1",
+   "verified": true,
+   "sources": [
+    "ramcharit.in (Gita Press tr.)"
+   ]
+  }
+ ]
+}
