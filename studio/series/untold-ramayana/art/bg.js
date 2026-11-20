@@ -508,3 +508,49 @@ function brahmastra(c, x0, y0, x1, y1, k, t) {
   for (let i = 0; i < 14; i++) { const q = Math.max(0, Math.min(1, k) - i * 0.03); stroke(c, lerp(x0, x1, q), lerp(y0, y1, q), x, y, 18 - i, i < 3 ? '#ffffff' : '#ffd070', 0.35 * (1 - i / 14)); }
   glow(c, x, y, 160, '#fff0b0', 0.6); glow(c, x, y, 50, '#ffffff', 0.8); c.restore();
 }
+
+// ---- A89: dawn on the mountain where baby Hanuman lived (Kishkindha 4.65; Uttara 7.35) ----
+const DAWN_PEAK = [250, 1330];        // rocky spur: the child sits here, and falls back here
+function buildDawn() {
+  const r = rng(889), sky = newLayer(0.05), far = newLayer(0.25), mid = newLayer(0.6), fg = newLayer(1.25);
+  wash(sky.x, r, -M, -M, W + 2 * M, HORIZON + M + 60, [[0, '#141436'], [.3, '#3a2e6a'], [.55, '#8a4a72'], [.75, '#d8705a'], [.9, '#f4a45a'], [1, '#ffd890']], { n: 520, alpha: 0.45, th: [26, 80], len: [240, 700] });
+  for (let i = 0; i < 10; i++) { const cy = 200 + r() * (HORIZON - 360), cx = r() * W, L = 260 + r() * 420, t = cy / HORIZON; for (let k = 0; k < 5; k++) stroke(sky.x, cx - L / 2 + r() * 60, cy + k * 7 + r() * 8, cx + L / 2 - r() * 60, cy + k * 7 + r() * 8, 14 + r() * 14, k > 2 ? mix('#ffb07a', '#ffe0b0', t) : '#5a3a6a', 0.3, (r() - .5) * .04); }
+  [['#6a3e6e', 170, 0.9, 0], ['#3a2a52', 100, 1.5, 6]].forEach(([col, amp, rough, k]) => { const pts = ridge(r, -M, W + M, HORIZON + 6 - k, amp, 26, rough), x = far.x; x.beginPath(); x.moveTo(-M, HORIZON + 90); pts.forEach(p => x.lineTo(p[0], p[1])); x.lineTo(W + M, HORIZON + 90); x.closePath(); x.fillStyle = col; x.fill(); });
+  wash(mid.x, r, -M, HORIZON + 40, W + 2 * M, H + M - HORIZON, [[0, '#2a2a44'], [.3, '#1c2236'], [1, '#0a0e1c']], { n: 420, alpha: 0.5, th: [14, 44], len: [120, 420] });
+  for (let i = 0; i < 60; i++) { const px = -M + r() * (W + 2 * M), py = HORIZON + 60 + r() * 140; dab(mid.x, px, py, 50 + r() * 60, 30 + r() * 30, 0, jit(r() < .3 ? '#3a3a5a' : '#22283e', r, 8), 0.9); dab(mid.x, px + 10, py - 14, 26, 12, 0, '#c87a6a', 0.25); }
+  paintTree(mid.x, r, 940, 1520, 1000, 340, { n: 260, dark: '#141a2a', mid: '#22304a', lit: '#6a5a7a', hi: '#d89a7a', litDir: -1 });
+  const P = DAWN_PEAK;
+  blob(mid.x, [[-M, H + M], [-M, P[1] + 40], [P[0] - 160, P[1] + 10], [P[0] - 60, P[1] - 30], [P[0] + 40, P[1] - 20], [P[0] + 150, P[1] + 30], [P[0] + 260, P[1] + 160], [P[0] + 330, H + M]], '#2a2234', 1, 0.3);
+  blob(mid.x, [[P[0] - 60, P[1] - 30], [P[0] + 40, P[1] - 20], [P[0] + 150, P[1] + 30], [P[0] + 60, P[1] + 12], [P[0] - 20, P[1] - 8]], '#b0705a', 0.55, 0.3);
+  for (let i = 0; i < 40; i++) { const x = P[0] - 200 + r() * 500, y = P[1] + 40 + r() * 400; stroke(mid.x, x, y, x + 20 + r() * 40, y + (r() - .5) * 10, 3, '#1a1424', 0.5); }
+  const f = fg.x; for (let i = 0; i < 160; i++) { const px = -M + r() * (W + 2 * M), py = H + 40 + r() * 60, hh = 60 + r() * 140; stroke(f, px, py, px + (r() - .5) * 80, py - hh, 6 + r() * 9, jit('#0e0c18', r, 6), 1, (r() - .5) * .5); }
+  return { layers: [sky, far, mid, fg], sky, far, mid, fg };
+}
+// ---- A89: the open sky above the clouds, for the flight to the sun ----
+function buildSkyHigh() {
+  const r = rng(731), sky = newLayer(0.05), cl = newLayer(0.4), fg = newLayer(1.0);
+  wash(sky.x, r, -M, -M, W + 2 * M, H + 2 * M, [[0, '#0e1640'], [.35, '#2a3a7a'], [.6, '#7a6a9a'], [.8, '#f0a070'], [1, '#ffd0a0']], { n: 600, alpha: 0.4, th: [30, 90], len: [240, 700] });
+  for (let i = 0; i < 70; i++) dab(sky.x, -M + r() * (W + 2 * M), -M + r() * 700, 1.2 + r() * 2, 1.2 + r() * 2, 0, '#e6e6ff', 0.2 + r() * 0.4);
+  for (let i = 0; i < 120; i++) { const px = -M + r() * (W + 2 * M), py = 1350 + Math.pow(r(), 0.7) * 700; dab(cl.x, px, py, 90 + r() * 120, 40 + r() * 40, 0, jit(r() < .4 ? '#f6c8b0' : '#d8a8b8', r, 10), 0.75); dab(cl.x, px - 20, py - 20, 60 + r() * 60, 22, 0, '#ffe6d0', 0.4); }
+  for (let i = 0; i < 20; i++) dab(fg.x, -M + r() * (W + 2 * M), 1750 + r() * 300, 160 + r() * 120, 60 + r() * 30, 0, '#f0d0d0', 0.5);
+  return { layers: [sky, cl, fg], sky, cl, fg };
+}
+// the sun, "like a cluster of hibiscus flowers" (7.35.23)
+function sunDisc(c, x, y, rad, t, a = 1) {
+  glow(c, x, y, rad * 4, '#ffb060', 0.35 * a); glow(c, x, y, rad * 2.2, '#ffd890', 0.5 * a);
+  for (let i = 0; i < 14; i++) { const an = i / 14 * TAU + t * 0.1; dab(c, x + Math.cos(an) * rad * 0.55, y + Math.sin(an) * rad * 0.55, rad * 0.55, rad * 0.5, an, i % 2 ? '#ff6a3a' : '#ff8a3a', 0.55 * a); }
+  dab(c, x, y, rad, rad, 0, '#ff7a3a', 0.9 * a); dab(c, x, y, rad * 0.8, rad * 0.8, 0, '#ffa04a', 0.9 * a); dab(c, x - rad * 0.2, y - rad * 0.2, rad * 0.45, rad * 0.45, 0, '#ffd27a', 0.8 * a);
+}
+// heat rings pushing outward from the sun (4.65.20: driven back by its radiance)
+function heatRings(c, x, y, rad, t, a = 1) { for (let i = 0; i < 4; i++) { const k = (t * 0.7 + i / 4) % 1; c.save(); c.globalAlpha = a * 0.5 * (1 - k); c.strokeStyle = '#ffd890'; c.lineWidth = 10 * (1 - k) + 2; c.beginPath(); c.arc(x, y, rad * (1.2 + k * 2.2), 0, TAU); c.stroke(); c.restore(); } }
+// Indra's thunderbolt: a jagged white-blue bolt (k 0..1 = how far it has reached)
+function vajra(c, x0, y0, x1, y1, k, t, seed = 3) {
+  if (k <= 0) return; const r = rng(seed + Math.floor(t * 12)), n = 9, pts = [[x0, y0]];
+  for (let i = 1; i <= n; i++) { const q = i / n * Math.min(1, k); pts.push([lerp(x0, x1, q) + (i < n ? (r() - .5) * 90 : 0), lerp(y0, y1, q) + (i < n ? (r() - .5) * 40 : 0)]); }
+  c.save(); c.globalCompositeOperation = 'lighter'; line(c, pts, 26, '#6a8aff', 0.35, false); line(c, pts, 10, '#cfe0ff', 0.8, false); line(c, pts, 4, '#ffffff', 1, false);
+  const e = pts[pts.length - 1]; glow(c, e[0], e[1], 140, '#cfe0ff', 0.7); c.restore();
+}
+// Vayu keeping the child cool (7.35.28): pale-blue spiralling streams
+function windSwirl(c, x, y, rad, t, a = 1) {
+  for (let i = 0; i < 7; i++) { const ph = t * 1.6 + i * 0.9, pts = []; for (let j = 0; j < 14; j++) { const an = ph + j * 0.32, rr = rad * (0.6 + 0.5 * j / 14) * (1 + 0.15 * Math.sin(i)); pts.push([x + Math.cos(an) * rr, y + Math.sin(an) * rr * 0.55]); } line(c, pts, 5 - i * 0.4, i % 2 ? '#bfe6ff' : '#e6f6ff', 0.45 * a); }
+}

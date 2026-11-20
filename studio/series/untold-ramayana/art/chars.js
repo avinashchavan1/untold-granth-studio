@@ -18,6 +18,7 @@ const CH = {
   mandodari: { kind: 'woman', skin: '#ecc8a0', skinSh: '#b08a86', cloth: '#7a1e4a', clothSh: '#4a1030', border: '#e6b450', blouse: '#a8304a', hair: '#0d0a16' },     // A07: Ravana's chief queen, 'radiant like gold'
   vibhishana: { kind: 'man', god: true, skin: '#6e5a62', skinSh: '#43343e', cloth: '#ece2cc', clothSh: '#a89c84', sash: '#e6b450', hair: '#0e0c18' },   // A92: the righteous rakshasa prince, crowned king of Lanka
   matali:  { kind: 'man', skin: '#c89a78', skinSh: '#8a6a60', cloth: '#e8d8b0', clothSh: '#a8987a', sash: '#4a7ab8', hair: '#14101c' },                         // Indra's charioteer
+  indra:   { kind: 'man', god: true, skin: '#e8c08a', skinSh: '#b08a66', cloth: '#e6b450', clothSh: '#a87a2a', sash: '#c41e1e', hair: '#14101c' },   // A89: king of the gods, on Airavata
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';
@@ -378,5 +379,64 @@ function drawRavana(ctx, cx, base, s, t, eyeGlow, rise, hs) {   // hs: optional 
   line(x, [[-0.95, -1.12], [0, -1.04], [0.95, -1.12]], 0.05, '#f0c050');
   const order = [0, 9, 1, 8, 2, 7, 3, 6, 4, 5];
   order.forEach(i => { const d = i - 4.5, ad = Math.abs(d), hx = d * 0.208, r = 0.168 - ad * 0.009, hy = (-1.4 + ad * ad * 0.004 + Math.sin(t * 1.6 + i * 0.9) * 0.008) * br; const k = hs ? hs(i) : 1; if (k > 0.01) ravanaHead(x, hx, hy, r * k, t, i, eyeGlow); });
+  x.restore();
+}
+
+// ---- A89: baby Hanuman: round, big-headed, curly tail; faces +x. o: { pose: 'sit'|'reach'|'fly'|'fall', face, rot, eye, smile, mouthO, glow }
+function drawBabyHanuman(ctx, cx, cy, s, t, o = {}) {
+  const x = ctx, pose = o.pose || 'sit', skin = '#d07c3e', sh = '#8e4e2c', muz = '#f6dab0', eye = o.eye === undefined ? 1 : o.eye;
+  x.save(); x.translate(cx, cy); if (o.rot) x.rotate(o.rot); x.scale(s * (o.face || 1), s);
+  if (o.glow) glow(x, 0, -0.3, 1.4, '#ffe0a0', 0.5 * o.glow);
+  const sw = Math.sin(t * 3);
+  const tail = pose === 'fly' || pose === 'fall' ? [[-0.25, 0.15], [-0.7, 0.25], [-1.0, 0.05 + sw * 0.05], [-1.15, -0.2], [-1.0, -0.32], [-0.9, -0.2]] : [[-0.22, 0.25], [-0.6, 0.3], [-0.8, 0.0 + sw * 0.04], [-0.75, -0.35], [-0.6, -0.42], [-0.52, -0.3]];
+  line(x, tail, 0.09, sh); line(x, tail, 0.06, skin);
+  const legs = { sit: [[[-0.12, 0.25], [-0.32, 0.42], [0.0, 0.48]], [[0.12, 0.25], [0.34, 0.42], [0.08, 0.5]]],
+    reach: [[[-0.1, 0.28], [-0.14, 0.55], [-0.06, 0.62]], [[0.1, 0.28], [0.16, 0.55], [0.24, 0.6]]],
+    fly: [[[-0.1, 0.25], [-0.42, 0.42], [-0.62, 0.4]], [[0.1, 0.25], [-0.25, 0.5], [-0.48, 0.55]]],
+    fall: [[[-0.1, 0.25], [-0.2, 0.5], [-0.05, 0.58]], [[0.1, 0.25], [0.3, 0.45], [0.36, 0.3]]] }[pose];
+  legs.forEach(L => { line(x, L, 0.15, sh); line(x, L, 0.12, skin); dab(x, L[2][0], L[2][1], 0.08, 0.05, 0, sh); });
+  dab(x, 0, 0.05, 0.3, 0.34, 0, skin); dab(x, 0.05, 0.1, 0.18, 0.22, 0, muz, 0.7);
+  blob(x, [[-0.28, 0.14], [0.28, 0.14], [0.24, 0.3], [0, 0.36], [-0.24, 0.3]], '#c41e1e', 1, 0.4); line(x, [[-0.28, 0.14], [0.28, 0.14]], 0.04, '#f0c050');
+  const arms = { sit: [[[-0.22, -0.12], [-0.3, 0.1], [-0.18, 0.22]], [[0.22, -0.12], [0.34, 0.08], [0.22, 0.2]]],
+    reach: [[[-0.2, -0.14], [0.05, -0.5], [0.22, -0.78]], [[0.22, -0.12], [0.4, -0.45], [0.5, -0.7]]],
+    fly: [[[-0.2, -0.12], [0.2, -0.35], [0.55, -0.42]], [[0.22, -0.12], [0.5, -0.2], [0.75, -0.22]]],
+    fall: [[[-0.2, -0.12], [-0.42, -0.4], [-0.5, -0.62]], [[0.22, -0.12], [0.46, -0.32], [0.6, -0.5]]] }[pose];
+  arms.forEach(A => { line(x, A, 0.13, sh); line(x, A, 0.1, skin); dab(x, A[2][0], A[2][1], 0.07, 0.07, 0, skin); const m = [lerp(A[1][0], A[2][0], .6), lerp(A[1][1], A[2][1], .6)]; dab(x, m[0], m[1], 0.05, 0.035, 0, '#f0c050'); });
+  const hx = 0.04, hy = -0.5;
+  [-1, 1].forEach(k => { dab(x, hx + k * 0.33, hy - 0.02, 0.1, 0.12, 0, sh); dab(x, hx + k * 0.33, hy - 0.02, 0.06, 0.08, 0, muz); });
+  dab(x, hx, hy, 0.34, 0.32, 0, skin); blob(x, [[hx - 0.3, hy - 0.12], [hx - 0.12, hy - 0.34], [hx + 0.1, hy - 0.36], [hx + 0.3, hy - 0.14], [hx, hy - 0.22]], sh, 0.5, 0.4);
+  line(x, [[hx - 0.02, hy - 0.3], [hx + 0.04, hy - 0.42], [hx + 0.1, hy - 0.38]], 0.04, sh);
+  dab(x, hx + 0.08, hy + 0.1, 0.2, 0.15, 0, muz);
+  [-0.06, 0.16].forEach(ex => { if (eye > 0.2) { dab(x, hx + ex, hy - 0.07, 0.055, 0.065 * eye, 0, '#1a1018'); dab(x, hx + ex + 0.015, hy - 0.09, 0.018, 0.018, 0, '#ffffff'); } else line(x, [[hx + ex - 0.05, hy - 0.06], [hx + ex, hy - 0.04], [hx + ex + 0.05, hy - 0.06]], 0.02, '#1a1018'); });
+  dab(x, hx + 0.1, hy + 0.04, 0.03, 0.02, 0, '#5a2a1a');
+  const sm = o.smile === undefined ? 0.6 : o.smile; line(x, [[hx, hy + 0.13], [hx + 0.09, hy + 0.13 + 0.05 * sm], [hx + 0.18, hy + 0.12]], 0.022, '#5a2a1a');
+  if (o.mouthO) dab(x, hx + 0.09, hy + 0.16, 0.04, 0.05 * o.mouthO, 0, '#7a2a2a');
+  dab(x, hx - 0.14, hy + 0.06, 0.05, 0.03, 0, '#e86a5a', 0.4);
+  x.restore();
+}
+// ---- A89: Rahu, who "retains only his head" (7.35.41): a huge dark smoky head with glowing eyes
+function drawRahu(ctx, cx, cy, s, t, a = 1) {
+  const x = ctx; x.save(); x.translate(cx, cy); x.scale(s, s);
+  for (let i = 0; i < 26; i++) { const an = i / 26 * TAU + Math.sin(t + i) * 0.1, d = 0.95 + 0.25 * hash(i); dab(x, Math.cos(an) * d, Math.sin(an) * d * 0.9 - 0.1, 0.28, 0.2, an, i % 2 ? '#1a1030' : '#2a1640', 0.7 * a); }
+  dab(x, 0, 0, 0.9, 0.85, 0, '#241838', a); dab(x, -0.2, -0.2, 0.5, 0.4, 0, '#3a2654', 0.6 * a);
+  [-0.32, 0.32].forEach(ex => { stroke(x, ex - 0.22, -0.3 + (ex > 0 ? 0.06 : 0), ex + 0.2, -0.3 + (ex > 0 ? 0 : 0.06), 0.09, '#0c0816', a); dab(x, ex, -0.12, 0.13, 0.08, 0, '#ffcc40', a); dab(x, ex, -0.12, 0.05, 0.05, 0, '#ff5a1a', a); glow(x, ex, -0.12, 0.3, '#ff9a3a', 0.4 * a); });
+  blob(x, [[-0.45, 0.25], [0, 0.18], [0.45, 0.25], [0.3, 0.5], [0, 0.56], [-0.3, 0.5]], '#0a0610', a, 0.4);
+  [-0.3, -0.1, 0.1, 0.3].forEach((fx, i) => blob(x, [[fx - 0.05, 0.22], [fx + 0.05, 0.22], [fx, 0.34 + (i % 2) * 0.05]], '#f2e6d0', a, 0.2));
+  for (let i = -2; i <= 2; i++) blob(x, [[i * 0.18 - 0.08, -0.72], [i * 0.18, -0.95 - (2 - Math.abs(i)) * 0.06], [i * 0.18 + 0.08, -0.72]], '#a07a2a', 0.9 * a, 0.2);
+  x.restore();
+}
+// ---- A89: Airavata, Indra's white king of elephants (7.35.38, 44); face -1 = facing left
+function drawAiravata(ctx, cx, base, s, t, face = -1) {
+  const x = ctx, wh = '#eef0f4', sh = '#b8bcd0', gold = '#e6b450';
+  x.save(); x.translate(cx, base); x.scale(s * -face, s);
+  [-0.55, -0.3, 0.35, 0.6].forEach((lx, i) => blob(x, [[lx - 0.12, -0.5], [lx + 0.12, -0.5], [lx + 0.13, 0], [lx - 0.13, 0]], i % 2 ? sh : wh, 1, 0.2));
+  blob(x, [[-0.85, -0.5], [-0.8, -0.95], [-0.4, -1.15], [0.3, -1.15], [0.7, -1.0], [0.85, -0.6], [0.7, -0.4], [-0.7, -0.4]], wh, 1, 0.45);
+  blob(x, [[-0.85, -0.5], [-0.8, -0.8], [-0.3, -0.7], [0.4, -0.75], [0.85, -0.6], [0.7, -0.4], [-0.7, -0.4]], sh, 0.35, 0.45);
+  blob(x, [[-0.4, -1.1], [0.35, -1.1], [0.4, -0.6], [0, -0.52], [-0.45, -0.6]], '#b4201c', 1, 0.3); line(x, [[-0.45, -0.6], [0, -0.52], [0.4, -0.6]], 0.05, gold); for (let i = 0; i < 6; i++) dab(x, -0.38 + i * 0.15, -0.58, 0.03, 0.04, 0, gold);
+  dab(x, 0.95, -0.95, 0.35, 0.33, 0, wh); blob(x, [[0.75, -1.15], [0.55, -1.0], [0.55, -0.7], [0.75, -0.62], [0.85, -0.9]], sh, 1, 0.4);
+  blob(x, [[0.85, -1.25], [1.05, -1.32], [1.2, -1.22], [1.0, -1.12]], gold, 1, 0.3);
+  const sw = Math.sin(t * 1.4) * 0.06; line(x, [[1.15, -0.85], [1.3, -0.6], [1.32, -0.3 + sw], [1.25, -0.12], [1.35, -0.05]], 0.14, wh); line(x, [[1.15, -0.85], [1.3, -0.6], [1.32, -0.3 + sw]], 0.04, sh, 0.5);
+  line(x, [[1.12, -0.78], [1.3, -0.72], [1.42, -0.8]], 0.05, '#fff8e8'); line(x, [[1.05, -0.76], [1.2, -0.66], [1.3, -0.7]], 0.04, '#f0e6d0');
+  dab(x, 1.02, -1.0, 0.035, 0.035, 0, '#1a1018');
   x.restore();
 }
