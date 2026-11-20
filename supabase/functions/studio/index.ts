@@ -208,8 +208,11 @@ Deno.serve(async (req) => {
             let stats: Record<string, number | null> = {};
             if (p.platform === "youtube") {
               ytTok ??= await youtubeAccessToken();
-              const v = (await (await fetch(`${YT}/videos?part=statistics&id=${p.external_id}`, { headers: { Authorization: `Bearer ${ytTok}` } })).json()).items?.[0]?.statistics ?? {};
+              const it = (await (await fetch(`${YT}/videos?part=statistics,status,contentDetails&id=${p.external_id}`, { headers: { Authorization: `Bearer ${ytTok}` } })).json()).items?.[0] ?? {};
+              const v = it.statistics ?? {}, st = it.status ?? {};
               stats = { views: +v.viewCount || 0, likes: +v.likeCount || 0, comments: +v.commentCount || 0 };
+              (stats as Record<string, unknown>).status = { privacy: st.privacyStatus, upload: st.uploadStatus, made_for_kids: st.madeForKids, self_declared_kids: st.selfDeclaredMadeForKids,
+                age_restricted: it.contentDetails?.contentRating?.ytRating === "ytAgeRestricted", rejection: st.rejectionReason ?? null, license: st.license };
             } else if (p.platform === "instagram") {
               if (!ig) { const t = await instagramToken(); ig = { token: t.token, api_base: t.api_base }; }
               const q = (path: string) => fetch(`${ig!.api_base}/${path}${path.includes("?") ? "&" : "?"}access_token=${encodeURIComponent(ig!.token)}`).then((r) => r.json());
@@ -217,12 +220,28 @@ Deno.serve(async (req) => {
               stats = { likes: m.like_count ?? null, comments: m.comments_count ?? null };
               const ins = await q(`${p.external_id}/insights?metric=views,reach,saved,shares`);
               for (const d of ins.data ?? []) stats[d.name] = d.values?.[0]?.value ?? d.total_value?.value ?? null;
+              if (ins.error) (stats as Record<string, unknown>).insights_error = String(ins.error.message ?? ins.error).slice(0, 200);
             } else continue;
             await admin.from("publications").update({ stats, stats_at: new Date().toISOString() }).eq("id", p.id);
             out.push({ id: p.id, ...stats });
           } catch (e) { out.push({ id: p.id, error: e instanceof Error ? e.message : String(e) }); }
         }
         return json({ ok: true, updated: out });
+      }
+      case "youtube_set_covers": {   // after channel verification: put our designed cover on every posted YouTube video
+        const tok = await youtubeAccessToken();
+        const { data: pubs } = await admin.from("publications").select("reel_id,external_id").eq("platform", "youtube").eq("state", "posted").not("external_id", "is", null);
+        const out: Record<string, unknown>[] = [];
+        for (const p of pubs ?? []) {
+          const { data: f } = await admin.from("files").select("path").eq("reel_id", p.reel_id).eq("kind", "thumbnail").eq("store", "supabase").order("created_at", { ascending: false }).limit(1).maybeSingle();
+          if (!f?.path) { out.push({ video: p.external_id, ok: false, detail: "no cover file" }); continue; }
+          const img = (await admin.storage.from("reel-media").download(f.path)).data;
+          if (!img) { out.push({ video: p.external_id, ok: false, detail: "cover not readable" }); continue; }
+          const r = await fetch(`${YT_UP}/thumbnails/set?videoId=${p.external_id}&uploadType=media`, { method: "POST", headers: { Authorization: `Bearer ${tok}`, "Content-Type": "image/jpeg" }, body: img });
+          out.push({ video: p.external_id, ok: r.ok, detail: r.ok ? "cover set" : ((await r.json().catch(() => ({}))).error?.message ?? r.status) });
+        }
+        await admin.from("activity").insert({ actor: email, action: "youtube: covers applied", detail: { results: out } });
+        return json({ ok: out.every((o) => o.ok), results: out });
       }
       case "youtube_brand": {
         const steps = await applyYouTubeBrand(email);
