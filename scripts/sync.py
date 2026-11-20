@@ -23,10 +23,27 @@ cast = json.load(open(os.path.join(SER, "cast", "cast.json")))["voices"]; mc = s
 major = set(mc.get("locked", [])) | set(mc.get("ask_user_when_first_needed", []))
 NAMES = {"narrator": "Narrator (Rudra)", "lakshmana": "Lakshmana"}; FIRST = {"narrator": "A01", "rama": "A01", "sita": "A01", "lakshmana": "A01", "maricha": "A01", "shabari": "A02", "gautama": "A03"}
 looks = {m.group(1): m.group(2) for m in re.finditer(r"^\s+(\w+):\s+(\{ kind:[^\n]*\}),", open(os.path.join(SER, "art", "chars.js")).read(), re.M)}
+# portraits, voice samples, appearances and who chose the look (scripts/cast_media.py -> cast/looks.json)
+lj = json.load(open(os.path.join(SER, "cast", "looks.json"))) if os.path.exists(os.path.join(SER, "cast", "looks.json")) else {}
+NAMES.update({"hanuman_child": "Baby Hanuman", "vishvamitra": "Vishvamitra", "sagara": "Sagara (the Ocean)", "vanara": "Vanara army", "boatman": "Boatman",
+              "airavata": "Airavata", "rahu": "Rahu", "indra": "Indra", "matali": "Matali", "mandodari": "Mandodari", "vibhishana": "Vibhishana", "ravana": "Ravana", "guha": "Guha", "nala": "Nala"})
+RIGKEY = {"lakshmana": "lak", "vishvamitra": "vishva"}
+def look_of(k):
+    L = dict(lj.get(k, {})); L["rig"] = looks.get(RIGKEY.get(k, k), ""); return L
+def voice_of(k):
+    v = dict(cast.get(k, {})); L = lj.get(k, {})
+    if L.get("voice_sample"): v["sample"] = L["voice_sample"]; v["sample_line"] = L.get("voice_line")
+    return v
+def first_of(k): ins = lj.get(k, {}).get("appears_in") or []; return FIRST.get(k) or (ins[0] if ins else None)
 rows = [{"series_id": "untold-ramayana", "key": k, "name": NAMES.get(k, k.title()), "tier": "major" if k in major else "minor",
-         "status": "provisional" if "PROVISIONAL" in str(v.get("chosen", "")) else "locked", "voice": v, "look": {"rig": looks.get({"lakshmana": "lak"}.get(k, k), "")},
-         "first_reel": FIRST.get(k)} for k, v in cast.items()]
-rows += [{"series_id": "untold-ramayana", "key": k, "name": k.title(), "tier": "major", "status": "needed", "voice": {}, "look": {}, "first_reel": None} for k in sorted(major - set(cast))]
+         "status": "provisional" if "PROVISIONAL" in str(v.get("chosen", "")) else "locked", "voice": voice_of(k), "look": look_of(k),
+         "first_reel": first_of(k)} for k, v in cast.items()]
+for k, L in lj.items():
+    if k in cast: continue
+    is_major = k in major or k == "hanuman_child"
+    rows.append({"series_id": "untold-ramayana", "key": k, "name": NAMES.get(k, k.title()), "tier": "major" if is_major else "minor",
+                 "status": "provisional" if (is_major and L.get("look_chosen") == "claude") else "locked", "voice": {}, "look": look_of(k), "first_reel": first_of(k)})
+rows += [{"series_id": "untold-ramayana", "key": k, "name": k.title(), "tier": "major", "status": "needed", "voice": {}, "look": {}, "first_reel": None} for k in sorted(major - set(cast) - set(lj))]
 upsert("characters", rows, "series_id,key")
 upsert("locations", [{"series_id": "untold-ramayana", "key": k, "name": n, "builder": b, "description": d} for k, n, b, d in [
     ("hermitage", "Panchavati hermitage (dusk / night / end)", "buildHermitage(tod)", "Hut, mango tree, Godavari river band, moon; A01 and the end card."),

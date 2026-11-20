@@ -185,3 +185,9 @@ export function useIdeaMutations() {
   const remove = useMutation({ mutationFn: async (id: string) => { await must(supabase.from("ideas").delete().eq("id", id).select("id")); }, onSuccess: done });
   return { add, update, remove };
 }
+
+// live "what Claude is doing" status (scripts/status.py writes it; the bar on every page reads it)
+export interface WorkStatus { lane: string; state: "working" | "waiting" | "idle"; reel_code: string | null; task: string | null; detail: string | null; step: number | null; steps: number | null; pct: number | null; eta_min: number | null; started_at: string | null; updated_at: string }
+export const useWorkStatus = () =>
+  useQuery({ queryKey: ["work_status"], refetchInterval: 10_000, refetchIntervalInBackground: false, staleTime: 5_000,
+    queryFn: () => must<WorkStatus[]>(supabase.from("work_status").select("*").eq("lane", "main")).then((r) => r[0] ?? null) });

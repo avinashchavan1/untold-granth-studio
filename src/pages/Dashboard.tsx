@@ -120,8 +120,23 @@ function Results({ reels, pubs }: { reels: Reel[]; pubs: Publication[] }) {
   const last = pubs.map((p) => p.stats_at).filter(Boolean).sort().pop();
   return (
     <Card>
-      <SectionTitle right={<span className="flex flex-wrap gap-2"><Button size="sm" disabled={st.busy} onClick={async () => { setSt({ busy: true }); try { const r = await studio<{ ok: boolean; results: { ok: boolean; detail: string }[] }>("youtube_set_covers"); setSt({ msg: r.ok ? "Covers set on YouTube." : "Some covers failed: " + r.results.filter((x) => !x.ok).map((x) => x.detail).join("; ") }); } catch (e) { setSt({ err: (e as Error).message }); } }}>Set YouTube covers</Button><Button size="sm" disabled={st.busy} onClick={async () => { setSt({ busy: true }); try { await studio("refresh_stats"); setSt({}); qc.invalidateQueries({ queryKey: ["publications"] }); } catch (e) { setSt({ err: (e as Error).message }); } }}><RefreshCw size={14} className={st.busy ? "animate-spin" : ""} /> {st.busy ? "Updating…" : "Refresh stats"}</Button></span>}>How the reels are doing</SectionTitle>
-      <div className="-mx-1 overflow-x-auto">
+      <SectionTitle right={<span className="flex flex-wrap gap-2"><Button size="sm" disabled={st.busy} onClick={async () => { setSt({ busy: true }); try { const r = await studio<{ ok: boolean; results: { ok: boolean; detail: string }[] }>("youtube_set_covers"); setSt({ msg: r.ok ? "Covers set on YouTube." : "Some covers failed: " + r.results.filter((x) => !x.ok).map((x) => x.detail).join("; ") }); } catch (e) { setSt({ err: (e as Error).message }); } }}>Set YouTube covers</Button><Button size="sm" disabled={st.busy} onClick={async () => { setSt({ busy: true }); try { await studio("refresh_stats"); setSt({}); qc.invalidateQueries({ queryKey: ["pubs"] }); } catch (e) { setSt({ err: (e as Error).message }); } }}><RefreshCw size={14} className={st.busy ? "animate-spin" : ""} /> {st.busy ? "Updating…" : "Refresh stats"}</Button></span>}>How the reels are doing</SectionTitle>
+      {/* phone: one card per reel */}
+      <ul className="grid gap-2 sm:hidden">
+        {posted.map((r) => {
+          const line = (pl: string, keys: string[]) => keys.map((k) => { const v = cell(r, pl, k); return v && v !== "–" ? `${v} ${k}` : null; }).filter(Boolean).join(" · ");
+          return (
+            <li key={r.id} className="rounded-xl border border-parchment-deep p-3 dark:border-night-700">
+              <Link to={`/reels/${r.code}`} className="font-semibold"><span className="mr-1.5 font-mono text-xs text-gold-deep dark:text-gold">{r.code}</span>{r.title}</Link>
+              <div className="mt-1.5 grid gap-0.5 text-[13px] tabular">
+                <div><span className="inline-block w-20 text-ink-soft dark:text-parchment/60">YouTube</span>{line("youtube", ["views", "likes", "comments"]) || "–"}</div>
+                <div><span className="inline-block w-20 text-ink-soft dark:text-parchment/60">Instagram</span>{line("instagram", ["views", "likes", "comments", "shares"]) || "–"}</div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="-mx-1 hidden overflow-x-auto sm:block">
         <table className="w-full min-w-[560px] text-sm">
           <thead className="text-left text-xs uppercase tracking-wider text-ink-soft dark:text-parchment/60">
             <tr><th className="p-2">Reel</th><th className="p-2">Length</th><th className="p-2 text-right">IG views</th><th className="p-2 text-right">IG likes</th><th className="p-2 text-right">IG comments</th><th className="p-2 text-right">IG shares</th><th className="p-2 text-right">YT views</th><th className="p-2 text-right">YT likes</th><th className="p-2 text-right">YT comments</th></tr>

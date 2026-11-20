@@ -1,0 +1,327 @@
+{
+ "ahalya": {
+  "portrait": "untold-ramayana/cast/ahalya.jpg",
+  "appears_in": [
+   "A03"
+  ],
+  "posted_in": [
+   "A03"
+  ],
+  "look_chosen": "seen",
+  "note": null
+ },
+ "airavata": {
+  "portrait": "untold-ramayana/cast/airavata.jpg",
+  "appears_in": [
+   "A89"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": "Indra's white elephant (Uttara 7.35)."
+ },
+ "boatman": {
+  "portrait": "untold-ramayana/cast/boatman.jpg",
+  "appears_in": [
+   "A06"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": "A generic boatman (A06's popular-version scene)."
+ },
+ "gautama": {
+  "portrait": "untold-ramayana/cast/gautama.jpg",
+  "appears_in": [
+   "A03"
+  ],
+  "posted_in": [
+   "A03"
+  ],
+  "look_chosen": "seen",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_gautama.mp3",
+  "voice_line": {
+   "reel": "A03",
+   "shot": 5,
+   "hi": "तुम हवा पीकर, बिना भोजन, राख पर सोकर, तप करोगी। सबसे अदृश्य होकर, इसी आश्रम में रहोगी।",
+   "en": "\"Living on air, without food, sleeping on ashes, you will do penance. Unseen by all beings, you will stay in this hermitage.\""
+  }
+ },
+ "guha": {
+  "portrait": "untold-ramayana/cast/guha.jpg",
+  "appears_in": [
+   "A06"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_guha.mp3",
+  "voice_line": {
+   "reel": "A06",
+   "shot": 4,
+   "hi": "रघुनंदन, ये धरती भी आपकी है, जैसे अयोध्या। कहिए, मैं आपके लिए क्या करूँ?",
+   "en": "\"Raghunandana, this land is yours, just as Ayodhya is. Tell me, what may I do for you?\""
+  }
+ },
+ "hanuman": {
+  "portrait": "untold-ramayana/cast/hanuman.jpg",
+  "appears_in": [
+   "A07"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_hanuman.mp3",
+  "voice_line": {
+   "reel": "A07",
+   "shot": 7,
+   "hi": "रुको। प्रभु श्रीराम से बिछड़कर, माता सीता न सोएँगी, न श्रृंगार करेंगी।",
+   "en": "\"Wait. Apart from Lord Rama, Mother Sita would neither sleep nor adorn herself.\""
+  }
+ },
+ "hanuman_child": {
+  "portrait": "untold-ramayana/cast/hanuman_child.jpg",
+  "appears_in": [
+   "A89"
+  ],
+  "posted_in": [],
+  "look_chosen": "user",
+  "note": "Baby Hanuman (A89): a little human boy with small monkey ears and a tail."
+ },
+ "indra": {
+  "portrait": "untold-ramayana/cast/indra.jpg",
+  "appears_in": [
+   "A89"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null
+ },
+ "lakshmana": {
+  "portrait": "untold-ramayana/cast/lakshmana.jpg",
+  "appears_in": [
+   "A01",
+   "A02",
+   "A03",
+   "A06",
+   "A92"
+  ],
+  "posted_in": [
+   "A01",
+   "A02",
+   "A03"
+  ],
+  "look_chosen": "seen",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_lakshmana.mp3",
+  "voice_line": {
+   "reel": "A01",
+   "shot": 7,
+   "hi": "राम को युद्ध में कोई नहीं हरा सकता। ये उस राक्षस की माया है।",
+   "en": "\"No one can defeat Rama in battle. This is that demon's illusion.\""
+  }
+ },
+ "mandodari": {
+  "portrait": "untold-ramayana/cast/mandodari.jpg",
+  "appears_in": [
+   "A07"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null
+ },
+ "maricha": {
+  "portrait": "untold-ramayana/cast/maricha.jpg",
+  "appears_in": [
+   "A01"
+  ],
+  "posted_in": [
+   "A01"
+  ],
+  "look_chosen": "seen",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_maricha.mp3",
+  "voice_line": {
+   "reel": "A01",
+   "shot": 5,
+   "hi": "हा सीते! हा लक्ष्मण!",
+   "en": "\"Ha Sita! Ha Lakshmana!\""
+  }
+ },
+ "matali": {
+  "portrait": "untold-ramayana/cast/matali.jpg",
+  "appears_in": [
+   "A53",
+   "A92"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null
+ },
+ "nala": {
+  "portrait": "untold-ramayana/cast/nala.jpg",
+  "appears_in": [
+   "A04"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_nala.mp3",
+  "voice_line": {
+   "reel": "A04",
+   "shot": 5,
+   "hi": "बिना पूछे, मैं अपने गुण कभी न बताता। आज ही, सेतु बाँधना शुरू करें।",
+   "en": "\"Unasked, I would never speak of my own skills. Let the bridge begin, today.\""
+  }
+ },
+ "rahu": {
+  "portrait": "untold-ramayana/cast/rahu.jpg",
+  "appears_in": [
+   "A89"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": "The eclipse demon, only a head (Uttara 7.35)."
+ },
+ "rama": {
+  "portrait": "untold-ramayana/cast/rama.jpg",
+  "appears_in": [
+   "A01",
+   "A02",
+   "A03",
+   "A04",
+   "A06",
+   "A53",
+   "A92"
+  ],
+  "posted_in": [
+   "A01",
+   "A02",
+   "A03"
+  ],
+  "look_chosen": "seen",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_rama.mp3",
+  "voice_line": {
+   "reel": "A02",
+   "shot": 6,
+   "hi": "क्या आपकी तपस्या में कोई विघ्न तो नहीं? क्या गुरु-सेवा सफल हुई?",
+   "en": "\"Is your penance free of obstacles? Has your service to your teachers borne fruit?\""
+  }
+ },
+ "ravana": {
+  "portrait": "untold-ramayana/cast/ravana.jpg",
+  "appears_in": [
+   "A01",
+   "A53",
+   "A92"
+  ],
+  "posted_in": [
+   "A01"
+  ],
+  "look_chosen": "seen",
+  "note": null
+ },
+ "sagara": {
+  "portrait": "untold-ramayana/cast/sagara.jpg",
+  "appears_in": [
+   "A04"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_sagara.mp3",
+  "voice_line": {
+   "reel": "A04",
+   "shot": 4,
+   "hi": "ये नल है, विश्वकर्मा का पुत्र। ये मुझ पर सेतु बनाए। मैं उसे थामे रखूँगा।",
+   "en": "\"This is Nala, son of Vishvakarma. Let him build a bridge upon me. I will hold it up.\""
+  }
+ },
+ "shabari": {
+  "portrait": "untold-ramayana/cast/shabari.jpg",
+  "appears_in": [
+   "A02"
+  ],
+  "posted_in": [
+   "A02"
+  ],
+  "look_chosen": "seen",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_shabari.mp3",
+  "voice_line": {
+   "reel": "A02",
+   "shot": 7,
+   "hi": "मेरे गुरुओं ने कहा था, राम आएँगे। आपके लिए मैंने पम्पा के किनारे से, वन के फल इकट्ठा किए हैं।",
+   "en": "\"My teachers said Rama would come. For you, I have gathered forest fruits from the banks of the Pampa.\""
+  }
+ },
+ "sita": {
+  "portrait": "untold-ramayana/cast/sita.jpg",
+  "appears_in": [
+   "A01",
+   "A06"
+  ],
+  "posted_in": [
+   "A01"
+  ],
+  "look_chosen": "seen",
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_sita.mp3",
+  "voice_line": {
+   "reel": "A01",
+   "shot": 6,
+   "hi": "जाओ लक्ष्मण! तुम्हारे भाई मदद के लिए पुकार रहे हैं!",
+   "en": "\"Go, Lakshmana! Your brother is calling for help!\""
+  }
+ },
+ "vanara": {
+  "portrait": "untold-ramayana/cast/vanara.jpg",
+  "appears_in": [
+   "A04"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": "The monkey army (generic vanaras)."
+ },
+ "vibhishana": {
+  "portrait": "untold-ramayana/cast/vibhishana.jpg",
+  "appears_in": [
+   "A53",
+   "A92"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": null
+ },
+ "vishvamitra": {
+  "portrait": "untold-ramayana/cast/vishvamitra.jpg",
+  "appears_in": [
+   "A03"
+  ],
+  "posted_in": [
+   "A03"
+  ],
+  "look_chosen": "seen",
+  "note": null
+ },
+ "narrator": {
+  "voice_sample": "untold-ramayana/cast/voice_narrator.mp3",
+  "voice_line": {
+   "reel": "A01",
+   "shot": 1,
+   "hi": "क्या लक्ष्मण रेखा, सच में खींची गई थी?",
+   "en": "Was the Lakshmana Rekha ever really drawn?"
+  },
+  "appears_in": [
+   "A01",
+   "A02",
+   "A03",
+   "A04",
+   "A06",
+   "A07",
+   "A53",
+   "A89",
+   "A92"
+  ]
+ }
+}
