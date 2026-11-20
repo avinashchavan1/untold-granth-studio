@@ -1,275 +1,275 @@
 {
- "reel": "A07",
- "title": "Hanuman Thought Mandodari Was Sita",
- "series": "untold-ramayana",
- "fps": 24,
- "kind": "reveal",
- "status": "DRAFT v1 — every verse checked in the CE text (enjoylearningsanskrit, Sundara 5.7–5.9); review before posting",
- "source": "Valmiki Ramayana, Sundara Kanda 5(8-9) (Critical Edition; vulgate 5.10-11)",
- "source_card": {
-  "title": [
-   "VALMIKI",
-   "RAMAYANA"
+  "reel": "A07",
+  "title": "Hanuman Thought Mandodari Was Sita",
+  "series": "untold-ramayana",
+  "fps": 24,
+  "kind": "reveal",
+  "status": "DRAFT v1 — every verse checked in the CE text (enjoylearningsanskrit, Sundara 5.7–5.9); review before posting",
+  "source": "Valmiki Ramayana, Sundara Kanda 5(8-9) (Critical Edition; vulgate 5.10-11)",
+  "source_card": {
+    "title": [
+      "VALMIKI",
+      "RAMAYANA"
+    ],
+    "sub": "SUNDARA KANDA  ·  CHAPTERS 8–9",
+    "edition": "CRITICAL EDITION"
+  },
+  "avoid": [
+    "the sensual descriptions of the sleeping women (5.8.33-45, 5.9.26-32): never on screen or in narration",
+    "Ravana's drinking",
+    "making Hanuman look foolish: his joy is love for Rama; his reasoning is the point"
   ],
-  "sub": "SUNDARA KANDA  ·  CHAPTERS 8–9",
-  "edition": "CRITICAL EDITION"
- },
- "avoid": [
-  "the sensual descriptions of the sleeping women (5.8.33-45, 5.9.26-32): never on screen or in narration",
-  "Ravana's drinking",
-  "making Hanuman look foolish: his joy is love for Rama; his reasoning is the point"
- ],
- "verify_note": "CE 5.8.48-50: Hanuman sees Mandodari, concludes 'This is Sita' by her beauty and youth, rejoices (arms, tail, singing, pillars). CE 5.9.1-3: he discards the thought — Sita apart from Rama would not sleep, eat, adorn herself or drink, nor approach any other, not even Indra. Mandodari is named in 5.8.48.",
- "caption": "In Ravana's palace, Hanuman once mistook Queen Mandodari for Sita, and danced for joy. Then he stopped and reasoned it out: Sita, apart from Rama, would neither sleep nor adorn herself, and would go to no one but Rama, not even Indra. He recognised Sita by her character, before he ever saw her face. This moment is right there in Valmiki's Sundara Kanda.",
- "youtube_title": "Did Hanuman Mistake Mandodari for Sita? | Valmiki Ramayana #Shorts",
- "comment_prompt": "Had you heard this moment from the Sundara Kanda before? Which Hanuman story should we tell next? 👇",
- "hashtags": [
-  "#UntoldGranth",
-  "#Hanuman",
-  "#SundaraKanda",
-  "#Ramayana",
-  "#Valmiki",
-  "#UntoldRamayana",
-  "#JaiHanuman"
- ],
- "thumbnail": {
-  "frame": "",
-  "hook": "Did Hanuman once mistake Mandodari for Sita?",
-  "stamp": "It's in Valmiki",
-  "line": "He knew Sita by her character.",
-  "badge": "Valmiki Ramayana · Sundara 5.8–9",
-  "art_shift": 0
- },
- "score": {
-  "engine": "elevenlabs music_v1",
-  "file": "audio/score.mp3",
-  "duration_s": 80,
-  "gain": 1.4,
-  "prompt": "Mysterious Indian cinematic underscore, instrumental only, built to sit under a spoken voice. Opens with a sharp low taiko-and-tabla hit and a dark, glittering palace drone with santoor; a tiptoeing, curious night section with pizzicato strings and soft frame drums at about 90 BPM; then a burst of playful, joyful rhythm with dhol and bright bansuri; then it suddenly hushes into a thoughtful, reverent drone with warm strings; it ends in a calm, devotional resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
-  "take": "take 2 of 2 (hit in the first second)"
- },
- "shots": [
-  {
-   "id": 1,
-   "voice": "narrator",
-   "hi": "क्या हनुमान ने, एक बार मंदोदरी को सीता समझ लिया था?",
-   "en": "Did Hanuman once mistake Mandodari for Sita?",
-   "units": [
-    "[curious] क्या हनुमान ने… एक बार मंदोदरी को सीता समझ लिया था?"
-   ],
-   "card": [
-    [
-     "HANUMAN'S",
-     null
-    ],
-    [
-     "MISTAKE?",
-     "#f6c244"
-    ]
-   ],
-   "lead": 0.28,
-   "tail": 0.6,
-   "min": 2.6
+  "verify_note": "CE 5.8.48-50: Hanuman sees Mandodari, concludes 'This is Sita' by her beauty and youth, rejoices (arms, tail, singing, pillars). CE 5.9.1-3: he discards the thought — Sita apart from Rama would not sleep, eat, adorn herself or drink, nor approach any other, not even Indra. Mandodari is named in 5.8.48.",
+  "caption": "In Ravana's palace, Hanuman once mistook Queen Mandodari for Sita, and danced for joy. Then he stopped and reasoned it out: Sita, apart from Rama, would neither sleep nor adorn herself, and would go to no one but Rama, not even Indra. He recognised Sita by her character, before he ever saw her face. This moment is right there in Valmiki's Sundara Kanda.",
+  "youtube_title": "Did Hanuman Mistake Mandodari for Sita? | Valmiki Ramayana #Shorts",
+  "comment_prompt": "Had you heard this moment from the Sundara Kanda before? Which Hanuman story should we tell next? 👇",
+  "hashtags": [
+    "#UntoldGranth",
+    "#Hanuman",
+    "#SundaraKanda",
+    "#Ramayana",
+    "#Valmiki",
+    "#UntoldRamayana",
+    "#JaiHanuman"
+  ],
+  "thumbnail": {
+    "frame": "31s",
+    "hook": "Did Hanuman once mistake Mandodari for Sita?",
+    "stamp": "It's in Valmiki",
+    "line": "He knew Sita by her character.",
+    "badge": "Valmiki Ramayana · Sundara 5.8–9",
+    "art_shift": 0
   },
-  {
-   "id": 2,
-   "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ। ये है असली कहानी।",
-   "en": "Valmiki Ramayana, Sundara Kanda, chapters 8 and 9. Here's the real story.",
-   "units": [
-    "वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ।",
-    "[serious] ये है असली कहानी।"
-   ],
-   "unit_gap": 0.28,
-   "lead": 0.18,
-   "tail": 0.12
+  "score": {
+    "engine": "elevenlabs music_v1",
+    "file": "audio/score.mp3",
+    "duration_s": 80,
+    "gain": 1.4,
+    "prompt": "Mysterious Indian cinematic underscore, instrumental only, built to sit under a spoken voice. Opens with a sharp low taiko-and-tabla hit and a dark, glittering palace drone with santoor; a tiptoeing, curious night section with pizzicato strings and soft frame drums at about 90 BPM; then a burst of playful, joyful rhythm with dhol and bright bansuri; then it suddenly hushes into a thoughtful, reverent drone with warm strings; it ends in a calm, devotional resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
+    "take": "take 2 of 2 (hit in the first second)"
   },
-  {
-   "id": 3,
-   "voice": "narrator",
-   "hi": "रात में, सीता को खोजते हुए, हनुमान रावण के महल में पहुँचते हैं।",
-   "en": "At night, searching for Sita, Hanuman reaches Ravana's palace.",
-   "units": [
-    "[softly] रात में, सीता को खोजते हुए… हनुमान रावण के महल में पहुँचते हैं।"
-   ],
-   "cite": "5.7.1-3",
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 4,
-   "voice": "narrator",
-   "hi": "वहाँ एक सुनहरे पलंग पर, एक रानी सो रही है, सोने जैसी दमकती, रूप और यौवन से भरी। मंदोदरी।",
-   "en": "There, on a gleaming couch, a queen lies asleep, radiant like gold, full of beauty and youth: Mandodari.",
-   "units": [
-    "वहाँ एक सुनहरे पलंग पर, एक रानी सो रही है… सोने जैसी दमकती, रूप और यौवन से भरी।",
-    "मंदोदरी।"
-   ],
-   "unit_gap": 0.35,
-   "cite": "5.8.48",
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 5,
-   "voice": "narrator",
-   "hi": "हनुमान सोचते हैं, यही सीता हैं!",
-   "en": "Hanuman thinks: this is Sita!",
-   "units": [
-    "[warmly] हनुमान सोचते हैं… यही सीता हैं!"
-   ],
-   "cite": "5.8.49",
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 6,
-   "voice": "narrator",
-   "hi": "ख़ुशी से वे बाँहें ठोकते हैं, पूँछ चूमते हैं, गाते हैं, खंभों पर चढ़ते और कूद पड़ते हैं।",
-   "en": "Overjoyed, he slaps his arms, kisses his tail, sings, climbs the pillars and leaps down.",
-   "units": [
-    "ख़ुशी से वे बाँहें ठोकते हैं, पूँछ चूमते हैं, गाते हैं… खंभों पर चढ़ते और कूद पड़ते हैं।"
-   ],
-   "cite": "5.8.50",
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 7,
-   "voice": "hanuman",
-   "hi": "रुको। प्रभु श्रीराम से बिछड़कर, माता सीता न सोएँगी, न श्रृंगार करेंगी।",
-   "en": "\"Wait. Apart from Lord Rama, Mother Sita would neither sleep nor adorn herself.\"",
-   "units": [
-    "रुको।",
-    "प्रभु श्रीराम से बिछड़कर, माता सीता न सोएँगी… न श्रृंगार करेंगी।"
-   ],
-   "unit_gap": 0.4,
-   "cite": "5.9.1-2",
-   "lead": 0.25,
-   "tail": 0.25
-  },
-  {
-   "id": 8,
-   "voice": "hanuman",
-   "hi": "और वे प्रभु के सिवा किसी के पास नहीं जाएँगी, देवराज इंद्र के पास भी नहीं। ये माता सीता नहीं हैं।",
-   "en": "\"And she would go to no one but my Lord, not even to Indra, king of the gods. This is not Mother Sita.\"",
-   "units": [
-    "और वे प्रभु के सिवा किसी के पास नहीं जाएँगी… देवराज इंद्र के पास भी नहीं।",
-    "ये माता सीता नहीं हैं।"
-   ],
-   "unit_gap": 0.4,
-   "cite": "5.9.3",
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 9,
-   "voice": "narrator",
-   "hi": "एक पल की ख़ुशी। फिर, सीता के चरित्र ने, सच बता दिया।",
-   "en": "",
-   "units": [
-    "[serious] एक पल की ख़ुशी। [pause] फिर, सीता के चरित्र ने… सच बता दिया।"
-   ],
-   "sentences": 2,
-   "sentence_gap": 0.4,
-   "card": [
-    [
-     "A MOMENT'S JOY.",
-     null
-    ],
-    [
-     "HER CHARACTER TOLD THE TRUTH.",
-     "#f6c244"
-    ]
-   ],
-   "cite": "5.9.1-3",
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 10,
-   "voice": "narrator",
-   "hi": "ये अनसुना पल, वाल्मीकि रामायण में ही है।",
-   "en": "",
-   "units": [
-    "[warmly] ये अनसुना पल… वाल्मीकि रामायण में ही है।"
-   ],
-   "card": [
-    [
-     "IT'S IN",
-     null
-    ],
-    [
-     "VALMIKI",
-     "#f6c244"
-    ]
-   ],
-   "cite": "5.8.48-50",
-   "lead": 0.28,
-   "tail": 0.35
-  },
-  {
-   "id": 11,
-   "voice": "narrator",
-   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
-   "en": "",
-   "units": [
-    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
-   ],
-   "lead": 0.43,
-   "tail": 0.68,
-   "min": 3.7,
-   "cta": true
-  }
- ],
- "claims": [
-  {
-   "claim": "Searching for Sita, Hanuman entered Ravana's palace at night",
-   "ref": "5.7.1-3",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "Hanuman saw Mandodari, radiant like gold, Ravana's chief queen, asleep",
-   "ref": "5.8.48",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "By her beauty and youth he concluded 'This is Sita' and rejoiced",
-   "ref": "5.8.49",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "He clapped his arms, kissed his tail, played, sang, climbed pillars and dropped to the ground",
-   "ref": "5.8.50",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "He discarded the thought: Sita, apart from Rama, would not sleep, eat, adorn herself or drink",
-   "ref": "5.9.1-2",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "She would approach no other man, not even the lord of the gods: 'this is not she'",
-   "ref": "5.9.3",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  }
- ]
+  "shots": [
+    {
+      "id": 1,
+      "voice": "narrator",
+      "hi": "क्या हनुमान ने, एक बार मंदोदरी को सीता समझ लिया था?",
+      "en": "Did Hanuman once mistake Mandodari for Sita?",
+      "units": [
+        "[curious] क्या हनुमान ने… एक बार मंदोदरी को सीता समझ लिया था?"
+      ],
+      "card": [
+        [
+          "HANUMAN'S",
+          null
+        ],
+        [
+          "MISTAKE?",
+          "#f6c244"
+        ]
+      ],
+      "lead": 0.28,
+      "tail": 0.6,
+      "min": 2.6
+    },
+    {
+      "id": 2,
+      "voice": "narrator",
+      "hi": "वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ। ये है असली कहानी।",
+      "en": "Valmiki Ramayana, Sundara Kanda, chapters 8 and 9. Here's the real story.",
+      "units": [
+        "वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ।",
+        "[serious] ये है असली कहानी।"
+      ],
+      "unit_gap": 0.28,
+      "lead": 0.18,
+      "tail": 0.12
+    },
+    {
+      "id": 3,
+      "voice": "narrator",
+      "hi": "रात में, सीता को खोजते हुए, हनुमान रावण के महल में पहुँचते हैं।",
+      "en": "At night, searching for Sita, Hanuman reaches Ravana's palace.",
+      "units": [
+        "[softly] रात में, सीता को खोजते हुए… हनुमान रावण के महल में पहुँचते हैं।"
+      ],
+      "cite": "5.7.1-3",
+      "lead": 0.25,
+      "tail": 0.3
+    },
+    {
+      "id": 4,
+      "voice": "narrator",
+      "hi": "वहाँ एक सुनहरे पलंग पर, एक रानी सो रही है, सोने जैसी दमकती, रूप और यौवन से भरी। मंदोदरी।",
+      "en": "There, on a gleaming couch, a queen lies asleep, radiant like gold, full of beauty and youth: Mandodari.",
+      "units": [
+        "वहाँ एक सुनहरे पलंग पर, एक रानी सो रही है… सोने जैसी दमकती, रूप और यौवन से भरी।",
+        "मंदोदरी।"
+      ],
+      "unit_gap": 0.35,
+      "cite": "5.8.48",
+      "lead": 0.25,
+      "tail": 0.3
+    },
+    {
+      "id": 5,
+      "voice": "narrator",
+      "hi": "हनुमान सोचते हैं, यही सीता हैं!",
+      "en": "Hanuman thinks: this is Sita!",
+      "units": [
+        "[warmly] हनुमान सोचते हैं… यही सीता हैं!"
+      ],
+      "cite": "5.8.49",
+      "lead": 0.25,
+      "tail": 0.3
+    },
+    {
+      "id": 6,
+      "voice": "narrator",
+      "hi": "ख़ुशी से वे बाँहें ठोकते हैं, पूँछ चूमते हैं, गाते हैं, खंभों पर चढ़ते और कूद पड़ते हैं।",
+      "en": "Overjoyed, he slaps his arms, kisses his tail, sings, climbs the pillars and leaps down.",
+      "units": [
+        "ख़ुशी से वे बाँहें ठोकते हैं, पूँछ चूमते हैं, गाते हैं… खंभों पर चढ़ते और कूद पड़ते हैं।"
+      ],
+      "cite": "5.8.50",
+      "lead": 0.25,
+      "tail": 0.3
+    },
+    {
+      "id": 7,
+      "voice": "hanuman",
+      "hi": "रुको। प्रभु श्रीराम से बिछड़कर, माता सीता न सोएँगी, न श्रृंगार करेंगी।",
+      "en": "\"Wait. Apart from Lord Rama, Mother Sita would neither sleep nor adorn herself.\"",
+      "units": [
+        "रुको।",
+        "प्रभु श्रीराम से बिछड़कर, माता सीता न सोएँगी… न श्रृंगार करेंगी।"
+      ],
+      "unit_gap": 0.4,
+      "cite": "5.9.1-2",
+      "lead": 0.25,
+      "tail": 0.25
+    },
+    {
+      "id": 8,
+      "voice": "hanuman",
+      "hi": "और वे प्रभु के सिवा किसी के पास नहीं जाएँगी, देवराज इंद्र के पास भी नहीं। ये माता सीता नहीं हैं।",
+      "en": "\"And she would go to no one but my Lord, not even to Indra, king of the gods. This is not Mother Sita.\"",
+      "units": [
+        "और वे प्रभु के सिवा किसी के पास नहीं जाएँगी… देवराज इंद्र के पास भी नहीं।",
+        "ये माता सीता नहीं हैं।"
+      ],
+      "unit_gap": 0.4,
+      "cite": "5.9.3",
+      "lead": 0.25,
+      "tail": 0.3
+    },
+    {
+      "id": 9,
+      "voice": "narrator",
+      "hi": "एक पल की ख़ुशी। फिर, सीता के चरित्र ने, सच बता दिया।",
+      "en": "",
+      "units": [
+        "[serious] एक पल की ख़ुशी। [pause] फिर, सीता के चरित्र ने… सच बता दिया।"
+      ],
+      "sentences": 2,
+      "sentence_gap": 0.4,
+      "card": [
+        [
+          "A MOMENT'S JOY.",
+          null
+        ],
+        [
+          "HER CHARACTER TOLD THE TRUTH.",
+          "#f6c244"
+        ]
+      ],
+      "cite": "5.9.1-3",
+      "lead": 0.25,
+      "tail": 0.3
+    },
+    {
+      "id": 10,
+      "voice": "narrator",
+      "hi": "ये अनसुना पल, वाल्मीकि रामायण में ही है।",
+      "en": "",
+      "units": [
+        "[warmly] ये अनसुना पल… वाल्मीकि रामायण में ही है।"
+      ],
+      "card": [
+        [
+          "IT'S IN",
+          null
+        ],
+        [
+          "VALMIKI",
+          "#f6c244"
+        ]
+      ],
+      "cite": "5.8.48-50",
+      "lead": 0.28,
+      "tail": 0.35
+    },
+    {
+      "id": 11,
+      "voice": "narrator",
+      "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+      "en": "",
+      "units": [
+        "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+      ],
+      "lead": 0.43,
+      "tail": 0.68,
+      "min": 3.7,
+      "cta": true
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Searching for Sita, Hanuman entered Ravana's palace at night",
+      "ref": "5.7.1-3",
+      "verified": true,
+      "sources": [
+        "enjoylearningsanskrit (CE)"
+      ]
+    },
+    {
+      "claim": "Hanuman saw Mandodari, radiant like gold, Ravana's chief queen, asleep",
+      "ref": "5.8.48",
+      "verified": true,
+      "sources": [
+        "enjoylearningsanskrit (CE)"
+      ]
+    },
+    {
+      "claim": "By her beauty and youth he concluded 'This is Sita' and rejoiced",
+      "ref": "5.8.49",
+      "verified": true,
+      "sources": [
+        "enjoylearningsanskrit (CE)"
+      ]
+    },
+    {
+      "claim": "He clapped his arms, kissed his tail, played, sang, climbed pillars and dropped to the ground",
+      "ref": "5.8.50",
+      "verified": true,
+      "sources": [
+        "enjoylearningsanskrit (CE)"
+      ]
+    },
+    {
+      "claim": "He discarded the thought: Sita, apart from Rama, would not sleep, eat, adorn herself or drink",
+      "ref": "5.9.1-2",
+      "verified": true,
+      "sources": [
+        "enjoylearningsanskrit (CE)"
+      ]
+    },
+    {
+      "claim": "She would approach no other man, not even the lord of the gods: 'this is not she'",
+      "ref": "5.9.3",
+      "verified": true,
+      "sources": [
+        "enjoylearningsanskrit (CE)"
+      ]
+    }
+  ]
 }
