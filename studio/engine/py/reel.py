@@ -44,4 +44,13 @@ def units(shot):
         out.append((clean(u["say"]), v, u["say"], u.get("ex", cv.get("ex", 0.6)), u.get("cfg", cv.get("cfg", 0.4))))
     return out
 
-def take_path(sid, i, k, ext="wav", sub="cb"): return os.path.join(AUD, sub, f"s{sid:02d}_{i}_t{k}.{ext}")
+def take_path(sid, i, k, ext="wav", sub="cb", var=""): return os.path.join(AUD, sub, f"s{sid:02d}{var}_{i}_t{k}.{ext}")
+
+def cta_units(shot):
+    """The YouTube version of a call-to-action shot ("cta": true): same voice and delivery tags, the subscribe line
+    (shot "hi_youtube", else series.json cta.youtube.say). Empty for other shots."""
+    if not shot.get("cta") or not shot.get("voice"): return []
+    line = shot.get("hi_youtube") or SER.get("cta", {}).get("youtube", {}).get("say")
+    if not line: return []
+    first = units(shot)[0]; tags = re.match(r"^(?:\s*\[[^\]]*\]\s*)*", first[2]).group(0)      # keep the leading delivery [tags]
+    v = shot["voice"]; return [(clean(line), v, tags + line, first[3], first[4])]

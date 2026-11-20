@@ -4,10 +4,11 @@
 
 script.json:
   "thumbnail": {"frame": "3s",                       time or frame number of the art (pick with: make_reel.py thumb <reel> 3s,26s,...)
-                "title_hi": "लक्ष्मण रेखा",          big Hindi hook (1-2 lines)
-                "stamp_hi": "वाल्मीकि में नहीं",       optional red stamp (myth-busters)
-                "title_en": "There was no Lakshmana Rekha",
-                "badge": "Valmiki Ramayana · Aranya 3.42–47"}   the verse the reel proves it with
+                "hook": "Was the Lakshmana Rekha ever really drawn?",   the reel's hook question, big (default: shot 1's English line)
+                "stamp": "NOT IN VALMIKI",                  optional red stamp: the answer (myth-busters)
+                "line": "No line. No spell. Just a prayer.",            the payoff, in gold
+                "badge": "Valmiki Ramayana · Aranya 3.42–47"}           the verses the reel proves it with
+English is the main language for every written word (covers included); the narration stays Hindi.
 Layout keeps every word inside the Instagram profile-grid crop (centre 1080x1440) and above the Reels UI."""
 import json, os, subprocess, sys
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -80,25 +81,26 @@ diya(d, x0 + 16, SAFE_TOP + 52, 16, rgb(GOLD)); xx = x0 + 46
 for ch in lab: d.text((xx, SAFE_TOP + 30), ch, font=fl, fill=rgb(GOLD)); xx += d.textlength(ch, font=fl) + 6
 y = SAFE_TOP + 96
 
-# big Hindi hook
-fh, lines = fit(d, T["title_hi"], "Mukta-Bold.ttf", None, 176, 960, 1)          # one big line keeps the art (faces) clear …
-if fh.size < 128: fh, lines = fit(d, T["title_hi"], "Mukta-Bold.ttf", None, 176, 960, 2)   # … unless that would make it small
-lh = int(fh.size * 1.12)
+# the hook question, big
+hook = T.get("hook") or s["shots"][0].get("en", "")
+fh, lines = fit(d, hook.upper(), "Montserrat.ttf", "ExtraBold", 92, 960, 2)      # two lines max keeps faces clear
+lh = int(fh.size * 1.14)
 for ln in lines: shadow_text(img, (W / 2, y), ln, fh, rgb(IVORY), stroke=3); y += lh
 d = ImageDraw.Draw(img)
 
-# red stamp
-if T.get("stamp_hi"):
-    fs = font("Mukta-Bold.ttf", 78); tw = d.textlength(T["stamp_hi"], font=fs); pw, ph = int(tw + 84), 128
+# red stamp: the answer
+if T.get("stamp"):
+    fs = font("Montserrat.ttf", 64, "Black"); txt = T["stamp"].upper(); tw = d.textlength(txt, font=fs) + 5 * len(txt); pw, ph = int(tw + 84), 118
     st = Image.new("RGBA", (pw + 40, ph + 40), (0, 0, 0, 0)); sd = ImageDraw.Draw(st)
     sd.rounded_rectangle((20, 20, 20 + pw, 20 + ph), 22, fill=rgb(RED), outline=rgb(IVORY), width=5)
-    sd.text((20 + pw / 2, 20 + ph / 2 + 4), T["stamp_hi"], font=fs, fill=rgb(IVORY), anchor="mm")
+    xx = 20 + (pw - tw) / 2
+    for ch in txt: sd.text((xx, 20 + ph / 2 + 2), ch, font=fs, fill=rgb(IVORY), anchor="lm"); xx += sd.textlength(ch, font=fs) + 5
     st = st.rotate(4, resample=Image.BICUBIC, expand=True)
-    shd = Image.new("RGBA", img.size, (0, 0, 0, 0)); shd.paste((3, 3, 14, 170), (int((W - st.width) / 2) + 6, y + 18), st.split()[3])
-    img.alpha_composite(shd.filter(ImageFilter.GaussianBlur(10))); img.alpha_composite(st, (int((W - st.width) / 2), y + 8)); d = ImageDraw.Draw(img)
+    shd = Image.new("RGBA", img.size, (0, 0, 0, 0)); shd.paste((3, 3, 14, 170), (int((W - st.width) / 2) + 6, y + 22), st.split()[3])
+    img.alpha_composite(shd.filter(ImageFilter.GaussianBlur(10))); img.alpha_composite(st, (int((W - st.width) / 2), y + 12)); d = ImageDraw.Draw(img)
 
-# English title + verse badge at the bottom of the safe area
-fe, el = fit(d, T["title_en"].upper(), "Cinzel.ttf", "Black", 66, 950, 2)
+# payoff line + verse badge at the bottom of the safe area
+fe, el = fit(d, T.get("line", "").upper(), "Cinzel.ttf", "Black", 62, 950, 2)
 fb = font("Montserrat.ttf", 31, "SemiBold"); badge = T.get("badge") or s.get("source", "")
 bw, bh = d.textlength(badge, font=fb) + 70, 70; by = SAFE_BOT - 40 - bh
 ey = by - 34 - len(el) * int(fe.size * 1.16)

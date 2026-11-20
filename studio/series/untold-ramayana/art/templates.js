@@ -59,7 +59,8 @@ function sourceCard(ctx, u, p, sh, t, post, opts) {
   };
 }
 
-// END CARD — Rama, Sita, Lakshmana at the hermitage + series title, tagline and FOLLOW button (all from SERIES)
+// END CARD — Rama, Sita, Lakshmana at the hermitage + series title, tagline and the platform's call to action (FOLLOW on Instagram/Facebook, SUBSCRIBE on YouTube)
+const CTA = Object.assign({ button: 'FOLLOW' }, (SERIES.cta || {})[typeof PLATFORM !== 'undefined' ? PLATFORM : 'instagram'] || {});
 function endCard(ctx, u, p, sh, t, post) {
   const bg = ensureScene('herE', () => buildHermitage('end')), cam = { z: lerp(1.03, 1.08, p), y: 40 };
   hermitage(ctx, bg, cam, t);
@@ -80,9 +81,11 @@ function endCard(ctx, u, p, sh, t, post) {
     const w = 300 * ease(u, 0.5, 1.0); c.fillStyle = rgba(C_IVORY, 0.85); c.fillRect(540 - w, 528, w * 2, 3);
     if (SERIES.series_name) { const q = ease(u, 0.3, 0.8); text(c, SERIES.series_name + ' SERIES', 540, 210, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 8, alpha: q, stroke: 6 }); c.fillStyle = rgba(C_GOLD, 0.8 * q); c.fillRect(380, 232, 320, 3); }
     text(c, SERIES.tagline, 540, 598, { size: 39, font: 'Montserrat', weight: 600, italic: true, color: C_IVORY, alpha: ease(u, 0.6, 1.1), stroke: 6 });
-    const b = backOut(map(u, 0.9, 1.35)); if (b > 0) { const pu = 1 + Math.sin(u * 5) * 0.025; c.save(); c.translate(540, 1560); c.scale(b * pu, b * pu); c.shadowColor = 'rgba(0,0,0,0.6)'; c.shadowBlur = 26; c.shadowOffsetY = 8; c.fillStyle = C_RED; c.beginPath(); c.roundRect(-230, -62, 460, 124, 62); c.fill(); c.shadowColor = 'transparent'; c.strokeStyle = C_GOLD; c.lineWidth = 5; c.stroke();
-      c.fillStyle = C_IVORY; c.fillRect(-190, -5, 44, 10); c.fillRect(-173, -22, 10, 44); text(c, 'FOLLOW', 36, 20, { size: 56, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 7, shadow: 0 }); c.restore(); }
-    if (SERIES.handles_line) [].concat(SERIES.handles_line).forEach((l, i) => text(c, l, 540, 1680 + i * 44, { size: 30, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 2, alpha: ease(u, 1.1, 1.6), stroke: 5 }));
+    const b = backOut(map(u, 0.9, 1.35)); if (b > 0) { const pu = 1 + Math.sin(u * 5) * 0.025; c.save(); c.translate(540, 1560); c.scale(b * pu, b * pu); c.shadowColor = 'rgba(0,0,0,0.6)'; c.shadowBlur = 26; c.shadowOffsetY = 8; const label = CTA.button, fsz = label.length > 7 ? 50 : 56; c.font = `800 ${fsz}px Montserrat`; c.letterSpacing = '7px'; const tw = c.measureText(label).width, bw = Math.max(460, tw + 200), x0 = -bw / 2;
+      c.fillStyle = C_RED; c.beginPath(); c.roundRect(x0, -62, bw, 124, 62); c.fill(); c.shadowColor = 'transparent'; c.strokeStyle = C_GOLD; c.lineWidth = 5; c.stroke();
+      c.fillStyle = C_IVORY; c.fillRect(x0 + 40, -5, 44, 10); c.fillRect(x0 + 57, -22, 10, 44); text(c, label, x0 + 104 + tw / 2, fsz * 0.36, { size: fsz, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 7, shadow: 0 }); c.restore(); }
+    const handles = CTA.handles_line || SERIES.handles_line;
+    if (handles) [].concat(handles).forEach((l, i) => text(c, l, 540, 1680 + i * 44, { size: 30, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 2, alpha: ease(u, 1.1, 1.6), stroke: 5 }));
   };
 }
 

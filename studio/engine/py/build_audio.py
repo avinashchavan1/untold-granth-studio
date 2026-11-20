@@ -13,6 +13,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reel import REEL as ROOT, CAST
 SR = 48000
 TL = json.load(open(os.path.join(ROOT, "src/timeline.json")))
+VARIANT = os.environ.get("VARIANT", "")          # "youtube": the subscribe call to action -> audio/mix_youtube.wav
+SUFFIX = "_youtube" if VARIANT == "youtube" else ""
 FPS = TL["fps"]; TOTAL = TL["total"]; N = int((TOTAL + 0.6) * SR)
 S = {s["id"]: s for s in TL["shots"]}
 st = lambda i: S[i]["start"]
@@ -144,7 +146,7 @@ def rd(p):
 VG = {v: c.get("mix_gain", 1.0) for v, c in CAST.items()}
 for s in TL["shots"]:
     if not s.get("audio"): continue
-    x = rd(os.path.join(ROOT, s["audio"])); x = x / (np.sqrt(np.mean(x[np.abs(x) > 0.02] ** 2)) + 1e-9) * 0.16 * VG[s["voice"]]
+    x = rd(os.path.join(ROOT, s.get("audio_youtube") if VARIANT == "youtube" and s.get("audio_youtube") else s["audio"])); x = x / (np.sqrt(np.mean(x[np.abs(x) > 0.02] ** 2)) + 1e-9) * 0.16 * VG[s["voice"]]
     place(voice, x, s.get("aStart", s["vStart"]), 1.0, 0.0)
     if "forest_echo" in CAST[s["voice"]].get("post", []):   # the cry rolls through the forest
         ex5 = x * env_ad(len(x) / SR + 1e-6, 0.01, 0.5)[:len(x)]; place(sfx, ex5, s["vStart"] + 1.05, 0.28, -0.7); place(sfx, ex5, s["vStart"] + 1.9, 0.15, 0.7)
@@ -162,12 +164,12 @@ print("voice(active) %.1f dB | music under speech %.1f dB | music in gaps %.1f d
 fo = np.clip((E + 0.25 - tA) / 0.5, 0, 1); mix *= fo[:, None]
 mix = np.tanh(mix * 1.6) / 1.6
 mix = mix[: int((E + 0.02) * SR)]
-out = os.path.join(ROOT, "audio/mix_raw.wav")
+out = os.path.join(ROOT, f"audio/mix_raw{SUFFIX}.wav")
 with wave.open(out, "wb") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix / (np.abs(mix).max() + 1e-9) * 0.9, -1, 1) * 32767).astype(np.int16).tobytes())
 # two-pass loudness normalisation to -14 LUFS
 r = subprocess.run(["ffmpeg", "-hide_banner", "-i", out, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-"], capture_output=True, text=True).stderr
 j = json.loads(r[r.rindex("{"): r.rindex("}") + 1])
-final = os.path.join(ROOT, "audio/mix.wav")
+final = os.path.join(ROOT, f"audio/mix{SUFFIX}.wav")
 subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", out, "-af", f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_TP={j['input_tp']}:measured_LRA={j['input_lra']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}:linear=true", "-ar", "48000", final], check=True)
 print("raw loudness", j["input_i"], "LUFS ->", final)

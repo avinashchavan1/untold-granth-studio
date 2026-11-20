@@ -31,7 +31,7 @@ export interface Reel {
 }
 export interface Claim { id: string; reel_id: string; position: number; claim: string; ref: string; quote_sa: string | null; verified: boolean; sources: string[]; }
 export interface FileRow { id: string; reel_id: string | null; kind: string; store: "supabase" | "github_release" | "github_repo" | "external"; path: string | null; url: string | null; bytes: number | null; spec: string | null; created_at: string; }
-export interface Publication { id: string; reel_id: string; platform: Platform; state: PubState; post_url: string | null; posted_at: string | null; scheduled_for: string | null; notes: string | null; }
+export interface Publication { external_id?: string | null; id: string; reel_id: string; platform: Platform; state: PubState; post_url: string | null; posted_at: string | null; scheduled_for: string | null; notes: string | null; }
 export interface Character { id: string; series_id: string; key: string; name: string; tier: "major" | "minor"; status: "needed" | "audition" | "provisional" | "locked"; voice: Record<string, unknown>; look: Record<string, unknown>; notes: string | null; first_reel: string | null; }
 export interface Location { id: string; key: string; name: string; builder: string | null; description: string | null; }
 export interface Doc { id: string; series_id: string | null; slug: string; title: string; kind: string; body_md: string; updated_at: string; }

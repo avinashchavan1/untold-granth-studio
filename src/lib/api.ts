@@ -166,3 +166,19 @@ export function useSaveCaptions() {
   const up = useUpdateReel();
   return (reel: Reel, captions: Record<string, string>) => up.mutateAsync({ reel, patch: { captions }, action: "captions edited" });
 }
+
+// ---------- ideas inbox ----------
+export interface Idea { id: string; body: string; tags: string[]; status: "new" | "promoted" | "dropped"; reel_id: string | null; created_by: string | null; created_at: string; updated_at: string; }
+export const useIdeas = () => useQuery({ queryKey: ["ideas"], queryFn: () => must<Idea[]>(supabase.from("ideas").select("*").order("created_at", { ascending: false })) });
+export function useIdeaMutations() {
+  const qc = useQueryClient();
+  const done = () => qc.invalidateQueries({ queryKey: ["ideas"] });
+  const add = useMutation({
+    mutationFn: async (v: { body: string; tags: string[] }) => {
+      const { data } = await supabase.auth.getUser();
+      await must(supabase.from("ideas").insert({ ...v, created_by: data.user?.email ?? null }).select("id"));
+    }, onSuccess: done });
+  const update = useMutation({ mutationFn: async ({ id, patch }: { id: string; patch: Partial<Idea> }) => { await must(supabase.from("ideas").update({ ...patch, updated_at: new Date().toISOString() }).eq("id", id).select("id")); }, onSuccess: done });
+  const remove = useMutation({ mutationFn: async (id: string) => { await must(supabase.from("ideas").delete().eq("id", id).select("id")); }, onSuccess: done });
+  return { add, update, remove };
+}

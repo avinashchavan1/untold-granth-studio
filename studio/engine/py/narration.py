@@ -12,23 +12,25 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reel import *
 
 def narr_units():
+    """(shot id, unit index, voice, text, variant): variant "y" = the YouTube call-to-action line of a "cta" shot."""
     for sh in SCRIPT["shots"]:
-        for i, (txt, v, say, ex, cfg) in enumerate(units(sh)):
-            if CAST[v].get("engine") == "elevenlabs": yield sh["id"], i, v, say
+        for var, us in (("", units(sh)), ("y", cta_units(sh))):
+            for i, (txt, v, say, ex, cfg) in enumerate(us):
+                if CAST[v].get("engine") == "elevenlabs": yield sh["id"], i, v, say, var
 
 cmd = sys.argv[1] if len(sys.argv) > 1 else "list"
 if cmd == "list":
-    for sid, i, v, say in narr_units():
-        c = CAST[v]; print(json.dumps({"file": f"audio/narrator/s{sid:02d}_{i}_t1.mp3", "voice_id": c["voice_id"], "model_id": c["model"], "prompt": say}, ensure_ascii=False))
+    for sid, i, v, say, var in narr_units():
+        c = CAST[v]; print(json.dumps({"file": f"audio/narrator/s{sid:02d}{var}_{i}_t1.mp3", "voice_id": c["voice_id"], "model_id": c["model"], "prompt": say}, ensure_ascii=False))
 elif cmd == "chars":
     n = sum(len(say) for *_, say in narr_units()); print(n, "characters (x takes)")
 elif cmd == "api":
     takes = int(sys.argv[2]) if len(sys.argv) > 2 else 1
     key = os.environ.get("ELEVENLABS_API_KEY", "proxy-injected")
-    for sid, i, v, say in narr_units():
+    for sid, i, v, say, var in narr_units():
         c = CAST[v]
         for k in range(1, takes + 1):
-            p = take_path(sid, i, k, "mp3", "narrator")
+            p = take_path(sid, i, k, "mp3", "narrator", var)
             if os.path.exists(p): continue
             body = json.dumps({"text": say, "model_id": c["model"], "language_code": c.get("language", "hi")}).encode()
             rq = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{c['voice_id']}?output_format=mp3_44100_128", body,

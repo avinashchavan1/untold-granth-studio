@@ -1,0 +1,78 @@
+{
+ "title": "There Was No Lakshmana Rekha",
+ "series": "Untold Ramayana",
+ "source": "Valmiki Ramayana, Aranya Kanda 3(42-47)",
+ "length": "1:27",
+ "captions": {
+  "instagram": "Was the Lakshmana Rekha ever really drawn?\n\nEveryone 'knows' Lakshmana drew a line Sita must not cross. In Valmiki's Ramayana there is no line and no spell — Lakshmana leaves with a prayer to the forest deities. The Rekha came from later retellings.\n\n📜 Source: Valmiki Ramayana, Aranya Kanda 3(42-47)\n🎧 Hindi narration · English subtitles\n\nFollow @untoldgranth.official for more untold stories from the original texts.\n\n#UntoldGranth #LakshmanaRekha #Ramayana #Valmiki #UntoldRamayana #IndianMythology",
+  "facebook": "Was the Lakshmana Rekha ever really drawn?\n\nEveryone 'knows' Lakshmana drew a line Sita must not cross. In Valmiki's Ramayana there is no line and no spell — Lakshmana leaves with a prayer to the forest deities. The Rekha came from later retellings.\n\n📜 Source: Valmiki Ramayana, Aranya Kanda 3(42-47)\n🎧 Hindi narration · English subtitles\n\nFollow Untold Granth for more untold stories from the original texts.\n\n#UntoldGranth #LakshmanaRekha #Ramayana #Valmiki #UntoldRamayana #IndianMythology",
+  "youtube_title": "There Was No Lakshmana Rekha | Valmiki Ramayana #Shorts",
+  "youtube_description": "Was the Lakshmana Rekha ever really drawn?\n\nEveryone 'knows' Lakshmana drew a line Sita must not cross. In Valmiki's Ramayana there is no line and no spell — Lakshmana leaves with a prayer to the forest deities. The Rekha came from later retellings.\n\nSource: Valmiki Ramayana, Aranya Kanda 3(42-47)\nVerses:\n• No line (rekha) is drawn by Lakshmana — 3.43 (CE): Lakshmana leaves after a blessing; no line, no mantra\n• Maricha cries 'Ha Sita! Ha Lakshmana!' in Rama's voice — 3.42\n• Sita accuses Lakshmana of coming for her / being sent by Bharata — 3.43.21-22\n• Blessing: may the forest deities protect you; may I see you again with Rama — 3.43.30-31\n• Ravana arrives as a mendicant; trees and Godavari still in fear — 3.44\n• Sita offers him water/hospitality — 3.44\n• Lakshmana Rekha appears in later retellings, not Valmiki — absent from Valmiki CE 3.42-47\n\nHindi narration · English subtitles.\nSubscribe to Untold Granth for real stories from the original texts, with the verse on screen.\n\n#UntoldGranth #LakshmanaRekha #Ramayana #Valmiki #UntoldRamayana #IndianMythology #Shorts"
+ },
+ "claims": [
+  {
+   "claim": "No line (rekha) is drawn by Lakshmana",
+   "ref": "3.43 (CE): Lakshmana leaves after a blessing; no line, no mantra"
+  },
+  {
+   "claim": "Maricha cries 'Ha Sita! Ha Lakshmana!' in Rama's voice",
+   "ref": "3.42"
+  },
+  {
+   "claim": "Sita accuses Lakshmana of coming for her / being sent by Bharata",
+   "ref": "3.43.21-22"
+  },
+  {
+   "claim": "Blessing: may the forest deities protect you; may I see you again with Rama",
+   "ref": "3.43.30-31"
+  },
+  {
+   "claim": "Ravana arrives as a mendicant; trees and Godavari still in fear",
+   "ref": "3.44"
+  },
+  {
+   "claim": "Sita offers him water/hospitality",
+   "ref": "3.44"
+  },
+  {
+   "claim": "Lakshmana Rekha appears in later retellings, not Valmiki",
+   "ref": "absent from Valmiki CE 3.42-47"
+  }
+ ],
+ "verify_note": "Verse-level refs (3.43.21-22, 3.43.30-31) were checked against the CE Sanskrit; others are chapter-level. Recheck against Debroy before publishing.",
+ "masters": {
+  "instagram": {
+   "file": "A01_INSTAGRAM_MASTER.mp4",
+   "spec": "1080×1920 · H.264 CRF 12 · AAC 320k"
+  },
+  "facebook": {
+   "file": "A01_INSTAGRAM_MASTER.mp4",
+   "spec": "1080×1920 · H.264 CRF 12 · AAC 320k"
+  },
+  "youtube": {
+   "file": "A01_YOUTUBE_MASTER.mp4",
+   "spec": "2160×3840 (4K) · H.264 CRF 14 · AAC 384k"
+  }
+ },
+ "platforms": {
+  "instagram": {
+   "state": "todo",
+   "url": "",
+   "at": ""
+  },
+  "youtube": {
+   "state": "todo",
+   "url": "",
+   "at": ""
+  },
+  "facebook": {
+   "state": "todo",
+   "url": "",
+   "at": ""
+  }
+ },
+ "review": {
+  "done": false,
+  "at": ""
+ }
+}

@@ -17,8 +17,10 @@
   ]
  },
  "language": {
-  "narration": "Hinglish/Hindi in Devanagari",
-  "screen_text": "English"
+  "narration": "Hindi (Devanagari) — the only Hindi; everything written is English",
+  "screen_text": "English",
+  "thumbnails": "English",
+  "captions_titles": "English"
  },
  "palette": {
   "gold": "#f6c244",
@@ -86,5 +88,24 @@
  "handles_line": [
   "INSTAGRAM  @untoldgranth.official",
   "YOUTUBE  @untoldgranth"
- ]
+ ],
+ "cta": {
+  "_note": "Per-platform call to action: end-card button + the narrator's closing line. Instagram/Facebook = follow, YouTube = subscribe. The CTA shot is marked \"cta\": true in script.json; its YouTube line is generated as extra takes s<ID>y_*.",
+  "instagram": {
+   "button": "FOLLOW",
+   "say": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "handles_line": [
+    "INSTAGRAM  @untoldgranth.official",
+    "YOUTUBE  @untoldgranth"
+   ]
+  },
+  "youtube": {
+   "button": "SUBSCRIBE",
+   "say": "ऐसी और अनसुनी कहानियों के लिए, सब्सक्राइब करें।",
+   "handles_line": [
+    "YOUTUBE  @untoldgranth",
+    "INSTAGRAM  @untoldgranth.official"
+   ]
+  }
+ }
 }

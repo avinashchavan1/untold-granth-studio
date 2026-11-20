@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import Docs from "./pages/Docs";
+import Ideas from "./pages/Ideas";
 import Plan from "./pages/Plan";
 import Profiles from "./pages/Profiles";
 import ReelDetail from "./pages/ReelDetail";
@@ -33,6 +34,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="reels/:code" element={<ReelDetail />} />
               <Route path="plan" element={<Plan />} />
               <Route path="world" element={<World />} />
+              <Route path="ideas" element={<Ideas />} />
               <Route path="profiles" element={<Profiles />} />
               <Route path="docs" element={<Docs />} />
               <Route path="docs/:slug" element={<Docs />} />

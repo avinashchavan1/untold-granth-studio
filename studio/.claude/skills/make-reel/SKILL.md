@@ -34,10 +34,12 @@ Read `STYLE_GUIDE.md` first (truth rules, reel anatomy, voice, visual, sound, ch
    (expect music ≈ −18 dB under voice).
 8. **Render** — `nohup python3 make_reel.py render <reel> &` (≈25–40 min for 60–90 s). Verify with ffprobe +
    loudness (−14 LUFS) + 6–8 stills.
+8a. **Language + CTA** — every written word is English (narration stays Hindi); shot 1 carries the hook `card`; the closing
+   shot has `"cta": true` so YouTube gets "subscribe" (extra narrator takes s<ID>y_*, `mix_youtube.wav`, SUBSCRIBE end card).
 8b. **Thumbnail (every reel)** — `make_reel.py thumb <reel> 3s,15s,30s,45s,60s` renders art-only candidates
    (`frames/thumb_candidates.jpg`); pick the frame that shows the story at a glance with faces clear of the top third,
-   fill `script.json → thumbnail` (frame, `title_hi` = the myth in 2–4 words, `stamp_hi` "वाल्मीकि में नहीं" for
-   myth-busters, `title_en`, `badge` = "Valmiki Ramayana · <Kanda> <sarga range>" matching the claims), then
+   fill `script.json → thumbnail` (frame, `hook` = shot 1's question in English, `stamp` "Not in Valmiki" for
+   myth-busters, `line` = the payoff, `badge` = "Valmiki Ramayana · <Kanda> <sarga range>" matching the claims; all English), then
    `make_reel.py thumb <reel>` → `out/<ID>_cover.jpg`. Look at it; text must sit inside y 240–1680.
 9. **Deliver** — send `out/<ID>_final.mp4`, the citation sheet (claims + refs) and caption; ask for human
    review before posting. Never post/publish to any platform yourself without explicit approval.

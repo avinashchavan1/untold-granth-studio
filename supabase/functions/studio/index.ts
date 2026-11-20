@@ -182,6 +182,23 @@ Deno.serve(async (req) => {
         await admin.from("activity").insert({ actor: email, reel_id, action: `${platform}: posting started`, detail: { code: reel.code, job: job.id } });
         return json({ ok: true, job_id: job.id });
       }
+      case "youtube_update": {      // push the app's title/description/tags to an already-posted YouTube video
+        const { data: reel } = await admin.from("reels").select("id,code,title,captions,hashtags").eq("id", body.reel_id).single();
+        const { data: pub } = await admin.from("publications").select("external_id").eq("reel_id", body.reel_id).eq("platform", "youtube").maybeSingle();
+        if (!reel || !pub?.external_id) return json({ error: "This reel has no posted YouTube video" }, 400);
+        const caps = (reel.captions ?? {}) as Record<string, string>;
+        const tok = await youtubeAccessToken();
+        const snippet = { title: (caps.youtube_title || `${reel.title} #Shorts`).slice(0, 100), description: (caps.youtube_description || "").slice(0, 4900),
+          tags: ((reel.hashtags ?? []) as string[]).map((t) => t.replace(/^#/, "")).slice(0, 30), categoryId: "27", defaultLanguage: "en", defaultAudioLanguage: "hi" };
+        const r = await fetch(`${YT}/videos?part=snippet`, { method: "PUT", headers: { Authorization: `Bearer ${tok}`, "Content-Type": "application/json" }, body: JSON.stringify({ id: pub.external_id, snippet }) });
+        if (!r.ok) {
+          const e = await r.json().catch(() => ({}));
+          const msg = e.error?.message ?? r.status;
+          return json({ error: /insufficient|scope/i.test(String(msg)) ? "Press “Reconnect YouTube” once (Settings → Connections) to allow edits, then try again." : `YouTube refused the update: ${msg}` }, 400);
+        }
+        await admin.from("activity").insert({ actor: email, reel_id: reel.id, action: "youtube: title/description updated", detail: { code: reel.code } });
+        return json({ ok: true });
+      }
       case "youtube_brand": {
         const steps = await applyYouTubeBrand(email);
         return json({ ok: steps.every((s) => s.ok), steps });

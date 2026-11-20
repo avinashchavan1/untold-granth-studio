@@ -3,7 +3,7 @@ import { ArrowLeft, CheckCircle2, Download, ExternalLink, FileText, Loader2, Pen
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Card, Code, CopyButton, Empty, ErrorNote, LinkButton, PubBadge, SectionTitle, Spinner, StageBadge, fmtBytes, fmtDate, fmtLen } from "../components/ui";
-import { mediaUrl, type ProviderStatus, useClaims, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
+import { mediaUrl, studio, type ProviderStatus, useClaims, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
 import { Target } from "../components/Target";
 import { KIND_LABEL, PLATFORMS, STAGES, type FileRow, type Publication, type Reel, type Stage } from "../lib/types";
 
@@ -31,8 +31,8 @@ export default function ReelDetail() {
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2"><Code>{r.code}</Code>{r.kind && <span className="text-sm text-ink-soft dark:text-parchment/60">{KIND_LABEL[r.kind]}</span>}<span className="text-sm text-ink-soft dark:text-parchment/60">· {r.source_ref}</span></div>
           <h1 className="mt-1 font-display text-2xl font-extrabold tracking-wide sm:text-3xl" style={{ textWrap: "balance" } as React.CSSProperties}>{r.title}</h1>
-          {r.hook_hi && <p className="mt-2 text-lg">{r.hook_hi}</p>}
-          {r.hook_en && <p className="text-sm text-ink-soft dark:text-parchment/60">{r.hook_en}</p>}
+          {r.hook_en && <p className="mt-2 text-lg">{r.hook_en}</p>}
+          {r.hook_hi && <p className="text-sm text-ink-soft dark:text-parchment/60">Narration: {r.hook_hi}</p>}
         </div>
         <label className="grid w-full gap-1 text-xs font-semibold uppercase tracking-wider text-ink-soft sm:w-auto dark:text-parchment/60">
           Stage
@@ -72,6 +72,32 @@ function Preview({ preview, poster }: { preview?: FileRow; poster?: FileRow }) {
   if (!preview) return <div className="grid aspect-[9/16] w-full place-items-center rounded-2xl border border-dashed border-parchment-deep text-sm text-ink-soft dark:border-night-700">No video yet</div>;
   if (v.isLoading) return <div className="aspect-[9/16] w-full animate-pulse rounded-2xl bg-night-800" />;
   return <video controls playsInline preload="metadata" poster={p.data ?? undefined} src={v.data ?? undefined} className="aspect-[9/16] w-full rounded-2xl bg-black" />;
+}
+
+function YouTubeEdit({ r }: { r: Reel }) {
+  const save = useSaveCaptions();
+  const [open, setOpen] = useState(false);
+  const [d, setD] = useState({ title: r.captions?.youtube_title ?? "", description: r.captions?.youtube_description ?? "" });
+  const [st, setSt] = useState<{ busy?: boolean; ok?: boolean; err?: string }>({});
+  if (!open) return <Button size="sm" onClick={() => setOpen(true)}>Edit title & description on YouTube</Button>;
+  return (
+    <div className="grid gap-2">
+      <label className="grid gap-1 text-xs font-semibold">Title ({d.title.length}/100)
+        <input id="yt-live-title" value={d.title} maxLength={100} onChange={(e) => setD({ ...d, title: e.target.value })} className="rounded-lg border border-parchment-deep bg-white/80 px-2.5 py-1.5 text-sm font-normal dark:border-night-700 dark:bg-night-950" /></label>
+      <label className="grid gap-1 text-xs font-semibold">Description ({d.description.length}/5000)
+        <textarea id="yt-live-desc" value={d.description} maxLength={5000} rows={8} onChange={(e) => setD({ ...d, description: e.target.value })} className="rounded-lg border border-parchment-deep bg-white/80 px-2.5 py-1.5 text-sm font-normal dark:border-night-700 dark:bg-night-950" /></label>
+      <div className="flex flex-wrap gap-2">
+        <Button size="sm" variant="primary" disabled={st.busy} onClick={async () => {
+          setSt({ busy: true });
+          try { await save(r, { ...(r.captions ?? {}), youtube_title: d.title, youtube_description: d.description }); await studio("youtube_update", { reel_id: r.id }); setSt({ ok: true }); }
+          catch (e) { setSt({ err: (e as Error).message }); }
+        }}>{st.busy ? "Updating…" : "Save & update on YouTube"}</Button>
+        <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>Close</Button>
+      </div>
+      {st.ok && <p className="text-sm text-emerald-700 dark:text-emerald-300">Updated on YouTube.</p>}
+      {st.err && <p className="text-sm text-vermilion">{st.err}</p>}
+    </div>
+  );
 }
 
 function Cover({ cover }: { cover?: FileRow }) {
@@ -156,6 +182,7 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
         <div className="grid gap-2 text-sm">
           <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300"><CheckCircle2 size={16} /> Posted {fmtDate(pub?.posted_at)}</div>
           {pub?.post_url && <a href={pub.post_url} target="_blank" rel="noreferrer" className="break-all text-gold-deep underline dark:text-gold">{pub.post_url}</a>}
+          {platform.key === "youtube" && pub?.external_id && <YouTubeEdit r={r} />}
           <Button size="sm" variant="ghost" onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "todo", posted_at: null } })}>Mark as not posted</Button>
         </div>
       ) : editing ? (

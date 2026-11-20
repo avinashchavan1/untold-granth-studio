@@ -99,6 +99,17 @@ retellings, we never mock the tradition or the people who believe them.
   - SFX are subtle and literal: footsteps, crickets, lamp crackle, arrow, fire.
 - **Loudness and format:** −14 LUFS integrated, true peak ≤ −1.5 dBFS. Stereo AAC 192k.
 
+## 6b. Language
+
+- **English is the main language for every written word:** on-screen cards, subtitles, covers, titles, captions, descriptions, profiles.
+- **Hindi is the narration only** (spoken). No Devanagari on screen, except Sanskrit verse used as art (for example the manuscript prop).
+- **The hook is on screen:** shot 1 always has a `card` with the hook (e.g. "SHABARI'S / BERRIES?"), the subtitle carries the full question, and the cover repeats it. `make_reel.py check` fails without it.
+
+## 6c. Call to action per platform
+
+- Instagram and Facebook: the narrator says **follow** and the end card says **FOLLOW**. YouTube: **subscribe** / **SUBSCRIBE**.
+- The closing shot is marked `"cta": true`. `narration api` also generates its YouTube line (`series.json → cta.youtube.say`) as takes `s<ID>y_*`; `pick` builds both; `audio` writes `mix.wav` and `mix_youtube.wav`; `master` renders the end card per platform, so the YouTube master gets SUBSCRIBE and the subscribe narration.
+
 ## 7. Delivery
 
 - **Upload masters (best quality; these are what you post).** `make_reel.py render` makes them automatically, or run `make_reel.py master`.
@@ -108,7 +119,7 @@ retellings, we never mock the tradition or the people who believe them.
   - **Size:** several hundred MB per reel, on purpose. Platforms re-encode everything, so the cleaner the upload, the better viewers see it.
 - **Cover / thumbnail (every reel):** `out/<ID>_cover.jpg` (1080×1920 JPEG, under 2 MB), from `make_reel.py thumb` (also run by `render`).
   - Art: one clean frame from the reel (no subtitles, cards or logo), chosen so the story reads at a glance and faces stay clear of the title.
-  - Type: series label in gold Cinzel; the myth in big ivory Hindi (Mukta Bold, one line where possible); a red "वाल्मीकि में नहीं" stamp on myth-busters; the English title in gold Cinzel; a verse badge that matches the reel's claims.
+  - Type (all English): series label in gold Cinzel; the hook question big in ivory Montserrat ExtraBold (two lines max); a red "NOT IN VALMIKI" stamp on myth-busters; the payoff line in gold Cinzel; a verse badge that matches the reel's claims.
   - Every word sits inside y 240–1680, the Instagram profile-grid crop (3:4) and clear of the Reels UI.
   - The publisher sends it as the Instagram Reels cover and the YouTube thumbnail.
 - **`out/<ID>_final.mp4`:** small preview and sharing copy (WhatsApp, review). Never upload this one.

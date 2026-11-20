@@ -312,14 +312,15 @@
    ],
    "lead": 0.43,
    "tail": 0.68,
-   "min": 3.7
+   "min": 3.7,
+   "cta": true
   }
  ],
  "thumbnail": {
   "frame": "",
-  "title_hi": "पत्थर बनी अहल्या",
-  "stamp_hi": "वाल्मीकि में नहीं",
-  "title_en": "Ahalya was never stone",
+  "hook": "Did a stone really turn into a woman?",
+  "stamp": "Not in Valmiki",
+  "line": "No stone. Rama touched her feet.",
   "badge": "Valmiki Ramayana · Bala 1.47–48"
  }
 }

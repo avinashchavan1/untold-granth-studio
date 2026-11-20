@@ -82,14 +82,15 @@
    ],
    "lead": 0.43,
    "tail": 0.68,
-   "min": 3.7
+   "min": 3.7,
+   "cta": true
   }
  ],
  "thumbnail": {
   "frame": "",
-  "title_hi": "",
-  "stamp_hi": "",
-  "title_en": "",
+  "hook": "",
+  "stamp": "Not in Valmiki",
+  "line": "",
   "badge": "Valmiki Ramayana · <Kanda> <sarga range>"
  }
 }

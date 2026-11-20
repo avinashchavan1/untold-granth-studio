@@ -37,7 +37,7 @@ def download(spec, dest):
 def youtube(spec, path):
     yt = spec["youtube"]; tok = yt["access_token"]; print(f"::add-mask::{tok}")
     size = os.path.getsize(path); privacy = spec.get("options", {}).get("privacy", "public")
-    meta = {"snippet": {"title": yt["title"][:100], "description": yt["description"][:4900], "tags": yt["tags"][:30], "categoryId": "27", "defaultLanguage": "hi", "defaultAudioLanguage": "hi"},
+    meta = {"snippet": {"title": yt["title"][:100], "description": yt["description"][:4900], "tags": yt["tags"][:30], "categoryId": "27", "defaultLanguage": "en", "defaultAudioLanguage": "hi"},
             "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": False, "embeddable": True}}
     report(step="uploading to YouTube", log=f"Starting resumable upload ({size / 1e6:.0f} MB), privacy={privacy}")
     r, _ = call("POST", "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status", json.dumps(meta).encode(),

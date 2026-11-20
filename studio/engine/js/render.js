@@ -1,4 +1,5 @@
 // REEL=<reel dir> node render.js stills 10,200,4.5s,...   |   REEL=<reel dir> node render.js clean 51s,72.5s  (art-only PNGs for thumbnails)   |   REEL=<reel dir> node render.js range <start> <end> <out.mp4>
+// env PLATFORM=instagram|youtube picks the call to action on the end card (series.json → cta).
 // Serves one virtual folder /x/ that layers: reel/src  >  series/art  >  engine/js   (first match wins),
 // plus /x/series.js generated from series.json, and /fonts/ (series/fonts > engine/fonts).
 const { chromium } = require('playwright'); const http = require('http'); const fs = require('fs'); const path = require('path'); const { spawn } = require('child_process');
@@ -10,7 +11,7 @@ fs.mkdirSync(path.join(REEL, 'frames'), { recursive: true });
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.ttf': 'font/ttf', '.png': 'image/png' };
 (async () => {
   const srv = http.createServer((q, s) => { const u = decodeURIComponent(q.url.split('?')[0]);
-    if (u === '/x/series.js') { s.writeHead(200, { 'Content-Type': 'text/javascript' }); s.end('const SERIES = ' + fs.readFileSync(path.join(SERIES, 'series.json'), 'utf8') + ';'); return; }
+    if (u === '/x/series.js') { s.writeHead(200, { 'Content-Type': 'text/javascript' }); s.end('const SERIES = ' + fs.readFileSync(path.join(SERIES, 'series.json'), 'utf8') + ';\nconst PLATFORM = ' + JSON.stringify(process.env.PLATFORM || 'instagram') + ';'); return; }
     const f = resolve(u); if (!f) { s.writeHead(404); s.end(); return; } fs.readFile(f, (e, d) => { if (e) { s.writeHead(404); s.end(); return; } s.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream' }); s.end(d); }); });
   await new Promise(r => srv.listen(0, '127.0.0.1', r)); const port = srv.address().port;
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 } });
