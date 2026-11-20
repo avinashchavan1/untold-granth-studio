@@ -22,6 +22,11 @@ st = lambda i: S[i]["start"]
 rg = np.random.default_rng(7)
 SA = 146.83  # D
 
+def boxavg(x, k):
+    """moving average, same output as np.convolve(x, np.ones(k) / k, "same") but O(n) via a running sum"""
+    k = max(1, int(k)); c = np.concatenate([[0.0], np.cumsum(x, dtype=np.float64)]); n = len(x); lo = k // 2
+    i = np.arange(n); a = np.clip(i - lo, 0, n); b = np.clip(i - lo + k, 0, n)
+    return (c[b] - c[a]) / k
 def buf(): return np.zeros((N, 2), dtype=np.float64)
 def place(b, sig, start, gain=1.0, pan=0.0):
     i = int(start * SR)
@@ -65,7 +70,7 @@ def bansuri(notes, breath=0.05):
         e = np.minimum(1, (t[i0:i1] - s) / 0.09) * np.minimum(1, (s + d - t[i0:i1]) / 0.16); amp[i0:i1] = np.maximum(amp[i0:i1], e)
     f[f == 0] = 2 * SA
     k = int(0.05 * SR); ker = np.hanning(k); ker /= ker.sum(); f = np.convolve(f, ker, "same"); amp = np.convolve(amp, ker, "same")
-    vib = 1 + 0.006 * np.sin(2 * np.pi * 5.2 * t) * np.clip(np.convolve(amp, np.ones(int(0.3 * SR)) / (0.3 * SR), "same"), 0, 1)
+    vib = 1 + 0.006 * np.sin(2 * np.pi * 5.2 * t) * np.clip(boxavg(amp, int(0.3 * SR)), 0, 1)
     ph = 2 * np.pi * np.cumsum(f * vib) / SR
     y = np.sin(ph) + 0.33 * np.sin(2 * ph + 0.4) + 0.1 * np.sin(3 * ph) + 0.04 * np.sin(4 * ph)
     y += breath * 6 * bandnoise(end, 1500, 7000, 3)[: len(t)] * (0.6 + 0.4 * amp)
@@ -171,10 +176,10 @@ for s in TL["shots"]:
         ex5 = x * env_ad(len(x) / SR + 1e-6, 0.01, 0.5)[:len(x)]; place(sfx, ex5, s["vStart"] + 1.05, 0.28, -0.7); place(sfx, ex5, s["vStart"] + 1.9, 0.15, 0.7)
 
 # ---------------- mix: duck music under speech ----------------
-ve = np.abs(voice).max(1); k = int(0.06 * SR); ve = np.convolve(ve, np.ones(k) / k, "same")
-k2 = int(0.35 * SR); ve = np.maximum(ve, np.convolve(ve, np.ones(k2) / k2, "same") * 1.5); ve = np.clip(ve / 0.08, 0, 1)
+ve = np.abs(voice).max(1); k = int(0.06 * SR); ve = boxavg(ve, k)
+k2 = int(0.35 * SR); ve = np.maximum(ve, boxavg(ve, k2) * 1.5); ve = np.clip(ve / 0.08, 0, 1)
 ve = np.concatenate([ve[int(0.15 * SR):], np.zeros(int(0.15 * SR))])   # look-ahead: music dips just before a line starts
-duck = 1 - 0.86 * ve; duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+duck = 1 - 0.86 * ve; duck = boxavg(duck, int(0.08 * SR))
 mix = voice * 1.0 + music * 0.20 * duck[:, None] + sfx * 0.85 * (1 - 0.55 * (1 - duck))[:, None]
 act = ve > 0.5; gap = ve < 0.05
 rms = lambda x, m: 20 * np.log10(np.sqrt(np.mean(x[m] ** 2)) + 1e-9)

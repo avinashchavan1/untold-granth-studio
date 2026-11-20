@@ -1,0 +1,300 @@
+{
+ "reel": "A92",
+ "title": "Ravana Never Taught Lakshmana",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 — CE Yuddha 6.97 and 6.100 read; review before posting",
+ "source": "Valmiki Ramayana, Yuddha Kanda 6(97) (Critical Edition; vulgate 6.108)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "YUDDHA KANDA  ·  CHAPTER 97",
+  "edition": "CRITICAL EDITION"
+ },
+ "avoid": [
+  "naming who first told the 'dying Ravana teaches Lakshmana' story (sources vary): say only 'later retellings and discourses'",
+  "the navel-nectar arrow (that is A53, the follow-up)",
+  "gore: the arrow 'pierces the heart' — show light, not wounds",
+  "mocking the popular story: it carries a good lesson; we only say where it comes from"
+ ],
+ "verify_note": "CE 6.97.2-4: Matali urges the Brahmastra, given by Agastya. 6.97.16-17: it falls on Ravana's chest and pierces his heart. 6.97.20-21: bow falls, prana departs, he falls lifeless from the chariot. 6.97.32: Lakshmana among those honouring Rama. 6.100.11-12: Lakshmana consecrates Vibhishana. No words from Ravana after the arrow; no teaching scene.",
+ "caption": "Many of us have heard that the dying Ravana taught Lakshmana lessons in statecraft, and that Rama sent Lakshmana to learn from him. In Valmiki's Ramayana, the Brahmastra strikes Ravana's chest, pierces his heart, and he falls from his chariot already lifeless. There are no last words and no lesson. Lakshmana is busy with the victory, and soon crowns Vibhishana king of Lanka. The story of Ravana's last lesson came later.",
+ "youtube_title": "Did Dying Ravana Really Teach Lakshmana? | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Where did you first hear the story of Ravana's last lesson to Lakshmana? Next: how Ravana actually died, and the navel arrow 👇",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Ravana",
+  "#Lakshmana",
+  "#Ramayana",
+  "#Valmiki",
+  "#UntoldRamayana",
+  "#JaiShriRam"
+ ],
+ "thumbnail": {
+  "frame": "",
+  "hook": "Did dying Ravana really teach Lakshmana?",
+  "stamp": "Not in Valmiki",
+  "line": "One arrow. He fell lifeless.",
+  "badge": "Valmiki Ramayana · Yuddha 6.97",
+  "art_shift": 0
+ },
+ "score": {
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "duration_s": 75,
+  "gain": 1.4,
+  "prompt": "Epic Indian battle underscore, instrumental only, built to sit under a spoken voice. Opens with a sharp low taiko-and-dhol hit and a dark, tense drone with low brass and cellos; a driving war rhythm with dhol and frame drums at about 100 BPM builds tension; around one third through a held breath, then a single huge impact hit and rising choir pads; then a sombre, quiet aftermath with a slow drone and soft strings; it ends in a calm, solemn resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
+  "take": "take 1 of 2 (hit in the first second; quiet aftermath lines up with the crowning)"
+ },
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या मरते हुए रावण ने, लक्ष्मण को ज्ञान दिया था?",
+   "en": "Did the dying Ravana really teach Lakshmana?",
+   "units": [
+    "[thoughtfully] क्या मरते हुए रावण ने… लक्ष्मण को ज्ञान दिया था?"
+   ],
+   "card": [
+    [
+     "RAVANA'S",
+     null
+    ],
+    [
+     "LAST LESSON?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 2.6
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग सत्तानवे। ये है असली कहानी।",
+   "en": "Valmiki Ramayana, Yuddha Kanda, chapter 97. Here's the real story.",
+   "units": [
+    "वाल्मीकि रामायण, युद्ध कांड, सर्ग सत्तानवे।",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.28,
+   "lead": 0.18,
+   "tail": 0.12
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "युद्ध लंबा खिंचता है। तब इंद्र के सारथि मातलि, राम से कहते हैं, अब ब्रह्मास्त्र चलाइए।",
+   "en": "The battle drags on. Then Matali, Indra's charioteer, tells Rama: release the Brahmastra now.",
+   "units": [
+    "[serious] युद्ध लंबा खिंचता है।",
+    "तब इंद्र के सारथि मातलि, राम से कहते हैं… अब ब्रह्मास्त्र चलाइए।"
+   ],
+   "unit_gap": 0.32,
+   "cite": "6.97.1-2",
+   "lead": 0.25,
+   "tail": 0.25
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "वही अस्त्र, जो ऋषि अगस्त्य ने राम को दिया था।",
+   "en": "The same weapon the sage Agastya had given Rama.",
+   "units": [
+    "वही अस्त्र, जो ऋषि अगस्त्य ने राम को दिया था।"
+   ],
+   "cite": "6.97.4",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "बाण रावण की छाती पर गिरता है, और उसका हृदय चीर देता है।",
+   "en": "The arrow strikes Ravana's chest, and pierces his heart.",
+   "units": [
+    "[serious] बाण रावण की छाती पर गिरता है… और उसका हृदय चीर देता है।"
+   ],
+   "cite": "6.97.16-17",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 6,
+   "voice": "narrator",
+   "hi": "धनुष हाथ से छूट जाता है, प्राण निकल जाते हैं, और रावण रथ से, निर्जीव, धरती पर गिरता है।",
+   "en": "The bow slips from his hand, his life-breath leaves him, and Ravana falls from his chariot to the ground, lifeless.",
+   "units": [
+    "धनुष हाथ से छूट जाता है, प्राण निकल जाते हैं…",
+    "और रावण रथ से, निर्जीव, धरती पर गिरता है।"
+   ],
+   "unit_gap": 0.32,
+   "cite": "6.97.20-21",
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 7,
+   "voice": "narrator",
+   "hi": "एक बाण। हृदय में। उसी क्षण मृत्यु।",
+   "en": "",
+   "units": [
+    "[serious] एक बाण। [pause] हृदय में। [pause] उसी क्षण मृत्यु।"
+   ],
+   "sentences": 3,
+   "sentence_gap": 0.4,
+   "card": [
+    [
+     "ONE ARROW.",
+     null
+    ],
+    [
+     "THROUGH THE HEART.",
+     null
+    ],
+    [
+     "DEAD AT ONCE.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "6.97.17-21",
+   "lead": 0.23,
+   "tail": 0.3
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "और लक्ष्मण? वे विजय के उत्सव में हैं, और राम की आज्ञा से, विभीषण का राज्याभिषेक करते हैं।",
+   "en": "And Lakshmana? He joins the celebration, and at Rama's command, crowns Vibhishana king.",
+   "units": [
+    "और लक्ष्मण?",
+    "वे विजय के उत्सव में हैं… और राम की आज्ञा से, विभीषण का राज्याभिषेक करते हैं।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "6.97.32, 6.100.11-12",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "hi": "कोई अंतिम पाठ नहीं। कोई अंतिम शब्द नहीं।",
+   "en": "",
+   "units": [
+    "[serious] कोई अंतिम पाठ नहीं। [pause] कोई अंतिम शब्द नहीं।"
+   ],
+   "sentences": 2,
+   "sentence_gap": 0.4,
+   "card": [
+    [
+     "NO LAST LESSON.",
+     null
+    ],
+    [
+     "NO LAST WORDS.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "6.97.20-21",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "मरते रावण की सीख की कथा, बाद की कथाओं में आई। वाल्मीकि में नहीं।",
+   "en": "",
+   "units": [
+    "मरते रावण की सीख की कथा, बाद की कथाओं में आई।",
+    "[serious] वाल्मीकि में नहीं।"
+   ],
+   "unit_gap": 0.32,
+   "card": [
+    [
+     "RAVANA'S LESSON",
+     null
+    ],
+    [
+     "NOT IN VALMIKI",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.31
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Matali urges Rama to release the Brahmastra for Ravana's destruction",
+   "ref": "6.97.1-2",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The weapon had been given to Rama by the sage Agastya",
+   "ref": "6.97.4",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The arrow fell upon Ravana's chest and pierced his heart",
+   "ref": "6.97.16-17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "His bow fell, his life-breaths departed; he fell from the chariot to the ground, lifeless",
+   "ref": "6.97.20-21",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Lakshmana joins Sugriva, Vibhishana and others in honouring the victorious Rama",
+   "ref": "6.97.32",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "At Rama's command Lakshmana consecrates Vibhishana as king of Lanka",
+   "ref": "6.100.11-12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "No words from Ravana after the arrow and no teaching of Lakshmana anywhere in the death and aftermath chapters (CE 6.97-6.100)",
+   "ref": "6.97-6.100 (chapters, read)",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit CE 6.97-6.100"
+   ]
+  }
+ ]
+}

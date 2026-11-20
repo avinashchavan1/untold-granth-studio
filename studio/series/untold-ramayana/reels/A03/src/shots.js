@@ -9,13 +9,6 @@ const STONE = { tint: '#86848c', tintA: 0.93, rim: '#d8d6e0', rimA: 0.5, dir: 1,
 const L_PAST = { rim: '#f4c890', rimA: 0.8, dir: 1, tint: '#4a2c18', tintA: 0.28 };             // flashback warmth
 const RADIANT = { rim: '#fff4d0', rimA: 0.95, dir: 1, tint: '#40306a', tintA: 0.08 };
 
-function petals(c, t, seed, n, a = 1, top = -100) {     // flowers raining from the sky
-  for (let i = 0; i < n; i++) {
-    const h1 = hash(seed + i * 1.7), h2 = hash(seed + i * 4.3), y = top + ((t * (90 + h2 * 80) + h1 * 2100) % 2100), x = h1 * 1240 - 80 + Math.sin(t * 1.3 + i) * 40;
-    const col = ['#f4a6bc', '#ffd0dc', '#f6d27a', '#ffffff', '#e88aa8'][i % 5];
-    dab(c, x, y, 9 + h2 * 6, 5 + h2 * 3, t * (1 + h1) + i, col, 0.9 * a); dab(c, x + 2, y - 1, 4, 2.5, t + i, '#fff6e8', 0.6 * a);
-  }
-}
 function penance(c, x, y, s, a, t, light) {            // Ahalya seated on the ash in penance, eyes closed
   if (a <= 0.01) return;
   c.save(); c.globalAlpha = a;

@@ -16,6 +16,8 @@ const CH = {
   boatman: { kind: 'man', skin: '#9a6a48', skinSh: '#62423a', cloth: '#d8ccb4', clothSh: '#988c76', sash: '#7a6a52', hair: '#14101c' },
   hanuman: { kind: 'man', vanara: true, crown: true, skin: '#c8743a', skinSh: '#86482a', muzzle: '#f2d4a8', cloth: '#b4201c', clothSh: '#6e1420', sash: '#e6b450', hair: '#a85a24' },   // A07: crowned, red-orange, red cloth
   mandodari: { kind: 'woman', skin: '#ecc8a0', skinSh: '#b08a86', cloth: '#7a1e4a', clothSh: '#4a1030', border: '#e6b450', blouse: '#a8304a', hair: '#0d0a16' },     // A07: Ravana's chief queen, 'radiant like gold'
+  vibhishana: { kind: 'man', god: true, skin: '#6e5a62', skinSh: '#43343e', cloth: '#ece2cc', clothSh: '#a89c84', sash: '#e6b450', hair: '#0e0c18' },   // A92: the righteous rakshasa prince, crowned king of Lanka
+  matali:  { kind: 'man', skin: '#c89a78', skinSh: '#8a6a60', cloth: '#e8d8b0', clothSh: '#a8987a', sash: '#4a7ab8', hair: '#14101c' },                         // Indra's charioteer
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';

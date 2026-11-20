@@ -476,3 +476,35 @@ function lamps(ctx, t) {      // hanging oil lamps, flickering
 function palace(ctx, bg, cam, t, mid) {
   drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); drawLayer(ctx, cam, bg.mid); withCam(ctx, cam, 0.6, c => lamps(c, t)); if (mid) withCam(ctx, cam, 0.6, mid);
 }
+
+// ---- A92: the battlefield before Lanka at the hour of the final duel — smoky red dusk, walls and towers, fires ----
+const WAR_GROUND = 1360;
+function buildBattlefield() {
+  const r = rng(920);
+  const sky = newLayer(0.05), far = newLayer(0.25), mid = newLayer(0.6), fg = newLayer(1.25);
+  wash(sky.x, r, -M, -M, W + 2 * M, HORIZON + M, [[0, '#2a0e1a'], [.45, '#6a1e1e'], [.8, '#c45a2a'], [1, '#e89a4a']], { n: 320, alpha: 0.6, th: [20, 60], len: [200, 600] });
+  for (let i = 0; i < 18; i++) dab(sky.x, r() * W, 200 + r() * 500, 220 + r() * 200, 50 + r() * 40, 0, jit('#3a1820', r, 10), 0.35);   // smoke banks
+  // Lanka's walls and towers on the horizon
+  blob(far.x, [[-M, HORIZON + 10], [-M, HORIZON - 70], [W + M, HORIZON - 70], [W + M, HORIZON + 10]], '#2a1420', 1, 0.1);
+  for (let i = 0; i < 9; i++) { const x = 40 + i * 130, h = 120 + r() * 160, w = 40 + r() * 30; blob(far.x, [[x - w, HORIZON - 60], [x - w, HORIZON - 60 - h], [x - w * 0.5, HORIZON - 80 - h], [x, HORIZON - 110 - h - r() * 40], [x + w * 0.5, HORIZON - 80 - h], [x + w, HORIZON - 60 - h], [x + w, HORIZON - 60]], jit('#341a26', r, 8), 1, 0.15); dab(far.x, x, HORIZON - 70 - h * 0.5, 6, 9, 0, '#ffb060', 0.5); }
+  // the field: scorched earth, broken arrows, a fallen banner
+  wash(mid.x, r, -M, HORIZON + 20, W + 2 * M, H + M - HORIZON, [[0, '#4a2a26'], [.4, '#2a1a1e'], [1, '#100a10']], { n: 420, alpha: 0.55, th: [12, 40], len: [120, 420] });
+  for (let i = 0; i < 70; i++) { const x = r() * W, y = HORIZON + 80 + Math.pow(r(), 0.7) * 700, l = 20 + r() * 40, a = r() * 3; stroke(mid.x, x, y, x + Math.cos(a) * l, y + Math.sin(a) * l * 0.3, 2, '#2a1810', 0.7); }
+  stroke(mid.x, 880, WAR_GROUND - 10, 980, WAR_GROUND - 220, 6, '#3a2414', 1); blob(mid.x, [[980, WAR_GROUND - 220], [1060, WAR_GROUND - 200], [1040, WAR_GROUND - 170], [975, WAR_GROUND - 180]], '#7a1a1a', 0.9, 0.3);
+  const f = fg.x; for (let i = 0; i < 160; i++) { const px = -M + r() * (W + 2 * M), py = H + 40 + r() * 60, hh = 60 + r() * 120; stroke(f, px, py, px + (r() - .5) * 80, py - hh, 6 + r() * 9, jit('#120a0e', r, 6), 1, (r() - .5) * .5); }
+  return { layers: [sky, far, mid, fg], sky, far, mid, fg };
+}
+function battlefield(ctx, bg, cam, t, mid, smoke = 1) {
+  drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far);
+  withCam(ctx, cam, bg.far.depth, c => { fire(c, 200, HORIZON - 40, 40, 70, t, 1, 6, 0.7); fire(c, 760, HORIZON - 50, 30, 50, t, 2, 5, 0.6); });
+  drawLayer(ctx, cam, bg.mid);
+  withCam(ctx, cam, bg.mid.depth, c => { mist(c, t, 61, 6, [-200, 900, 1500, 500], '#5a3a40', 0.25 * smoke, 16); embers(c, t, 4, 14, 540, WAR_GROUND, 600, 0.6); });
+  if (mid) withCam(ctx, cam, 0.6, mid);
+}
+// the Brahmastra in flight: a white-gold streak with a burning head (k 0..1 along from -> to)
+function brahmastra(c, x0, y0, x1, y1, k, t) {
+  if (k <= 0) return; const x = lerp(x0, x1, Math.min(1, k)), y = lerp(y0, y1, Math.min(1, k));
+  c.save(); c.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 14; i++) { const q = Math.max(0, Math.min(1, k) - i * 0.03); stroke(c, lerp(x0, x1, q), lerp(y0, y1, q), x, y, 18 - i, i < 3 ? '#ffffff' : '#ffd070', 0.35 * (1 - i / 14)); }
+  glow(c, x, y, 160, '#fff0b0', 0.6); glow(c, x, y, 50, '#ffffff', 0.8); c.restore();
+}

@@ -108,3 +108,23 @@ function lying(c, ch, x, y, s, pose, light) {
   drawFigure(c, ch, P(Object.assign({ eye: 0.05, smile: 0.1, aN: [0.04, 0.3], aF: [0.05, 0.3] }, pose)), { x: 0, y: 0, s, face: 1 }, Object.assign({}, light, { shadow: 0 }));
   c.restore();
 }
+
+// flowers raining from the sky (gods' blessing): A03, A92 …
+function petals(c, t, seed, n, a = 1, top = -100) {
+  for (let i = 0; i < n; i++) {
+    const h1 = hash(seed + i * 1.7), h2 = hash(seed + i * 4.3), y = top + ((t * (90 + h2 * 80) + h1 * 2100) % 2100), x = h1 * 1240 - 80 + Math.sin(t * 1.3 + i) * 40;
+    const col = ['#f4a6bc', '#ffd0dc', '#f6d27a', '#ffffff', '#e88aa8'][i % 5];
+    dab(c, x, y, 9 + h2 * 6, 5 + h2 * 3, t * (1 + h1) + i, col, 0.9 * a); dab(c, x + 2, y - 1, 4, 2.5, t + i, '#fff6e8', 0.6 * a);
+  }
+}
+// a war chariot seen from the side: wheel, platform, pole-flag; riders are drawn by the caller
+function chariot(c, x, y, s, face = 1, col = '#8a5a2a', flag = '#c41e1e') {
+  c.save(); c.translate(x, y); c.scale(face * s, s);
+  blob(c, [[-0.9, -0.55], [0.7, -0.55], [0.9, -0.2], [-0.9, -0.2]], col, 1, 0.2); stroke(c, -0.9, -0.55, 0.7, -0.55, 0.05, '#e6b450', 1);
+  for (let k = 0; k < 5; k++) stroke(c, -0.8 + k * 0.36, -0.52, -0.8 + k * 0.36, -0.22, 0.02, '#3a2414', 0.6);
+  c.lineWidth = 0.07; c.strokeStyle = '#4a2e1a'; c.beginPath(); c.arc(-0.3, -0.1, 0.42, 0, TAU); c.stroke();
+  for (let k = 0; k < 8; k++) { const a = k / 8 * TAU; stroke(c, -0.3, -0.1, -0.3 + Math.cos(a) * 0.4, -0.1 + Math.sin(a) * 0.4, 0.03, '#6a4428', 1); }
+  dab(c, -0.3, -0.1, 0.07, 0.07, 0, '#e6b450'); stroke(c, -0.9, -0.55, -1.0, -1.9, 0.03, '#5a3a24', 1);
+  blob(c, [[-1.0, -1.9], [-0.5, -1.8], [-0.62, -1.68], [-0.5, -1.55], [-1.0, -1.6]], flag, 1, 0.2);
+  c.restore();
+}
