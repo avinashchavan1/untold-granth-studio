@@ -116,7 +116,7 @@ function Results({ reels, pubs }: { reels: Reel[]; pubs: Publication[] }) {
   const posted = reels.filter((r) => pubs.some((p) => p.reel_id === r.id && p.state === "posted"));
   if (!posted.length) return null;
   const cell = (r: Reel, pl: string, k: string) => { const p = pubs.find((x) => x.reel_id === r.id && x.platform === pl && x.state === "posted"); const v = (p?.stats as Record<string, number> | undefined)?.[k]; return p ? (v == null ? "–" : v.toLocaleString()) : ""; };
-  const trial = (r: Reel) => ["A04", "A05", "A06"].includes(r.code);
+  const trial = (r: Reel) => ["A04", "A06", "A07"].includes(r.code);
   const last = pubs.map((p) => p.stats_at).filter(Boolean).sort().pop();
   return (
     <Card>
@@ -138,7 +138,7 @@ function Results({ reels, pubs }: { reels: Reel[]; pubs: Publication[] }) {
           </tbody>
         </table>
       </div>
-      <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Trial (A04–A06): ~55 s short cut on both platforms, question title, question in the caption and as the first comment. {last ? `Updated ${fmtDate(last)}.` : "Press Refresh stats after posting."}{st.err && <span className="text-vermilion"> {st.err}</span>}</p>
+      <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Trial (A04, A06, A07): ~55 s short cut on both platforms, question title, question in the caption and as the first comment. {last ? `Updated ${fmtDate(last)}.` : "Press Refresh stats after posting."}{st.err && <span className="text-vermilion"> {st.err}</span>}</p>
     </Card>
   );
 }
