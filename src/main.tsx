@@ -13,6 +13,7 @@ import Profiles from "./pages/Profiles";
 import ReelDetail from "./pages/ReelDetail";
 import Reels from "./pages/Reels";
 import SettingsPage from "./pages/Settings";
+import Timeline from "./pages/Timeline";
 import World from "./pages/World";
 import { About, Privacy, Terms } from "./pages/Legal";
 
@@ -30,6 +31,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="*" element={<AuthGate><Routes>
             <Route element={<Layout />}>
               <Route index element={<Dashboard />} />
+              <Route path="timeline" element={<Timeline />} />
               <Route path="reels" element={<Reels />} />
               <Route path="reels/:code" element={<ReelDetail />} />
               <Route path="plan" element={<Plan />} />
