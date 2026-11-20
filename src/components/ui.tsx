@@ -42,6 +42,7 @@ export const SectionTitle = ({ children, right }: { children: ReactNode; right?:
 
 const STAGE_STYLE: Record<Stage, string> = {
   idea: "bg-stone-200 text-stone-700 dark:bg-night-700 dark:text-parchment/70",
+  dropped: "bg-black/10 text-ink-soft line-through dark:bg-white/10",
   researching: "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300",
   scripted: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300",
   voiced: "bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-300",
@@ -51,7 +52,7 @@ const STAGE_STYLE: Record<Stage, string> = {
   published: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300",
 };
 export const StageBadge = ({ stage }: { stage: Stage }) => (
-  <span className={clsx("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider", STAGE_STYLE[stage])}>{STAGES.find((s) => s.key === stage)?.label}</span>
+  <span className={clsx("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider", STAGE_STYLE[stage] ?? "bg-black/10 text-ink-soft line-through dark:bg-white/10")}>{STAGES.find((s) => s.key === stage)?.label ?? (stage === "dropped" ? "Dropped" : stage)}</span>
 );
 
 export const PubBadge = ({ state }: { state: PubState }) => (

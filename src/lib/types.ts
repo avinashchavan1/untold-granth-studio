@@ -1,4 +1,4 @@
-export type Stage = "idea" | "researching" | "scripted" | "voiced" | "rendered" | "review" | "approved" | "published";
+export type Stage = "idea" | "researching" | "scripted" | "voiced" | "rendered" | "review" | "approved" | "published" | "dropped";
 export type ReelKind = "myth_buster" | "reveal" | "dialogue";
 export type Platform = "instagram" | "youtube" | "facebook" | "threads" | "moj" | "sharechat" | "josh" | "whatsapp";
 export type PubState = "todo" | "scheduled" | "posting" | "posted" | "failed" | "skipped";

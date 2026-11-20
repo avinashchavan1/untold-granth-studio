@@ -45,7 +45,8 @@
   "file": "audio/score.mp3",
   "duration_s": 80,
   "gain": 1.4,
-  "prompt": ""
+  "prompt": "Mysterious Indian cinematic underscore, instrumental only, built to sit under a spoken voice. Opens with a sharp low taiko-and-tabla hit and a dark, glittering palace drone with santoor; a tiptoeing, curious night section with pizzicato strings and soft frame drums at about 90 BPM; then a burst of playful, joyful rhythm with dhol and bright bansuri; then it suddenly hushes into a thoughtful, reverent drone with warm strings; it ends in a calm, devotional resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
+  "take": "take 2 of 2 (hit in the first second)"
  },
  "shots": [
   {
@@ -136,11 +137,11 @@
   {
    "id": 7,
    "voice": "hanuman",
-   "hi": "रुको। राम से बिछड़कर, सीता न सोएँगी, न श्रृंगार करेंगी।",
-   "en": "\"Wait. Apart from Rama, Sita would neither sleep nor adorn herself.\"",
+   "hi": "रुको। प्रभु श्रीराम से बिछड़कर, माता सीता न सोएँगी, न श्रृंगार करेंगी।",
+   "en": "\"Wait. Apart from Lord Rama, Mother Sita would neither sleep nor adorn herself.\"",
    "units": [
     "रुको।",
-    "राम से बिछड़कर, सीता न सोएँगी… न श्रृंगार करेंगी।"
+    "प्रभु श्रीराम से बिछड़कर, माता सीता न सोएँगी… न श्रृंगार करेंगी।"
    ],
    "unit_gap": 0.4,
    "cite": "5.9.1-2",
@@ -150,11 +151,11 @@
   {
    "id": 8,
    "voice": "hanuman",
-   "hi": "और वे राम के सिवा किसी के पास नहीं जाएँगी, देवराज इंद्र के पास भी नहीं। ये सीता नहीं हैं।",
-   "en": "\"And she would go to no one but Rama, not even to Indra, king of the gods. This is not Sita.\"",
+   "hi": "और वे प्रभु के सिवा किसी के पास नहीं जाएँगी, देवराज इंद्र के पास भी नहीं। ये माता सीता नहीं हैं।",
+   "en": "\"And she would go to no one but my Lord, not even to Indra, king of the gods. This is not Mother Sita.\"",
    "units": [
-    "और वे राम के सिवा किसी के पास नहीं जाएँगी… देवराज इंद्र के पास भी नहीं।",
-    "ये सीता नहीं हैं।"
+    "और वे प्रभु के सिवा किसी के पास नहीं जाएँगी… देवराज इंद्र के पास भी नहीं।",
+    "ये माता सीता नहीं हैं।"
    ],
    "unit_gap": 0.4,
    "cite": "5.9.3",

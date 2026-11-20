@@ -17,30 +17,38 @@
    "calm_rule": "Calm storyteller: only [softly] [warmly] [curious] [serious] [thoughtfully] [pause]; the picker drops takes > f0_hz + f0_max_rise (shouting)"
   },
   "sita": {
-   "ref": "voices/sita.wav",
-   "source": "Google FLEURS hi_in test (CC-BY-4.0), female speaker",
-   "source_clip": "flf_test_6452456317001922868",
-   "character": "lower, mature, warm; rises to fear and anger",
-   "chosen": "audition option 4",
-   "engine": "chatterbox",
-   "ex": 0.85,
-   "cfg": 0.4,
-   "fx": "highpass=f=110,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.25:55|97:0.12|0.07",
-   "mix_gain": 0.95
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "1qEiC6qsybMkmnNdVMbK",
+   "name": "Monika Sogam - Calm and Natural (ElevenLabs library)",
+   "character": "Sita: calm, firm, graceful",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 2026",
+   "audition": "cast/audition/listen/",
+   "previous_chatterbox": {
+    "ref": "voices/sita.wav",
+    "ex": 0.85,
+    "cfg": 0.4
+   }
   },
   "lakshmana": {
-   "ref": "voices/lakshmana.wav",
-   "source": "Google FLEURS hi_in (CC-BY-4.0), male speaker",
-   "source_clip": "fl_m_10691214664103820058",
-   "text": "इतालवी भाषा में उच्चारण करना तुलनात्मक रूप से आसान है क्योंकि ज़्यादातर शब्दों का उच्चारण वैसे ही किया जाता है जैसे उन्हें लिखा जाता है",
-   "dur": 9.24,
-   "f0_hz": 129,
-   "character": "younger male, firm and earnest; clearly different from the narrator",
-   "engine": "chatterbox",
-   "ex": 0.5,
-   "cfg": 0.4,
-   "fx": "highpass=f=70,bass=g=1.5:f=140,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.25:55|97:0.12|0.07",
-   "mix_gain": 0.95
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "Sxk6njaoa7XLsAFT7WcN",
+   "name": "Amit Gupta - Warm and Sympathetic (ElevenLabs library)",
+   "character": "Lakshmana: young, loyal, fiery when needed",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 2026",
+   "audition": "cast/audition/listen/",
+   "previous_chatterbox": {
+    "ref": "voices/lakshmana.wav",
+    "ex": 0.5,
+    "cfg": 0.4
+   }
   },
   "maricha": {
    "ref": "voices/rama.wav",
@@ -59,16 +67,21 @@
    "asr_cut": false
   },
   "rama": {
-   "ref": "voices/rama.wav",
-   "source": "Google FLEURS hi_in test (CC-BY-4.0), male speaker",
-   "source_clip": "flm_test_5636625969852704727",
-   "character": "young, noble prince",
-   "chosen": "audition option 3 (Maricha's cry)",
-   "engine": "chatterbox",
-   "ex": 0.6,
-   "cfg": 0.4,
-   "fx": "highpass=f=70,bass=g=1.5:f=130,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.9:0.25:55|97:0.12|0.07",
-   "mix_gain": 0.95
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "4BoDaQ6aygOP6fpsUmJe",
+   "name": "Raghav - Calm, Confident and Engaging (ElevenLabs library)",
+   "character": "Rama: calm, dignified, warm",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 2026",
+   "audition": "cast/audition/listen/",
+   "previous_chatterbox": {
+    "ref": "voices/rama.wav",
+    "ex": 0.6,
+    "cfg": 0.4
+   }
   },
   "shabari": {
    "engine": "chatterbox",
@@ -130,6 +143,18 @@
    "mix_gain": 1.0,
    "chosen": "Claude, A06 audition (Ranga/Yatin/Krishna): ASR 0.87, f0 150 Hz — distinct from narrator (125) and Sagara (113); minor character rule",
    "audition": "cast/audition/guha/"
+  },
+  "hanuman": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "d0grukerEzs069eKIauC",
+   "name": "Ranga - Powerful Brand Hindi Narrator (ElevenLabs library)",
+   "character": "Hanuman: devoted, powerful, humble before Rama",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 2026",
+   "audition": "cast/audition/listen/"
   }
  },
  "fx": {

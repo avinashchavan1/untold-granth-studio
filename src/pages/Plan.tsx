@@ -2,11 +2,12 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, ErrorNote, SectionTitle, Spinner, StageBadge } from "../components/ui";
-import { useAddReel, useReels } from "../lib/api";
+import { useAddReel, useDroppedReels, useReels } from "../lib/api";
 import { KIND_LABEL } from "../lib/types";
 
 export default function Plan() {
   const { data, isLoading, error } = useReels();
+  const dropped = useDroppedReels();
   const add = useAddReel();
   const [open, setOpen] = useState(false);
   const [f, setF] = useState({ title: "", kind: "myth_buster", source_ref: "", plan_note: "" });
@@ -14,7 +15,7 @@ export default function Plan() {
   if (error) return <ErrorNote error={error} />;
   const reels = data ?? [];
   const nextNo = Math.max(0, ...reels.map((r) => r.plan_no ?? 0)) + 1;
-  const nextCode = "A" + String(Math.max(0, ...reels.map((r) => parseInt(r.code.slice(1)) || 0)) + 1).padStart(2, "0");
+  const nextCode = "A" + String(Math.max(0, ...[...reels, ...(dropped.data ?? [])].map((r) => parseInt(r.code.slice(1)) || 0)) + 1).padStart(2, "0");   // dropped codes stay taken
   const done = reels.filter((r) => r.stage === "published").length;
 
   return (
@@ -55,6 +56,12 @@ export default function Plan() {
           </li>
         ))}
       </ol>
+      {(dropped.data ?? []).length > 0 && (
+        <details className="rounded-xl border border-dashed border-parchment-deep p-3 text-sm dark:border-night-700">
+          <summary className="cursor-pointer font-semibold text-ink-soft dark:text-parchment/60">Dropped or merged · {dropped.data!.length}</summary>
+          <ul className="mt-2 grid gap-1.5">{dropped.data!.map((r) => <li key={r.id}><Link to={`/reels/${r.code}`} className="hover:underline"><span className="mr-2 font-mono text-xs text-ink-soft">{r.code}</span><span className="line-through">{r.title}</span></Link>{r.plan_note && <span className="block text-xs text-ink-soft dark:text-parchment/50">{r.plan_note}</span>}</li>)}</ul>
+        </details>
+      )}
     </div>
   );
 }

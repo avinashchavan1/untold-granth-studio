@@ -42,6 +42,15 @@ def check(reel):
             if v != "narrator" and not sh.get("cite"): probs.append(f"shot {sh['id']}: dialogue without a verse citation ('cite')")
     est = chars / 14.5 + sum(sh.get("lead", 0.3) + sh.get("tail", 0.3) for sh in s["shots"]) + sum(sh.get("min", 0) for sh in s["shots"] if not sh.get("voice"))
     if not s.get("claims"): probs.append("no 'claims' list: every factual claim needs a reference")
+    ser_ = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(reel))), "series.json"), encoding="utf-8"))
+    adr = ser_.get("address", {}); ok = set(adr.get("plain_name_ok", ["narrator"]))
+    for sh in s["shots"]:                                   # respect: no bare "राम" from devotees, brothers, wife, friends
+        v = sh.get("voice")
+        if not v or v in ok: continue
+        for u in (sh.get("units") or [sh.get("hi", "")]):
+            txt = u if isinstance(u, str) else u.get("say", "")
+            if re.search(r"(?<![\u0900-\u097F])(?<!श्री)राम(?![\u0900-\u097F])", txt):
+                probs.append(f"shot {sh['id']}: {v} calls Rama by bare name 'राम' — use {adr.get('forms', {}).get(v, adr.get('forms', {}).get('default', 'an honorific'))}")
     CALM = {"softly", "warmly", "curious", "serious", "thoughtfully", "pause", "sadly", "gently", "whispers"}   # the narrator is a calm storyteller: no shouting
     for sh in s["shots"]:
         if sh.get("voice") != "narrator": continue

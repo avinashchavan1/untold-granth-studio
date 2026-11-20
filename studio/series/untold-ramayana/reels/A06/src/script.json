@@ -102,10 +102,10 @@
   {
    "id": 4,
    "voice": "guha",
-   "hi": "राम, ये धरती भी आपकी है, जैसे अयोध्या। कहिए, मैं आपके लिए क्या करूँ?",
-   "en": "\"Rama, this land is yours, just as Ayodhya is. Tell me, what may I do for you?\"",
+   "hi": "रघुनंदन, ये धरती भी आपकी है, जैसे अयोध्या। कहिए, मैं आपके लिए क्या करूँ?",
+   "en": "\"Raghunandana, this land is yours, just as Ayodhya is. Tell me, what may I do for you?\"",
    "units": [
-    "राम, ये धरती भी आपकी है, जैसे अयोध्या।",
+    "रघुनंदन, ये धरती भी आपकी है, जैसे अयोध्या।",
     "कहिए, मैं आपके लिए क्या करूँ?"
    ],
    "unit_gap": 0.3,
