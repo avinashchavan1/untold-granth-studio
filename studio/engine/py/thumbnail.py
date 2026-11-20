@@ -7,7 +7,8 @@ script.json:
                 "hook": "Was the Lakshmana Rekha ever really drawn?",   the reel's hook question, big (default: shot 1's English line)
                 "stamp": "NOT IN VALMIKI",                  optional red stamp: the answer (myth-busters)
                 "line": "No line. No spell. Just a prayer.",            the payoff, in gold
-                "badge": "Valmiki Ramayana · Aranya 3.42–47"}           the verses the reel proves it with
+                "badge": "Valmiki Ramayana · Aranya 3.42–47",           the verses the reel proves it with
+                "art_shift": 0}                                         optional: push the art down (px) so faces clear the title
 English is the main language for every written word (covers included); the narration stays Hindi.
 Layout keeps every word inside the Instagram profile-grid crop (centre 1080x1440) and above the Reels UI."""
 import json, os, subprocess, sys
@@ -66,6 +67,9 @@ def diya(d, cx, cy, s, col):
     d.polygon([(cx, cy - s * 1.25), (cx + s * 0.32, cy - s * 0.55), (cx, cy - s * 0.25), (cx - s * 0.32, cy - s * 0.55)], fill=col)
 
 img = clean_frame().resize((W, H), Image.LANCZOS)
+if T.get("art_shift", 0):          # push the art down so faces clear the title block; the sky stretches to fill the top
+    sh_ = int(T["art_shift"]); src = img; img = Image.new("RGBA", (W, H)); img.alpha_composite(src.crop((0, 0, W, H - sh_)), (0, sh_))
+    img.alpha_composite(src.crop((0, 0, W, 240)).resize((W, sh_ + 2)), (0, 0))
 # legibility: night gradient behind the title (top) and the English line + badge (bottom)
 g = Image.new("L", (1, H))
 for y in range(H):

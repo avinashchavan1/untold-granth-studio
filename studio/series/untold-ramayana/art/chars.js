@@ -5,6 +5,13 @@ const CH = {
   sita:    { kind: 'woman', skin: '#dfb699', skinSh: '#a67e8a', cloth: '#dc8a2c', clothSh: '#9c5a36', border: '#b8261e', hair: '#0d0a16' },
   shabari: { kind: 'woman', elder: true, skin: '#a97a5c', skinSh: '#6c4a4c', cloth: '#8d6a44', clothSh: '#56402c', border: '#6a4a2c', blouse: '#6e5034', hair: '#dcd6cc' },   // A02: aged ascetic, bark-coloured robe, no jewellery
   monk:    { kind: 'monk',  skin: '#8e5c42', skinSh: '#573642', cloth: '#dc7c22', clothSh: '#8f4a28', hair: '#0b090f' },
+  ahalya:  { kind: 'woman', plain: true, skin: '#e4bea2', skinSh: '#a8808a', cloth: '#d9ccb0', clothSh: '#9a8c74', border: '#8a6a3a', blouse: '#b09068', hair: '#14101c' },   // A03: ascetic, plain robe, no jewellery
+  gautama: { kind: 'monk', sage: true, skin: '#a87a5a', skinSh: '#6a4a4a', cloth: '#b88e5c', clothSh: '#76583a', hair: '#ebe5da' },    // A03: elder sage, white jata + beard, bark/deerskin robe
+  vishva:  { kind: 'monk', sage: true, skin: '#9c6c4c', skinSh: '#5e4040', cloth: '#cc7a2e', clothSh: '#8a4a24', hair: '#bcb4a8' },    // A03: Vishvamitra, grey jata, saffron robe
+  nala:    { kind: 'man', vanara: true, skin: '#a8743e', skinSh: '#6a4628', muzzle: '#e8c8a0', cloth: '#7a4a2a', clothSh: '#4a2c1a', sash: '#c88a3a', hair: '#7a4a24' },     // A04: vanara engineer, son of Vishvakarma
+  vanara:  { kind: 'man', vanara: true, skin: '#8a6038', skinSh: '#553a24', muzzle: '#dcbc96', cloth: '#5a3a22', clothSh: '#3a2416', sash: '#8a5a2a', hair: '#5a3a1e' },     // generic monkey of the army
+  vanara2: { kind: 'man', vanara: true, skin: '#b08a5a', skinSh: '#76583a', muzzle: '#eedcbc', cloth: '#6a4a2a', clothSh: '#42301c', sash: '#a07040', hair: '#806040' },
+  sagara:  { kind: 'man', god: true, skin: '#3f78b4', skinSh: '#22487a', cloth: '#b4201c', clothSh: '#6e1420', sash: '#e6b450', hair: '#0e1a34' },   // A04: the Ocean — lapis-blue, gold, red garlands and garments (CE 6.15.2)
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';
@@ -48,6 +55,7 @@ function drawHeadBack(x, ch, p) { // hair mass that sits behind neck/shoulders
   const k = ch.kind;
   if (k === 'man') blob(x, [[-0.44, -0.1], [-0.56, 0.35], [-0.52, 0.78], [-0.3, 0.86], [-0.16, 0.55], [-0.2, 0.2]], ch.hair);
   if (k === 'woman') blob(x, [[-0.44, -0.2], [-0.6, 0.2], [-0.5, 0.56], [-0.26, 0.6], [-0.14, 0.4], [-0.2, 0.1]], ch.hair);
+  if (ch.sage) blob(x, [[-0.4, -0.3], [-0.62, 0.15], [-0.6, 0.7], [-0.36, 0.86], [-0.18, 0.5], [-0.2, 0.1]], ch.hair);
   if (k === 'demon') { const pts = []; for (let i = 0; i < 22; i++) { const a = 1.25 + i / 21 * 3.9, rr = (i % 2 ? 0.62 : 1.02) + 0.2 * Math.sin(i * 2.7) + (a > 2.2 && a < 4.2 ? 0.45 : 0); pts.push([-0.08 + Math.cos(a) * rr * 0.8, 0.05 + Math.sin(a) * rr]); } blob(x, pts, ch.hair, 1, 0.25); }
 }
 function drawHead(x, ch, p) {
@@ -62,19 +70,31 @@ function drawHead(x, ch, p) {
   x.restore();
   // ear + earring
   dab(x, -0.14, 0.03, 0.065, 0.1, 0.1, mix(ch.skin, ch.skinSh, 0.45)); line(x, [[-0.13, -0.03], [-0.17, 0.03], [-0.13, 0.07]], 0.016, ch.skinSh, 0.8);
-  if (!dem && !ch.elder) { dab(x, -0.14, 0.16, 0.038, 0.038, 0, GOLD); if (fem) { dab(x, -0.14, 0.23, 0.05, 0.045, 0, GOLD); dab(x, -0.14, 0.275, 0.02, 0.02, 0, '#b8261e'); } } else if (dem) dab(x, -0.14, 0.17, 0.05, 0.05, 0, GOLD);
+  if (ch.vanara) { dab(x, -0.16, -0.02, 0.12, 0.15, 0, ch.skin); dab(x, -0.15, -0.01, 0.07, 0.09, 0, ch.muzzle, 0.8); }
+  if (!dem && !ch.elder && !ch.plain && !ch.vanara) { dab(x, -0.14, 0.16, 0.038, 0.038, 0, GOLD); if (fem) { dab(x, -0.14, 0.23, 0.05, 0.045, 0, GOLD); dab(x, -0.14, 0.275, 0.02, 0.02, 0, '#b8261e'); } } else if (dem) dab(x, -0.14, 0.17, 0.05, 0.05, 0, GOLD);
   // hair
-  if (k === 'man') {
+  if (ch.vanara) {      // fur cap with a ragged edge, a light muzzle round mouth and nose, a heavy brow
+    const pts = []; for (let i = 0; i < 18; i++) { const a = Math.PI * 1.05 + i / 17 * Math.PI * 0.95, rr = 0.56 + (i % 2) * 0.05; pts.push([0.0 + Math.cos(a) * rr * 0.95, -0.02 + Math.sin(a) * rr]); }
+    pts.push([0.38, -0.2], [0.3, -0.28], [0.1, -0.3], [-0.1, -0.2], [-0.22, 0.12], [-0.4, 0.26]); blob(x, pts, ch.hair, 1, 0.2);
+    blob(x, [[0.08, 0.02], [0.3, -0.02], [0.5, 0.08], [0.54, 0.24], [0.44, 0.42], [0.24, 0.48], [0.06, 0.38], [0.02, 0.18]], ch.muzzle, 1, 0.35);
+    dab(x, 0.47, 0.16, 0.035, 0.025, 0, '#2a1a12'); line(x, [[0.0, -0.17], [0.2, -0.22], [0.42, -0.16]], 0.05, mix(ch.hair, '#000000', 0.35), 0.8);
+  } else if (k === 'man') {
     blob(x, [[0.36, -0.3], [0.22, -0.5], [-0.05, -0.58], [-0.34, -0.48], [-0.5, -0.2], [-0.5, 0.1], [-0.4, 0.3], [-0.24, 0.28], [-0.215, 0.08], [-0.2, -0.08], [-0.03, -0.21], [0.18, -0.31]], ch.hair);
     dab(x, -0.1, -0.7, 0.2, 0.19, 0, ch.hair); stroke(x, -0.25, -0.56, 0.05, -0.56, 0.035, GOLD, 0.95, -0.15);
+    if (ch.god) { blob(x, [[-0.3, -0.55], [-0.24, -0.9], [-0.1, -1.08], [0.02, -0.9], [0.1, -0.56]], GOLD, 1, 0.3); blob(x, [[-0.24, -0.6], [-0.18, -0.86], [-0.1, -0.98], [-0.06, -0.6]], GOLDSH, 0.7); dab(x, -0.1, -0.72, 0.04, 0.05, 0, '#c41e1e'); }
     stroke(x, -0.2, -0.78, -0.02, -0.8, 0.03, '#3a3a66', 0.7, 0.3); stroke(x, -0.3, -0.36, 0.1, -0.46, 0.03, '#3a3a66', 0.55, 0.2);
   } else if (fem) {
     blob(x, [[0.35, -0.3], [0.22, -0.5], [-0.05, -0.58], [-0.34, -0.48], [-0.5, -0.2], [-0.52, 0.12], [-0.42, 0.38], [-0.25, 0.36], [-0.21, 0.1], [-0.17, -0.1], [0.02, -0.27], [0.2, -0.34]], ch.hair);
     stroke(x, -0.3, -0.36, 0.1, -0.47, 0.03, ch.elder ? '#f4f0ea' : '#3a3a66', 0.55, 0.2);
     if (ch.elder) { for (let i = 0; i < 4; i++) stroke(x, -0.36 + i * 0.1, -0.5 + i * 0.02, -0.2 + i * 0.12, -0.56 + i * 0.03, 0.012, '#9c968e', 0.5, 0.2); dab(x, -0.42, -0.36, 0.16, 0.14, 0, ch.hair); dab(x, 0.3, -0.24, 0.018, 0.05, 0, '#efe6d4'); }
-    else { line(x, [[0.345, -0.31], [0.22, -0.5], [-0.02, -0.575]], 0.05, GOLD); line(x, [[0.345, -0.31], [0.22, -0.5], [-0.02, -0.575]], 0.016, '#fff0b8', 0.8);
+    else if (!ch.plain) { line(x, [[0.345, -0.31], [0.22, -0.5], [-0.02, -0.575]], 0.05, GOLD); line(x, [[0.345, -0.31], [0.22, -0.5], [-0.02, -0.575]], 0.016, '#fff0b8', 0.8);
     poly(x, [[0.16, -0.5], [0.24, -0.66], [0.3, -0.46]], GOLD); dab(x, 0.235, -0.54, 0.028, 0.028, 0, '#c4261e');
     dab(x, 0.33, -0.19, 0.028, 0.03, 0, '#c4261e'); }
+  } else if (monk && ch.sage) {
+    blob(x, [[0.34, -0.32], [0.2, -0.5], [-0.05, -0.57], [-0.34, -0.47], [-0.5, -0.2], [-0.5, 0.12], [-0.38, 0.3], [-0.24, 0.26], [-0.215, 0.06], [-0.2, -0.1], [-0.02, -0.25], [0.18, -0.34]], ch.hair);
+    dab(x, -0.08, -0.74, 0.22, 0.2, 0, ch.hair); dab(x, -0.08, -0.9, 0.14, 0.13, 0, ch.hair);                       // matted jata, coiled high
+    for (let i = 0; i < 5; i++) stroke(x, -0.26 + i * 0.09, -0.62 - (i % 2) * 0.05, -0.2 + i * 0.07, -0.86 + (i % 3) * 0.05, 0.016, mix(ch.hair, '#6a6058', 0.45), 0.6, 0.3);
+    line(x, [[-0.28, -0.6], [-0.08, -0.56], [0.12, -0.6]], 0.03, mix(ch.hair, '#7a6a5a', 0.5), 0.8);          // band of twisted locks
   } else if (monk) {
     dab(x, -0.3, -0.5, 0.1, 0.085, -0.5, ch.hair); stroke(x, -0.34, -0.5, -0.5, -0.36, 0.05, ch.hair, 1, -0.3);
   } else if (dem) {
@@ -92,8 +112,13 @@ function drawHead(x, ch, p) {
   drawEye(x, [0.125, -0.055], 0.105, 0.058, p, iris, fem, ch.hair); drawEye(x, [0.35, -0.062], 0.062, 0.054, p, iris, fem, ch.hair);
   // nose hint
   line(x, [[0.405, 0.145], [0.385, 0.185], [0.42, 0.195]], 0.014, ch.skinSh, 0.8);
-  if (fem && !ch.elder) dab(x, 0.4, 0.15, 0.012, 0.012, 0, GOLD);
+  if (fem && !ch.elder && !ch.plain) dab(x, 0.4, 0.15, 0.012, 0.012, 0, GOLD);
   if (ch.elder) { line(x, [[0.04, -0.33], [0.2, -0.35], [0.36, -0.32]], 0.008, ch.skinSh, 0.55); line(x, [[0.07, -0.29], [0.2, -0.305], [0.33, -0.285]], 0.007, ch.skinSh, 0.45); line(x, [[0.43, 0.2], [0.4, 0.27], [0.36, 0.33]], 0.01, ch.skinSh, 0.6); line(x, [[0.02, 0.0], [0.06, 0.03]], 0.007, ch.skinSh, 0.5); line(x, [[0.02, -0.02], [0.07, -0.0]], 0.006, ch.skinSh, 0.45); }
+  if (ch.sage) {   // long beard from the jaw; the mouth is painted on top of it
+    blob(x, [[-0.14, 0.06], [0.02, 0.24], [0.2, 0.2], [0.44, 0.22], [0.47, 0.36], [0.38, 0.62], [0.24, 0.92], [0.08, 1.02], [-0.04, 0.78], [-0.16, 0.4]], ch.hair, 1, 0.35);
+    for (let i = 0; i < 6; i++) stroke(x, 0.0 + i * 0.07, 0.34 + (i % 2) * 0.05, 0.02 + i * 0.05, 0.86 - i * 0.05, 0.012, mix(ch.hair, '#7a7068', 0.5), 0.55, 0.2);
+    line(x, [[0.16, 0.25], [0.3, 0.215], [0.46, 0.25]], 0.05, ch.hair);                                     // moustache
+  }
   // mouth
   const m = [0.3, 0.3], o = clamp(p.mouth, 0, 1.2), s = p.smile, wN = dem ? 0.13 : 0.088, wF = dem ? 0.075 : 0.055;
   const L = [m[0] - wN, m[1] - s * 0.035 + 0.004], R = [m[0] + wF, m[1] - s * 0.03 - 0.004], lip = fem ? (ch.elder ? '#7e4a48' : '#a6303a') : mix(ch.skinSh, '#5a1e28', 0.5);
@@ -109,7 +134,7 @@ function drawHead(x, ch, p) {
     if (fem) { blob(x, [[L[0] + 0.02, L[1] + 0.008], [m[0], m[1] + s * 0.03 + 0.012], [R[0] - 0.012, R[1] + 0.008], [m[0] + 0.01, m[1] + 0.06 + s * 0.02]], lip, 0.95); blob(x, [[L[0] + 0.015, L[1]], [m[0] - 0.03, m[1] - 0.03], [m[0], m[1] - 0.012], [m[0] + 0.03, m[1] - 0.028], [R[0] - 0.01, R[1]], [m[0], m[1] + s * 0.03 + 0.004]], '#8e2632', 0.95); }
   }
   if (dem) { poly(x, [[L[0] + 0.02, L[1] + 0.03], [L[0] + 0.045, L[1] - 0.11], [L[0] + 0.075, L[1] + 0.03]], '#efe8d6'); poly(x, [[R[0] - 0.05, R[1] + 0.03], [R[0] - 0.03, R[1] - 0.09], [R[0] - 0.005, R[1] + 0.03]], '#efe8d6'); }
-  if (monk) { // big curled moustache
+  if (monk && !ch.sage) { // big curled moustache
     x.strokeStyle = ch.hair; x.lineCap = 'round'; x.lineWidth = 0.075; x.beginPath(); x.moveTo(0.39, 0.225); x.bezierCurveTo(0.26, 0.2, 0.12, 0.34, 0.02, 0.24); x.stroke();
     x.lineWidth = 0.04; x.beginPath(); x.moveTo(0.04, 0.26); x.bezierCurveTo(-0.06, 0.24, -0.06, 0.1, 0.03, 0.12); x.stroke();
     x.lineWidth = 0.06; x.beginPath(); x.moveTo(0.4, 0.225); x.bezierCurveTo(0.47, 0.22, 0.52, 0.28, 0.55, 0.2); x.stroke(); x.lineWidth = 0.03; x.beginPath(); x.moveTo(0.55, 0.21); x.quadraticCurveTo(0.58, 0.14, 0.53, 0.12); x.stroke();
@@ -179,7 +204,7 @@ function figureBody(x, ch, p) {
     const c = far ? mix(skin, skinSh, 0.55) : skin;
     limb(x, shd, a.el, 0.052 * armW, 0.042 * armW, c); limb(x, a.el, a.hand, 0.04 * armW, 0.03 * armW, c);
     if (!far) { limb(x, add(shd, [0.004, 0.012]), add(a.el, [0.004, 0.01]), 0.022 * armW, 0.018 * armW, skinSh, 0.45); }
-    if (fem) { limb(x, shd, [lerp(shd[0], a.el[0], 0.48), lerp(shd[1], a.el[1], 0.48)], 0.058, 0.052, ch.blouse ? (far ? mix(ch.blouse, '#000000', 0.3) : ch.blouse) : far ? '#7a1c1e' : '#b8261e'); if (!ch.elder) for (let i = 0; i < 3; i++) { const t = 0.8 + i * 0.07, c2 = [lerp(a.el[0], a.hand[0], t), lerp(a.el[1], a.hand[1], t)]; dab(x, c2[0], c2[1], 0.02, 0.02, 0, i === 1 ? '#c4261e' : GOLD); } }
+    if (fem) { limb(x, shd, [lerp(shd[0], a.el[0], 0.48), lerp(shd[1], a.el[1], 0.48)], 0.058, 0.052, ch.blouse ? (far ? mix(ch.blouse, '#000000', 0.3) : ch.blouse) : far ? '#7a1c1e' : '#b8261e'); if (!ch.elder && !ch.plain) for (let i = 0; i < 3; i++) { const t = 0.8 + i * 0.07, c2 = [lerp(a.el[0], a.hand[0], t), lerp(a.el[1], a.hand[1], t)]; dab(x, c2[0], c2[1], 0.02, 0.02, 0, i === 1 ? '#c4261e' : GOLD); } }
     if (man) { const c2 = [lerp(shd[0], a.el[0], 0.45), lerp(shd[1], a.el[1], 0.45)]; const an = Math.atan2(a.el[1] - shd[1], a.el[0] - shd[0]); x.save(); x.translate(c2[0], c2[1]); x.rotate(an); x.fillStyle = GOLD; x.fillRect(-0.012, -0.027, 0.024, 0.054); x.fillStyle = GOLDSH; x.fillRect(-0.012, 0.008, 0.024, 0.019); x.restore(); }
     if (dem) { const c2 = [lerp(a.el[0], a.hand[0], 0.82), lerp(a.el[1], a.hand[1], 0.82)]; dab(x, c2[0], c2[1], 0.03, 0.03, 0, GOLDSH); }
     if (handType !== 'namaste') drawHand(x, a.hand, a.el, handType, c, skinSh);
@@ -193,6 +218,7 @@ function figureBody(x, ch, p) {
     for (let i = -4; i <= 4; i++) stroke(x, top[0] + i * 0.07, top[1] + 0.02, top[0] + i * 0.07, top[1] + 0.05, 0.008, '#5a4e42', 0.9);
     dab(x, top[0], top[1] - 0.175, 0.016, 0.02, 0, GOLDSH);
   }
+  if (ch.vanara) { const ph = (p.tail || 0); line(x, [add(hip, [-0.05, 0.0]), add(hip, [-0.2, 0.06]), add(hip, [-0.32 + ph * 0.04, -0.06]), add(hip, [-0.33 + ph * 0.06, -0.22]), add(hip, [-0.26 + ph * 0.05, -0.32])], 0.034, ch.skin); dab(x, hip[0] - 0.26 + ph * 0.05, hip[1] - 0.33, 0.03, 0.03, 0, ch.skinSh); }
   if (ch.bow && p.bow === 'F') drawBow(x, aF.hand, p.bowAng);
   if (ch.bow && p.bow === 'B') drawBow(x, add(N, rot([-0.09, 0.03], lean)), 0.3 + lean);
   drawArm(aF, shF, true, p.handF);
@@ -216,7 +242,7 @@ function figureBody(x, ch, p) {
     blob(x, [[-0.078, hipY - 0.02], [-0.1, hipY + 0.2], [-0.125 + sw, hem - 0.05], [-0.13 + sw, hem], [0.0 + sw, hem + 0.008], [0.145 + sw, hem], [0.135 + sw, hem - 0.06], [0.1, hipY + 0.2], [0.075, hipY - 0.02]], cloth, 1, 0.35);
     blob(x, [[-0.078, hipY - 0.02], [-0.1, hipY + 0.2], [-0.125 + sw, hem - 0.05], [-0.13 + sw, hem], [-0.04 + sw, hem + 0.004], [-0.03, hipY + 0.2], [-0.02, hipY]], clothSh, 0.7, 0.35);
     for (let i = 0; i < 5; i++) stroke(x, 0.045 + i * 0.004, hipY + 0.02, 0.02 + i * 0.03 + sw, hem - 0.03, 0.006, clothSh, 0.7, 0.04);
-    line(x, [[-0.128 + sw, hem - 0.018], [0.0 + sw, hem - 0.008], [0.142 + sw, hem - 0.018]], 0.034, ch.border); if (!ch.elder) line(x, [[-0.126 + sw, hem - 0.044], [0.0 + sw, hem - 0.034], [0.14 + sw, hem - 0.044]], 0.008, GOLD, 0.9);
+    line(x, [[-0.128 + sw, hem - 0.018], [0.0 + sw, hem - 0.008], [0.142 + sw, hem - 0.018]], 0.034, ch.border); if (!ch.elder && !ch.plain) line(x, [[-0.126 + sw, hem - 0.044], [0.0 + sw, hem - 0.034], [0.14 + sw, hem - 0.044]], 0.008, GOLD, 0.9);
     dab(x, 0.07 + sw, hem + 0.004, 0.035, 0.012, 0, skin); dab(x, -0.02 + sw, hem + 0.004, 0.03, 0.011, 0, mix(skin, skinSh, 0.5));
   }
   // --- seated lap (monk)
@@ -231,7 +257,8 @@ function figureBody(x, ch, p) {
     line(x, tp([[0.03, -0.215], [0.06, -0.2], [0.082, -0.215]]), 0.006, skinSh, 0.6);
     if (man) {
       line(x, tp([[0.075, -0.295], [0.02, -0.17], [-0.07, -0.03]]), 0.042, ch.sash); line(x, tp([[0.082, -0.285], [0.03, -0.165], [-0.058, -0.03]]), 0.008, mix(ch.sash, '#ffffff', 0.4), 0.6);
-      line(x, tp([[-0.035, -0.3], [0.02, -0.255], [0.07, -0.292]]), 0.014, GOLD); dab(x, add(hip, rot([0.02, -0.248], lean))[0], add(hip, rot([0.02, -0.248], lean))[1], 0.014, 0.016, 0, '#c4261e');
+      line(x, tp([[-0.035, -0.3], [0.02, -0.255], [0.07, -0.292]]), 0.014, GOLD);
+      if (ch.god) { for (let i = 0; i < 9; i++) { const t = i / 8, q = add(hip, rot([lerp(-0.06, 0.07, t) * bw, -0.3 + Math.sin(t * Math.PI) * 0.17], lean)); dab(x, q[0], q[1], 0.016, 0.016, 0, i % 2 ? '#d42a2a' : '#f0503a'); } } dab(x, add(hip, rot([0.02, -0.248], lean))[0], add(hip, rot([0.02, -0.248], lean))[1], 0.014, 0.016, 0, '#c4261e');
       // hip wrap + pleats
       blob(x, tp([[-0.09, -0.035], [-0.088, 0.07], [0, 0.1], [0.09, 0.065], [0.085, -0.04], [0, -0.055]]), cloth, 1, 0.4);
       blob(x, [add(hip, [0.02, -0.02]), add(hip, [0.075, 0.02]), add(hip, [0.07 + p.pleat, 0.27]), add(hip, [0.0 + p.pleat, 0.285])], mix(cloth, '#ffffff', 0.12), 1, 0.2);
@@ -246,9 +273,9 @@ function figureBody(x, ch, p) {
     blob(x, tp([[-0.085, -0.17], [-0.085, -0.24], [-0.076, -0.3], [-0.02, -0.315], [0.045, -0.31], [0.08, -0.29], [0.092, -0.215], [0.086, -0.17], [0.0, -0.155]]), ch.blouse || '#b8261e', 1, 0.4);
     // pallu drape across the chest to the far shoulder
     blob(x, tp([[-0.086, 0.05], [0.082, 0.05], [0.072, -0.1], [0.098, -0.21], [0.086, -0.3], [0.03, -0.318], [-0.02, -0.22], [-0.075, -0.1]]), cloth, 1, 0.3);
-    line(x, tp([[-0.078, -0.1], [-0.02, -0.22], [0.03, -0.318]]), 0.022, ch.border); if (!ch.elder) line(x, tp([[-0.064, -0.09], [-0.006, -0.212], [0.044, -0.31]]), 0.006, GOLD, 0.9);
+    line(x, tp([[-0.078, -0.1], [-0.02, -0.22], [0.03, -0.318]]), 0.022, ch.border); if (!ch.elder && !ch.plain) line(x, tp([[-0.064, -0.09], [-0.006, -0.212], [0.044, -0.31]]), 0.006, GOLD, 0.9);
     for (let i = 0; i < 3; i++) line(x, tp([[-0.03 + i * 0.03, -0.01], [0.02 + i * 0.022, -0.14], [0.05 + i * 0.012, -0.29]]), 0.005, clothSh, 0.6);
-    line(x, tp([[-0.03, -0.305], [0.01, -0.262], [0.055, -0.3]]), 0.012, ch.elder ? '#5a2e1c' : GOLD);
+    line(x, tp([[-0.03, -0.305], [0.01, -0.262], [0.055, -0.3]]), 0.012, ch.elder || ch.plain ? '#5a2e1c' : GOLD);
   } else if (monk) {
     blob(x, tp([[-0.08, 0.0], [-0.085, -0.1], [-0.092, -0.24], [-0.078, -0.3], [-0.02, -0.315], [0.045, -0.31], [0.085, -0.29], [0.1, -0.2], [0.1, -0.08], [0.08, 0.0], [0, 0.03]]), skin, 1, 0.4);
     blob(x, tp([[-0.086, 0.02], [0.086, 0.02], [0.104, -0.1], [0.1, -0.21], [0.086, -0.3], [0.03, -0.318], [-0.03, -0.2], [-0.09, -0.1]]), cloth, 1, 0.3);
@@ -257,7 +284,7 @@ function figureBody(x, ch, p) {
     for (let i = 0; i < 13; i++) { const t = i / 12, q = add(hip, rot([lerp(-0.03, 0.07, t) * bw, -0.3 + Math.sin(t * Math.PI) * 0.15], lean)); dab(x, q[0], q[1], 0.0085, 0.0085, 0, '#2c1610'); }
   }
   // --- braid (Sita), head
-  if (fem && !ch.elder) { const b0 = add(N, rot([-0.05, -0.06], lean)), b1 = add(N, rot([-0.05, 0.04], lean)), b2 = add(N, rot([0.0, 0.2], lean)); for (let i = 0; i <= 9; i++) { const t = i / 9, q = [(1 - t) * (1 - t) * b0[0] + 2 * t * (1 - t) * b1[0] + t * t * b2[0], (1 - t) * (1 - t) * b0[1] + 2 * t * (1 - t) * b1[1] + t * t * b2[1]]; dab(x, q[0], q[1], lerp(0.022, 0.012, t), lerp(0.026, 0.016, t), (i % 2 ? 0.5 : -0.5), i % 2 ? '#1a1630' : ch.hair); } dab(x, b2[0], b2[1] + 0.012, 0.01, 0.012, 0, GOLD); stroke(x, b2[0], b2[1] + 0.02, b2[0] + 0.004, b2[1] + 0.055, 0.014, ch.hair); }
+  if (fem && !ch.elder) { const BR = ch.plain ? ch.hair : GOLD; const b0 = add(N, rot([-0.05, -0.06], lean)), b1 = add(N, rot([-0.05, 0.04], lean)), b2 = add(N, rot([0.0, 0.2], lean)); for (let i = 0; i <= 9; i++) { const t = i / 9, q = [(1 - t) * (1 - t) * b0[0] + 2 * t * (1 - t) * b1[0] + t * t * b2[0], (1 - t) * (1 - t) * b0[1] + 2 * t * (1 - t) * b1[1] + t * t * b2[1]]; dab(x, q[0], q[1], lerp(0.022, 0.012, t), lerp(0.026, 0.016, t), (i % 2 ? 0.5 : -0.5), i % 2 ? '#1a1630' : ch.hair); } dab(x, b2[0], b2[1] + 0.012, 0.01, 0.012, 0, BR); stroke(x, b2[0], b2[1] + 0.02, b2[0] + 0.004, b2[1] + 0.055, 0.014, ch.hair); }
   limb(x, add(N, rot([0.005, 0.01], lean)), add(HC, rot([-0.012, 0.045], headRot)), 0.056 * (dem ? 1.5 : monk ? 1.25 : fem ? 0.82 : 1), 0.048 * (dem ? 1.4 : monk ? 1.2 : fem ? 0.82 : 1), mix(skin, skinSh, 0.55));
   x.save(); x.translate(HC[0], HC[1]); x.rotate(headRot); x.scale(HS, HS); drawHead(x, ch, p); x.restore();
   // --- near arm + things held in the near hand

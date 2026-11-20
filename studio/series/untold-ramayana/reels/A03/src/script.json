@@ -74,7 +74,7 @@
   "#Ramayana",
   "#Valmiki",
   "#UntoldRamayana",
-  "#IndianMythology"
+  "#Sanatan"
  ],
  "shots": [
   {
@@ -317,11 +317,12 @@
   }
  ],
  "thumbnail": {
-  "frame": "",
+  "frame": "52.8s",
   "hook": "Did a stone really turn into a woman?",
   "stamp": "Not in Valmiki",
   "line": "No stone. Rama touched her feet.",
-  "badge": "Valmiki Ramayana · Bala 1.47–48"
+  "badge": "Valmiki Ramayana · Bala 1.47–48",
+  "art_shift": 150
  },
  "score": {
   "engine": "elevenlabs eleven_music_v2_5",

@@ -316,3 +316,92 @@ function pampa(ctx, bg, cam, t, mid) {
   withCam(ctx, cam, bg.mid.depth, c => { glow(c, bg.alt[0], bg.alt[1] - 90, 120, '#ffcf70', 0.18 + 0.06 * Math.sin(t * 2.3)); });   // the altar still glows
   if (mid) withCam(ctx, cam, 0.6, mid);
 }
+
+// ---- A03: Sage Gautama's deserted hermitage on the way to Mithila (overgrown hut, cold ash altar, smoky air) ----
+// tod: 'dusk'. Anchors: alt = the ash altar where Ahalya keeps her penance; hut = the empty hut.
+function buildGautama(tod = 'dusk') {
+  const r = rng(91);
+  const sky = newLayer(0.05), far = newLayer(0.25), mid = newLayer(0.6), fg = newLayer(1.25);
+  paintSky(sky.x, r, tod, [760, 300, 58]);
+  paintHills(far.x, r, tod);
+  for (let i = 0; i < 9; i++) paintTree(far.x, r, -40 + i * 150 + r() * 60, HORIZON + 40, 260 + r() * 140, 110, { n: 50, litDir: i % 2 ? 1 : -1 });   // the forest closing in
+  paintGround(mid.x, r, HORIZON + 170, tod, { path: [560, 1200, 90], pathDx: 120 });
+  paintTree(mid.x, r, 1000, 1150, 820, 300, { n: 240, litDir: -1 });
+  paintHut(mid.x, r, 790, 1180, 420, 440, { glowA: 0.0, moonSide: 1 });
+  // creepers over the empty hut + fallen thatch
+  for (let i = 0; i < 46; i++) { const px = 600 + r() * 380, py = 840 + r() * 300; stroke(mid.x, px, py, px + (r() - 0.5) * 30, py + 40 + r() * 70, 3, jit('#2f5a3e', r, 10), 0.8, 0.2); dab(mid.x, px, py + 20, 9, 5, r() * 3, jit('#3c7048', r, 10), 0.85); }
+  // the old fire altar: stepped bricks under a mound of grey ash (no fire for years)
+  const alt = [400, 1262];
+  [[140, 30, '#5c3a30'], [108, 26, '#6e4636']].forEach(([w, h, c], k) => { const y = alt[1] - k * 26; blob(mid.x, [[alt[0] - w, y], [alt[0] + w, y], [alt[0] + w - 10, y - h], [alt[0] - w + 10, y - h]], jit(c, r, 8), 1, 0.12); stroke(mid.x, alt[0] - w + 10, y - h, alt[0] + w - 10, y - h, 3, '#a07060', 0.5); });
+  blob(mid.x, [[alt[0] - 92, alt[1] - 50], [alt[0] - 60, alt[1] - 74], [alt[0], alt[1] - 84], [alt[0] + 66, alt[1] - 72], [alt[0] + 94, alt[1] - 50]], '#8c8a90', 1, 0.4);
+  for (let i = 0; i < 30; i++) dab(mid.x, alt[0] - 80 + r() * 160, alt[1] - 56 - r() * 22, 6 + r() * 8, 3 + r() * 3, 0, jit('#b4b2b8', r, 10), 0.8);
+  // scattered dry leaves and a broken water pot
+  for (let i = 0; i < 60; i++) dab(mid.x, 140 + r() * 860, HORIZON + 230 + r() * 260, 6 + r() * 5, 3, r() * 3, jit('#8a5a32', r, 14), 0.7);
+  dab(mid.x, 640, 1268, 26, 20, 0, '#5d3830'); poly(mid.x, [[628, 1250], [650, 1246], [646, 1262]], '#2a1a18');
+  paintTree(mid.x, r, 90, 1300, 1080, 420, { n: 360, litDir: 1 });
+  const f = fg.x;
+  for (let i = 0; i < 260; i++) { const px = -M + r() * (W + 2 * M), py = H + 40 + r() * 60, hh = 120 + r() * 200; stroke(f, px, py, px + (r() - .5) * 120, py - hh, 6 + r() * 9, jit(r() < .15 ? '#18404a' : '#050d1c', r, 6), 1, (r() - .5) * .5); }
+  return { tod, layers: [sky, far, mid, fg], sky, far, mid, fg, alt, hut: [790, 1180] };
+}
+// draws the set with live drifting smoke (Valmiki: she appears "like the full moon veiled by smoke")
+function gautamaSet(ctx, bg, cam, t, mid, smoke = 1) {
+  drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); drawLayer(ctx, cam, bg.mid);
+  withCam(ctx, cam, bg.mid.depth, c => mist(c, t, 31, 7, [-200, 950, 1500, 380], '#c8c2d8', 0.16 * smoke, 14));
+  if (mid) withCam(ctx, cam, 0.6, mid);
+}
+
+// ---- A04: the southern shore — open sea at dusk, Lanka a dark line on the horizon (bridge drawn live by bridge()) ----
+const SHORE_Y = 1440, BRIDGE_VP = [900, HORIZON + 2];   // the road runs to Lanka (right of the horizon)
+function buildShore(tod = 'dusk') {
+  const r = rng(404);
+  const sky = newLayer(0.05), far = newLayer(0.25), mid = newLayer(0.6), fg = newLayer(1.25);
+  paintSky(sky.x, r, tod, [300, 330, 56]);
+  // Lanka: a low dark island line on the right of the horizon
+  blob(far.x, [[760, HORIZON + 4], [820, HORIZON - 26], [900, HORIZON - 40], [990, HORIZON - 30], [1060, HORIZON - 44], [1160, HORIZON - 18], [1200, HORIZON + 4]], '#1a1838', 0.95, 0.3);
+  // the sea: wide band, darker towards the shore
+  const sea = tod === 'dusk' ? [[0, '#8a5a86'], [.18, '#4a3a7c'], [.6, '#26306a'], [1, '#14204a']] : [[0, '#3c3a7c'], [.4, '#222864'], [1, '#121844']];
+  wash(far.x, r, -M, HORIZON - 4, W + 2 * M, SHORE_Y - HORIZON + 40, sea, { n: 520, alpha: 0.55, th: [6, 18], len: [160, 520] });
+  for (let i = 0; i < 160; i++) { const t = Math.pow(r(), 1.6), y = lerp(HORIZON + 6, SHORE_Y - 10, t), w = 30 + t * 220; stroke(far.x, -M + r() * (W + 2 * M), y, -M + r() * (W + 2 * M) + w, y + (r() - .5) * 4, 2 + t * 6, jit(r() < .3 ? '#a8a0d8' : '#2e3a7a', r, 10), 0.35 + t * 0.3); }
+  // beach + rocks + palms
+  const m = mid.x;
+  m.save(); m.beginPath(); m.moveTo(-M, SHORE_Y); for (let i = 0; i <= 20; i++) m.lineTo(-M + i * (W + 2 * M) / 20, SHORE_Y + Math.sin(i * 1.3) * 10); m.lineTo(W + M, H + M); m.lineTo(-M, H + M); m.closePath(); m.clip();
+  wash(m, r, -M, SHORE_Y - 10, W + 2 * M, H + M - SHORE_Y, [[0, '#b89a7c'], [.2, '#8a6e5e'], [1, '#3a2c34']], { n: 360, alpha: 0.5, th: [12, 40], len: [120, 380] });
+  for (let i = 0; i < 400; i++) dab(m, -M + r() * (W + 2 * M), SHORE_Y + r() * 520, 2 + r() * 3, 1.5, 0, jit('#d8c0a0', r, 20), 0.5);
+  m.restore();
+  [[110, SHORE_Y + 60, 70], [990, SHORE_Y + 90, 90], [880, SHORE_Y + 40, 46]].forEach(([px, py, s]) => { blob(m, [[px - s, py], [px - s * 0.7, py - s * 0.6], [px, py - s * 0.8], [px + s * 0.8, py - s * 0.5], [px + s, py]], jit('#3c3448', r, 8), 1, 0.3); stroke(m, px - s * 0.5, py - s * 0.5, px + s * 0.3, py - s * 0.7, 4, '#6a6080', 0.5); });
+  paintTree(m, r, 40, SHORE_Y + 160, 900, 260, { n: 160, litDir: 1 });
+  paintTree(m, r, 1090, SHORE_Y + 200, 980, 300, { n: 180, litDir: -1 });
+  const f = fg.x;
+  for (let i = 0; i < 200; i++) { const px = -M + r() * (W + 2 * M), py = H + 40 + r() * 60, hh = 90 + r() * 150; stroke(f, px, py, px + (r() - .5) * 120, py - hh, 6 + r() * 9, jit(r() < .15 ? '#18404a' : '#0a0c18', r, 6), 1, (r() - .5) * .5); }
+  return { tod, layers: [sky, far, mid, fg], sky, far, mid, fg };
+}
+// live sea: glitter + foam lines along the shore
+function seaLive(ctx, t, a = 1) {
+  for (let i = 0; i < 90; i++) { const h1 = hash(i * 3.1), h2 = hash(i * 7.7), y = HORIZON + 10 + Math.pow(h2, 1.5) * (SHORE_Y - HORIZON - 30), x = h1 * (W + 200) - 100 + Math.sin(t * (0.4 + h2) + i) * 20;
+    stroke(ctx, x, y, x + 20 + h2 * 80, y, 2 + h2 * 4, Math.abs(h1 * W - 300) < 140 ? '#f1e6c4' : '#b8b0e8', a * (0.2 + 0.5 * Math.pow(0.5 + 0.5 * Math.sin(t * (1 + h1 * 2) + i * 2.1), 2))); }
+  for (let k = 0; k < 3; k++) { const ph = (t * 0.25 + k / 3) % 1, y = SHORE_Y - 30 + ph * 36; ctx.globalAlpha = a * 0.5 * Math.sin(ph * Math.PI); ctx.strokeStyle = '#f4ecf8'; ctx.lineWidth = 4; ctx.beginPath(); for (let i = 0; i <= 24; i++) { const x = -40 + i * 48; ctx.lineTo(x, y + Math.sin(i * 1.7 + t * 2 + k) * 6); } ctx.stroke(); ctx.globalAlpha = 1; }
+}
+// the causeway of trees and rocks, lying ON the sea, from the near shore towards Lanka; prog 0..1 = how far it reaches
+function bridge(ctx, prog, t, glowA = 0) {
+  if (prog <= 0) return;
+  const y0 = SHORE_Y + 10, y1 = BRIDGE_VP[1], K = Math.pow(prog, 0.7), yEnd = lerp(y0, y1, K);
+  // perspective: depth z = 1/(y - horizon); width and x follow z so the road narrows smoothly to Lanka
+  const ed = y => { const d = Math.max(2, y - HORIZON), s = d / (y0 - HORIZON), cx = lerp(BRIDGE_VP[0], 520, s), w = 190 * s; return [cx - w, cx + w, s]; };
+  const path = (side) => { const pts = []; for (let y = y0; y >= yEnd; y -= 4) pts.push([ed(y)[side], y]); return pts; };
+  const L = path(0), R = path(1);
+  // side face (thickness) + water line
+  ctx.beginPath(); L.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); for (let i = L.length - 1; i >= 0; i--) { const s = ed(L[i][1])[2]; ctx.lineTo(L[i][0] - 4 * s, L[i][1] + 26 * s); } ctx.closePath(); ctx.fillStyle = '#2a2230'; ctx.fill();
+  ctx.beginPath(); R.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); for (let i = R.length - 1; i >= 0; i--) { const s = ed(R[i][1])[2]; ctx.lineTo(R[i][0] + 4 * s, R[i][1] + 26 * s); } ctx.closePath(); ctx.fillStyle = '#221c28'; ctx.fill();
+  // top surface
+  ctx.beginPath(); L.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); for (let i = R.length - 1; i >= 0; i--) ctx.lineTo(R[i][0], R[i][1]); ctx.closePath(); ctx.fillStyle = '#5a5060'; ctx.fill();
+  // rocks and logs, smaller with distance
+  for (let i = 0; i < 420; i++) { const k = Math.pow(hash(i * 1.37), 1.8), y = lerp(y0, y1, k); if (y < yEnd) continue; const [a, b, s] = ed(y), x = lerp(a, b, hash(i * 5.3));
+    if (i % 5 === 0) stroke(ctx, x - 26 * s, y, x + 26 * s, y - 3 * s, 6 * s + 0.5, '#6a4a30', 0.95); else dab(ctx, x, y, 13 * s + 0.6, 6 * s + 0.4, hash(i) * 3, ['#7a7086', '#635a70', '#8e8698', '#544c60'][i % 4], 0.95); }
+  // foam along both edges
+  for (let y = y0; y >= yEnd; y -= 10) { const [a, b, s] = ed(y), w = Math.sin(t * 2 + y * 0.05) * 3 * s; stroke(ctx, a - 10 * s, y + 24 * s + w, a + 4 * s, y + 22 * s, 3 * s + 0.5, '#e8eef8', 0.5); stroke(ctx, b - 4 * s, y + 22 * s, b + 10 * s, y + 24 * s - w, 3 * s + 0.5, '#e8eef8', 0.5); }
+  if (glowA > 0) { ctx.save(); ctx.globalCompositeOperation = 'lighter'; for (let y = y0; y >= yEnd; y -= 8) { const [a, b, s] = ed(y); dab(ctx, (a + b) / 2, y, (b - a) * 0.55, 3 * s + 1, 0, '#ffe8a0', glowA * 0.07); } ctx.restore(); }
+}
+function shore(ctx, bg, cam, t, mid, prog = 0, glowA = 0) {
+  drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); withCam(ctx, cam, bg.far.depth, c => seaLive(c, t)); withCam(ctx, cam, bg.far.depth, c => bridge(c, prog, t, glowA));
+  drawLayer(ctx, cam, bg.mid); if (mid) withCam(ctx, cam, 0.6, mid);
+}

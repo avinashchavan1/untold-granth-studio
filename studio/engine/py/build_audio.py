@@ -147,10 +147,14 @@ for _f in ("score.wav", "score.mp3"):
     if not os.path.exists(_p): continue
     _raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", _p, "-f", "f32le", "-ac", "2", "-ar", str(SR), "-"], capture_output=True, check=True).stdout
     _sc = np.frombuffer(_raw, dtype=np.float32).astype(np.float64).reshape(-1, 2)
-    if len(_sc) < N: _sc = np.concatenate([_sc, np.zeros((N - len(_sc), 2))])     # shorter score: silence after it (end fade covers it)
-    _sc = _sc[:N]; _sc[: int(0.25 * SR)] *= np.linspace(0, 1, int(0.25 * SR))[:, None]
+    _L = min(len(_sc), N); _sc = np.concatenate([_sc[:_L], np.zeros((N - _L, 2))]); _sc[: int(0.25 * SR)] *= np.linspace(0, 1, int(0.25 * SR))[:, None]
     _ref = np.sqrt(np.mean(music ** 2)); _ref = _ref if _ref > 1e-5 else 0.05
-    music = _sc / (np.sqrt(np.mean(_sc[: int(TOTAL * SR)] ** 2)) + 1e-9) * _ref * float(json.load(open(os.path.join(ROOT, "src", "script.json"), encoding="utf-8")).get("score", {}).get("gain", 1.0))
+    _sc = _sc / (np.sqrt(np.mean(_sc[: min(_L, int(TOTAL * SR))] ** 2)) + 1e-9) * _ref * float(json.load(open(os.path.join(ROOT, "src", "script.json"), encoding="utf-8")).get("score", {}).get("gain", 1.0))
+    if _L < N:   # score shorter than the reel: crossfade (2 s) into the synthesized bed so the end card is never silent
+        _x = max(0, _L - 2 * SR); _w = np.ones(N); _w[_x:_L] = np.linspace(1, 0, _L - _x); _w[_L:] = 0
+        _sc = _sc * _w[:, None] + music * (1 - _w)[:, None]
+        print(f"score ends at {_L / SR:.1f}s of {N / SR:.1f}s: crossfaded into the synthesized bed")
+    music = _sc
     print("score:", _f, f"{len(_raw) / 8 / SR:.1f}s, level matched to the synthesized bed"); break
 
 # ---------------- voices ----------------

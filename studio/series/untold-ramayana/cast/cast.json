@@ -91,6 +91,30 @@
    "mix_gain": 1.0,
    "chosen": "Claude, A03 audition (5 candidates: 3 Chatterbox/FLEURS + 2 ElevenLabs); ASR 0.91, oldest timbre — minor character rule",
    "audition": "cast/audition/gautama/"
+  },
+  "sagara": {
+   "engine": "elevenlabs",
+   "voice_id": "qDuRKMlYmrm8trt5QyBn",
+   "name": "Taksh - Calm, Serious and Smooth (ElevenLabs library)",
+   "model": "eleven_v4",
+   "language": "hi",
+   "character": "the Ocean god: vast, calm, majestic",
+   "fx": "highpass=f=50,acompressor=threshold=-22dB:ratio=2:attack=12:release=180:makeup=1.5,aecho=0.85:0.4:90|160:0.18|0.1",
+   "mix_gain": 1.0,
+   "chosen": "Claude, A04 audition (Taksh/Yatin/Shivank, ElevenLabs): ASR 0.88, deepest (f0 113 Hz), suited to divine epics — minor character rule",
+   "audition": "cast/audition/sagara/"
+  },
+  "nala": {
+   "engine": "elevenlabs",
+   "voice_id": "tVeibrRmkweME2rrFZAs",
+   "name": "Abhii - Energetic and Natural (ElevenLabs library)",
+   "model": "eleven_v4",
+   "language": "hi",
+   "character": "Nala, young vanara engineer, son of Vishvakarma: eager but modest",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "chosen": "Claude, A04 audition (Viraj/Sudhir/Abhii, ElevenLabs): ASR 0.88, youngest timbre (f0 158 Hz), distinct from narrator — minor character rule",
+   "audition": "cast/audition/nala/"
   }
  },
  "fx": {
@@ -103,5 +127,6 @@
  },
  "previous_narrators": "voices_v1/ (IndicTTS), voices_v2/ (IndicTTS), IndicVoices-R v6 option F (cast/voices/narrator.wav), audition alternates",
  "how_to_add_a_character": "1) find a natural CC-BY/CC0 reference clip (8-12 s, clean, one speaker; FLEURS/IndicVoices-R) 2) make_reel.py audition 3) lock: copy to voices/<name>.wav and add an entry here with source + licence. Never clone a real person's voice without written consent.",
- "voice_choice_rule": "User chooses voices only for major characters (series.json → major_characters). Claude chooses minor characters' voices."
+ "voice_choice_rule": "User chooses voices only for major characters (series.json → major_characters). Claude chooses minor characters' voices.",
+ "engine_rule": "All voices are ElevenLabs (user, Nov 2026). Chatterbox voices stay only on reels already made (A01–A03)."
 }
