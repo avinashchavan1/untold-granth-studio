@@ -20,6 +20,7 @@ const CH = {
   matali:  { kind: 'man', skin: '#c89a78', skinSh: '#8a6a60', cloth: '#e8d8b0', clothSh: '#a8987a', sash: '#4a7ab8', hair: '#14101c' },                         // Indra's charioteer
   indra:   { kind: 'man', god: true, skin: '#e8c08a', skinSh: '#b08a66', cloth: '#e6b450', clothSh: '#a87a2a', sash: '#c41e1e', hair: '#14101c' },   // A89: king of the gods, on Airavata
   jambavan: { kind: 'man', vanara: true, bear: true, elder: true, band: true, skin: '#7a6e66', skinSh: '#4a403c', muzzle: '#d8cfc2', ruff: '#f2eee6', cloth: '#8a1a1c', clothSh: '#561018', sash: '#e6b450', hair: '#9a8e84' },   // A23: Jambavan, aged king of the bears, son of Prajapati (6.61.14): silvered fur, white brows and beard, gold band, deep red cloth
+  sushena: { kind: 'man', vanara: true, elder: true, skin: '#9a7a5a', skinSh: '#5e4a3a', muzzle: '#e8d6bc', cloth: '#e6dcc4', clothSh: '#a89c84', sash: '#3a8a68', hair: '#c8c0b4' },   // A23: Sushena, the vanara chief who heals Lakshmana (6.89): greying, pale cloth, green sash (Claude's pick, minor)
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';

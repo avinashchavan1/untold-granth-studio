@@ -554,3 +554,39 @@ function vajra(c, x0, y0, x1, y1, k, t, seed = 3) {
 function windSwirl(c, x, y, rad, t, a = 1) {
   for (let i = 0; i < 7; i++) { const ph = t * 1.6 + i * 0.9, pts = []; for (let j = 0; j < 14; j++) { const an = ph + j * 0.32, rr = rad * (0.6 + 0.5 * j / 14) * (1 + 0.15 * Math.sin(i)); pts.push([x + Math.cos(an) * rr, y + Math.sin(an) * rr * 0.55]); } line(c, pts, 5 - i * 0.4, i % 2 ? '#bfe6ff' : '#e6f6ff', 0.45 * a); }
 }
+
+// ---- A23: the Himalaya at night: Kailasa (white, left) and golden Rishabha (right); the herb mountain is drawn live (herbPeak) ----
+const HIM_BASE = 1240;
+function buildHimalaya() {
+  const r = rng(623), sky = newLayer(0.05), far = newLayer(0.25), mid = newLayer(0.6), fg = newLayer(1.25);
+  wash(sky.x, r, -M, -M, W + 2 * M, H + 2 * M, [[0, '#070a24'], [.4, '#16204a'], [.7, '#2a3a6a'], [1, '#4a5a8a']], { n: 520, alpha: 0.45, th: [26, 80], len: [240, 700] });
+  for (let i = 0; i < 160; i++) dab(sky.x, -M + r() * (W + 2 * M), -M + r() * 900, 1 + r() * 2.2, 1 + r() * 2.2, 0, '#eef0ff', 0.2 + r() * 0.6);
+  // distant snow ranges
+  [['#3a4a7a', 260, 1.2, 0, 700], ['#2a365e', 200, 1.6, 0, 820]].forEach(([col, amp, rough, k, hz]) => { const pts = ridge(r, -M, W + M, hz, amp, 30, rough), x = far.x; x.beginPath(); x.moveTo(-M, H + M); pts.forEach(p => x.lineTo(p[0], p[1])); x.lineTo(W + M, H + M); x.closePath(); x.fillStyle = col; x.fill();
+    pts.forEach((p, i) => { if (i % 2 === 0 && p[1] < hz) dab(x, p[0], p[1] + 14, 26, 10, 0, '#dfe6ff', 0.35); }); });
+  // Kailasa: a white dome-peak (left); Rishabha: golden (right)
+  blob(far.x, [[-60, 900], [60, 520], [170, 430], [280, 520], [400, 900]], '#cfd8f4', 1, 0.35); blob(far.x, [[60, 600], [170, 450], [250, 560], [170, 620]], '#ffffff', 0.6, 0.4);
+  blob(far.x, [[700, 900], [820, 560], [930, 470], [1040, 560], [1160, 900]], '#b88a3a', 1, 0.35); blob(far.x, [[820, 620], [930, 490], [1010, 600], [930, 660]], '#f6c244', 0.7, 0.4);
+  wash(mid.x, r, -M, HIM_BASE - 40, W + 2 * M, H + M - HIM_BASE, [[0, '#28304e'], [.4, '#1a1e36'], [1, '#0a0c1a']], { n: 380, alpha: 0.55, th: [14, 44], len: [120, 420] });
+  for (let i = 0; i < 40; i++) { const px = -M + r() * (W + 2 * M), py = HIM_BASE + r() * 160; dab(mid.x, px, py, 50 + r() * 60, 18 + r() * 14, 0, '#c8d0ee', 0.18); }
+  const f = fg.x; for (let i = 0; i < 120; i++) { const px = -M + r() * (W + 2 * M), py = H + 40 + r() * 60, hh = 50 + r() * 110; stroke(f, px, py, px + (r() - .5) * 80, py - hh, 6 + r() * 9, jit('#0a0c18', r, 6), 1, (r() - .5) * .5); }
+  return { layers: [sky, far, mid, fg], sky, far, mid, fg };
+}
+function himalaya(ctx, bg, cam, t, mid) { drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); drawLayer(ctx, cam, bg.mid); if (mid) withCam(ctx, cam, 0.6, mid); drawLayer(ctx, cam, bg.fg); }
+// the herb mountain / its torn-off peak: base centre (x, y), height s. o.glow 0..1 (the mountain's own blaze, 6.61.55-56),
+// o.herbs 0..1 (the four shining herbs; 0 = hidden, 6.61.58), o.root 0..1 (a ragged torn base when carried)
+function herbPeak(c, x, y, s, t, o = {}) {
+  const g = o.glow === undefined ? 1 : o.glow, hb = o.herbs === undefined ? 1 : o.herbs;
+  c.save(); c.translate(x, y); c.scale(s, s);
+  if (g > 0) { glow(c, 0, -0.45, 1.1, '#ffd890', 0.35 * g); glow(c, 0, -0.5, 0.6, '#c8ffb0', 0.25 * g); }
+  blob(c, [[-0.62, 0], [-0.46, -0.36], [-0.28, -0.6], [-0.1, -0.9], [0.06, -1.0], [0.2, -0.78], [0.38, -0.56], [0.56, -0.28], [0.66, 0]], '#4a5a52', 1, 0.3);
+  blob(c, [[0.06, -1.0], [0.2, -0.78], [0.38, -0.56], [0.56, -0.28], [0.66, 0], [0.2, 0], [0.12, -0.5]], '#33403e', 0.8, 0.3);
+  blob(c, [[-0.1, -0.9], [0.06, -1.0], [0.2, -0.78], [0.1, -0.74], [0.0, -0.8], [-0.1, -0.76]], '#eef2ff', 0.95, 0.3);          // snow cap
+  for (let i = 0; i < 14; i++) { const a = hash(i * 3.1), b = hash(i * 7.7), px = -0.45 + a * 0.95, py = -0.08 - b * 0.5 * (1 - Math.abs(px)); dab(c, px, py, 0.05, 0.07, 0, i % 3 ? '#2e5a3a' : '#3e7a46', 0.9); }   // trees
+  for (let i = 0; i < 5; i++) dab(c, -0.3 + i * 0.15, -0.2 - (i % 2) * 0.12, 0.02, 0.012, 0, '#f6c244', 0.7);          // gold veins (6.61.61: 'with gold, thousands of minerals')
+  if (o.root) for (let i = 0; i < 8; i++) { const px = -0.52 + i * 0.15; dab(c, px, 0.02, 0.09, 0.035 + hash(i) * 0.03 * o.root, 0, i % 2 ? '#6a4a34' : '#5a3e2a', o.root); }   // torn earth under the lifted peak
+  if (hb > 0) [[-0.22, -0.42], [0.1, -0.58], [0.28, -0.3], [-0.04, -0.24]].forEach(([hx, hy], i) => { const tw = 0.75 + 0.25 * Math.sin(t * 3 + i * 1.7); glow(c, hx, hy, 0.16, ['#b8ffb0', '#fff0a0', '#ffd27a', '#c8f0ff'][i], 0.8 * hb * tw); dab(c, hx, hy, 0.022, 0.022, 0, '#ffffff', hb); });
+  c.restore();
+}
+// a hand-held torch: flame tip at (x, y)
+function torch(c, x, y, t, seed = 0, a = 1) { stroke(c, x, y + 10, x - 6, y + 120, 9, '#4a2e1a', a); glow(c, x, y, 220, '#ffb050', 0.35 * a); flame(c, x, y, 18, t, seed); }

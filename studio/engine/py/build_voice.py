@@ -21,6 +21,7 @@ FORCE = {(i, int(u)): k for i, sh in SH.items() for u, k in sh.get("force_take",
 FX = {v: c.get("fx", "anull") for v, c in CAST.items()}
 POST = {v: c.get("post", []) for v, c in CAST.items()}
 ASRCUT = {v: c.get("asr_cut", True) for v, c in CAST.items()}
+NOCUT = {(i, int(u)) for i, sh in SH.items() for u in sh.get("no_cut", [])}   # units whose last word ASR mishears: keep the whole take (A23 "इकसठ")
 TEMPO = 1.0   # never speed up the narrator (user rule)
 asr = WhisperModel("small", device="cpu", compute_type="int8")
 norm = lambda s: re.sub(r"[^ऀ-ॿ]", "", s).replace("़", "")
@@ -92,7 +93,7 @@ def voice_track(sid, s, ulist, var=""):
             p = os.path.join(CB, f"s{sid:02d}{var}_{i}_t{k}.wav")
             if not os.path.exists(p): continue
             x, sr0 = read_wav(p); x = trim(x, sr0)
-            x, h, sim = cut_to_line(x, sr0, txt) if ASRCUT[v] else (x, heard(x, sr0), None)
+            x, h, sim = cut_to_line(x, sr0, txt) if ASRCUT[v] and (sid, i) not in NOCUT else (x, heard(x, sr0), None)
             if sim is None: sim = difflib.SequenceMatcher(None, norm(txt), norm(h)).ratio()
             if not NSENT.get(sid): x = squeeze(x, sr0, 0.24 if len(ulist) == 1 else 0.22)
             cands.append(dict(k=k, x=x, dur=len(x) / sr0, h=h, sim=sim, f0=pitch(x, sr0)))

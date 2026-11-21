@@ -156,7 +156,8 @@ function quoteCard(ctx, u, sh, t, post, Q) {
   post.ui = c => {
     const q0 = ease(u, 0.05, 0.4); if (q0 > 0) { text(c, Q.source, 540, 330, { size: 72, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); text(c, Q.ref, 540, 394, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }); }
     const q1 = ease(u, 0.2, 0.7); if (q1 > 0) { Q.lines.forEach((l, i) => textFit(c, l, 540, 560 + i * 116 + (1 - q1) * 14, { size: 84, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, 980));
-      textFit(c, Q.translit, 540, 790, { size: 33, font: 'Montserrat', weight: 600, color: C_IVORY, alpha: 0.85 * q1, stroke: 5 }, 960); }
+      const tl = Q.translit.length > 80 && Q.translit.includes(', ') ? Q.translit.split(', ') : [Q.translit];      // long verses: one line per half
+      tl.forEach((l, i) => textFit(c, l + (i < tl.length - 1 ? ',' : ''), 540, 790 + i * 44 - (tl.length - 1) * 10, { size: 33, font: 'Montserrat', weight: 600, color: C_IVORY, alpha: 0.85 * q1, stroke: 5 }, 960)); }
     const at = Q.enAt || 3.5, q2 = ease(u, at, at + 0.45); if (q2 > 0) { const w = Q.en.split(' '), h = Math.ceil(w.length / 2);
       [w.slice(0, h).join(' '), w.slice(h).join(' ')].forEach((l, i) => textFit(c, l, 540, 905 + i * 60, { size: 44, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: q2, stroke: 6, shadow: 20 }, 960)); }
   };
