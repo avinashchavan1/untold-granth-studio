@@ -36,7 +36,8 @@
 | A92 | Ravana teaching Lakshmana at death isn't in Valmiki | M | Yuddha · 108 (CE 97, 100) | ● | ★★★ Viral WhatsApp story; huge recognition. Absence claim: full search |
 | A53 | How Ravana actually died | R | Yuddha · 107–108 (CE 96–97) | ●●● | ★★★ Navel-nectar arrow is famous; pairs with A92 (same chapters). The Brahmastra to the chest; no navel-nectar arrow ⚠ the navel story is later |
 | A89 | Baby Hanuman leapt at the sun | R | Kishkindha · 66; Uttara · 35 | ●● | ★★★ Everyone knows it; reveal what Valmiki actually says. |
-| A23 | Hanuman brought the mountain twice | R | Yuddha · 74, 101 | ●●● | ★★★ Sanjeevani is iconic; Hanuman. Two herb-mountain trips ⚠ verify both in CE |
+| A23 | Hanuman took the mountain back (herb mountain, trip 1 of 2) | R | Yuddha · CE 61 (vulgate 74) | ●●● Jambavan, Himalaya | ★★★ Sanjeevani is iconic. CE 6.61: blind Jambavan asks for Hanuman first; herbs hide; fragrance heals; mountain carried back (6.61.68). Split from one 194 s cut (owner, Nov 21 2026) |
+| A101 | Who struck Lakshmana? The second mountain (trip 2 of 2) | M | Yuddha · CE 88–89 (vulgate 101–102) | ●● Sushena | ★★★ follows A23 (post the next day). Ravana's spear, not Meghnad's (6.88.31); 'I brought the whole peak' (6.89.21); Chalisa 11 + Manas Lanka quote cards |
 | A18 | No Sita swayamvara crowd at the bow | M | Bala · 66–67 | ●●● Janaka, bow | ★★★ Swayamvara is in every TV serial; Bala layer. The bow was a bride-price; Rama breaks it on a visit ⚠ Bala 📅 Post on Vivah Panchami (Mon 14 Dec 2026): make it right after A23. |
 | A17 | Urmila's 14-year sleep isn't in Valmiki | M | (whole text) | ● | ★★★ Urmila's sleep is widely shared; absence claim needs full search. Absence claim: needs a full search; Nidra legend is later |
 | A82 | Who was Shanta? | M | Bala · 11 | ●● | ★★★ 'Rama had a sister?' drives debate. Popular: Rama's sister; Valmiki calls her Romapada's daughter ⚠ verify |
