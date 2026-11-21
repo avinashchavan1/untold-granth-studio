@@ -37,10 +37,10 @@
 | A53 | How Ravana actually died | R | Yuddha · 107–108 (CE 96–97) | ●●● | ★★★ Navel-nectar arrow is famous; pairs with A92 (same chapters). The Brahmastra to the chest; no navel-nectar arrow ⚠ the navel story is later |
 | A89 | Baby Hanuman leapt at the sun | R | Kishkindha · 66; Uttara · 35 | ●● | ★★★ Everyone knows it; reveal what Valmiki actually says. |
 | A23 | Hanuman brought the mountain twice | R | Yuddha · 74, 101 | ●●● | ★★★ Sanjeevani is iconic; Hanuman. Two herb-mountain trips ⚠ verify both in CE |
+| A18 | No Sita swayamvara crowd at the bow | M | Bala · 66–67 | ●●● Janaka, bow | ★★★ Swayamvara is in every TV serial; Bala layer. The bow was a bride-price; Rama breaks it on a visit ⚠ Bala 📅 Post on Vivah Panchami (Mon 14 Dec 2026): make it right after A23. |
 | A17 | Urmila's 14-year sleep isn't in Valmiki | M | (whole text) | ● | ★★★ Urmila's sleep is widely shared; absence claim needs full search. Absence claim: needs a full search; Nidra legend is later |
 | A82 | Who was Shanta? | M | Bala · 11 | ●● | ★★★ 'Rama had a sister?' drives debate. Popular: Rama's sister; Valmiki calls her Romapada's daughter ⚠ verify |
 | A62 | The young ascetic Dasharatha killed had no name | M | Ayodhya · 63–64 | ●● | ★★★ Shravan Kumar is a household name. "Shravan Kumar" is a later name ⚠ verify |
-| A18 | No Sita swayamvara crowd at the bow | M | Bala · 66–67 | ●●● Janaka, bow | ★★★ Swayamvara is in every TV serial; Bala layer. The bow was a bride-price; Rama breaks it on a visit ⚠ Bala |
 | A97 | Vibhishana was kicked out, not a traitor | D | Yuddha · 16 | ●● | ★★★ 'Ghar ka bhedi' phrase; strong opinions. His advice to Ravana first |
 | A91 | Hanuman tearing open his chest isn't in Valmiki | M | (whole text) | ● | ★★★ Iconic Hanuman image; absence claim needs full search. Absence claim: full search |
 | A38 | Hanuman forgot his own powers | R | Kishkindha · 66; Uttara · 36 | ●● Jambavan | ★★★ Famous; Uttara layer. The sages' curse ⚠ Uttara |
