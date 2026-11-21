@@ -410,9 +410,10 @@
   "engine": "elevenlabs music_v1",
   "file": "audio/score.mp3",
   "duration_s": 105,
-  "gain": 1.4,
+  "gain": 1.9,
   "prompt": "Auspicious Indian wedding-temple underscore, instrumental only, built to sit under a spoken voice. Opens with soft shehnai-like woodwind and tanpura drone, gentle temple bells; a warm royal court feel with soft strings and light tabla; around 60 percent through, a building tension with low drums and one huge thunder-like impact hit; then a bright, joyful, devotional resolution with bells and warm strings. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
-  "take": "take 2 of 2: quiet first 15 s under the śloka, peaks from 55 s (the bow breaks)"
+  "take": "take 2 of 2: quiet first 15 s under the śloka, peaks from 55 s (the bow breaks)",
+  "duck": 0.72
  },
  "avoid": [
   "any disrespect to Goswami Tulsidas or the Ramcharitmanas; both are told with devotion",

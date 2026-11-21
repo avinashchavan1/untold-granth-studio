@@ -179,7 +179,8 @@ for s in TL["shots"]:
 ve = np.abs(voice).max(1); k = int(0.06 * SR); ve = boxavg(ve, k)
 k2 = int(0.35 * SR); ve = np.maximum(ve, boxavg(ve, k2) * 1.5); ve = np.clip(ve / 0.08, 0, 1)
 ve = np.concatenate([ve[int(0.15 * SR):], np.zeros(int(0.15 * SR))])   # look-ahead: music dips just before a line starts
-duck = 1 - 0.86 * ve; duck = boxavg(duck, int(0.08 * SR))
+DUCK = float(json.load(open(os.path.join(ROOT, "src", "script.json"), encoding="utf-8")).get("score", {}).get("duck", 0.86))   # how far music dips under speech (owner: music may sit higher)
+duck = 1 - DUCK * ve; duck = boxavg(duck, int(0.08 * SR))
 mix = voice * 1.0 + music * 0.20 * duck[:, None] + sfx * 0.85 * (1 - 0.55 * (1 - duck))[:, None]
 act = ve > 0.5; gap = ve < 0.05
 rms = lambda x, m: 20 * np.log10(np.sqrt(np.mean(x[m] ** 2)) + 1e-9)

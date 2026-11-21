@@ -21,7 +21,9 @@ FORCE = {(i, int(u)): k for i, sh in SH.items() for u, k in sh.get("force_take",
 FX = {v: c.get("fx", "anull") for v, c in CAST.items()}
 POST = {v: c.get("post", []) for v, c in CAST.items()}
 ASRCUT = {v: c.get("asr_cut", True) for v, c in CAST.items()}
-NOCUT = {(i, int(u)) for i, sh in SH.items() for u in sh.get("no_cut", [])}   # units whose last word ASR mishears: keep the whole take (A23 "इकसठ")
+NOCUT = {(i, int(u)) for i, sh in SH.items() for u in sh.get("no_cut", [])}
+NOCUT |= {(i, int(sh["sloka_unit"])) for i, sh in SH.items() if "sloka_unit" in sh}                  # the śloka: ASR can't spell Sanskrit, never cut it
+NOCUT |= {(i, u) for i, sh in SH.items() if "quote" in sh for u in range(len(sh.get("units", [])))}   # quote-card lines (Sanskrit/Awadhi)   # units whose last word ASR mishears: keep the whole take (A23 "इकसठ")
 TEMPO = 1.0   # never speed up the narrator (user rule)
 asr = WhisperModel("small", device="cpu", compute_type="int8")
 norm = lambda s: re.sub(r"[^ऀ-ॿ]", "", s).replace("़", "")
@@ -30,9 +32,18 @@ def read_wav(p):
     return (x.reshape(-1, w.getnchannels()).mean(1) if w.getnchannels() > 1 else x), sr
 def write_wav(p, x, sr):
     with wave.open(p, "wb") as w: w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes((np.clip(x, -1, 1) * 32767).astype(np.int16).tobytes())
+def fade(x, sr, fi=0.012, fo=0.12):
+    """raised-cosine fade in/out so no line starts or stops with a click or a hard cut"""
+    x = x.copy(); a = min(len(x) // 4, int(fi * sr)); b = min(len(x) // 3, int(fo * sr))
+    if a: x[:a] *= 0.5 - 0.5 * np.cos(np.linspace(0, np.pi, a))
+    if b: x[-b:] *= 0.5 + 0.5 * np.cos(np.linspace(0, np.pi, b))
+    return x
 def trim(x, sr, thr=0.035):
+    """drop leading/trailing silence but keep the word's natural decay (0.3 s tail, owner Nov 2026: never chop a voice)"""
     k = int(0.03 * sr); smv = np.convolve(np.abs(x), np.ones(k) / k, "same"); idx = np.where(smv > thr * smv.max())[0]
-    return x[max(0, idx[0] - int(0.02 * sr)): min(len(x), idx[-1] + int(0.05 * sr))]
+    if not len(idx): return x
+    tail = np.where(smv > 0.008 * smv.max())[0][-1]
+    return fade(x[max(0, idx[0] - int(0.06 * sr)): min(len(x), max(idx[-1] + int(0.12 * sr), tail) + int(0.18 * sr))], sr)
 def squeeze(x, sr, maxgap=0.22, thr=0.05):
     """shorten every silence inside a take to at most maxgap seconds"""
     k = int(0.02 * sr); env = np.convolve(np.abs(x), np.ones(k) / k, "same"); q = env < thr * env.max()
@@ -62,6 +73,8 @@ def cut_to_line(x, sr, txt):
         if r > best[0] + 1e-6: best = (r, j)
     r, j = best
     if j == len(words): return x, " ".join(w.word.strip() for w in words), r      # nothing extra after the line: never cut real speech
+    if r < 0.8 or words[-1].end - words[j].start < 0.6:                            # unsure, or only a word's worth "extra" (ASR misheard the end): keep it all
+        return x, " ".join(w.word.strip() for w in words), r
     end = min(len(x), int(max(words[j - 1].end + 0.14, words[j].start - 0.05) * sr))   # cut just before the first babbled word
     return trim(x[:end], sr), " ".join(w.word.strip() for w in words[:j]), r
 def pitch(x, sr):
@@ -95,7 +108,8 @@ def voice_track(sid, s, ulist, var=""):
             x, sr0 = read_wav(p); x = trim(x, sr0)
             x, h, sim = cut_to_line(x, sr0, txt) if ASRCUT[v] and (sid, i) not in NOCUT else (x, heard(x, sr0), None)
             if sim is None: sim = difflib.SequenceMatcher(None, norm(txt), norm(h)).ratio()
-            if not NSENT.get(sid): x = squeeze(x, sr0, 0.24 if len(ulist) == 1 else 0.22)
+            SLK = {(i2, int(sh2["sloka_unit"])) for i2, sh2 in SH.items() if "sloka_unit" in sh2}
+            if not NSENT.get(sid) and (sid, i) not in SLK: x = squeeze(x, sr0, 0.32 if len(ulist) == 1 else 0.30)   # keep natural breaths; the śloka keeps its own pauses
             cands.append(dict(k=k, x=x, dur=len(x) / sr0, h=h, sim=sim, f0=pitch(x, sr0)))
         cands_all = list(cands)
         ref, rise = F0.get(v, (None, 40))

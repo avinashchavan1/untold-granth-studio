@@ -461,9 +461,10 @@
   "engine": "elevenlabs music_v1",
   "file": "audio/score.mp3",
   "duration_s": 125,
-  "gain": 1.4,
+  "gain": 1.9,
   "prompt": "Devotional-heroic Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with a soft tanpura drone and a low bansuri phrase over a night battlefield hush; slow frame drums enter as a search by torchlight; around one third through, a rising heroic build with dhol, low brass and strings as the hero leaps into the sky, and one huge bright impact hit with choir pads as a mountain is lifted toward the sun; then it settles into a warm, quiet passage; a second, smaller build in the last third; it ends in a calm, glowing, devotional resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
-  "take": "take 2 of 2: quiet first 20 s under the śloka and Chalisa quote, build at 20 s, peak ~55 s (the peak lifted)"
+  "take": "take 2 of 2: quiet first 20 s under the śloka and Chalisa quote, build at 20 s, peak ~55 s (the peak lifted)",
+  "duck": 0.72
  },
  "avoid": [
   "any disrespect to the Hanuman Chalisa or Goswami Tulsidas: both are told with devotion; we only add what Valmiki tells",
