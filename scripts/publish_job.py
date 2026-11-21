@@ -147,6 +147,8 @@ def instagram(spec, path):
             if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED"): break
             time.sleep(15)
         if st.get("status_code") == "FINISHED": break
+        if st.get("status_code") == "IN_PROGRESS":       # re-uploading would only restart Instagram's processing clock
+            raise RuntimeError(f"Instagram is still processing container {cid} after 45 min; press Publish again later (full-quality reels can take long)")
         errors.append(f"container {cid} processing: {st.get('status_code')}: {st.get('status')}")
         report(log=f"Instagram could not process container {cid}: {st.get('status')}")
     else:
