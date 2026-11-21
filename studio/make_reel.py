@@ -54,10 +54,13 @@ def check(reel):
                 probs.append(f"shot {sh['id']}: {v} calls Rama by bare name 'राम' — use {adr.get('forms', {}).get(v, adr.get('forms', {}).get('default', 'an honorific'))}")
     CALM = {"softly", "warmly", "curious", "serious", "thoughtfully", "pause", "sadly", "gently", "whispers"}   # the narrator is a calm storyteller: no shouting
     EXPRESSIVE = {"reverently", "solemnly", "chanting", "with devotion", "with deep devotion", "slowly", "expressively", "majestically", "with feeling"}   # śloka line only (sloka_unit); the pitch guard still drops shouted takes
+    ENERGY = {"excited", "dramatically", "intense", "energetic", "urgently", "with energy"}   # narration_energy test: hook + reveal only
+    energy_on = s.get("narration_energy") == "hook_reveal"                               # owner's A/B test (Nov 21 2026); shouting guard still applies
     for sh in s["shots"]:
         if sh.get("voice") != "narrator": continue
         for ui, u in enumerate(sh.get("units") or []):
             ok_tags = CALM | (EXPRESSIVE if ui == sh.get("sloka_unit") else set())   # the opening śloka may be recited with feeling (owner's request)
+            if energy_on and (sh["id"] == s["shots"][0]["id"] or sh.get("reveal")): ok_tags = ok_tags | ENERGY
             for tag in re.findall(r"\[([^\]]+)\]", u if isinstance(u, str) else u.get("say", "")):
                 if tag.strip().lower() not in ok_tags: probs.append(f"shot {sh['id']}: narrator tag [{tag}] makes him shout; use one of {sorted(ok_tags)}")
     th = s.get("thumbnail") or {}
