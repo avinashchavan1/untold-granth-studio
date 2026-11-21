@@ -134,7 +134,11 @@
     "t1": "[reverently] [slowly]",
     "t2": "[with deep devotion] [chanting]",
     "t3": "[solemnly] [expressively]"
-   }
+   },
+   "force_take": {
+    "1": 2
+   },
+   "sloka_pick": "take 2 [with deep devotion] [chanting]: 3.82 st, p95 165 Hz, 'तव सुता' heard clearly; t1 4.52 st but 'सुता' heard as 'सुपा'; t3 p95 208 Hz"
   },
   {
    "id": 3,

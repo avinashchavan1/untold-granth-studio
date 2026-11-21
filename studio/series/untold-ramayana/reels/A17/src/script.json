@@ -107,7 +107,11 @@
     "t1": "[reverently] [slowly]",
     "t2": "[with deep devotion] [chanting]",
     "t3": "[solemnly] [expressively]"
-   }
+   },
+   "force_take": {
+    "1": 2
+   },
+   "sloka_pick": "take 2 [with deep devotion] [chanting]: 4.73 st, p95 164 Hz, all words heard; t3 5.33 st but p95 192 Hz (shouting guard); t1 ASR failed"
   },
   {
    "id": 3,
