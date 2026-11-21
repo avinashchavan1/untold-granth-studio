@@ -293,12 +293,12 @@
   }
  ],
  "thumbnail": {
-  "frame": "",
+  "frame": "45s",
   "hook": "Who struck Lakshmana?",
   "stamp": "Ravana, not Meghnad",
   "line": "The second herb mountain.",
   "badge": "Valmiki Ramayana · Yuddha 6.88–89",
-  "art_shift": 0
+  "art_shift": 220
  },
  "score": {
   "engine": "elevenlabs music_v1",
