@@ -87,7 +87,7 @@ def plan_progress(folder, key, mix):
         total += fr.get(n, 0)
         if os.path.exists(os.path.join(folder, n + ".done")): done += fr.get(n, 0); nd += 1; continue
         log = os.path.join(folder, (n[:-4] + ".log") if key == "lossless" else ("r" + n[3:-4] + ".log"))
-        if os.path.exists(log): done += frames([log])[0]
+        if os.path.exists(log) and os.path.getmtime(log) >= os.path.getmtime(pf) - 5: done += min(fr.get(n, 0), frames([log])[0])   # ignore logs left by an older run
     return done, total, nd, len(names)
 
 def phase_of(studio, code):
