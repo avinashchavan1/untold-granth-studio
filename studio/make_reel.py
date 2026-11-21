@@ -228,6 +228,8 @@ def master(reel, short=False):
     out = os.path.join(os.path.abspath(reel), "out"); rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]
     tlname = "timeline_short.json" if short else "timeline.json"; sfx = "_short" if short else ""
     tl = json.load(open(os.path.join(reel, "src", tlname))); nf = round(tl["total"] * 24)
+    ig0, yt0, stamp0 = f"{out}/{rid}_INSTAGRAM_{'SHORT' if short else 'MASTER'}.mp4", f"{out}/{rid}_YOUTUBE_{'SHORT' if short else 'MASTER'}.mp4", _stamp(reel)
+    if _done(ig0, stamp0) and _done(yt0, stamp0): print("MASTER", ig0, "(already done)"); print("MASTER", yt0, "(already done)"); return
     tmp = os.path.join(out, "lossless" + sfx); os.makedirs(tmp, exist_ok=True)
     env = lambda plat: dict(os.environ, REEL=os.path.abspath(reel), LOSSLESS="1", PLATFORM=plat, **({"TIMELINE": tlname} if short else {}))
     # every chunk once (Instagram's FOLLOW end card); the chunks holding the end card again for YouTube (SUBSCRIBE)
