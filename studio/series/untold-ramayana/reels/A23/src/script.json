@@ -450,12 +450,12 @@
   }
  ],
  "thumbnail": {
-  "frame": "",
+  "frame": "99s",
   "hook": "He took the mountain back?",
   "stamp": "Trip 1 of 2",
   "line": "The herb mountain, the first time.",
   "badge": "Valmiki Ramayana · Yuddha 6.61",
-  "art_shift": 0
+  "art_shift": 260
  },
  "score": {
   "engine": "elevenlabs music_v1",
