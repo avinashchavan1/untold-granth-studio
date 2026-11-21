@@ -89,8 +89,13 @@ def phase_of(studio, code):
         d, t = frames(ml); segs_done = all(os.path.exists(f[:-4] + ".mkv.done") for f in ml)
         if not segs_done and t and d < t * 0.995: return "lossless", d / t, f"{d:,} of {t:,} lossless frames, {len(ml)} segments in parallel"
         if not segs_done: return "lossless", 0.99, "finishing the last frames"
-        if not fresh(ig, mix) or not os.path.exists(ig + ".done"): return "instagram", 0.5, "1080p, best quality (no frame counter while compressing)"
-        return "youtube", 0.5, "2160×3840, best quality (no frame counter while compressing)"
+        secs = secs_of(studio, code)
+        def since(marks):   # how far into an encode we are: time since the previous phase finished, against its usual length
+            ts = [os.path.getmtime(m) for m in marks if os.path.exists(m)]
+            return min(0.97, (time.time() - max(ts)) / 60 / max(0.5, COST_PH * secs)) if ts else 0.0
+        if not fresh(ig, mix) or not os.path.exists(ig + ".done"):
+            COST_PH = COST["instagram"]; return "instagram", since(glob.glob(os.path.join(out, "lossless", "*.mkv.done"))), "1080p, best quality (time left is estimated: no frame counter while compressing)"
+        COST_PH = COST["youtube"]; return "youtube", since([ig + ".done"]), "2160×3840, best quality (time left is estimated: no frame counter while compressing)"
     if fresh(final, mix): return "lossless", 0.0, "starting the lossless renderer"
     pl = sorted(glob.glob(os.path.join(out, "r[0-9].log")))
     if pl and any(os.path.getmtime(f) > os.path.getmtime(mix) for f in pl if os.path.exists(mix)):
