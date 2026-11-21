@@ -322,7 +322,8 @@
   "duration_s": 95,
   "gain": 1.9,
   "duck": 0.72,
-  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice."
+  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
+  "take": "A17's take 2 (same session prompt): gentle and even, suits the calm part 2"
  },
  "avoid": [
   "calling the Urmila story 'fake' or mocking it: it is a later, loving telling of her sacrifice",

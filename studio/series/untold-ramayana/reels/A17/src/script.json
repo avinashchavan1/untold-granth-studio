@@ -64,7 +64,7 @@
    "hi": "क्या उर्मिला सच में, चौदह साल सोती रहीं?",
    "en": "Did Urmila really sleep for fourteen years?",
    "units": [
-    "[intense] क्या उर्मिला सच में… चौदह साल सोती रहीं?"
+    "[serious] [intense] क्या उर्मिला सच में… चौदह साल सोती रहीं?"
    ],
    "card": [
     [
@@ -202,10 +202,10 @@
   {
    "id": 7,
    "voice": "narrator",
-   "hi": "तो फिर, लक्ष्मण की रातें कैसी थीं? क्या वो सच में, कभी नहीं सोए? ये, अगले भाग में।",
-   "en": "So what were Lakshmana's nights like? Did he really never sleep? That's in part 2.",
+   "hi": "अब बात, लक्ष्मण की रातों की। क्या वो सच में, कभी नहीं सोए। ये, अगले भाग में।",
+   "en": "Now, Lakshmana's nights. Did he really never sleep? That's in part 2.",
    "units": [
-    "[curious] तो फिर, लक्ष्मण की रातें कैसी थीं? क्या वो सच में, कभी नहीं सोए?",
+    "[softly] अब बात, लक्ष्मण की रातों की। क्या वो सच में, कभी नहीं सोए।",
     "[warmly] ये, अगले भाग में।"
    ],
    "unit_gap": 0.4,
@@ -251,7 +251,8 @@
   "duration_s": 90,
   "gain": 1.9,
   "duck": 0.72,
-  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice."
+  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
+  "take": "take 1: steady build, peak 50-70 s (vs take 2 flatter)"
  },
  "narration_energy": "hook_reveal",
  "avoid": [
