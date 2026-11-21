@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-"""Fetch Critical Edition verses (Devanagari + transliteration + English) from enjoylearningsanskrit.com, never from memory.
+"""Fetch verses of the channel's base text (original script + transliteration + English) from its source site, never from memory.
 
-  python3 scripts/ce_verse.py <book 1-7> <chapter> <verse>[,<verse>...|<a>-<b>] [--json]
-  e.g.  python3 scripts/ce_verse.py 6 97 17          python3 scripts/ce_verse.py 4 65 19-22
-Books: 1 Bala, 2 Ayodhya, 3 Aranya, 4 Kishkindha, 5 Sundara, 6 Yuddha, 7 Uttara. Pages are cached in ~/.cache/ce_pages.
+  python3 scripts/source_verse.py <book> <chapter> <verse>[,<verse>...|<a>-<b>] [--json]
+  e.g.  python3 scripts/source_verse.py 6 97 17          python3 scripts/source_verse.py 4 65 19-22
+The page URL comes from channel.json → source.verse_url ({book}, {chapter}). The parser below fits verse pages laid out as
+"<half 1> । <half 2> ॥N॥ … N. <transliteration> … N. <translation>"; adapt verses() if your source site differs.
+Pages are cached in ~/.cache/source_pages.
 """
 import html, json, os, re, sys, urllib.request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from channel import C
 
 def page(book, ch):
-    d = os.path.expanduser("~/.cache/ce_pages"); os.makedirs(d, exist_ok=True); f = os.path.join(d, f"b{book}_c{ch}.html")
+    d = os.path.expanduser("~/.cache/source_pages"); os.makedirs(d, exist_ok=True); f = os.path.join(d, f"b{book}_c{ch}.html")
     if not os.path.exists(f):
-        url = f"https://enjoylearningsanskrit.com/scriptures/ramayana/book-{book}/chapter-{ch}/"
+        url = C["source"]["verse_url"].format(book=book, chapter=ch)
         rq = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (studio verse fetch)"})
         open(f, "wb").write(urllib.request.urlopen(rq, timeout=60).read())
     return open(f, encoding="utf-8", errors="ignore").read()

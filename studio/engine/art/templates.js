@@ -1,4 +1,5 @@
-// ===== Series templates & shared helpers (Untold Ramayana) — reusable by every reel =====
+// ===== storyreel-studio art library: card templates (source card, verse card, quote card, title shot, end card) =====
+// ===== templates & shared helpers — reusable by every reel =====
 
 const L_DUSK = { rim: '#f4b48c', rimA: 0.85, dir: 1, tint: '#262060', tintA: 0.2 };
 const L_NIGHT = { rim: '#c2ccff', rimA: 0.85, dir: 1, tint: '#141c5c', tintA: 0.3 };
@@ -59,16 +60,16 @@ function sourceCard(ctx, u, p, sh, t, post, opts) {
   };
 }
 
-// END CARD — Rama, Sita, Lakshmana at the hermitage + series title, tagline and the platform's call to action (FOLLOW on Instagram/Facebook, SUBSCRIBE on YouTube)
+// END CARD — the series' three leads (CH.brother, CH.heroine, CH.hero; override CH entries or endCard in series art) at the hermitage + series title, tagline and the platform's call to action (FOLLOW on Instagram/Facebook, SUBSCRIBE on YouTube)
 const CTA = Object.assign({ button: 'FOLLOW' }, (SERIES.cta || {})[typeof PLATFORM !== 'undefined' ? PLATFORM : 'instagram'] || {});
 function endCard(ctx, u, p, sh, t, post) {
   const bg = ensureScene('herE', () => buildHermitage('end')), cam = { z: lerp(1.03, 1.08, p), y: 40 };
   hermitage(ctx, bg, cam, t);
   withCam(ctx, cam, 0.9, c => {
     const br = Math.sin(t * 1.6) * 0.012, L = Object.assign({}, L_NIGHT, { tint: '#2a1c58', tintA: 0.16, rim: '#e6dcff' });
-    drawFigure(c, CH.lak, P({ bow: 'B', eye: blink(t, 1), smile: 0.6, gaze: [0.5, 0], pleat: br, head: -0.02 }), { x: 262, y: 1404, s: 575, face: 1 }, L);
-    drawFigure(c, CH.sita, P({ aN: [0.06, 0.25], aF: [0.085, 0.25], eye: blink(t, 4), smile: 0.75, gaze: [0.5, 0], head: -0.02 }), { x: 820, y: 1402, s: 555, face: -1 }, L);
-    drawFigure(c, CH.rama, P({ bow: 'F', aF: [0.17, 0.15], handF: 'hold', eye: blink(t, 7), smile: 0.7, gaze: [0.3, 0], pleat: br * 1.4, head: -0.03 }), { x: 545, y: 1412, s: 610, face: 1 }, L);
+    drawFigure(c, CH.brother, P({ bow: 'B', eye: blink(t, 1), smile: 0.6, gaze: [0.5, 0], pleat: br, head: -0.02 }), { x: 262, y: 1404, s: 575, face: 1 }, L);
+    drawFigure(c, CH.heroine, P({ aN: [0.06, 0.25], aF: [0.085, 0.25], eye: blink(t, 4), smile: 0.75, gaze: [0.5, 0], head: -0.02 }), { x: 820, y: 1402, s: 555, face: -1 }, L);
+    drawFigure(c, CH.hero, P({ bow: 'F', aF: [0.17, 0.15], handF: 'hold', eye: blink(t, 7), smile: 0.7, gaze: [0.3, 0], pleat: br * 1.4, head: -0.03 }), { x: 545, y: 1412, s: 610, face: 1 }, L);
     fireflies(c, t, 5, 18, [40, 800, 1000, 700], 0.9);
   });
   drawLayer(ctx, cam, bg.fg);
@@ -89,7 +90,7 @@ function endCard(ctx, u, p, sh, t, post) {
   };
 }
 
-// TITLE SHOT — generic painted backdrop + big staggered lines (hooks, reveals, "NOT IN VALMIKI" beats).
+// TITLE SHOT — generic painted backdrop + big staggered lines (hooks, reveals, "NOT IN THE TEXT" beats).
 // lines: [[text, colour?], ...]  · appear on the narrator's sentence starts when the shot has several sentences
 function titleShot(ctx, u, p, sh, t, post, lines, scene = 'herN') {
   const bg = ensureScene(scene, () => buildHermitage(scene === 'herD' ? 'dusk' : scene === 'herE' ? 'end' : 'night')), cam = { z: lerp(1.0, 1.08, p), y: lerp(0, 24, p) };
@@ -109,7 +110,7 @@ function lying(c, ch, x, y, s, pose, light) {
   c.restore();
 }
 
-// flowers raining from the sky (gods' blessing): A03, A92 …
+// flowers raining from the sky (gods' blessing)
 function petals(c, t, seed, n, a = 1, top = -100) {
   for (let i = 0; i < n; i++) {
     const h1 = hash(seed + i * 1.7), h2 = hash(seed + i * 4.3), y = top + ((t * (90 + h2 * 80) + h1 * 2100) % 2100), x = h1 * 1240 - 80 + Math.sin(t * 1.3 + i) * 40;
@@ -129,10 +130,10 @@ function chariot(c, x, y, s, face = 1, col = '#8a5a2a', flag = '#c41e1e') {
   c.restore();
 }
 
-// Opening śloka + source card (shot 2 of every reel). S = { lines: [two Devanagari half-verses], ref: 'SUNDARA KANDA 5.9.2', en: 'translation' }.
-// Unit 1 ("वाल्मीकि रामायण, <kanda>...") shows the source card; from unit 2 (the verse, recited with feeling) the verse card.
+// Opening śloka + source card (shot 2 of every reel). S = { lines: [two Devanagari half-verses], ref: 'BOOK 5 · 5.9.2', en: 'translation' }.
+// Unit 1 ("<source>, <book>, <chapter>।") shows the source card; from unit 2 (the verse, recited with feeling) the verse card.
 function slokaSource(ctx, u, p, sh, t, post, S) {
-  // order (owner, Nov 2026): kanda line first (source card), then the śloka recited with feeling (verse card), then "ये है असली कहानी"
+  // order: the source line first (source card), then the śloka recited with feeling (verse card), then "ये है असली कहानी"
   const st = sentenceStarts(sh, 3), cut = Math.max(1.2, st[1] - 0.25);
   if (u < cut) return sourceCard(ctx, u, p, sh, t, post, TL.source_card);
   const p0 = p; u = u - cut; const len = Math.max(2, sh.dur - cut);
@@ -140,7 +141,7 @@ function slokaSource(ctx, u, p, sh, t, post, S) {
   drawLayer(ctx, cam, bg.bg); withCam(ctx, cam, 0.8, c => { glow(c, 540, 700, 560, '#ffd890', 0.14); flame(c, bg.lamp[0], bg.lamp[1], 26, t, 3); });
   ctx.fillStyle = rgba('#05061a', 0.45); ctx.fillRect(0, 0, W, H);
   post.ui = c => {
-    const q0 = ease(u, 0.05, 0.45); if (q0 > 0) { text(c, 'VALMIKI RAMAYANA', 540, 330, { size: 70, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); text(c, S.ref, 540, 392, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }); }
+    const q0 = ease(u, 0.05, 0.45); if (q0 > 0) { text(c, (SERIES.source_title || 'THE SOURCE').toUpperCase(), 540, 330, { size: 70, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); text(c, S.ref, 540, 392, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }); }
     const q1 = ease(u, 0.25, 0.8); if (q1 > 0) S.lines.forEach((l, i) => textFit(c, l, 540, 540 + i * 112 + (1 - q1) * 14, { size: 76, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, 980));
     const q2 = ease(u, Math.min(len * 0.4, 3.0), Math.min(len * 0.4, 3.0) + 0.5); if (q2 > 0) { const w = S.en.split(' '), h = Math.ceil(w.length / 2);
       [w.slice(0, h).join(' '), w.slice(h).join(' ')].forEach((l, i) => textFit(c, l, 540, 800 + i * 60, { size: 44, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: q2, stroke: 6, shadow: 20 }, 960)); }
@@ -148,7 +149,7 @@ function slokaSource(ctx, u, p, sh, t, post, S) {
 }
 
 // Quote card for a later source's exact words (Ramcharitmanas, Chalisa...). u = seconds since the quote started.
-// Q = { source: 'RAMCHARITMANAS', ref: 'LANKA KAND 101.3', lines: [2 Devanagari lines], translit, en, enAt (s, when the translation appears) }
+// Q = { source: 'LATER RETELLING', ref: 'CHAPTER 101.3', lines: [2 Devanagari lines], translit, en, enAt (s, when the translation appears) }
 function quoteCard(ctx, u, sh, t, post, Q) {
   const bg = ensureScene('ms', buildManuscript), cam = { z: lerp(1.03, 1.1, Math.min(1, u / 8)), y: 10 };
   drawLayer(ctx, cam, bg.bg); withCam(ctx, cam, 0.8, c => { glow(c, 540, 700, 560, '#ffd890', 0.12); flame(c, bg.lamp[0], bg.lamp[1], 26, t, 3); });

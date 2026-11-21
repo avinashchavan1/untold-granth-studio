@@ -1,6 +1,6 @@
-# Studio Style Guide — "Untold" scripture reels
+# Studio Style Guide — story reels with citations
 
-This guide works for any book. Untold Ramayana (Valmiki) is the first series. The same rules, engine and
+This guide works for any book. The same rules, engine and
 checklist apply to a Mahabharata, Bhagavata, Puranas, Panchatantra or Upanishad series. Only the
 **series folder** changes: `series.json`, `cast/`, `art/`.
 
@@ -10,31 +10,30 @@ checklist apply to a Mahabharata, Bhagavata, Puranas, Panchatantra or Upanishad 
 
 > *"The real version, from the original text, with the verse number on screen."*
 
-Every reel either **busts a popular belief** ("there was no Lakshmana Rekha") or **reveals a moment almost
-nobody knows** ("Hanuman first mistook Mandodari for Sita"). Every claim is traceable to a verse.
+Every reel either **busts a popular belief** ("that famous line isn't in the text") or **reveals a moment almost
+nobody knows** ("the hero first mistook a stranger for the person he was searching for"). Every claim is traceable to a verse.
 Accuracy is the brand: one wrong claim can sink the page. Reverence is not optional either: we correct
 retellings, we never mock the tradition or the people who believe them.
 
 ## 2. Truth rules (non-negotiable)
 
-1. **One base text per series**, named on screen. For Ramayana this is the Valmiki Ramayana, Baroda
-   **Critical Edition** (English: Bibek Debroy). Chapter numbers follow the Critical Edition.
-   The vulgate/Gita Press numbering is often +1 to +12 sargas off, so always say which one you mean.
-2. **Every factual claim goes in `script.json → claims[]`** with `ref` (kanda.sarga.verse), the Sanskrit
+1. **One base text per series**, named on screen. Use one edition (ideally a critical edition) and follow its
+   chapter numbers; popular printed editions often number chapters differently, so always say which one you mean.
+2. **Every factual claim goes in `script.json → claims[]`** with `ref` (book.chapter.verse), the original text
    (`quote_sa`) where possible, and `verified: true` only after it has been read in the text.
    `make_reel.py check` refuses unverified claims.
-3. **Two independent sources** for each claim: the CE Sanskrit (e.g. enjoylearningsanskrit.com CE text) plus a
-   translation (Debroy; or Shastri/wisdomlib, vulgate numbers). If they disagree, the CE wins and the reel says less.
+3. **Two independent sources** for each claim: the base text in the original language (channel.json → source.verse_url) plus a
+   respected translation. If they disagree, the base edition wins and the reel says less.
 4. **Dialogue is translation, not invention.** A character may only say what the verse says,
-   tightened for speech. No added insults, relationships, names or props. In A01 we removed "भाभी" and
+   tightened for speech. No added insults, relationships, names or props. For example, an earlier reel removed a kinship term and
    "red-hot iron arrows" because they are not in the CE.
-5. **Say "later retellings", never "fake".** For example: "The Lakshmana Rekha came from later tellings, not from Valmiki."
+5. **Say "later retellings", never "fake".** For example: "This scene came from later tellings, not from the base text."
    Name the later source (Ramcharitmanas, Adhyatma, Kamba, folk) only when you have verified it.
-6. **Absence claims need care.** "X is not in Valmiki" means it is absent from the whole CE, not only from that
-   chapter. Search the full text (all kandas) before saying it.
-7. **Uttara Kanda and the Bala Kanda frame are later layers** by scholarly consensus. When a reel uses them, the
-   source card says so ("UTTARA KANDA") and the script avoids "Valmiki says…" absolutes.
-8. **Sensitive episodes** (Sita's exile, Shambuka, Vali's killing, caste, women's agency) are handled with
+6. **Absence claims need care.** "X is not in the text" means it is absent from the whole base text, not only from that
+   chapter. Search the full text (all books) before saying it.
+7. **Later layers of a text** (sections scholars date later) are named on the source card when a reel uses them,
+   and the script avoids "the author says…" absolutes.
+8. **Sensitive episodes** (violence, caste, women's agency, contested killings) are handled with
    context, the text's own words, and no editorial dunking. When in doubt, skip the episode.
 9. **Human review before posting.** Every reel ships with a citation sheet. A person reads it against the text
    before upload.
@@ -65,7 +64,7 @@ retellings, we never mock the tradition or the people who believe them.
 - **Characters (locked):** Chatterbox Multilingual, cloned only from openly licensed references (FLEURS CC-BY-4.0, IndicVoices-R).
   - Each character has one reference clip in `cast/voices/`, and its delivery (`ex`, `cfg`) and FX chain live in `cast.json`.
   - A new character gets an audition (3–6 candidates, same line), then it is locked.
-  - **Who picks:** the user picks only for *major, recurring* characters (list in `series.json → major_characters`: Hanuman, Ravana, Bharata, Dasharatha, Kaikeyi, Sugriva, Vibhishana…). For minor or one-episode characters (Shabari, Jatayu, Guha, Ahalya…), Claude auditions, picks by fit and pronunciation, locks the voice and notes the choice in `cast.json`. No need to ask.
+  - **Who picks:** the user picks only for *major, recurring* characters (list in `series.json → major_characters`, e.g. the hero, the villain, the hero's family). For minor or one-episode characters (one-episode figures: a boatman, a hermit, a messenger…), Claude auditions, picks by fit and pronunciation, locks the voice and notes the choice in `cast.json`. No need to ask.
 - **Consent:** never clone a real creator's or actor's voice without their written consent.
 - **Picking takes:** `make_reel.py pick` speech-recognises every take, rejects takes that run on past the line, and picks the most accurate and tightest one.
   - When a picked take is wrong, pin the right take in the shot (`"force_take": {"0": 2}`).
@@ -79,7 +78,7 @@ retellings, we never mock the tradition or the people who believe them.
   - All of this is generated in code, so it is consistent, free and repeatable.
 - **Characters** are rigs in `art/chars.js`: locked skin, cloth and accessories per character, with poses, blinks, gaze and IK hands.
   - **Respect:** dignified poses for divine figures, no gore (cuts happen off-screen and are shown as light, sound and shadow), and no sexualised framing.
-  - ⚠ **Open design question:** Valmiki repeatedly calls Rama *śyāma* (dark). The current rig is light-skinned, following the original brief. Decide once, lock it, and note it in `cast.json`.
+  - ⚠ **Match the text:** if the base text describes a character's appearance (e.g. skin colour), the rig follows the text; decide once and lock it.
 - **Locations** are built once per series in `art/bg.js` (hermitage at dusk, night and end; forest; doorway; manuscript) and reused. A new location is a new `build*()` function.
 - **Camera:** slow push-ins (1.00 → 1.08) and parallax layers; a small camera shake only on impacts.
 - **Text on screen:**
@@ -109,20 +108,20 @@ retellings, we never mock the tradition or the people who believe them.
 
 - **English is the main language for every written word:** on-screen cards, subtitles, covers, titles, captions, descriptions, profiles.
 - **Hindi is the narration only** (spoken). No Devanagari on screen, except Sanskrit verse used as art (for example the manuscript prop).
-- **The hook is on screen:** shot 1 always has a `card` with the hook (e.g. "SHABARI'S / BERRIES?"), the subtitle carries the full question, and the cover repeats it. `make_reel.py check` fails without it.
+- **The hook is on screen:** shot 1 always has a `card` with the hook (e.g. "THE FAMOUS / LINE?"), the subtitle carries the full question, and the cover repeats it. `make_reel.py check` fails without it.
 
 ## 6c. Call to action per platform
 
 - Instagram and Facebook: the narrator says **follow** and the end card says **FOLLOW**. YouTube: **subscribe** / **SUBSCRIBE**.
 - The closing shot is marked `"cta": true`. `narration api` also generates its YouTube line (`series.json → cta.youtube.say`) as takes `s<ID>y_*`; `pick` builds both; `audio` writes `mix.wav` and `mix_youtube.wav`; `master` renders the end card per platform, so the YouTube master gets SUBSCRIBE and the subscribe narration.
 
-## 6d. Reach (trial on A04–A06, then decide)
+## 6d. Reach (trial a few reels, then decide)
 
 - **Short cut:** `script.json → short` drops whole shots or keeps only some narration units; `make_reel.py short` builds a ~50–60 s version from the same takes. During the trial the short cut is posted on both Instagram and YouTube (`masters.py <ID> --short`); the full-length masters are kept as backups.
 - **Question title** (`youtube_title`), e.g. "Did a Squirrel Really Help Build Ram Setu?" — the phrase people search, as a question.
 - **Question for the comments** (`comment_prompt`): asks which version the viewer grew up with. It ends the caption and is posted automatically as the first comment; pin it by hand.
 - **Respect:** never call a loved story "fake"; say where it comes from.
-- **Measure:** Dashboard → "How the reels are doing" → Refresh stats (views, likes, comments, shares). Compare A04–A06 with A01–A03 after 7 days.
+- **Measure:** Dashboard → "How the reels are doing" → Refresh stats (views, likes, comments, shares). Compare the trial reels with earlier ones after 7 days.
 
 ## 7. Delivery
 
@@ -133,20 +132,20 @@ retellings, we never mock the tradition or the people who believe them.
   - **Size:** several hundred MB per reel, on purpose. Platforms re-encode everything, so the cleaner the upload, the better viewers see it.
 - **Cover / thumbnail (every reel):** `out/<ID>_cover.jpg` (1080×1920 JPEG, under 2 MB), from `make_reel.py thumb` (also run by `render`).
   - Art: one clean frame from the reel (no subtitles, cards or logo), chosen so the story reads at a glance and faces stay clear of the title.
-  - Type (all English): series label in gold Cinzel; the hook question big in ivory Montserrat ExtraBold (two lines max); a red "NOT IN VALMIKI" stamp on myth-busters; the payoff line in gold Cinzel; a verse badge that matches the reel's claims.
+  - Type (all English): series label in gold Cinzel; the hook question big in ivory Montserrat ExtraBold (two lines max); a red "NOT IN THE TEXT" stamp on myth-busters; the payoff line in gold Cinzel; a verse badge that matches the reel's claims.
   - Every word sits inside y 240–1680, the Instagram profile-grid crop (3:4) and clear of the Reels UI.
   - The publisher sends it as the Instagram Reels cover and the YouTube thumbnail.
 - **`out/<ID>_final.mp4`:** small preview and sharing copy (WhatsApp, review). Never upload this one.
 - **Loudness:** −14 LUFS integrated, true peak ≤ −1.5 dBFS.
 - **Paperwork:** `<ID>_citations.md` and `<ID>_caption.txt`; `make_reel.py desk` builds the publishing-desk entry with per-platform captions.
-- **Publishing desk:** the Untold Granth Studio page tracks every reel: preview, citation check, copy caption, open platform, mark posted.
+- **Publishing desk:** the studio app tracks every reel: preview, citation check, copy caption, open platform, mark posted.
 - **Long-form later:** stitch 6–10 related reels into a 6–10 minute chapter video at 16:9.
 
 ## 8. Review checklist (every reel)
 
 - [ ] `make_reel.py check` passes: all claims `verified: true` with refs
 - [ ] Every character line matches its verse; nothing added
-- [ ] The source card shows the right kanda and chapters, plus "CRITICAL EDITION"
+- [ ] The source card shows the right book and chapters, plus the edition
 - [ ] `pick_log.txt`: every "heard" line matches "said" (no babble, no missing words)
 - [ ] Stills checked: hook, source card, every character's first appearance, the reveal, the end card
 - [ ] Length 45–65 s (≤ 90 s); −14 LUFS; the voice is clearly audible over the music on a phone speaker
@@ -157,7 +156,7 @@ retellings, we never mock the tradition or the people who believe them.
 
 ## 9. Making a new series (another book)
 
-1. `cp -r series/untold-ramayana series/<new>`. Keep the `reel_template/`, delete `reels/`.
+1. `cp -r series/example series/<new>` (or run `scripts/setup.sh`). Keep the `reel_template/`, delete `reels/`.
 2. Edit `series.json`: logo, title lines, tagline, CTA, base text and edition, citation format, palette.
 3. Cast: keep the narrator for brand continuity (recommended), then audition and lock new character voices in `cast/`.
 4. Art: add character rigs to `art/chars.js` and locations to `art/bg.js`; update `sourceCard`/`endCard` art if needed.

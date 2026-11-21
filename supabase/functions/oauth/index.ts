@@ -1,7 +1,7 @@
 // OAuth callbacks: /functions/v1/oauth/youtube and /functions/v1/oauth/instagram
 import { admin, APP_URL, FB_GRAPH, FN_URL, getIntegration, resolveInstagramFromToken, setIntegration } from "../_shared/util.ts";
 
-const ALLOWED = [APP_URL, "https://untold-granth-studio.avinashchavan.com", "https://untold-granth-studio.netlify.app", "http://localhost:5173"];
+const ALLOWED = [APP_URL, ...(Deno.env.get("APP_URL_ALT") ?? "").split(",").filter(Boolean), "http://localhost:5173"];   // APP_URL_ALT: extra allowed app addresses, comma-separated
 let returnTo = APP_URL;   // the app address the user started from (must be one of ALLOWED)
 const back = (status: string, provider: string, msg = "") =>
   Response.redirect(`${returnTo}/settings?${new URLSearchParams({ connect: provider, status, msg }).toString()}#connections`, 302);

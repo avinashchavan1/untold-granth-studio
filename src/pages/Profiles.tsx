@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CopyButton, ErrorNote, SectionTitle, Spinner, fmtDate } from "../components/ui";
 import { mediaUrl, studio, useChannels, useConnections } from "../lib/api";
+import { IG } from "../lib/channel";
 
 type Step = { step: string; ok: boolean; detail?: string };
 const ASSETS = [
@@ -37,7 +38,7 @@ export default function Profiles() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <SectionTitle right={<a href="https://www.instagram.com/untoldgranth.official/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-gold-deep dark:text-gold">Open <ExternalLink size={13} /></a>}>
+          <SectionTitle right={<a href={IG.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-gold-deep dark:text-gold">Open <ExternalLink size={13} /></a>}>
             <span className="inline-flex items-center gap-2"><Instagram size={18} /> Instagram · @{ig.username}</span>
           </SectionTitle>
           <p className="mb-3 text-sm text-ink-soft dark:text-parchment/60">Instagram app → Profile → <b>Edit profile</b>. Copy each field:</p>

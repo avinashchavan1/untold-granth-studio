@@ -4,10 +4,10 @@
 
 script.json:
   "thumbnail": {"frame": "3s",                       time or frame number of the art (pick with: make_reel.py thumb <reel> 3s,26s,...)
-                "hook": "Was the Lakshmana Rekha ever really drawn?",   the reel's hook question, big (default: shot 1's English line)
-                "stamp": "NOT IN VALMIKI",                  optional red stamp: the answer (myth-busters)
+                "hook": "Was that famous line ever really in the text?",   the reel's hook question, big (default: shot 1's English line)
+                "stamp": "NOT IN THE TEXT",                  optional red stamp: the answer (myth-busters)
                 "line": "No line. No spell. Just a prayer.",            the payoff, in gold
-                "badge": "Valmiki Ramayana · Aranya 3.42–47",           the verses the reel proves it with
+                "badge": "Source · Book 3.42–47",           the verses the reel proves it with
                 "art_shift": 0}                                         optional: push the art down (px) so faces clear the title
 English is the main language for every written word (covers included); the narration stays Hindi.
 Layout keeps every word inside the Instagram profile-grid crop (centre 1080x1440) and above the Reels UI."""

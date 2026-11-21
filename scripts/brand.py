@@ -3,8 +3,9 @@
    python3 scripts/brand.py            render brand/*.png|jpg (brand/make_brand.py), upload them to storage reel-media/brand/,
                                        and store brand/profiles.json on the channels rows (Profiles page + "Apply to YouTube")."""
 import json, mimetypes, os, subprocess, sys, urllib.request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from channel import C, SID, SUPA, STUDIO, SER, REELS, HF_MASTERS, HANDLES
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); BRAND = os.path.join(ROOT, "brand")
-BASE = "https://spsrryrycowxmgiofyxo.supabase.co"; H = {"apikey": "proxy-injected"}
+BASE = SUPA; H = {"apikey": "proxy-injected"}
 ASSETS = ["avatar_1080.png", "youtube_profile_800.png", "youtube_banner_2560x1440.jpg", "youtube_watermark_300.png"]
 
 if "--no-render" not in sys.argv:

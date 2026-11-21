@@ -1,0 +1,68 @@
+{
+ "_doc": "One channel per copy of the storyreel-studio template. Every script, the engine and the app read this file.",
+ "id": "untold-granth",
+ "name": "Untold Granth",
+ "app_title": "Untold Granth Studio",
+ "app_url": "https://untold-granth-studio.avinashchavan.com",
+ "series": {
+  "id": "untold-ramayana",
+  "name": "Untold Ramayana",
+  "book": "Valmiki Ramayana",
+  "edition": "Critical Edition (Baroda)"
+ },
+ "handles": {
+  "instagram": {
+   "handle": "@untoldgranth.official",
+   "url": "https://www.instagram.com/untoldgranth.official/"
+  },
+  "youtube": {
+   "handle": "@untoldgranth",
+   "url": "https://www.youtube.com/@untoldgranth"
+  }
+ },
+ "language": {
+  "narration": "hi",
+  "screen": "en"
+ },
+ "hashtags": [
+  "#UntoldGranth",
+  "#Ramayana",
+  "#Valmiki",
+  "#IndianMythology",
+  "#Sanatan",
+  "#UntoldRamayana"
+ ],
+ "source": {
+  "title": "Valmiki Ramayana",
+  "edition": "Critical Edition (Baroda)",
+  "citation": "kanda.sarga.verse",
+  "verse_url": "https://enjoylearningsanskrit.com/scriptures/ramayana/book-{book}/chapter-{chapter}/",
+  "_books": "1 Bala, 2 Ayodhya, 3 Aranya, 4 Kishkindha, 5 Sundara, 6 Yuddha, 7 Uttara"
+ },
+ "captions": {
+  "instagram_follow": "Follow {instagram} for more untold stories from the original texts.",
+  "youtube_subscribe": "Subscribe to {name} for real stories from the original texts, with the verse on screen.",
+  "youtube_title_suffix": "{book} #Shorts"
+ },
+ "infra": {
+  "supabase_ref": "spsrryrycowxmgiofyxo",
+  "supabase_url": "https://spsrryrycowxmgiofyxo.supabase.co",
+  "supabase_publishable_key": "sb_publishable_wZsdbYBPgVSg9Mp10mKqMg_nxMWHjmD",
+  "hf_masters_repo": "Avinash1443/untold-granth-masters",
+  "netlify_site_id": "f1c552aa-f1fb-450d-b878-606862a3f1f1",
+  "github_repo": "avinashchavan1/untold-granth-studio"
+ },
+ "owner": {
+  "contact_email": "avinashchavan1433@gmail.com",
+  "_doc": "Shown on the app's privacy/terms pages and seeded as the first app admin."
+ },
+ "brand": {
+  "tagline": "Untold stories from our Granths",
+  "palette": {
+   "gold": "#f6c244",
+   "ivory": "#fbf3df",
+   "red": "#c81e1e",
+   "ink": "#07061a"
+  }
+ }
+}

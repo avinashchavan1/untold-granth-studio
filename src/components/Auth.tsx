@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { isAdmin } from "../lib/api";
 import { supabase } from "../lib/supabase";
 import { Button, Spinner } from "./ui";
+import { CHANNEL } from "../lib/channel";
 
 const Ctx = createContext<{ session: Session | null }>({ session: null });
 export const useSession = () => useContext(Ctx).session;
@@ -42,7 +43,7 @@ const Shell = ({ children }: { children: ReactNode }) => (
         <img src="/favicon.svg" alt="" className="h-10 w-10" />
         <div>
           <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">Studio</div>
-          <div className="font-display text-xl font-extrabold tracking-wider">Untold Granth</div>
+          <div className="font-display text-xl font-extrabold tracking-wider">{CHANNEL.name}</div>
         </div>
       </div>
       {children}

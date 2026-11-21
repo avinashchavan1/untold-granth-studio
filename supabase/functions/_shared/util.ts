@@ -4,10 +4,12 @@ import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2.4
 export const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 export const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 export const ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
-export const APP_URL = "https://untold-granth-studio.avinashchavan.com";
+// channel settings come from function secrets (setup.sh prints them from channel.json): APP_URL, GITHUB_REPO, HF_MASTERS_REPO, IG_HANDLE
+export const APP_URL = Deno.env.get("APP_URL") ?? "http://localhost:5173";
 export const FN_URL = `${SUPABASE_URL}/functions/v1`;
-export const REPO = "avinashchavan1/untold-granth-studio";
-export const HF_REPO = "Avinash1443/untold-granth-masters";
+export const REPO = Deno.env.get("GITHUB_REPO") ?? "";
+export const HF_REPO = Deno.env.get("HF_MASTERS_REPO") ?? "";
+export const IG_HANDLE = Deno.env.get("IG_HANDLE") ?? "your Instagram account";
 export const IG_API = "https://graph.instagram.com/v21.0";
 
 export const admin: SupabaseClient = createClient(SUPABASE_URL, SERVICE_KEY, { auth: { persistSession: false } });
@@ -105,5 +107,5 @@ export async function resolveInstagramFromToken(token: string, givenId?: string)
     if (a.id && !a.error) return { user_id: String(a.id), username: a.username ?? null };
     notes.push(`${id}: ${a.error?.message ?? "no access"}`);
   }
-  throw new Error(`No Instagram account is attached to this login. When Meta asks which assets to share, pick @untoldgranth.official under "Instagram account". (${notes.join("; ").slice(0, 300)})`);
+  throw new Error(`No Instagram account is attached to this login. When Meta asks which assets to share, pick ${IG_HANDLE} under "Instagram account". (${notes.join("; ").slice(0, 300)})`);
 }

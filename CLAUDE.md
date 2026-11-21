@@ -26,7 +26,7 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   one śloka, about 7–11 s). Copy the Devanagari from the CE page, never from memory. Only this line (`sloka_unit`) may use the
   expressive tags ([reverently] [slowly], [with deep devotion] [chanting], [solemnly] [expressively]); record one take with each,
   pick the take with the most pitch movement and intact words, pin it with `force_take`; the shouting guard still applies.
-  Reference: A07 and A89 shot 2 (`slokaSource` in art/templates.js).
+  Reference: A07 and A89 shot 2 (`slokaSource` in studio/engine/art/templates.js).
   The śloka is recited by the narrator Rudra (owner's pick after a 6-voice audition); no separate śloka voice.
 - **Length follows the information:** 60–90 s is typical, up to ~120 s is fine when the evidence needs it. Never cut a quote,
   a citation or a step of the story just to be shorter.
@@ -57,29 +57,47 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   7 masters, 8 cover/upload); `python3 scripts/status.py watch-render <ID> &` during renders; `status.py idle` when done;
   `--state waiting --task "Pick baby Hanuman's look"` when you need the owner.
 
-## Layout
+## Layout (this repo runs the storyreel-studio template's shared code; the channel lives in channel.json + studio/series/untold-ramayana)
+- `channel.json`: identity, handles, hashtags, base text + verse page (enjoylearningsanskrit.com CE), Supabase/Netlify/HF ids.
+  `calendar.json`: festivals, theme words, weekly days (Hanuman on Tue/Sat) for the posting plan. `PLAYBOOK.md`: the generic rules.
 - `studio/` = the reel engine (the ONLY working copy; render here). `studio/make_reel.py` is the CLI.
-  - `engine/js` canvas renderer (Playwright), `engine/py` audio (ElevenLabs TTS + music, mixing, covers).
-  - `series/untold-ramayana/art/{chars.js,bg.js,templates.js}`: rigs and sets shared by all reels.
-  - `series/untold-ramayana/reels/<ID>/src/{script.json,shots.js,timeline.json}` in git; `audio/` in the HF audio pack;
-    `out/` and `frames/` are generated (git-ignored).
+  - `engine/js` renderer (Playwright), `engine/py` audio (ElevenLabs TTS + music, take picker, mixing, covers).
+  - `engine/art/{rigs,sets,templates}.js`: the SHARED art library (figures, sets, source/verse/quote/end cards). Load order per reel:
+    reel/src > series/art > engine/art > engine/js.
+  - `series/untold-ramayana/art/chars.js`: this series' cast (`Object.assign(CH, …)`) + Ravana, baby Hanuman, Rahu, Airavata;
+    `art/bg.js`: old names of library sets (buildPampa, buildMithila, buildHimalaya, buildGanga, shivaBow…).
+  - `series/untold-ramayana/series.json`: cast lock, looks, address rule (`protected_names: ["राम"]`), CTA, cast_meta, locations,
+    manuscript verse, experiments. `reels/<ID>/src/{script.json,shots.js,timeline.json}` in git; `audio/` in the HF audio pack.
   - `series/untold-ramayana/cast/{cast.json,looks.json,portraits/}`: voices, portraits, who chose what.
 - `src/` = the studio app (React + Vite + Tailwind; Supabase). Deploy: `bash scripts/deploy.sh` (Netlify).
-- `supabase/` = migrations and edge functions (studio, job, oauth). Project ref `spsrryrycowxmgiofyxo`.
-  Deploy a function via the Management API (see README); `studio` verify_jwt true, `job` false.
-- `scripts/`: `sync.py` (studio → app DB; never moves a stage backwards), `media.py` (preview/cover/citations/caption to storage),
-  `masters.py` (masters to HF `Avinash1443/untold-granth-masters`), `audiopack.py` (reel audio backup/restore),
-  `cast_media.py` (portraits + voice samples for Cast & world), `status.py` (live progress bar), `publish_job.py` (GitHub Actions publisher).
+- `supabase/` = migrations and edge functions (studio, job, oauth). Project ref `spsrryrycowxmgiofyxo`. Function secrets APP_URL,
+  APP_URL_ALT, GITHUB_REPO, HF_MASTERS_REPO, IG_HANDLE are set. Deploy a function via the Management API; `studio` verify_jwt true, `job` false.
+- `scripts/`: `sync.py`, `media.py` (an approved reel whose preview/cover changes goes back to review), `masters.py`, `audiopack.py`,
+  `cast_media.py`, `status.py` (work panel: `watch-queue A23 A101 …`), `publish_job.py` (GitHub Actions publisher, runs from `main`),
+  `source_verse.py <book> <chapter> <verses>` (CE verses from the page in channel.json), `template_sync.py`, `channel.py`.
+- Renders are chunked and resumable (15 s chunks, `.done` markers): after a machine restart just run the same command again.
+
+## Ramayana research notes (were in the skill; the make-reel skill is now generic)
+- CE books: 1 Bala, 2 Ayodhya, 3 Aranya, 4 Kishkindha, 5 Sundara, 6 Yuddha, 7 Uttara. CE sarga numbers are lower than the vulgate's.
+- Verses: `python3 scripts/source_verse.py 6 97 17` (enjoylearningsanskrit.com book-N/chapter-M). Popular texts: Ramcharitmanas at
+  ramcharit.in (verbatim text; its page summaries can be wrong), Hanuman Chalisa. Model reels: A53 (battle), A89 (sky/dawn), A07 (palace),
+  A23 (night battlefield, Himalaya), A18 (court, quote cards), A101 (two-part reel with `follows`).
+
+## Keep the template in sync (owner's rule)
+- After ANY change to the engine, art library, app, backend, scripts, skills or PLAYBOOK, run
+  `python3 scripts/template_sync.py /home/user/storyreel-studio --commit` (attach/clone `avinashchavan1/storyreel-studio` first) and push it.
+  It copies only shared paths and refuses to commit if a channel detail (name, handles, ids) would leak. Channel details belong in
+  channel.json, calendar.json, studio/series/ and this CLAUDE.md.
 
 ## Posting
-- Timeline page plans the posting days and times (`src/lib/bestTime.ts` + `src/lib/occasions.ts`):
-  - Days: every ordering of the ready reels is scored (≤8 reels: exact); score = festival fit (OCCASIONS calendar:
+- Timeline page plans the posting days and times (`src/lib/bestTime.ts` + `src/lib/occasions.ts`, data in `calendar.json`):
+  - Days: every ordering of the ready reels is scored (≤8 reels: exact); score = festival fit (`calendar.json` occasions:
     Tulsi Vivah, Kartik Purnima, Vivah Panchami, Makar Sankranti, Maha Shivratri, Ram Navami, Hanuman Jayanti...) +
-    Hanuman reels on Tue/Sat + ★★★ reels on weekends + small plan-order cost; `"follows"` pairs stay back to back.
+    Hanuman reels on Tue/Sat (`calendar.json → weekly`) + ★★★ reels on weekends + small plan-order cost; `"follows"` pairs stay back to back.
   - Times: an Indian evening-audience prior × the channel's own results (age-normalised).
   - Double posts (owner-approved rule): one reel a day by default; an OPTIONAL 2nd morning post (9–11 AM) only on a major
     festival (weight ≥ 5), when a second ready reel truly matches it and 5+ reels are ready (`doubleCandidate` in occasions.ts).
-  - "Festival plan" section: upcoming occasions, the reels that fit, and "make X before <date>". Keep OCCASIONS updated
+  - "Festival plan" section: upcoming occasions, the reels that fit, and "make X before <date>". Keep `calendar.json → occasions` updated
     a year ahead (check dates on two panchang sites; mark ±1-day ones `approx`). Plan production so festival reels are ready.
 - A reel is marked published automatically when both Instagram and YouTube are posted (DB trigger).
 

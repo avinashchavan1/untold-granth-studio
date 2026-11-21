@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ErrorNote, Spinner, StageBadge, fmtLen } from "../components/ui";
 import { useAllFiles, useMediaUrl, usePublications, useReels } from "../lib/api";
 import { KIND_LABEL, type FileRow, type Publication, type Reel } from "../lib/types";
-import { doubleCandidate, hanumanDay, MAJOR, MIN_BACKLOG, occasionsOn, upcoming } from "../lib/occasions";
+import { doubleCandidate, weeklyOn, MAJOR, MIN_BACKLOG, occasionsOn, upcoming } from "../lib/occasions";
 import { bestHour, confidence, dayName, fmtHour, istParts, observations, planDays, type Main, type Obs } from "../lib/bestTime";
 
 // All dates are India time. Posting days and times are suggestions from lib/bestTime.ts.
@@ -38,14 +38,14 @@ export default function Timeline() {
   const making = all.filter((r) => PRODUCTION.includes(r.stage));
   const ideas = all.filter((r) => r.stage === "idea");
 
-  // suggested days (one a day; Hanuman reels on Tue/Sat; paired reels back to back) and best times per platform
+  // suggested days (one a day; themed reels on their weekly days, calendar.json; paired reels back to back) and best times per platform
   const now = new Date();
   const obs = observations(pubs.data ?? [], all);
   const todayN = istParts(now).day, lastDayN = live.length ? istParts(firstPost(live[live.length - 1])).day : -1;
   const eveningLeft = bestHour("instagram", todayN, obs, now) !== null;
   const firstDay = lastDayN >= todayN || !eveningLeft ? todayN + 1 : todayN;
   const fixedFor = (r: Reel) => { const sch = (byReel[r.id] ?? []).map((p) => p.scheduled_for).filter(Boolean).sort()[0]; return sch ? new Date(sch) : null; };
-  const todayTags = [...(hanumanDay(todayN) ? [`${istParts(now).dow === 2 ? "Tuesday" : "Saturday"}: Hanuman's day`] : []), ...occasionsOn(todayN).map((o) => o.name)];
+  const todayTags = [...weeklyOn(todayN).map((w) => w.text), ...occasionsOn(todayN).map((o) => o.name)];
   const fest = upcoming(all, todayN, 183);
   const plan = planDays(ready, firstDay, fixedFor).map((s) => {
     const dbl = doubleCandidate(s.day, s.reel, ready);
@@ -198,7 +198,7 @@ function BestTimeCard({ obs }: { obs: Obs[] }) {
       <p className="mt-1 text-xs leading-relaxed text-ink-soft dark:text-parchment/70">
         A starting pattern for Indian, Hindi-speaking viewers (evening peak, a lunch bump, late mornings at weekends), adjusted by how your own posts did:
         each post's reach is divided by the square root of its age, so a 6-hour-old post compares fairly with a 2-day-old one. The more you post, the more your own results count.
-        Hanuman reels go on Tuesday or Saturday. Press <b>Refresh stats</b> on the Dashboard to update.
+        Reels with a weekly theme (calendar.json → weekly) go on their days. Press <b>Refresh stats</b> on the Dashboard to update.
       </p>
       <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
         {rows.map(({ p, list, conf }) => (

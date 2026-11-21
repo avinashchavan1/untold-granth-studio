@@ -6,6 +6,7 @@ import { Button, Card, Code, CopyButton, Empty, ErrorNote, LinkButton, PubBadge,
 import { mediaUrl, studio, type ProviderStatus, useClaims, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
 import { Target } from "../components/Target";
 import { KIND_LABEL, PLATFORMS, STAGES, type FileRow, type Publication, type Reel, type Stage } from "../lib/types";
+import { CHANNEL, IG } from "../lib/channel";
 
 const TABS = ["Publish", "Script", "Citations", "Files", "Notes"] as const;
 type Tab = (typeof TABS)[number];
@@ -168,7 +169,7 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
   const save = async () => {
     const next = { ...(r.captions ?? {}), [platform.capField]: draft.caption };
     if (platform.titleField) next[platform.titleField] = draft.title;
-    if (platform.key === "instagram" && (r.captions?.facebook ?? "") === caption) next.facebook = draft.caption.replace("@untoldgranth.official", "Untold Granth");
+    if (platform.key === "instagram" && (r.captions?.facebook ?? "") === caption) next.facebook = draft.caption.replace(IG.handle, CHANNEL.name);
     await saveCaptions(r, next); setEditing(false);
   };
   return (

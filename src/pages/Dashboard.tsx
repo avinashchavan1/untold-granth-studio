@@ -7,6 +7,7 @@ import { Target } from "../components/Target";
 import { studio, useActivity, useChannels, useConnections, usePublications, useReels } from "../lib/api";
 import type { Publication, Reel } from "../lib/types";
 import { STAGES, type Stage } from "../lib/types";
+import { CHANNEL } from "../lib/channel";
 
 export default function Dashboard() {
   const reels = useReels();
@@ -29,7 +30,7 @@ export default function Dashboard() {
     <div className="grid grid-cols-[minmax(0,1fr)] gap-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="min-w-0">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-deep sm:text-xs sm:tracking-[0.25em] dark:text-gold">Untold Ramayana · Valmiki, Critical Edition</div>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-deep sm:text-xs sm:tracking-[0.25em] dark:text-gold">{CHANNEL.series.name} · {CHANNEL.series.book}, {CHANNEL.series.edition}</div>
           <h1 className="mt-1 font-display text-3xl font-extrabold tracking-wide sm:text-4xl">Today in the studio</h1>
         </div>
         <div className="flex min-w-0 flex-wrap gap-2 font-mono text-xs text-ink-soft dark:text-parchment/60">

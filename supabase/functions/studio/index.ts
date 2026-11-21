@@ -97,7 +97,7 @@ Deno.serve(async (req) => {
         const values: Record<string, string> = {};
         for (const k of keys) { const v = String(body.values?.[k] ?? "").trim(); if (!v) return json({ error: `missing ${k}` }, 400); values[k] = v; }
         if (body.provider === "github") {
-          const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows`, { headers: { Authorization: `Bearer ${values.token}`, Accept: "application/vnd.github+json", "User-Agent": "untold-granth-studio" } });
+          const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows`, { headers: { Authorization: `Bearer ${values.token}`, Accept: "application/vnd.github+json", "User-Agent": "storyreel-studio" } });
           if (!r.ok) return json({ error: `GitHub refused this token (${r.status}). It needs Actions: read & write on ${REPO}.` }, 400);
         }
         if (body.provider === "huggingface") {
@@ -170,7 +170,7 @@ Deno.serve(async (req) => {
         const gh = await getIntegration("github");
         const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/publish.yml/dispatches`, {
           method: "POST",
-          headers: { Authorization: `Bearer ${gh!.token}`, Accept: "application/vnd.github+json", "User-Agent": "untold-granth-studio", "Content-Type": "application/json" },
+          headers: { Authorization: `Bearer ${gh!.token}`, Accept: "application/vnd.github+json", "User-Agent": "storyreel-studio", "Content-Type": "application/json" },
           body: JSON.stringify({ ref: "main", inputs: { job_id: job.id, job_token: token, api: `${FN_URL}/job` } }),
         });
         if (!r.ok) {

@@ -6,6 +6,7 @@ import { Button, Card, CopyButton, SectionTitle, Spinner } from "../components/u
 import { Target } from "../components/Target";
 import { studio, useConnections, type Connections as Conn } from "../lib/api";
 import { useQueryClient } from "@tanstack/react-query";
+import { CHANNEL, IG, YT } from "../lib/channel";
 
 export default function Connections() {
   const c = useConnections();
@@ -33,7 +34,7 @@ export default function Connections() {
         <p>Lets the app start the publisher that uploads your full-quality files.</p>
         <ol className="list-decimal space-y-1 pl-5">
           <li>Open <A href="https://github.com/settings/personal-access-tokens/new">GitHub → new fine-grained token</A>.</li>
-          <li>Name <code>untold-granth-publisher</code>, expiration up to 1 year, Repository access → <b>Only select repositories</b> → <code>untold-granth-studio</code>.</li>
+          <li>Name <code>{CHANNEL.id}-publisher</code>, expiration up to 1 year, Repository access → <b>Only select repositories</b> → <code>{CHANNEL.infra.github_repo.split("/")[1]}</code>.</li>
           <li>Permissions → Repository → <b>Actions: Read and write</b>. Generate, copy, paste below.</li>
         </ol>
         <SaveForm provider="github" fields={[["token", "GitHub token"]]} />
@@ -42,7 +43,7 @@ export default function Connections() {
       <Step n={2} title="Master files (Hugging Face)" done={!!p.huggingface?.connected} detail={p.huggingface?.name ? `Signed in as ${p.huggingface.name}` : undefined}>
         <p>Lets the publisher read the masters in your private repo.</p>
         <ol className="list-decimal space-y-1 pl-5">
-          <li>Open <A href="https://huggingface.co/settings/tokens/new?tokenType=read">Hugging Face → new token</A>, type <b>Read</b>, name <code>untold-granth-publisher</code>.</li>
+          <li>Open <A href="https://huggingface.co/settings/tokens/new?tokenType=read">Hugging Face → new token</A>, type <b>Read</b>, name <code>{CHANNEL.id}-publisher</code>.</li>
           <li>Copy and paste below.</li>
         </ol>
         <SaveForm provider="huggingface" fields={[["token", "Hugging Face token"]]} />
@@ -51,12 +52,12 @@ export default function Connections() {
       <Step n={3} title="YouTube" done={!!p.youtube?.connected} detail={p.youtube?.connected ? `${p.youtube.name ?? "Channel"}${p.youtube.account_id ? ` · ${p.youtube.account_id}` : ""}` : undefined}>
         <p>One-time Google setup (about 10 minutes):</p>
         <ol className="list-decimal space-y-1 pl-5">
-          <li>Open <A href="https://console.cloud.google.com/projectcreate">Google Cloud → new project</A> named <code>untold-granth</code>.</li>
+          <li>Open <A href="https://console.cloud.google.com/projectcreate">Google Cloud → new project</A> named <code>{CHANNEL.id}</code>.</li>
           <li>Enable <A href="https://console.cloud.google.com/apis/library/youtube.googleapis.com">YouTube Data API v3</A>.</li>
-          <li><A href="https://console.cloud.google.com/auth/overview">Google Auth Platform</A> → Get started: app name <i>Untold Granth Studio</i>, audience <b>External</b>, your email. Then <b>Audience → Publish app</b> (keeps you signed in permanently; Google shows an "unverified" warning you can click through).</li>
+          <li><A href="https://console.cloud.google.com/auth/overview">Google Auth Platform</A> → Get started: app name <i>{CHANNEL.app_title}</i>, audience <b>External</b>, your email. Then <b>Audience → Publish app</b> (keeps you signed in permanently; Google shows an "unverified" warning you can click through).</li>
           <li><A href="https://console.cloud.google.com/auth/clients/create">Clients → Create client</A> → <b>Web application</b> → Authorized redirect URI:
             <Copyable text={c.data!.redirect_uris.youtube} /></li>
-          <li>Paste the Client ID and Client secret below, then press <b>Connect YouTube</b> and choose your @untoldgranth channel.</li>
+          <li>Paste the Client ID and Client secret below, then press <b>Connect YouTube</b> and choose your {YT.handle} channel.</li>
         </ol>
         <SaveForm provider="google_app" fields={[["client_id", "Client ID"], ["client_secret", "Client secret"]]} saved={!!p.google_app?.connected} />
         <ConnectButton provider="youtube" label="Connect YouTube" disabled={!p.google_app?.connected} connected={!!p.youtube?.connected} />
@@ -67,12 +68,12 @@ export default function Connections() {
       <Step n={4} title="Instagram" done={!!p.instagram?.connected} detail={p.instagram?.connected ? `@${p.instagram.name ?? "account"}${p.instagram.account_id ? ` · ID ${p.instagram.account_id}` : ""}` : undefined}>
         <p>One-time Meta setup (Instagram must be a professional/Creator account):</p>
         <ol className="list-decimal space-y-1 pl-5">
-          <li><A href="https://developers.facebook.com/apps/">Meta for Developers → My Apps</A> → <b>Untold Granth Studio</b> → Use cases → <b>Customize</b> → <b>API setup with Unified login</b>.</li>
+          <li><A href="https://developers.facebook.com/apps/">Meta for Developers → My Apps</A> → <b>{CHANNEL.app_title}</b> → Use cases → <b>Customize</b> → <b>API setup with Unified login</b>.</li>
           <li>Under <b>1. Configure your app</b>, keep the "Instagram API (unified login)" configuration selected and copy its <b>Configuration ID</b>.</li>
           <li>Same section → <b>Register a new redirect URL</b> → paste and <b>Save</b>:
             <Copyable text={c.data!.redirect_uris.instagram} /></li>
           <li>Left menu → <b>App settings → Basic</b> → copy <b>App ID</b> and <b>App secret</b> (Show).</li>
-          <li>Paste all three below → <b>Save</b> → <b>Connect Instagram</b> → log in and choose <b>@untoldgranth.official</b>.</li>
+          <li>Paste all three below → <b>Save</b> → <b>Connect Instagram</b> → log in and choose <b>{IG.handle}</b>.</li>
         </ol>
         <SaveForm provider="meta_app" fields={[["app_id", "App ID"], ["app_secret", "App secret"], ["config_id", "Configuration ID"]]} saved={!!p.meta_app?.connected} />
         <ConnectButton provider="instagram" label="Connect Instagram" disabled={!p.meta_app?.connected} connected={!!p.instagram?.connected} />

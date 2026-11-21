@@ -1,4 +1,4 @@
-// ===== UNTOLD RAMAYANA renderer — core: math, colour, gouache painting helpers, post =====
+// ===== storyreel-studio renderer — core: math, colour, gouache painting helpers, post =====
 const W = 1080, H = 1920, FPS = 24, TAU = Math.PI * 2, M = 170; // M = layer margin for camera moves
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, t) => a + (b - a) * t;

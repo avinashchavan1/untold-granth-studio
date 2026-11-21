@@ -1,7 +1,7 @@
 """Shared paths + data for one reel. Every engine script does `from reel import *`.
 
 Which reel?  env REEL=<path to reel dir>  (make_reel.py sets it), e.g.
-    studio/series/untold-ramayana/reels/A02
+    studio/series/<series>/reels/<ID>
 Layout:
     <series>/series.json           series identity (logo, title, tagline, palette, source rules)
     <series>/cast/cast.json        LOCKED voices (engine, reference clip, delivery, fx, mix gain)

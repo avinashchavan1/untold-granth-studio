@@ -26,7 +26,7 @@ export default function Reels() {
         <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
           <label className="relative w-full sm:w-auto">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft" />
-            <input id="reel-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search title, code, kanda…" aria-label="Search reels"
+            <input id="reel-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search title, code, book…" aria-label="Search reels"
               className="w-full rounded-xl sm:w-64 border border-parchment-deep bg-white/80 py-2 pl-9 pr-3 text-sm outline-none focus:border-gold dark:border-night-700 dark:bg-night-900" />
           </label>
           <select id="stage-filter" aria-label="Filter by stage" value={stage ?? ""} onChange={(e) => set("stage", e.target.value || null)}

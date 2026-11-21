@@ -1,4 +1,4 @@
--- Untold Granth Studio — core schema
+-- storyreel-studio — core schema
 -- Everything the channel needs: series (books) → characters, locations, docs, reels → claims, files, publications.
 -- Access: only emails in app_admins can read or write anything (RLS on every table).
 
@@ -30,10 +30,10 @@ create type public.doc_kind as enum ('style_guide', 'plan', 'skill', 'readme', '
 
 -- ---------- series (one per book / show) ----------
 create table public.series (
-  id text primary key,                         -- e.g. 'untold-ramayana'
-  name text not null,                          -- 'Untold Ramayana'
-  book text not null,                          -- 'Valmiki Ramayana'
-  edition text,                                -- 'Critical Edition (Baroda); English: Bibek Debroy'
+  id text primary key,                         -- e.g. 'my-series'
+  name text not null,                          -- 'My Series'
+  book text not null,                          -- the base text
+  edition text,                                -- e.g. 'Critical edition; English: <translator>'
   config jsonb not null default '{}'::jsonb,   -- series.json: logo, title, tagline, palette, fonts, mix, handles…
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -50,7 +50,7 @@ create table public.channels (
 create table public.characters (
   id uuid primary key default gen_random_uuid(),
   series_id text not null references public.series(id) on delete cascade,
-  key text not null,                           -- 'rama', 'shabari'
+  key text not null,                           -- 'hero', 'sage'
   name text not null,
   tier public.char_tier not null default 'minor',
   status public.char_status not null default 'needed',
@@ -106,8 +106,8 @@ create table public.claims (
   reel_id uuid not null references public.reels(id) on delete cascade,
   position int not null default 0,
   claim text not null,
-  ref text not null,                           -- kanda.sarga.verse
-  quote_sa text,                               -- Sanskrit of the verse
+  ref text not null,                           -- book.chapter.verse
+  quote_sa text,                               -- original-script text of the verse
   verified boolean not null default false,
   sources text[] not null default '{}'
 );
@@ -196,4 +196,4 @@ create policy "reel-media admins update" on storage.objects for update to authen
 create policy "reel-media admins delete" on storage.objects for delete to authenticated using (bucket_id = 'reel-media' and (select public.is_admin()));
 
 -- owner login (add more editors with: insert into public.app_admins(email) values ('...'))
-insert into public.app_admins (email) values ('avinashchavan1433@gmail.com');
+-- the first admin is added by setup (scripts/setup.sh prints: insert into public.app_admins (email) values ('<owner email>');)

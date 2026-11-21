@@ -1,0 +1,168 @@
+{
+ "_doc": "Hindu festival calendar (India, IST) used by Untold Granth. Re-check dates a year ahead on two panchang sites; approx = may differ by a day.",
+ "timezone_offset_min": 330,
+ "occasions": [
+  {
+   "date": "2026-11-21",
+   "name": "Tulsi Vivah",
+   "what": "Kartika Shukla Dwadashi; a big devotional day, the wedding season begins",
+   "themes": [
+    "devotion"
+   ],
+   "weight": 2,
+   "devotional": true
+  },
+  {
+   "date": "2026-11-24",
+   "name": "Kartik Purnima · Dev Diwali",
+   "what": "Full moon of Kartik: holy dip in the Ganga, lamps on the ghats",
+   "themes": [
+    "devotion",
+    "ganga",
+    "lamps"
+   ],
+   "weight": 4,
+   "devotional": true
+  },
+  {
+   "date": "2026-12-14",
+   "name": "Vivah Panchami",
+   "what": "Anniversary of the wedding of Rama and Sita",
+   "themes": [
+    "wedding",
+    "swayamvara",
+    "bow",
+    "janaka"
+   ],
+   "weight": 5,
+   "devotional": true
+  },
+  {
+   "date": "2026-12-20",
+   "name": "Gita Jayanti",
+   "what": "Mokshada Ekadashi (some calendars 19 Dec)",
+   "themes": [
+    "devotion"
+   ],
+   "weight": 1,
+   "approx": true,
+   "devotional": true
+  },
+  {
+   "date": "2027-01-14",
+   "name": "Makar Sankranti",
+   "what": "The sun enters Capricorn: a sun festival",
+   "themes": [
+    "sun"
+   ],
+   "weight": 3
+  },
+  {
+   "date": "2027-03-06",
+   "name": "Maha Shivratri",
+   "what": "Night of Shiva (some calendars 5 Mar)",
+   "themes": [
+    "shiva",
+    "bow"
+   ],
+   "weight": 3,
+   "approx": true,
+   "devotional": true
+  },
+  {
+   "date": "2027-04-15",
+   "name": "Ram Navami",
+   "what": "Birth of Rama (some calendars 14 Apr)",
+   "themes": [
+    "rama-birth",
+    "dasharatha"
+   ],
+   "weight": 6,
+   "approx": true,
+   "devotional": true
+  },
+  {
+   "date": "2027-04-20",
+   "name": "Hanuman Jayanti",
+   "what": "Birth of Hanuman (north Indian date)",
+   "themes": [
+    "hanuman"
+   ],
+   "weight": 6,
+   "approx": true,
+   "devotional": true
+  }
+ ],
+ "themes": [
+  [
+   "hanuman",
+   "hanuman|maruti|anjan"
+  ],
+  [
+   "sun",
+   "\\bsun\\b|surya"
+  ],
+  [
+   "sita",
+   "\\bsita\\b|janaki|vaidehi"
+  ],
+  [
+   "wedding",
+   "wedding|marri|vivah|swayamvara"
+  ],
+  [
+   "swayamvara",
+   "swayamvara"
+  ],
+  [
+   "bow",
+   "\\bbow\\b|pinaka"
+  ],
+  [
+   "janaka",
+   "janaka"
+  ],
+  [
+   "shiva",
+   "shiva|rameshwar"
+  ],
+  [
+   "rama-birth",
+   "birth of rama|rama.?s birth|putrakam|ram navami|shanta|rishyashringa"
+  ],
+  [
+   "dasharatha",
+   "dasharatha|shravan"
+  ],
+  [
+   "ayodhya",
+   "ayodhya"
+  ],
+  [
+   "ganga",
+   "ganga|boat|kevat|guha"
+  ],
+  [
+   "lamps",
+   "diwali|lamp|deep"
+  ],
+  [
+   "ravana",
+   "ravana"
+  ],
+  [
+   "rama",
+   "\\brama\\b"
+  ]
+ ],
+ "weekly": [
+  {
+   "theme": "hanuman",
+   "days": [
+    2,
+    6
+   ],
+   "label": "Hanuman's day"
+  }
+ ]
+}

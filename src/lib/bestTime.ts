@@ -3,7 +3,7 @@
 //             × what our own posts show (each post's speed vs the others, smoothed over nearby hours),
 // with our own data weighted more as more posts come in (w = n / (n + 6)).
 import type { Publication, Reel } from "./types";
-import { fit, pullOf, themesOf } from "./occasions";
+import { fit, pullOf } from "./occasions";
 
 export type Main = "instagram" | "youtube";
 const TZ = "Asia/Kolkata";
@@ -71,16 +71,15 @@ export const confidence = (obs: Obs[], p: Main) => { const n = obs.filter((o) =>
 
 // --- 3. which day each ready reel goes out ----------------------------------
 // Day by day from the first free evening, give each day the ready reel that fits it best:
-// festival match (lib/occasions.ts) + Hanuman's Tue/Sat + audience pull (★ in the plan), with a small pull towards plan order.
+// festival match (lib/occasions.ts, calendar.json) + weekly theme days + audience pull (★ in the plan), with a small pull towards plan order.
 // A reel with "follows" only goes the day after its pair; scheduled posts stay where they are.
-export const isHanuman = (r: Reel) => themesOf(r).has("hanuman");
 export interface Slot { reel: Reel; day: number; fixed?: Date; why: string[] }
 export function planDays(queue: Reel[], firstDay: number, fixedFor: (r: Reel) => Date | null): Slot[] {
   const fixed: Slot[] = [], left: Reel[] = [], taken = new Set<number>();
   for (const r of queue) { const f = fixedFor(r); if (f) { const d = istParts(f).day; fixed.push({ reel: r, day: d, fixed: f, why: ["Scheduled"] }); taken.add(d); } else left.push(r); }
   const days: number[] = []; for (let d = firstDay; days.length < left.length; d++) if (!taken.has(d)) days.push(d);
   const order = (r: Reel) => queue.indexOf(r), n = left.length;
-  // total value of posting left[perm[k]] on days[k]: festival/Hanuman fit, strong reels a little earlier, small cost for leaving plan order;
+  // total value of posting left[perm[k]] on days[k]: festival/weekly-day fit, strong reels a little earlier, small cost for leaving plan order;
   // a reel with "follows" must sit the day right after its pair (when both are in the queue)
   const value = (perm: number[]) => {
     let v = 0; const at: Record<string, number> = {};

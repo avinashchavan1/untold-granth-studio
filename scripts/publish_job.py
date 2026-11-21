@@ -112,7 +112,7 @@ def instagram(spec, path):
     print(f"Instagram file: {size / 1e6:.0f} MB")
     q = lambda cid: call("GET", f"{IG}/{cid}?fields=status_code,status,video_status&access_token={urllib.parse.quote(tok)}")
     # Instagram's top-level status_code says IN_PROGRESS even when its upload server stored NOTHING (video_status.uploading_phase:
-    # error, 0 bytes, FILE_NOT_FOUND: A01 on Nov 18, A89 on Nov 21). So we judge the upload by video_status, never by status_code,
+    # error, 0 bytes, FILE_NOT_FOUND: seen on real uploads). So we judge the upload by video_status, never by status_code,
     # resend (or resume from the bytes it has) until every byte is stored, and only then wait for processing.
     def upload_state(cid):
         st = q(cid); up = (st.get("video_status") or {}).get("uploading_phase") or {}
@@ -165,7 +165,7 @@ def instagram(spec, path):
                            "Try again later. Details: " + " || ".join(errors)[:1300])
     p = call("POST", f"{IG}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
     mid = p["id"]
-    link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or "https://www.instagram.com/untoldgranth.official/"
+    link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or os.environ.get("IG_PROFILE_URL", "")
     return link, mid, f"Published reel {mid}"
 
 def first_comment(spec, ext_id):

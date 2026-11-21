@@ -16,6 +16,9 @@ import SettingsPage from "./pages/Settings";
 import Timeline from "./pages/Timeline";
 import World from "./pages/World";
 import { About, Privacy, Terms } from "./pages/Legal";
+import { CHANNEL } from "./lib/channel";
+
+document.title = CHANNEL.app_title;   // the browser tab shows this channel's studio name (channel.json)
 
 const qc = new QueryClient({ defaultOptions: { queries: { staleTime: 30_000, refetchOnWindowFocus: true, retry: 1 } } });
 

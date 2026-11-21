@@ -1,5 +1,5 @@
 {
-  "name": "untold-studio-engine",
+  "name": "storyreel-studio-engine",
   "private": true,
   "type": "commonjs",
   "description": "Reel engine scripts (CommonJS). Keeps the app package.json (type: module) from applying here."

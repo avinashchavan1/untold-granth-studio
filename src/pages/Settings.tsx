@@ -4,6 +4,7 @@ import { useSession } from "../components/Auth";
 import { Button, Card, SectionTitle, Spinner, fmtDate } from "../components/ui";
 import { useAdminMutations, useAdmins, useChannels, useSeries } from "../lib/api";
 import Connections from "./Connections";
+import { CHANNEL } from "../lib/channel";
 
 export default function SettingsPage() {
   const series = useSeries();
@@ -62,7 +63,7 @@ export default function SettingsPage() {
           <SectionTitle>How data gets here</SectionTitle>
           <ul className="list-disc space-y-1.5 pl-5 text-sm">
             <li>Claude produces each reel in the studio engine (in this repo), then syncs it here: script, citations, captions, preview and files.</li>
-            <li>Full-quality masters live in your private Hugging Face repo (Avinash1443/untold-granth-masters) and are linked from each reel's Publish tab.</li>
+            <li>Full-quality masters live in your private Hugging Face repo ({CHANNEL.infra.hf_masters_repo}) and are linked from each reel's Publish tab.</li>
             <li>You review the citations, post on each platform, and mark it posted. Everything is logged in Recent activity.</li>
           </ul>
         </Card>

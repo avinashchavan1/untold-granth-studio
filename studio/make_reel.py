@@ -9,6 +9,7 @@
   python3 make_reel.py pick     <reel dir>      choose the best take per line, build timeline.json
   python3 make_reel.py stills   <reel dir> 1s,10s,...          preview frames into <reel>/frames
   python3 make_reel.py audio    <reel dir>      score + sfx + voice mix -> audio/mix.wav (-14 LUFS)
+  python3 make_reel.py draft-timeline <reel dir>       estimated timeline from the script (preview art before recording)
   python3 make_reel.py render   <reel dir>      frames (3 parallel) + mix -> out/<ID>_final.mp4
   python3 make_reel.py master   <reel dir>      BEST-QUALITY upload masters: lossless PNG re-render -> Instagram 1080p CRF12 + YouTube 4K
   python3 make_reel.py short    <reel dir>      SHORT CUT from script.json "short" (drop shots / keep units): timeline_short.json,
@@ -21,6 +22,8 @@
 
 Engine paths: engine/js (renderer), engine/py (voice/audio), engine/models/cbenv (Chatterbox venv)."""
 import json, os, re, shutil, subprocess, sys, time
+CHN = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "channel.json"), encoding="utf-8"))   # the channel (repo root)
+LANG = {"hi": "Hindi", "en": "English", "mr": "Marathi", "ta": "Tamil", "te": "Telugu", "bn": "Bengali", "gu": "Gujarati", "kn": "Kannada", "ml": "Malayalam"}.get(CHN["language"]["narration"], CHN["language"]["narration"])
 HERE = os.path.dirname(os.path.abspath(__file__)); PY = os.path.join(HERE, "engine", "py"); JS = os.path.join(HERE, "engine", "js")
 CBPY = os.path.join(HERE, "engine", "models", "cbenv", "bin", "python")
 
@@ -45,13 +48,16 @@ def check(reel):
     if not s.get("claims"): probs.append("no 'claims' list: every factual claim needs a reference")
     ser_ = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(reel))), "series.json"), encoding="utf-8"))
     adr = ser_.get("address", {}); ok = set(adr.get("plain_name_ok", ["narrator"]))
-    for sh in s["shots"]:                                   # respect: no bare "राम" from devotees, brothers, wife, friends
+    names = adr.get("protected_names", []); pre = adr.get("honorific_prefixes", [])   # series.json → address: e.g. ["राम"], ["श्री"]
+    for sh in s["shots"]:                                   # respect: a revered name is not used bare by devotees, family, friends
         v = sh.get("voice")
         if not v or v in ok: continue
         for u in (sh.get("units") or [sh.get("hi", "")]):
             txt = u if isinstance(u, str) else u.get("say", "")
-            if re.search(r"(?<![\u0900-\u097F])(?<!श्री)राम(?![\u0900-\u097F])", txt):
-                probs.append(f"shot {sh['id']}: {v} calls Rama by bare name 'राम' — use {adr.get('forms', {}).get(v, adr.get('forms', {}).get('default', 'an honorific'))}")
+            for nm in names:
+                lb = "".join(f"(?<!{re.escape(x)})" for x in pre)
+                if re.search(r"(?<![\u0900-\u097F])" + lb + re.escape(nm) + r"(?![\u0900-\u097F])", txt):
+                    probs.append(f"shot {sh['id']}: {v} uses the bare name '{nm}' — use {adr.get('forms', {}).get(v, adr.get('forms', {}).get('default', 'an honorific'))}")
     CALM = {"softly", "warmly", "curious", "serious", "thoughtfully", "pause", "sadly", "gently", "whispers"}   # the narrator is a calm storyteller: no shouting
     EXPRESSIVE = {"reverently", "solemnly", "chanting", "with devotion", "with deep devotion", "slowly", "expressively", "majestically", "with feeling"}   # śloka line only (sloka_unit); the pitch guard still drops shouted takes
     ENERGY = {"excited", "dramatically", "intense", "energetic", "urgently", "with energy"}   # narration_energy test: hook + reveal only
@@ -99,24 +105,24 @@ def sheet(reel):
     L += ["", "## Script (Hindi → English)", ""] + [f"{sh['id']}. [{sh.get('voice') or '—'}] {sh['hi']}" + (f"  \n   _{sh['en']}_" if sh.get("en") else "") + (f" ({sh['cite']})" if sh.get("cite") else "") for sh in s["shots"] if sh.get("hi")]
     if s.get("verify_note"): L += ["", "> " + s["verify_note"]]
     open(f"{out}/{rid}_citations.md", "w").write("\n".join(L) + "\n")
-    hook = s["shots"][0]["en"]; tags = s.get("hashtags", ["#UntoldGranth", "#Ramayana", "#Valmiki", "#IndianMythology", "#Sanatan", "#UntoldRamayana"])
+    hook = s["shots"][0]["en"]; tags = s.get("hashtags", CHN["hashtags"])
     open(f"{out}/{rid}_caption.txt", "w").write(f"{hook}\n\n{s.get('caption', '') + chr(10) + chr(10) if s.get('caption') else ''}Source: {s.get('source', '')}{'' if 'Critical' in s.get('source', '') else ' (' + ser['source']['edition'].split(';')[0] + ')'}\n\n{' '.join(tags)}\n")
     print("wrote", f"{out}/{rid}_citations.md", f"{out}/{rid}_caption.txt")
 
 def desk_row(reel, preview_id="", poster_id=""):
     """The publishing-desk entry for one reel (captions per platform, citations, master files) -> publish/desk/rows/<ID>.json"""
     s = json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8")); ser = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(reel))), "series.json")))
-    rid = s["reel"]; tags = " ".join(s.get("hashtags", ["#UntoldGranth", "#Ramayana", "#Valmiki", "#UntoldRamayana"]))
+    rid = s["reel"]; tags = " ".join(s.get("hashtags", CHN["hashtags"]))
     hook_hi = s["shots"][0]["hi"]; hook_en = s["shots"][0]["en"]; src = s.get("source", ""); cap = s.get("caption", "")
     refs = "\n".join(f"• {c['claim']} — {c['ref'].split(' — ')[0]}" for c in s.get("claims", []) if c.get("verified"))
     tl = json.load(open(os.path.join(reel, "src", "timeline.json"))); secs = round(tl["total"])
     ask = s.get("comment_prompt", "")                                                            # ends the caption with a question to drive comments
     # English is the main language for every written word (captions, titles, covers); the narration stays Hindi
-    ig = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}📜 Source: {src}\n🎧 Hindi narration · English subtitles\n\nFollow @untoldgranth.official for more untold stories from the original texts.\n\n{tags}"
-    yt_title = (s.get("youtube_title") or f"{s['title']} | Valmiki Ramayana #Shorts")[:100]   # a question title beats a statement
-    yt = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}Source: {src}\nVerses:\n{refs}\n\nHindi narration · English subtitles.\nSubscribe to Untold Granth for real stories from the original texts, with the verse on screen.\n\n{tags} #Shorts"
+    ig = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}📜 Source: {src}\n🎧 {LANG} narration · English subtitles\n\n{CHN['captions']['instagram_follow'].format(instagram=CHN['handles']['instagram']['handle'], name=CHN['name'])}\n\n{tags}"
+    yt_title = (s.get("youtube_title") or f"{s['title']} | " + CHN["captions"]["youtube_title_suffix"].format(book=CHN["series"]["book"]))[:100]   # a question title beats a statement
+    yt = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}Source: {src}\nVerses:\n{refs}\n\n{LANG} narration · English subtitles.\n{CHN['captions']['youtube_subscribe'].format(name=CHN['name'])}\n\n{tags} #Shorts"
     row = {"title": s["title"], "series": ser.get("series_name", "").title(), "source": src, "length": f"{secs // 60}:{secs % 60:02d}",
-           "captions": {"instagram": ig, "facebook": ig.replace("@untoldgranth.official", "Untold Granth"), "youtube_title": yt_title, "youtube_description": yt, **({"first_comment": ask} if ask else {})},
+           "captions": {"instagram": ig, "facebook": ig.replace(CHN["handles"]["instagram"]["handle"], CHN["name"]), "youtube_title": yt_title, "youtube_description": yt, **({"first_comment": ask} if ask else {})},
            "claims": [{"claim": c["claim"], "ref": c["ref"]} for c in s.get("claims", [])], "verify_note": s.get("verify_note", ""),
            "masters": {"instagram": {"file": f"{rid}_INSTAGRAM_MASTER.mp4", "spec": "1080×1920 · H.264 CRF 12 · AAC 320k"},
                        "facebook": {"file": f"{rid}_INSTAGRAM_MASTER.mp4", "spec": "1080×1920 · H.264 CRF 12 · AAC 320k"},
@@ -137,6 +143,21 @@ def audio(reel):
     if has_yt_cta(reel):
         env = dict(os.environ, REEL=os.path.abspath(reel), VARIANT="youtube"); print("$ VARIANT=youtube build_audio.py", flush=True)
         subprocess.run(["python3", os.path.join(PY, "build_audio.py")], env=env, check=True)
+
+def draft_timeline(reel):
+    """An ESTIMATED timeline from script.json (no audio yet): lets a new series preview its art with `stills` before recording voices.
+    Replaced by the real one as soon as `pick` runs."""
+    s = json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8")); shots = []; t = 0.0
+    for sh in s["shots"]:
+        units = [u if isinstance(u, str) else u.get("say", "") for u in (sh.get("units") or [sh.get("hi", "")])]
+        lens = [max(0.8, len(re.sub(r"\[[^\]]*\]|[\s,।?!…॥]", "", u)) / 11.0) for u in units]
+        sent, acc = [], 0.0
+        for i, L in enumerate(lens): sent.append(round(acc, 3)); acc += L + (sh.get("unit_gap", 0.35) if i < len(lens) - 1 else 0)
+        lead, tail = sh.get("lead", 0.25), sh.get("tail", 0.3); dur = max(sh.get("min", 0), lead + acc + tail)
+        shots.append({k: sh[k] for k in ("id", "voice", "en", "hi", "card", "quote", "cta") if k in sh} | {"env": [], "sent": sent, "start": round(t, 4), "dur": round(dur, 4), "vStart": round(t + lead, 4), "aStart": round(t + lead, 4), "speech": round(acc, 3)})
+        t += dur
+    tl = {"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "reel": s["reel"], "draft": True}
+    json.dump(tl, open(os.path.join(reel, "src", "timeline.json"), "w"), ensure_ascii=False); print(f"draft timeline {t:.1f}s (estimated; `pick` writes the real one)")
 
 # ---- resumable renders: a finished piece gets <file>.done holding a stamp of its inputs; a re-run skips it while the stamp matches
 def _stamp(reel):
@@ -280,6 +301,7 @@ if __name__ == "__main__":
     elif cmd == "stills": run(["node", os.path.join(JS, "render.js"), "stills"] + rest, reel)
     elif cmd == "audio": audio(reel)
     elif cmd == "render": render(reel)
+    elif cmd == "draft-timeline": draft_timeline(reel)
     elif cmd == "all":
         run(["python3", os.path.join(PY, "narration.py"), "import"], reel); run(["python3", os.path.join(PY, "build_voice.py")], reel)
         audio(reel); render(reel)

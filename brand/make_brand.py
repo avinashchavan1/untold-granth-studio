@@ -1,5 +1,10 @@
-"""Untold Granth brand kit: avatar (1080²), YouTube banner (2560×1440), video watermark (300² transparent)."""
-import math, random
+"""Channel brand kit: avatar (1080²), YouTube banner (2560×1440), video watermark (300² transparent).
+Reads channel.json (name, brand.tagline) and two art frames from your reels: brand/banner_left.png, brand/banner_right.png
+(1080×1920 stills, e.g. from make_reel.py thumb candidates). Run from brand/: python3 make_brand.py"""
+import json, math, os, random
+CHN = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "channel.json"), encoding="utf-8"))
+WORDS = CHN["name"].upper().split(); TOP, BOT = (WORDS[0], " ".join(WORDS[1:])) if len(WORDS) > 1 else (WORDS[0], "")
+TAGLINE = CHN.get("brand", {}).get("tagline", "").upper()
 from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageChops
 GOLD, GOLD_D, IVORY, NIGHT, NIGHT2 = (230, 180, 80), (168, 116, 26), (246, 241, 230), (11, 10, 24), (27, 24, 56)
 def font(name, size, var=None):
@@ -43,8 +48,8 @@ gl, m = glow((A, A), (A // 2, A // 2 - 40), 520, (230, 170, 70), 0.55); av.paste
 d = ImageDraw.Draw(av)
 d.ellipse((60, 60, A - 60, A - 60), outline=GOLD_D, width=10); d.ellipse((92, 92, A - 92, A - 92), outline=(90, 70, 40), width=3)
 lamp = diya(640); av.paste(lamp, ((A - 640) // 2, 150), lamp)
-f = font("Cinzel.ttf", 118, "Black"); t = "UNTOLD"; w = d.textlength(t, font=f); d.text(((A - w) / 2, 690), t, font=f, fill=GOLD)
-f2 = font("Cinzel.ttf", 82, "Bold"); t2 = "GRANTH"; w2 = d.textlength(t2, font=f2); d.text(((A - w2) / 2, 820), t2, font=f2, fill=IVORY)
+f = font("Cinzel.ttf", 118, "Black"); t = TOP; w = d.textlength(t, font=f); d.text(((A - w) / 2, 690), t, font=f, fill=GOLD)
+f2 = font("Cinzel.ttf", 82, "Bold"); t2 = BOT; w2 = d.textlength(t2, font=f2); d.text(((A - w2) / 2, 820), t2, font=f2, fill=IVORY)
 tex = paper_texture((A, A)); av = Image.composite(ImageChops.multiply(av, Image.merge("RGB", [tex.point(lambda v: 200 + v // 5)] * 3)), av, Image.new("L", (A, A), 90))
 av.save("avatar_1080.png"); av.resize((800, 800), Image.LANCZOS).save("youtube_profile_800.png")
 
@@ -62,8 +67,8 @@ def feather(w, h, side, fade):
         a = int(255 * i / fade); x = (w - fade + i) if side == "right" else (fade - 1 - i)
         dd.line([(x, 0), (x, h)], fill=a if False else 255 - a + 0)
     return m
-left = panel("src_48.6.png", (0, 200, 1080, 1540), H)            # Sita at the hermitage under the moon (no logo, no subtitle)
-right = panel("src_a02_20.png", (0, 200, 1080, 1360), H, flip=True)  # Shabari's hermitage at Pampa (mirrored: she stands at the right)
+left = panel("banner_left.png", (0, 200, 1080, 1540), H)            # a clean art frame (no logo, no subtitle)
+right = panel("banner_right.png", (0, 200, 1080, 1360), H, flip=True)  # a second frame, mirrored
 def fmask(im, fade_side, fade=520):
     w, h = im.size; m = Image.new("L", (w, h), 255); dd = ImageDraw.Draw(m)
     for i in range(fade):
@@ -77,10 +82,10 @@ gl, m = glow((W, H), (W // 2, H // 2 - 60), 700, (230, 170, 70), 0.22); ban.past
 d = ImageDraw.Draw(ban)
 # center band (YouTube safe area: 1546×423 centered)
 lamp = diya(150); ban.paste(lamp, ((W - 150) // 2, 476), lamp)
-f = font("Cinzel.ttf", 136, "Black"); t = "UNTOLD GRANTH"; w = d.textlength(t, font=f)
+f = font("Cinzel.ttf", 136, "Black"); t = CHN["name"].upper(); w = d.textlength(t, font=f)
 d.text(((W - w) / 2 + 4, 612), t, font=f, fill=(0, 0, 0)); d.text(((W - w) / 2, 606), t, font=f, fill=GOLD)
 d.line([(W / 2 - 380, 772), (W / 2 + 380, 772)], fill=GOLD_D, width=3)
-fh = font("Cinzel.ttf", 58, "Bold"); th = "UNTOLD STORIES FROM OUR GRANTHS"; w = d.textlength(th, font=fh); d.text(((W - w) / 2, 782), th, font=fh, fill=IVORY)
+fh = font("Cinzel.ttf", 58, "Bold"); th = TAGLINE; w = d.textlength(th, font=fh); d.text(((W - w) / 2, 782), th, font=fh, fill=IVORY)
 fe = font("Montserrat.ttf", 36, "SemiBold"); te = "Real stories from the original texts · verse on screen"; w = d.textlength(te, font=fe); d.text(((W - w) / 2, 862), te, font=fe, fill=(220, 210, 190))
 ban.save("youtube_banner_2560x1440.jpg", quality=92)
 # safe-area preview (what phones show)

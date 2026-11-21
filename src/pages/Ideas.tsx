@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Card, Empty, ErrorNote, Spinner, fmtDate } from "../components/ui";
 import { supabase } from "../lib/supabase";
 import { useAddReel, useIdeaMutations, useIdeas, useReels, type Idea } from "../lib/api";
+import { SERIES_ID } from "../lib/channel";
 
 const tagsOf = (s: string) => [...new Set((s.match(/#[\p{L}\p{N}_-]+/gu) ?? []).map((t) => t.slice(1).toLowerCase()))];
 
@@ -29,7 +30,7 @@ export default function Ideas() {
         <form onSubmit={(e) => { e.preventDefault(); save(); }} className="grid gap-2">
           <textarea ref={box} id="idea-body" value={text} onChange={(e) => setText(e.target.value)} rows={3} maxLength={4000} aria-label="New idea"
             onKeyDown={(e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); save(); } }}
-            placeholder="e.g. Did Hanuman really carry the whole mountain? Check Yuddha 61 #hanuman #mythbuster"
+            placeholder="e.g. Did the hero really do this? Check book 6, chapter 61 #hero #mythbuster"
             className="w-full rounded-xl border border-parchment-deep bg-white/80 px-3 py-2.5 text-[15px] outline-none focus:border-gold dark:border-night-700 dark:bg-night-950" />
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs text-ink-soft dark:text-parchment/60">{text.length > 0 ? `${text.length}/4000 · ` : ""}Ctrl/⌘ + Enter to save{tagsOf(text).length ? ` · tags: ${tagsOf(text).join(", ")}` : ""}</span>
@@ -69,8 +70,8 @@ function IdeaRow({ idea }: { idea: Idea }) {
       const code = "A" + String(Math.max(0, ...all.map((r) => parseInt(r.code.slice(1)) || 0)) + 1).padStart(2, "0");
       const planNo = Math.max(0, ...all.map((r) => r.plan_no ?? 0)) + 1;
       const first = idea.body.split("\n")[0].replace(/#[\p{L}\p{N}_-]+/gu, "").trim().slice(0, 120) || "New idea";
-      await addReel.mutateAsync({ series_id: "untold-ramayana", code, title: first, kind: idea.tags.includes("mythbuster") ? "myth_buster" : null, source_ref: "", plan_note: idea.body, plan_no: planNo });
-      const { data } = await supabase.from("reels").select("id").eq("series_id", "untold-ramayana").eq("code", code).single();
+      await addReel.mutateAsync({ series_id: SERIES_ID, code, title: first, kind: idea.tags.includes("mythbuster") ? "myth_buster" : null, source_ref: "", plan_note: idea.body, plan_no: planNo });
+      const { data } = await supabase.from("reels").select("id").eq("series_id", SERIES_ID).eq("code", code).single();
       await update.mutateAsync({ id: idea.id, patch: { status: "promoted", reel_id: data?.id ?? null } });
     } catch (e) { setErr((e as Error).message); }
   };

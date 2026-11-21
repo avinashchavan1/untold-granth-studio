@@ -1,20 +1,21 @@
 import { Link } from "react-router-dom";
+import { CHANNEL, IG, YT } from "../lib/channel";
 
 const Shell = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="min-h-full bg-parchment px-4 py-10 text-ink dark:bg-night-950 dark:text-parchment">
     <article className="prose-studio mx-auto">
-      <Link to="/about" className="text-sm font-semibold text-gold-deep no-underline dark:text-gold">Untold Granth Studio</Link>
+      <Link to="/about" className="text-sm font-semibold text-gold-deep no-underline dark:text-gold">{CHANNEL.app_title}</Link>
       <h1>{title}</h1>
       {children}
-      <p className="mt-10 text-sm opacity-70">Last updated 18 November 2026 · Contact: avinashchavan1433@gmail.com</p>
+      <p className="mt-10 text-sm opacity-70">Last updated 18 November 2026 · Contact: {CHANNEL.owner.contact_email}</p>
     </article>
   </div>
 );
 
 export function About() {
   return (
-    <Shell title="Untold Granth Studio">
-      <p>Untold Granth Studio is the private production tool of the <b>Untold Granth</b> channel (Instagram <b>@untoldgranth.official</b>, YouTube <b>@untoldgranth</b>), which publishes short videos on Indian scriptures with verse citations from the original texts.</p>
+    <Shell title={CHANNEL.app_title}>
+      <p>{CHANNEL.app_title} is the private production tool of the <b>{CHANNEL.name}</b> channel (Instagram <b>{IG.handle}</b>, YouTube <b>{YT.handle}</b>), which publishes short story videos with citations from the original texts.</p>
       <p>The studio is used only by the channel's own team to prepare videos and publish them to the channel's own Instagram and YouTube accounts. It is not offered to the public.</p>
       <p><Link to="/privacy">Privacy policy</Link> · <Link to="/terms">Terms of service</Link> · <Link to="/">Team sign-in</Link></p>
     </Shell>
@@ -24,7 +25,7 @@ export function About() {
 export function Privacy() {
   return (
     <Shell title="Privacy policy">
-      <p>This policy covers Untold Granth Studio ("the studio"), a private tool used only by the Untold Granth team.</p>
+      <p>This policy covers {CHANNEL.app_title} ("the studio"), a private tool used only by the {CHANNEL.name} team.</p>
       <h2>What we collect</h2>
       <ul>
         <li><b>Team sign-in:</b> the email address of team members, used only to sign in.</li>
@@ -45,9 +46,9 @@ export function Privacy() {
 export function Terms() {
   return (
     <Shell title="Terms of service">
-      <p>Untold Granth Studio is a private tool for the Untold Granth team. Access is limited to people the channel owner has added.</p>
+      <p>{CHANNEL.app_title} is a private tool for the {CHANNEL.name} team. Access is limited to people the channel owner has added.</p>
       <ul>
-        <li>Use the studio only to prepare and publish the Untold Granth channel's own content.</li>
+        <li>Use the studio only to prepare and publish the {CHANNEL.name} channel's own content.</li>
         <li>Content published through the studio must follow the YouTube and Instagram terms and community guidelines.</li>
         <li>The studio is provided as is, without warranty. The channel owner may change or withdraw access at any time.</li>
       </ul>

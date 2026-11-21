@@ -1,10 +1,10 @@
 // REEL=<reel dir> node render.js stills 10,200,4.5s,...   |   REEL=<reel dir> node render.js clean 51s,72.5s  (art-only PNGs for thumbnails)   |   REEL=<reel dir> node render.js range <start> <end> <out.mp4>
 // env PLATFORM=instagram|youtube picks the call to action on the end card (series.json → cta).
-// Serves one virtual folder /x/ that layers: reel/src  >  series/art  >  engine/js   (first match wins),
+// Serves one virtual folder /x/ that layers: reel/src  >  series/art  >  engine/art (shared library)  >  engine/js   (first match wins),
 // plus /x/series.js generated from series.json, and /fonts/ (series/fonts > engine/fonts).
 const { chromium } = require('playwright'); const http = require('http'); const fs = require('fs'); const path = require('path'); const { spawn } = require('child_process');
 const REEL = path.resolve(process.env.REEL || '.'), SERIES = path.resolve(REEL, '..', '..'), ENGINE = path.resolve(__dirname, '..');
-const LAYERS = [path.join(REEL, 'src'), path.join(SERIES, 'art'), path.join(ENGINE, 'js')], FONTS = [path.join(SERIES, 'fonts'), path.join(ENGINE, 'fonts')];
+const LAYERS = [path.join(REEL, 'src'), path.join(SERIES, 'art'), path.join(ENGINE, 'art'), path.join(ENGINE, 'js')], FONTS = [path.join(SERIES, 'fonts'), path.join(ENGINE, 'fonts')];
 const resolve = u => { const [, dir, ...rest] = u.split('/'); const name = rest.join('/'); const roots = dir === 'fonts' ? FONTS : dir === 'x' ? LAYERS : [];
   for (const r of roots) { const f = path.join(r, name); if (f.startsWith(r) && fs.existsSync(f)) return f; } return null; };
 fs.mkdirSync(path.join(REEL, 'frames'), { recursive: true });

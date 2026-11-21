@@ -15,10 +15,7 @@ import argparse, glob, json, os, re, sys, time, urllib.request
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-try:
-    from channel import SUPA as BASE, SID
-except Exception:   # channel repos without channel.json yet
-    BASE, SID = "https://spsrryrycowxmgiofyxo.supabase.co", "untold-ramayana"
+from channel import SUPA as BASE, SID
 H = {"apikey": "proxy-injected"}   # key injected by the environment proxy
 STEPS = ["Research the verses", "Write the script", "Record the voices", "Compose the music", "Draw the art and animation",
          "Render the preview", "Render the 4K and 1080p masters", "Cover, checks and upload"]

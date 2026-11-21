@@ -143,7 +143,13 @@
    "guha": "रघुनंदन / प्रभु",
    "shabari": "प्रभु / रघुनंदन",
    "default": "रघुनंदन / प्रभु / श्रीराम"
-  }
+  },
+  "protected_names": [
+   "राम"
+  ],
+  "honorific_prefixes": [
+   "श्री"
+  ]
  },
  "character_looks": {
   "hanuman_child": {
@@ -186,5 +192,119 @@
    "measure": "YouTube views and Instagram views/reach at 48 h after posting (Dashboard → Refresh stats); Instagram views need the instagram_manage_insights permission",
    "decide": "after both test reels reach 48 h: keep calm, adopt hook/reveal energy, or test more"
   }
- }
+ },
+ "source_title": "Valmiki Ramayana",
+ "manuscript_lines": [
+  "मा निषाद प्रतिष्ठां त्वमगमः शाश्वतीः समाः ।",
+  "यत्क्रौञ्चमिथुनादेकमवधीः काममोहितम् ॥"
+ ],
+ "plan_file": "PLAN_100.md",
+ "cast_meta": {
+  "names": {
+   "narrator": "Narrator (Rudra)",
+   "lakshmana": "Lakshmana",
+   "hanuman_child": "Baby Hanuman",
+   "vishvamitra": "Vishvamitra",
+   "sagara": "Sagara (the Ocean)",
+   "vanara": "Vanara army",
+   "boatman": "Boatman",
+   "airavata": "Airavata",
+   "rahu": "Rahu",
+   "indra": "Indra",
+   "matali": "Matali",
+   "mandodari": "Mandodari",
+   "vibhishana": "Vibhishana",
+   "ravana": "Ravana",
+   "guha": "Guha",
+   "nala": "Nala"
+  },
+  "first_reel": {
+   "narrator": "A01",
+   "rama": "A01",
+   "sita": "A01",
+   "lakshmana": "A01",
+   "maricha": "A01",
+   "shabari": "A02",
+   "gautama": "A03"
+  },
+  "rig_keys": {
+   "lakshmana": "lak",
+   "vishvamitra": "vishva"
+  },
+  "rig_to_character": {
+   "rama": "rama",
+   "lak": "lakshmana",
+   "sita": "sita",
+   "shabari": "shabari",
+   "ahalya": "ahalya",
+   "gautama": "gautama",
+   "vishva": "vishvamitra",
+   "nala": "nala",
+   "vanara": "vanara",
+   "vanara2": "vanara",
+   "sagara": "sagara",
+   "guha": "guha",
+   "boatman": "boatman",
+   "hanuman": "hanuman",
+   "mandodari": "mandodari",
+   "vibhishana": "vibhishana",
+   "matali": "matali",
+   "indra": "indra",
+   "maricha": "maricha"
+  },
+  "draw_functions": {
+   "drawRavana": "ravana",
+   "drawBalHanuman": "hanuman_child",
+   "drawRahu": "rahu",
+   "drawAiravata": "airavata"
+  },
+  "notes": {
+   "hanuman_child": "Baby Hanuman (A89): a little human boy with small monkey ears and a tail.",
+   "vanara": "The monkey army (generic vanaras).",
+   "boatman": "A generic boatman (A06's popular-version scene).",
+   "rahu": "The eclipse demon, only a head (Uttara 7.35).",
+   "airavata": "Indra's white elephant (Uttara 7.35)."
+  },
+  "major_extra": [
+   "hanuman_child"
+  ]
+ },
+ "locations": [
+  {
+   "key": "hermitage",
+   "name": "Panchavati hermitage (dusk / night / end)",
+   "builder": "buildHermitage(tod)",
+   "description": "Hut, mango tree, Godavari river band, moon; A01 and the end card."
+  },
+  {
+   "key": "hook",
+   "name": "Hook ground shot",
+   "builder": "buildHook()",
+   "description": "Low angle on the ground before the hut, dusk."
+  },
+  {
+   "key": "forest",
+   "name": "Dandaka forest",
+   "builder": "buildForest()",
+   "description": "Layered trunks with mist; chases and walks."
+  },
+  {
+   "key": "doorway",
+   "name": "Hut doorway",
+   "builder": "buildDoorway(tod)",
+   "description": "Close on the door and thatch fringe."
+  },
+  {
+   "key": "manuscript",
+   "name": "Palm-leaf manuscript",
+   "builder": "buildManuscript()",
+   "description": "Source card and 'not in Valmiki' card."
+  },
+  {
+   "key": "pampa",
+   "name": "Shabari's hermitage, Lake Pampa",
+   "builder": "buildPampa(tod)",
+   "description": "Lotus lake, hut, sages' glowing altar, wet bark robes, fruit basket."
+  }
+ ]
 }
