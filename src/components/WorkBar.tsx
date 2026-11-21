@@ -43,9 +43,9 @@ function Pill({ s, onOpen }: { s: WorkStatus; onOpen: () => void }) {
   const { waiting, stale, pct, left } = useMeta(s);
   return (
     <button onClick={onOpen} aria-label="Show what Claude is doing"
-      className={clsx("fixed bottom-4 right-4 z-50 flex max-w-[calc(100vw-2rem)] items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold shadow-lg ring-1 transition hover:scale-[1.02]",
+      className={clsx("fixed right-3 z-50 flex max-w-[calc(100vw-1.5rem)] items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold shadow-lg ring-1 transition hover:scale-[1.02] bottom-[calc(4.75rem+env(safe-area-inset-bottom))] lg:bottom-4 lg:right-4",   // above the mobile bottom nav
         waiting ? "bg-amber-100 text-amber-950 ring-amber-300 dark:bg-amber-900 dark:text-amber-50 dark:ring-amber-700" : "bg-night-900 text-parchment ring-gold/40")}>
-      {waiting ? <Hand size={15} className="shrink-0" /> : <Loader2 size={15} className={clsx("shrink-0 text-gold", !stale && "animate-spin")} />}
+      <span className="relative flex shrink-0">{waiting ? <Hand size={15} /> : <Loader2 size={15} className={clsx("text-gold", !stale && "animate-spin")} />}<span className="absolute -right-0.5 -top-0.5 h-2 w-2 animate-ping rounded-full bg-gold" /></span>
       <span className="truncate">{waiting ? "Needs you" : s.reel_code ?? "Working"}{!waiting && s.task ? ` · ${s.task}` : ""}</span>
       {!waiting && pct !== null && <span className="tabular shrink-0 opacity-80">{pct}%</span>}
       {!waiting && left && <span className="shrink-0 opacity-70">· ~{left}</span>}
