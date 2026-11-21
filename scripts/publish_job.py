@@ -110,9 +110,24 @@ def instagram(spec, path):
     IG = ig.get("api_base") or IG_API; ver = IG.rsplit("/", 1)[-1]
     path = instagram_fit(path); size = os.path.getsize(path)
     print(f"Instagram file: {size / 1e6:.0f} MB")
-    q = lambda cid: call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
+    q = lambda cid: call("GET", f"{IG}/{cid}?fields=status_code,status,video_status&access_token={urllib.parse.quote(tok)}")
+    # Instagram's top-level status_code says IN_PROGRESS even when its upload server stored NOTHING (video_status.uploading_phase:
+    # error, 0 bytes, FILE_NOT_FOUND: A01 on Nov 18, A89 on Nov 21). So we judge the upload by video_status, never by status_code,
+    # resend (or resume from the bytes it has) until every byte is stored, and only then wait for processing.
+    def upload_state(cid):
+        st = q(cid); up = (st.get("video_status") or {}).get("uploading_phase") or {}
+        return st, up.get("status"), int(up.get("bytes_transferred") or 0), up.get("errors")
+    def send(uri, offset):
+        with open(path, "rb") as f:
+            f.seek(offset)
+            req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": str(offset), "file_size": str(size),
+                                                                               "Content-Length": str(size - offset), "Content-Type": "application/octet-stream"})
+            try:
+                with urllib.request.urlopen(req, timeout=1800) as r: return (r.read() or b"{}").decode(errors="replace")[:300]
+            except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ConnectionError) as e:
+                return (e.read().decode(errors="replace") if isinstance(e, urllib.error.HTTPError) else f"{type(e).__name__}: {e}")[:300]
     errors = []
-    for attempt in (1, 2):                                # Meta: retry the upload; if it still fails, start a new container
+    for attempt in (1, 2):                                # a new container only if 4 sends to this one never stored the file
         report(step="creating Instagram reel", log=f"Creating Reels container ({size / 1e6:.0f} MB){' (new container, attempt 2)' if attempt > 1 else ''}")
         params = {"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok}
         if spec.get("cover_url"): params["cover_url"] = spec["cover_url"]      # our designed cover instead of a random frame
@@ -122,37 +137,32 @@ def instagram(spec, path):
             report(log=f"Instagram refused the cover ({e}); posting with its default cover")
             params.pop("cover_url"); c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
         cid, uri = c["id"], c.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{ver}/{c['id']}"
-        uploaded = False
-        for tryno in (1, 2):
-            report(step="uploading to Instagram", log=f"Container {cid}: uploading {size / 1e6:.0f} MB (try {tryno})")
-            try:
-                with open(path, "rb") as f:
-                    req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": "0", "file_size": str(size),
-                                                                                       "Content-Length": str(size), "Content-Type": "application/octet-stream"})
-                    with urllib.request.urlopen(req, timeout=1800) as r: up = json.loads(r.read() or b"{}")
-                if up.get("success", True): uploaded = True; break
-                errors.append(f"upload response {up}")
-            except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as e:
-                body = e.read().decode(errors="replace")[:400] if isinstance(e, urllib.error.HTTPError) else str(e)
-                st = q(cid); errors.append(f"container {cid} try {tryno}: {body} | status {st.get('status_code')}: {st.get('status')}")
-                report(log=f"Upload answered with an error: {body} | container status: {st.get('status_code')}")
-                if st.get("status_code") in ("IN_PROGRESS", "FINISHED"):     # the bytes arrived anyway; let Instagram finish
-                    uploaded = True; break
-            time.sleep(30)
-        if not uploaded: continue
-        t0 = time.time()                                  # keep waiting on THIS container while it is IN_PROGRESS (that is not a failure);
-        while time.time() - t0 < 45 * 60:                 # only ERROR / EXPIRED make us start a new one
-            st = q(cid); waited = int((time.time() - t0) / 60)
+        stored, offset = False, 0
+        for tryno, pause in zip((1, 2, 3, 4), (0, 30, 60, 120)):
+            if pause: report(log=f"Waiting {pause} s before sending again"); time.sleep(pause)
+            report(step="uploading to Instagram", log=f"Container {cid}: sending {(size - offset) / 1e6:.0f} MB from byte {offset:,} (send {tryno} of 4)")
+            reply = send(uri, offset)
+            for _ in range(8):                            # the upload server needs a moment to settle: read its real state
+                time.sleep(10); st, ust, got, uerr = upload_state(cid)
+                if ust in ("complete", "error") or got >= size: break
+            report(log=f"Upload reply: {reply} | Instagram stored {got:,} of {size:,} bytes ({ust}{': ' + str(uerr)[:160] if uerr else ''})")
+            if ust == "complete" or got >= size: stored = True; break
+            errors.append(f"container {cid} send {tryno}: stored {got} of {size} bytes ({ust}) {str(uerr)[:160] if uerr else ''}")
+            offset = got if 0 < got < size else 0         # resume from what it kept; after a failed (0-byte) send, start again from 0
+        if not stored: report(log=f"Instagram's upload server did not store the file in container {cid}"); continue
+        report(log="All bytes stored; Instagram is processing the video")
+        t0 = time.time()
+        while time.time() - t0 < 30 * 60:                 # processing usually takes ~30 s; check once a minute (Meta's advice, and its request limit)
+            time.sleep(20 if time.time() - t0 < 60 else 60)
+            st = q(cid); proc = ((st.get("video_status") or {}).get("processing_phase") or {}).get("status"); waited = int((time.time() - t0) / 60)
             report(step=f"Instagram processing ({st.get('status_code')}, {waited} min)")
-            if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED"): break
-            time.sleep(15)
+            if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED") or proc == "error": break
         if st.get("status_code") == "FINISHED": break
-        if st.get("status_code") == "IN_PROGRESS":       # re-uploading would only restart Instagram's processing clock
-            raise RuntimeError(f"Instagram is still processing container {cid} after 45 min; press Publish again later (full-quality reels can take long)")
-        errors.append(f"container {cid} processing: {st.get('status_code')}: {st.get('status')}")
-        report(log=f"Instagram could not process container {cid}: {st.get('status')}")
+        errors.append(f"container {cid} processing: {st.get('status_code')}: {st.get('status')} (processing {proc})")
+        report(log=f"Instagram could not process container {cid}: {st.get('status')} (processing {proc})")
     else:
-        raise RuntimeError("Instagram did not accept the video after 2 containers: " + " || ".join(errors)[:1500])
+        raise RuntimeError("Instagram's upload server did not take the video (it stored 0 bytes on every try; this is on Instagram's side). "
+                           "Try again later. Details: " + " || ".join(errors)[:1300])
     p = call("POST", f"{IG}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
     mid = p["id"]
     link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or "https://www.instagram.com/untoldgranth.official/"
