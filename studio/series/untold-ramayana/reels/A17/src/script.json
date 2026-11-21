@@ -3,14 +3,14 @@
  "title": "Did Urmila Sleep for 14 Years?",
  "series": "untold-ramayana",
  "fps": 24,
- "status": "DRAFT v1 — whole CE searched for Urmila (all 7 kandas); Ayodhya 2.41, 2.44-45, 2.47, 2.49-50 read; review before posting",
- "source": "Valmiki Ramayana, Bala Kanda 1.70-72 and Ayodhya Kanda 2.41-50 (Critical Edition)",
+ "status": "DRAFT v2 (part 1 of 2; A102 follows) — whole CE searched for Urmila; Bala 1.70-72 read; review before posting",
+ "source": "Valmiki Ramayana, Bala Kanda 1.70-76, with a whole-text search (Critical Edition)",
  "source_card": {
   "title": [
    "VALMIKI",
    "RAMAYANA"
   ],
-  "sub": "AYODHYA KANDA  ·  CHAPTERS 41–50",
+  "sub": "BALA KANDA  ·  CHAPTERS 70–72",
   "edition": "CRITICAL EDITION"
  },
  "claims": [
@@ -18,6 +18,15 @@
    "claim": "Janaka gives Sita to Rama and Urmila to Lakshmana",
    "ref": "1.70.21-22; 1.72.18",
    "quote_sa": "सीतां रामाय भद्रं ते ऊर्मिलां लक्ष्मणाय च । वीर्यशुल्कां मम सुतां सीतां सुरसुतोपमाम् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "At the wedding Janaka says: Lakshmana, come, accept Urmila whom I offer; take her hand",
+   "ref": "1.72.18",
+   "quote_sa": "लक्ष्मणागच्छ भद्रं ते ऊर्मिलामुद्यतां मया । प्रतीच्छ पाणिं गृह्णीष्व मा भूत् कालस्य पर्ययः ॥",
    "verified": true,
    "sources": [
     "enjoylearningsanskrit (CE)"
@@ -40,50 +49,6 @@
    ]
   },
   {
-   "claim": "First night, on the Tamasa: Rama and Sita slept; Lakshmana stayed awake all night with the charioteer Sumantra, speaking of Rama's virtues",
-   "ref": "2.41.12-14",
-   "quote_sa": "जाग्रतो ह्येव तां रात्रिं सौमित्रेरुदितो रविः । सूतस्य तमसातीरे रामस्य ब्रुवतो गुणान् ॥",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "At Shringaverapura Guha offers Lakshmana a bed and says his people will keep watch",
-   "ref": "2.45.2-3",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "Lakshmana: how can I sleep, or live, or enjoy, while Rama lies on the ground with Sita?",
-   "ref": "2.45.9",
-   "quote_sa": "कथं दाशरथौ भूमौ शयाने सह सीतया । शक्या निद्रा मया लब्धुं जीवितं वा सुखानि वा ॥",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "Past the Ganga, Rama: from today we two must stay awake at night; Sita's safety rests on us two",
-   "ref": "2.47.3",
-   "quote_sa": "जागर्तव्यमतन्द्रिभ्यामद्य प्रभृति रात्रिषु । योगक्षेमो हि सीताया वर्तते लक्ष्मणावयोः ॥",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
-   "claim": "By the Yamuna (after Bharadvaja's ashram), at night's end Rama gently woke Lakshmana, who had been sleeping beside him; Lakshmana shook off sleep and the road's fatigue",
-   "ref": "2.49.15; 2.50.1-3",
-   "quote_sa": "अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम् । प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः ॥ … स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः । जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम् ॥",
-   "verified": true,
-   "sources": [
-    "enjoylearningsanskrit (CE)"
-   ]
-  },
-  {
    "claim": "The Urmila / Nidra Devi story is a later, loving telling (no single text named or quoted)",
    "ref": "later folk tellings",
    "verified": true,
@@ -99,7 +64,7 @@
    "hi": "क्या उर्मिला सच में, चौदह साल सोती रहीं?",
    "en": "Did Urmila really sleep for fourteen years?",
    "units": [
-    "[dramatically] क्या उर्मिला सच में… चौदह साल सोती रहीं?"
+    "[intense] क्या उर्मिला सच में… चौदह साल सोती रहीं?"
    ],
    "card": [
     [
@@ -118,11 +83,11 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, अयोध्या कांड, सर्ग पचास। स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः । जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम् ॥ ये है असली कहानी।",
+   "hi": "वाल्मीकि रामायण, बाल कांड, सर्ग बहत्तर। लक्ष्मणागच्छ भद्रं ते ऊर्मिलामुद्यतां मया । प्रतीच्छ पाणिं गृह्णीष्व मा भूत् कालस्य पर्ययः ॥ ये है असली कहानी।",
    "en": "",
    "units": [
-    "वाल्मीकि रामायण, अयोध्या कांड, सर्ग पचास।",
-    "[reverently] [slowly] स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः… जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम्॥",
+    "वाल्मीकि रामायण, बाल कांड, सर्ग बहत्तर।",
+    "[reverently] [slowly] लक्ष्मणागच्छ भद्रं ते, ऊर्मिलामुद्यतां मया… प्रतीच्छ पाणिं गृह्णीष्व, मा भूत् कालस्य पर्ययः॥",
     "[serious] ये है असली कहानी।"
    ],
    "unit_gap": 0.5,
@@ -131,12 +96,12 @@
    "sloka_unit": 1,
    "sloka": {
     "lines": [
-     "स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः ।",
-     "जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम् ॥"
+     "लक्ष्मणागच्छ भद्रं ते ऊर्मिलामुद्यतां मया ।",
+     "प्रतीच्छ पाणिं गृह्णीष्व मा भूत् कालस्य पर्ययः ॥"
     ],
-    "ref": "AYODHYA KANDA 2.50.3",
-    "en": "“Lakshmana, who had been asleep, was woken at the right time by his brother; he shook off sleep, drowsiness and the weariness of the road.”",
-    "translit": "sa suptaḥ samaye bhrātrā lakṣmaṇaḥ pratibodhitaḥ, jahau nidrāṃ ca tandrīṃ ca prasaktaṃ ca pathi śramam"
+    "ref": "BALA KANDA 1.72.18",
+    "en": "“Lakshmana, come! May good fortune be yours. Accept Urmila, whom I offer. Take her hand; let there be no delay.”",
+    "translit": "lakṣmaṇāgaccha bhadraṃ te ūrmilāmudyatāṃ mayā, pratīccha pāṇiṃ gṛhṇīṣva mā bhūt kālasya paryayaḥ"
    },
    "sloka_takes": {
     "t1": "[reverently] [slowly]",
@@ -233,150 +198,21 @@
   {
    "id": 7,
    "voice": "narrator",
-   "hi": "अब लक्ष्मण की रातें। वनवास की पहली रात, तमसा के तट पर, श्रीराम और सीता सो गए। और लक्ष्मण, पूरी रात जागे, सुमंत्र से श्रीराम के गुणों की बातें करते हुए।",
-   "en": "Now, Lakshmana's nights. The first night of exile, on the Tamasa: Rama and Sita slept. Lakshmana stayed up all night, telling Sumantra of Rama's virtues.",
+   "hi": "तो फिर, लक्ष्मण की रातें कैसी थीं? क्या वो सच में, कभी नहीं सोए? ये, अगले भाग में।",
+   "en": "So what were Lakshmana's nights like? Did he really never sleep? That's in part 2.",
    "units": [
-    "[thoughtfully] अब, लक्ष्मण की रातें।",
-    "वनवास की पहली रात, तमसा के तट पर, श्रीराम और सीता सो गए।",
-    "[softly] और लक्ष्मण, पूरी रात जागे… सुमंत्र से, श्रीराम के गुणों की बातें करते हुए।"
+    "[curious] तो फिर, लक्ष्मण की रातें कैसी थीं? क्या वो सच में, कभी नहीं सोए?",
+    "[warmly] ये, अगले भाग में।"
    ],
    "unit_gap": 0.4,
-   "cite": "2.41.12-14",
+   "cite": "see A102",
    "card": [
     [
-     "NIGHT 1",
-     null
-    ]
-   ],
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 8,
-   "voice": "narrator",
-   "hi": "दूसरी रात, गंगा के तट पर। निषादराज गुह, लक्ष्मण से कहते हैं:",
-   "en": "The second night, by the Ganga. Guha, king of the Nishadas, says to Lakshmana:",
-   "units": [
-    "दूसरी रात, गंगा के तट पर।",
-    "निषादराज गुह, लक्ष्मण से कहते हैं:"
-   ],
-   "unit_gap": 0.35,
-   "cite": "2.44.25-26",
-   "card": [
-    [
-     "NIGHT 2",
-     null
-    ]
-   ],
-   "lead": 0.25,
-   "tail": 0.2
-  },
-  {
-   "id": 9,
-   "voice": "guha",
-   "hi": "राजकुमार, ये शय्या आपके लिए है, आराम से सोइए। हम रात भर पहरा देंगे।",
-   "en": "\"Prince, this bed is for you. Sleep in comfort. We will keep watch all night.\"",
-   "units": [
-    "राजकुमार, ये शय्या आपके लिए है… आराम से सोइए।",
-    "हम, रात भर पहरा देंगे।"
-   ],
-   "unit_gap": 0.35,
-   "cite": "2.45.2-3",
-   "lead": 0.25,
-   "tail": 0.3
-  },
-  {
-   "id": 10,
-   "voice": "lakshmana",
-   "hi": "जब भैया, माता सीता के साथ, धरती पर सो रहे हैं, तो मुझे नींद कैसे आए? जीवन, या सुख भी कैसे?",
-   "en": "\"While my brother lies on the bare ground with Sita, how could I sleep? How could I live, or know any comfort?\"",
-   "units": [
-    "जब भैया, माता सीता के साथ, धरती पर सो रहे हैं…",
-    "तो मुझे नींद कैसे आए? जीवन, या सुख भी कैसे?"
-   ],
-   "unit_gap": 0.35,
-   "cite": "2.45.9",
-   "lead": 0.25,
-   "tail": 0.35
-  },
-  {
-   "id": 11,
-   "voice": "narrator",
-   "hi": "गंगा पार, तीसरी रात, एक पेड़ के नीचे, श्रीराम कहते हैं:",
-   "en": "Across the Ganga, the third night, under a tree, Rama says:",
-   "units": [
-    "[thoughtfully] गंगा पार, तीसरी रात, एक पेड़ के नीचे, श्रीराम कहते हैं:"
-   ],
-   "cite": "2.47.1",
-   "card": [
-    [
-     "NIGHT 3",
-     null
-    ]
-   ],
-   "lead": 0.25,
-   "tail": 0.2
-  },
-  {
-   "id": 12,
-   "voice": "rama",
-   "hi": "लक्ष्मण, आज से रातों में, हम दोनों को जागना होगा। सीता की रक्षा, हम दोनों पर है।",
-   "en": "\"Lakshmana, from today, we two must stay awake at night. Sita's safety rests on us both.\"",
-   "units": [
-    "लक्ष्मण, आज से रातों में, हम दोनों को जागना होगा।",
-    "सीता की रक्षा, हम दोनों पर है।"
-   ],
-   "unit_gap": 0.35,
-   "cite": "2.47.3",
-   "lead": 0.25,
-   "tail": 0.35
-  },
-  {
-   "id": 13,
-   "voice": "narrator",
-   "reveal": true,
-   "hi": "और कुछ ही दिन बाद, यमुना के तट पर, वाल्मीकि लिखते हैं: अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम्, प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः। यानी, रात बीतने पर, श्रीराम ने, पास में सोए लक्ष्मण को, धीरे से जगाया।",
-   "en": "",
-   "units": [
-    "[intense] और कुछ ही दिन बाद, यमुना के तट पर, वाल्मीकि लिखते हैं:",
-    "[softly] अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम्… प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः।",
-    "[dramatically] यानी, रात बीतने पर, श्रीराम ने… पास में सोए लक्ष्मण को, धीरे से जगाया।"
-   ],
-   "unit_gap": 0.45,
-   "cite": "2.49.15; 2.50.1",
-   "tail": 0.4,
-   "lead": 0.25,
-   "quote": {
-    "source": "VALMIKI RAMAYANA",
-    "ref": "AYODHYA KANDA 2.50.1 · CRITICAL EDITION",
-    "lines": [
-     "अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम् ।",
-     "प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः ॥"
-    ],
-    "translit": "atha rātryāṃ vyatītāyāmavasuptamanantaram, prabodhayāmāsa śanairlakṣmaṇaṃ raghunandanaḥ",
-    "en": "“Then, as the night passed, Rama, the joy of the Raghus, gently woke Lakshmana, who had been sleeping beside him.”"
-   }
-  },
-  {
-   "id": 14,
-   "voice": "narrator",
-   "hi": "लक्ष्मण का जागना, उनकी सेवा, सच है। पर वो सोए भी। और उर्मिला की नींद, बाद की कथा है। दोनों, भक्ति से सुनाई जाती हैं।",
-   "en": "",
-   "units": [
-    "[warmly] लक्ष्मण का जागना, उनकी सेवा, सच है।",
-    "[serious] पर वो सोए भी।",
-    "और उर्मिला की नींद, बाद की कथा है।",
-    "[warmly] दोनों, भक्ति से सुनाई जाती हैं।"
-   ],
-   "unit_gap": 0.4,
-   "cite": "2.41.14; 2.45.9; 2.50.1-3",
-   "card": [
-    [
-     "HE KEPT WATCH.",
+     "PART 2:",
      null
     ],
     [
-     "HE SLEPT TOO.",
+     "LAKSHMANA'S NIGHTS",
      "#f6c244"
     ]
    ],
@@ -384,7 +220,7 @@
    "tail": 0.4
   },
   {
-   "id": 15,
+   "id": 8,
    "voice": "narrator",
    "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
    "en": "",
@@ -401,14 +237,14 @@
   "frame": "",
   "hook": "Did Urmila sleep for 14 years?",
   "stamp": "Not in Valmiki",
-  "line": "Rama woke Lakshmana.",
-  "badge": "Valmiki Ramayana · Ayodhya 2.50",
+  "line": "Named at her wedding. Then silence.",
+  "badge": "Valmiki Ramayana · Bala 1.70–72",
   "art_shift": 0
  },
  "score": {
   "engine": "elevenlabs eleven_music_v2_5",
   "file": "audio/score.mp3",
-  "duration_s": 120,
+  "duration_s": 90,
   "gain": 1.9,
   "duck": 0.72,
   "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice."
@@ -423,17 +259,17 @@
   "showing Nidra Devi as a figure: the goddess appears only as a soft moon-glow in the 'later telling' shot"
  ],
  "verify_note": "Whole CE searched (Bala 76, Ayodhya 111, Aranya 71, Kishkindha 66, Sundara 66, Yuddha 116, Uttara 100 sargas): ऊर्मिला only at 1.70.21-22, 1.71.3, 1.72.18, 1.76.9 and 2.110.51 (1.32.12 is another Urmila, a gandharvi's mother). No Nidra Devi, no 14-year sleep. Nights: 1 Tamasa 2.41.12-14 (Lakshmana awake all night with Sumantra); 2 Shringaverapura 2.44.25-26, 2.45.2-3 (Guha offers the bed), 2.45.9 (Lakshmana's reply); 3 under a tree past the Ganga 2.47.1-3 (Rama: we two must keep awake); 4 Bharadvaja 2.48-49.1; 5 by the Yamuna 2.49.15; morning 2.50.1-3 Rama gently wakes the sleeping Lakshmana. Research: series/untold-ramayana/research/A17_urmila_sleep.md",
- "caption": "A much-loved story says Urmila slept for fourteen years so that Lakshmana could stay awake and guard his brother. In Valmiki's Ramayana, Urmila is named at her wedding (Janaka: \"Sita to Rama, Urmila to Lakshmana\") and once more when Sita tells of her marriage. There is no Nidra Devi and no 14-year sleep. Lakshmana does keep watch: all night on the Tamasa, and by the Ganga he tells Guha, \"How could I sleep while my brother lies on the ground?\" Then Rama says, \"We two must keep watch.\" And by the Yamuna, Valmiki writes that Rama gently woke Lakshmana, who had been sleeping beside him. Both stories are told with devotion.",
- "youtube_title": "Did Urmila Really Sleep for 14 Years? What Valmiki Says | Ramayana #Shorts",
- "comment_prompt": "Which version did you grow up with: Urmila's 14-year sleep, or Lakshmana keeping watch? 👇 Jai Shri Ram!",
+ "caption": "Part 1 of 2. A much-loved story says Urmila slept for fourteen years so that Lakshmana could stay awake and guard his brother. In Valmiki's Ramayana (Critical Edition), Urmila is named at her wedding: Janaka gives \"Sita to Rama, Urmila to Lakshmana\" and tells Lakshmana, \"Come, take Urmila's hand.\" She is named once more, when Sita tells Anasuya of her marriage. There is no Nidra Devi and no 14-year sleep anywhere in the text. The story is told with love for Urmila's sacrifice. Part 2: what Valmiki says about Lakshmana's nights.",
+ "youtube_title": "Did Urmila Really Sleep for 14 Years? What Valmiki Says | Part 1 #Shorts",
+ "comment_prompt": "Did you grow up hearing Urmila slept for 14 years? 👇 Part 2: Lakshmana's nights. Jai Shri Ram!",
  "hashtags": [
   "#UntoldGranth",
   "#Urmila",
   "#Lakshmana",
   "#Ramayana",
   "#Valmiki",
-  "#Vanvas",
   "#Sita",
+  "#Janaka",
   "#JaiShriRam"
  ]
 }
