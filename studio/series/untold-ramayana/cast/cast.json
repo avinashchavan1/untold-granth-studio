@@ -14,7 +14,8 @@
       "mix_gain": 1.0,
       "f0_hz": 125,
       "f0_max_rise": 40,
-      "calm_rule": "Calm storyteller: only [softly] [warmly] [curious] [serious] [thoughtfully] [pause]; the picker drops takes > f0_hz + f0_max_rise (shouting)"
+      "calm_rule": "Calm storyteller: only [softly] [warmly] [curious] [serious] [thoughtfully] [pause]; the picker drops takes > f0_hz + f0_max_rise (shouting)",
+      "sloka": "USER choice (Nov 21 2026): the narrator Rudra also recites the Sanskrit ślokas, after an audition against Shardul K, Hari Kavi, Sudhir, Shrey and Kanika (cast/audition/sloka/)."
     },
     "sita": {
       "engine": "elevenlabs",

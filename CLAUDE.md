@@ -27,6 +27,7 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   expressive tags ([reverently] [slowly], [with deep devotion] [chanting], [solemnly] [expressively]); record one take with each,
   pick the take with the most pitch movement and intact words, pin it with `force_take`; the shouting guard still applies.
   Reference: A07 and A89 shot 2 (`slokaSource` in art/templates.js).
+  The śloka is recited by the narrator Rudra (owner's pick after a 6-voice audition); no separate śloka voice.
 - **Length follows the information:** 60–90 s is typical, up to ~120 s is fine when the evidence needs it. Never cut a quote,
   a citation or a step of the story just to be shorter.
 - **Ask before choosing anything about a MAJOR character** (look OR voice). Major = `series.json → major_characters`
