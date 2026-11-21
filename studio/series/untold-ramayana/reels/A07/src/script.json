@@ -74,14 +74,14 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "न रामेण वियुक्ता सा, स्वप्तुमर्हति भामिनी। न भोक्तुं, नाप्यलंकर्तुं, न पानमुपसेवितुम्॥ वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ। ये है असली कहानी।",
+   "hi": "वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ। न रामेण वियुक्ता सा… स्वप्तुमर्हति भामिनी। न भोक्तुं… नाप्यलंकर्तुं… न पानमुपसेवितुम्॥ [serious] ये है असली कहानी।",
    "en": "",
    "units": [
-    "[softly] न रामेण वियुक्ता सा, स्वप्तुमर्हति भामिनी। न भोक्तुं, नाप्यलंकर्तुं, न पानमुपसेवितुम्॥",
     "वाल्मीकि रामायण, सुंदर कांड, सर्ग आठ और नौ।",
+    "[reverently] [slowly] न रामेण वियुक्ता सा… स्वप्तुमर्हति भामिनी। न भोक्तुं… नाप्यलंकर्तुं… न पानमुपसेवितुम्॥",
     "[serious] ये है असली कहानी।"
    ],
-   "unit_gap": 0.45,
+   "unit_gap": 0.5,
    "lead": 0.18,
    "tail": 0.12,
    "sloka": {
@@ -92,7 +92,17 @@
     "ref": "SUNDARA KANDA 5.9.2",
     "en": "“Separated from Rama, that lady would not sleep, nor eat, nor adorn herself, nor drink.”"
    },
-   "cite": "5.9.2"
+   "cite": "5.9.2",
+   "sloka_unit": 1,
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 1
+   },
+   "sloka_pick": "take 1 [reverently] [slowly]: most pitch movement with the words intact; average pitch well under the shouting guard"
   },
   {
    "id": 3,

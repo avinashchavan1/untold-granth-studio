@@ -22,8 +22,10 @@ R = `series/untold-ramayana/reels/<ID>`. Keep the owner posted: one-line chat up
   QUOTE CARDS: for every source the reel names (the popular version's text, and the key Valmiki verse), a shot where the narrator
   reads the exact line and the screen shows source + verse no., Devanagari (`font: 'Mukta'`), transliteration, English (copy A89 shot 11).
   Length 60–120 s: let the evidence breathe; never drop a quote to save time.
-  SHOT 2 = ŚLOKA + SOURCE: units = [the Sanskrit verse (Devanagari from the CE page, `[softly]`), then "वाल्मीकि रामायण, <kanda>, सर्ग <n>।",
-  "[serious] ये है असली कहानी।"]; `en` = the verse's English translation; the card shows the Devanagari (Mukta) + "VALMIKI RAMAYANA · <KANDA> k.s.v".
+  SHOT 2 = SOURCE THEN ŚLOKA: units = ["वाल्मीकि रामायण, <kanda>, सर्ग <n>।", "<expressive tags> <Sanskrit verse, Devanagari from the CE page, with … at the caesura>",
+  "[serious] ये है असली कहानी।"], `"sloka_unit": 1`, `en: ""`; shots.js: `const SLOKA = {lines, ref, en}` + `slokaSource(ctx,u,p,sh,t,post,SLOKA)`.
+  Record the verse 3 ways (tags [reverently] [slowly] / [with deep devotion] [chanting] / [solemnly] [expressively]) as s02_1_t1..t3,
+  measure pitch movement (librosa pyin, std in semitones) + ASR match, pin the best with `"force_take": {"1": k}` (see A07/A89 script.json).
   The CE page holds each verse's Devanagari next to its translation: save both when you research (pick the verse in step 1).
   Narrator `units` with calm tags only; `unit_gap` between units; short shots get `"min"`.
   Also: `source`, `source_card`, `avoid`, `verify_note`, `caption`, `youtube_title`, `comment_prompt`, `hashtags`,

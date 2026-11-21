@@ -20,11 +20,13 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   (e.g. Hanuman Chalisa chaupai 18 "जुग सहस्र जोजन पर भानू। लील्यो ताहि मधुर फल जानू॥") AND the key Valmiki verse it is compared with,
   each as a quote card: source + verse number, Devanagari (font Mukta), transliteration, English translation; the narrator reads it.
   Devanagari quotes are the one exception to "English on screen". Reference: A89 shot 11.
-- **Open with the śloka.** In the source-card shot near the start (where the kanda is named), the narrator first recites one
-  short Sanskrit verse from that sarga, in the CE text, calm and clear (the verse the payoff rests on, or the most striking one;
-  one śloka or half, about 6–10 s). The card shows the Devanagari, "Valmiki Ramayana · <Kanda> k.s.v" and the English translation
-  as the subtitle; then he says the kanda/sarga line. Copy the Devanagari from the CE source page, never type it from memory;
-  check the take with ASR. Quote cards later in the reel follow the same format (A89 shot 11).
+- **Open with the śloka (owner's format, Nov 2026).** Shot 2: the narrator FIRST names the source ("वाल्मीकि रामायण, <kanda>, सर्ग <n>।",
+  source card), THEN recites one Sanskrit verse from that sarga very expressively (verse card: "Valmiki Ramayana · <Kanda> k.s.v",
+  Devanagari in Mukta, English translation), then "ये है असली कहानी।". Pick the verse the payoff rests on (or the most striking one;
+  one śloka, about 7–11 s). Copy the Devanagari from the CE page, never from memory. Only this line (`sloka_unit`) may use the
+  expressive tags ([reverently] [slowly], [with deep devotion] [chanting], [solemnly] [expressively]); record one take with each,
+  pick the take with the most pitch movement and intact words, pin it with `force_take`; the shouting guard still applies.
+  Reference: A07 and A89 shot 2 (`slokaSource` in art/templates.js).
 - **Length follows the information:** 60–90 s is typical, up to ~120 s is fine when the evidence needs it. Never cut a quote,
   a citation or a step of the story just to be shorter.
 - **Ask before choosing anything about a MAJOR character** (look OR voice). Major = `series.json → major_characters`

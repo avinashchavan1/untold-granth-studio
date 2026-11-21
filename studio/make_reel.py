@@ -53,11 +53,13 @@ def check(reel):
             if re.search(r"(?<![\u0900-\u097F])(?<!श्री)राम(?![\u0900-\u097F])", txt):
                 probs.append(f"shot {sh['id']}: {v} calls Rama by bare name 'राम' — use {adr.get('forms', {}).get(v, adr.get('forms', {}).get('default', 'an honorific'))}")
     CALM = {"softly", "warmly", "curious", "serious", "thoughtfully", "pause", "sadly", "gently", "whispers"}   # the narrator is a calm storyteller: no shouting
+    EXPRESSIVE = {"reverently", "solemnly", "chanting", "with devotion", "with deep devotion", "slowly", "expressively", "majestically", "with feeling"}   # śloka line only (sloka_unit); the pitch guard still drops shouted takes
     for sh in s["shots"]:
         if sh.get("voice") != "narrator": continue
-        for u in sh.get("units") or []:
+        for ui, u in enumerate(sh.get("units") or []):
+            ok_tags = CALM | (EXPRESSIVE if ui == sh.get("sloka_unit") else set())   # the opening śloka may be recited with feeling (owner's request)
             for tag in re.findall(r"\[([^\]]+)\]", u if isinstance(u, str) else u.get("say", "")):
-                if tag.strip().lower() not in CALM: probs.append(f"shot {sh['id']}: narrator tag [{tag}] makes him shout; use one of {sorted(CALM)}")
+                if tag.strip().lower() not in ok_tags: probs.append(f"shot {sh['id']}: narrator tag [{tag}] makes him shout; use one of {sorted(ok_tags)}")
     th = s.get("thumbnail") or {}
     if not (th.get("hook") and th.get("line") and th.get("badge")): probs.append("no 'thumbnail' block (hook, stamp, line, badge, frame): every reel ships with a cover")
     if not any(sh.get("cta") for sh in s["shots"]): probs.append("no call-to-action shot (\"cta\": true on the closing line): YouTube needs its 'subscribe' version")

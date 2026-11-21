@@ -76,14 +76,14 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "ततः शैलाग्रशिखरे, वामो हनुरभज्यत। ततो हि नामधेयं ते, हनुमानिति कीर्त्यते॥ वाल्मीकि रामायण, किष्किंधा कांड और उत्तर कांड। ये है असली कहानी।",
+   "hi": "वाल्मीकि रामायण, किष्किंधा कांड और उत्तर कांड। ततः शैलाग्रशिखरे… वामो हनुरभज्यत। ततो हि नामधेयं ते… हनुमानिति कीर्त्यते॥ [serious] ये है असली कहानी।",
    "en": "",
    "units": [
-    "[softly] ततः शैलाग्रशिखरे, वामो हनुरभज्यत। ततो हि नामधेयं ते, हनुमानिति कीर्त्यते॥",
     "वाल्मीकि रामायण, किष्किंधा कांड और उत्तर कांड।",
+    "[solemnly] [expressively] ततः शैलाग्रशिखरे… वामो हनुरभज्यत। ततो हि नामधेयं ते… हनुमानिति कीर्त्यते॥",
     "[serious] ये है असली कहानी।"
    ],
-   "unit_gap": 0.45,
+   "unit_gap": 0.5,
    "lead": 0.18,
    "tail": 0.12,
    "sloka": {
@@ -94,7 +94,17 @@
     "ref": "KISHKINDHA KANDA 4.65.22",
     "en": "“Then, on a mountain peak, your left jaw was broken. That is why you are called Hanuman.”"
    },
-   "cite": "4.65.22"
+   "cite": "4.65.22",
+   "sloka_unit": 1,
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 3
+   },
+   "sloka_pick": "take 3 [solemnly] [expressively]: most pitch movement with the words intact; average pitch well under the shouting guard"
   },
   {
    "id": 3,
