@@ -69,8 +69,13 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   `cast_media.py` (portraits + voice samples for Cast & world), `status.py` (live progress bar), `publish_job.py` (GitHub Actions publisher).
 
 ## Posting
-- Timeline page suggests the day and the best time per platform (`src/lib/bestTime.ts`): an Indian evening-audience
-  prior × the channel's own results; Hanuman reels on Tue/Sat; `script.json → "follows"` keeps paired reels back to back.
+- Timeline page plans the posting days and times (`src/lib/bestTime.ts` + `src/lib/occasions.ts`):
+  - Days: every ordering of the ready reels is scored (≤8 reels: exact); score = festival fit (OCCASIONS calendar:
+    Tulsi Vivah, Kartik Purnima, Vivah Panchami, Makar Sankranti, Maha Shivratri, Ram Navami, Hanuman Jayanti...) +
+    Hanuman reels on Tue/Sat + ★★★ reels on weekends + small plan-order cost; `"follows"` pairs stay back to back.
+  - Times: an Indian evening-audience prior × the channel's own results (age-normalised).
+  - "Festival plan" section: upcoming occasions, the reels that fit, and "make X before <date>". Keep OCCASIONS updated
+    a year ahead (check dates on two panchang sites; mark ±1-day ones `approx`). Plan production so festival reels are ready.
 - A reel is marked published automatically when both Instagram and YouTube are posted (DB trigger).
 
 ## Sessions and tokens

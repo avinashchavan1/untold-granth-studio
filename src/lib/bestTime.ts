@@ -3,6 +3,7 @@
 //             × what our own posts show (each post's speed vs the others, smoothed over nearby hours),
 // with our own data weighted more as more posts come in (w = n / (n + 6)).
 import type { Publication, Reel } from "./types";
+import { fit, pullOf, themesOf } from "./occasions";
 
 export type Main = "instagram" | "youtube";
 const TZ = "Asia/Kolkata";
@@ -69,24 +70,41 @@ export function bestHour(p: Main, day: number, obs: Obs[], now = new Date()) {
 export const confidence = (obs: Obs[], p: Main) => { const n = obs.filter((o) => o.platform === p).length; return n >= 12 ? "high" : n >= 5 ? "medium" : "low"; };
 
 // --- 3. which day each ready reel goes out ----------------------------------
-const HANUMAN_DAYS = [2, 6]; // Tuesday, Saturday
-export const isHanuman = (r: Reel) => /hanuman/i.test(`${r.title} ${(r.hashtags ?? []).join(" ")}`);
+// Day by day from the first free evening, give each day the ready reel that fits it best:
+// festival match (lib/occasions.ts) + Hanuman's Tue/Sat + audience pull (★ in the plan), with a small pull towards plan order.
+// A reel with "follows" only goes the day after its pair; scheduled posts stay where they are.
+export const isHanuman = (r: Reel) => themesOf(r).has("hanuman");
 export interface Slot { reel: Reel; day: number; fixed?: Date; why: string[] }
 export function planDays(queue: Reel[], firstDay: number, fixedFor: (r: Reel) => Date | null): Slot[] {
-  const slots: Slot[] = []; let d = firstDay;
-  for (const r of queue) { const f = fixedFor(r); if (f) slots.push({ reel: r, day: istParts(f).day, fixed: f, why: ["Scheduled"] }); else slots.push({ reel: r, day: d++, why: [] }); }
-  const locked = new Set<string>(); queue.forEach((r) => { if (r.follows) { locked.add(r.code); locked.add(r.follows); } });
-  const free = (s: Slot) => !s.fixed && !locked.has(s.reel.code);
-  for (const s of slots) {
-    if (!free(s) || !isHanuman(s.reel) || HANUMAN_DAYS.includes((s.day + 4) % 7)) continue;
-    const cand = slots.filter((o) => o !== s && free(o) && !isHanuman(o.reel) && HANUMAN_DAYS.includes((o.day + 4) % 7) && Math.abs(o.day - s.day) <= 3)
-      .sort((a, b) => Math.abs(a.day - s.day) - Math.abs(b.day - s.day) || a.day - b.day)[0];
-    if (cand) { const t = s.day; s.day = cand.day; cand.day = t; }
+  const fixed: Slot[] = [], left: Reel[] = [], taken = new Set<number>();
+  for (const r of queue) { const f = fixedFor(r); if (f) { const d = istParts(f).day; fixed.push({ reel: r, day: d, fixed: f, why: ["Scheduled"] }); taken.add(d); } else left.push(r); }
+  const days: number[] = []; for (let d = firstDay; days.length < left.length; d++) if (!taken.has(d)) days.push(d);
+  const order = (r: Reel) => queue.indexOf(r), n = left.length;
+  // total value of posting left[perm[k]] on days[k]: festival/Hanuman fit, strong reels a little earlier, small cost for leaving plan order;
+  // a reel with "follows" must sit the day right after its pair (when both are in the queue)
+  const value = (perm: number[]) => {
+    let v = 0; const at: Record<string, number> = {};
+    perm.forEach((ri, k) => { at[left[ri].code] = days[k]; });
+    for (let k = 0; k < n; k++) { const r = left[perm[k]];
+      if (r.follows && at[r.follows] !== undefined && at[r.follows] !== days[k] - 1) return -1e9;
+      const wk = [0, 6].includes((days[k] + 4) % 7) ? 0.45 * pullOf(r) : 0;   // weekends: the biggest audience, give it the strongest reels
+      v += fit(r, days[k]).s + wk + 0.25 * pullOf(r) * (n - k) / n - 0.15 * Math.abs(k - order(r)); }
+    return v;
+  };
+  let best: number[] = left.map((_, i) => i);
+  if (n <= 8) {          // try every order (8! = 40320): small and exact
+    let bv = -Infinity; const cur: number[] = [], used = new Array(n).fill(false);
+    const rec = () => { if (cur.length === n) { const v = value(cur); if (v > bv) { bv = v; best = [...cur]; } return; }
+      for (let i = 0; i < n; i++) if (!used[i]) { used[i] = true; cur.push(i); rec(); cur.pop(); used[i] = false; } };
+    rec();
+  } else {               // bigger queues: best single swaps until nothing improves
+    let improved = true; while (improved) { improved = false; const v0 = value(best);
+      for (let a = 0; a < n && !improved; a++) for (let b = a + 1; b < n && !improved; b++) { const t = [...best]; [t[a], t[b]] = [t[b], t[a]]; if (value(t) > v0 + 1e-9) { best = t; improved = true; } } }
   }
-  for (const s of slots) {
-    const dow = (s.day + 4) % 7;
-    if (isHanuman(s.reel) && HANUMAN_DAYS.includes(dow)) s.why.push(`${dow === 2 ? "Tuesday" : "Saturday"} is Hanuman's day: devotional interest peaks`);
-    if (s.reel.follows) s.why.push(`Posts the day after ${s.reel.follows}, as its pinned comment promises`);
-  }
-  return slots.sort((a, b) => a.day - b.day);
+  const slots: Slot[] = best.map((ri, k) => { const r = left[ri], f = fit(r, days[k]), why = [...f.why];
+    if (r.follows) why.push(`Posts the day after ${r.follows}, as its pinned comment promises`);
+    if ((days[k] + 4) % 7 === 0 && pullOf(r) >= 3) why.push("Sunday: the biggest audience of the week, for a ★★★ reel");
+    if (!why.length && pullOf(r) >= 3) why.push("Strong pull (★★★): everyone knows the popular version");
+    return { reel: r, day: days[k], why }; });
+  return [...fixed, ...slots].sort((a, b) => a.day - b.day);
 }

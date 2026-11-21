@@ -1,10 +1,11 @@
 import clsx from "clsx";
-import { CalendarClock, CheckCircle2, Clapperboard, Clock, Hammer, Lightbulb } from "lucide-react";
+import { CalendarClock, CheckCircle2, Clapperboard, Clock, Flame, Hammer, Lightbulb } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ErrorNote, Spinner, StageBadge, fmtLen } from "../components/ui";
 import { useAllFiles, useMediaUrl, usePublications, useReels } from "../lib/api";
 import { KIND_LABEL, type FileRow, type Publication, type Reel } from "../lib/types";
+import { hanumanDay, occasionsOn, upcoming } from "../lib/occasions";
 import { bestHour, confidence, dayName, fmtHour, istParts, observations, planDays, type Main, type Obs } from "../lib/bestTime";
 
 // All dates are India time. Posting days and times are suggestions from lib/bestTime.ts.
@@ -44,6 +45,8 @@ export default function Timeline() {
   const eveningLeft = bestHour("instagram", todayN, obs, now) !== null;
   const firstDay = lastDayN >= todayN || !eveningLeft ? todayN + 1 : todayN;
   const fixedFor = (r: Reel) => { const sch = (byReel[r.id] ?? []).map((p) => p.scheduled_for).filter(Boolean).sort()[0]; return sch ? new Date(sch) : null; };
+  const todayTags = [...(hanumanDay(todayN) ? [`${istParts(now).dow === 2 ? "Tuesday" : "Saturday"}: Hanuman's day`] : []), ...occasionsOn(todayN).map((o) => o.name)];
+  const fest = upcoming(all, todayN, 183);
   const plan = planDays(ready, firstDay, fixedFor).map((s) => ({ ...s, ig: bestHour("instagram", s.day, obs, now), yt: bestHour("youtube", s.day, obs, now) }));
 
   const total = all.length;
@@ -76,6 +79,7 @@ export default function Timeline() {
           <span className="rounded-full bg-gold px-3 py-1 text-xs font-extrabold uppercase tracking-widest text-night-950 shadow">Today · {dayLabel(now)}</span>
           <span className="h-px flex-1 bg-gold/60" />
         </li>
+        {(todayTags.length > 0) && <li className="-mt-2 mb-3 flex flex-wrap gap-1.5">{todayTags.map((t) => <span key={t} className="flex items-center gap-1 rounded-full bg-vermilion/10 px-2.5 py-0.5 text-xs font-semibold text-vermilion"><Flame size={12} />{t}</span>)}</li>}
 
         <Phase icon={<CalendarClock size={16} />} tone="amber" title="Ready to post" note="Watch it, check the citations, then post from the reel page" />
         {ready.length === 0 && <Empty>Nothing waiting. The next reel is in production.</Empty>}
@@ -86,6 +90,20 @@ export default function Timeline() {
         <Phase icon={<Hammer size={16} />} tone="violet" title="In production" note="Being researched, voiced or rendered now" />
         {making.length === 0 && <Empty>Starting the next one from the plan.</Empty>}
         {making.map((r) => <Item key={r.id} r={r} cover={covers[r.id]} when="Being made" dot="violet" />)}
+
+        <Phase icon={<Flame size={16} />} tone="amber" title="Festival plan" note="Occasions in the next 6 months and the reels that fit them (make them in time)" />
+        {fest.map(({ o, day, reels: rs }) => {
+          const daysTo = day - todayN, need = rs.filter((r) => r.stage === "idea" || PRODUCTION.includes(r.stage));
+          return (
+            <li key={o.date} className="mb-2 rounded-xl border border-parchment-deep bg-white/80 p-3 text-sm dark:border-night-700 dark:bg-night-900">
+              <div className="flex flex-wrap items-baseline justify-between gap-2"><span className="font-semibold">{o.name}</span><span className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">{dayName(day)}{daysTo === 0 ? " · today" : ` · in ${daysTo} days`}{o.approx ? " · date ±1 day, recheck" : ""}</span></div>
+              <div className="text-xs text-ink-soft dark:text-parchment/60">{o.what}</div>
+              {rs.length > 0 ? <div className="mt-1.5 flex flex-wrap gap-1.5">{rs.map((r) => <Link key={r.id} to={`/reels/${r.code}`} className="flex items-center gap-1 rounded-full border border-parchment-deep px-2 py-0.5 text-xs hover:border-gold dark:border-night-700"><span className="font-mono text-gold-deep dark:text-gold">{r.code}</span> {r.title.length > 34 ? r.title.slice(0, 33) + "…" : r.title} <StageBadge stage={r.stage} /></Link>)}</div>
+                : <div className="mt-1 text-xs text-ink-soft">No matching reel yet: a general devotional day.</div>}
+              {need.length > 0 && daysTo > 3 && <div className="mt-1.5 text-xs font-semibold text-vermilion">Make {need[0].code} before {dayName(day - 2)} to post it on the day.</div>}
+            </li>
+          );
+        })}
 
         <Phase icon={<Lightbulb size={16} />} tone="stone" title="Coming up" note="From the plan, strongest audience pull first" />
         {(allIdeas ? ideas : ideas.slice(0, 10)).map((r, i) => <Item key={r.id} r={r} when={i === 0 && making.length === 0 ? "Next" : `#${r.plan_no ?? "–"}`} dot="stone" compact />)}
