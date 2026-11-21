@@ -90,7 +90,7 @@ def instagram_fit(path):
     """Instagram Reels API delivery spec: H.264 High, 4:2:0, closed GOP, <=25 Mbps video, AAC 128 kbps 48 kHz stereo,
     <=300 MB, moov atom at the front, NO edit lists (so no B-frames: they make ffmpeg write one). Re-encode from our master at the best quality that stays inside those limits."""
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]).strip())
-    cap_k = min(18_000, int((IG_MAX * 0.93 * 8 / dur - 128_000) / 1000))      # every second under 25 Mbps, file under 300 MB
+    cap_k = min(18_000, int((IG_MAX * 0.93 * 8 / dur - 128_000) / 1000))      # every second under 25 Mbps, file under 300 MB (owner: keep full quality)
     report(step="preparing Instagram file", log=f"Encoding to Instagram's Reels spec (H.264, ≤{cap_k} kb/s, AAC 128k/48k, ≤300 MB)")
     out = path.replace(".mp4", "_ig.mp4")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-c:v", "libx264", "-preset", "slow", "-tune", "grain", "-crf", "14",
@@ -140,12 +140,15 @@ def instagram(spec, path):
                     uploaded = True; break
             time.sleep(30)
         if not uploaded: continue
-        for i in range(90):                               # Instagram processes the video (up to ~15 min)
-            st = q(cid)
-            report(step=f"Instagram processing ({st.get('status_code')})")
+        t0 = time.time()                                  # keep waiting on THIS container while it is IN_PROGRESS (that is not a failure);
+        while time.time() - t0 < 45 * 60:                 # only ERROR / EXPIRED make us start a new one
+            st = q(cid); waited = int((time.time() - t0) / 60)
+            report(step=f"Instagram processing ({st.get('status_code')}, {waited} min)")
             if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED"): break
-            time.sleep(10)
+            time.sleep(15)
         if st.get("status_code") == "FINISHED": break
+        if st.get("status_code") == "IN_PROGRESS":       # re-uploading would only restart Instagram's processing clock
+            raise RuntimeError(f"Instagram is still processing container {cid} after 45 min; press Publish again later (full-quality reels can take long)")
         errors.append(f"container {cid} processing: {st.get('status_code')}: {st.get('status')}")
         report(log=f"Instagram could not process container {cid}: {st.get('status')}")
     else:
