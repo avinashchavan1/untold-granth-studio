@@ -82,7 +82,7 @@ def phase_of(studio, code):
     """(phase key, done fraction 0..1, detail) for one reel, read from its out/ folder; ('done', 1, '') when both masters exist."""
     R = reel_dir(studio, code); out = os.path.join(R, "out"); mix = os.path.join(R, "audio", "mix.wav")
     yt, ig, final = (os.path.join(out, f"{code}_{k}.mp4") for k in ("YOUTUBE_MASTER", "INSTAGRAM_MASTER", "final"))
-    if fresh(yt, mix) and not glob.glob(os.path.join(out, "lossless", "*.mkv")): return "done", 1.0, ""
+    if fresh(yt, mix) and fresh(ig, mix) and os.path.exists(ig + ".done") and os.path.exists(yt + ".done") and not glob.glob(os.path.join(out, "lossless", "*.mkv")): return "done", 1.0, ""
     newer = lambda f: not os.path.exists(mix) or os.path.getmtime(f) > os.path.getmtime(mix)
     ml = [f for f in sorted(glob.glob(os.path.join(out, "lossless", "*.log"))) if newer(f)]   # ignore leftovers from a render of an older mix
     if ml:

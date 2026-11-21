@@ -145,7 +145,11 @@ def _stamp(reel):
     for f in files:
         if os.path.exists(f): st = os.stat(f); h.update(f"{os.path.basename(f)}:{st.st_size}:{int(st.st_mtime)}".encode())
     return h.hexdigest()[:16]
-def _done(f, stamp): return os.path.exists(f) and os.path.exists(f + ".done") and open(f + ".done").read().strip() == stamp
+def _playable(f):   # a video only counts as finished if ffprobe can read its duration (a cut-off encode has no index)
+    if not f.endswith((".mp4", ".mkv")): return True
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True)
+    return r.returncode == 0 and r.stdout.strip() not in ("", "N/A")
+def _done(f, stamp): return os.path.exists(f) and os.path.exists(f + ".done") and open(f + ".done").read().strip() == stamp and _playable(f)
 def _mark(f, stamp): open(f + ".done", "w").write(stamp)
 
 def render(reel):
