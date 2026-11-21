@@ -187,7 +187,10 @@ export function useIdeaMutations() {
 }
 
 // live "what Claude is doing" status (scripts/status.py writes it; the bar on every page reads it)
-export interface WorkStatus { lane: string; state: "working" | "waiting" | "idle"; reel_code: string | null; task: string | null; detail: string | null; step: number | null; steps: number | null; pct: number | null; eta_min: number | null; started_at: string | null; updated_at: string }
+export interface WorkPhase { name: string; state: "done" | "running" | "todo"; pct?: number }
+export interface WorkQueueItem { code: string; title: string; state: "done" | "running" | "queued"; note?: string }
+export interface WorkInfo { title?: string | null; phase?: string | null; phases?: WorkPhase[]; queue?: WorkQueueItem[]; events?: { at: string; text: string }[]; overall_eta_min?: number | null; elapsed_min?: number | null }
+export interface WorkStatus { lane: string; state: "working" | "waiting" | "idle"; reel_code: string | null; task: string | null; detail: string | null; step: number | null; steps: number | null; pct: number | null; eta_min: number | null; started_at: string | null; updated_at: string; info: WorkInfo | null }
 export const useWorkStatus = () =>
   useQuery({ queryKey: ["work_status"], refetchInterval: 10_000, refetchIntervalInBackground: false, staleTime: 5_000,
     queryFn: () => must<WorkStatus[]>(supabase.from("work_status").select("*").eq("lane", "main")).then((r) => r[0] ?? null) });

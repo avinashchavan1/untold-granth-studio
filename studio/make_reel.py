@@ -135,20 +135,35 @@ def audio(reel):
         env = dict(os.environ, REEL=os.path.abspath(reel), VARIANT="youtube"); print("$ VARIANT=youtube build_audio.py", flush=True)
         subprocess.run(["python3", os.path.join(PY, "build_audio.py")], env=env, check=True)
 
+# ---- resumable renders: a finished piece gets <file>.done holding a stamp of its inputs; a re-run skips it while the stamp matches
+def _stamp(reel):
+    import hashlib
+    h = hashlib.sha1(); ser = os.path.dirname(os.path.dirname(os.path.abspath(reel)))
+    files = [os.path.join(reel, "audio", "mix.wav"), os.path.join(reel, "audio", "mix_youtube.wav"), os.path.join(reel, "src", "timeline.json"), os.path.join(reel, "src", "shots.js")]
+    for d in (os.path.join(ser, "art"), os.path.join(JS, "..", "art"), JS):
+        if os.path.isdir(d): files += sorted(os.path.join(d, f) for f in os.listdir(d) if f.endswith(".js"))
+    for f in files:
+        if os.path.exists(f): st = os.stat(f); h.update(f"{os.path.basename(f)}:{st.st_size}:{int(st.st_mtime)}".encode())
+    return h.hexdigest()[:16]
+def _done(f, stamp): return os.path.exists(f) and os.path.exists(f + ".done") and open(f + ".done").read().strip() == stamp
+def _mark(f, stamp): open(f + ".done", "w").write(stamp)
+
 def render(reel):
     tl = json.load(open(os.path.join(reel, "src", "timeline.json"))); nf = round(tl["total"] * 24); cuts = [0, nf // 3, 2 * nf // 3, nf]
     out = os.path.join(os.path.abspath(reel), "out"); os.makedirs(out, exist_ok=True)
     env = dict(os.environ, REEL=os.path.abspath(reel))
-    ps = [subprocess.Popen(["node", os.path.join(JS, "render.js"), "range", str(cuts[i]), str(cuts[i + 1]), f"{out}/seg{i}.mp4"], env=env, stdout=open(f"{out}/r{i}.log", "w"), stderr=subprocess.STDOUT) for i in range(3)]
+    stamp = _stamp(reel); todo = [i for i in range(3) if not _done(f"{out}/seg{i}.mp4", stamp)]   # resumable after a restart
+    ps = [subprocess.Popen(["node", os.path.join(JS, "render.js"), "range", str(cuts[i]), str(cuts[i + 1]), f"{out}/seg{i}.mp4"], env=env, stdout=open(f"{out}/r{i}.log", "w"), stderr=subprocess.STDOUT) for i in todo]
     if not os.path.exists(os.path.join(reel, "audio", "mix.wav")): audio(reel)
     for p in ps:
         if p.wait(): sys.exit("render segment failed, see out/r*.log")
+    for i in todo: _mark(f"{out}/seg{i}.mp4", stamp)
     open(f"{out}/list.txt", "w").write("".join(f"file 'seg{i}.mp4'\n" for i in range(3)))
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{out}/list.txt", "-c", "copy", f"{out}/video.mp4"], check=True)
     rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]; final = f"{out}/{rid}_final.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{out}/video.mp4", "-i", os.path.join(reel, "audio", "mix.wav"), "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-level:v", "4.1", "-crf", "22", "-maxrate", "3000k", "-bufsize", "6000k", "-pix_fmt", "yuv420p", "-g", "48",
                     "-af", "alimiter=limit=0.80:attack=3:release=60:level=disabled", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", "-shortest", final], check=True)
-    for i in range(3): os.remove(f"{out}/seg{i}.mp4")
+    for i in range(3): os.remove(f"{out}/seg{i}.mp4"); os.path.exists(f"{out}/seg{i}.mp4.done") and os.remove(f"{out}/seg{i}.mp4.done")
     master(reel)
     if (json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8")).get("thumbnail") or {}).get("frame"): thumb(reel)
     else: print("⚠ no thumbnail.frame in script.json: run make_reel.py thumb <reel> <times> to pick one, then make_reel.py thumb <reel>")
@@ -192,9 +207,12 @@ def master(reel, short=False):
     env = lambda plat: dict(os.environ, REEL=os.path.abspath(reel), LOSSLESS="1", PLATFORM=plat, **({"TIMELINE": tlname} if short else {}))
     # segments 0-1 are shared; the last third holds the end card, so it is rendered once per platform (FOLLOW / SUBSCRIBE)
     jobs = [(0, "instagram", "seg0"), (1, "instagram", "seg1"), (2, "instagram", "seg2"), (2, "youtube", "seg2_youtube")]
+    stamp = _stamp(reel)                                                          # resumable: skip work finished for this same audio/timeline/art
+    jobs = [j for j in jobs if not _done(f"{tmp}/{j[2]}.mkv", stamp)]
     ps = [subprocess.Popen(["node", os.path.join(JS, "render.js"), "range", str(cuts[i]), str(cuts[i + 1]), f"{tmp}/{name}.mkv"], env=env(plat), stdout=open(f"{tmp}/{name}.log", "w"), stderr=subprocess.STDOUT) for i, plat, name in jobs]
     for p in ps:
         if p.wait(): sys.exit("lossless render failed, see out/lossless/*.log")
+    for j in jobs: _mark(f"{tmp}/{j[2]}.mkv", stamp)
     open(f"{tmp}/list.txt", "w").write("file 'seg0.mkv'\nfile 'seg1.mkv'\nfile 'seg2.mkv'\n")
     open(f"{tmp}/list_youtube.txt", "w").write("file 'seg0.mkv'\nfile 'seg1.mkv'\nfile 'seg2_youtube.mkv'\n")
     yt_mix = os.path.join(reel, "audio", f"mix{sfx}_youtube.wav")
@@ -204,11 +222,13 @@ def master(reel, short=False):
     tags = ["-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", "-shortest"]
     lim = ["-af", "alimiter=limit=0.80:attack=3:release=60:level=disabled", "-ar", "48000", "-ac", "2", "-c:a", "aac"]
     ig = f"{out}/{rid}_INSTAGRAM_{'SHORT' if short else 'MASTER'}.mp4"
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *src, "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "veryslow", "-crf", "12", "-tune", "grain",
+    if not _done(ig, stamp): subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *src, "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "veryslow", "-crf", "12", "-tune", "grain",
                     "-profile:v", "high", "-level:v", "4.2", "-g", "24", "-keyint_min", "24", "-bf", "2", *lim, "-b:a", "320k", *tags, ig], check=True)
+    _mark(ig, stamp)
     yt = f"{out}/{rid}_YOUTUBE_{'SHORT' if short else 'MASTER'}.mp4"
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *src_yt, "-vf", "scale=2160:3840:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "14", "-tune", "grain",
+    if not _done(yt, stamp): subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *src_yt, "-vf", "scale=2160:3840:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "14", "-tune", "grain",
                     "-profile:v", "high", "-level:v", "5.2", "-g", "12", "-keyint_min", "12", "-bf", "2", *lim, "-b:a", "384k", *tags, yt], check=True)
+    _mark(yt, stamp)
     for f in (ig, yt): print("MASTER", f, f"{os.path.getsize(f) / 1e6:.0f} MB")
     subprocess.run(["rm", "-rf", tmp])
 

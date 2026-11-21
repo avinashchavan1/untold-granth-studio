@@ -14,7 +14,13 @@ print(urllib.request.urlopen(rq, timeout=600).read().decode()[:120])
 def rest(method, q, body=None, prefer="return=representation"):
     r = urllib.request.Request(f"{BASE}/rest/v1/{q}", json.dumps(body).encode() if body is not None else None, {**H, "Content-Type": "application/json", "Prefer": prefer}, method=method)
     b = urllib.request.urlopen(r, timeout=60).read(); return json.loads(b) if b else None
-reel = rest("GET", f"reels?select=id&series_id=eq.untold-ramayana&code=eq.{code}")[0]
+reel = rest("GET", f"reels?select=id,stage&series_id=eq.untold-ramayana&code=eq.{code}")[0]
+prev = rest("GET", f"files?select=sha256&reel_id=eq.{reel['id']}&kind=eq.{kind}&store=eq.supabase&path=eq.{urllib.parse.quote(key)}") or []
+# owner's rule: an APPROVED reel whose video/cover changes goes back to REVIEW (it must be re-approved before posting)
+if kind in ("preview", "final", "poster", "thumbnail") and reel.get("stage") == "approved" and prev and prev[0].get("sha256") != sha:
+    rest("PATCH", f"reels?id=eq.{reel['id']}", {"stage": "review", "reviewed": False, "reviewed_at": None}, "return=minimal")
+    rest("POST", "activity", [{"actor": "claude", "action": "back_to_review", "detail": {"reel": code, "why": f"new {kind} uploaded after approval"}}], "return=minimal")
+    print(f"{code}: was approved; the {kind} changed, so it is back in REVIEW")
 rest("DELETE", f"files?reel_id=eq.{reel['id']}&kind=eq.{kind}&store=eq.supabase&path=eq.{urllib.parse.quote(key)}", prefer="return=minimal")
 rest("POST", "files", [{"reel_id": reel["id"], "series_id": "untold-ramayana", "kind": kind, "store": "supabase", "path": key, "bytes": size, "spec": spec, "sha256": sha}], "return=minimal")
 print("recorded", code, kind, key, f"{size / 1e6:.1f} MB")

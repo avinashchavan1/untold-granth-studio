@@ -1,32 +1,66 @@
 #!/usr/bin/env python3
-"""Live "what Claude is doing" status for the app's progress bar (table work_status, lane 'main').
+"""Live "what Claude is doing" status for the app's work panel (table work_status, lane 'main').
 
-  python3 scripts/status.py set --reel A89 --step 5 --task "Drawing the art" [--detail ...] [--pct 40] [--state working|waiting]
+  python3 scripts/status.py set --reel A89 --step 5 --task "Drawing the art" [--detail ...] [--pct 40] [--eta 12] [--state working|waiting]
   python3 scripts/status.py idle
-  python3 scripts/status.py watch-render A89 [studio_dir]    # follows a make_reel render and updates the bar every 20 s until FINAL
+  python3 scripts/status.py watch-queue A18 A23 A101 [--studio DIR]   # follows renders reel by reel until every master is done
+  python3 scripts/status.py watch-render A89                          # one reel (same as watch-queue with one code)
 
 Steps of a reel (shown as "step N of 8"):
   1 Research the verses · 2 Write the script · 3 Record the voices · 4 Compose the music
   5 Draw the art and animation · 6 Render the preview · 7 Render the 4K and 1080p masters · 8 Cover, checks and upload
+The panel also shows `info`: the reel's title, the render phases, the queue of reels, recent events and an overall time estimate.
 """
 import argparse, glob, json, os, re, sys, time, urllib.request
 from datetime import datetime, timezone
 
-BASE = "https://spsrryrycowxmgiofyxo.supabase.co"; H = {"apikey": "proxy-injected"}   # key injected by the environment proxy
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    from channel import SUPA as BASE, SID
+except Exception:   # channel repos without channel.json yet
+    BASE, SID = "https://spsrryrycowxmgiofyxo.supabase.co", "untold-ramayana"
+H = {"apikey": "proxy-injected"}   # key injected by the environment proxy
 STEPS = ["Research the verses", "Write the script", "Record the voices", "Compose the music", "Draw the art and animation",
          "Render the preview", "Render the 4K and 1080p masters", "Cover, checks and upload"]
+# minutes of work per second of video on this machine (measured on 4 cores, Nov 2026); refined live from frame rates
+COST = {"preview": 0.08, "lossless": 0.16, "instagram": 0.04, "youtube": 0.12}
+PHASES = [("preview", "Drawing the preview frames"), ("preview_mux", "Joining the preview with the sound"),
+          ("lossless", "Drawing lossless frames for the masters"), ("instagram", "Encoding the Instagram 1080p master"),
+          ("youtube", "Encoding the YouTube 4K master")]
+STATE = os.path.join(os.path.expanduser("~"), ".cache", "work_status_info.json")   # keeps events between calls
 
-def patch(row):
-    row = {**row, "updated_at": datetime.now(timezone.utc).isoformat()}
-    rq = urllib.request.Request(f"{BASE}/rest/v1/work_status?lane=eq.main", json.dumps(row).encode(),
-                                {**H, "Content-Type": "application/json", "Prefer": "return=minimal"}, method="PATCH")
+def now(): return datetime.now(timezone.utc).isoformat()
+def api(method, q, body=None):
+    rq = urllib.request.Request(f"{BASE}/rest/v1/{q}", json.dumps(body).encode() if body is not None else None,
+                                {**H, "Content-Type": "application/json", "Prefer": "return=minimal"}, method=method)
     urllib.request.urlopen(rq, timeout=30).read()
 
-def set_status(state="working", reel=None, step=None, task=None, detail=None, pct=None, eta=None, started=None):
-    patch({"state": state, "reel_code": reel, "step": step, "steps": len(STEPS) if step else None,
-           "task": task or (STEPS[step - 1] if step else None), "detail": detail, "pct": None if pct is None else round(max(0, min(100, pct)), 1),
-           "eta_min": None if eta is None else round(eta, 1), **({"started_at": started} if started else {})})
+def load_info():
+    try: return json.load(open(STATE))
+    except Exception: return {"events": []}
+def save_info(info):
+    os.makedirs(os.path.dirname(STATE), exist_ok=True); json.dump(info, open(STATE, "w"), ensure_ascii=False)
 
+def event(info, text):
+    ev = info.setdefault("events", [])
+    if not ev or ev[-1]["text"] != text: ev.append({"at": now(), "text": text})
+    info["events"] = ev[-8:]
+
+def patch(row, info=None):
+    row = {**row, "updated_at": now()}
+    if info is not None: row["info"] = info; save_info(info)
+    api("PATCH", "work_status?lane=eq.main", row)
+
+def set_status(state="working", reel=None, step=None, task=None, detail=None, pct=None, eta=None, started=None, info=None, log=True):
+    info = info if info is not None else load_info()
+    task = task or (STEPS[step - 1] if step else None)
+    if log and task: event(info, f"{reel + ': ' if reel else ''}{task}" + (f" ({detail})" if detail and len(detail) < 70 else ""))
+    if state == "waiting": info["phases"] = []
+    patch({"state": state, "reel_code": reel, "step": step, "steps": len(STEPS) if step else None, "task": task, "detail": detail,
+           "pct": None if pct is None else round(max(0, min(100, pct)), 1), "eta_min": None if eta is None else round(eta, 1),
+           **({"started_at": started} if started else {})}, info)
+
+# ---------------- render queue watcher ----------------
 def frames(logs):
     done = total = 0
     for f in logs:
@@ -34,36 +68,87 @@ def frames(logs):
         if m: d, t = map(int, m[-1]); done += d; total += t
     return done, total
 
-def watch_render(code, studio):
-    out = os.path.join(studio, "series", "untold-ramayana", "reels", code, "out"); main = os.path.join(out, "render_main.log")
-    t0 = time.time(); started = datetime.now(timezone.utc).isoformat(); hist = []
+def reel_dir(studio, code): return os.path.join(studio, "series", SID, "reels", code)
+def title_of(studio, code):
+    try: return json.load(open(os.path.join(reel_dir(studio, code), "src", "script.json"), encoding="utf-8"))["title"]
+    except Exception: return code
+def secs_of(studio, code):
+    try: return json.load(open(os.path.join(reel_dir(studio, code), "src", "timeline.json")))["total"]
+    except Exception: return 100.0
+def fresh(f, mix):      # an output counts as done only if newer than the reel's current sound mix
+    return os.path.exists(f) and (not os.path.exists(mix) or os.path.getmtime(f) > os.path.getmtime(mix))
+
+def phase_of(studio, code):
+    """(phase key, done fraction 0..1, detail) for one reel, read from its out/ folder; ('done', 1, '') when both masters exist."""
+    R = reel_dir(studio, code); out = os.path.join(R, "out"); mix = os.path.join(R, "audio", "mix.wav")
+    yt, ig, final = (os.path.join(out, f"{code}_{k}.mp4") for k in ("YOUTUBE_MASTER", "INSTAGRAM_MASTER", "final"))
+    if fresh(yt, mix) and not glob.glob(os.path.join(out, "lossless", "*.mkv")): return "done", 1.0, ""
+    newer = lambda f: not os.path.exists(mix) or os.path.getmtime(f) > os.path.getmtime(mix)
+    ml = [f for f in sorted(glob.glob(os.path.join(out, "lossless", "*.log"))) if newer(f)]   # ignore leftovers from a render of an older mix
+    if ml:
+        d, t = frames(ml); segs_done = all(os.path.exists(f[:-4] + ".mkv.done") for f in ml)
+        if not segs_done and t and d < t * 0.995: return "lossless", d / t, f"{d:,} of {t:,} lossless frames, {len(ml)} segments in parallel"
+        if not segs_done: return "lossless", 0.99, "finishing the last frames"
+        if not fresh(ig, mix) or not os.path.exists(ig + ".done"): return "instagram", 0.5, "1080p, best quality (no frame counter while compressing)"
+        return "youtube", 0.5, "2160×3840, best quality (no frame counter while compressing)"
+    if fresh(final, mix): return "lossless", 0.0, "starting the lossless renderer"
+    pl = sorted(glob.glob(os.path.join(out, "r[0-9].log")))
+    if pl and any(os.path.getmtime(f) > os.path.getmtime(mix) for f in pl if os.path.exists(mix)):
+        d, t = frames(pl)
+        if t and d < t - 5: return "preview", d / t, f"{d:,} of {t:,} frames, {len(pl)} segments in parallel"
+        return "preview_mux", 0.5, "compressing the preview"
+    return "queued", 0.0, "waiting for its turn"
+
+def remaining_min(key, frac, secs, rate=None):
+    order = [p for p, _ in PHASES]; left = 0.0
+    if key == "done": return 0.0
+    if key == "queued": return secs * sum(COST.values())
+    i = order.index(key)
+    cur = COST.get(key, 0.02) * secs * (1 - frac)
+    if rate and key in ("preview", "lossless"): cur = rate
+    left += cur
+    for p in order[i + 1:]: left += COST.get(p, 0.02) * secs
+    return left
+
+def watch_queue(codes, studio):
+    info = load_info(); started = now(); t0 = time.time(); hist = {}
+    info["events"] = info.get("events", [])
     while True:
-        log = open(main, errors="ignore").read() if os.path.exists(main) else ""
-        if re.search(r"^FINAL", log, re.M):
-            set_status(reel=code, step=8, detail="Render finished: checking both endings, making the cover, uploading", pct=0); return
-        if "Traceback" in log:
-            set_status(state="working", reel=code, step=7, detail="The render hit an error; fixing it", pct=None); return
-        ml = sorted(glob.glob(os.path.join(out, "lossless", "*.log")))
-        step, (d, t) = (7, frames(ml)) if ml else (6, frames(sorted(glob.glob(os.path.join(out, "r[0-9].log")))))
-        pct = 100 * d / t if t else 0
-        hist = [h for h in hist if h[0] > time.time() - 300 and h[1] == step] + [(time.time(), step, pct)]
-        eta = None
-        if len(hist) > 2 and hist[-1][2] > hist[0][2]:
-            rate = (hist[-1][2] - hist[0][2]) / (hist[-1][0] - hist[0][0]); eta = (100 - pct) / rate / 60
-        segs = len(ml) if ml else len(glob.glob(os.path.join(out, "r[0-9].log")))
-        if t and d >= t - len(ml or [1]) * 30 and step == 7:   # all frames drawn: ffmpeg is compressing the final files (no counter)
-            set_status(reel=code, step=7, pct=99, detail="All frames drawn; compressing the final 4K and 1080p files (a few minutes, no counter)"); time.sleep(20); continue
-        set_status(reel=code, step=step, pct=pct, eta=eta, started=started if time.time() - t0 < 25 else None,
-                   detail=f"{d:,} of {t:,} frames across {segs} parallel segments" if t else "starting the renderer")
+        queue, total_left, cur = [], 0.0, None
+        for c in codes:
+            key, frac, det = phase_of(studio, c); secs = secs_of(studio, c)
+            rate_left = None
+            if key in ("preview", "lossless"):
+                h = [x for x in hist.get(c, []) if x[0] > time.time() - 300 and x[1] == key] + [(time.time(), key, frac)]; hist[c] = h
+                if len(h) > 2 and h[-1][2] > h[0][2]: rate_left = (1 - frac) / ((h[-1][2] - h[0][2]) / (h[-1][0] - h[0][0])) / 60
+            left = remaining_min(key, frac, secs, rate_left); total_left += left
+            state = "done" if key == "done" else ("queued" if key == "queued" or cur else "running")
+            if state == "running" and cur is None: cur = (c, key, frac, det, left, secs)
+            queue.append({"code": c, "title": title_of(studio, c), "state": state, "note": f"{secs:.0f} s reel" + ("" if state == "done" else f" · ~{max(1, round(left))} min")})
+        info["queue"] = queue; info["overall_eta_min"] = round(total_left, 1); info["elapsed_min"] = round((time.time() - t0) / 60, 1)
+        if cur is None:
+            info["phases"] = []; event(info, "All renders finished: " + ", ".join(codes))
+            set_status(reel=codes[-1], step=8, task="Renders finished: checks, covers and upload next", detail=None, pct=100, eta=None, info=info, log=False); return
+        c, key, frac, det, left, secs = cur
+        order = [p for p, _ in PHASES]; i = order.index(key)
+        info["title"] = title_of(studio, c); info["phase"] = dict(PHASES)[key]
+        info["phases"] = [{"name": n, "state": "done" if j < i else ("running" if j == i else "todo"), **({"pct": round(100 * frac)} if j == i and p in ("preview", "lossless") else {})} for j, (p, n) in enumerate(PHASES)]
+        done_w = sum(COST.get(p, 0.02) for p in order[:i]) + COST.get(key, 0.02) * frac; pct = 100 * done_w / sum(COST.get(p, 0.02) for p in order)
+        step = 6 if key in ("preview", "preview_mux") else 7
+        event(info, f"{c}: {dict(PHASES)[key]}")
+        set_status(reel=c, step=step, task=dict(PHASES)[key], detail=det, pct=pct, eta=left, started=started if time.time() - t0 < 25 else None, info=info, log=False)
         time.sleep(20)
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("code", nargs="?"); ap.add_argument("studio", nargs="?", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "studio"))
+    ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("codes", nargs="*")
+    ap.add_argument("--studio", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "studio"))
     for k in ("reel", "task", "detail", "state"): ap.add_argument("--" + k)
     ap.add_argument("--step", type=int); ap.add_argument("--pct", type=float); ap.add_argument("--eta", type=float)
     a = ap.parse_args()
-    if a.cmd == "idle": patch({"state": "idle", "reel_code": None, "task": None, "detail": None, "step": None, "steps": None, "pct": None, "eta_min": None})
-    elif a.cmd == "set": set_status(a.state or "working", a.reel, a.step, a.task, a.detail, a.pct, a.eta, datetime.now(timezone.utc).isoformat())
-    elif a.cmd == "watch-render": watch_render(a.code, a.studio)
+    if a.cmd == "idle":
+        info = load_info(); info.update({"queue": [], "phases": [], "title": None, "phase": None, "overall_eta_min": None}); event(info, "Idle")
+        patch({"state": "idle", "reel_code": None, "task": None, "detail": None, "step": None, "steps": None, "pct": None, "eta_min": None}, info)
+    elif a.cmd == "set": set_status(a.state or "working", a.reel, a.step, a.task, a.detail, a.pct, a.eta, now())
+    elif a.cmd in ("watch-queue", "watch-render"): watch_queue(a.codes, a.studio)
     else: sys.exit(__doc__)
-    print("status:", a.cmd, a.code or a.reel or "")
+    print("status:", a.cmd, " ".join(a.codes) or a.reel or "")
