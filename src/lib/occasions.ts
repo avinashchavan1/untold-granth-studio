@@ -47,3 +47,17 @@ export function upcoming(reels: Reel[], fromDay: number, days = 180) {
   return OCCASIONS.filter((o) => { const d = istDayOf(o.date); return d >= fromDay && d < fromDay + days; })
     .map((o) => ({ o, day: istDayOf(o.date), reels: reels.filter((r) => r.stage !== "published" && o.themes.some((t) => themesOf(r).has(t))).sort((a, b) => pullOf(b) - pullOf(a) || (a.plan_no ?? 999) - (b.plan_no ?? 999)).slice(0, 4) }));
 }
+
+// Double-post rule (owner, Nov 2026): one reel a day by default. A second, optional MORNING post only when
+// (1) the day is a major festival (weight >= 5), (2) a second ready reel also matches the festival's themes,
+// (3) at least 5 reels are ready (the backlog keeps daily posting going), and (4) the morning slot hasn't passed.
+export const MAJOR = 5, MIN_BACKLOG = 5;
+export function doubleCandidate(day: number, primary: Reel, ready: Reel[]) {
+  const os = occasionsOn(day).filter((o) => o.weight >= MAJOR);
+  if (!os.length || ready.length < MIN_BACKLOG) return null;
+  for (const o of os) {
+    const r = ready.find((x) => x !== primary && o.themes.some((t) => themesOf(x).has(t)));
+    if (r) return { reel: r, occasion: o };
+  }
+  return null;
+}

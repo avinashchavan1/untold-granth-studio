@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ErrorNote, Spinner, StageBadge, fmtLen } from "../components/ui";
 import { useAllFiles, useMediaUrl, usePublications, useReels } from "../lib/api";
 import { KIND_LABEL, type FileRow, type Publication, type Reel } from "../lib/types";
-import { hanumanDay, occasionsOn, upcoming } from "../lib/occasions";
+import { doubleCandidate, hanumanDay, MAJOR, MIN_BACKLOG, occasionsOn, upcoming } from "../lib/occasions";
 import { bestHour, confidence, dayName, fmtHour, istParts, observations, planDays, type Main, type Obs } from "../lib/bestTime";
 
 // All dates are India time. Posting days and times are suggestions from lib/bestTime.ts.
@@ -47,7 +47,11 @@ export default function Timeline() {
   const fixedFor = (r: Reel) => { const sch = (byReel[r.id] ?? []).map((p) => p.scheduled_for).filter(Boolean).sort()[0]; return sch ? new Date(sch) : null; };
   const todayTags = [...(hanumanDay(todayN) ? [`${istParts(now).dow === 2 ? "Tuesday" : "Saturday"}: Hanuman's day`] : []), ...occasionsOn(todayN).map((o) => o.name)];
   const fest = upcoming(all, todayN, 183);
-  const plan = planDays(ready, firstDay, fixedFor).map((s) => ({ ...s, ig: bestHour("instagram", s.day, obs, now), yt: bestHour("youtube", s.day, obs, now) }));
+  const plan = planDays(ready, firstDay, fixedFor).map((s) => {
+    const dbl = doubleCandidate(s.day, s.reel, ready);
+    const am = dbl ? bestHour("instagram", s.day, obs, now, 9, 11.5) : null;
+    return { ...s, ig: bestHour("instagram", s.day, obs, now), yt: bestHour("youtube", s.day, obs, now), dbl: dbl && am !== null ? { ...dbl, am } : null };
+  });
 
   const total = all.length;
   return (
@@ -85,7 +89,7 @@ export default function Timeline() {
         {ready.length === 0 && <Empty>Nothing waiting. The next reel is in production.</Empty>}
         {ready.length > 0 && <BestTimeCard obs={obs} />}
         {plan.map((s) => <Item key={s.reel.id} r={s.reel} cover={covers[s.reel.id]} when={`Post ${dayName(s.day)}`} pubs={byReel[s.reel.id]} dot="amber" hint={!s.reel.reviewed ? "Waiting for your check" : undefined}
-          best={<BestTimes ig={s.ig} yt={s.yt} why={s.why} />} />)}
+          best={<><BestTimes ig={s.ig} yt={s.yt} why={s.why} />{s.dbl && <div className="mt-1.5 rounded-lg border border-dashed border-amber-400 px-2 py-1 text-[11px] text-amber-900 dark:text-amber-200"><b>Optional 2nd post, {fmtHour(s.dbl.am)}:</b> {s.dbl.reel.code} {s.dbl.reel.title} also fits {s.dbl.occasion.name}. Space it from the evening post; skip it if fewer than {MIN_BACKLOG} reels are ready.</div>}</>} />)}
 
         <Phase icon={<Hammer size={16} />} tone="violet" title="In production" note="Being researched, voiced or rendered now" />
         {making.length === 0 && <Empty>Starting the next one from the plan.</Empty>}
@@ -101,6 +105,7 @@ export default function Timeline() {
               {rs.length > 0 ? <div className="mt-1.5 flex flex-wrap gap-1.5">{rs.map((r) => <Link key={r.id} to={`/reels/${r.code}`} className="flex items-center gap-1 rounded-full border border-parchment-deep px-2 py-0.5 text-xs hover:border-gold dark:border-night-700"><span className="font-mono text-gold-deep dark:text-gold">{r.code}</span> {r.title.length > 34 ? r.title.slice(0, 33) + "…" : r.title} <StageBadge stage={r.stage} /></Link>)}</div>
                 : <div className="mt-1 text-xs text-ink-soft">No matching reel yet: a general devotional day.</div>}
               {need.length > 0 && daysTo > 3 && <div className="mt-1.5 text-xs font-semibold text-vermilion">Make {need[0].code} before {dayName(day - 2)} to post it on the day.</div>}
+              {o.weight >= MAJOR && rs.length >= 2 && <div className="mt-1 text-xs text-amber-900 dark:text-amber-200">Major festival: a 2nd post is OK if {rs[1].code} is ready too (morning 9–11 AM, {rs[0].code} in the evening) and {MIN_BACKLOG}+ reels are ready.</div>}
             </li>
           );
         })}

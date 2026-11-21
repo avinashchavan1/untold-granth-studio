@@ -74,6 +74,8 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
     Tulsi Vivah, Kartik Purnima, Vivah Panchami, Makar Sankranti, Maha Shivratri, Ram Navami, Hanuman Jayanti...) +
     Hanuman reels on Tue/Sat + ★★★ reels on weekends + small plan-order cost; `"follows"` pairs stay back to back.
   - Times: an Indian evening-audience prior × the channel's own results (age-normalised).
+  - Double posts (owner-approved rule): one reel a day by default; an OPTIONAL 2nd morning post (9–11 AM) only on a major
+    festival (weight ≥ 5), when a second ready reel truly matches it and 5+ reels are ready (`doubleCandidate` in occasions.ts).
   - "Festival plan" section: upcoming occasions, the reels that fit, and "make X before <date>". Keep OCCASIONS updated
     a year ahead (check dates on two panchang sites; mark ±1-day ones `approx`). Plan production so festival reels are ready.
 - A reel is marked published automatically when both Instagram and YouTube are posted (DB trigger).

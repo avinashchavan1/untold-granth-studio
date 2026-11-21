@@ -60,10 +60,10 @@ function learned(obs: Obs[], p: Main, h: number) {
 
 export function score(p: Main, day: number, h: number, obs: Obs[]) { const dow = (day + 4) % 7; return prior(p, h, dow === 0 || dow === 6) * learned(obs, p, h); }
 
-// best half-hour on a given IST day (skips times already past, and anything under an hour from now)
-export function bestHour(p: Main, day: number, obs: Obs[], now = new Date()) {
+// best half-hour on a given IST day (skips times already past, and anything under an hour from now); from/to limit the window
+export function bestHour(p: Main, day: number, obs: Obs[], now = new Date(), from = 7, to = 22.5) {
   const n = istParts(now); let best = { h: 20, s: -1 };
-  for (let h = 7; h <= 22.5; h += 0.5) { if (day === n.day && h < n.hour + 1) continue; const s = score(p, day, h, obs); if (s > best.s) best = { h, s }; }
+  for (let h = from; h <= to; h += 0.5) { if (day === n.day && h < n.hour + 1) continue; const s = score(p, day, h, obs); if (s > best.s) best = { h, s }; }
   return best.s < 0 ? null : best.h;
 }
 
