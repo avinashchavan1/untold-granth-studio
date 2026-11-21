@@ -105,14 +105,8 @@ def instagram_fit(path):
     if size > IG_MAX: raise RuntimeError(f"Instagram file is still {size / 1e6:.0f} MB (limit 300 MB)")
     return out
 
-IG_API_MAX_S = 90      # Meta's Reels publishing API accepts 3-90 s; longer uploads are taken but never finish processing (A89: 98.7 s, 3 tries)
-
 def instagram(spec, path):
     ig = spec["instagram"]; tok = ig["access_token"]; uid = ig["user_id"]; print(f"::add-mask::{tok}")
-    dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]).strip())
-    if dur > IG_API_MAX_S:
-        raise RuntimeError(f"This reel is {dur:.0f} s; Instagram only lets apps auto-publish Reels up to {IG_API_MAX_S} s. "
-                           "Post it from the Instagram app instead: download the Instagram master from the Publish tab, copy the caption, post, then mark it posted.")
     IG = ig.get("api_base") or IG_API; ver = IG.rsplit("/", 1)[-1]
     path = instagram_fit(path); size = os.path.getsize(path)
     print(f"Instagram file: {size / 1e6:.0f} MB")
@@ -151,7 +145,7 @@ def instagram(spec, path):
             st = q(cid); waited = int((time.time() - t0) / 60)
             report(step=f"Instagram processing ({st.get('status_code')}, {waited} min)")
             if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED"): break
-            time.sleep(60)                                # gentle on Meta's request limit (polling every 15 s hit it)
+            time.sleep(15)
         if st.get("status_code") == "FINISHED": break
         if st.get("status_code") == "IN_PROGRESS":       # re-uploading would only restart Instagram's processing clock
             raise RuntimeError(f"Instagram is still processing container {cid} after 45 min; press Publish again later (full-quality reels can take long)")
