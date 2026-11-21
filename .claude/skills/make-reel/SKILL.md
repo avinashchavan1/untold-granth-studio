@@ -7,7 +7,7 @@ description: Produce one cited story reel (9:16, narration in the channel's lang
 
 Rules live in `CLAUDE.md` and `PLAYBOOK.md`; read them first. Work in `studio/` (cd into it for `make_reel.py`; run `scripts/*` from the repo root).
 S = `series/<series id>` (channel.json → series.id); R = `S/reels/<ID>`. Keep the owner posted: one-line chat updates +
-`python3 scripts/status.py set --reel <ID> --step N` (1 research … 8 cover/upload).
+`python3 scripts/status.py set --reel <ID> --step N` (1 research … 8 cover/upload); it also moves the reel's stage in the app, never backwards).
 
 ## 1. Research (step 1)
 - Topic = next `idea` row of the series plan (★★★ first) unless the owner names one; check `S/research/` notes.

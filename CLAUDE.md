@@ -54,7 +54,8 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
 - **No model IDs** in commits or code. Commit messages end with the session's attribution lines.
 - **Keep the owner updated**: short progress notes in chat, and the live bar in the app:
   `python3 scripts/status.py set --reel <ID> --step N` (1 research, 2 script, 3 voices, 4 music, 5 art, 6 preview,
-  7 masters, 8 cover/upload); `python3 scripts/status.py watch-render <ID> &` during renders; `status.py idle` when done;
+  7 masters, 8 cover/upload; it also moves the reel's stage in the app: 1 researching, 2 scripted, 3-5 voiced, 6-8 rendered,
+  never backwards; review is set at upload); `python3 scripts/status.py watch-render <ID> &` during renders; `status.py idle` when done;
   `--state waiting --task "Pick baby Hanuman's look"` when you need the owner.
 
 ## Layout (this repo runs the storyreel-studio template's shared code; the channel lives in channel.json + studio/series/untold-ramayana)
