@@ -19,6 +19,7 @@ const CH = {
   vibhishana: { kind: 'man', god: true, skin: '#6e5a62', skinSh: '#43343e', cloth: '#ece2cc', clothSh: '#a89c84', sash: '#e6b450', hair: '#0e0c18' },   // A92: the righteous rakshasa prince, crowned king of Lanka
   matali:  { kind: 'man', skin: '#c89a78', skinSh: '#8a6a60', cloth: '#e8d8b0', clothSh: '#a8987a', sash: '#4a7ab8', hair: '#14101c' },                         // Indra's charioteer
   indra:   { kind: 'man', god: true, skin: '#e8c08a', skinSh: '#b08a66', cloth: '#e6b450', clothSh: '#a87a2a', sash: '#c41e1e', hair: '#14101c' },   // A89: king of the gods, on Airavata
+  jambavan: { kind: 'man', vanara: true, bear: true, elder: true, band: true, skin: '#7a6e66', skinSh: '#4a403c', muzzle: '#d8cfc2', ruff: '#f2eee6', cloth: '#8a1a1c', clothSh: '#561018', sash: '#e6b450', hair: '#9a8e84' },   // A23: Jambavan, aged king of the bears, son of Prajapati (6.61.14): silvered fur, white brows and beard, gold band, deep red cloth
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';
@@ -85,6 +86,16 @@ function drawHead(x, ch, p) {
     pts.push([0.38, -0.2], [0.3, -0.28], [0.1, -0.3], [-0.1, -0.2], [-0.22, 0.12], [-0.4, 0.26]); blob(x, pts, ch.hair, 1, 0.2);
     blob(x, [[0.08, 0.02], [0.3, -0.02], [0.5, 0.08], [0.54, 0.24], [0.44, 0.42], [0.24, 0.48], [0.06, 0.38], [0.02, 0.18]], ch.muzzle, 1, 0.35);
     dab(x, 0.47, 0.16, 0.035, 0.025, 0, '#2a1a12'); line(x, [[0.0, -0.17], [0.2, -0.22], [0.42, -0.16]], 0.05, mix(ch.hair, '#000000', 0.35), 0.8);
+    if (ch.bear) {      // Jambavan (A23): venerable old king of bears: small round ears, long pale snout, big dark nose, heavy white brows, flowing white beard
+      dab(x, 0.12, -0.6, 0.085, 0.085, 0, ch.hair); dab(x, 0.12, -0.6, 0.04, 0.04, 0, ch.skinSh, 0.6);
+      dab(x, -0.3, -0.54, 0.1, 0.1, 0, ch.hair); dab(x, -0.3, -0.54, 0.048, 0.048, 0, ch.skinSh, 0.6);
+      blob(x, [[0.04, -0.04], [0.34, -0.1], [0.62, 0.04], [0.68, 0.2], [0.56, 0.36], [0.3, 0.42], [0.06, 0.34], [-0.02, 0.14]], ch.muzzle, 1, 0.3);
+      dab(x, 0.63, 0.08, 0.07, 0.05, 0, '#17100e'); dab(x, 0.61, 0.06, 0.022, 0.014, 0, '#6a5a52', 0.7);
+      blob(x, [[-0.26, 0.16], [0.0, 0.3], [0.3, 0.4], [0.5, 0.36], [0.46, 0.56], [0.3, 0.8], [0.1, 0.96], [-0.04, 0.78], [-0.2, 0.52]], ch.ruff || ch.hair, 1, 0.35);   // beard
+      for (let i = 0; i < 5; i++) stroke(x, -0.1 + i * 0.1, 0.42 + (i % 2) * 0.06, -0.02 + i * 0.08, 0.8 - (i % 3) * 0.06, 0.012, mix(ch.ruff || ch.hair, '#7a7066', 0.5), 0.5, 0.2);
+      if (ch.elder) { line(x, [[0.0, -0.18], [0.2, -0.26], [0.44, -0.2], [0.52, -0.12]], 0.06, '#f2eee6', 0.95); for (let i = 0; i < 3; i++) stroke(x, 0.3 + i * 0.07, -0.22, 0.42 + i * 0.08, -0.12 + i * 0.02, 0.014, '#f2eee6', 0.8, 0.2); }
+      if (ch.band) { line(x, [[-0.52, -0.3], [-0.1, -0.44], [0.3, -0.36]], 0.05, GOLD, 1); dab(x, -0.08, -0.44, 0.04, 0.05, 0, '#c41e1e'); }
+    }
     if (ch.crown) { blob(x, [[-0.36, -0.46], [-0.3, -0.78], [-0.12, -0.98], [0.04, -0.8], [0.12, -0.5]], GOLD, 1, 0.3); blob(x, [[-0.3, -0.5], [-0.24, -0.74], [-0.12, -0.86], [-0.08, -0.5]], GOLDSH, 0.7); dab(x, -0.12, -0.64, 0.045, 0.055, 0, '#c41e1e'); stroke(x, -0.38, -0.47, 0.14, -0.5, 0.05, GOLD, 1, 0.1); }
   } else if (k === 'man') {
     blob(x, [[0.36, -0.3], [0.22, -0.5], [-0.05, -0.58], [-0.34, -0.48], [-0.5, -0.2], [-0.5, 0.1], [-0.4, 0.3], [-0.24, 0.28], [-0.215, 0.08], [-0.2, -0.08], [-0.03, -0.21], [0.18, -0.31]], ch.hair);
@@ -226,7 +237,7 @@ function figureBody(x, ch, p) {
     for (let i = -4; i <= 4; i++) stroke(x, top[0] + i * 0.07, top[1] + 0.02, top[0] + i * 0.07, top[1] + 0.05, 0.008, '#5a4e42', 0.9);
     dab(x, top[0], top[1] - 0.175, 0.016, 0.02, 0, GOLDSH);
   }
-  if (ch.vanara) { const ph = (p.tail || 0); line(x, [add(hip, [-0.05, 0.0]), add(hip, [-0.2, 0.06]), add(hip, [-0.32 + ph * 0.04, -0.06]), add(hip, [-0.33 + ph * 0.06, -0.22]), add(hip, [-0.26 + ph * 0.05, -0.32])], 0.034, ch.skin); dab(x, hip[0] - 0.26 + ph * 0.05, hip[1] - 0.33, 0.03, 0.03, 0, ch.skinSh); }
+  if (ch.vanara && !ch.bear) { const ph = (p.tail || 0); line(x, [add(hip, [-0.05, 0.0]), add(hip, [-0.2, 0.06]), add(hip, [-0.32 + ph * 0.04, -0.06]), add(hip, [-0.33 + ph * 0.06, -0.22]), add(hip, [-0.26 + ph * 0.05, -0.32])], 0.034, ch.skin); dab(x, hip[0] - 0.26 + ph * 0.05, hip[1] - 0.33, 0.03, 0.03, 0, ch.skinSh); }
   if (ch.bow && p.bow === 'F') drawBow(x, aF.hand, p.bowAng);
   if (ch.bow && p.bow === 'B') drawBow(x, add(N, rot([-0.09, 0.03], lean)), 0.3 + lean);
   drawArm(aF, shF, true, p.handF);

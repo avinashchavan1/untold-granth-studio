@@ -325,5 +325,14 @@
    "A89",
    "A92"
   ]
+ },
+ "jambavan": {
+  "portrait": "untold-ramayana/cast/jambavan.jpg",
+  "appears_in": [
+   "A23"
+  ],
+  "posted_in": [],
+  "look_chosen": "claude",
+  "note": "Owner asked Claude to choose a dignified look (Nov 21 2026); voice picked by the owner."
  }
 }

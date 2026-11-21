@@ -16,6 +16,7 @@ const CAST = [
   ['nala', fig('nala')], ['vanara', fig('vanara')], ['sagara', fig('sagara', { handN: 'namaste', handF: 'none', aN: [0.115, 0.1], aF: [0.115, 0.1] })],
   ['guha', fig('guha')], ['boatman', fig('boatman')], ['mandodari', fig('mandodari')], ['vibhishana', fig('vibhishana', { handN: 'namaste', handF: 'none', aN: [0.115, 0.1], aF: [0.115, 0.1] })],
   ['matali', fig('matali')], ['indra', fig('indra')],
+  ['jambavan', fig('jambavan', { smile: 0, handN: 'namaste', handF: 'none', aN: [0.115, 0.1], aF: [0.115, 0.1] })],
   ['rahu', (c, t) => drawRahu(c, 540, 1050, 430, t, 1)], ['airavata', (c, t) => drawAiravata(c, 470, 1500, 300, t, -1)],
 ];
 const SHOTS = {}; CAST.forEach(([k, draw], i) => { SHOTS[i + 1] = (ctx, u, p, sh, t) => { backdrop(ctx, t); draw(ctx, 1.0); }; });

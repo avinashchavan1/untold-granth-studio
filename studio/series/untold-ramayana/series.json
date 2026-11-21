@@ -1,154 +1,161 @@
 {
-  "id": "untold-ramayana",
-  "logo": "UNTOLD GRANTH",
-  "title": [
-    "UNTOLD",
-    "GRANTH"
+ "id": "untold-ramayana",
+ "logo": "UNTOLD GRANTH",
+ "title": [
+  "UNTOLD",
+  "GRANTH"
+ ],
+ "tagline": "Stories from Valmiki you were never told.",
+ "cta_hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+ "source": {
+  "book": "Valmiki Ramayana",
+  "edition": "Critical Edition (Baroda); English: Bibek Debroy",
+  "cite_format": "Kanda.Sarga.Verse, e.g. 3.43.22",
+  "check_against": [
+   "enjoylearningsanskrit.com (CE Sanskrit + translation)",
+   "wisdomlib.org Shastri translation (vulgate numbering = CE + ~2 in Aranya)"
+  ]
+ },
+ "language": {
+  "narration": "Hindi (Devanagari) — the only Hindi; everything written is English",
+  "screen_text": "English",
+  "thumbnails": "English",
+  "captions_titles": "English"
+ },
+ "palette": {
+  "gold": "#f6c244",
+  "ivory": "#fbf3df",
+  "red": "#c81e1e",
+  "ink": "#07061a"
+ },
+ "fonts": {
+  "title": "Cinzel",
+  "body": "Montserrat"
+ },
+ "loudness_lufs": -14,
+ "mix": {
+  "music_under_speech_db_below_voice": 18,
+  "music_gain": 0.2,
+  "duck_depth": 0.86
+ },
+ "major_characters": {
+  "rule": "User picks the voice (audition with options) ONLY for major, recurring characters. Minor / one-episode characters: Claude auditions 3-5 openly-licensed candidates, picks the best by fit + pronunciation, locks it, and notes it in cast.json.",
+  "locked": [
+   "hanuman",
+   "lakshmana",
+   "narrator",
+   "rama",
+   "sita",
+   "jambavan"
   ],
-  "tagline": "Stories from Valmiki you were never told.",
-  "cta_hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
-  "source": {
-    "book": "Valmiki Ramayana",
-    "edition": "Critical Edition (Baroda); English: Bibek Debroy",
-    "cite_format": "Kanda.Sarga.Verse, e.g. 3.43.22",
-    "check_against": [
-      "enjoylearningsanskrit.com (CE Sanskrit + translation)",
-      "wisdomlib.org Shastri translation (vulgate numbering = CE + ~2 in Aranya)"
-    ]
-  },
-  "language": {
-    "narration": "Hindi (Devanagari) — the only Hindi; everything written is English",
-    "screen_text": "English",
-    "thumbnails": "English",
-    "captions_titles": "English"
-  },
-  "palette": {
-    "gold": "#f6c244",
-    "ivory": "#fbf3df",
-    "red": "#c81e1e",
-    "ink": "#07061a"
-  },
-  "fonts": {
-    "title": "Cinzel",
-    "body": "Montserrat"
-  },
-  "loudness_lufs": -14,
-  "mix": {
-    "music_under_speech_db_below_voice": 18,
-    "music_gain": 0.2,
-    "duck_depth": 0.86
-  },
-  "major_characters": {
-    "rule": "User picks the voice (audition with options) ONLY for major, recurring characters. Minor / one-episode characters: Claude auditions 3-5 openly-licensed candidates, picks the best by fit + pronunciation, locks it, and notes it in cast.json.",
-    "locked": [
-      "hanuman",
-      "lakshmana",
-      "narrator",
-      "rama",
-      "sita"
-    ],
-    "ask_user_when_first_needed": [
-      "ravana",
-      "bharata",
-      "dasharatha",
-      "kaikeyi",
-      "kaushalya",
-      "sugriva",
-      "vali",
-      "vibhishana",
-      "kumbhakarna",
-      "mandodari",
-      "indrajit",
-      "vishvamitra",
-      "jambavan",
-      "tara",
-      "angada",
-      "shurpanakha"
-    ],
-    "minor_examples": [
-      "shabari",
-      "maricha",
-      "jatayu",
-      "kabandha",
-      "guha",
-      "ahalya",
-      "gautama",
-      "sampati",
-      "trijata",
-      "jabali",
-      "rishis, guards, messengers"
-    ]
-  },
-  "series_name": "UNTOLD RAMAYANA",
-  "channel": {
-    "name": "Untold Granth",
-    "instagram": "@untoldgranth.official",
-    "youtube": "@untoldgranth"
-  },
-  "handles_line": [
+  "ask_user_when_first_needed": [
+   "ravana",
+   "bharata",
+   "dasharatha",
+   "kaikeyi",
+   "kaushalya",
+   "sugriva",
+   "vali",
+   "vibhishana",
+   "kumbhakarna",
+   "mandodari",
+   "indrajit",
+   "vishvamitra",
+   "tara",
+   "angada",
+   "shurpanakha"
+  ],
+  "minor_examples": [
+   "shabari",
+   "maricha",
+   "jatayu",
+   "kabandha",
+   "guha",
+   "ahalya",
+   "gautama",
+   "sampati",
+   "trijata",
+   "jabali",
+   "rishis, guards, messengers"
+  ]
+ },
+ "series_name": "UNTOLD RAMAYANA",
+ "channel": {
+  "name": "Untold Granth",
+  "instagram": "@untoldgranth.official",
+  "youtube": "@untoldgranth"
+ },
+ "handles_line": [
+  "INSTAGRAM  @untoldgranth.official",
+  "YOUTUBE  @untoldgranth"
+ ],
+ "cta": {
+  "_note": "Per-platform call to action: end-card button + the narrator's closing line. Instagram/Facebook = follow, YouTube = subscribe. The CTA shot is marked \"cta\": true in script.json; its YouTube line is generated as extra takes s<ID>y_*.",
+  "instagram": {
+   "button": "FOLLOW",
+   "say": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "handles_line": [
     "INSTAGRAM  @untoldgranth.official",
     "YOUTUBE  @untoldgranth"
-  ],
-  "cta": {
-    "_note": "Per-platform call to action: end-card button + the narrator's closing line. Instagram/Facebook = follow, YouTube = subscribe. The CTA shot is marked \"cta\": true in script.json; its YouTube line is generated as extra takes s<ID>y_*.",
-    "instagram": {
-      "button": "FOLLOW",
-      "say": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
-      "handles_line": [
-        "INSTAGRAM  @untoldgranth.official",
-        "YOUTUBE  @untoldgranth"
-      ]
-    },
-    "youtube": {
-      "button": "SUBSCRIBE",
-      "say": "ऐसी और अनसुनी कहानियों के लिए, सब्सक्राइब करें।",
-      "handles_line": [
-        "YOUTUBE  @untoldgranth",
-        "INSTAGRAM  @untoldgranth.official"
-      ]
-    }
+   ]
   },
-  "address": {
-    "rule": "Characters never call Rama by his bare name unless they are his elders, gurus, sages or adversaries. Narration may say 'राम'.",
-    "plain_name_ok": [
-      "narrator",
-      "dasharatha",
-      "kaushalya",
-      "kaikeyi",
-      "sumitra",
-      "vishvamitra",
-      "vasishtha",
-      "gautama",
-      "bharadvaja",
-      "agastya",
-      "ravana",
-      "maricha",
-      "mandodari",
-      "shurpanakha",
-      "vali",
-      "sagara",
-      "parashurama"
-    ],
-    "forms": {
-      "hanuman": "प्रभु / प्रभु श्रीराम; Sita = माता सीता",
-      "lakshmana": "भैया / आर्य / भ्राता श्रीराम",
-      "bharata": "भैया / आर्य",
-      "shatrughna": "भैया / आर्य",
-      "sita": "आर्यपुत्र / स्वामी",
-      "sugriva": "प्रभु / रघुनंदन",
-      "vibhishana": "प्रभु / श्रीराम",
-      "guha": "रघुनंदन / प्रभु",
-      "shabari": "प्रभु / रघुनंदन",
-      "default": "रघुनंदन / प्रभु / श्रीराम"
-    }
-  },
-  "character_looks": {
-    "hanuman_child": {
-      "approved_by": "user",
-      "reel": "A89",
-      "rig": "drawBalHanuman(..., { style: 'g' }) in art/chars.js",
-      "look": "a little human boy: human face (eyebrows, nose, lips, no muzzle), black hair with a gold-banded top-knot, red tilak, golden-brown skin, gold necklace and bangles, red dhoti with gold border; vanara signs only: small rounded monkey ears and the tail",
-      "rule": "Show the user any new or changed look for a major character as stills BEFORE rendering."
-    }
+  "youtube": {
+   "button": "SUBSCRIBE",
+   "say": "ऐसी और अनसुनी कहानियों के लिए, सब्सक्राइब करें।",
+   "handles_line": [
+    "YOUTUBE  @untoldgranth",
+    "INSTAGRAM  @untoldgranth.official"
+   ]
   }
+ },
+ "address": {
+  "rule": "Characters never call Rama by his bare name unless they are his elders, gurus, sages or adversaries. Narration may say 'राम'.",
+  "plain_name_ok": [
+   "narrator",
+   "dasharatha",
+   "kaushalya",
+   "kaikeyi",
+   "sumitra",
+   "vishvamitra",
+   "vasishtha",
+   "gautama",
+   "bharadvaja",
+   "agastya",
+   "ravana",
+   "maricha",
+   "mandodari",
+   "shurpanakha",
+   "vali",
+   "sagara",
+   "parashurama"
+  ],
+  "forms": {
+   "hanuman": "प्रभु / प्रभु श्रीराम; Sita = माता सीता",
+   "lakshmana": "भैया / आर्य / भ्राता श्रीराम",
+   "bharata": "भैया / आर्य",
+   "shatrughna": "भैया / आर्य",
+   "sita": "आर्यपुत्र / स्वामी",
+   "sugriva": "प्रभु / रघुनंदन",
+   "vibhishana": "प्रभु / श्रीराम",
+   "guha": "रघुनंदन / प्रभु",
+   "shabari": "प्रभु / रघुनंदन",
+   "default": "रघुनंदन / प्रभु / श्रीराम"
+  }
+ },
+ "character_looks": {
+  "hanuman_child": {
+   "approved_by": "user",
+   "reel": "A89",
+   "rig": "drawBalHanuman(..., { style: 'g' }) in art/chars.js",
+   "look": "a little human boy: human face (eyebrows, nose, lips, no muzzle), black hair with a gold-banded top-knot, red tilak, golden-brown skin, gold necklace and bangles, red dhoti with gold border; vanara signs only: small rounded monkey ears and the tail",
+   "rule": "Show the user any new or changed look for a major character as stills BEFORE rendering."
+  },
+  "jambavan": {
+   "approved_by": "claude (owner asked Claude to choose, Nov 21 2026: 'it should not look like an insult')",
+   "reel": "A23",
+   "rig": "CH.jambavan (drawFigure, bear head in art/chars.js)",
+   "look": "aged king of the bears, son of Prajapati (CE 6.61.14): silvered grey fur, small round ears, long pale snout, heavy white brows, flowing white beard, gold head band with a red jewel, deep red dhoti, serious calm face; no tail",
+   "rule": "Keep him dignified: never cute or comic. Show the owner any change as stills first."
+  }
+ }
 }

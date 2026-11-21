@@ -1,0 +1,647 @@
+{
+ "reel": "A23",
+ "title": "Hanuman Brought the Mountain Twice",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 — CE Yuddha 6.61, 6.88-89 read; Hanuman Chalisa 11 and Ramcharitmanas Lanka (doha 54-57) read; review before posting",
+ "source": "Valmiki Ramayana, Yuddha Kanda 6(61, 88-89) (Critical Edition; vulgate 6.74, 6.101-102)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "YUDDHA KANDA  ·  CHAPTERS 61, 88–89",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "Indrajit's Brahmastra struck down Rama and Lakshmana",
+   "ref": "6.61.1-4",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Sixty-seven crore monkeys were struck down",
+   "ref": "6.61.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "At night Hanuman and Vibhishana searched the field with torches",
+   "ref": "6.61.7",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Jambavan, aged and covered with arrows, could not see and knew Vibhishana by his voice",
+   "ref": "6.61.14-17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Jambavan asked whether Hanuman still lived",
+   "ref": "6.61.18",
+   "quote_sa": "अञ्जना सुप्रजा येन मातरिश्वा च नैरृत । हनूमान् वानरश्रेष्ठः प्राणान्धारयते क्व चित् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Vibhishana asked why he asked of Hanuman and not the princes",
+   "ref": "6.61.19-20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "While Hanuman lives the beaten army is unbeaten; if he dies we are dead though alive",
+   "ref": "6.61.22",
+   "quote_sa": "तस्मिञ्जीवति वीरे तु हतमप्यहतं बलम् । हनूमत्युज्झितप्राणे जीवन्तो ऽपि वयं हताः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Hanuman clasped Jambavan's feet",
+   "ref": "6.61.24",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Jambavan sent him to the Himalaya, to the herb mountain between Rishabha and Kailasa, with four herbs",
+   "ref": "6.61.29-34",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The herbs, knowing a seeker was coming, hid",
+   "ref": "6.61.58",
+   "quote_sa": "महौषध्यस्तु ताः सर्वास्तस्मिन्पर्वतसत्तमे । विज्ञायार्थिनमायान्तं ततो जग्मुरदर्शनम् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Hanuman reproached the mountain for showing no compassion to Raghava and threatened it with the might of his arms",
+   "ref": "6.61.59-60",
+   "quote_sa": "किमेतदेवं सुविनिश्चितं ते यद् राघवे नासि कृतानुकम्पः ।",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "He uprooted the whole peak",
+   "ref": "6.61.61",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "On the sun's path he shone like a rival sun",
+   "ref": "6.61.63",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The herbs' fragrance alone freed both princes of their arrows; the monkey heroes rose",
+   "ref": "6.61.67",
+   "quote_sa": "तावप्युभौ मानुषराजपुत्रौ तं गन्धमाघ्राय महौषधीनाम् । बभूवतुस्तत्र तदा विशल्याव् उत्तस्थुरन्ये च हरिप्रवीराः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "He carried the herb mountain back to the Himalaya and rejoined Rama",
+   "ref": "6.61.68",
+   "quote_sa": "ततो हरिर्गन्धवहात्मजस्तु तमोषधीशैलमुदग्रवीर्यः । निनाय वेगाद्धिमवन्तमेव पुनश्च रामेण समाजगाम ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Ravana (not Indrajit) hurled the Maya-made shakti, which struck Lakshmana's chest",
+   "ref": "6.88.30-35",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Sushena saw Lakshmana was alive",
+   "ref": "6.89.9-11",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Sushena sent Hanuman to the herb mountain described before by Jambavan",
+   "ref": "6.89.13-16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Hanuman did not know the herbs and brought the whole peak",
+   "ref": "6.89.17-21",
+   "quote_sa": "ओषधीर्नावगछामि ता अहं हरिपुंगव । तदिदं शिखरं कृत्स्नं गिरेस्तस्याहृतं मया ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Sushena crushed the herb and gave it through the nose; Lakshmana rose free of pain",
+   "ref": "6.89.22-24",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Hanuman Chalisa chaupai 11: 'लाय सजीवन लखन जियाये। श्री रघुवीर हरषि उर लाये॥'",
+   "ref": "Hanuman Chalisa 11",
+   "verified": true,
+   "sources": [
+    "ramcharit.in"
+   ]
+  },
+  {
+   "claim": "Ramcharitmanas: Meghnad hurls the shakti at Lakshmana; Hanuman cannot tell the herb and uproots the mountain",
+   "ref": "Ramcharitmanas, Lanka Kand (doha 54-57)",
+   "verified": true,
+   "sources": [
+    "ramcharit.in"
+   ]
+  }
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या हनुमान जी, संजीवनी का पर्वत, बस एक बार लाए थे?",
+   "en": "Did Hanuman bring the herb mountain only once?",
+   "units": [
+    "[curious] क्या हनुमान जी… संजीवनी का पर्वत, बस एक बार लाए थे?"
+   ],
+   "card": [
+    [
+     "ONE MOUNTAIN.",
+     null
+    ],
+    [
+     "OR TWO?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 2.8
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग इकसठ। ततो हरिर्गन्धवहात्मजस्तु तमोषधीशैलमुदग्रवीर्यः । निनाय वेगाद्धिमवन्तमेव पुनश्च रामेण समाजगाम ॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, युद्ध कांड, सर्ग इकसठ।",
+    "[with deep devotion] [chanting] ततो हरिर्गन्धवहात्मजस्तु तमोषधीशैलमुदग्रवीर्यः… निनाय वेगाद्धिमवन्तमेव पुनश्च रामेण समाजगाम॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "ततो हरिर्गन्धवहात्मजस्तु तमोषधीशैलमुदग्रवीर्यः ।",
+     "निनाय वेगाद्धिमवन्तमेव पुनश्च रामेण समाजगाम ॥"
+    ],
+    "ref": "YUDDHA KANDA 6.61.68",
+    "en": "“Then the mighty son of the wind swiftly carried that herb mountain back to the Himalaya, and rejoined Rama.”",
+    "translit": "tato harirgandhavahātmajastu tamoṣadhīśailamudagravīryaḥ, nināya vegāddhimavantameva punaśca rāmeṇa samājagāma"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   }
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "हनुमान चालीसा में, हम सब गाते हैं: लाय सजीवन लखन जियाये, श्री रघुवीर हरषि उर लाये। यानी, संजीवनी लाकर लक्ष्मण को जीवित किया, और श्री रघुवीर ने उन्हें हृदय से लगाया।",
+   "en": "",
+   "units": [
+    "[warmly] हनुमान चालीसा में, हम सब गाते हैं:",
+    "[softly] लाय सजीवन लखन जियाये… श्री रघुवीर हरषि उर लाये।",
+    "यानी, संजीवनी लाकर लक्ष्मण को जीवित किया, और श्री रघुवीर ने उन्हें हृदय से लगाया।"
+   ],
+   "unit_gap": 0.45,
+   "cite": "Hanuman Chalisa, chaupai 11",
+   "tail": 0.4,
+   "quote": {
+    "source": "HANUMAN CHALISA · CHAUPAI 11",
+    "lines": [
+     "लाय सजीवन लखन जियाये।",
+     "श्री रघुवीर हरषि उर लाये॥"
+    ],
+    "translit": "Lāya sajīvana lakhana jiyāye, śrī raghuvīra haraṣi ura lāye",
+    "en": "“You brought the Sanjeevani and revived Lakshmana; Shri Raghuvir, overjoyed, held you to his heart.”"
+   },
+   "lead": 0.25
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "पर वाल्मीकि में, पर्वत आता है दो बार। और पहली बार, लक्ष्मण अकेले नहीं गिरे थे।",
+   "en": "But in Valmiki, the mountain comes twice. And the first time, Lakshmana wasn't the only one who fell.",
+   "units": [
+    "[serious] पर वाल्मीकि में, पर्वत आता है दो बार।",
+    "[curious] और पहली बार, लक्ष्मण अकेले नहीं गिरे थे।"
+   ],
+   "cite": "6.61; 6.89",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "इंद्रजीत के ब्रह्मास्त्र से, राम और लक्ष्मण दोनों गिरे। और साथ में, सड़सठ करोड़ वानर।",
+   "en": "Indrajit's Brahmastra felled both Rama and Lakshmana. And sixty-seven crore vanaras with them.",
+   "units": [
+    "[serious] इंद्रजीत के ब्रह्मास्त्र से, राम और लक्ष्मण दोनों गिरे।",
+    "और साथ में, सड़सठ करोड़ वानर।"
+   ],
+   "cite": "6.61.1-4, 12",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 6,
+   "voice": "narrator",
+   "hi": "रात में, मशाल लिए, हनुमान और विभीषण खोजते हैं। बाणों से बिंधे बूढ़े जाम्बवान, जिन्हें कुछ दिखता नहीं।",
+   "en": "At night, with torches, Hanuman and Vibhishana search. Old Jambavan lies pierced by arrows, unable to see.",
+   "units": [
+    "[softly] रात में, मशाल लिए, हनुमान और विभीषण खोजते हैं।",
+    "बाणों से बिंधे बूढ़े जाम्बवान… जिन्हें कुछ दिखता नहीं।"
+   ],
+   "cite": "6.61.7, 13-17",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 7,
+   "voice": "jambavan",
+   "hi": "क्या वानरश्रेष्ठ हनुमान, कहीं जीवित है?",
+   "en": "\"Does Hanuman, the best of the vanaras, still live?\"",
+   "units": [
+    "क्या वानरश्रेष्ठ हनुमान… कहीं जीवित है?"
+   ],
+   "cite": "6.61.18",
+   "lead": 0.25,
+   "tail": 0.3,
+   "min": 3.0
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "विभीषण चकित हैं। राजकुमारों से पहले, हनुमान क्यों?",
+   "en": "Vibhishana is puzzled. Why Hanuman, before the princes?",
+   "units": [
+    "[curious] विभीषण चकित हैं। राजकुमारों से पहले, हनुमान क्यों?"
+   ],
+   "cite": "6.61.19-20",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 9,
+   "voice": "jambavan",
+   "hi": "जब तक वो वीर जीवित है, हारी हुई सेना भी हारी नहीं। पर हनुमान न रहे, तो हम जीवित होकर भी मरे हुए हैं।",
+   "en": "\"While that hero lives, even a beaten army is unbeaten. If Hanuman is gone, we are dead, though alive.\"",
+   "units": [
+    "जब तक वो वीर जीवित है… हारी हुई सेना भी, हारी नहीं।",
+    "पर हनुमान न रहे… तो हम जीवित होकर भी, मरे हुए हैं।"
+   ],
+   "cite": "6.61.21-22",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.4
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "हनुमान उनके चरण छूते हैं। और जाम्बवान भेजते हैं हिमालय, ऋषभ और कैलाश के बीच, औषधियों का पर्वत।",
+   "en": "Hanuman touches his feet. Jambavan sends him to the Himalaya: the herb mountain, between Rishabha and Kailasa.",
+   "units": [
+    "[warmly] हनुमान उनके चरण छूते हैं।",
+    "और जाम्बवान भेजते हैं हिमालय… ऋषभ और कैलाश के बीच, औषधियों का पर्वत।"
+   ],
+   "cite": "6.61.24, 29-31",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "चार औषधियाँ: मृतसंजीवनी, विशल्यकरणी, सौवर्णकरणी, और संधानी।",
+   "en": "",
+   "units": [
+    "[thoughtfully] चार औषधियाँ:",
+    "मृतसंजीवनी, विशल्यकरणी, सौवर्णकरणी, और संधानी।"
+   ],
+   "unit_gap": 0.3,
+   "card": [
+    [
+     "FOUR HERBS",
+     null
+    ],
+    [
+     "Mṛtasañjīvanī · Viśalyakaraṇī",
+     "#f6c244"
+    ],
+    [
+     "Sauvarṇakaraṇī · Saṃdhānī",
+     "#f6c244"
+    ]
+   ],
+   "cite": "6.61.32-34",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 12,
+   "voice": "narrator",
+   "hi": "पर वहाँ, औषधियाँ, किसी को आता जानकर, छिप गईं।",
+   "en": "But there, the herbs sensed a seeker coming, and hid.",
+   "units": [
+    "[curious] पर वहाँ, औषधियाँ… किसी को आता जानकर, छिप गईं।"
+   ],
+   "cite": "6.61.55-58",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 13,
+   "voice": "hanuman",
+   "hi": "क्या तुमने यही तय किया है, कि प्रभु श्रीराम पर तुम्हें दया नहीं? तो अब देखो, मेरी भुजाओं का बल।",
+   "en": "\"Is this your decision, then, to show no compassion to Lord Rama? Then see the strength of my arms.\"",
+   "units": [
+    "क्या तुमने यही तय किया है… कि प्रभु श्रीराम पर, तुम्हें दया नहीं?",
+    "तो अब देखो… मेरी भुजाओं का बल।"
+   ],
+   "cite": "6.61.59-60",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.4
+  },
+  {
+   "id": 14,
+   "voice": "narrator",
+   "hi": "और पूरा शिखर उखाड़ लिया। सूर्य के मार्ग पर, जैसे सूर्य के पास, दूसरा सूर्य।",
+   "en": "He tore off the whole peak. On the sun's path, like a second sun beside the sun.",
+   "units": [
+    "[serious] और पूरा शिखर उखाड़ लिया।",
+    "सूर्य के मार्ग पर… जैसे सूर्य के पास, दूसरा सूर्य।"
+   ],
+   "cite": "6.61.61-63",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 15,
+   "voice": "narrator",
+   "hi": "वाल्मीकि कहते हैं: तावप्युभौ मानुषराजपुत्रौ, तं गन्धमाघ्राय महौषधीनाम्। यानी, सुगंध भर से, दोनों राजकुमार बाणों से मुक्त हो गए, और वानर वीर उठ खड़े हुए।",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि कहते हैं:",
+    "[softly] तावप्युभौ मानुषराजपुत्रौ… तं गन्धमाघ्राय महौषधीनाम्।",
+    "यानी, सुगंध भर से, दोनों राजकुमार बाणों से मुक्त हो गए… और वानर वीर उठ खड़े हुए।"
+   ],
+   "unit_gap": 0.42,
+   "cite": "6.61.67",
+   "tail": 0.4,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "YUDDHA KANDA 6.61.67 · CRITICAL EDITION",
+    "lines": [
+     "तावप्युभौ मानुषराजपुत्रौ तं गन्धमाघ्राय महौषधीनाम् ।",
+     "बभूवतुस्तत्र तदा विशल्याव् उत्तस्थुरन्ये च हरिप्रवीराः ॥"
+    ],
+    "translit": "tāvapyubhau mānuṣarājaputrau taṃ gandhamāghrāya mahauṣadhīnām, babhūvatustatra tadā viśalyāv uttasthuranye ca haripravīrāḥ",
+    "en": "“Just by smelling the fragrance of the great herbs, both princes were freed of their arrows; and the other vanara heroes rose.”"
+   },
+   "lead": 0.25
+  },
+  {
+   "id": 16,
+   "voice": "narrator",
+   "hi": "फिर हनुमान, पर्वत को वापस हिमालय पर छोड़ आए, और राम के पास लौट आए।",
+   "en": "",
+   "units": [
+    "[warmly] फिर हनुमान, पर्वत को वापस हिमालय पर छोड़ आए… और राम के पास लौट आए।"
+   ],
+   "card": [
+    [
+     "HE TOOK IT",
+     null
+    ],
+    [
+     "BACK.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "6.61.68",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 17,
+   "voice": "narrator",
+   "hi": "दूसरी बार, बहुत बाद में। मय की बनाई शक्ति, लक्ष्मण की छाती में लगती है, और उसे चलाया था, मेघनाद ने नहीं, स्वयं रावण ने।",
+   "en": "The second time, much later. A spear made by Maya strikes Lakshmana's chest. And it was thrown not by Meghnad, but by Ravana himself.",
+   "units": [
+    "[serious] दूसरी बार, बहुत बाद में।",
+    "मय की बनाई शक्ति, लक्ष्मण की छाती में लगती है… और उसे चलाया था, मेघनाद ने नहीं, स्वयं रावण ने।"
+   ],
+   "cite": "6.88.30-35",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 18,
+   "voice": "narrator",
+   "hi": "वानर वीर सुषेण देखते हैं, लक्ष्मण जीवित हैं। वो हनुमान को फिर भेजते हैं, उसी पर्वत पर।",
+   "en": "The vanara Sushena sees Lakshmana is alive. He sends Hanuman again, to the same mountain.",
+   "units": [
+    "[thoughtfully] वानर वीर सुषेण देखते हैं, लक्ष्मण जीवित हैं।",
+    "वो हनुमान को फिर भेजते हैं, उसी पर्वत पर।"
+   ],
+   "cite": "6.89.9-16",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 19,
+   "voice": "hanuman",
+   "hi": "मैं उन औषधियों को पहचानता नहीं। इसलिए, पूरा शिखर ही ले आया हूँ।",
+   "en": "\"I don't know those herbs. So I have brought the whole peak.\"",
+   "units": [
+    "मैं उन औषधियों को, पहचानता नहीं।",
+    "इसलिए… पूरा शिखर ही ले आया हूँ।"
+   ],
+   "cite": "6.89.17-21",
+   "lead": 0.25,
+   "tail": 0.3,
+   "unit_gap": 0.4
+  },
+  {
+   "id": 20,
+   "voice": "narrator",
+   "hi": "यहाँ, तुलसीदास जी का रामचरितमानस भी यही कहता है: देखा सैल न औषध चीन्हा, सहसा कपि उपारि गिरि लीन्हा। यानी, औषधि पहचानी नहीं, तो पूरा पर्वत ही उखाड़ लिया।",
+   "en": "",
+   "units": [
+    "[warmly] यहाँ, तुलसीदास जी का रामचरितमानस भी यही कहता है:",
+    "[softly] देखा सैल न औषध चीन्हा… सहसा कपि उपारि गिरि लीन्हा।",
+    "यानी, औषधि पहचानी नहीं, तो पूरा पर्वत ही उखाड़ लिया।"
+   ],
+   "unit_gap": 0.45,
+   "cite": "Ramcharitmanas, Lanka Kand (after doha 56)",
+   "tail": 0.4,
+   "quote": {
+    "source": "RAMCHARITMANAS",
+    "ref": "LANKA KAND · AFTER DOHA 56 · GOSWAMI TULSIDAS",
+    "lines": [
+     "देखा सैल न औषध चीन्हा।",
+     "सहसा कपि उपारि गिरि लीन्हा॥"
+    ],
+    "translit": "Dekhā saila na auṣadha cīnhā, sahasā kapi upāri giri līnhā",
+    "en": "“He saw the mountain but could not tell the herb; at once the monkey uprooted the whole mountain.”"
+   },
+   "lead": 0.25
+  },
+  {
+   "id": 21,
+   "voice": "narrator",
+   "hi": "सुषेण औषधि पीसकर सुँघाते हैं, और लक्ष्मण, पीड़ा से मुक्त, उठ खड़े होते हैं।",
+   "en": "Sushena crushes the herb and gives it to Lakshmana through the nose. Lakshmana rises, free of pain.",
+   "units": [
+    "[softly] सुषेण औषधि पीसकर सुँघाते हैं… और लक्ष्मण, पीड़ा से मुक्त, उठ खड़े होते हैं।"
+   ],
+   "cite": "6.89.22-24",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 22,
+   "voice": "narrator",
+   "hi": "एक बार नहीं, दो बार। पहली बार, दोनों भाइयों और सेना के लिए। दूसरी बार, लक्ष्मण के लिए। दोनों कथाएँ, भक्ति से भरी हैं।",
+   "en": "",
+   "units": [
+    "[serious] एक बार नहीं… दो बार।",
+    "पहली बार, दोनों भाइयों और सेना के लिए। दूसरी बार, लक्ष्मण के लिए।",
+    "[warmly] दोनों कथाएँ, भक्ति से भरी हैं।"
+   ],
+   "card": [
+    [
+     "TWICE.",
+     "#f6c244"
+    ],
+    [
+     "FOR BOTH BROTHERS.",
+     null
+    ],
+    [
+     "THEN FOR LAKSHMANA.",
+     null
+    ]
+   ],
+   "cite": "6.61.67; 6.89.24",
+   "tail": 0.35,
+   "lead": 0.25,
+   "unit_gap": 0.35
+  },
+  {
+   "id": 23,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "thumbnail": {
+  "frame": "",
+  "hook": "Hanuman lifted the mountain only once?",
+  "stamp": "Twice, in Valmiki",
+  "line": "And he took the first one back.",
+  "badge": "Valmiki Ramayana · Yuddha 6.61, 6.89",
+  "art_shift": 0
+ },
+ "score": {
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "duration_s": 110,
+  "gain": 1.4,
+  "prompt": "Devotional-heroic Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with a soft tanpura drone and a low bansuri phrase over a night battlefield hush; slow frame drums enter as a search by torchlight; around one third through, a rising heroic build with dhol, low brass and strings as the hero leaps into the sky, and one huge bright impact hit with choir pads as a mountain is lifted toward the sun; then it settles into a warm, quiet passage; a second, smaller build in the last third; it ends in a calm, glowing, devotional resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production."
+ },
+ "avoid": [
+  "any disrespect to the Hanuman Chalisa or Goswami Tulsidas: both are told with devotion; we only add what Valmiki tells",
+  "saying the Chalisa or Manas is 'wrong': the Chalisa line is about the Lakshmana trip, which Valmiki also has",
+  "claiming Hanuman returned the mountain after the SECOND trip (CE 6.89 does not say so)",
+  "naming the herb that cured Lakshmana in trip 2 (6.89.23 says only 'that herb')",
+  "calling Sushena a 'vaidya' from Lanka (that is Manas; in Valmiki he is a vanara chief)",
+  "gore: the 67-crore fallen army shown as still silhouettes, no blood"
+ ],
+ "verify_note": "CE 6.61.1-4,12: Indrajit's Brahmastra fells Rama, Lakshmana and 67 crore monkeys. 6.61.7,13-17: Hanuman and Vibhishana search with torches at night; old Jambavan, covered in arrows, can't see, knows Vibhishana by voice. 6.61.18: asks if Hanuman lives. 6.61.19-20: Vibhishana asks why Hanuman before the princes. 6.61.21-22: 'while he lives the beaten army is unbeaten; if he dies we are dead though alive'. 6.61.24: Hanuman clasps his feet. 6.61.29-34: Himalaya, between Rishabha and Kailasa, four herbs. 6.61.58: the herbs hide. 6.61.59-61: angry speech to the mountain, uproots the peak. 6.61.63: like a rival sun on the sun's path. 6.61.67: the fragrance frees both princes of arrows; monkey heroes rise. 6.61.68: he carries the mountain back to the Himalaya and rejoins Rama. 6.88.30-35: Ravana hurls the Maya-made shakti; it strikes Lakshmana's chest. 6.89.9-16: Sushena: not dead; sends Hanuman to the mountain 'described before by Jambavan'. 6.89.17-21: he doesn't know the herbs, brings the peak. 6.89.22-24: Sushena crushes the herb, gives it through the nose; Lakshmana rises. Hanuman Chalisa ch. 11 (ramcharit.in). Ramcharitmanas Lanka Kand: Meghnad's shakti (before doha 54), 'देखा सैल न औषध चीन्हा। सहसा कपि उपारि गिरि लीन्हा॥' (after doha 56).",
+ "caption": "We all sing it in the Hanuman Chalisa: \"Laaye Sajeevan Lakhan jiyaaye.\" Hanuman brought the herb mountain and saved Lakshmana. But in Valmiki's Ramayana he brings it twice. The first time, Indrajit's Brahmastra had felled BOTH Rama and Lakshmana and much of the army. Wounded old Jambavan, unable to see, first asks: \"Is Hanuman alive?\" On the Himalaya the herbs hide from him, so he lifts the whole peak; their fragrance alone heals everyone, and then he carries the mountain back. The second time, Ravana's spear strikes Lakshmana; Sushena sends Hanuman again, and once more he brings the whole peak. Both the Chalisa and the Ramcharitmanas are told with devotion. Valmiki simply tells us more.",
+ "youtube_title": "Hanuman Brought the Sanjeevani Mountain TWICE | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Did you know Hanuman made two trips to the herb mountain? 👇 Jai Bajrang Bali!",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Hanuman",
+  "#Sanjeevani",
+  "#Ramayana",
+  "#Valmiki",
+  "#HanumanChalisa",
+  "#UntoldRamayana",
+  "#JaiHanuman"
+ ]
+}
