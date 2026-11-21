@@ -20,7 +20,7 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   (e.g. Hanuman Chalisa chaupai 18 "जुग सहस्र जोजन पर भानू। लील्यो ताहि मधुर फल जानू॥") AND the key Valmiki verse it is compared with,
   each as a quote card: source + verse number, Devanagari (font Mukta), transliteration, English translation; the narrator reads it.
   Devanagari quotes are the one exception to "English on screen". Reference: A89 shot 11.
-- **Open with the śloka (owner's format, Nov 2026).** Shot 2: the narrator FIRST names the source ("वाल्मीकि रामायण, <kanda>, सर्ग <n>।",
+- **Open with the śloka (owner's format, APPROVED Nov 21 2026 on A07/A89; use it on every new and unposted reel).** Shot 2: the narrator FIRST names the source ("वाल्मीकि रामायण, <kanda>, सर्ग <n>।",
   source card), THEN recites one Sanskrit verse from that sarga very expressively (verse card: "Valmiki Ramayana · <Kanda> k.s.v",
   Devanagari in Mukta, English translation), then "ये है असली कहानी।". Pick the verse the payoff rests on (or the most striking one;
   one śloka, about 7–11 s). Copy the Devanagari from the CE page, never from memory. Only this line (`sloka_unit`) may use the
