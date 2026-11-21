@@ -20,7 +20,7 @@
   python3 make_reel.py all      <reel dir>      narration import -> pick -> audio + render
 
 Engine paths: engine/js (renderer), engine/py (voice/audio), engine/models/cbenv (Chatterbox venv)."""
-import json, os, re, shutil, subprocess, sys
+import json, os, re, shutil, subprocess, sys, time
 HERE = os.path.dirname(os.path.abspath(__file__)); PY = os.path.join(HERE, "engine", "py"); JS = os.path.join(HERE, "engine", "js")
 CBPY = os.path.join(HERE, "engine", "models", "cbenv", "bin", "python")
 
@@ -152,22 +152,39 @@ def _playable(f):   # a video only counts as finished if ffprobe can read its du
 def _done(f, stamp): return os.path.exists(f) and os.path.exists(f + ".done") and open(f + ".done").read().strip() == stamp and _playable(f)
 def _mark(f, stamp): open(f + ".done", "w").write(stamp)
 
+CHUNK = 360   # frames per render chunk (15 s): a machine restart loses at most one chunk per worker; finished chunks are skipped on re-run
+def _chunks(nf): return [(a, min(nf, a + CHUNK)) for a in range(0, nf, CHUNK)]
+def _run_chunks(jobs, stamp, workers=3):
+    """jobs: [(out_file, start, end, env, log)] rendered by render.js `range`, `workers` at a time; each finished file is marked done."""
+    todo = [j for j in jobs if not _done(j[0], stamp)]; running = []
+    while todo or running:
+        while todo and len(running) < workers:
+            f, a, b, env, log = todo.pop(0)
+            running.append((subprocess.Popen(["node", os.path.join(JS, "render.js"), "range", str(a), str(b), f], env=env, stdout=open(log, "w"), stderr=subprocess.STDOUT), f))
+        time.sleep(2)
+        for pr, f in list(running):
+            if pr.poll() is None: continue
+            running.remove((pr, f))
+            if pr.returncode: [q.kill() for q, _ in running]; sys.exit(f"render chunk failed, see {f}.log")
+            _mark(f, stamp)
+
 def render(reel):
-    tl = json.load(open(os.path.join(reel, "src", "timeline.json"))); nf = round(tl["total"] * 24); cuts = [0, nf // 3, 2 * nf // 3, nf]
+    tl = json.load(open(os.path.join(reel, "src", "timeline.json"))); nf = round(tl["total"] * 24)
     out = os.path.join(os.path.abspath(reel), "out"); os.makedirs(out, exist_ok=True)
     env = dict(os.environ, REEL=os.path.abspath(reel))
-    stamp = _stamp(reel); todo = [i for i in range(3) if not _done(f"{out}/seg{i}.mp4", stamp)]   # resumable after a restart
-    ps = [subprocess.Popen(["node", os.path.join(JS, "render.js"), "range", str(cuts[i]), str(cuts[i + 1]), f"{out}/seg{i}.mp4"], env=env, stdout=open(f"{out}/r{i}.log", "w"), stderr=subprocess.STDOUT) for i in todo]
     if not os.path.exists(os.path.join(reel, "audio", "mix.wav")): audio(reel)
-    for p in ps:
-        if p.wait(): sys.exit("render segment failed, see out/r*.log")
-    for i in todo: _mark(f"{out}/seg{i}.mp4", stamp)
-    open(f"{out}/list.txt", "w").write("".join(f"file 'seg{i}.mp4'\n" for i in range(3)))
+    stamp = _stamp(reel); ch = _chunks(nf)
+    names = [f"{out}/seg{i:02d}.mp4" for i in range(len(ch))]
+    json.dump({"preview": [os.path.basename(n) for n in names], "frames": {os.path.basename(n): b - a for n, (a, b) in zip(names, ch)}}, open(f"{out}/plan.json", "w"))
+    _run_chunks([(n, a, b, env, f"{out}/r{i:02d}.log") for i, (n, (a, b)) in enumerate(zip(names, ch))], stamp)
+    open(f"{out}/list.txt", "w").write("".join(f"file '{os.path.basename(n)}'\n" for n in names))
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{out}/list.txt", "-c", "copy", f"{out}/video.mp4"], check=True)
     rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]; final = f"{out}/{rid}_final.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{out}/video.mp4", "-i", os.path.join(reel, "audio", "mix.wav"), "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-level:v", "4.1", "-crf", "22", "-maxrate", "3000k", "-bufsize", "6000k", "-pix_fmt", "yuv420p", "-g", "48",
                     "-af", "alimiter=limit=0.80:attack=3:release=60:level=disabled", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", "-shortest", final], check=True)
-    for i in range(3): os.remove(f"{out}/seg{i}.mp4"); os.path.exists(f"{out}/seg{i}.mp4.done") and os.remove(f"{out}/seg{i}.mp4.done")
+    for n in names:
+        for f in (n, n + ".done"):
+            if os.path.exists(f): os.remove(f)
     master(reel)
     if (json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8")).get("thumbnail") or {}).get("frame"): thumb(reel)
     else: print("⚠ no thumbnail.frame in script.json: run make_reel.py thumb <reel> <times> to pick one, then make_reel.py thumb <reel>")
@@ -206,19 +223,20 @@ def master(reel, short=False):
     out/<ID>_final.mp4 stays the small preview / WhatsApp copy."""
     out = os.path.join(os.path.abspath(reel), "out"); rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]
     tlname = "timeline_short.json" if short else "timeline.json"; sfx = "_short" if short else ""
-    tl = json.load(open(os.path.join(reel, "src", tlname))); nf = round(tl["total"] * 24); cuts = [0, nf // 3, 2 * nf // 3, nf]
+    tl = json.load(open(os.path.join(reel, "src", tlname))); nf = round(tl["total"] * 24)
     tmp = os.path.join(out, "lossless" + sfx); os.makedirs(tmp, exist_ok=True)
     env = lambda plat: dict(os.environ, REEL=os.path.abspath(reel), LOSSLESS="1", PLATFORM=plat, **({"TIMELINE": tlname} if short else {}))
-    # segments 0-1 are shared; the last third holds the end card, so it is rendered once per platform (FOLLOW / SUBSCRIBE)
-    jobs = [(0, "instagram", "seg0"), (1, "instagram", "seg1"), (2, "instagram", "seg2"), (2, "youtube", "seg2_youtube")]
-    stamp = _stamp(reel)                                                          # resumable: skip work finished for this same audio/timeline/art
-    jobs = [j for j in jobs if not _done(f"{tmp}/{j[2]}.mkv", stamp)]
-    ps = [subprocess.Popen(["node", os.path.join(JS, "render.js"), "range", str(cuts[i]), str(cuts[i + 1]), f"{tmp}/{name}.mkv"], env=env(plat), stdout=open(f"{tmp}/{name}.log", "w"), stderr=subprocess.STDOUT) for i, plat, name in jobs]
-    for p in ps:
-        if p.wait(): sys.exit("lossless render failed, see out/lossless/*.log")
-    for j in jobs: _mark(f"{tmp}/{j[2]}.mkv", stamp)
-    open(f"{tmp}/list.txt", "w").write("file 'seg0.mkv'\nfile 'seg1.mkv'\nfile 'seg2.mkv'\n")
-    open(f"{tmp}/list_youtube.txt", "w").write("file 'seg0.mkv'\nfile 'seg1.mkv'\nfile 'seg2_youtube.mkv'\n")
+    # every chunk once (Instagram's FOLLOW end card); the chunks holding the end card again for YouTube (SUBSCRIBE)
+    cta = next((s_ for s_ in tl["shots"] if s_.get("cta")), tl["shots"][-1]); cta_f = int(cta["start"] * 24)
+    ch = _chunks(nf); stamp = _stamp(reel)
+    ig_names = [f"{tmp}/k{i:02d}.mkv" for i in range(len(ch))]
+    yt_names = [f"{tmp}/k{i:02d}_youtube.mkv" if b_ > cta_f else ig_names[i] for i, (a_, b_) in enumerate(ch)]
+    jobs = [(n, a_, b_, env("instagram"), n[:-4] + ".log") for n, (a_, b_) in zip(ig_names, ch)]
+    jobs += [(n, a_, b_, env("youtube"), n[:-4] + ".log") for n, (a_, b_) in zip(yt_names, ch) if n.endswith("_youtube.mkv")]
+    json.dump({"lossless": [os.path.basename(j[0]) for j in jobs], "frames": {os.path.basename(j[0]): j[2] - j[1] for j in jobs}}, open(f"{tmp}/plan.json", "w"))
+    _run_chunks(jobs, stamp)
+    open(f"{tmp}/list.txt", "w").write("".join(f"file '{os.path.basename(n)}'\n" for n in ig_names))
+    open(f"{tmp}/list_youtube.txt", "w").write("".join(f"file '{os.path.basename(n)}'\n" for n in yt_names))
     yt_mix = os.path.join(reel, "audio", f"mix{sfx}_youtube.wav")
     if not os.path.exists(yt_mix): print(f"⚠ no audio/mix{sfx}_youtube.wav (no YouTube CTA takes): the YouTube master says 'follow' in the narration"); yt_mix = os.path.join(reel, "audio", f"mix{sfx}.wav")
     src = ["-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt", "-i", os.path.join(reel, "audio", f"mix{sfx}.wav"), "-map", "0:v", "-map", "1:a"]

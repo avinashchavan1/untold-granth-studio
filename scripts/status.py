@@ -78,30 +78,41 @@ def secs_of(studio, code):
 def fresh(f, mix):      # an output counts as done only if newer than the reel's current sound mix
     return os.path.exists(f) and (not os.path.exists(mix) or os.path.getmtime(f) > os.path.getmtime(mix))
 
+def plan_progress(folder, key, mix):
+    """(done frames, total frames, chunks done, chunks) for a chunked render pass described by <folder>/plan.json (written by make_reel)."""
+    pf = os.path.join(folder, "plan.json")
+    if not os.path.exists(pf) or (os.path.exists(mix) and os.path.getmtime(pf) < os.path.getmtime(mix)): return None
+    plan = json.load(open(pf)); names = plan.get(key, []); fr = plan.get("frames", {}); done = total = nd = 0
+    for n in names:
+        total += fr.get(n, 0)
+        if os.path.exists(os.path.join(folder, n + ".done")): done += fr.get(n, 0); nd += 1; continue
+        log = os.path.join(folder, (n[:-4] + ".log") if key == "lossless" else ("r" + n[3:-4] + ".log"))
+        if os.path.exists(log): done += frames([log])[0]
+    return done, total, nd, len(names)
+
 def phase_of(studio, code):
     """(phase key, done fraction 0..1, detail) for one reel, read from its out/ folder; ('done', 1, '') when both masters exist."""
-    R = reel_dir(studio, code); out = os.path.join(R, "out"); mix = os.path.join(R, "audio", "mix.wav")
+    R = reel_dir(studio, code); out = os.path.join(R, "out"); mix = os.path.join(R, "audio", "mix.wav"); ll = os.path.join(out, "lossless")
     yt, ig, final = (os.path.join(out, f"{code}_{k}.mp4") for k in ("YOUTUBE_MASTER", "INSTAGRAM_MASTER", "final"))
-    if fresh(yt, mix) and fresh(ig, mix) and os.path.exists(ig + ".done") and os.path.exists(yt + ".done") and not glob.glob(os.path.join(out, "lossless", "*.mkv")): return "done", 1.0, ""
-    newer = lambda f: not os.path.exists(mix) or os.path.getmtime(f) > os.path.getmtime(mix)
-    ml = [f for f in sorted(glob.glob(os.path.join(out, "lossless", "*.log"))) if newer(f)]   # ignore leftovers from a render of an older mix
-    if ml:
-        d, t = frames(ml); segs_done = all(os.path.exists(f[:-4] + ".mkv.done") for f in ml)
-        if not segs_done and t and d < t * 0.995: return "lossless", d / t, f"{d:,} of {t:,} lossless frames, {len(ml)} segments in parallel"
-        if not segs_done: return "lossless", 0.99, "finishing the last frames"
-        secs = secs_of(studio, code)
-        def since(marks):   # how far into an encode we are: time since the previous phase finished, against its usual length
-            ts = [os.path.getmtime(m) for m in marks if os.path.exists(m)]
-            return min(0.97, (time.time() - max(ts)) / 60 / max(0.5, COST_PH * secs)) if ts else 0.0
-        if not fresh(ig, mix) or not os.path.exists(ig + ".done"):
-            COST_PH = COST["instagram"]; return "instagram", since(glob.glob(os.path.join(out, "lossless", "*.mkv.done"))), "1080p, best quality (time left is estimated: no frame counter while compressing)"
-        COST_PH = COST["youtube"]; return "youtube", since([ig + ".done"]), "2160×3840, best quality (time left is estimated: no frame counter while compressing)"
+    if fresh(yt, mix) and fresh(ig, mix) and os.path.exists(ig + ".done") and os.path.exists(yt + ".done") and not os.path.isdir(ll): return "done", 1.0, ""
+    secs = secs_of(studio, code)
+    def since(marks):   # how far into an encode we are: time since the previous phase finished, against its usual length
+        ts = [os.path.getmtime(m) for m in marks if os.path.exists(m)]
+        return min(0.97, (time.time() - max(ts)) / 60 / max(0.5, COST_PH[0] * secs)) if ts else 0.0
+    COST_PH = [0.0]
+    lp = plan_progress(ll, "lossless", mix)
+    if lp:
+        d, t, nd, n = lp
+        if nd < n: return "lossless", (d / t if t else 0), f"{d:,} of {t:,} lossless frames · chunk {nd} of {n} done · 3 at a time"
+        if not (fresh(ig, mix) and os.path.exists(ig + ".done")):
+            COST_PH[0] = COST["instagram"]; return "instagram", since(glob.glob(os.path.join(ll, "*.mkv.done"))), "1080p, best quality (time left is estimated: no frame counter while compressing)"
+        COST_PH[0] = COST["youtube"]; return "youtube", since([ig + ".done"]), "2160×3840, best quality (time left is estimated: no frame counter while compressing)"
     if fresh(final, mix): return "lossless", 0.0, "starting the lossless renderer"
-    pl = sorted(glob.glob(os.path.join(out, "r[0-9].log")))
-    if pl and any(os.path.getmtime(f) > os.path.getmtime(mix) for f in pl if os.path.exists(mix)):
-        d, t = frames(pl)
-        if t and d < t - 5: return "preview", d / t, f"{d:,} of {t:,} frames, {len(pl)} segments in parallel"
-        return "preview_mux", 0.5, "compressing the preview"
+    pp = plan_progress(out, "preview", mix)
+    if pp:
+        d, t, nd, n = pp
+        if nd < n: return "preview", (d / t if t else 0), f"{d:,} of {t:,} frames · chunk {nd} of {n} done · 3 at a time"
+        return "preview_mux", 0.5, "joining the chunks and the sound"
     return "queued", 0.0, "waiting for its turn"
 
 def remaining_min(key, frac, secs, rate=None):
