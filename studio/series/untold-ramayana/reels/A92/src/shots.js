@@ -1,6 +1,8 @@
 // ===== Reel A92 — "Ravana Never Taught Lakshmana" — 11 shots (CE Yuddha 6.97, 6.100) =====
 // Matali urges the Brahmastra (6.97.2), Agastya's gift (6.97.4); it strikes Ravana's chest and pierces his heart (6.97.16-17);
 // bow falls, life departs, he falls lifeless from the chariot (6.97.20-21); Lakshmana crowns Vibhishana (6.100.11-12).
+// opening śloka (CE 6.97.21), Devanagari from the CE page via scripts/ce_verse.py
+const SLOKA = {"lines": ["गतासुर्भीमवेगस्तु नैरृतेन्द्रो महाद्युतिः ।", "पपात स्यन्दनाद्भूमौ वृत्रो वज्रहतो यथा ॥"], "ref": "YUDDHA KANDA 6.97.21", "en": "“Lifeless, the mighty lord of the rakshasas fell from his chariot to the ground, like Vritra struck by the thunderbolt.”", "translit": "gatāsurbhīmavegastu nairṛtendro mahādyutiḥ, papāta syandanādbhūmau vṛtro vajrahato yathā"};
 function buildScenes() { BG.war = buildBattlefield(); BG.ms = buildManuscript(); }
 const L_WAR = { rim: '#ff9a5a', rimA: 0.9, dir: 1, tint: '#3a0a10', tintA: 0.22 };
 const MEMORY = { tint: '#c89a5a', tintA: 0.55, rim: '#ffe0a0', rimA: 0.7, dir: 1, shadow: 0.3 };
@@ -35,7 +37,7 @@ const SHOTS = {
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => { (sh.card || []).forEach(([s, col], i) => { const q = ease(u, 0.15 + i * 0.25, 0.55 + i * 0.25); if (q > 0) textFit(c, s, 540, 560 + i * 124 + (1 - q) * 22, { size: 108, weight: 900, color: col || C_IVORY, ls: 6, alpha: q, stroke: 10, shadow: 34 }); }); };
   },
-  2(ctx, u, p, sh, t, post) { sourceCard(ctx, u, p, sh, t, post, TL.source_card); },
+  2(ctx, u, p, sh, t, post) { slokaSource(ctx, u, p, sh, t, post, SLOKA); },
   // 3 — the long duel; Matali, Indra's charioteer, tells Rama: release the Brahmastra
   3(ctx, u, p, sh, t, post) {
     const bg = BG.war, cam = { z: lerp(1.0, 1.06, p), x: 0, y: 60 }, st = sentenceStarts(sh, 2), talk = ease(u, st[1] - 0.2, st[1] + 0.4);

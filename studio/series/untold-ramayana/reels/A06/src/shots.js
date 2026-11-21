@@ -1,6 +1,10 @@
 // ===== Reel A06 — "No Boatman Washed Rama's Feet" — 12 shots (CE Ayodhya 2.44–2.46) =====
 // Guha, king of the Nishadas and Rama's friend (2.44.9-12); Lakshmana washes Rama's feet that night (2.44.25);
 // Guha keeps watch (2.44.26); at dawn the boatmen row them across (2.46.61-66); Sita prays mid-river (2.46.67-68).
+// opening śloka (CE 2.44.25), Devanagari from the CE page via scripts/ce_verse.py
+const SLOKA = {"lines": ["तस्य भूमौ शयानस्य पादौ प्रक्षाल्य लक्ष्मणः ।", "सभार्यस्य ततो ऽभ्येत्य तस्थौ वृक्षमुपाश्रितः ॥"], "ref": "AYODHYA KANDA 2.44.25", "en": "“Lakshmana washed the feet of Rama, who lay on the ground with his wife, then stood leaning on a tree.”", "translit": "tasya bhūmau śayānasya pādau prakṣālya lakṣmaṇaḥ, sabhāryasya tato'bhyetya tasthau vṛkṣamupāśritaḥ"};
+// Ramcharitmanas, Ayodhya Kand 100.4 (verified on bhaktibharat.com Hindi text)
+const KEVAT = {"source": "RAMCHARITMANAS", "ref": "AYODHYA KAND 100.4 · GOSWAMI TULSIDAS", "lines": ["जौ प्रभु पार अवसि गा चहहू ।", "मोहि पद पदुम पखारन कहहू ॥"], "translit": "Jau prabhu pāra avasi gā chahahū, mohi pada paduma pakhārana kahahū", "en": "“Lord, if you must cross, first let me wash your lotus feet.”"};
 function buildScenes() { BG.gn = buildGanga('night'); BG.gd = buildGanga('dawn'); BG.ms = buildManuscript(); }
 const MEMORY = { tint: '#c89a5a', tintA: 0.55, rim: '#ffe0a0', rimA: 0.7, dir: 1, shadow: 0.3 };   // the popular image, as a fading memory
 const L_DAWN = { rim: '#ffc890', rimA: 0.9, dir: -1, tint: '#40284a', tintA: 0.12 };
@@ -22,7 +26,7 @@ const SHOTS = {
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => { (sh.card || []).forEach(([s, col], i) => { const q = ease(u, 0.15 + i * 0.25, 0.55 + i * 0.25); if (q > 0) textFit(c, s, 540, 560 + i * 124 + (1 - q) * 22, { size: i ? 84 : 104, weight: 900, color: col || C_IVORY, ls: 6, alpha: q, stroke: 10, shadow: 34 }); }); };
   },
-  2(ctx, u, p, sh, t, post) { sourceCard(ctx, u, p, sh, t, post, TL.source_card); },
+  2(ctx, u, p, sh, t, post) { slokaSource(ctx, u, p, sh, t, post, SLOKA); },
   // 3 — the three reach the Ganga at dusk; Guha, king of the Nishadas, comes to meet his friend
   3(ctx, u, p, sh, t, post) {
     const bg = BG.gn, cam = { z: lerp(1.0, 1.1, p), x: 20, y: 60 }, st = sentenceStarts(sh, 2), g = ease(u, st[1] - 0.3, st[1] + 1.6);
@@ -123,8 +127,12 @@ const SHOTS = {
     post.ui = c => (sh.card || []).forEach(([s, col], i) => { const q = ease(u, st[i] - 0.05, st[i] + 0.3); if (q > 0) textFit(c, s, 545, 560 + i * 116 + (1 - q) * 22, { size: i === 0 ? 88 : 64, weight: 900, color: col || C_IVORY, ls: 4, alpha: q, stroke: 9, shadow: 30 }); });
   },
   // 11 — "The Kevat story — not in Valmiki"
+  // 11 — the kevat scene is Tulsidas's: quote Ramcharitmanas Ayodhya 100.4, then "not in Valmiki"
   11(ctx, u, p, sh, t, post) {
-    const bg = BG.ms, cam = { z: lerp(1.05, 1.12, p), y: 10 }, st = sentenceStarts(sh, 2);
+    const st4 = sentenceStarts(sh, 4), qa = st4[1] - 0.3, qb = st4[3] - 0.3;
+    if (u >= qa && u < qb) return quoteCard(ctx, u - qa, sh, t, post, Object.assign({ enAt: st4[2] - qa }, KEVAT));
+    const st = u < qa ? [0, 99] : [0, qb + 0.3];
+    const bg = BG.ms, cam = { z: lerp(1.05, 1.12, p), y: 10 };
     drawLayer(ctx, cam, bg.bg); drawLayer(ctx, cam, bg.ms); withCam(ctx, cam, 0.8, c => flame(c, bg.lamp[0], bg.lamp[1], 26, t, 3));
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => {

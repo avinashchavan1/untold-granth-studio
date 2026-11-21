@@ -1,6 +1,8 @@
 // ===== Reel A04 — "No Squirrel at Rama's Bridge" — 12 shots (CE Yuddha 6.15) =====
 // The Ocean rises and names Nala (6.15.1-9); Nala speaks only because asked (6.15.13); the monkeys hurl trees and
 // mountains (6.15.14-21); a bridge 10 x 100 yojanas, shining like Svati's path (6.15.20-22); all beings watch, the army crosses.
+// opening śloka (CE 6.15.20), Devanagari from the CE page via scripts/ce_verse.py
+const SLOKA = {"lines": ["दशयोजनविस्तीर्णं शतयोजनमायतम् ।", "नलश्चक्रे महासेतुं मध्ये नदनदीपतेः ॥"], "ref": "YUDDHA KANDA 6.15.20", "en": "“Nala built a great bridge, ten yojanas wide and a hundred yojanas long, in the middle of the ocean.”", "translit": "daśayojanavistīrṇaṃ śatayojanamāyatam, nalaścakre mahāsetuṃ madhye nadanadīpateḥ"};
 function buildScenes() { BG.sh = buildShore('dusk'); BG.ms = buildManuscript(); }
 const MK = [CH.vanara, CH.vanara2, CH.vanara];
 
@@ -44,7 +46,7 @@ const SHOTS = {
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => { (sh.card || []).forEach(([s, col], i) => { const q = ease(u, 0.15 + i * 0.25, 0.55 + i * 0.25); if (q > 0) text(c, s, 540, 560 + i * 124 + (1 - q) * 22, { size: i ? 96 : 104, weight: 900, color: col || C_IVORY, ls: 6, alpha: q, stroke: 10, shadow: 34 }); }); };
   },
-  2(ctx, u, p, sh, t, post) { sourceCard(ctx, u, p, sh, t, post, TL.source_card); },
+  2(ctx, u, p, sh, t, post) { slokaSource(ctx, u, p, sh, t, post, SLOKA); },
   // 3 — Rama at the shore; the Ocean himself rises from the waves with joined palms
   3(ctx, u, p, sh, t, post) {
     const bg = BG.sh, cam = { z: lerp(1.0, 1.12, p), x: 0, y: lerp(40, 90, p) }, st = sentenceStarts(sh, 2), rise = ease(u, st[1] - 0.2, st[1] + 2.2), WL = SHORE_Y - 220;

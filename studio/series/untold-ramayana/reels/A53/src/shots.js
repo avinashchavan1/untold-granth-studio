@@ -3,6 +3,10 @@
 // Matali reminds Rama: the Brahmastra (6.97.1-3); it strikes the chest and pierces the heart (6.97.16-17).
 // The navel nectar and the 31 arrows are from Tulsidas's Ramcharitmanas (Lanka 101.3, doha 102).
 // Severed heads are shown as a flash of light and a head re-forming: no gore.
+// opening śloka (CE 6.97.17), Devanagari from the CE page via scripts/ce_verse.py
+const SLOKA = {"lines": ["स विसृष्टो महावेगः शरीरान्तकरः शरः ।", "बिभेद हृदयं तस्य रावणस्य दुरात्मनः ॥"], "ref": "YUDDHA KANDA 6.97.17", "en": "“That swift arrow, ending the body, pierced the heart of the wicked Ravana.”", "translit": "sa visṛṣṭo mahāvegaḥ śarīrāntakaraḥ śaraḥ, bibheda hṛdayaṃ tasya rāvaṇasya durātmanaḥ"};
+// Ramcharitmanas, Lanka Kand 101.3 (verified on ramcharit.in)
+const NAVEL = {"source": "RAMCHARITMANAS", "ref": "LANKA KAND 101.3 · GOSWAMI TULSIDAS", "lines": ["नाभिकुंड पियूष बस याकें ।", "नाथ जिअत रावनु बल ताकें ॥"], "translit": "Nābhikuṇḍa piyūṣa basa yākeṃ, nātha jiata rāvanu bala tākeṃ", "en": "“Nectar dwells in the hollow of his navel; by its power, Lord, Ravana lives.”"};
 function buildScenes() { BG.war = buildBattlefield(); BG.ms = buildManuscript(); }
 const L_WAR = { rim: '#ff9a5a', rimA: 0.9, dir: 1, tint: '#3a0a10', tintA: 0.22 };
 const MEMORY = { tint: '#c89a5a', tintA: 0.55, rim: '#ffe0a0', rimA: 0.7, dir: 1, shadow: 0.3 };
@@ -55,7 +59,7 @@ const SHOTS = {
     ctx.fillStyle = rgba('#05061a', 0.3); ctx.fillRect(0, 0, W, H);
     post.ui = c => { (sh.card || []).forEach(([s, col], i) => { const q = ease(u, 0.15 + i * 0.25, 0.55 + i * 0.25); if (q > 0) textFit(c, s, 540, 560 + i * 124 + (1 - q) * 22, { size: 108, weight: 900, color: col || C_IVORY, ls: 6, alpha: q, stroke: 10, shadow: 34 }); }); };
   },
-  2(ctx, u, p, sh, t, post) { sourceCard(ctx, u, p, sh, t, post, TL.source_card); },
+  2(ctx, u, p, sh, t, post) { slokaSource(ctx, u, p, sh, t, post, SLOKA); },
   // 3 — Rama severs a head (a flash of light) ... and at once an identical head appears (6.96.20-21)
   3(ctx, u, p, sh, t, post) {
     const bg = BG.war, cam = { z: lerp(1.28, 1.36, p), x: 170, y: 230 }, st = sentenceStarts(sh, 2);
@@ -138,6 +142,8 @@ const SHOTS = {
   },
   // 9 — the navel nectar and the 31 arrows: Goswami Tulsidas's Ramcharitmanas, 16th century (Lanka 101.3, doha 102)
   9(ctx, u, p, sh, t, post) {
+    const st4 = sentenceStarts(sh, 4), qa = st4[2] - 0.3;
+    if (u >= qa) return quoteCard(ctx, u - qa, sh, t, post, Object.assign({ enAt: st4[3] - qa }, NAVEL));
     const st = sentenceStarts(sh, 2), u2 = Math.max(0, u - (st[1] - 0.2));
     sourceCard(ctx, u2, p, sh, t, post, { title: ['RAMCHARIT', 'MANAS'], sub: 'LANKA KAND  ·  101–102', edition: 'GOSWAMI TULSIDAS  ·  16TH CENTURY' });
     const ui = post.ui; post.ui = c => {

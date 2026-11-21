@@ -146,3 +146,18 @@ function slokaSource(ctx, u, p, sh, t, post, S) {
       [w.slice(0, h).join(' '), w.slice(h).join(' ')].forEach((l, i) => textFit(c, l, 540, 800 + i * 60, { size: 44, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: q2, stroke: 6, shadow: 20 }, 960)); }
   };
 }
+
+// Quote card for a later source's exact words (Ramcharitmanas, Chalisa...). u = seconds since the quote started.
+// Q = { source: 'RAMCHARITMANAS', ref: 'LANKA KAND 101.3', lines: [2 Devanagari lines], translit, en, enAt (s, when the translation appears) }
+function quoteCard(ctx, u, sh, t, post, Q) {
+  const bg = ensureScene('ms', buildManuscript), cam = { z: lerp(1.03, 1.1, Math.min(1, u / 8)), y: 10 };
+  drawLayer(ctx, cam, bg.bg); withCam(ctx, cam, 0.8, c => { glow(c, 540, 700, 560, '#ffd890', 0.12); flame(c, bg.lamp[0], bg.lamp[1], 26, t, 3); });
+  ctx.fillStyle = rgba('#05061a', 0.45); ctx.fillRect(0, 0, W, H);
+  post.ui = c => {
+    const q0 = ease(u, 0.05, 0.4); if (q0 > 0) { text(c, Q.source, 540, 330, { size: 72, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); text(c, Q.ref, 540, 394, { size: 34, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }); }
+    const q1 = ease(u, 0.2, 0.7); if (q1 > 0) { Q.lines.forEach((l, i) => textFit(c, l, 540, 560 + i * 116 + (1 - q1) * 14, { size: 84, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, 980));
+      textFit(c, Q.translit, 540, 790, { size: 33, font: 'Montserrat', weight: 600, color: C_IVORY, alpha: 0.85 * q1, stroke: 5 }, 960); }
+    const at = Q.enAt || 3.5, q2 = ease(u, at, at + 0.45); if (q2 > 0) { const w = Q.en.split(' '), h = Math.ceil(w.length / 2);
+      [w.slice(0, h).join(' '), w.slice(h).join(' ')].forEach((l, i) => textFit(c, l, 540, 905 + i * 60, { size: 44, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: q2, stroke: 6, shadow: 20 }, 960)); }
+  };
+}

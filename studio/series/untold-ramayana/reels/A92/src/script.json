@@ -74,15 +74,35 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग सत्तानवे। ये है असली कहानी।",
-   "en": "Valmiki Ramayana, Yuddha Kanda, chapter 97. Here's the real story.",
+   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग सत्तानवे। गतासुर्भीमवेगस्तु नैरृतेन्द्रो महाद्युतिः… पपात स्यन्दनाद्भूमौ वृत्रो वज्रहतो यथा॥ ये है असली कहानी।",
+   "en": "",
    "units": [
     "वाल्मीकि रामायण, युद्ध कांड, सर्ग सत्तानवे।",
+    "[solemnly] [expressively] गतासुर्भीमवेगस्तु नैरृतेन्द्रो महाद्युतिः… पपात स्यन्दनाद्भूमौ वृत्रो वज्रहतो यथा॥",
     "[serious] ये है असली कहानी।"
    ],
-   "unit_gap": 0.28,
+   "unit_gap": 0.5,
    "lead": 0.18,
-   "tail": 0.12
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "गतासुर्भीमवेगस्तु नैरृतेन्द्रो महाद्युतिः ।",
+     "पपात स्यन्दनाद्भूमौ वृत्रो वज्रहतो यथा ॥"
+    ],
+    "ref": "YUDDHA KANDA 6.97.21",
+    "en": "“Lifeless, the mighty lord of the rakshasas fell from his chariot to the ground, like Vritra struck by the thunderbolt.”",
+    "translit": "gatāsurbhīmavegastu nairṛtendro mahādyutiḥ, papāta syandanādbhūmau vṛtro vajrahato yathā"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 3
+   },
+   "sloka_pick": "take 3 [solemnly] [expressively]: most pitch movement with the words intact, under the shouting guard"
   },
   {
    "id": 3,
@@ -294,6 +314,14 @@
    "verified": true,
    "sources": [
     "enjoylearningsanskrit CE 6.97-6.100"
+   ]
+  },
+  {
+   "claim": "Opening śloka: “Lifeless, the mighty lord of the rakshasas fell from his chariot to the ground, like Vritra struck by the thunderbolt.”",
+   "ref": "6.97.21",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE), via scripts/ce_verse.py"
    ]
   }
  ]

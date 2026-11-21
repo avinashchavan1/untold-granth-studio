@@ -72,15 +72,35 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग पंद्रह। ये है असली कहानी।",
-   "en": "Valmiki Ramayana, Yuddha Kanda, chapter 15. Here's the real story.",
+   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग पंद्रह। दशयोजनविस्तीर्णं शतयोजनमायतम्… नलश्चक्रे महासेतुं मध्ये नदनदीपतेः॥ ये है असली कहानी।",
+   "en": "",
    "units": [
     "वाल्मीकि रामायण, युद्ध कांड, सर्ग पंद्रह।",
+    "[solemnly] [expressively] दशयोजनविस्तीर्णं शतयोजनमायतम्… नलश्चक्रे महासेतुं मध्ये नदनदीपतेः॥",
     "[serious] ये है असली कहानी।"
    ],
-   "unit_gap": 0.28,
+   "unit_gap": 0.5,
    "lead": 0.18,
-   "tail": 0.12
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "दशयोजनविस्तीर्णं शतयोजनमायतम् ।",
+     "नलश्चक्रे महासेतुं मध्ये नदनदीपतेः ॥"
+    ],
+    "ref": "YUDDHA KANDA 6.15.20",
+    "en": "“Nala built a great bridge, ten yojanas wide and a hundred yojanas long, in the middle of the ocean.”",
+    "translit": "daśayojanavistīrṇaṃ śatayojanamāyatam, nalaścakre mahāsetuṃ madhye nadanadīpateḥ"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 3
+   },
+   "sloka_pick": "take 3 [solemnly] [expressively]: most pitch movement with the words intact, under the shouting guard"
   },
   {
    "id": 3,
@@ -332,6 +352,14 @@
    "sources": [
     "Wikipedia: Ranganatha Ramayanamu",
     "Amar Chitra Katha: The Ramayana's Different Versions"
+   ]
+  },
+  {
+   "claim": "Opening śloka: “Nala built a great bridge, ten yojanas wide and a hundred yojanas long, in the middle of the ocean.”",
+   "ref": "6.15.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE), via scripts/ce_verse.py"
    ]
   }
  ],

@@ -20,7 +20,7 @@
   "mocking the Kevat story: we only say where it comes from"
  ],
  "verify_note": "CE 2.44–2.46 read: Guha is king and Rama's friend (2.44.9-12); Lakshmana washes Rama's feet that night (2.44.25); Guha keeps watch (2.44.26); at dawn Rama sees a boat, boards, boatmen row across (2.46.61-66); Sita prays to Ganga mid-stream (2.46.67-71). Kevat's foot-washing at the boat: Tulsidas, Ramcharitmanas, Ayodhya Kand.",
- "caption": "Many of us know the boatman Kevat who washed Rama's feet before taking him across the Ganga. Valmiki's Ramayana tells it differently: Guha is a king and Rama's dearest friend, the one who washes Rama's feet that night is Lakshmana, and at dawn Rama simply boards a boat and the boatmen row them across. The Kevat story comes from Tulsidas's Ramcharitmanas.",
+ "caption": "Many of us know the boatman Kevat who washed Rama's feet before taking him across the Ganga. Valmiki's Ramayana tells it differently: Guha is a king and Rama's dearest friend, the one who washes Rama's feet that night is Lakshmana, and at dawn Rama simply boards a boat and the boatmen row them across. The Kevat story comes from Tulsidas's Ramcharitmanas. The kevat's lovely line is Tulsidas's (Ramcharitmanas, Ayodhya Kand 100.4): “Jau prabhu par avasi ga chahahu, mohi pad padum pakharan kahahu”, “Lord, if you must cross, first let me wash your lotus feet.”",
  "youtube_title": "Did a Boatman Really Wash Rama's Feet? | Valmiki Ramayana #Shorts",
  "comment_prompt": "Which version did you grow up with: Kevat washing Rama's feet, or Lakshmana? Tell us where you heard it 👇",
  "hashtags": [
@@ -75,15 +75,35 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, अयोध्या कांड, सर्ग चौवालीस से छियालीस। ये है असली कहानी।",
-   "en": "Valmiki Ramayana, Ayodhya Kanda, chapters 44 to 46. Here's the real story.",
+   "hi": "वाल्मीकि रामायण, अयोध्या कांड, सर्ग चौवालीस से छियालीस। तस्य भूमौ शयानस्य पादौ प्रक्षाल्य लक्ष्मणः… सभार्यस्य ततो ऽभ्येत्य तस्थौ वृक्षमुपाश्रितः॥ ये है असली कहानी।",
+   "en": "",
    "units": [
     "वाल्मीकि रामायण, अयोध्या कांड, सर्ग चौवालीस से छियालीस।",
+    "[solemnly] [expressively] तस्य भूमौ शयानस्य पादौ प्रक्षाल्य लक्ष्मणः… सभार्यस्य ततो ऽभ्येत्य तस्थौ वृक्षमुपाश्रितः॥",
     "[serious] ये है असली कहानी।"
    ],
-   "unit_gap": 0.28,
+   "unit_gap": 0.5,
    "lead": 0.18,
-   "tail": 0.12
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "तस्य भूमौ शयानस्य पादौ प्रक्षाल्य लक्ष्मणः ।",
+     "सभार्यस्य ततो ऽभ्येत्य तस्थौ वृक्षमुपाश्रितः ॥"
+    ],
+    "ref": "AYODHYA KANDA 2.44.25",
+    "en": "“Lakshmana washed the feet of Rama, who lay on the ground with his wife, then stood leaning on a tree.”",
+    "translit": "tasya bhūmau śayānasya pādau prakṣālya lakṣmaṇaḥ, sabhāryasya tato'bhyetya tasthau vṛkṣamupāśritaḥ"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 3
+   },
+   "sloka_pick": "take 3 [solemnly] [expressively]: most pitch movement with the words intact, under the shouting guard"
   },
   {
    "id": 3,
@@ -220,13 +240,15 @@
   {
    "id": 11,
    "voice": "narrator",
-   "hi": "केवट की कथा, तुलसीदास के रामचरितमानस से आई। वाल्मीकि में नहीं।",
+   "hi": "केवट की कथा, तुलसीदास के रामचरितमानस से आई। जौ प्रभु पार अवसि गा चहहू… मोहि पद पदुम पखारन कहहू। यानी, प्रभु, अगर पार जाना ही है… तो पहले मुझे आपके चरण कमल धोने दीजिए। वाल्मीकि में नहीं।",
    "en": "",
    "units": [
     "केवट की कथा, तुलसीदास के रामचरितमानस से आई।",
+    "[softly] जौ प्रभु पार अवसि गा चहहू… मोहि पद पदुम पखारन कहहू।",
+    "यानी, प्रभु, अगर पार जाना ही है… तो पहले मुझे आपके चरण कमल धोने दीजिए।",
     "[serious] वाल्मीकि में नहीं।"
    ],
-   "unit_gap": 0.32,
+   "unit_gap": 0.4,
    "card": [
     [
      "THE KEVAT STORY",
@@ -238,7 +260,18 @@
     ]
    ],
    "lead": 0.28,
-   "tail": 0.31
+   "tail": 0.31,
+   "cite": "Ramcharitmanas, Ayodhya 100.4",
+   "quote": {
+    "source": "RAMCHARITMANAS",
+    "ref": "AYODHYA KAND 100.4 · GOSWAMI TULSIDAS",
+    "lines": [
+     "जौ प्रभु पार अवसि गा चहहू ।",
+     "मोहि पद पदुम पखारन कहहू ॥"
+    ],
+    "translit": "Jau prabhu pāra avasi gā chahahū, mohi pada paduma pakhārana kahahū",
+    "en": "“Lord, if you must cross, first let me wash your lotus feet.”"
+   }
   },
   {
    "id": 12,
@@ -318,6 +351,22 @@
    "sources": [
     "Daily Excelsior: Ram on his way to jungle (cites Manas, Ayodhya Kand 99)",
     "Bhakti Bharat: Ramcharitmanas Ayodhya Kand pad 100"
+   ]
+  },
+  {
+   "claim": "Opening śloka: “Lakshmana washed the feet of Rama, who lay on the ground with his wife, then stood leaning on a tree.”",
+   "ref": "2.44.25",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE), via scripts/ce_verse.py"
+   ]
+  },
+  {
+   "claim": "Ramcharitmanas, Ayodhya Kand 100.4 (the kevat): 'जौ प्रभु पार अवसि गा चहहू। मोहि पद पदुम पखारन कहहू॥'",
+   "ref": "Ramcharitmanas, Ayodhya Kand 100.4",
+   "verified": true,
+   "sources": [
+    "bhaktibharat.com (Hindi + meaning)"
    ]
   }
  ],

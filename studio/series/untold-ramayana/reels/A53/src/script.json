@@ -75,15 +75,35 @@
   {
    "id": 2,
    "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग छियानवे और सत्तानवे। ये है असली कहानी।",
-   "en": "Valmiki Ramayana, Yuddha Kanda, chapters 96 and 97. Here's the real story.",
+   "hi": "वाल्मीकि रामायण, युद्ध कांड, सर्ग छियानवे और सत्तानवे। स विसृष्टो महावेगः शरीरान्तकरः शरः… बिभेद हृदयं तस्य रावणस्य दुरात्मनः॥ ये है असली कहानी।",
+   "en": "",
    "units": [
     "वाल्मीकि रामायण, युद्ध कांड, सर्ग छियानवे और सत्तानवे।",
+    "[with deep devotion] [chanting] स विसृष्टो महावेगः शरीरान्तकरः शरः… बिभेद हृदयं तस्य रावणस्य दुरात्मनः॥",
     "[serious] ये है असली कहानी।"
    ],
-   "unit_gap": 0.28,
+   "unit_gap": 0.5,
    "lead": 0.18,
-   "tail": 0.12
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "स विसृष्टो महावेगः शरीरान्तकरः शरः ।",
+     "बिभेद हृदयं तस्य रावणस्य दुरात्मनः ॥"
+    ],
+    "ref": "YUDDHA KANDA 6.97.17",
+    "en": "“That swift arrow, ending the body, pierced the heart of the wicked Ravana.”",
+    "translit": "sa visṛṣṭo mahāvegaḥ śarīrāntakaraḥ śaraḥ, bibheda hṛdayaṃ tasya rāvaṇasya durātmanaḥ"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 2
+   },
+   "sloka_pick": "take 2 [with deep devotion] [chanting]: most pitch movement with the words intact, under the shouting guard"
   },
   {
    "id": 3,
@@ -190,16 +210,28 @@
   {
    "id": 9,
    "voice": "narrator",
-   "hi": "नाभि में अमृत, और इकतीस बाण, ये प्रसंग गोस्वामी तुलसीदास जी के रामचरितमानस का है।",
-   "en": "The nectar in the navel and the thirty-one arrows: that scene is from Goswami Tulsidas's Ramcharitmanas.",
+   "hi": "नाभि में अमृत, और इकतीस बाण… ये प्रसंग, गोस्वामी तुलसीदास जी के रामचरितमानस का है। नाभिकुंड पियूष बस याकें… नाथ जिअत रावनु बल ताकें। यानी, इसकी नाभि में अमृत है… उसी के बल पर, रावण जीवित है।",
+   "en": "",
    "units": [
     "नाभि में अमृत, और इकतीस बाण…",
-    "ये प्रसंग, गोस्वामी तुलसीदास जी के रामचरितमानस का है।"
+    "ये प्रसंग, गोस्वामी तुलसीदास जी के रामचरितमानस का है।",
+    "[softly] नाभिकुंड पियूष बस याकें… नाथ जिअत रावनु बल ताकें।",
+    "यानी, इसकी नाभि में अमृत है… उसी के बल पर, रावण जीवित है।"
    ],
-   "unit_gap": 0.32,
+   "unit_gap": 0.4,
    "cite": "Ramcharitmanas, Lanka 101.3, 102",
    "lead": 0.25,
-   "tail": 0.3
+   "tail": 0.3,
+   "quote": {
+    "source": "RAMCHARITMANAS",
+    "ref": "LANKA KAND 101.3 · GOSWAMI TULSIDAS",
+    "lines": [
+     "नाभिकुंड पियूष बस याकें ।",
+     "नाथ जिअत रावनु बल ताकें ॥"
+    ],
+    "translit": "Nābhikuṇḍa piyūṣa basa yākeṃ, nātha jiata rāvanu bala tākeṃ",
+    "en": "“Nectar dwells in the hollow of his navel; by its power, Lord, Ravana lives.”"
+   }
   },
   {
    "id": 10,
@@ -295,6 +327,14 @@
    "verified": true,
    "sources": [
     "ramcharit.in (Gita Press tr.)"
+   ]
+  },
+  {
+   "claim": "Opening śloka: “That swift arrow, ending the body, pierced the heart of the wicked Ravana.”",
+   "ref": "6.97.17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE), via scripts/ce_verse.py"
    ]
   }
  ],
