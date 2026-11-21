@@ -90,12 +90,10 @@ def instagram_fit(path):
     """Instagram Reels API delivery spec: H.264 High, 4:2:0, closed GOP, <=25 Mbps video, AAC 128 kbps 48 kHz stereo,
     <=300 MB, moov atom at the front, NO edit lists (so no B-frames: they make ffmpeg write one). Re-encode from our master at the best quality that stays inside those limits."""
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]).strip())
-    # Instagram re-compresses every reel to ~4-6 Mbps for viewers, so a heavier upload only makes its processing slow (it once took
-    # >30 min at 18 Mbps / 214 MB). ~10 Mbps CRF 18 is visually identical after Instagram's encode and processes in a few minutes.
-    cap_k = min(10_000, int((IG_MAX * 0.93 * 8 / dur - 128_000) / 1000))      # under 10 Mbps, file well under 300 MB
+    cap_k = min(18_000, int((IG_MAX * 0.93 * 8 / dur - 128_000) / 1000))      # every second under 25 Mbps, file under 300 MB (owner: keep full quality)
     report(step="preparing Instagram file", log=f"Encoding to Instagram's Reels spec (H.264, ≤{cap_k} kb/s, AAC 128k/48k, ≤300 MB)")
     out = path.replace(".mp4", "_ig.mp4")
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-c:v", "libx264", "-preset", "slow", "-crf", "18",
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-c:v", "libx264", "-preset", "slow", "-tune", "grain", "-crf", "14",
                     "-maxrate", f"{cap_k}k", "-bufsize", f"{cap_k}k", "-pix_fmt", "yuv420p", "-profile:v", "high", "-level:v", "4.2",
                     "-bf", "0", "-g", "48", "-keyint_min", "24", "-sc_threshold", "0", "-flags", "+cgop", "-r", "24",
                     "-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-ac", "2",
