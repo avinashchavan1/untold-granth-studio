@@ -192,6 +192,18 @@
    "character": "Jambavan: aged, wise king of the bears; wounded, slow, warm",
    "chosen": "USER choice (major character), ElevenLabs audition Nov 21 2026 (vs Nazir Qureshi, Yatin)",
    "audition": "cast/audition/jambavan/"
+  },
+  "janaka": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "6Z5iST9MV6ETJweKYiob",
+   "name": "Ajay - Wise, Intense, Calm (ElevenLabs library)",
+   "character": "Janaka: royal sage, father of Sita; calm, dignified, warm",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 21 2026 (vs Sudhir, Nazir Qureshi)",
+   "audition": "cast/audition/janaka/"
   }
  },
  "fx": {

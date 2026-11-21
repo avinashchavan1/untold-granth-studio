@@ -81,5 +81,6 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
 - A reel is marked published automatically when both Instagram and YouTube are posted (DB trigger).
 
 ## Sessions and tokens
-- One reel per session. Start a new session after a reel is delivered (or when this one gets long); everything needed
-  is in git, the HF audio packs and the app DB, so nothing is lost. The first message can simply be: "next reel".
+- Up to 3 reels per session (4 when they share sets/characters, e.g. a two-part reel); owner approved Nov 21 2026. Start a new
+  session when this one gets long; everything needed is in git, the HF audio packs and the app DB, so nothing is lost.
+  The first message can simply be: "next reel".

@@ -21,6 +21,8 @@ const CH = {
   indra:   { kind: 'man', god: true, skin: '#e8c08a', skinSh: '#b08a66', cloth: '#e6b450', clothSh: '#a87a2a', sash: '#c41e1e', hair: '#14101c' },   // A89: king of the gods, on Airavata
   jambavan: { kind: 'man', vanara: true, bear: true, elder: true, band: true, skin: '#7a6e66', skinSh: '#4a403c', muzzle: '#d8cfc2', ruff: '#f2eee6', cloth: '#8a1a1c', clothSh: '#561018', sash: '#e6b450', hair: '#9a8e84' },   // A23: Jambavan, aged king of the bears, son of Prajapati (6.61.14): silvered fur, white brows and beard, gold band, deep red cloth
   sushena: { kind: 'man', vanara: true, elder: true, skin: '#9a7a5a', skinSh: '#5e4a3a', muzzle: '#e8d6bc', cloth: '#e6dcc4', clothSh: '#a89c84', sash: '#3a8a68', hair: '#c8c0b4' },   // A23: Sushena, the vanara chief who heals Lakshmana (6.89): greying, pale cloth, green sash (Claude's pick, minor)
+  janaka: { kind: 'man', god: true, sage: true, skin: '#d4a882', skinSh: '#987062', cloth: '#efe2c4', clothSh: '#b0a088', sash: '#e6b450', hair: '#ece6dc' },   // A18: Janaka, the royal sage (rajarshi): white hair and beard, gold crown, ivory and gold (owner's pick)
+  parashurama: { kind: 'monk', sage: true, bow: true, skin: '#a8724a', skinSh: '#6a4436', cloth: '#8a4a2a', clothSh: '#5a2e1a', hair: '#1a1418' },   // A18: Parashurama, warrior-sage: black jata and beard, bark-brown robe, rudraksha, axe (parashu()) + bow (owner's pick)
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
 };
 const GOLD = '#f0c060', GOLDSH = '#b07a2a';
@@ -520,4 +522,11 @@ function drawBalHanuman(ctx, cx, cy, s, t, o = {}) {
   if (o.mouthO) dab(x, hx + 0.08, hy + 0.15, 0.035, 0.04 * o.mouthO, 0, '#7a2a2a');
   dab(x, hx - 0.12, hy + 0.08, 0.04, 0.025, 0, '#e86a5a', 0.35);
   x.restore();
+}
+
+// Parashurama's axe (parashu): handle from the hand (x, y) up-and-out, crescent blade at the top. s = figure scale.
+function parashu(c, x, y, s, ang = -0.35) {
+  c.save(); c.translate(x, y); c.rotate(ang); stroke(c, 0, s * 0.06, 0, -s * 0.34, s * 0.014, '#5a3a22', 1);
+  poly(c, [[0, -s * 0.37], [s * 0.06, -s * 0.4], [s * 0.12, -s * 0.42], [s * 0.15, -s * 0.36], [s * 0.16, -s * 0.31], [s * 0.14, -s * 0.25], [s * 0.1, -s * 0.22], [s * 0.05, -s * 0.25], [0, -s * 0.27]], '#c8ccd4'); line(c, [[s * 0.1, -s * 0.42], [s * 0.15, -s * 0.33], [s * 0.12, -s * 0.24]], s * 0.008, '#f4f6ff', 0.9);
+  c.restore();
 }

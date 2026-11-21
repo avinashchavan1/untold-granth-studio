@@ -46,7 +46,9 @@
    "narrator",
    "rama",
    "sita",
-   "jambavan"
+   "jambavan",
+   "janaka",
+   "parashurama"
   ],
   "ask_user_when_first_needed": [
    "ravana",
@@ -127,7 +129,8 @@
    "shurpanakha",
    "vali",
    "sagara",
-   "parashurama"
+   "parashurama",
+   "janaka"
   ],
   "forms": {
    "hanuman": "प्रभु / प्रभु श्रीराम; Sita = माता सीता",
@@ -156,6 +159,20 @@
    "rig": "CH.jambavan (drawFigure, bear head in art/chars.js)",
    "look": "aged king of the bears, son of Prajapati (CE 6.61.14): silvered grey fur, small round ears, long pale snout, heavy white brows, flowing white beard, gold head band with a red jewel, deep red dhoti, serious calm face; no tail",
    "rule": "Keep him dignified: never cute or comic. Show the owner any change as stills first."
+  },
+  "janaka": {
+   "approved_by": "user",
+   "reel": "A18",
+   "rig": "CH.janaka (drawFigure)",
+   "look": "royal sage (rajarshi): white hair and beard, gold crown with red jewel, ivory dhoti, gold sash, red garland beads",
+   "rule": "Show the user any change as stills first."
+  },
+  "parashurama": {
+   "approved_by": "user",
+   "reel": "A18",
+   "rig": "CH.parashurama (drawFigure) + parashu() axe in art/chars.js",
+   "look": "warrior-sage: black jata and beard, bark-brown robe, rudraksha, axe in hand, bow and quiver",
+   "rule": "Show the user any change as stills first."
   }
  }
 }

@@ -590,3 +590,39 @@ function herbPeak(c, x, y, s, t, o = {}) {
 }
 // a hand-held torch: flame tip at (x, y)
 function torch(c, x, y, t, seed = 0, a = 1) { stroke(c, x, y + 10, x - 6, y + 120, 9, '#4a2e1a', a); glow(c, x, y, 220, '#ffb050', 0.35 * a); flame(c, x, y, 18, t, seed); }
+
+// ---- A18: Janaka's court at Mithila by day: warm sandstone arches, open sky behind, a raised dais (no Lanka couch) ----
+const MIT_FLOOR = 1420;
+function buildMithila() {
+  const r = rng(181), sky = newLayer(0.05), far = newLayer(0.3), mid = newLayer(0.6), fg = newLayer(1.25);
+  wash(sky.x, r, -M, -M, W + 2 * M, H + 2 * M, [[0, '#3a5a9a'], [.45, '#8aaad0'], [.8, '#f0d8b0'], [1, '#e8c090']], { n: 300, alpha: 0.5, th: [20, 60], len: [200, 600] });
+  for (let i = 0; i < 6; i++) { const x = -40 + i * 230; blob(far.x, [[x, MIT_FLOOR - 60], [x, 520], [x + 90, 400], [x + 180, 520], [x + 180, MIT_FLOOR - 60]], jit('#c89a6a', r, 8), 0.95, 0.2);
+    blob(far.x, [[x + 30, MIT_FLOOR - 60], [x + 30, 560], [x + 90, 470], [x + 150, 560], [x + 150, MIT_FLOOR - 60]], '#f6e2b8', 0.55, 0.2); stroke(far.x, x + 10, 530, x + 170, 530, 6, '#e6b450', 0.8); }
+  for (let i = 0; i < 9; i++) { const x = 60 + i * 120; stroke(far.x, x, 300, x, 340, 3, '#e6b450', 0.8); dab(far.x, x, 350, 18, 12, 0, ['#f4a6bc', '#f6d27a', '#ffffff'][i % 3], 0.9); }   // festoons
+  wash(mid.x, r, -M, MIT_FLOOR - 40, W + 2 * M, H + M - MIT_FLOOR + 40, [[0, '#b08a5a'], [.3, '#8a6440'], [1, '#3a2418']], { n: 260, alpha: 0.6, th: [10, 30], len: [200, 500] });
+  for (let i = 0; i < 14; i++) stroke(mid.x, 540 + (i - 7) * 40, MIT_FLOOR - 30, 540 + (i - 7) * 220, H + M, 2, '#d8b070', 0.35);
+  [[40, 1.0], [1060, 1.0]].forEach(([px, k]) => { const w = 46; blob(mid.x, [[px - w, MIT_FLOOR], [px - w * 0.8, 120], [px + w * 0.8, 120], [px + w, MIT_FLOOR]], '#a8783a', 1, 0.15); for (let y = 240; y < MIT_FLOOR; y += 240) stroke(mid.x, px - w, y, px + w, y, 6, '#f0c860', 0.9); });
+  const f = fg.x; for (let i = 0; i < 60; i++) dab(f, -M + r() * (W + 2 * M), H - 20 + r() * 80, 80, 30, 0, '#1a0e08', 0.8);
+  return { layers: [sky, far, mid, fg], sky, far, mid, fg };
+}
+function mithila(ctx, bg, cam, t, mid) { drawLayer(ctx, cam, bg.sky); drawLayer(ctx, cam, bg.far); drawLayer(ctx, cam, bg.mid); if (mid) withCam(ctx, cam, 0.6, mid); drawLayer(ctx, cam, bg.fg); }
+// Shiva's bow (A18): a huge dark-gold recurve, centre (x, y), half-length L, angle ang; brk 0..1 = broken in the middle and the halves falling apart
+function shivaBow(c, x, y, L, ang, t, brk = 0, strung = 0) {
+  c.save(); c.translate(x, y); c.rotate(ang);
+  const half = (sgn) => { c.save(); if (brk > 0) { c.translate(sgn * brk * 60, brk * 40); c.rotate(sgn * brk * 0.5); }
+    const pts = [[0, 0], [sgn * L * 0.35, -L * 0.06], [sgn * L * 0.7, -L * 0.04], [sgn * L * 0.92, L * 0.06], [sgn * L, L * 0.02]];
+    line(c, pts, L * 0.055, '#3a2a1a'); line(c, pts, L * 0.035, '#8a6428'); line(c, pts.slice(0, 3), L * 0.012, '#f0c860', 0.8);
+    dab(c, sgn * L, L * 0.02, L * 0.03, L * 0.03, 0, '#f0c860'); c.restore(); };
+  half(-1); half(1);
+  if (brk <= 0) { dab(c, 0, 0, L * 0.05, L * 0.06, 0, '#c41e1e'); stroke(c, -L * 0.06, 0, L * 0.06, 0, L * 0.04, '#e6b450', 1); }
+  else { glow(c, 0, 0, L * 0.5 * (1 - brk * 0.5), '#fff4d0', 0.8 * (1 - brk)); }
+  if (strung > 0 && brk <= 0) { c.globalAlpha = strung; c.strokeStyle = '#f6f0e0'; c.lineWidth = 3; c.beginPath(); c.moveTo(-L, L * 0.02); c.lineTo(0, L * (0.02 + 0.25 * strung)); c.lineTo(L, L * 0.02); c.stroke(); c.globalAlpha = 1; }
+  c.restore();
+}
+// the eight-wheeled chest the bow is kept in (1.66.4)
+function bowChest(c, x, y, w, open = 0) {
+  blob(c, [[x - w, y - w * 0.18], [x + w, y - w * 0.18], [x + w * 0.96, y + w * 0.06], [x - w * 0.96, y + w * 0.06]], '#6a3a1e', 1, 0.1); stroke(c, x - w, y - w * 0.18, x + w, y - w * 0.18, 6, '#e6b450', 1);
+  for (let i = 0; i < 4; i++) { const wx = x - w * 0.8 + i * w * 0.53; dab(c, wx, y + w * 0.1, w * 0.08, w * 0.08, 0, '#3a2414'); dab(c, wx, y + w * 0.1, w * 0.03, w * 0.03, 0, '#e6b450'); }
+  if (open > 0) blob(c, [[x - w, y - w * 0.18], [x + w, y - w * 0.18], [x + w * 0.9, y - w * 0.18 - w * 0.3 * open], [x - w * 0.9, y - w * 0.18 - w * 0.3 * open]], '#8a4a26', 0.9, 0.1);
+  for (let i = 0; i < 6; i++) dab(c, x - w * 0.8 + i * w * 0.32, y - w * 0.2, 10, 6, 0, ['#f4a6bc', '#f6d27a', '#ffffff'][i % 3], 0.9);   // garlands on the bow-chest (1.66.2)
+}

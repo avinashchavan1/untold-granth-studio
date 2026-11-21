@@ -334,5 +334,23 @@
   "posted_in": [],
   "look_chosen": "claude",
   "note": "Owner asked Claude to choose a dignified look (Nov 21 2026); voice picked by the owner."
+ },
+ "janaka": {
+  "portrait": "untold-ramayana/cast/janaka.jpg",
+  "appears_in": [
+   "A18"
+  ],
+  "posted_in": [],
+  "look_chosen": "user",
+  "note": null
+ },
+ "parashurama": {
+  "portrait": "untold-ramayana/cast/parashurama.jpg",
+  "appears_in": [
+   "A18"
+  ],
+  "posted_in": [],
+  "look_chosen": "user",
+  "note": null
  }
 }
