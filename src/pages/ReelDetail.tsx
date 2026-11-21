@@ -164,6 +164,8 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
   const caption = r.captions?.[platform.capField] ?? "";
   const title = platform.titleField ? r.captions?.[platform.titleField] ?? "" : "";
   const active = job && (job.status === "queued" || job.status === "running");
+  // Instagram lets apps auto-publish Reels only up to 90 s (Meta Reels API); longer ones are posted from the Instagram app at full quality
+  const tooLong = platform.key === "instagram" && Number(r.length_s ?? 0) > 90;
   const startEdit = () => { setDraft({ title, caption }); setEditing(true); };
   const save = async () => {
     const next = { ...(r.captions ?? {}), [platform.capField]: draft.caption };
@@ -204,7 +206,7 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
             <CopyButton text={caption} label={platform.titleField ? "Copy description" : "Copy caption"} />
           </div>
 
-          {auto && platform.key !== "facebook" ? (
+          {auto && platform.key !== "facebook" && !tooLong ? (
             <div className="grid gap-2 rounded-xl border border-gold-deep/40 bg-gold-soft/40 p-3 dark:border-gold/30 dark:bg-gold/5">
               {(platform.key === "instagram" || platform.key === "youtube") && <Target platform={platform.key} providers={providers} />}
               {platform.key === "youtube" && (
@@ -220,8 +222,15 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
               <p className="text-[11px] text-ink-soft dark:text-parchment/60">Uploads the full-quality master with this {platform.titleField ? "title and description" : "caption"}. Takes 3–10 minutes; you can leave this page.</p>
             </div>
           ) : (
-            <details className="text-sm" open={platform.key === "facebook"}><summary className="cursor-pointer font-semibold">Post manually</summary>
+            <details className="text-sm" open={platform.key === "facebook" || tooLong}><summary className="cursor-pointer font-semibold">Post manually</summary>
               <div className="mt-2 grid gap-2">
+                {tooLong && (
+                  <div className="rounded-lg border border-amber-300 bg-amber-50 p-2.5 text-xs text-amber-950 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100">
+                    <b>Post this one from the Instagram app.</b> It is {Math.round(Number(r.length_s))} s, and Instagram only lets apps auto-publish Reels up to 90 s
+                    (longer uploads never finish processing). The app takes longer Reels at full quality:
+                    <ol className="mt-1 list-decimal pl-4"><li>Download the Instagram master above (on your phone).</li><li>Copy the caption.</li><li>Instagram app → + → Reel → pick the video, paste the caption, add the cover, share.</li><li>Paste the post link below and press Mark posted.</li></ol>
+                  </div>
+                )}
                 <LinkButton href={platform.uploadUrl}><ExternalLink size={14} /> Open {platform.label.split(" ")[0]}</LinkButton>
                 <div className="flex flex-col gap-2 sm:flex-row">
                   <input id={`url-${platform.key}`} value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste post link (optional)" aria-label={`${platform.label} post link`}
