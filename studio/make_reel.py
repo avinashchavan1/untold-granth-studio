@@ -174,6 +174,9 @@ def render(reel):
     env = dict(os.environ, REEL=os.path.abspath(reel))
     if not os.path.exists(os.path.join(reel, "audio", "mix.wav")): audio(reel)
     stamp = _stamp(reel); ch = _chunks(nf)
+    rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]; final = f"{out}/{rid}_final.mp4"
+    if _done(final, stamp):                                  # preview already made for these exact inputs: go straight to the masters
+        master(reel); print("FINAL", final); return
     names = [f"{out}/seg{i:02d}.mp4" for i in range(len(ch))]
     json.dump({"preview": [os.path.basename(n) for n in names], "frames": {os.path.basename(n): b - a for n, (a, b) in zip(names, ch)}}, open(f"{out}/plan.json", "w"))
     _run_chunks([(n, a, b, env, f"{out}/r{i:02d}.log") for i, (n, (a, b)) in enumerate(zip(names, ch))], stamp)
@@ -182,6 +185,7 @@ def render(reel):
     rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]; final = f"{out}/{rid}_final.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{out}/video.mp4", "-i", os.path.join(reel, "audio", "mix.wav"), "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-level:v", "4.1", "-crf", "22", "-maxrate", "3000k", "-bufsize", "6000k", "-pix_fmt", "yuv420p", "-g", "48",
                     "-af", "alimiter=limit=0.80:attack=3:release=60:level=disabled", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", "-shortest", final], check=True)
+    _mark(final, stamp)
     for n in names:
         for f in (n, n + ".done"):
             if os.path.exists(f): os.remove(f)
