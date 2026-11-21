@@ -1,11 +1,14 @@
 {
-  "A01": "published",
-  "A02": "published",
-  "A03": "published",
-  "A04": "review",
-  "A06": "review",
-  "A07": "review",
-  "A92": "review",
-  "A53": "review",
-  "A89": "review"
+ "A01": "published",
+ "A02": "published",
+ "A03": "published",
+ "A04": "review",
+ "A06": "review",
+ "A07": "review",
+ "A92": "review",
+ "A53": "review",
+ "A89": "review",
+ "A18": "review",
+ "A23": "voiced",
+ "A101": "voiced"
 }
