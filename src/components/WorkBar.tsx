@@ -38,19 +38,24 @@ function useMeta(s: WorkStatus) {
   return { waiting, stale, pct, left: mins(s.eta_min), queueLeft: mins(s.info?.overall_eta_min), since };
 }
 
-// collapsed: a small pill in the corner
+// collapsed: on phones a thin one-line strip at the top (away from the thumbs); on computers a small pill in the corner
 function Pill({ s, onOpen }: { s: WorkStatus; onOpen: () => void }) {
   const { waiting, stale, pct, left } = useMeta(s);
+  const icon = (size: number) => waiting ? <Hand size={size} className="shrink-0" /> : <Loader2 size={size} className={clsx("shrink-0 text-gold", !stale && "animate-spin")} />;
+  const label = <span className="min-w-0 truncate">{waiting ? "Needs you" : s.reel_code ?? "Working"}{!waiting && s.task ? ` · ${s.task}` : ""}</span>;
+  const nums = !waiting && <>{pct !== null && <span className="tabular shrink-0 opacity-80">{pct}%</span>}{left && <span className="shrink-0 opacity-70">· ~{left}</span>}</>;
+  const tone = waiting ? "bg-amber-100 text-amber-950 dark:bg-amber-900 dark:text-amber-50" : "bg-night-900 text-parchment";
   return (
-    <button onClick={onOpen} aria-label="Show what Claude is doing"
-      className={clsx("fixed right-3 z-50 flex max-w-[calc(100vw-1.5rem)] items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold shadow-lg ring-1 transition hover:scale-[1.02] bottom-[calc(4.75rem+env(safe-area-inset-bottom))] lg:bottom-4 lg:right-4",   // above the mobile bottom nav
-        waiting ? "bg-amber-100 text-amber-950 ring-amber-300 dark:bg-amber-900 dark:text-amber-50 dark:ring-amber-700" : "bg-night-900 text-parchment ring-gold/40")}>
-      <span className="relative flex shrink-0">{waiting ? <Hand size={15} /> : <Loader2 size={15} className={clsx("text-gold", !stale && "animate-spin")} />}<span className="absolute -right-0.5 -top-0.5 h-2 w-2 animate-ping rounded-full bg-gold" /></span>
-      <span className="truncate">{waiting ? "Needs you" : s.reel_code ?? "Working"}{!waiting && s.task ? ` · ${s.task}` : ""}</span>
-      {!waiting && pct !== null && <span className="tabular shrink-0 opacity-80">{pct}%</span>}
-      {!waiting && left && <span className="shrink-0 opacity-70">· ~{left}</span>}
-      <ChevronUp size={15} className="shrink-0 opacity-70" />
-    </button>
+    <>
+      <button onClick={onOpen} aria-label="Show what Claude is doing"
+        className={clsx("flex w-full items-center gap-2 border-b px-4 py-1 text-[12px] font-semibold lg:hidden", tone, waiting ? "border-amber-300 dark:border-amber-700" : "border-gold/30")}>
+        {icon(13)}{label}{nums}<ChevronDown size={14} className="ml-auto shrink-0 opacity-70" />
+      </button>
+      <button onClick={onOpen} aria-label="Show what Claude is doing"
+        className={clsx("fixed bottom-4 right-4 z-50 hidden max-w-md items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold shadow-lg ring-1 transition hover:scale-[1.02] lg:flex", tone, waiting ? "ring-amber-300 dark:ring-amber-700" : "ring-gold/40")}>
+        {icon(15)}{label}{nums}<ChevronUp size={15} className="shrink-0 opacity-70" />
+      </button>
+    </>
   );
 }
 
