@@ -1,7 +1,8 @@
 // ===== storyreel-studio art library: figure rigs (gouache cut-outs with poses, blinks, gaze, IK hands) =====
 // A character is data: CH.<key> = { kind: 'man'|'woman'|'monk'|'demon', skin, skinSh, cloth, clothSh, sash|border|blouse, hair,
 //   optional flags: god (crown), sage (beard; monk+sage = matted jata), elder, plain (no jewellery), vanara (muzzle, fur cap, tail),
-//   bear (round ears, long snout; with vanara), band (gold head band), crown (vanara crown), bow (bow + quiver), ruff }.
+//   bear (round ears, long snout; with vanara), band (gold head band), crown (vanara crown), bow (bow + quiver), ruff,
+//   garland: 'gold'|'flowers' (also per pose: P({garland})), ears + tail (vanara signs on a human face; fur = ear colour) }.
 // Draw: drawFigure(ctx, CH.key, P({ pose overrides }), { x, y, s, face: ±1 }, light). A series adds its own cast in art/chars.js:
 //   Object.assign(CH, { hero: {...}, ... });
 const CH = {
@@ -159,6 +160,7 @@ function drawHead(x, ch, p) {
   }
   // tears
   if (p.tear > 0.02) { const a = clamp(p.tear); dab(x, 0.07, 0.03, 0.018, 0.022, 0, '#dff0ff', 0.9 * a); line(x, [[0.075, 0.04], [0.06, 0.12 + 0.1 * a], [0.075, 0.2 + 0.16 * a]], 0.02, '#cfe6ff', 0.75 * a); dab(x, 0.075, 0.2 + 0.16 * a, 0.022, 0.03, 0, '#eaf6ff', 0.9 * a); dab(x, 0.33, 0.02, 0.014, 0.018, 0, '#dff0ff', 0.8 * a); }
+  if (ch.ears && !ch.vanara) { dab(x, -0.3, -0.34, 0.1, 0.11, -0.3, ch.fur || ch.skin); dab(x, -0.29, -0.33, 0.055, 0.06, -0.3, mix(ch.fur || ch.skin, '#3a2014', 0.45), 0.8); }   // vanara sign on a human face: small rounded ear above the hairline
   x.restore();
 }
 
@@ -236,7 +238,7 @@ function figureBody(x, ch, p) {
     for (let i = -4; i <= 4; i++) stroke(x, top[0] + i * 0.07, top[1] + 0.02, top[0] + i * 0.07, top[1] + 0.05, 0.008, '#5a4e42', 0.9);
     dab(x, top[0], top[1] - 0.175, 0.016, 0.02, 0, GOLDSH);
   }
-  if (ch.vanara && !ch.bear) { const ph = (p.tail || 0); line(x, [add(hip, [-0.05, 0.0]), add(hip, [-0.2, 0.06]), add(hip, [-0.32 + ph * 0.04, -0.06]), add(hip, [-0.33 + ph * 0.06, -0.22]), add(hip, [-0.26 + ph * 0.05, -0.32])], 0.034, ch.skin); dab(x, hip[0] - 0.26 + ph * 0.05, hip[1] - 0.33, 0.03, 0.03, 0, ch.skinSh); }
+  if ((ch.vanara && !ch.bear) || ch.tail) { const ph = (p.tail || 0); line(x, [add(hip, [-0.05, 0.0]), add(hip, [-0.2, 0.06]), add(hip, [-0.32 + ph * 0.04, -0.06]), add(hip, [-0.33 + ph * 0.06, -0.22]), add(hip, [-0.26 + ph * 0.05, -0.32])], 0.034, ch.fur || ch.skin); dab(x, hip[0] - 0.26 + ph * 0.05, hip[1] - 0.33, 0.03, 0.03, 0, ch.skinSh); }
   if (ch.bow && p.bow === 'F') drawBow(x, aF.hand, p.bowAng);
   if (ch.bow && p.bow === 'B') drawBow(x, add(N, rot([-0.09, 0.03], lean)), 0.3 + lean);
   drawArm(aF, shF, true, p.handF);
@@ -300,6 +302,14 @@ function figureBody(x, ch, p) {
     blob(x, tp([[-0.086, 0.02], [-0.02, 0.02], [-0.03, -0.1], [-0.03, -0.2], [-0.09, -0.1]]), clothSh, 0.6, 0.3);
     for (let i = 0; i < 3; i++) line(x, tp([[-0.02 + i * 0.03, 0.0], [0.03 + i * 0.02, -0.14], [0.05 + i * 0.012, -0.29]]), 0.006, clothSh, 0.7);
     for (let i = 0; i < 13; i++) { const t = i / 12, q = add(hip, rot([lerp(-0.03, 0.07, t) * bw, -0.3 + Math.sin(t * Math.PI) * 0.15], lean)); dab(x, q[0], q[1], 0.0085, 0.0085, 0, '#2c1610'); }
+  }
+  // --- garland: ch.garland = 'gold' (a jewelled golden chain, e.g. Indra's gift to Vali) | 'flowers' (a flowering creeper, e.g. Sugriva's gajapushpi)
+  if (ch.garland || p.garland) {
+    const g = p.garland || ch.garland, n = g === 'gold' ? 15 : 13;
+    for (let i = 0; i < n; i++) { const t = i / (n - 1), q = add(hip, rot([lerp(-0.07, 0.08, t) * bw, -0.305 + Math.sin(t * Math.PI) * 0.24], lean));
+      if (g === 'gold') { dab(x, q[0], q[1], 0.024, 0.021, 0, i % 2 ? '#ffd65a' : GOLD); dab(x, q[0] - 0.006, q[1] - 0.006, 0.008, 0.007, 0, '#fff4c0', 0.9); if (i % 3 === 1) dab(x, q[0], q[1] + 0.004, 0.009, 0.009, 0, i % 2 ? '#c41e3a' : '#2a7a9a'); }
+      else { dab(x, q[0], q[1], 0.02, 0.012, t * 3, '#2e7a2a'); if (i % 2 === 0) { dab(x, q[0], q[1], 0.026, 0.023, 0, i % 4 ? '#fbf6ea' : '#f4a8c0'); dab(x, q[0], q[1], 0.006, 0.006, 0, '#e8b23a'); } } }
+    if (g === 'gold') { const q = add(hip, rot([0.005 * bw, -0.05], lean)); dab(x, q[0], q[1], 0.036, 0.044, 0, '#ffd65a'); dab(x, q[0], q[1], 0.016, 0.02, 0, '#c41e3a'); }
   }
   // --- braid, head
   if (fem && !ch.elder) { const BR = ch.plain ? ch.hair : GOLD; const b0 = add(N, rot([-0.05, -0.06], lean)), b1 = add(N, rot([-0.05, 0.04], lean)), b2 = add(N, rot([0.0, 0.2], lean)); for (let i = 0; i <= 9; i++) { const t = i / 9, q = [(1 - t) * (1 - t) * b0[0] + 2 * t * (1 - t) * b1[0] + t * t * b2[0], (1 - t) * (1 - t) * b0[1] + 2 * t * (1 - t) * b1[1] + t * t * b2[1]]; dab(x, q[0], q[1], lerp(0.022, 0.012, t), lerp(0.026, 0.016, t), (i % 2 ? 0.5 : -0.5), i % 2 ? '#1a1630' : ch.hair); } dab(x, b2[0], b2[1] + 0.012, 0.01, 0.012, 0, BR); stroke(x, b2[0], b2[1] + 0.02, b2[0] + 0.004, b2[1] + 0.055, 0.014, ch.hair); }

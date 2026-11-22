@@ -1,0 +1,20 @@
+{
+ "line": "[gently] हे वीर, सुग्रीव को युवराज बना दीजिए। [pause] अपने भाई से यह वैर छोड़ दीजिए।",
+ "voices": [
+  {
+   "n": 1,
+   "voice_id": "xccfcojYYGnqTTxwZEDU",
+   "name": "Kanika - Soft, Vibrant"
+  },
+  {
+   "n": 2,
+   "voice_id": "9cI5mhBtM4WtQ9Fo6jWQ",
+   "name": "Sara - Warm, Serious"
+  },
+  {
+   "n": 3,
+   "voice_id": "EGQM7bHbTHTb7VUEcOHG",
+   "name": "Shakuntala - Clear"
+  }
+ ]
+}

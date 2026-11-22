@@ -1,0 +1,20 @@
+{
+ "line": "[serious] जिसका मुख दूसरी ओर था, उसे मारकर तुम्हें कौन-सा पुण्य मिला? [pause] मैं तो किसी और से युद्ध कर रहा था।",
+ "voices": [
+  {
+   "n": 1,
+   "voice_id": "7eRpHPIAaX3Z8JIv8xfg",
+   "name": "Yatin - Rich, Deep"
+  },
+  {
+   "n": 2,
+   "voice_id": "wbOlq3nIga8HKqcDhASI",
+   "name": "Shivank - Deep, Breathy"
+  },
+  {
+   "n": 3,
+   "voice_id": "7UUQ7nKkAFuNp9HpqSDh",
+   "name": "Niraj - Serious, Compelling"
+  }
+ ]
+}
