@@ -109,39 +109,39 @@ function lyingVali(c, sh, u, t, x = 960, light = L_DUSK, o = {}) { lying(c, vali
 function rain(c, t, a = 1) { for (let i = 0; i < 260; i++) { const h1 = hash(i * 3.1), h2 = hash(i * 7.3), x = ((h1 * (W + 400) + t * 260) % (W + 400)) - 200, y = ((h2 * 1300 + t * (900 + h1 * 400)) % 1300) + 480; stroke(c, x, y, x - 24, y + 70, 2, '#b8c8e8', 0.35 * a); } }
 
 // ---------- UI (frame coordinates, FW x FH) ----------
-const CX = FW / 2;
-function chip(c, ref, a = 1) { if (!ref || a <= 0) return; text(c, 'VALMIKI RAMAYANA · CE ' + ref, FW - 50, 70, { size: 26, font: 'Montserrat', weight: 800, color: C_GOLD, align: 'right', ls: 3, alpha: 0.9 * a, stroke: 5, shadow: 10 }); }
-function hookLines(c, u, lines) { lines.forEach(([s, col], i) => { const a = ease(u, 0.15 + i * 0.5, 0.5 + i * 0.5); if (a > 0) textFit(c, s, CX, 230 + i * 110 + (1 - a) * 16, { size: 96, weight: 900, color: col || C_IVORY, ls: 6, alpha: a, stroke: 10, shadow: 30 }, 1700); }); }
-function actTitle(c, u, act) { const N = ['', 'ACT I', 'ACT II', 'ACT III', 'ACT IV'][act.n], a = Math.min(ease(u, 0.2, 0.8), 1 - ease(u, 3.6, 4.4)); if (a <= 0 || !N) return;
+const CX = FW / 2, TALL = FH > FW, MW = FW - 100;   // TALL = a 9:16 reel derived from this video (cards re-flow)
+function chip(c, ref, a = 1) { if (!ref || a <= 0) return; text(c, 'VALMIKI RAMAYANA · CE ' + ref, FW - 50, TALL ? 250 : 70, { size: 26, font: 'Montserrat', weight: 800, color: C_GOLD, align: 'right', ls: 3, alpha: 0.9 * a, stroke: 5, shadow: 10 }); }
+function hookLines(c, u, lines) { lines.forEach(([s, col], i) => { const a = ease(u, 0.15 + i * 0.5, 0.5 + i * 0.5); if (a > 0) textFit(c, s, CX, (TALL ? 380 : 230) + i * 110 + (1 - a) * 16, { size: 96, weight: 900, color: col || C_IVORY, ls: 6, alpha: a, stroke: 10, shadow: 30 }, TALL ? MW : 1700); }); }
+function actTitle(c, u, act) { if (TALL) return; const N = ['', 'ACT I', 'ACT II', 'ACT III', 'ACT IV'][act.n], a = Math.min(ease(u, 0.2, 0.8), 1 - ease(u, 3.6, 4.4)); if (a <= 0 || !N) return;
   text(c, N, 80, 190, { size: 46, font: 'Montserrat', weight: 800, color: C_GOLD, align: 'left', ls: 10, alpha: a, stroke: 6 }); text(c, act.name.toUpperCase(), 80, 270, { size: 66, weight: 900, color: C_IVORY, align: 'left', ls: 4, alpha: a, stroke: 9, shadow: 24 }); }
-function enLines(c, en, y, a, max = 1600, size = 44) { const w = en.split(' '); if (w.join(' ').length < 70) { textFit(c, en, CX, y, { size, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: a, stroke: 6, shadow: 20 }, max); return; } const h = Math.ceil(w.length / 2);
+function enLines(c, en, y, a, max = TALL ? MW : 1600, size = 44) { const w = en.split(' '); if (w.join(' ').length < 70) { textFit(c, en, CX, y, { size, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: a, stroke: 6, shadow: 20 }, max); return; } const h = Math.ceil(w.length / 2);
   [w.slice(0, h).join(' '), w.slice(h).join(' ')].forEach((l, i) => textFit(c, l, CX, y + i * 58, { size, font: 'Montserrat', weight: 800, color: C_IVORY, alpha: a, stroke: 6, shadow: 20 }, max)); }
 function cardBg(ctx, t, u) { lfScene(ctx, 'card', { z: lerp(1.02, 1.08, Math.min(1, u / 10)) }); glow(ctx, 960, 1100, 700, '#ffd890', 0.12); flame(ctx, 960, 1560, 22, t, 3); }
 // verse / quote card, wide: source + ref, Devanagari (Mukta), transliteration, English
 function wideQuote(ctx, u, t, post, Q, enAt) {
-  cardBg(ctx, t, u);
+  cardBg(ctx, t, u); const Y = TALL ? 330 : 0, LM = TALL ? MW : 1700;
   post.ui = c => {
-    const q0 = ease(u, 0.05, 0.4); if (q0 > 0) { text(c, Q.source, CX, 150, { size: 60, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 8, shadow: 30 }); text(c, Q.ref, CX, 205, { size: 30, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }); }
-    const q1 = ease(u, 0.2, 0.7); if (q1 > 0) { Q.lines.forEach((l, i) => textFit(c, l, CX, 350 + i * 104 + (1 - q1) * 12, { size: 80, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, 1700));
-      const tl = Q.translit.length > 90 && Q.translit.includes(', ') ? Q.translit.split(', ') : [Q.translit]; tl.forEach((l, i) => textFit(c, l + (i < tl.length - 1 ? ',' : ''), CX, 350 + Q.lines.length * 104 + 10 + i * 42, { size: 32, font: 'Montserrat', weight: 600, color: C_IVORY, alpha: 0.85 * q1, stroke: 5 }, 1600)); }
-    const q2 = ease(u, enAt, enAt + 0.45); if (q2 > 0) enLines(c, Q.en, 350 + Q.lines.length * 104 + 150, q2);
+    const q0 = ease(u, 0.05, 0.4); if (q0 > 0) { textFit(c, Q.source, CX, 150 + Y, { size: 60, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 8, shadow: 30 }, TALL ? MW : 1240); textFit(c, Q.ref, CX, 205 + Y, { size: 30, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }, TALL ? MW : 9999); }
+    const q1 = ease(u, 0.2, 0.7); if (q1 > 0) { Q.lines.forEach((l, i) => textFit(c, l, CX, 350 + Y + i * 104 + (1 - q1) * 12, { size: 80, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, LM));
+      const tl = Q.translit.length > 90 && Q.translit.includes(', ') ? Q.translit.split(', ') : [Q.translit]; tl.forEach((l, i) => textFit(c, l + (i < tl.length - 1 ? ',' : ''), CX, 350 + Y + Q.lines.length * 104 + 10 + i * 42, { size: 32, font: 'Montserrat', weight: 600, color: C_IVORY, alpha: 0.85 * q1, stroke: 5 }, LM)); }
+    const q2 = ease(u, enAt, enAt + 0.45); if (q2 > 0) enLines(c, Q.en, 350 + Y + Q.lines.length * 104 + 150, q2);
   };
 }
 function wideSource(ctx, u, t, post, title, sub) {
-  cardBg(ctx, t, u);
-  post.ui = c => { const a = ease(u, 0.15, 0.6); text(c, title, CX, 420, { size: 110, weight: 900, color: C_GOLD, ls: 8, alpha: a, stroke: 9, shadow: 30 });
-    const w = 420 * ease(u, 0.4, 1.0); c.fillStyle = rgba(C_IVORY, 0.8 * a); c.fillRect(CX - w, 470, w * 2, 3);
-    text(c, sub, CX, 545, { size: 42, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 5, alpha: ease(u, 0.5, 1.0), stroke: 6 });
-    text(c, 'CRITICAL EDITION', CX, 605, { size: 30, font: 'Montserrat', weight: 700, color: C_GOLD, ls: 6, alpha: ease(u, 0.7, 1.2), stroke: 5 }); };
+  cardBg(ctx, t, u); const Y = TALL ? 280 : 0;
+  post.ui = c => { const a = ease(u, 0.15, 0.6); textFit(c, title, CX, 420 + Y, { size: 110, weight: 900, color: C_GOLD, ls: 8, alpha: a, stroke: 9, shadow: 30 }, TALL ? MW : 9999);
+    const w = 420 * ease(u, 0.4, 1.0); c.fillStyle = rgba(C_IVORY, 0.8 * a); c.fillRect(CX - w, 470 + Y, w * 2, 3);
+    textFit(c, sub, CX, 545 + Y, { size: 42, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 5, alpha: ease(u, 0.5, 1.0), stroke: 6 }, TALL ? MW : 9999);
+    text(c, 'CRITICAL EDITION', CX, 605 + Y, { size: 30, font: 'Montserrat', weight: 700, color: C_GOLD, ls: 6, alpha: ease(u, 0.7, 1.2), stroke: 5 }); };
 }
 function wideEnd(ctx, u, p, sh, t, post) {
   lfScene(ctx, 'peakD', camOf(p, { z0: 1.02, z1: 1.06 }));
   const E = FS * 0.78, EY = BASE + 40; fig(ctx, CH.lak, 720, 1, { bow: 'B', eye: blink(t, 1), smile: 0.5, gaze: [0.4, 0] }, L_DUSK, E, EY); fig(ctx, CH.rama, 880, 1, Object.assign({}, BOW, { eye: blink(t, 2), smile: 0.6 }), L_DUSK, E * 1.04, EY);
   fig(ctx, CH.hanuman, 1060, -1, Object.assign({}, NAMASTE, { eye: blink(t, 3), smile: 0.6 }), L_DUSK, E, EY); fig(ctx, SUG_K, 1220, -1, { eye: blink(t, 4), smile: 0.4 }, L_DUSK, E, EY);
-  rain(ctx, t, 0.5); const C = (SERIES.cta || {}).youtube || {};
-  post.ui = c => { const a = ease(u, 0.2, 0.8); text(c, [].concat(SERIES.title || 'UNTOLD GRANTH').join(' '), CX, 170, { size: 84, weight: 900, color: C_GOLD, ls: 8, alpha: a, stroke: 9, shadow: 30 }); if (SERIES.tagline) text(c, SERIES.tagline, CX, 235, { size: 34, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 3, alpha: a, stroke: 5 });
-    const b = ease(u, 0.8, 1.3); if (b > 0) { c.save(); c.globalAlpha = b; c.fillStyle = '#c81e1e'; const bw = 480, bh = 96; c.beginPath(); c.roundRect(CX - bw / 2, 290, bw, bh, 48); c.fill(); c.restore(); text(c, C.button || 'SUBSCRIBE', CX, 355, { size: 50, font: 'Montserrat', weight: 800, color: '#ffffff', ls: 4, alpha: b, shadow: 0 }); }
-    (C.handles_line || []).forEach((h, i) => text(c, h, CX, 440 + i * 44, { size: 30, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 3, alpha: ease(u, 1.2, 1.7), stroke: 5 })); };
+  rain(ctx, t, 0.5); const C = (SERIES.cta || {})[TALL && typeof PLATFORM !== 'undefined' ? PLATFORM : 'youtube'] || {};
+  post.ui = c => { const a = ease(u, 0.2, 0.8), Y = TALL ? 260 : 0; text(c, [].concat(SERIES.title || 'UNTOLD GRANTH').join(' '), CX, 170 + Y, { size: 84, weight: 900, color: C_GOLD, ls: 8, alpha: a, stroke: 9, shadow: 30 }); if (SERIES.tagline) textFit(c, SERIES.tagline, CX, 235 + Y, { size: 34, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 3, alpha: a, stroke: 5 });
+    const b = ease(u, 0.8, 1.3); if (b > 0) { c.save(); c.globalAlpha = b; c.fillStyle = '#c81e1e'; const bw = 480, bh = 96; c.beginPath(); c.roundRect(CX - bw / 2, 290 + Y, bw, bh, 48); c.fill(); c.restore(); text(c, C.button || 'SUBSCRIBE', CX, 355 + Y, { size: 50, font: 'Montserrat', weight: 800, color: '#ffffff', ls: 4, alpha: b, shadow: 0 }); }
+    (C.handles_line || []).forEach((h, i) => text(c, h, CX, 440 + Y + i * 44, { size: 30, font: 'Montserrat', weight: 700, color: C_IVORY, ls: 3, alpha: ease(u, 1.2, 1.7), stroke: 5 })); };
   post.noLogo = true;
 }
 
@@ -187,7 +187,7 @@ qs(18, (c, u, p, sh, t) => { lfScene(c, 'peak', camOf(p)); fig(c, CH.lak, 1380, 
   fig(c, CH.hanuman, 980, -1, Object.assign({}, NAMASTE, { eye: blink(t, 4), smile: 0.5 }), L_DAY, FS * 0.95); const k = ease(u, sh.dur * 0.6, sh.dur); fig(c, CH.sugriva, 760, 1, { aN: [lerp(0.06, 0.24, k), lerp(0.36, 0.08, k)], eye: blink(t, 3), smile: 0.4 }, L_DAY, FS * 0.95); });
 qs(19, (c, u, p, sh, t) => { lfScene(c, 'peak', camOf(p, { z0: 1.06, z1: 1.1 })); fig(c, CH.rama, 1130, -1, { bow: 'B', aN: [0.22, 0.1], eye: blink(t, 2), smile: 0.6 }, L_DAY); fig(c, CH.sugriva, 820, 1, Object.assign({ aN: [0.24, 0.08], smile: 0.5 }, talk(sh, u, t, 3, 'sugriva')), L_DAY, FS * 0.96); });
 qs(20, (c, u, p, sh, t) => { lfScene(c, 'peakD', camOf(p)); const a = t * 0.35; fire(c, 960, BASE - 20, 70, 180, t, 7, 7);
-  [[CH.rama, 0], [CH.sugriva, Math.PI]].forEach(([ch, o]) => { const x = 960 + Math.cos(a + o) * 300, f = Math.sin(a + o) > 0 ? -1 : 1; fig(c, ch, x, f, { eye: blink(t, 2), smile: 0.4, bow: ch === CH.rama ? 'B' : undefined }, L_FIRE, FS * (0.92 + 0.06 * Math.sin(a + o))); });
+  [[CH.rama, 0], [CH.sugriva, Math.PI]].forEach(([ch, o]) => { const x = 960 + Math.cos(a + o) * 300, f = Math.sin(a + o) > 0 ? -1 : 1; fig(c, ch, x, f, Object.assign({ eye: blink(t, 2), smile: 0.4 }, ch === CH.rama ? { bow: 'B' } : {}), L_FIRE, FS * (0.92 + 0.06 * Math.sin(a + o))); });
   fig(c, CH.hanuman, 560, 1, Object.assign({}, NAMASTE, { eye: blink(t, 4), smile: 0.5 }), L_FIRE, FS * 0.85); embers(c, t, 3, 30, 960, BASE - 60, 120); });
 qs(21, (c, u, p, sh, t) => { lfScene(c, 'peakD', camOf(p)); fig(c, CH.sugriva, 960, 1, { eye: blink(t, 3), smile: -0.3, gaze: [0.5, -0.05], head: 0.08 }, L_DUSK, FS * 1.05); });
 // B04 seven sala trees
@@ -246,22 +246,22 @@ qs(72, (c, u, p, sh, t) => { lfScene(c, 'gate', camOf(p)); lyingVali(c, sh, u, t
 // Act IV · B14-B16
 qs(73, (c, u, p, sh, t) => { lfScene(c, 'forestD', camOf(p)); for (let i = 0; i < 4; i++) fig(c, CH.vanara, lerp(700 + i * 120, 300 + i * 120, ease(u, 0, sh.dur)), -1, runPose(t * 6 + i), L_DUSK, FS * 0.8);
   fig(c, CH.tara, lerp(900, 1300, ease(u, sh.dur * 0.3, sh.dur)), 1, runPose(t * 5, { eye: 1.1 }), L_DUSK, FS * 0.92); });
-const grief = (c, u, p, sh, t, z = [1.04, 1.08]) => { lfScene(c, 'gate', camOf(p, { z0: z[0], z1: z[1] })); lyingVali(c, sh, u, t, 960, L_DUSK);
-  fig(c, CH.tara, 740, 1, Object.assign({ sit: 0.8, aN: [0.18, 0.2], aF: [0.16, 0.22], smile: -0.6, brow: -0.6, tear: 0.8 }, talk(sh, u, t, 6, 'tara')), L_DUSK, FS * 0.9);
-  fig(c, CH.angada, 1200, -1, Object.assign({ sit: 0.7, smile: -0.5, tear: 0.8, head: 0.1 }, talk(sh, u, t, 8, 'angada')), L_DUSK, FS * 0.82); };
+const grief = (c, u, p, sh, t, z = [1.04, 1.08]) => { lfScene(c, 'gate', camOf(p, { z0: z[0], z1: z[1] })); lyingVali(c, sh, u, t, 900, L_DUSK);
+  fig(c, CH.tara, 1060, -1, Object.assign({ sit: 0.8, aN: [0.18, 0.2], aF: [0.16, 0.22], smile: -0.6, brow: -0.6, tear: 0.8 }, talk(sh, u, t, 6, 'tara')), L_DUSK, FS * 0.9);
+  fig(c, CH.angada, 1270, -1, Object.assign({ sit: 0.7, smile: -0.5, tear: 0.8, head: 0.1 }, talk(sh, u, t, 8, 'angada')), L_DUSK, FS * 0.82); };
 [74, 75, 86, 88].forEach(id => qs(id, (c, u, p, sh, t) => grief(c, u, p, sh, t)));
 qs(87, (c, u, p, sh, t) => { lfScene(c, 'gate', camOf(p, { z0: 1.1, z1: 1.16, x0: 80, x1: 80 })); lyingVali(c, sh, u, t, 960, L_DUSK, { eye: 0 }); fig(c, CH.angada, 1180, -1, Object.assign({ sit: 1, aN: [0.24, 0.3], aF: [0.22, 0.32], tear: 0.9, smile: -0.5 }, talk(sh, u, t, 8, 'angada')), L_DUSK, FS * 0.82); });
-const farewell = (c, u, p, sh, t, z) => { lfScene(c, 'gate', camOf(p, { z0: z[0], z1: z[1] })); lyingVali(c, sh, u, t, 960, L_DUSK);
-  fig(c, sugOf(sh.id), 1280, -1, { sit: 0.6, eye: blink(t, 3), smile: -0.5, tear: 0.6, head: 0.12, aN: sh.id === 81 ? [0.2, 0.2] : undefined }, L_DUSK, FS * 0.9);
-  fig(c, CH.tara, 620, 1, { sit: 0.8, eye: blink(t, 6), smile: -0.5, tear: 0.6 }, L_DUSK, FS * 0.88); if (sh.id === 78 || sh.id === 84) fig(c, CH.angada, 800, 1, { sit: 0.9, smile: -0.6, tear: 0.9, head: 0.15 }, L_DUSK, FS * 0.8); };
+const farewell = (c, u, p, sh, t, z) => { lfScene(c, 'gate', camOf(p, { z0: z[0], z1: z[1] })); lyingVali(c, sh, u, t, 900, L_DUSK);
+  fig(c, sugOf(sh.id), 1370, -1, Object.assign({ sit: 0.6, eye: blink(t, 3), smile: -0.5, tear: 0.6, head: 0.12 }, sh.id === 81 ? { aN: [0.2, 0.2] } : {}), L_DUSK, FS * 0.9);
+  fig(c, CH.tara, 1030, -1, { sit: 0.8, eye: blink(t, 6), smile: -0.5, tear: 0.6 }, L_DUSK, FS * 0.88); if (sh.id === 78 || sh.id === 84) fig(c, CH.angada, 1190, -1, { sit: 0.9, smile: -0.6, tear: 0.9, head: 0.15 }, L_DUSK, FS * 0.8); };
 qs(76, (c, u, p, sh, t) => farewell(c, u, p, sh, t, [1.0, 1.06]));
 [77, 78, 79, 81, 84].forEach(id => qs(id, (c, u, p, sh, t) => farewell(c, u, p, sh, t, id % 2 ? [1.04, 1.08] : [1.06, 1.1])));
 qs(82, (c, u, p, sh, t) => { lfScene(c, 'gate', camOf(p, { z0: 1.08, z1: 1.22, x0: 180, x1: 260, y: 40 })); lyingVali(c, sh, u, t, 960, L_DUSK);
   fig(c, SUG_G, 1280, -1, { sit: 0.6, eye: 0.7, smile: -0.4, tear: 0.7, head: 0.12 }, L_GOLD, FS * 0.9); glow(c, 1280, 1230, 200, '#ffd65a', 0.4 + 0.15 * Math.sin(t * 2)); });
 qs(83, (c, u, p, sh, t) => { lfScene(c, 'forestN', camOf(p)); const k = ease(u, 0, sh.dur); dab(c, 1420, 700, 46, 46, 0, '#f4edd2'); dab(c, 1420 + lerp(90, 10, k), 700, 46, 46, 0, '#0a0c24');
   fig(c, SUG_G, 960, 1, { eye: 0.6, smile: -0.6, tear: 0.8, head: 0.15 }, L_NIGHT, FS * 1.04); });
-qs(85, (c, u, p, sh, t) => { lfScene(c, 'gate', camOf(p, { z0: 1.0, z1: 1.08 })); lyingVali(c, sh, u, t, 960, L_NIGHT, { eye: lerp(0.3, 0, ease(u, 0.5, 2)) });
-  fig(c, SUG_G, 1280, -1, { sit: 0.6, eye: 0.4, smile: -0.6, tear: 0.8, head: 0.2 }, L_NIGHT, FS * 0.9); fig(c, CH.tara, 620, 1, { sit: 0.8, eye: 0.4, smile: -0.6, tear: 0.8, head: 0.2 }, L_NIGHT, FS * 0.88); });
+qs(85, (c, u, p, sh, t) => { lfScene(c, 'gate', camOf(p, { z0: 1.0, z1: 1.08 })); lyingVali(c, sh, u, t, 900, L_NIGHT, { eye: lerp(0.3, 0, ease(u, 0.5, 2)) });
+  fig(c, SUG_G, 1370, -1, { sit: 0.6, eye: 0.4, smile: -0.6, tear: 0.8, head: 0.2 }, L_NIGHT, FS * 0.9); fig(c, CH.tara, 1060, -1, { sit: 0.8, eye: 0.4, smile: -0.6, tear: 0.8, head: 0.2 }, L_NIGHT, FS * 0.88); });
 // B17 the fire and the rains
 qs(89, (c, u, p, sh, t) => { lfScene(c, 'river', camOf(p)); const k = ease(u, sh.dur * 0.4, sh.dur);
   for (let i = 0; i < 5; i++) stroke(c, 800, BASE - 40 - i * 22, 1120, BASE - 40 - i * 22 + (i % 2) * 8, 18, '#5a3a22'); if (k > 0.6) fire(c, 960, BASE - 140, 120, 300, t, 4, 8, ease(k, 0.6, 1));
