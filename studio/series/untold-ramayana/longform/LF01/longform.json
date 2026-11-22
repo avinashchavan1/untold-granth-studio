@@ -2,7 +2,7 @@
   "code": "LF01",
   "title": "Vali's Death, as Valmiki Tells It",
   "subtitle": "Why Rama shot from hiding: Vali's question and Rama's answer, both in the text",
-  "stage": "voiced",
+  "stage": "review",
   "frame": "16:9 (1920x1080), action kept inside a centred 9:16 safe zone",
   "target_min": "10-12",
   "arc": "Kishkindha Kanda (CE) 4.5 to 4.25: the fire-witness friendship, the brothers' feud, the two duels, Tara's warning, the arrow, Vali's accusation and Rama's answer, Vali's last words, Tara's grief, the funeral and Sugriva's crowning",
@@ -392,11 +392,11 @@
       "done": true
     },
     {
-      "step": "Render: YouTube 4K master + preview",
-      "done": false
+      "step": "Render: YouTube 4K master (13:59) + preview; ending checked (subscribe), -13.9 LUFS",
+      "done": true
     },
     {
-      "step": "Wide thumbnail + chapters; derived reels",
+      "step": "Wide thumbnail + chapters done; derived reels A35, A36, A34 rendering",
       "done": false
     }
   ],
@@ -498,5 +498,8 @@
       ]
     }
   },
-  "length": "13:59"
+  "length": "13:59",
+  "thumb_path": "untold-ramayana/LF01/LF01_thumb_wide.jpg",
+  "youtube_description": "Vali was shot from behind the trees, and as he lay dying he asked Rama: \"What merit did you gain by striking one whose face was turned away?\" (Valmiki Ramayana 4.17.13). Valmiki records his full accusation, and Rama's full answer (4.18). Two brothers, one cave, two garlands, and Tara, whose judgement \"never fails\" (4.22.14). Every line cited from the Critical Edition, with Tulsidas's telling beside it. Which argument weighs most for you?\n\nCHAPTERS\n0:00 The question (CE 4.17.13)\n0:54 The cave and the year (CE 4.9.4-4.9.20)\n1:58 The same stone, Vali's way (CE 4.10.1-4.10.22)\n2:48 A friendship sworn by fire (CE 4.5.12-4.5.16)\n3:20 Seven sala trees, one arrow (CE 4.12.1-4.12.11)\n3:44 The first duel: two brothers, one face (CE 4.12.13-4.12.32)\n4:49 Two garlands (CE 4.12.34-4.12.37; 4.11.37; 4.17.5)\n5:15 Tara's warning (CE 4.15.6-4.15.23)\n5:59 'How could he do wrong?' (CE 4.16.1-4.16.11)\n6:33 The arrow (CE 4.16.12-4.16.27; 4.17.1-4.17.7)\n7:16 Vali's accusation (CE 4.17.13-4.17.43)\n8:17 Rama's answer: the law (CE 4.18.6-4.18.27)\n9:07 Rama's answer: why from hiding (CE 4.18.34-4.18.36)\n10:05 Vali folds his hands (CE 4.18.40-4.18.50)\n10:32 Tara on the battlefield (CE 4.19.18-4.19.20; 4.20.4-4.20.24)\n11:01 The golden garland changes hands (CE 4.22.1-4.22.18)\n12:01 To Angada, then silence (CE 4.22.19-4.22.26; 4.23.22-4.23.25)\n12:27 The fire and the rains (CE 4.24.40-4.24.44; 4.25.9-4.25.13; 4.25.35)\n12:55 Outro: what the popular version says, and what Valmiki says (Ramcharitmanas & Valmiki)\n\nSOURCES\nValmiki Ramayana, Critical Edition, Kishkindha Kanda 4.5, 4.9-4.25 (every quoted verse is shown on screen with its number).\nRamcharitmanas of Goswami Tulsidas, Kishkindha Kand (dohas 7-11), quoted verbatim. Both are told with devotion.\n\nVali's accusation or Rama's answer: which weighs more for you?\n\n#Ramayana #ValmikiRamayana #Vali #Sugriva #Rama #Kishkindha #Tara #Hanuman #UntoldGranth",
+  "master": "LF01_YOUTUBE_MASTER.mp4 · 3840x2160 · H.264 CRF 16 · AAC 384k (masters repo)"
 }

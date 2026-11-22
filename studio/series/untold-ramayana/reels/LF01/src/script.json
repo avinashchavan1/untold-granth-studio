@@ -703,7 +703,8 @@
   "line": "Vali's question. Rama's answer.",
   "badge": "KISHKINDHA 4.17-18",
   "frame": "40s",
-  "wide": true
+  "wide": true,
+  "side": "right"
  },
  "score": {
   "engine": "elevenlabs music_v1 per act (engine/py/gen_score_acts.py)",
