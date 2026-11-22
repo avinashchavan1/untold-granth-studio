@@ -1,0 +1,420 @@
+{
+ "reel": "A82",
+ "title": "Who Was Shanta?",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 — whole CE searched for Shanta (only Bala 1.8-10, 1.17); Bhagavata 9.23.7-8 read on vedabase.io; review before posting",
+ "source": "Valmiki Ramayana, Bala Kanda 1.8-10 and 1.17 (Critical Edition; vulgate 1.9-11, 1.18)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "BALA KANDA  ·  CHAPTERS 8–10",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "Srimad Bhagavatam: to his friend Romapada, Dasharatha gave his own daughter Shanta, whom Rishyashringa married",
+   "ref": "Bhagavata Purana 9.23.7-8",
+   "quote_sa": "रोमपाद इति ख्यातस्तस्मै दशरथ: सखा ॥ शान्तां स्वकन्यां प्रायच्छदृष्यशृङ्ग उवाह याम् ।",
+   "verified": true,
+   "sources": [
+    "vedabase.io"
+   ]
+  },
+  {
+   "claim": "Anga suffers a drought under King Lomapada; the Brahmins say: bring Rishyashringa and give him the maiden Shanta",
+   "ref": "1.8.11-16",
+   "quote_sa": "प्रयच्छ कन्यां शान्तां वै विधिना सुसमाहितः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Rain falls as Rishyashringa arrives; the king of Anga gives him Shanta in marriage; he lives there with his wife Shanta",
+   "ref": "1.9.28-32",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Sanatkumara's prophecy: Dasharatha will be friends with the king of Anga, and HE will have a daughter named Shanta",
+   "ref": "1.10.3",
+   "quote_sa": "अङ्गराजेन सख्यं च तस्य राज्ञो भविष्यति । कन्या चास्य महाभागा शान्ता नाम भविष्यति ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "In the prophecy Dasharatha tells Lomapada: I am childless; may Shanta's husband perform my rite",
+   "ref": "1.10.5",
+   "quote_sa": "अनपत्यो ऽस्मि धर्मात्मञ् शान्ताभर्ता मम क्रतुम् ।",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Dasharatha to Lomapada: let your daughter Shanta come to my city with her husband",
+   "ref": "1.10.19",
+   "quote_sa": "शान्ता तव सुता राजन् सह भर्त्रा विशाम्पते । मदीयं नगरं यातु कार्यं हि महदुद्यतम् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The women of Ayodhya's inner palace welcome Shanta; she stays; after the horse-sacrifice she leaves with Rishyashringa; then Rama is born",
+   "ref": "1.10.28-29; 1.17.5-6",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Nowhere in the CE is Shanta called Dasharatha's daughter or Rama's sister (she is named only in 1.8-10 and 1.17)",
+   "ref": "whole text searched (all 7 kandas)",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE): full-text search for शान्ता/शान्तां/शान्तया"
+   ]
+  }
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या श्रीराम की, एक बहन थीं, शांता?",
+   "en": "Did Rama have a sister named Shanta?",
+   "units": [
+    "[serious] [intense] क्या श्रीराम की, एक बहन थीं… शांता?"
+   ],
+   "card": [
+    [
+     "DID RAMA HAVE",
+     null
+    ],
+    [
+     "A SISTER?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 3.0
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, बाल कांड, सर्ग दस। शान्ता तव सुता राजन् सह भर्त्रा विशाम्पते । मदीयं नगरं यातु कार्यं हि महदुद्यतम् ॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, बाल कांड, सर्ग दस।",
+    "[reverently] [slowly] शान्ता तव सुता राजन्, सह भर्त्रा विशाम्पते… मदीयं नगरं यातु, कार्यं हि महदुद्यतम्॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "शान्ता तव सुता राजन् सह भर्त्रा विशाम्पते ।",
+     "मदीयं नगरं यातु कार्यं हि महदुद्यतम् ॥"
+    ],
+    "ref": "BALA KANDA 1.10.19",
+    "en": "“O king, lord of the people, let your daughter Shanta come to my city with her husband, for a great task is at hand.”",
+    "translit": "śāntā tava sutā rājan saha bhartrā viśāmpate, madīyaṃ nagaraṃ yātu kāryaṃ hi mahadudyatam"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 2
+   },
+   "sloka_pick": "take 2 [with deep devotion] [chanting]: 3.82 st, p95 165 Hz, 'तव सुता' heard clearly; t1 4.52 st but 'सुता' heard as 'सुपा'; t3 p95 208 Hz"
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "एक प्रसिद्ध कथा कहती है: शांता, राजा दशरथ की बेटी थीं, श्रीराम की बड़ी बहन।",
+   "en": "A famous story says: Shanta was King Dasharatha's daughter, Rama's elder sister.",
+   "units": [
+    "[warmly] एक प्रसिद्ध कथा कहती है:",
+    "शांता, राजा दशरथ की बेटी थीं… श्रीराम की बड़ी बहन।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "Later tellings",
+   "card": [
+    [
+     "A FAMOUS STORY",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "श्रीमद्भागवत कहता है: रोमपाद इति ख्यातस्तस्मै दशरथः सखा, शान्तां स्वकन्यां प्रायच्छत्। यानी, दशरथ ने, अपनी कन्या शांता, मित्र रोमपाद को दे दी।",
+   "en": "",
+   "units": [
+    "[warmly] श्रीमद्भागवत कहता है:",
+    "[softly] रोमपाद इति ख्यातस्तस्मै दशरथः सखा… शान्तां स्वकन्यां प्रायच्छत्।",
+    "यानी, दशरथ ने, अपनी कन्या शांता, मित्र रोमपाद को दे दी।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "Bhagavata Purana 9.23.7-8",
+   "tail": 0.4,
+   "lead": 0.25,
+   "quote": {
+    "source": "SRIMAD BHAGAVATAM",
+    "ref": "9.23.7–8 · A PURANA OF DEVOTION",
+    "lines": [
+     "रोमपाद इति ख्यातस्तस्मै दशरथः सखा ।",
+     "शान्तां स्वकन्यां प्रायच्छत्"
+    ],
+    "translit": "romapāda iti khyātas tasmai daśarathaḥ sakhā, śāntāṃ sva-kanyāṃ prāyacchat",
+    "en": "“To Romapada, his friend Dasharatha gave his own daughter, Shanta.”"
+   }
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "पर वाल्मीकि की कथा, कुछ और है।",
+   "en": "But Valmiki tells it differently.",
+   "units": [
+    "[curious] पर वाल्मीकि की कथा… कुछ और है।"
+   ],
+   "cite": "—",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 6,
+   "voice": "narrator",
+   "hi": "अंग देश में, राजा लोमपाद के समय, भयंकर सूखा पड़ा। ब्राह्मणों ने कहा: ऋष्यशृंग मुनि को लाइए, और उन्हें कन्या शांता ब्याह दीजिए।",
+   "en": "In Anga, under King Lomapada, a terrible drought fell. The Brahmins said: bring the sage Rishyashringa, and give him the maiden Shanta in marriage.",
+   "units": [
+    "[serious] अंग देश में, राजा लोमपाद के समय, भयंकर सूखा पड़ा।",
+    "[thoughtfully] ब्राह्मणों ने कहा: ऋष्यशृंग मुनि को लाइए, और उन्हें कन्या शांता ब्याह दीजिए।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.8.11-16",
+   "card": [
+    [
+     "ANGA",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 7,
+   "voice": "narrator",
+   "hi": "मुनि आए, वर्षा हुई, और अंग के राजा ने, शांता का विवाह उनसे कर दिया।",
+   "en": "The sage came, the rain fell, and the king of Anga gave Shanta to him in marriage.",
+   "units": [
+    "[warmly] मुनि आए, वर्षा हुई… और अंग के राजा ने, शांता का विवाह उनसे कर दिया।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.9.28-32",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "अयोध्या में, सुमंत्र दशरथ को, एक पुरानी भविष्यवाणी सुनाते हैं: अङ्गराजेन सख्यं च तस्य राज्ञो भविष्यति, कन्या चास्य महाभागा शान्ता नाम भविष्यति। यानी, अंग के राजा की, एक बेटी होगी, शांता।",
+   "en": "",
+   "units": [
+    "[thoughtfully] अयोध्या में, सुमंत्र दशरथ को, एक पुरानी भविष्यवाणी सुनाते हैं:",
+    "[softly] अङ्गराजेन सख्यं च तस्य राज्ञो भविष्यति… कन्या चास्य महाभागा शान्ता नाम भविष्यति।",
+    "यानी, अंग के राजा की, एक बेटी होगी… शांता।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.8.4-6; 1.10.3",
+   "tail": 0.4,
+   "lead": 0.25,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "BALA KANDA 1.10.3 · CRITICAL EDITION",
+    "lines": [
+     "अङ्गराजेन सख्यं च तस्य राज्ञो भविष्यति ।",
+     "कन्या चास्य महाभागा शान्ता नाम भविष्यति ॥"
+    ],
+    "translit": "aṅgarājena sakhyaṃ ca tasya rājño bhaviṣyati, kanyā cāsya mahābhāgā śāntā nāma bhaviṣyati",
+    "en": "“That king will be a friend of the king of Anga; and he, the king of Anga, will have a fortunate daughter named Shanta.”"
+   }
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "hi": "उसी में, दशरथ लोमपाद से कहते हैं: मैं निःसंतान हूँ। शांता के पति, मेरा यज्ञ करवाएँ।",
+   "en": "In that same prophecy, Dasharatha tells Lomapada: I am childless. Let Shanta's husband perform my sacrifice.",
+   "units": [
+    "[serious] उसी में, दशरथ लोमपाद से कहते हैं: मैं निःसंतान हूँ… शांता के पति, मेरा यज्ञ करवाएँ।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.10.5",
+   "card": [
+    [
+     "“I AM CHILDLESS”",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "दशरथ अंग जाते हैं, और लोमपाद से कहते हैं:",
+   "en": "Dasharatha goes to Anga and says to Lomapada:",
+   "units": [
+    "[thoughtfully] दशरथ अंग जाते हैं, और लोमपाद से कहते हैं:"
+   ],
+   "cite": "1.10.13-18",
+   "lead": 0.25,
+   "tail": 0.2
+  },
+  {
+   "id": 11,
+   "voice": "dasharatha",
+   "hi": "राजन्, आपकी पुत्री शांता, अपने पति के साथ, मेरे नगर चलें। एक बड़ा कार्य करना है।",
+   "en": "\"O king, let your daughter Shanta come to my city with her husband. A great task is at hand.\"",
+   "units": [
+    "राजन्, आपकी पुत्री शांता, अपने पति के साथ, मेरे नगर चलें।",
+    "एक बड़ा कार्य करना है।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.10.19",
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 12,
+   "voice": "narrator",
+   "reveal": true,
+   "hi": "सुना आपने? तव सुता, आपकी पुत्री। दशरथ स्वयं, शांता को, लोमपाद की बेटी कहते हैं।",
+   "en": "",
+   "units": [
+    "[serious] [intense] सुना आपने? तव सुता… आपकी पुत्री।",
+    "[serious] [intense] दशरथ स्वयं, शांता को… लोमपाद की बेटी कहते हैं।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.10.19",
+   "card": [
+    [
+     "“YOUR DAUGHTER”",
+     null
+    ],
+    [
+     "SAYS DASHARATHA",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 13,
+   "voice": "narrator",
+   "hi": "अयोध्या में, शांता का प्रेम से स्वागत होता है। यज्ञ के बाद, वो पति के साथ लौटती हैं, और श्रीराम का जन्म होता है।",
+   "en": "Ayodhya welcomes Shanta with love. After the sacrifice she leaves with her husband, and Rama is born.",
+   "units": [
+    "[warmly] अयोध्या में, शांता का प्रेम से स्वागत होता है।",
+    "यज्ञ के बाद, वो पति के साथ लौटती हैं… और श्रीराम का जन्म होता है।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.10.28-29; 1.17.5-6",
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 14,
+   "voice": "narrator",
+   "hi": "वाल्मीकि में, शांता अंग के राजा की बेटी हैं, ऋष्यशृंग की पत्नी। बहन की कथा, बाद में आई। दोनों, भक्ति से सुनाई जाती हैं।",
+   "en": "",
+   "units": [
+    "[serious] वाल्मीकि में, शांता अंग के राजा की बेटी हैं, ऋष्यशृंग की पत्नी।",
+    "बहन की कथा, बाद में आई।",
+    "[warmly] दोनों, भक्ति से सुनाई जाती हैं।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "1.9.31; 1.10.3; 1.10.19",
+   "card": [
+    [
+     "LOMAPADA'S DAUGHTER.",
+     null
+    ],
+    [
+     "IN VALMIKI.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 15,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "thumbnail": {
+  "frame": "96s",
+  "hook": "Did Rama have a sister?",
+  "stamp": "Not in Valmiki",
+  "line": "\"Your daughter,\" said Dasharatha.",
+  "badge": "Valmiki Ramayana · Bala 1.10.19",
+  "art_shift": 0
+ },
+ "score": {
+  "engine": "elevenlabs eleven_music_v2_5",
+  "file": "audio/score.mp3",
+  "duration_s": 120,
+  "gain": 1.9,
+  "duck": 0.72,
+  "prompt": "Warm devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one bright curious hit and a tanpura drone with a bansuri phrase; very quiet and still under a recited Sanskrit verse; a dry, tense passage with low frame drums and sparse sarangi for a land in drought; then a joyful release with rain-like santoor shimmer and soft strings; a stately royal court mood with shehnai colour and gentle dhol; around three quarters through a bright rising lift with strings and choir pads for a reveal; then a warm, peaceful resolve. Sparse mid-range, no vocals, nothing that fights the voice.",
+  "take": "take 1 of the second generation: continuous, lift at 80-110 s under the reveal (first two takes rejected: long silences)"
+ },
+ "narration_energy": "hook_reveal",
+ "avoid": [
+  "calling the Bhagavata or the popular story 'wrong' or 'fake': it is a later, devotional telling",
+  "the courtesans' episode in detail (1.9.5-27): only 'the sage came'",
+  "saying 'Shanta is never mentioned again': she is named in 1.17.5 too",
+  "adding Kausalya's sister Varshini or any adoption detail (not in Valmiki)",
+  "naming Ramcharitmanas or TV serials (not checked)"
+ ],
+ "verify_note": "Whole CE searched: Shanta named only in 1.8.16, 1.8.21, 1.9.31-32, 1.10.3, 1.10.5, 1.10.19, 1.17.5. 1.10.3 'कन्या चास्य' = the Anga king's daughter; 1.10.19 Dasharatha: 'शान्ता तव सुता' (your daughter). 1.10.5 (inside Sanatkumara's prophecy told by Sumantra) Dasharatha: 'अनपत्यो ऽस्मि' I am childless. Popular: Bhagavata 9.23.7-8 (vedabase.io): Dasharatha gave his own daughter Shanta to Romapada. Research: series/untold-ramayana/research/A82_shanta.md",
+ "caption": "Many of us heard that Rama had an elder sister, Shanta, given by King Dasharatha to his friend, the king of Anga. The Srimad Bhagavatam tells it that way. In Valmiki's Ramayana (Critical Edition), Shanta is the daughter of Lomapada, king of Anga, and the wife of the sage Rishyashringa. The prophecy says the king of Anga \"will have a daughter named Shanta\", and Dasharatha himself says to Lomapada: \"Let YOUR daughter Shanta come to my city with her husband.\" Both tellings are told with devotion.",
+ "youtube_title": "Did Rama Have a Sister? Who Was Shanta | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Had you heard Shanta was Rama's sister? Tell us where you first heard it 👇 Jai Shri Ram!",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Shanta",
+  "#Dasharatha",
+  "#Ramayana",
+  "#Valmiki",
+  "#Rishyashringa",
+  "#Bhagavatam",
+  "#JaiShriRam"
+ ]
+}

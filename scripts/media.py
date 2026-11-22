@@ -7,6 +7,10 @@ import hashlib, json, mimetypes, os, sys, urllib.request, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from channel import C, SID, SUPA, STUDIO, SER, REELS, HF_MASTERS, HANDLES
 BASE = SUPA; H = {"apikey": "proxy-injected"}
 code, kind, path = sys.argv[1], sys.argv[2], sys.argv[3]; spec = sys.argv[4] if len(sys.argv) > 4 else None
+if kind == "preview" and os.path.getsize(path) > 50 * 1024 * 1024:   # long reels (~125 s+): the review copy is re-encoded to fit Storage
+    import subprocess; web = path[:-4] + "_web.mp4"
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", path, "-c:v", "libx264", "-preset", "slow", "-crf", "26", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", web], check=True); print("preview over 50 MB: uploading", web); path = web
 size = os.path.getsize(path); sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
 if size > 50 * 1024 * 1024: sys.exit("over 50 MB: use scripts/release.py for masters")
 ctype = mimetypes.guess_type(path)[0] or "application/octet-stream"; key = f"{SID}/{code}/{os.path.basename(path)}"

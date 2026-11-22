@@ -48,12 +48,12 @@
    "sita",
    "jambavan",
    "janaka",
-   "parashurama"
+   "parashurama",
+   "dasharatha"
   ],
   "ask_user_when_first_needed": [
    "ravana",
    "bharata",
-   "dasharatha",
    "kaikeyi",
    "kaushalya",
    "sugriva",
@@ -179,6 +179,13 @@
    "rig": "CH.parashurama (drawFigure) + parashu() axe in art/chars.js",
    "look": "warrior-sage: black jata and beard, bark-brown robe, rudraksha, axe in hand, bow and quiver",
    "rule": "Show the user any change as stills first."
+  },
+  "dasharatha": {
+   "approved_by": "user",
+   "reel": "A82",
+   "rig": "CH.dasharatha (drawFigure) in art/chars.js",
+   "look": "king of Ayodhya: grey-black hair and beard (greying, not white), gold crown with red jewel, saffron dhoti, red sash, gold ornaments",
+   "rule": "Show the user any change as stills first."
   }
  },
  "experiments": {
@@ -216,7 +223,8 @@
    "vibhishana": "Vibhishana",
    "ravana": "Ravana",
    "guha": "Guha",
-   "nala": "Nala"
+   "nala": "Nala",
+   "dasharatha": "Dasharatha"
   },
   "first_reel": {
    "narrator": "A01",
@@ -225,11 +233,13 @@
    "lakshmana": "A01",
    "maricha": "A01",
    "shabari": "A02",
-   "gautama": "A03"
+   "gautama": "A03",
+   "dasharatha": "A82"
   },
   "rig_keys": {
    "lakshmana": "lak",
-   "vishvamitra": "vishva"
+   "vishvamitra": "vishva",
+   "dasharatha": "dasharatha"
   },
   "rig_to_character": {
    "rama": "rama",

@@ -48,8 +48,28 @@ def patch(row, info=None):
     if info is not None: row["info"] = info; save_info(info)
     api("PATCH", "work_status?lane=eq.main", row)
 
+# the reel's stage on its details page follows the work step (owner's rule, Nov 21 2026); never moves a reel backwards,
+# and never sets review/approved/published (review is set at upload via stages.json + sync.py, the owner approves)
+ORDER = ["idea", "researching", "scripted", "voiced", "rendered", "review", "approved", "published"]
+STEP_STAGE = {1: "researching", 2: "scripted", 3: "voiced", 4: "voiced", 5: "voiced", 6: "rendered", 7: "rendered", 8: "rendered"}
+def advance_stage(reel, step, info):
+    want = STEP_STAGE.get(step)
+    if not reel or not want or info.setdefault("stage_sent", {}).get(reel) == want: return
+    try:
+        from channel import SER
+        sp = os.path.join(SER, "reels", "stages.json"); st = json.load(open(sp)) if os.path.exists(sp) else {}
+        if os.path.isdir(os.path.join(SER, "reels", reel)) and (st.get(reel) not in ORDER or ORDER.index(st[reel]) < ORDER.index(want)):
+            st[reel] = want; json.dump(st, open(sp, "w"), indent=1); open(sp, "a").write("\n")     # git copy, read by sync.py
+        rq = urllib.request.Request(f"{BASE}/rest/v1/reels?select=stage&series_id=eq.{SID}&code=eq.{reel}", headers=H)
+        cur = (json.loads(urllib.request.urlopen(rq, timeout=30).read()) or [{}])[0].get("stage")
+        if cur is None or (cur in ORDER and ORDER.index(cur) < ORDER.index(want)):
+            api("PATCH", f"reels?series_id=eq.{SID}&code=eq.{reel}", {"stage": want})
+        info["stage_sent"][reel] = want
+    except Exception as e: print("stage not updated:", e, file=sys.stderr)   # the work panel still updates
+
 def set_status(state="working", reel=None, step=None, task=None, detail=None, pct=None, eta=None, started=None, info=None, log=True):
     info = info if info is not None else load_info()
+    advance_stage(reel, step, info)
     task = task or (STEPS[step - 1] if step else None)
     if log and task: event(info, f"{reel + ': ' if reel else ''}{task}" + (f" ({detail})" if detail and len(detail) < 70 else ""))
     if state == "waiting": info["phases"] = []

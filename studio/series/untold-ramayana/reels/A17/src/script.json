@@ -1,0 +1,280 @@
+{
+ "reel": "A17",
+ "title": "Did Urmila Sleep for 14 Years?",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v2 (part 1 of 2; A102 follows) — whole CE searched for Urmila; Bala 1.70-72 read; review before posting",
+ "source": "Valmiki Ramayana, Bala Kanda 1.70-76, with a whole-text search (Critical Edition)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "BALA KANDA  ·  CHAPTERS 70–72",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "Janaka gives Sita to Rama and Urmila to Lakshmana",
+   "ref": "1.70.21-22; 1.72.18",
+   "quote_sa": "सीतां रामाय भद्रं ते ऊर्मिलां लक्ष्मणाय च । वीर्यशुल्कां मम सुतां सीतां सुरसुतोपमाम् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "At the wedding Janaka says: Lakshmana, come, accept Urmila whom I offer; take her hand",
+   "ref": "1.72.18",
+   "quote_sa": "लक्ष्मणागच्छ भद्रं ते ऊर्मिलामुद्यतां मया । प्रतीच्छ पाणिं गृह्णीष्व मा भूत् कालस्य पर्ययः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Lakshmana's wife Urmila is named only at the wedding (Bala 70-76) and once by Sita to Anasuya (2.110.51); nowhere else in the CE",
+   "ref": "1.70.21-22, 1.71.3, 1.72.18, 1.76.9; 2.110.51 — whole text searched",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE): raw-text search of all 7 kandas for र्मिल"
+   ]
+  },
+  {
+   "claim": "No Nidra Devi and no 14-year sleep of Urmila (or 14-year wakefulness of Lakshmana) in the CE",
+   "ref": "whole text searched (all 7 kandas)",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE): full-text search"
+   ]
+  },
+  {
+   "claim": "The Urmila / Nidra Devi story is a later, loving telling (no single text named or quoted)",
+   "ref": "later folk tellings",
+   "verified": true,
+   "sources": [
+    "absence in the CE (above); the reel names no specific later text"
+   ]
+  }
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या उर्मिला सच में, चौदह साल सोती रहीं?",
+   "en": "Did Urmila really sleep for fourteen years?",
+   "units": [
+    "[serious] [intense] क्या उर्मिला सच में… चौदह साल सोती रहीं?"
+   ],
+   "card": [
+    [
+     "DID URMILA SLEEP",
+     null
+    ],
+    [
+     "FOR 14 YEARS?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 3.0
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, बाल कांड, सर्ग बहत्तर। लक्ष्मणागच्छ भद्रं ते ऊर्मिलामुद्यतां मया । प्रतीच्छ पाणिं गृह्णीष्व मा भूत् कालस्य पर्ययः ॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, बाल कांड, सर्ग बहत्तर।",
+    "[reverently] [slowly] लक्ष्मणागच्छ भद्रं ते, ऊर्मिलामुद्यतां मया… प्रतीच्छ पाणिं गृह्णीष्व, मा भूत् कालस्य पर्ययः॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "लक्ष्मणागच्छ भद्रं ते ऊर्मिलामुद्यतां मया ।",
+     "प्रतीच्छ पाणिं गृह्णीष्व मा भूत् कालस्य पर्ययः ॥"
+    ],
+    "ref": "BALA KANDA 1.72.18",
+    "en": "“Lakshmana, come! May good fortune be yours. Accept Urmila, whom I offer. Take her hand; let there be no delay.”",
+    "translit": "lakṣmaṇāgaccha bhadraṃ te ūrmilāmudyatāṃ mayā, pratīccha pāṇiṃ gṛhṇīṣva mā bhūt kālasya paryayaḥ"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 2
+   },
+   "sloka_pick": "take 2 [with deep devotion] [chanting]: 4.73 st, p95 164 Hz, all words heard; t3 5.33 st but p95 192 Hz (shouting guard); t1 ASR failed"
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "एक प्रसिद्ध कथा कहती है: वनवास की पहली रात, निद्रा देवी लक्ष्मण के पास आईं। लक्ष्मण ने कहा, चौदह साल मुझे भैया की रक्षा करनी है। तब उनकी नींद, उर्मिला ने ले ली, और वो चौदह साल सोती रहीं।",
+   "en": "A famous story says: on the first night of exile, Nidra Devi, the goddess of sleep, came to Lakshmana. He said: for fourteen years I must guard my brother. So Urmila took his sleep, and slept for fourteen years.",
+   "units": [
+    "[warmly] एक प्रसिद्ध कथा कहती है:",
+    "वनवास की पहली रात, निद्रा देवी, लक्ष्मण के पास आईं।",
+    "लक्ष्मण ने कहा, चौदह साल, मुझे भैया की रक्षा करनी है।",
+    "[softly] तब उनकी नींद, उर्मिला ने ले ली… और वो चौदह साल सोती रहीं।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "Later folk tellings",
+   "card": [
+    [
+     "A LATER TELLING",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "ये कथा, उर्मिला के त्याग को, बड़े प्रेम से याद करती है। पर वाल्मीकि क्या कहते हैं?",
+   "en": "This story remembers Urmila's sacrifice with great love. But what does Valmiki say?",
+   "units": [
+    "[warmly] ये कथा, उर्मिला के त्याग को, बड़े प्रेम से याद करती है।",
+    "[curious] पर वाल्मीकि, क्या कहते हैं?"
+   ],
+   "unit_gap": 0.4,
+   "cite": "—",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "वाल्मीकि में उर्मिला का नाम आता है, उनके विवाह में। राजा जनक कहते हैं: सीतां रामाय भद्रं ते, ऊर्मिलां लक्ष्मणाय च। यानी, सीता राम को, और उर्मिला, लक्ष्मण को।",
+   "en": "",
+   "units": [
+    "[warmly] वाल्मीकि में उर्मिला का नाम आता है, उनके विवाह में। राजा जनक कहते हैं:",
+    "[softly] सीतां रामाय भद्रं ते… ऊर्मिलां लक्ष्मणाय च।",
+    "यानी, सीता राम को, और उर्मिला, लक्ष्मण को।"
+   ],
+   "unit_gap": 0.45,
+   "cite": "1.70.21",
+   "tail": 0.4,
+   "lead": 0.25,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "BALA KANDA 1.70.21 · CRITICAL EDITION",
+    "lines": [
+     "सीतां रामाय भद्रं ते",
+     "ऊर्मिलां लक्ष्मणाय च ।"
+    ],
+    "translit": "sītāṃ rāmāya bhadraṃ te ūrmilāṃ lakṣmaṇāya ca",
+    "en": "“I give Sita to Rama, and Urmila to Lakshmana. May good fortune be yours!”"
+   }
+  },
+  {
+   "id": 6,
+   "voice": "narrator",
+   "hi": "फिर एक बार, वन में, जब सीता अपने विवाह की बात बताती हैं। पूरी रामायण में, बस इतना ही। न निद्रा देवी, न चौदह साल की नींद।",
+   "en": "Then once more, in the forest, when Sita tells of her wedding. In the whole Ramayana, that's all. No Nidra Devi. No fourteen-year sleep.",
+   "units": [
+    "[thoughtfully] फिर एक बार, वन में, जब सीता अपने विवाह की बात बताती हैं।",
+    "[serious] पूरी रामायण में, बस इतना ही।",
+    "न निद्रा देवी… न चौदह साल की नींद।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "2.110.51; whole text",
+   "card": [
+    [
+     "NO NIDRA DEVI.",
+     null
+    ],
+    [
+     "NO 14-YEAR SLEEP.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 7,
+   "voice": "narrator",
+   "hi": "अब बात, लक्ष्मण की रातों की। क्या वो सच में, कभी नहीं सोए। ये, अगले भाग में।",
+   "en": "Now, Lakshmana's nights. Did he really never sleep? That's in part 2.",
+   "units": [
+    "[softly] अब बात, लक्ष्मण की रातों की। क्या वो सच में, कभी नहीं सोए।",
+    "[warmly] ये, अगले भाग में।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "see A102",
+   "card": [
+    [
+     "PART 2:",
+     null
+    ],
+    [
+     "LAKSHMANA'S NIGHTS",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "thumbnail": {
+  "frame": "2s",
+  "hook": "Did Urmila sleep for 14 years?",
+  "stamp": "Not in Valmiki",
+  "line": "Named at her wedding. No 14-year sleep.",
+  "badge": "Valmiki Ramayana · Bala 1.70–72",
+  "art_shift": 0
+ },
+ "score": {
+  "engine": "elevenlabs eleven_music_v2_5",
+  "file": "audio/score.mp3",
+  "duration_s": 90,
+  "gain": 1.9,
+  "duck": 0.72,
+  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
+  "take": "take 1: steady build, peak 50-70 s (vs take 2 flatter)"
+ },
+ "narration_energy": "hook_reveal",
+ "avoid": [
+  "calling the Urmila story 'fake' or mocking it: it is a later, loving telling of her sacrifice",
+  "naming or quoting a specific later text for the Nidra legend (none verified)",
+  "saying Lakshmana slept 'often' or 'every night': Valmiki shows him awake (2.41, 2.44-45) and asleep once (2.50.1-3)",
+  "the Indrajit 'only one who has not slept 14 years' legend: not checked, not claimed",
+  "inventing a farewell between Lakshmana and Urmila (none in the CE)",
+  "showing Nidra Devi as a figure: the goddess appears only as a soft moon-glow in the 'later telling' shot"
+ ],
+ "verify_note": "Whole CE searched (Bala 76, Ayodhya 111, Aranya 71, Kishkindha 66, Sundara 66, Yuddha 116, Uttara 100 sargas): ऊर्मिला only at 1.70.21-22, 1.71.3, 1.72.18, 1.76.9 and 2.110.51 (1.32.12 is another Urmila, a gandharvi's mother). No Nidra Devi, no 14-year sleep. Nights: 1 Tamasa 2.41.12-14 (Lakshmana awake all night with Sumantra); 2 Shringaverapura 2.44.25-26, 2.45.2-3 (Guha offers the bed), 2.45.9 (Lakshmana's reply); 3 under a tree past the Ganga 2.47.1-3 (Rama: we two must keep awake); 4 Bharadvaja 2.48-49.1; 5 by the Yamuna 2.49.15; morning 2.50.1-3 Rama gently wakes the sleeping Lakshmana. Research: series/untold-ramayana/research/A17_urmila_sleep.md",
+ "caption": "Part 1 of 2. A much-loved story says Urmila slept for fourteen years so that Lakshmana could stay awake and guard his brother. In Valmiki's Ramayana (Critical Edition), Urmila is named at her wedding: Janaka gives \"Sita to Rama, Urmila to Lakshmana\" and tells Lakshmana, \"Come, take Urmila's hand.\" She is named once more, when Sita tells Anasuya of her marriage. There is no Nidra Devi and no 14-year sleep anywhere in the text. The story is told with love for Urmila's sacrifice. Part 2: what Valmiki says about Lakshmana's nights.",
+ "youtube_title": "Did Urmila Really Sleep for 14 Years? What Valmiki Says | Part 1 #Shorts",
+ "comment_prompt": "Did you grow up hearing Urmila slept for 14 years? 👇 Part 2: Lakshmana's nights. Jai Shri Ram!",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Urmila",
+  "#Lakshmana",
+  "#Ramayana",
+  "#Valmiki",
+  "#Sita",
+  "#Janaka",
+  "#JaiShriRam"
+ ]
+}

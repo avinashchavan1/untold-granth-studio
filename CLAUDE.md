@@ -52,9 +52,13 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
 - **Secrets:** never ask for keys in chat. They are network secrets on the cloud environment (ElevenLabs, Netlify,
   Supabase, Hugging Face); code uses the placeholder `proxy-injected`. No personal info in external requests.
 - **No model IDs** in commits or code. Commit messages end with the session's attribution lines.
+- **Keep everything updated in git (owner, Nov 22 2026):** commit AND push after every meaningful step (research notes, script, art,
+  timeline, cover, stages, desk rows, cast, engine/app/script changes), not only at the end; never leave untracked or unpushed work.
+  Shared changes also go to the storyreel-studio template right away (template_sync + push). Audio lives in the HF audio packs, not git.
 - **Keep the owner updated**: short progress notes in chat, and the live bar in the app:
   `python3 scripts/status.py set --reel <ID> --step N` (1 research, 2 script, 3 voices, 4 music, 5 art, 6 preview,
-  7 masters, 8 cover/upload); `python3 scripts/status.py watch-render <ID> &` during renders; `status.py idle` when done;
+  7 masters, 8 cover/upload; it also moves the reel's stage in the app: 1 researching, 2 scripted, 3-5 voiced, 6-8 rendered,
+  never backwards; review is set at upload); `python3 scripts/status.py watch-render <ID> &` during renders; `status.py idle` when done;
   `--state waiting --task "Pick baby Hanuman's look"` when you need the owner.
 
 ## Layout (this repo runs the storyreel-studio template's shared code; the channel lives in channel.json + studio/series/untold-ramayana)
@@ -88,6 +92,10 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   `python3 scripts/template_sync.py /home/user/storyreel-studio --commit` (attach/clone `avinashchavan1/storyreel-studio` first) and push it.
   It copies only shared paths and refuses to commit if a channel detail (name, handles, ids) would leak. Channel details belong in
   channel.json, calendar.json, studio/series/ and this CLAUDE.md.
+
+## Full-length videos (owner, Nov 22 2026)
+- NEW 16:9 full-length videos (~10–12 min), never stitched from old reels; 4–6 reels are DERIVED from each. Plan, method and the
+  pilot (Vali's death, Kishkindha): `studio/series/untold-ramayana/LONGFORM.md`. Start it in a fresh session: "long-form pilot: Vali".
 
 ## Posting
 - Timeline page plans the posting days and times (`src/lib/bestTime.ts` + `src/lib/occasions.ts`, data in `calendar.json`):

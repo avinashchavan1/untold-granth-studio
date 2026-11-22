@@ -1,0 +1,351 @@
+{
+ "reel": "A102",
+ "title": "Did Lakshmana Never Sleep?",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 (part 2 of 2, follows A17) — Ayodhya 2.41, 2.44-45, 2.47, 2.49-50 read; review before posting",
+ "source": "Valmiki Ramayana, Ayodhya Kanda 2.41-50 (Critical Edition)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "AYODHYA KANDA  ·  CHAPTERS 41–50",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "First night, on the Tamasa: Rama and Sita slept; Lakshmana stayed awake all night with the charioteer Sumantra, speaking of Rama's virtues",
+   "ref": "2.41.12-14",
+   "quote_sa": "जाग्रतो ह्येव तां रात्रिं सौमित्रेरुदितो रविः । सूतस्य तमसातीरे रामस्य ब्रुवतो गुणान् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "At Shringaverapura Guha offers Lakshmana a bed and says his people will keep watch",
+   "ref": "2.45.2-3",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Lakshmana: how can I sleep, or live, or enjoy, while Rama lies on the ground with Sita?",
+   "ref": "2.45.9",
+   "quote_sa": "कथं दाशरथौ भूमौ शयाने सह सीतया । शक्या निद्रा मया लब्धुं जीवितं वा सुखानि वा ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Past the Ganga, Rama: from today we two must stay awake at night; Sita's safety rests on us two",
+   "ref": "2.47.3",
+   "quote_sa": "जागर्तव्यमतन्द्रिभ्यामद्य प्रभृति रात्रिषु । योगक्षेमो हि सीताया वर्तते लक्ष्मणावयोः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "By the Yamuna (after Bharadvaja's ashram), at night's end Rama gently woke Lakshmana, who had been sleeping beside him; Lakshmana shook off sleep and the road's fatigue",
+   "ref": "2.49.15; 2.50.1-3",
+   "quote_sa": "अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम् । प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः ॥ … स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः । जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "No Nidra Devi and no 14-year sleep of Urmila (or 14-year wakefulness of Lakshmana) in the CE",
+   "ref": "whole text searched (all 7 kandas)",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE): full-text search"
+   ]
+  }
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "क्या लक्ष्मण, वनवास में, सच में कभी नहीं सोए?",
+   "en": "Did Lakshmana really never sleep in the forest?",
+   "units": [
+    "[serious] क्या लक्ष्मण, वनवास में… सच में कभी नहीं सोए?"
+   ],
+   "card": [
+    [
+     "DID LAKSHMANA",
+     null
+    ],
+    [
+     "NEVER SLEEP?",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.6,
+   "min": 3.0
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, अयोध्या कांड, सर्ग पचास। स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः । जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम् ॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, अयोध्या कांड, सर्ग पचास।",
+    "[reverently] [slowly] स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः… जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम्॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "स सुप्तः समये भ्रात्रा लक्ष्मणः प्रतिबोधितः ।",
+     "जहौ निद्रां च तन्द्रीं च प्रसक्तं च पथि श्रमम् ॥"
+    ],
+    "ref": "AYODHYA KANDA 2.50.3",
+    "en": "“Lakshmana, who had been asleep, was woken at the right time by his brother; he shook off sleep, drowsiness and the weariness of the road.”",
+    "translit": "sa suptaḥ samaye bhrātrā lakṣmaṇaḥ pratibodhitaḥ, jahau nidrāṃ ca tandrīṃ ca prasaktaṃ ca pathi śramam"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   },
+   "force_take": {
+    "1": 1
+   },
+   "sloka_pick": "take 1 [reverently] [slowly]: 5.12 st pitch movement (t2 3.56, t3 3.90), p95 176 Hz; all words heard in all 3"
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "पिछले भाग में देखा: उर्मिला की चौदह साल की नींद, वाल्मीकि में नहीं है। अब, लक्ष्मण की रातें।",
+   "en": "In part 1: Urmila's fourteen-year sleep is not in Valmiki. Now, Lakshmana's nights.",
+   "units": [
+    "[thoughtfully] पिछले भाग में देखा: उर्मिला की चौदह साल की नींद, वाल्मीकि में नहीं है।",
+    "[thoughtfully] अब, लक्ष्मण की रातें।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "see A17",
+   "card": [
+    [
+     "PART 2",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "वनवास की पहली रात, तमसा के तट पर, श्रीराम और सीता सो गए। और लक्ष्मण, पूरी रात जागे, सुमंत्र से श्रीराम के गुणों की बातें करते हुए।",
+   "en": "Now, Lakshmana's nights. The first night of exile, on the Tamasa: Rama and Sita slept. Lakshmana stayed up all night, telling Sumantra of Rama's virtues.",
+   "units": [
+    "वनवास की पहली रात, तमसा के तट पर, श्रीराम और सीता सो गए।",
+    "[softly] और लक्ष्मण, पूरी रात जागे… सुमंत्र से, श्रीराम के गुणों की बातें करते हुए।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "2.41.12-14",
+   "card": [
+    [
+     "NIGHT 1",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "दूसरी रात, गंगा के तट पर। निषादराज गुह, लक्ष्मण से कहते हैं:",
+   "en": "The second night, by the Ganga. Guha, king of the Nishadas, says to Lakshmana:",
+   "units": [
+    "दूसरी रात, गंगा के तट पर।",
+    "निषादराज गुह, लक्ष्मण से कहते हैं:"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.44.25-26",
+   "card": [
+    [
+     "NIGHT 2",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.2
+  },
+  {
+   "id": 6,
+   "voice": "guha",
+   "hi": "राजकुमार, ये शय्या आपके लिए है, आराम से सोइए। हम रात भर पहरा देंगे।",
+   "en": "\"Prince, this bed is for you. Sleep in comfort. We will keep watch all night.\"",
+   "units": [
+    "राजकुमार, ये शय्या आपके लिए है… आराम से सोइए।",
+    "हम, रात भर पहरा देंगे।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.45.2-3",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 7,
+   "voice": "lakshmana",
+   "hi": "जब भैया, माता सीता के साथ, धरती पर सो रहे हैं, तो मुझे नींद कैसे आए? जीवन, या सुख भी कैसे?",
+   "en": "\"While my brother lies on the bare ground with Sita, how could I sleep? How could I live, or know any comfort?\"",
+   "units": [
+    "जब भैया, माता सीता के साथ, धरती पर सो रहे हैं…",
+    "तो मुझे नींद कैसे आए? जीवन, या सुख भी कैसे?"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.45.9",
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "गंगा पार, तीसरी रात, एक पेड़ के नीचे, श्रीराम कहते हैं:",
+   "en": "Across the Ganga, the third night, under a tree, Rama says:",
+   "units": [
+    "[thoughtfully] गंगा पार, तीसरी रात, एक पेड़ के नीचे, श्रीराम कहते हैं:"
+   ],
+   "cite": "2.47.1",
+   "card": [
+    [
+     "NIGHT 3",
+     null
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.2
+  },
+  {
+   "id": 9,
+   "voice": "rama",
+   "hi": "लक्ष्मण, आज से रातों में, हम दोनों को जागना होगा। सीता की रक्षा, हम दोनों पर है।",
+   "en": "\"Lakshmana, from today, we two must stay awake at night. Sita's safety rests on us both.\"",
+   "units": [
+    "लक्ष्मण, आज से रातों में, हम दोनों को जागना होगा।",
+    "सीता की रक्षा, हम दोनों पर है।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.47.3",
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "और कुछ ही दिन बाद, यमुना के तट पर, वाल्मीकि लिखते हैं: अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम्, प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः। यानी, रात बीतने पर, श्रीराम ने, पास में सोए लक्ष्मण को, धीरे से जगाया।",
+   "en": "",
+   "units": [
+    "[thoughtfully] और कुछ ही दिन बाद, यमुना के तट पर, वाल्मीकि लिखते हैं:",
+    "[softly] अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम्… प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः।",
+    "[serious] यानी, रात बीतने पर, श्रीराम ने… पास में सोए लक्ष्मण को, धीरे से जगाया।"
+   ],
+   "unit_gap": 0.45,
+   "cite": "2.49.15; 2.50.1",
+   "tail": 0.4,
+   "lead": 0.25,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "AYODHYA KANDA 2.50.1 · CRITICAL EDITION",
+    "lines": [
+     "अथ रात्र्यां व्यतीतायामवसुप्तमनन्तरम् ।",
+     "प्रबोधयामास शनैर्लक्ष्मणं रघुनन्दनः ॥"
+    ],
+    "translit": "atha rātryāṃ vyatītāyāmavasuptamanantaram, prabodhayāmāsa śanairlakṣmaṇaṃ raghunandanaḥ",
+    "en": "“Then, as the night passed, Rama, the joy of the Raghus, gently woke Lakshmana, who had been sleeping beside him.”"
+   }
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "लक्ष्मण का जागना, उनकी सेवा, सच है। पर वो सोए भी। और उर्मिला की नींद, बाद की कथा है। दोनों, भक्ति से सुनाई जाती हैं।",
+   "en": "",
+   "units": [
+    "[warmly] लक्ष्मण का जागना, उनकी सेवा, सच है।",
+    "[serious] पर वो सोए भी।",
+    "और उर्मिला की नींद, बाद की कथा है।",
+    "[warmly] दोनों, भक्ति से सुनाई जाती हैं।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "2.41.14; 2.45.9; 2.50.1-3",
+   "card": [
+    [
+     "HE KEPT WATCH.",
+     null
+    ],
+    [
+     "HE SLEPT TOO.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 12,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "thumbnail": {
+  "frame": "96s",
+  "hook": "Did Lakshmana never sleep?",
+  "stamp": "Valmiki says",
+  "line": "Rama woke him gently.",
+  "badge": "Valmiki Ramayana · Ayodhya 2.50",
+  "art_shift": -260
+ },
+ "score": {
+  "engine": "elevenlabs eleven_music_v2_5",
+  "file": "audio/score.mp3",
+  "duration_s": 95,
+  "gain": 1.9,
+  "duck": 0.72,
+  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
+  "take": "A17's take 2 (same session prompt): gentle and even, suits the calm part 2"
+ },
+ "avoid": [
+  "calling the Urmila story 'fake' or mocking it: it is a later, loving telling of her sacrifice",
+  "naming or quoting a specific later text for the Nidra legend (none verified)",
+  "saying Lakshmana slept 'often' or 'every night': Valmiki shows him awake (2.41, 2.44-45) and asleep once (2.50.1-3)",
+  "the Indrajit 'only one who has not slept 14 years' legend: not checked, not claimed",
+  "inventing a farewell between Lakshmana and Urmila (none in the CE)",
+  "showing Nidra Devi as a figure: the goddess appears only as a soft moon-glow in the 'later telling' shot"
+ ],
+ "verify_note": "Whole CE searched (Bala 76, Ayodhya 111, Aranya 71, Kishkindha 66, Sundara 66, Yuddha 116, Uttara 100 sargas): ऊर्मिला only at 1.70.21-22, 1.71.3, 1.72.18, 1.76.9 and 2.110.51 (1.32.12 is another Urmila, a gandharvi's mother). No Nidra Devi, no 14-year sleep. Nights: 1 Tamasa 2.41.12-14 (Lakshmana awake all night with Sumantra); 2 Shringaverapura 2.44.25-26, 2.45.2-3 (Guha offers the bed), 2.45.9 (Lakshmana's reply); 3 under a tree past the Ganga 2.47.1-3 (Rama: we two must keep awake); 4 Bharadvaja 2.48-49.1; 5 by the Yamuna 2.49.15; morning 2.50.1-3 Rama gently wakes the sleeping Lakshmana. Research: series/untold-ramayana/research/A17_urmila_sleep.md",
+ "caption": "Part 2 of 2. In Valmiki's Ramayana, Lakshmana stays awake all night on the Tamasa, telling Sumantra of Rama's virtues. By the Ganga, Guha offers him a bed, and he answers: \"How could I sleep while my brother lies on the bare ground with Sita?\" Past the Ganga, Rama says: \"From today, we two must keep watch.\" And by the Yamuna, Valmiki writes that Rama gently woke Lakshmana, who had been sleeping beside him. He kept watch, and he slept too. Both tellings are told with devotion.",
+ "youtube_title": "Did Lakshmana Never Sleep for 14 Years? Valmiki Ramayana | Part 2 #Shorts",
+ "comment_prompt": "Which night moved you most: the Tamasa, Guha's watch, or Rama waking Lakshmana? 👇 Jai Shri Ram!",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Urmila",
+  "#Lakshmana",
+  "#Ramayana",
+  "#Valmiki",
+  "#Vanvas",
+  "#Sita",
+  "#JaiShriRam"
+ ],
+ "follows": "A17"
+}
