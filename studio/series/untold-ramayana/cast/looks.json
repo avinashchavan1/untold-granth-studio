@@ -47,21 +47,18 @@
   ],
   "posted_in": [],
   "look_chosen": "claude",
-  "note": null,
-  "voice_sample": "untold-ramayana/cast/voice_guha.mp3",
-  "voice_line": {
-   "reel": "A102",
-   "shot": 6,
-   "hi": "राजकुमार, ये शय्या आपके लिए है, आराम से सोइए। हम रात भर पहरा देंगे।",
-   "en": "\"Prince, this bed is for you. Sleep in comfort. We will keep watch all night.\""
-  }
+  "note": null
  },
  "hanuman": {
   "portrait": "untold-ramayana/cast/hanuman.jpg",
   "appears_in": [
    "A07",
    "A101",
-   "A23"
+   "A23",
+   "A34",
+   "A35",
+   "A36",
+   "LF01"
   ],
   "posted_in": [],
   "look_chosen": "claude",
@@ -97,7 +94,11 @@
    "A17",
    "A18",
    "A23",
-   "A92"
+   "A34",
+   "A35",
+   "A36",
+   "A92",
+   "LF01"
   ],
   "posted_in": [
    "A01",
@@ -105,14 +106,7 @@
    "A03"
   ],
   "look_chosen": "seen",
-  "note": null,
-  "voice_sample": "untold-ramayana/cast/voice_lakshmana.mp3",
-  "voice_line": {
-   "reel": "A102",
-   "shot": 7,
-   "hi": "जब भैया, माता सीता के साथ, धरती पर सो रहे हैं, तो मुझे नींद कैसे आए? जीवन, या सुख भी कैसे?",
-   "en": "\"While my brother lies on the bare ground with Sita, how could I sleep? How could I live, or know any comfort?\""
-  }
+  "note": null
  },
  "mandodari": {
   "portrait": "untold-ramayana/cast/mandodari.jpg",
@@ -126,7 +120,11 @@
  "maricha": {
   "portrait": "untold-ramayana/cast/maricha.jpg",
   "appears_in": [
-   "A01"
+   "A01",
+   "A34",
+   "A35",
+   "A36",
+   "LF01"
   ],
   "posted_in": [
    "A01"
@@ -175,8 +173,12 @@
    "A17",
    "A18",
    "A23",
+   "A34",
+   "A35",
+   "A36",
    "A53",
-   "A92"
+   "A92",
+   "LF01"
   ],
   "posted_in": [
    "A01",
@@ -187,10 +189,10 @@
   "note": null,
   "voice_sample": "untold-ramayana/cast/voice_rama.mp3",
   "voice_line": {
-   "reel": "A102",
+   "reel": "A34",
    "shot": 9,
-   "hi": "लक्ष्मण, आज से रातों में, हम दोनों को जागना होगा। सीता की रक्षा, हम दोनों पर है।",
-   "en": "\"Lakshmana, from today, we two must stay awake at night. Sita's safety rests on us both.\""
+   "hi": "मित्र सुग्रीव, क्रोध छोड़ो। वेश में, कद में, चाल में, स्वर में, तुम दोनों में, मुझे कोई अंतर नहीं दिखा।",
+   "en": "\"Sugriva, my friend, let go of your anger. In dress, in build, in gait, in voice, I saw no difference between you two.\""
   }
  },
  "ravana": {
@@ -248,7 +250,11 @@
   "appears_in": [
    "A04",
    "A101",
-   "A23"
+   "A23",
+   "A34",
+   "A35",
+   "A36",
+   "LF01"
   ],
   "posted_in": [],
   "look_chosen": "claude",
@@ -281,10 +287,10 @@
  "narrator": {
   "voice_sample": "untold-ramayana/cast/voice_narrator.mp3",
   "voice_line": {
-   "reel": "A102",
+   "reel": "A34",
    "shot": 1,
-   "hi": "क्या लक्ष्मण, वनवास में, सच में कभी नहीं सोए?",
-   "en": "Did Lakshmana really never sleep in the forest?"
+   "hi": "एक बाण ने, सात पेड़ भेद दिए। फिर भी पहले युद्ध में, राम का बाण, नहीं चला।",
+   "en": "One arrow pierced seven trees. Yet in the first duel, Rama's arrow never flew."
   },
   "appears_in": [
    "A01",
@@ -298,22 +304,66 @@
    "A17",
    "A18",
    "A23",
+   "A34",
+   "A35",
+   "A36",
    "A53",
    "A82",
    "A89",
-   "A92"
+   "A92",
+   "LF01"
   ]
  },
- "dasharatha": {
-  "voice_sample": "untold-ramayana/cast/voice_dasharatha.mp3",
+ "vali": {
+  "voice_sample": "untold-ramayana/cast/voice_vali.mp3",
   "voice_line": {
-   "reel": "A82",
-   "shot": 11,
-   "hi": "राजन्, आपकी पुत्री शांता, अपने पति के साथ, मेरे नगर चलें। एक बड़ा कार्य करना है।",
-   "en": "\"O king, let your daughter Shanta come to my city with her husband. A great task is at hand.\""
+   "reel": "A35",
+   "shot": 3,
+   "hi": "अगर सामने आकर लड़ते, तो आज, यमराज के दर्शन करते। तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।",
+   "en": "\"Had you fought me face to face, today you would have met Yama. You struck from hiding, like a snake biting a sleeping man.\""
   },
   "appears_in": [
-   "A82"
+   "A35",
+   "A36",
+   "LF01"
+  ]
+ },
+ "sugriva": {
+  "voice_sample": "untold-ramayana/cast/voice_sugriva.mp3",
+  "voice_line": {
+   "reel": "A34",
+   "shot": 4,
+   "hi": "प्रभु, आज ही, उस बाली को मारिए, जो भाई के वेश में, मेरा शत्रु है।",
+   "en": "\"My lord, today itself, kill Vali, my enemy in the form of a brother.\""
+  },
+  "appears_in": [
+   "A34",
+   "LF01"
+  ]
+ },
+ "tara": {
+  "voice_sample": "untold-ramayana/cast/voice_tara.mp3",
+  "voice_line": {
+   "reel": "A36",
+   "shot": 5,
+   "hi": "जो भाई, हारकर भागा था, वो इतनी जल्दी, फिर गरज रहा है। वो अकेला नहीं आया है।",
+   "en": "\"The brother who fled in defeat is roaring again so soon. He has not come alone.\""
+  },
+  "appears_in": [
+   "A36",
+   "LF01"
+  ]
+ },
+ "angada": {
+  "voice_sample": "untold-ramayana/cast/voice_angada.mp3",
+  "voice_line": {
+   "reel": "LF01",
+   "shot": 87,
+   "hi": "पिताजी... मैं अंगद हूँ।",
+   "en": "\"Father... I am Angada.\""
+  },
+  "appears_in": [
+   "LF01"
   ]
  }
 }
