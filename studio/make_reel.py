@@ -93,8 +93,8 @@ def draft(reel):
     for sh in s["shots"]:
         sp = len(re.sub(r"[\s,।?!…]", "", sh["hi"])) / 11.0 if sh.get("voice") else 0.0      # Rudra's dramatic pace ~11 chars/s
         d = round(max(sh.get("min", 0), sh.get("lead", 0.3) + sp + sh.get("tail", 0.3)) * 24) / 24
-        shots.append({**{k: sh[k] for k in ("id", "voice", "en", "hi", "card", "label", "scene", "cite") if k in sh}, "start": round(t, 4), "dur": d, "vStart": round(t + sh.get("lead", 0.3), 4), "speech": round(sp, 3), "sent": [0.0]}); t += d
-    json.dump({"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "reel": s["reel"], "draft": True}, open(os.path.join(reel, "src", "timeline.json"), "w"), ensure_ascii=False, indent=1)
+        shots.append({**{k: sh[k] for k in ("id", "voice", "en", "hi", "card", "label", "scene", "cite", "quote", "sloka", "act", "beat", "link", "units", "cta", "reveal") if k in sh}, "start": round(t, 4), "dur": d, "vStart": round(t + sh.get("lead", 0.3), 4), "speech": round(sp, 3), "sent": [0.0]}); t += d
+    json.dump({"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "acts": s.get("acts"), "frame": s.get("frame", "tall"), "reel": s["reel"], "draft": True}, open(os.path.join(reel, "src", "timeline.json"), "w"), ensure_ascii=False, indent=1)
     print(f"draft timeline {t:.1f}s")
 
 def sheet(reel):
@@ -154,9 +154,9 @@ def draft_timeline(reel):
         sent, acc = [], 0.0
         for i, L in enumerate(lens): sent.append(round(acc, 3)); acc += L + (sh.get("unit_gap", 0.35) if i < len(lens) - 1 else 0)
         lead, tail = sh.get("lead", 0.25), sh.get("tail", 0.3); dur = max(sh.get("min", 0), lead + acc + tail)
-        shots.append({k: sh[k] for k in ("id", "voice", "en", "hi", "card", "quote", "cta") if k in sh} | {"env": [], "sent": sent, "start": round(t, 4), "dur": round(dur, 4), "vStart": round(t + lead, 4), "aStart": round(t + lead, 4), "speech": round(acc, 3)})
+        shots.append({k: sh[k] for k in ("id", "voice", "en", "hi", "card", "label", "scene", "cite", "quote", "sloka", "act", "beat", "link", "units", "cta", "reveal") if k in sh} | {"env": [], "sent": sent, "start": round(t, 4), "dur": round(dur, 4), "vStart": round(t + lead, 4), "aStart": round(t + lead, 4), "speech": round(acc, 3)})
         t += dur
-    tl = {"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "reel": s["reel"], "draft": True}
+    tl = {"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "acts": s.get("acts"), "frame": s.get("frame", "tall"), "reel": s["reel"], "draft": True}
     json.dump(tl, open(os.path.join(reel, "src", "timeline.json"), "w"), ensure_ascii=False); print(f"draft timeline {t:.1f}s (estimated; `pick` writes the real one)")
 
 # ---- resumable renders: a finished piece gets <file>.done holding a stamp of its inputs; a re-run skips it while the stamp matches

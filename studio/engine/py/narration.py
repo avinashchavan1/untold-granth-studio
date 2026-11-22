@@ -23,7 +23,7 @@ if cmd == "list":
     for sid, i, v, say, var in narr_units():
         c = CAST[v]; print(json.dumps({"file": f"audio/narrator/s{sid:02d}{var}_{i}_t1.mp3", "voice_id": c["voice_id"], "model_id": c["model"], "prompt": say}, ensure_ascii=False))
 elif cmd == "chars":
-    n = sum(len(say) for *_, say in narr_units()); print(n, "characters (x takes)")
+    n = sum(len(say) for sid, i, v, say, var in narr_units()); print(n, "characters (x takes)")
 elif cmd == "api":
     takes = int(sys.argv[2]) if len(sys.argv) > 2 else 1
     key = os.environ.get("ELEVENLABS_API_KEY", "proxy-injected")

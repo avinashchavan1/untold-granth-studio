@@ -26,8 +26,8 @@ function logo(ctx, a = 1) {
 function layoutSub(ctx, en) {
   ctx.font = '800 58px Montserrat'; ctx.letterSpacing = '0px';
   const words = en.split(' '), lines = []; let cur = [];
-  words.forEach(w => { const test = cur.concat(w).join(' '); if (cur.length && ctx.measureText(test).width > 900) { lines.push(cur); cur = [w]; } else cur.push(w); }); if (cur.length) lines.push(cur);
-  const groups = []; if (lines.length === 3) groups.push(lines); else for (let i = 0; i < lines.length; i += 2) groups.push(lines.slice(i, i + 2));
+  words.forEach(w => { const test = cur.concat(w).join(' '); if (cur.length && ctx.measureText(test).width > (FW > FH ? 1500 : 900)) { lines.push(cur); cur = [w]; } else cur.push(w); }); if (cur.length) lines.push(cur);
+  const groups = []; if (lines.length === 3 && FW <= FH) groups.push(lines); else for (let i = 0; i < lines.length; i += 2) groups.push(lines.slice(i, i + 2));
   // balance: avoid a single orphan word group
   return groups;
 }
@@ -40,9 +40,9 @@ function subtitle(ctx, sh, u) {
   let idx = 0, gi = 0; for (let g = 0; g < groups.length; g++) { const n = groups[g].reduce((a, l) => a + l.length, 0); if (cur >= idx && cur < idx + n) { gi = g; break; } idx += n; }
   const grp = groups[gi], a = Math.min(map(u, t0, t0 + 0.12), 1 - map(u, t1 - 0.12, t1));
   ctx.save(); ctx.font = '800 58px Montserrat'; ctx.textBaseline = 'alphabetic'; ctx.lineJoin = 'round'; ctx.globalAlpha = a;
-  const lh = 78, y0 = 1490 - (grp.length - 1) * lh / 2; let wi = idx;
+  const lh = 78, y0 = (FW > FH ? 958 : 1490) - (grp.length - 1) * lh / 2; let wi = idx;
   grp.forEach((ln, li) => {
-    const sp = ctx.measureText(' ').width, widths = ln.map(w => ctx.measureText(w).width), full = widths.reduce((a, b) => a + b, 0) + sp * (ln.length - 1); let x = W / 2 - full / 2; const y = y0 + li * lh;
+    const sp = ctx.measureText(' ').width, widths = ln.map(w => ctx.measureText(w).width), full = widths.reduce((a, b) => a + b, 0) + sp * (ln.length - 1); let x = FW / 2 - full / 2; const y = y0 + li * lh;
     ln.forEach((w, k) => {
       const on = wi === cur && u >= lead;
       ctx.textAlign = 'left'; ctx.shadowColor = 'rgba(3,3,14,0.9)'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 4; ctx.strokeStyle = C_INK; ctx.lineWidth = 12; ctx.strokeText(w, x, y);
