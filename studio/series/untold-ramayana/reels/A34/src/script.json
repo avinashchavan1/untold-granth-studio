@@ -1,0 +1,309 @@
+{
+ "series": "untold-ramayana",
+ "fps": 24,
+ "source": "Valmiki Ramayana, Critical Edition, Kishkindha Kanda 4.5, 4.9-4.25; Ramcharitmanas, Kishkindha Kand (dohas 7-11)",
+ "unit_gap": 0.38,
+ "avoid": [
+  "No verdict on Rama; present Vali's accusation and Rama's answer as the text gives them",
+  "No 'half strength' boon (not in 4.5-4.25; Uttara unread)",
+  "Tulsidas named with respect: both told with devotion"
+ ],
+ "verify_note": "Every line cites CE Kishkindha; character lines are close Hindi renderings of the cited verses. Vali's line 'what merit...' is 4.17.13; Rama's hunting answer is 4.18.34-36.",
+ "reel": "A34",
+ "title": "Seven Trees, One Arrow: Then Nothing",
+ "status": "scripted",
+ "frame": "tall_from_wide",
+ "derived_from": "LF01",
+ "source_card": {
+  "kanda": "KISHKINDHA KANDA",
+  "sarga": "SARGA 17"
+ },
+ "claims": [
+  {
+   "claim": "Rama raised his bow and loosed a single arrow. It pierced seven sala trees, the mountain and the earth, and returned to his quiver.",
+   "ref": "Valmiki Ramayana CE 4.12.1-4.12.4",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"My lord, today itself, kill Vali, my enemy in the form of a brother.\"",
+   "ref": "Valmiki Ramayana CE 4.12.11",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "They all reached Kishkindha and hid among the dense trees. Sugriva roared, and Vali burst out in fury.",
+   "ref": "Valmiki Ramayana CE 4.12.14-4.12.16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "The two brothers fought with fists like thunderbolts. Rama stood with his bow drawn. But the arrow never flew.",
+   "ref": "Valmiki Ramayana CE 4.12.17-4.12.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"You told me: challenge him. If you never meant to kill Vali, you should have said so then, my lord.\"",
+   "ref": "Valmiki Ramayana CE 4.12.26-4.12.27",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Sugriva, my friend, let go of your anger. In dress, in build, in gait, in voice, I saw no difference between you two.\"",
+   "ref": "Valmiki Ramayana CE 4.12.29-4.12.32",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Rama said: \"Lakshmana, uproot this flowering gajapushpi creeper and put it around Sugriva's neck.\" Lakshmana did.",
+   "ref": "Valmiki Ramayana CE 4.12.34-4.12.37",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  }
+ ],
+ "score": {
+  "engine": "excerpt of the wide production's score",
+  "file": "audio/score.wav",
+  "gain": 1.5,
+  "duck": 0.72
+ },
+ "thumbnail": {
+  "hook": "WHY DIDN'T HE SHOOT?",
+  "stamp": "VALMIKI 4.12",
+  "line": "Two brothers, one face",
+  "badge": "KISHKINDHA 4.12",
+  "frame": "20s"
+ },
+ "caption": "Rama's single arrow pierced seven sala trees, a mountain and the earth (Valmiki Ramayana 4.12.3). Yet in Sugriva's first duel with Vali, the arrow never flew. Rama's reason: \"By voice, radiance, gaze, prowess and words, I see no difference between you two\" (4.12.31). The answer was a flowering creeper around Sugriva's neck.",
+ "youtube_title": "Why Rama Didn't Shoot in the First Duel (Valmiki Ramayana) #shorts",
+ "hashtags": [
+  "#Ramayana",
+  "#ValmikiRamayana",
+  "#Vali",
+  "#Rama",
+  "#Sugriva",
+  "#Kishkindha",
+  "#UntoldGranth"
+ ],
+ "comment_prompt": "Did you know the brothers looked identical?",
+ "shots": [
+  {
+   "voice": "narrator",
+   "hi": "एक बाण ने, सात पेड़ भेद दिए। फिर भी पहले युद्ध में, राम का बाण, नहीं चला।",
+   "en": "One arrow pierced seven trees. Yet in the first duel, Rama's arrow never flew.",
+   "units": [
+    "[serious] एक बाण ने, सात पेड़ भेद दिए।",
+    "[thoughtfully] फिर भी पहले युद्ध में, राम का बाण, नहीं चला।"
+   ],
+   "card": [
+    [
+     "7 TREES. 1 ARROW.",
+     null
+    ],
+    [
+     "THEN... NOTHING.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "4.12.3; 4.12.20",
+   "lead": 0.3,
+   "tail": 0.4,
+   "min": 2.8,
+   "id": 1,
+   "art_from": 22
+  },
+  {
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग बारह। स्वरेण वर्चसा चैव प्रेक्षितेन च वानर । विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये ॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग बारह।",
+    "[with deep devotion] [chanting] स्वरेण वर्चसा चैव प्रेक्षितेन च वानर… विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "cite": "4.12.31",
+   "art_from": 2,
+   "sloka": {
+    "lines": [
+     "स्वरेण वर्चसा चैव प्रेक्षितेन च वानर ।",
+     "विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये ॥"
+    ],
+    "ref": "KISHKINDHA KANDA 4.12.31",
+    "en": "“By voice, by radiance, by gaze, by prowess and by words, I see no difference between you two.”",
+    "translit": "svareṇa varcasā caiva prekṣitena ca vānara, vikrameṇa ca vākyaiśca vyaktiṃ vāṃ nopalakṣaye"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly] स्वरेण वर्चसा चैव प्रेक्षितेन च वानर… विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये॥",
+    "t2": "[with deep devotion] [chanting] स्वरेण वर्चसा चैव प्रेक्षितेन च वानर… विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये॥",
+    "t3": "[solemnly] [expressively] स्वरेण वर्चसा चैव प्रेक्षितेन च वानर… विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये॥"
+   },
+   "id": 2,
+   "force_take": {
+    "1": 1
+   },
+   "sloka_pick": "t1 [reverently] [slowly]: ~4.3 st movement, calm median ~112 Hz, words intact; t3 moved most but peaked above 200 Hz"
+  },
+  {
+   "id": 3,
+   "beat": "B04",
+   "voice": "narrator",
+   "hi": "राम ने धनुष उठाया, और एक ही बाण चलाया। वो बाण, साल के सात पेड़ों को भेदकर, पर्वत और धरती को चीरकर, वापस तरकश में लौट आया।",
+   "en": "Rama raised his bow and loosed a single arrow. It pierced seven sala trees, the mountain and the earth, and returned to his quiver.",
+   "units": [
+    "[serious] राम ने धनुष उठाया, और एक ही बाण चलाया।",
+    "वो बाण, साल के सात पेड़ों को भेदकर, पर्वत और धरती को चीरकर, वापस तरकश में लौट आया।"
+   ],
+   "cite": "4.12.1-4.12.4",
+   "card": [
+    [
+     "7 TREES.",
+     null
+    ],
+    [
+     "1 ARROW.",
+     "#f6c244"
+    ]
+   ],
+   "art_from": 22
+  },
+  {
+   "id": 4,
+   "beat": "B04",
+   "voice": "sugriva",
+   "hi": "प्रभु, आज ही, उस बाली को मारिए, जो भाई के वेश में, मेरा शत्रु है।",
+   "en": "\"My lord, today itself, kill Vali, my enemy in the form of a brother.\"",
+   "units": [
+    "[warmly] प्रभु, आज ही, उस बाली को मारिए, जो भाई के वेश में, मेरा शत्रु है।"
+   ],
+   "cite": "4.12.11",
+   "art_from": 23
+  },
+  {
+   "id": 5,
+   "beat": "B04",
+   "voice": "narrator",
+   "hi": "तो पहला युद्ध, आसान होना चाहिए था। पर ऐसा हुआ नहीं।",
+   "en": "So the first duel should have been easy. It wasn't.",
+   "units": [
+    "[thoughtfully] तो पहला युद्ध, आसान होना चाहिए था।",
+    "[serious] पर ऐसा हुआ नहीं।"
+   ],
+   "link": true,
+   "unit_gap": 0.6,
+   "art_from": 24
+  },
+  {
+   "id": 6,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "सब किष्किन्धा पहुँचे, और घने पेड़ों के बीच छिप गए। सुग्रीव ने गर्जना की, और बाली, क्रोध में, बाहर निकले।",
+   "en": "They all reached Kishkindha and hid among the dense trees. Sugriva roared, and Vali burst out in fury.",
+   "units": [
+    "[serious] सब किष्किन्धा पहुँचे, और घने पेड़ों के बीच छिप गए।",
+    "सुग्रीव ने गर्जना की, और बाली, क्रोध में, बाहर निकले।"
+   ],
+   "cite": "4.12.14-4.12.16",
+   "art_from": 25
+  },
+  {
+   "id": 7,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "दोनों भाई, वज्र जैसे मुक्कों से लड़े। राम, धनुष ताने खड़े थे। पर बाण, नहीं चला।",
+   "en": "The two brothers fought with fists like thunderbolts. Rama stood with his bow drawn. But the arrow never flew.",
+   "units": [
+    "[serious] दोनों भाई, वज्र जैसे मुक्कों से लड़े।",
+    "राम, धनुष ताने खड़े थे।",
+    "[thoughtfully] पर बाण, नहीं चला।"
+   ],
+   "cite": "4.12.17-4.12.20",
+   "unit_gap": 0.5,
+   "reveal": true,
+   "art_from": 26
+  },
+  {
+   "id": 8,
+   "beat": "B05",
+   "voice": "sugriva",
+   "hi": "आपने कहा था, ललकारो। अगर बाली को मारना ही नहीं था, तो उसी समय कह देते, प्रभु।",
+   "en": "\"You told me: challenge him. If you never meant to kill Vali, you should have said so then, my lord.\"",
+   "units": [
+    "[sadly] आपने कहा था, ललकारो।",
+    "अगर बाली को मारना ही नहीं था, तो उसी समय कह देते, प्रभु।"
+   ],
+   "cite": "4.12.26-4.12.27",
+   "art_from": 28
+  },
+  {
+   "id": 9,
+   "beat": "B05",
+   "voice": "rama",
+   "hi": "मित्र सुग्रीव, क्रोध छोड़ो। वेश में, कद में, चाल में, स्वर में, तुम दोनों में, मुझे कोई अंतर नहीं दिखा।",
+   "en": "\"Sugriva, my friend, let go of your anger. In dress, in build, in gait, in voice, I saw no difference between you two.\"",
+   "units": [
+    "[gently] मित्र सुग्रीव, क्रोध छोड़ो।",
+    "वेश में, कद में, चाल में, स्वर में, तुम दोनों में, मुझे कोई अंतर नहीं दिखा।"
+   ],
+   "cite": "4.12.29-4.12.32",
+   "art_from": 29
+  },
+  {
+   "id": 10,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "और इस पहेली का हल, एक फूल था।",
+   "en": "And the answer to this puzzle was a flower.",
+   "units": [
+    "[thoughtfully] और इस पहेली का हल, एक फूल था।"
+   ],
+   "link": true,
+   "art_from": 31
+  },
+  {
+   "id": 11,
+   "beat": "B06",
+   "voice": "narrator",
+   "hi": "राम ने कहा: लक्ष्मण, ये फूलों वाली गजपुष्पी बेल उखाड़ो, और सुग्रीव के गले में डाल दो। लक्ष्मण ने, वैसा ही किया।",
+   "en": "Rama said: \"Lakshmana, uproot this flowering gajapushpi creeper and put it around Sugriva's neck.\" Lakshmana did.",
+   "units": [
+    "[warmly] राम ने कहा: लक्ष्मण, ये फूलों वाली गजपुष्पी बेल उखाड़ो, और सुग्रीव के गले में डाल दो।",
+    "लक्ष्मण ने, वैसा ही किया।"
+   ],
+   "cite": "4.12.34-4.12.37",
+   "art_from": 32
+  },
+  {
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true,
+   "id": 12,
+   "art_from": 98
+  }
+ ]
+}
