@@ -26,14 +26,14 @@
       "Show the payoff early, explain it later: the two garlands are planted in act 1 and paid off in act 4.",
       "Pattern breaks every 60-90 s: a quote card, a character's own line, a surprising detail (the year at the cave, the twins Rama could not tell apart).",
       "Chapters in the YouTube description so viewers can jump instead of leaving.",
-      "Music per act (4 pieces): mystery, rising conflict, stillness under the debate, grief to resolve; quiet under every verse.",
+      "Music per act: one symphonic piece per act (orchestra with Indian colour), sharing one recurring theme; smooth crossfades; quiet under every verse; builds to the climax, never harsh",
       "Narrator stays calm (series rule) but alive: short lines, [thoughtfully]/[serious] contrast, [pause] before each reveal; characters speak their own key lines."
     ]
   },
   "acts": [
     {
       "name": "Act 1 · Two brothers",
-      "music": "low mystery, night forest",
+      "music": "Act 1 (two brothers): night-forest mystery; solo bansuri over a tanpura drone and soft low strings, a gentle harp ostinato; a quiet brotherhood theme on cello that will return at the end",
       "beats": [
         {
           "id": "B00",
@@ -74,7 +74,7 @@
     },
     {
       "name": "Act 2 · Two duels, two garlands",
-      "music": "rising drums, tension",
+      "music": "Act 2 (two duels, two garlands): the theme grows; strings and soft horns build in long swells, light tabla and timpani rolls (never hard hits) for the duels; hushes for Tara's warning with a tender oboe/sarangi line",
       "beats": [
         {
           "id": "B05",
@@ -115,7 +115,7 @@
     },
     {
       "name": "Act 3 · The question and the answer",
-      "music": "near silence, low drone; quiet under every quote",
+      "music": "Act 3 (the question and the answer): almost still; sustained strings and a low choir pad, sparse harp notes; nearly silent under every quote and verse so the words carry",
       "beats": [
         {
           "id": "B10",
@@ -149,7 +149,7 @@
     },
     {
       "name": "Act 4 · The goodbye",
-      "music": "grief, slow strings, resolve at the end",
+      "music": "Act 4 (the goodbye): grief and grace; the brotherhood theme returns on solo cello and bansuri, full warm strings swell as the golden garland changes hands, then settle into a peaceful major-key resolve with the rains",
       "beats": [
         {
           "id": "B14",

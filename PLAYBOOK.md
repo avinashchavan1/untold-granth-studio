@@ -37,6 +37,9 @@ Each rule has a mechanism in the engine; keep both.
     normal pitch. Questions also tend to rise into the shout range: re-record with a calmer tag or phrase the line as a statement.
 13. **Never chop a voice.** Lines end with their natural tail and a fade; verse and quote lines are never ASR-cut (ASR can't spell scripture);
     the verse keeps its own pauses. If a word is cut, fix the engine, not just the reel.
+14a. **Music is pleasing to the ear.** Symphonic and melodic (orchestra plus the culture's own instruments), a recurring theme,
+    smooth swells; no harsh hits, distorted drums or shrill highs. Put the house sound in `series.json → score_style`; `gen_score.py`
+    appends it to every prompt.
 14. **Music may sit high** when it serves the reel (`score.gain`, `score.duck`); one take per reel chosen by its energy curve vs. the story beats.
 15. **Endings per platform:** FOLLOW on Instagram/Facebook, SUBSCRIBE on YouTube; both masters checked by transcribing their last seconds.
 
