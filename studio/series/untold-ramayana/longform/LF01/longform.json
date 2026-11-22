@@ -278,7 +278,7 @@
         "B10",
         "B12"
       ],
-      "note": "plan row A35"
+      "note": "rendered, in review"
     },
     {
       "id": "A36",
@@ -288,7 +288,7 @@
         "B08",
         "B09"
       ],
-      "note": "plan row A36"
+      "note": "rendered, in review"
     },
     {
       "id": "A34",
@@ -298,7 +298,7 @@
         "B04",
         "B05"
       ],
-      "note": "plan row A34"
+      "note": "rendered, in review"
     },
     {
       "id": "LF01-R4",
@@ -396,8 +396,8 @@
       "done": true
     },
     {
-      "step": "Wide thumbnail + chapters done; derived reels A35, A36, A34 rendering",
-      "done": false
+      "step": "Wide thumbnail + chapters done; derived reels A35, A36, A34 rendered and in review (same takes and art; new hook, verse, ending)",
+      "done": true
     }
   ],
   "budget": {
