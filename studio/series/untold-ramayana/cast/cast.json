@@ -216,6 +216,54 @@
    "character": "Dasharatha: king of Ayodhya, father of Rama; warm, deep, dignified",
    "chosen": "USER choice (major character), ElevenLabs audition Nov 21 2026 (vs Shiv, Nazir Qureshi)",
    "audition": "cast/audition/dasharatha/"
+  },
+  "vali": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "wbOlq3nIga8HKqcDhASI",
+   "name": "Shivank - Deep, Breathy and Suspense (ElevenLabs library)",
+   "character": "Vali: proud king, son of Indra; wounded, accusing, then reconciled",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 22 2026 (option 2 of 3; LF01_CAST_AUDITION.mp4)",
+   "audition": "cast/audition/vali/"
+  },
+  "sugriva": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "Qxb5zQvEo3DYQK2HNnXm",
+   "name": "Kunal Agarwal - Clear and Encouraging (ElevenLabs library)",
+   "character": "Sugriva: exiled younger brother, humble, hurt, later king",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 22 2026 (option 3 of 3; LF01_CAST_AUDITION.mp4)",
+   "audition": "cast/audition/sugriva/"
+  },
+  "tara": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "xccfcojYYGnqTTxwZEDU",
+   "name": "Kanika - Soft and Vibrant (ElevenLabs library)",
+   "character": "Tara: Vali's wise queen; counsel, then grief",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 22 2026 (option 1 of 3; LF01_CAST_AUDITION.mp4)",
+   "audition": "cast/audition/tara/"
+  },
+  "angada": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "X0Kc6dUd5Kws5uwEyOnL",
+   "name": "Laksh - Soft and Emotional (ElevenLabs library)",
+   "character": "Angada: young prince, Vali's son",
+   "chosen": "USER choice (major character), ElevenLabs audition Nov 22 2026 (option 1 of 3; LF01_CAST_AUDITION.mp4)",
+   "audition": "cast/audition/angada/"
   }
  },
  "fx": {

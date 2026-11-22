@@ -26,6 +26,10 @@ Object.assign(CH, {
   janaka: { kind: 'man', god: true, sage: true, skin: '#d4a882', skinSh: '#987062', cloth: '#efe2c4', clothSh: '#b0a088', sash: '#e6b450', hair: '#ece6dc' },   // A18: Janaka, the royal sage (rajarshi): white hair and beard, gold crown, ivory and gold (owner's pick)
   parashurama: { kind: 'monk', sage: true, bow: true, skin: '#a8724a', skinSh: '#6a4436', cloth: '#8a4a2a', clothSh: '#5a2e1a', hair: '#1a1418' },   // A18: Parashurama, warrior-sage: black jata and beard, bark-brown robe, rudraksha, axe (parashu()) + bow (owner's pick)
   maricha: { kind: 'demon', skin: '#52695c', skinSh: '#28393e', cloth: '#1a1622', clothSh: '#0e0c14', hair: '#07070e' },
+  vali: { kind: 'man', vanara: true, crown: true, garland: 'gold', skin: '#c08a3a', skinSh: '#7e5426', muzzle: '#f2dcb0', cloth: '#a8301e', clothSh: '#661c14', sash: '#e6b450', hair: '#9a6224' },   // LF01 (owner's pick, Nov 22 2026): golden-brown, crowned, red; Indra's golden garland (4.17.5)
+  sugriva: { kind: 'man', vanara: true, skin: '#c08a3a', skinSh: '#7e5426', muzzle: '#f2dcb0', cloth: '#a8301e', clothSh: '#661c14', sash: '#e6b450', hair: '#9a6224' },   // LF01: same look as Vali (4.12.30-31); P({garland:'flowers'}) from 4.12.36, crown after the consecration (4.25.33), gold garland from 4.22.18
+  tara: { kind: 'woman', skin: '#dcb088', skinSh: '#a6807a', cloth: '#1e5a6a', clothSh: '#10343e', border: '#e6b450', blouse: '#2a7a8a', hair: '#0d0a16' },   // LF01 (owner's pick): Vali's queen, fully human, teal and gold
+  angada: { kind: 'man', vanara: true, band: true, skin: '#c69044', skinSh: '#82582a', muzzle: '#f4e2bc', cloth: '#d88a1e', clothSh: '#9a5a14', sash: '#b8261e', hair: '#a06a2a' },   // LF01 (owner's pick): young prince, gold band, saffron, golden armlets (4.18.46)
 });
 // the library's end card and generic scenes use hero / heroine / brother: here they are Rama, Sita and Lakshmana
 Object.assign(CH, { hero: CH.rama, heroine: CH.sita, brother: CH.lak, monkey: CH.vanara, demon: CH.maricha });

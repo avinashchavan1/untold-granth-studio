@@ -324,22 +324,22 @@
     {
       "key": "vali",
       "tier": "major",
-      "status": "owner to choose look + voice"
+      "status": "locked (owner, Nov 22): look option 1, voice Shivank"
     },
     {
       "key": "sugriva",
       "tier": "major",
-      "status": "owner to choose look + voice"
+      "status": "locked (owner, Nov 22): look option 1, voice Kunal Agarwal"
     },
     {
       "key": "tara",
       "tier": "major",
-      "status": "owner to choose look + voice"
+      "status": "locked (owner, Nov 22): look option 3, voice Kanika"
     },
     {
       "key": "angada",
       "tier": "major",
-      "status": "owner to choose look + voice (one line: 'I am Angada')"
+      "status": "locked (owner, Nov 22): look option 1, voice Laksh"
     },
     {
       "key": "rama",
@@ -372,8 +372,8 @@
       "done": true
     },
     {
-      "step": "Owner picks Vali, Sugriva, Tara, Angada (looks + voices): options sent Nov 22",
-      "done": false
+      "step": "Owner picked Vali, Sugriva, Tara, Angada (looks + voices), Nov 22",
+      "done": true
     },
     {
       "step": "Script: beats with narration units + character lines",
