@@ -2,7 +2,7 @@
   "code": "LF01",
   "title": "Vali's Death, as Valmiki Tells It",
   "subtitle": "Why Rama shot from hiding: Vali's question and Rama's answer, both in the text",
-  "stage": "researching",
+  "stage": "voiced",
   "frame": "16:9 (1920x1080), action kept inside a centred 9:16 safe zone",
   "target_min": "10-12",
   "arc": "Kishkindha Kanda (CE) 4.5 to 4.25: the fire-witness friendship, the brothers' feud, the two duels, Tara's warning, the arrow, Vali's accusation and Rama's answer, Vali's last words, Tara's grief, the funeral and Sugriva's crowning",
@@ -364,7 +364,7 @@
   ],
   "progress": [
     {
-      "step": "Research: CE 4.5, 4.9-4.25 read; 159 cited verses saved (research/ce_verses.json)",
+      "step": "Research: CE 4.5, 4.9-4.25 read; 159 cited verses saved",
       "done": true
     },
     {
@@ -372,23 +372,31 @@
       "done": true
     },
     {
-      "step": "Owner picked Vali, Sugriva, Tara, Angada (looks + voices), Nov 22",
+      "step": "Owner picked Vali, Sugriva, Tara, Angada (looks + voices)",
       "done": true
     },
     {
-      "step": "Script: beats with narration units + character lines",
+      "step": "Script: 98 shots in 4 acts, every line cited (reels/LF01/src/script.json)",
+      "done": true
+    },
+    {
+      "step": "Engine: 16:9 frame from a square world (9:16 reels crop the centre), wide cards, per-act music",
+      "done": true
+    },
+    {
+      "step": "Voices recorded (narrator + Vali, Sugriva, Tara, Angada, Rama), picked, 13:59 timeline",
+      "done": true
+    },
+    {
+      "step": "Music: 4 symphonic act pieces, crossfaded",
+      "done": true
+    },
+    {
+      "step": "Render: YouTube 4K master + preview",
       "done": false
     },
     {
-      "step": "Engine: 16:9 frame + 9:16 safe zone, wide cards, per-act music",
-      "done": false
-    },
-    {
-      "step": "Voices (beats recorded once), music, art, render",
-      "done": false
-    },
-    {
-      "step": "YouTube master + chapters + wide thumbnail; derived reels",
+      "step": "Wide thumbnail + chapters; derived reels",
       "done": false
     }
   ],
@@ -489,5 +497,6 @@
         }
       ]
     }
-  }
+  },
+  "length": "13:59"
 }
