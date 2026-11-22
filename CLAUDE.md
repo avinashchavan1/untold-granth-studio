@@ -90,6 +90,10 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   It copies only shared paths and refuses to commit if a channel detail (name, handles, ids) would leak. Channel details belong in
   channel.json, calendar.json, studio/series/ and this CLAUDE.md.
 
+## Full-length videos (owner, Nov 22 2026)
+- NEW 16:9 full-length videos (~10–12 min), never stitched from old reels; 4–6 reels are DERIVED from each. Plan, method and the
+  pilot (Vali's death, Kishkindha): `studio/series/untold-ramayana/LONGFORM.md`. Start it in a fresh session: "long-form pilot: Vali".
+
 ## Posting
 - Timeline page plans the posting days and times (`src/lib/bestTime.ts` + `src/lib/occasions.ts`, data in `calendar.json`):
   - Days: every ordering of the ready reels is scored (≤8 reels: exact); score = festival fit (`calendar.json` occasions:
