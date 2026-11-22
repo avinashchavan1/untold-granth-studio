@@ -12,7 +12,7 @@ Object.assign(CH, { urmila: { kind: 'woman', skin: '#ddb294', skinSh: '#a47a86',
 
 function buildScenes() { BG.gn = buildGanga('night'); BG.gd = buildGanga('dawn'); BG.forest = buildForest(); BG.pal = buildPalace(); BG.ms = buildManuscript(); }
 const L_DAWN = { rim: '#ffc890', rimA: 0.9, dir: -1, tint: '#40284a', tintA: 0.12 };
-const L_FOREST = { rim: '#e0b0ff', rimA: 0.8, dir: 1, tint: '#1a1450', tintA: 0.3 };
+const L_GROVE = { rim: '#e0b0ff', rimA: 0.8, dir: 1, tint: '#1a1450', tintA: 0.3 };
 const MEMORY = { tint: '#c89a5a', tintA: 0.5, rim: '#ffe0a0', rimA: 0.7, dir: 1, shadow: 0.3 };
 const dim = (ctx, a = 0.3) => { ctx.fillStyle = rgba('#05061a', a); ctx.fillRect(0, 0, W, H); };
 const label = (c, s, y, q, col = C_GOLD, size = 110) => { if (q > 0) text(c, s, 540, y + (1 - q) * 18, { size, weight: 900, color: col, ls: 10, alpha: q, stroke: 10, shadow: 32 }); };
@@ -45,7 +45,7 @@ const SHOTS = {
   4(ctx, u, p, sh, t, post) {
     const st = sentenceStarts(sh, 2), bg = BG.gn, cam = NCAM(p, 1.12), m = 0.35 + 0.35 * Math.abs(Math.sin(t * 5));
     ganga(ctx, bg, cam, t, null, c => {
-      chariot(c, 230, GANGA_BANK + 180, 170, 1);
+      chariot(c, 360, GANGA_BANK + 150, 170, 1);
       sleepers(c, L_NIGHT, 60);
       drawFigure(c, CH.lak, P({ sit: 1, bow: 'B', head: 0.04, eye: blink(t, 2), gaze: [-0.4, 0], mouth: u > st[1] + 1.5 ? m * 0.5 : 0, aN: [0.2, 0.14], handN: 'palm' }), { x: 880, y: GANGA_BANK + 250, s: 560, face: -1 }, L_NIGHT);
       fireflies(c, t, 8, 10, [100, 1100, 900, 400], 0.6);
@@ -67,7 +67,7 @@ const SHOTS = {
   6(ctx, u, p, sh, t, post) {
     const bg = BG.gn, cam = { z: lerp(1.3, 1.36, p), x: 180, y: 300 }, m = mouthEnv(sh, u);
     ganga(ctx, bg, cam, t, null, c => {
-      sleepers(c, L_NIGHT, -160);
+      sleepers(c, L_NIGHT, 60);
       guard(c, CH.lak, 560, t, L_NIGHT, { face: 1, gaze: [0.5, 0] });
       const gp = P({ bow: 'B', aN: [0.24, 0.06], handN: 'palm', aF: [0.16, 0.12], head: 0.03, eye: blink(t, 3), smile: 0.4, mouth: m * 0.8, gaze: [0.5, 0] });
       drawFigure(c, CH.guha, gp, { x: 860, y: GANGA_BANK + 230, s: 620, face: -1 }, L_NIGHT);
@@ -78,7 +78,7 @@ const SHOTS = {
   7(ctx, u, p, sh, t, post) {
     const bg = BG.gn, cam = { z: lerp(1.3, 1.38, p), x: 120, y: 300 }, m = mouthEnv(sh, u), st = sentenceStarts(sh, 2), look = ease(u, 0.2, 1.2) * (1 - ease(u, st[1], st[1] + 0.8));
     ganga(ctx, bg, cam, t, null, c => {
-      sleepers(c, L_NIGHT, -100);
+      sleepers(c, L_NIGHT, 60);
       drawFigure(c, CH.lak, P({ bow: 'N', aN: [0.08, 0.2], bowAng: 0.05, eye: blink(t, 2), brow: 0.6, mouth: m * 0.8, gaze: [lerp(0.5, -0.6, look), 0.2 * look], head: 0.06 * look }), { x: 720, y: GANGA_BANK + 230, s: 640, face: 1 }, L_NIGHT);
       drawFigure(c, CH.guha, P({ bow: 'B', eye: blink(t, 3), smile: 0.1, gaze: [-0.5, 0], brow: 0.3 }), { x: 960, y: GANGA_BANK + 230, s: 620, face: -1 }, L_NIGHT);
     });
@@ -89,9 +89,9 @@ const SHOTS = {
     const bg = BG.forest, cam = { z: lerp(1.05, 1.12, p), x: 40, y: 0 };
     drawLayer(ctx, cam, bg.back); drawLayer(ctx, cam, bg.l1); drawLayer(ctx, cam, bg.l2); drawLayer(ctx, cam, bg.l3);
     withCam(ctx, cam, 0.85, c => {
-      drawFigure(c, CH.sita, P({ sit: 1, eye: blink(t, 4), smile: 0.1, gaze: [0.4, 0] }), { x: 360, y: 1420, s: 520, face: 1 }, L_FOREST);
-      drawFigure(c, CH.rama, P({ sit: 1, bow: 'B', eye: blink(t, 5), smile: 0.1, gaze: [0.5, 0] }), { x: 540, y: 1430, s: 560, face: 1 }, L_FOREST);
-      drawFigure(c, CH.lak, P({ sit: 1, bow: 'B', eye: blink(t, 2), gaze: [-0.5, 0] }), { x: 780, y: 1430, s: 550, face: -1 }, L_FOREST);
+      drawFigure(c, CH.sita, P({ sit: 1, eye: blink(t, 4), smile: 0.1, gaze: [0.4, 0] }), { x: 360, y: 1420, s: 520, face: 1 }, L_GROVE);
+      drawFigure(c, CH.rama, P({ sit: 1, bow: 'B', eye: blink(t, 5), smile: 0.1, gaze: [0.5, 0] }), { x: 540, y: 1430, s: 560, face: 1 }, L_GROVE);
+      drawFigure(c, CH.lak, P({ sit: 1, bow: 'B', eye: blink(t, 2), gaze: [-0.5, 0] }), { x: 780, y: 1430, s: 550, face: -1 }, L_GROVE);
       fireflies(c, t, 3, 10, [100, 1000, 800, 500], 0.6);
     });
     drawLayer(ctx, cam, bg.fg); dim(ctx, 0.2);
@@ -102,8 +102,8 @@ const SHOTS = {
     const bg = BG.forest, cam = { z: lerp(1.25, 1.3, p), x: 80, y: 120 }, m = mouthEnv(sh, u);
     drawLayer(ctx, cam, bg.back); drawLayer(ctx, cam, bg.l1); drawLayer(ctx, cam, bg.l2); drawLayer(ctx, cam, bg.l3);
     withCam(ctx, cam, 0.85, c => {
-      drawFigure(c, CH.rama, P({ sit: 1, bow: 'B', aN: [0.2, 0.1], handN: 'palm', eye: blink(t, 5), smile: 0.15, mouth: m * 0.8, gaze: [0.5, 0], brow: 0.3 }), { x: 480, y: 1430, s: 600, face: 1 }, L_FOREST);
-      drawFigure(c, CH.lak, P({ sit: 1, bow: 'B', eye: blink(t, 2), gaze: [-0.5, 0], head: 0.05 }), { x: 760, y: 1430, s: 580, face: -1 }, L_FOREST);
+      drawFigure(c, CH.rama, P({ sit: 1, bow: 'B', aN: [0.2, 0.1], handN: 'palm', eye: blink(t, 5), smile: 0.15, mouth: m * 0.8, gaze: [0.5, 0], brow: 0.3 }), { x: 480, y: 1430, s: 600, face: 1 }, L_GROVE);
+      drawFigure(c, CH.lak, P({ sit: 1, bow: 'B', eye: blink(t, 2), gaze: [-0.5, 0], head: 0.05 }), { x: 760, y: 1430, s: 580, face: -1 }, L_GROVE);
     });
     drawLayer(ctx, cam, bg.fg);
   },
