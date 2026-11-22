@@ -28,6 +28,8 @@ Each rule has a mechanism in the engine; keep both.
     The picker drops takes that rise far above the voice's normal pitch (shouting guard). Avoid [curious] if your narrator tends to rise on it.
     Optional test: `"narration_energy": "hook_reveal"` in script.json allows livelier tags ([excited] [dramatically] [intense]) on the hook
     and shots marked `"reveal": true` only (guard still on). Compare views at 48 h against calm reels of similar fame before adopting it.
+    In practice [dramatically]/[excited] made the narrator shout in every take (whole line ~200–240 Hz); `[serious] [intense]` gives lift at a
+    normal pitch. Questions also tend to rise into the shout range: re-record with a calmer tag or phrase the line as a statement.
 13. **Never chop a voice.** Lines end with their natural tail and a fade; verse and quote lines are never ASR-cut (ASR can't spell scripture);
     the verse keeps its own pauses. If a word is cut, fix the engine, not just the reel.
 14. **Music may sit high** when it serves the reel (`score.gain`, `score.duck`); one take per reel chosen by its energy curve vs. the story beats.
@@ -38,3 +40,22 @@ Each rule has a mechanism in the engine; keep both.
 17. **Keep the owner updated:** short chat notes + the live progress bar (`scripts/status.py`).
 18. **Festival-aware posting:** `calendar.json` (occasions, theme words, weekly days); plan production so festival reels are ready in time.
 19. **Up to 3–4 reels per session**, then a fresh session; everything lives in git, the audio packs and the app DB.
+20. **Shot files never redeclare library names.** A reel's `shots.js` loads after `engine/art`; a `const` that already exists there
+    (e.g. a light like `L_FOREST`) stops the whole render. Prefix reel-local names or check `engine/art/*.js` first.
+21. **Previews stay under 50 MB.** `scripts/media.py` re-encodes a longer reel's preview automatically; masters go to the masters repo.
+
+## Full-length videos
+22. **Full-length videos are NEW productions, never stitched from existing reels.** Reels are then DERIVED from the full-length video
+    (same research, same recorded beats, same art), so one production feeds both YouTube long-form and 4–6 reels.
+23. **Pick an arc, not a moment:** a whole episode where the base text differs from popular versions (~10–12 min). Read every chapter of the
+    arc; the same Truth and Show-the-words rules apply (quote cards for both sides, one verse to open the video and each derived reel).
+24. **Write in self-contained beats.** Each beat = one scene + its verse, with its own narration takes. Full video = intro + beats + short
+    spoken links + one SUBSCRIBE outro. Derived reel = hook card + opening verse + 3–5 beats + platform end card; only hooks/links are new
+    recordings, beats are never re-recorded.
+25. **Draw once for two frames.** Full video 16:9 (1920×1080); every scene keeps its action inside a centred 9:16 safe zone so derived reels
+    render the same scene at 1080×1920. Source/verse/quote/end cards get a wide and a vertical layout.
+26. **Music per act** (3–4 score pieces per video, crossfaded), chosen by energy curve like reels.
+27. **Delivery:** YouTube long-form master with chapters (verse refs in the description) and a wide thumbnail; derived reels go through
+    the normal reel pipeline (stages, covers, masters, owner review).
+28. **Budget:** ~10–12 min of narration is ~15–20k TTS characters for two takes; plan the month around it (about one full-length video
+    per month on a 40k-character plan, plus a few reels). The channel's plan and current pilot live in its series folder (`LONGFORM.md`).
