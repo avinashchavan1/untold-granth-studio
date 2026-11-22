@@ -44,7 +44,8 @@ for old, new in copy:
 js = open(os.path.join(src, "src", "shots.js"), encoding="utf-8").read()
 js += "\n// ---- derived reel " + rid + " (from " + S["reel"] + "): each shot is drawn by the wide shot it came from (timeline art_from) ----\n" + \
       "const _buildWide = buildScenes; buildScenes = function () { _buildWide(); (TL.shots || []).forEach(sh => { const from = sh.art_from; if (!from || !S_[from]) return;\n" + \
-      "  SHOTS[sh.id] = (c, u, p, s, t, post) => { S_[from](c, u, p, Object.assign({}, s, { id: from }), t, post); const inner = post.ui;\n" + \
+      "  SHOTS[sh.id] = (c, u, p, s, t, post) => { c.save(); c.translate(960, 1250); c.scale(1.15, 1.15); c.translate(-960, -1450);   // 9:16 framing: action above the subtitles\n" + \
+      "    S_[from](c, u, p, Object.assign({}, s, { id: from }), t, post); c.restore(); const inner = post.ui;\n" + \
       "    post.ui = cc => { if (inner && !s.card) inner(cc); if (s.card) hookLines(cc, u, s.card); if (s.cite && !s.quote && !s.sloka && !s.cta) chip(cc, s.cite, ease(u, 0.3, 0.8)); }; }; }); };\n"
 open(os.path.join(dst, "src", "shots.js"), "w", encoding="utf-8").write(js)
 # music: the wide score's excerpts under the borrowed beats are uneven; use the act the reel's beats mostly come from (whole piece, faded)

@@ -286,5 +286,6 @@ function buildScenes() { let lastAct = -1;     // TL is loaded by now
 
 // ---- derived reel A35 (from LF01): each shot is drawn by the wide shot it came from (timeline art_from) ----
 const _buildWide = buildScenes; buildScenes = function () { _buildWide(); (TL.shots || []).forEach(sh => { const from = sh.art_from; if (!from || !S_[from]) return;
-  SHOTS[sh.id] = (c, u, p, s, t, post) => { S_[from](c, u, p, Object.assign({}, s, { id: from }), t, post); const inner = post.ui;
+  SHOTS[sh.id] = (c, u, p, s, t, post) => { c.save(); c.translate(960, 1250); c.scale(1.15, 1.15); c.translate(-960, -1450);   // 9:16 framing: action above the subtitles
+    S_[from](c, u, p, Object.assign({}, s, { id: from }), t, post); c.restore(); const inner = post.ui;
     post.ui = cc => { if (inner && !s.card) inner(cc); if (s.card) hookLines(cc, u, s.card); if (s.cite && !s.quote && !s.sloka && !s.cta) chip(cc, s.cite, ease(u, 0.3, 0.8)); }; }; }); };
