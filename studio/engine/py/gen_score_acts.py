@@ -22,7 +22,7 @@ if cmd in ("gen", "all"):
         L = spans[a][1] - spans[a][0] + XF + 2; ms = int(min(300, max(10, L)) * 1000)
         prompt = acts[a]["music"] + (" " + style if style else "")
         rq = urllib.request.Request("https://api.elevenlabs.io/v1/music?output_format=mp3_44100_192", json.dumps({"prompt": prompt, "music_length_ms": ms, "model_id": "music_v1", "force_instrumental": True}).encode(), {"xi-api-key": "proxy-injected", "Content-Type": "application/json"})
-        open(f, "wb").write(urllib.request.urlopen(rq, timeout=900).read()); print(f"act {a}: {ms / 1000:.0f}s ok", flush=True)
+        data = urllib.request.urlopen(rq, timeout=900).read(); open(f, "wb").write(data); print(f"act {a}: {ms / 1000:.0f}s ok", flush=True)
 if cmd in ("join", "all"):
     # place each piece at its act start; overlap XF seconds and crossfade (equal-power) into the next
     ins, flt = [], []

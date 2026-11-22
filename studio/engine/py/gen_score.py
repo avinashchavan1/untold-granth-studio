@@ -15,4 +15,4 @@ for k in range(1, n + 1):
     rq = urllib.request.Request("https://api.elevenlabs.io/v1/music?output_format=mp3_44100_192",
                                 json.dumps({"prompt": prompt, "music_length_ms": ms, "model_id": "music_v1", "force_instrumental": True}).encode(),
                                 {"xi-api-key": "proxy-injected", "Content-Type": "application/json"})
-    open(os.path.join(out, f"take{k}.mp3"), "wb").write(urllib.request.urlopen(rq, timeout=600).read()); print("take", k, "ok", flush=True)
+    data = urllib.request.urlopen(rq, timeout=600).read(); open(os.path.join(out, f"take{k}.mp3"), "wb").write(data); print("take", k, "ok", flush=True)
