@@ -19,19 +19,23 @@
   },
   {
    "n": 1,
-   "name": "Two brothers"
+   "name": "Two brothers",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 1 (two brothers): night-forest mystery; solo bansuri over a tanpura drone and soft low strings, a gentle harp ostinato; a quiet brotherhood theme on cello that will return at the end."
   },
   {
    "n": 2,
-   "name": "Two duels, two garlands"
+   "name": "Two duels, two garlands",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 2 (two duels, two garlands): the theme grows; strings and soft horns build in long swells, light tabla and timpani rolls (never hard hits) for the duels; hushes for Tara's warning with a tender oboe/sarangi line."
   },
   {
    "n": 3,
-   "name": "The question and the answer"
+   "name": "The question and the answer",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 3 (the question and the answer): almost still; sustained strings and a low choir pad, sparse harp notes; nearly silent under every quote and verse so the words carry."
   },
   {
    "n": 4,
-   "name": "The goodbye"
+   "name": "The goodbye",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 4 (the goodbye): grief and grace; the brotherhood theme returns on solo cello and bansuri, full warm strings swell as the golden garland changes hands, then settle into a peaceful major-key resolve with the rains."
   }
  ],
  "unit_gap": 0.38,
@@ -702,12 +706,11 @@
   "wide": true
  },
  "score": {
-  "engine": "elevenlabs music_v1",
-  "file": "audio/score.mp3",
+  "engine": "elevenlabs music_v1 per act (engine/py/gen_score_acts.py)",
+  "file": "audio/score.wav",
   "per_act": true,
   "gain": 1.5,
-  "duck": 0.72,
-  "prompt": "see longform.json acts[].music"
+  "duck": 0.72
  },
  "avoid": [
   "No verdict on Rama; present Vali's accusation and Rama's answer as the text gives them",
@@ -1051,11 +1054,11 @@
    "act": 1,
    "beat": "B03",
    "voice": "narrator",
-   "hi": "पर सुग्रीव के मन में, एक डर था। क्या कोई, सच में, बाली के सामने टिक सकता है?",
-   "en": "But Sugriva had one fear: could anyone really stand before Vali?",
+   "hi": "पर सुग्रीव के मन में, एक डर था। कोई भी, बाली के सामने टिक पाएगा, इस पर उन्हें भरोसा नहीं था।",
+   "en": "But Sugriva had one fear. He could not believe anyone would stand before Vali.",
    "units": [
     "[thoughtfully] पर सुग्रीव के मन में, एक डर था।",
-    "क्या कोई, सच में, बाली के सामने टिक सकता है?"
+    "[serious] कोई भी, बाली के सामने टिक पाएगा, इस पर उन्हें भरोसा नहीं था।"
    ],
    "cite": "4.12.8-4.12.9",
    "link": true
