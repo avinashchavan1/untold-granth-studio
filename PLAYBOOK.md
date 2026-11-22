@@ -23,6 +23,11 @@ Each rule has a mechanism in the engine; keep both.
 10. **Major characters:** the owner picks look AND voice (stills + audio options first). Minor ones: Claude picks and says which. Elders and the revered stay dignified, never cute.
 11. **Address rule:** revered names aren't used bare by devotees/family (`series.json → address.protected_names`); `check` flags it.
 
+9b. **Keep viewers to the end.** Hook question in the first seconds with a promise of the answer; every shot/beat ends on an open
+    question the next one answers; reveal in steps; change rhythm often (a character's line or a quote card every 20-30 s in reels,
+    every 60-90 s in full-length videos; a [pause] before reveals); music builds to the climax. Engagement comes from writing and
+    pacing, never from shouting tags. Read the platforms' retention graphs at 48 h and fix the pattern where viewers leave.
+
 ## Sound
 12. **One narrator, calm.** Only calm tags ([softly] [warmly] [curious] [serious] [thoughtfully] [pause]); dramatic tags make TTS shout.
     The picker drops takes that rise far above the voice's normal pitch (shouting guard). Avoid [curious] if your narrator tends to rise on it.

@@ -1,0 +1,20 @@
+{
+ "line": "[softly] पिताजी... [pause] मैं अंगद हूँ।",
+ "voices": [
+  {
+   "n": 1,
+   "voice_id": "X0Kc6dUd5Kws5uwEyOnL",
+   "name": "Laksh - Soft, Emotional"
+  },
+  {
+   "n": 2,
+   "voice_id": "P1bg08DkjqiVEzOn76yG",
+   "name": "Viraj - Rich and Soft"
+  },
+  {
+   "n": 3,
+   "voice_id": "dxhwlBCxCrnzRlP4wDeE",
+   "name": "Arjun - Gentle"
+  }
+ ]
+}

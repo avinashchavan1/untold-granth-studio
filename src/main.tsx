@@ -8,6 +8,7 @@ import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import Docs from "./pages/Docs";
 import Ideas from "./pages/Ideas";
+import Longform from "./pages/Longform";
 import Plan from "./pages/Plan";
 import Profiles from "./pages/Profiles";
 import ReelDetail from "./pages/ReelDetail";
@@ -38,6 +39,8 @@ createRoot(document.getElementById("root")!).render(
               <Route path="reels" element={<Reels />} />
               <Route path="reels/:code" element={<ReelDetail />} />
               <Route path="plan" element={<Plan />} />
+              <Route path="longform" element={<Longform />} />
+              <Route path="longform/:code" element={<Longform />} />
               <Route path="world" element={<World />} />
               <Route path="ideas" element={<Ideas />} />
               <Route path="profiles" element={<Profiles />} />

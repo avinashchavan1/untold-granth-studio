@@ -1,0 +1,493 @@
+{
+  "code": "LF01",
+  "title": "Vali's Death, as Valmiki Tells It",
+  "subtitle": "Why Rama shot from hiding: Vali's question and Rama's answer, both in the text",
+  "stage": "researching",
+  "frame": "16:9 (1920x1080), action kept inside a centred 9:16 safe zone",
+  "target_min": "10-12",
+  "arc": "Kishkindha Kanda (CE) 4.5 to 4.25: the fire-witness friendship, the brothers' feud, the two duels, Tara's warning, the arrow, Vali's accusation and Rama's answer, Vali's last words, Tara's grief, the funeral and Sugriva's crowning",
+  "base_text": "Valmiki Ramayana, Critical Edition (enjoylearningsanskrit.com, book-4)",
+  "sargas_read": "4.5, 4.9 to 4.25 (every verse), 4.11.37; translations cross-checked against the Devanagari where the English page is garbled (4.18.56 names Hanuman but the speaker is Vali; 4.19.26-28 is a mis-pasted Mandodari passage and is not used)",
+  "opening_sloka": {
+    "ref": "4.17.13",
+    "lines": [
+      "पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः ।",
+      "यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः ॥"
+    ],
+    "translit": "parāṅmukhavadhaṃ kṛtvā ko nu prāptastvayā guṇaḥ, yadahaṃ yuddhasaṃrabdhastvatkṛte nidhanaṃ gataḥ",
+    "en": "What merit have you gained by striking one whose face was turned away? Because of you, I, absorbed in battle, have met my death.",
+    "why": "The whole video is the answer to this one question, asked by Vali himself in Valmiki's text."
+  },
+  "retention": {
+    "owner_note": "Nov 22 2026: the audio must be engaging so viewers don't leave midway.",
+    "plan": [
+      "0:00-0:15 cold open: the arrow, then Vali's question as a quote card; promise: 'Valmiki records Vali's accusation AND Rama's answer. By the end you will have heard both, word for word.'",
+      "Every beat ends on an open question that the next beat answers (the 'link' lines are recorded separately so reels can drop them).",
+      "Show the payoff early, explain it later: the two garlands are planted in act 1 and paid off in act 4.",
+      "Pattern breaks every 60-90 s: a quote card, a character's own line, a surprising detail (the year at the cave, the twins Rama could not tell apart).",
+      "Chapters in the YouTube description so viewers can jump instead of leaving.",
+      "Music per act (4 pieces): mystery, rising conflict, stillness under the debate, grief to resolve; quiet under every verse.",
+      "Narrator stays calm (series rule) but alive: short lines, [thoughtfully]/[serious] contrast, [pause] before each reveal; characters speak their own key lines."
+    ]
+  },
+  "acts": [
+    {
+      "name": "Act 1 · Two brothers",
+      "music": "low mystery, night forest",
+      "beats": [
+        {
+          "id": "B00",
+          "title": "Cold open: the question",
+          "cite": "4.16.25; 4.17.13",
+          "summary": "One arrow from behind the trees. Vali falls and asks: what merit did you gain by striking one whose face was turned away? Promise both sides, word for word.",
+          "link_out": "But to answer him, we have to go back to a cave, and a year of waiting."
+        },
+        {
+          "id": "B01",
+          "title": "The cave and the year",
+          "cite": "4.9.4-4.9.20",
+          "summary": "Sugriva's account: the demon Mayavi challenges Vali at night; the brothers chase him into a cave; Vali makes Sugriva swear by his feet to wait at the mouth; a full year passes; foaming blood flows out, demons roar, Sugriva hears what sounds like his brother crying out, seals the cave with a rock; the ministers crown him.",
+          "link_out": "And then the dead brother walked back into Kishkindha."
+        },
+        {
+          "id": "B02",
+          "title": "The same stone, Vali's way",
+          "cite": "4.10.1-4.10.22",
+          "summary": "Sugriva offers the kingdom back with folded hands (4.10.4); Vali tells the court his version: he called 'Sugriva!' again and again, kicked the rock open, and found the door shut on him (4.10.17-4.10.20). He exiles Sugriva with one garment and takes his wife Ruma (4.10.21-22). Sugriva hides on Rishyamuka, where Vali cannot go (4.10.23).",
+          "link_out": "A brother with nothing left meets a prince who has lost everything too."
+        },
+        {
+          "id": "B03",
+          "title": "A friendship sworn by fire",
+          "cite": "4.5.12-4.5.16",
+          "summary": "Hanuman brings Rama and Sugriva together; 'let hand be grasped by hand'; Hanuman kindles fire from two sticks and the two walk around it.",
+          "link_out": "Sugriva has one doubt: can anyone stand before Vali?"
+        },
+        {
+          "id": "B04",
+          "title": "Seven sala trees, one arrow",
+          "cite": "4.12.1-4.12.11",
+          "summary": "Rama's single arrow pierces seven sala trees, the mountain and the earth, and returns to the quiver. Sugriva falls at his feet: kill Vali today.",
+          "link_out": "So the first duel should have been easy. It wasn't."
+        }
+      ]
+    },
+    {
+      "name": "Act 2 · Two duels, two garlands",
+      "music": "rising drums, tension",
+      "beats": [
+        {
+          "id": "B05",
+          "title": "The first duel: two brothers, one face",
+          "cite": "4.12.13-4.12.32",
+          "summary": "Sugriva roars, Vali bursts out; Rama, bow drawn, cannot tell them apart and does not shoot (4.12.20); Sugriva flees bleeding to Rishyamuka and accuses Rama (4.12.26). Rama: 'by voice, radiance, gaze, prowess and words I see no difference between you' (4.12.31).",
+          "link_out": "The answer was a flower."
+        },
+        {
+          "id": "B06",
+          "title": "Two garlands",
+          "cite": "4.12.34-4.12.37; 4.11.37; 4.17.5",
+          "summary": "Lakshmana uproots a flowering gajapushpi creeper and puts it round Sugriva's neck so Rama can tell him apart. Vali already wears a garland: the golden one given by his father Indra. Plant: remember that golden garland.",
+          "link_out": "Back at Kishkindha, one person guesses the trap."
+        },
+        {
+          "id": "B07",
+          "title": "Tara's warning",
+          "cite": "4.15.6-4.15.23",
+          "summary": "Tara holds Vali back: a beaten brother does not come back roaring without a strong ally; she has heard from Angada that it is Rama; make Sugriva crown prince, give up the feud.",
+          "link_out": "Vali's reply is the most painful line in the episode."
+        },
+        {
+          "id": "B08",
+          "title": "'How could he do wrong?'",
+          "cite": "4.16.1-4.16.11",
+          "summary": "Vali: 'Rama knows dharma and is grateful; how could he do a sinful thing?' (4.16.5). He swears Tara back by his life. She walks around him, prays for his victory, and goes in.",
+          "link_out": "Minutes later he was proved wrong, or was he?"
+        },
+        {
+          "id": "B09",
+          "title": "The arrow",
+          "cite": "4.16.12-4.16.27; 4.17.1-4.17.7",
+          "summary": "The second duel; Sugriva weakens; Rama's arrow strikes Vali's chest. He falls like Indra's banner. Indra's golden garland holds his life, strength and splendour (4.17.5), so he lives long enough to speak.",
+          "link_out": "And what he said, Valmiki kept every word of."
+        }
+      ]
+    },
+    {
+      "name": "Act 3 · The question and the answer",
+      "music": "near silence, low drone; quiet under every quote",
+      "beats": [
+        {
+          "id": "B10",
+          "title": "Vali's accusation",
+          "cite": "4.17.13-4.17.43",
+          "summary": "Vali's speech, his own words: what merit in striking one whose face was turned away (13); I was fighting another (17, 21); I never harmed your land (20); if you had fought me openly you would have met Yama (39); like a sleeping man bitten by a snake (40); I would have dragged Ravana to you by the neck and found Sita (41-42); Sugriva taking the kingdom is right, but I was killed by adharma (43).",
+          "link_out": "Now Rama answers. This is the part most retellings shorten."
+        },
+        {
+          "id": "B11",
+          "title": "Rama's answer: the law",
+          "cite": "4.18.6-4.18.27",
+          "summary": "The land belongs to the Ikshvakus and Bharata rules it by dharma; we carry out his law (6-11). An elder brother is like a father, a younger brother like a son (13-14). The reason: you live with your brother's wife Ruma while he lives (18-20); for this the punishment is death (22). And I gave Sugriva my word (27).",
+          "link_out": "But that still leaves the hiding."
+        },
+        {
+          "id": "B12",
+          "title": "Rama's answer: why from hiding",
+          "cite": "4.18.34-4.18.36",
+          "summary": "Rama's own words: men catch animals with nets and traps, hidden or visible, fleeing or still; royal sages hunt; 'you are a shakhamriga (tree-dwelling animal), so fighting or not fighting, you were struck by my arrow.' Present it as the text gives it, no verdict.",
+          "link_out": "And then Vali did something no one expects."
+        },
+        {
+          "id": "B13",
+          "title": "Vali folds his hands",
+          "cite": "4.18.40-4.18.50",
+          "summary": "Vali, hands folded: 'what you say is so' (41); forgive my harsh words (42). He does not grieve for himself or Tara as much as for Angada (46-47); asks Rama to treat Sugriva and Angada like Bharata and Lakshmana (49), and to see that Sugriva does not slight Tara (50).",
+          "link_out": "Then Tara arrived."
+        }
+      ]
+    },
+    {
+      "name": "Act 4 · The goodbye",
+      "music": "grief, slow strings, resolve at the end",
+      "beats": [
+        {
+          "id": "B14",
+          "title": "Tara on the battlefield",
+          "cite": "4.19.18-4.19.20; 4.20.4-4.20.24",
+          "summary": "Monkeys flee; Tara runs the other way: 'what is a son, a kingdom, my own life to me now?' She holds him: 'rise, kings do not sleep on the ground'; 'you would not hear my advice' (4.20.12).",
+          "link_out": "With his last breaths, Vali speaks to the brother he exiled."
+        },
+        {
+          "id": "B15",
+          "title": "The golden garland changes hands",
+          "cite": "4.22.1-4.22.18",
+          "summary": "To Sugriva: we were not fated to be happy together (4); take the kingdom (5); protect Angada (8-10); 'Tara's judgement is never wrong' (14); do Rama's work (15); wear this golden garland, its fortune would leave it when I die (16). Sugriva's joy turns to grief (17).",
+          "link_out": "And his last words were for his son."
+        },
+        {
+          "id": "B16",
+          "title": "To Angada, then silence",
+          "cite": "4.22.19-4.22.26; 4.23.22-4.23.25",
+          "summary": "Bear joy and sorrow, obey Sugriva, neither too familiar nor too distant (20-23); he dies (24). Tara: 'salute your father'; Angada clasps his feet: 'I am Angada'.",
+          "link_out": ""
+        },
+        {
+          "id": "B17",
+          "title": "The fire and the rains",
+          "cite": "4.24.40-4.24.44; 4.25.9-4.25.13; 4.25.35",
+          "summary": "Angada and Sugriva place him on the pyre; Rama, sharing Sugriva's grief, arranges the rites (4.24.44). Rama will not enter the city for fourteen years (4.25.9); Sugriva is crowned, Angada made crown prince; the rains begin.",
+          "link_out": ""
+        },
+        {
+          "id": "B18",
+          "title": "Outro: what the popular version says, and what Valmiki says",
+          "cite": "Ramcharitmanas Kishkindha Kand (verbatim, ramcharit.in); 4.17.13; 4.18.18; 4.18.36",
+          "summary": "Tulsidas's lines (quote cards) beside Valmiki's; both told with devotion. Valmiki gives Vali the full accusation and Rama the full answer; the viewer decides. SUBSCRIBE.",
+          "link_out": ""
+        }
+      ]
+    }
+  ],
+  "popular_compare": {
+    "source": "Ramcharitmanas, Kishkindha Kand, https://ramcharit.in/kishkindha-kand/ (verbatim; doha numbers as the page gives them)",
+    "status": "verified on the page Nov 22 2026",
+    "pairs": [
+      {
+        "topic": "The flower garland",
+        "tulsidas": {
+          "ref": "before doha 8",
+          "line": "मेली कंठ सुमन कै माला। पठवा पुनि बल देइ बिसाला।।"
+        },
+        "valmiki": "4.12.35-36 (Lakshmana puts a flowering gajapushpi creeper on Sugriva)",
+        "note": "both have it"
+      },
+      {
+        "topic": "Shot from behind a tree",
+        "tulsidas": {
+          "ref": "before doha 8",
+          "line": "पुनि नाना बिधि भई लराई। बिटप ओट देखहिं रघुराई।।"
+        },
+        "valmiki": "4.12.14, 4.14.1 (they hide among the trees); 4.16.25 (the arrow)",
+        "note": "both"
+      },
+      {
+        "topic": "Tara's warning",
+        "tulsidas": {
+          "ref": "before doha 7",
+          "line": "सुनु पति जिन्हहि मिलेउ सुग्रीवा। ते द्वौ बंधु तेज बल सींवा।।"
+        },
+        "valmiki": "4.15.6-23 (much longer: she has it from Angada, advises making Sugriva crown prince)",
+        "note": "both; Valmiki's is a full counsel"
+      },
+      {
+        "topic": "Vali's trust in Rama",
+        "tulsidas": {
+          "ref": "doha 7",
+          "line": "कह बालि सुनु भीरु प्रिय समदरसी रघुनाथ। जौं कदाचि मोहि मारहिं तौ पुनि होउँ सनाथ।।"
+        },
+        "valmiki": "4.16.5 'धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति'",
+        "note": "Tulsidas: if he kills me I am blessed; Valmiki: he knows dharma, how could he do wrong"
+      },
+      {
+        "topic": "Vali's accusation",
+        "tulsidas": {
+          "ref": "before doha 9",
+          "line": "धर्म हेतु अवतरेहु गोसाई। मारेहु मोहि ब्याध की नाईं।।"
+        },
+        "valmiki": "4.17.13-43 (a 30-verse speech)",
+        "note": "Tulsidas: two lines; Valmiki: the full speech"
+      },
+      {
+        "topic": "Rama's reason",
+        "tulsidas": {
+          "ref": "before doha 9",
+          "line": "अनुज बधू भगिनी सुत नारी। सुनु सठ कन्या सम ए चारी।।"
+        },
+        "valmiki": "4.18.18-22 (brother's wife), 4.18.6-11 (Bharata's law), 4.18.34-36 (hunting)",
+        "note": "same core reason; Valmiki adds the law of Bharata's kingdom and the hunting argument for the hiding"
+      },
+      {
+        "topic": "Rama offers Vali his life",
+        "tulsidas": {
+          "ref": "before doha 10",
+          "line": "अचल करौं तनु राखहु प्राना। बालि कहा सुनु कृपानिधाना।।"
+        },
+        "valmiki": "no offer in 4.17-4.22 (read in full); Vali asks Rama to protect Angada and Sugriva to protect Tara, and gives Sugriva the golden garland (4.22.16)",
+        "note": "difference; absence claim covers 4.17-4.22, whole death scene"
+      },
+      {
+        "topic": "Tara is consoled",
+        "tulsidas": {
+          "ref": "before doha 11",
+          "line": "छिति जल पावक गगन समीरा। पंच रचित अति अधम सरीरा।।"
+        },
+        "valmiki": "4.21.1-11: Hanuman consoles Tara; Rama speaks of time and destiny to Sugriva (4.24.2-11)",
+        "note": "Tulsidas: Rama teaches Tara; Valmiki: Hanuman consoles her"
+      }
+    ],
+    "page_typo": "the page prints 'कुद्दष्टि' (for कुदृष्टि) in the line after 'अनुज बधू'; we don't quote that line",
+    "not_claimed": "the popular belief that Vali took half an opponent's strength: not in 4.5-4.25; Uttara not read; video wording to be approved by the owner"
+  },
+  "derived_reels": [
+    {
+      "id": "A35",
+      "title": "Why Rama shot Vali from hiding: his own answer",
+      "beats": [
+        "B09",
+        "B10",
+        "B12"
+      ],
+      "note": "plan row A35"
+    },
+    {
+      "id": "A36",
+      "title": "Tara warned Vali",
+      "beats": [
+        "B07",
+        "B08",
+        "B09"
+      ],
+      "note": "plan row A36"
+    },
+    {
+      "id": "A34",
+      "title": "Seven sala trees, one arrow",
+      "beats": [
+        "B03",
+        "B04",
+        "B05"
+      ],
+      "note": "plan row A34"
+    },
+    {
+      "id": "LF01-R4",
+      "title": "The year Sugriva waited at the cave",
+      "beats": [
+        "B01",
+        "B02"
+      ],
+      "note": "new plan row needed"
+    },
+    {
+      "id": "LF01-R5",
+      "title": "Vali's last gift: the golden garland",
+      "beats": [
+        "B06",
+        "B15",
+        "B16"
+      ],
+      "note": "new plan row needed"
+    }
+  ],
+  "characters_needed": [
+    {
+      "key": "vali",
+      "tier": "major",
+      "status": "owner to choose look + voice"
+    },
+    {
+      "key": "sugriva",
+      "tier": "major",
+      "status": "owner to choose look + voice"
+    },
+    {
+      "key": "tara",
+      "tier": "major",
+      "status": "owner to choose look + voice"
+    },
+    {
+      "key": "angada",
+      "tier": "major",
+      "status": "owner to choose look + voice (one line: 'I am Angada')"
+    },
+    {
+      "key": "rama",
+      "tier": "major",
+      "status": "locked"
+    },
+    {
+      "key": "lakshmana",
+      "tier": "major",
+      "status": "locked"
+    },
+    {
+      "key": "hanuman",
+      "tier": "major",
+      "status": "locked"
+    },
+    {
+      "key": "mayavi",
+      "tier": "minor",
+      "status": "Claude chooses (silhouette only, no lines)"
+    }
+  ],
+  "progress": [
+    {
+      "step": "Research: CE 4.5, 4.9-4.25 read; 159 cited verses saved (research/ce_verses.json)",
+      "done": true
+    },
+    {
+      "step": "Popular version: Ramcharitmanas lines verbatim",
+      "done": true
+    },
+    {
+      "step": "Owner picks Vali, Sugriva, Tara, Angada (looks + voices): options sent Nov 22",
+      "done": false
+    },
+    {
+      "step": "Script: beats with narration units + character lines",
+      "done": false
+    },
+    {
+      "step": "Engine: 16:9 frame + 9:16 safe zone, wide cards, per-act music",
+      "done": false
+    },
+    {
+      "step": "Voices (beats recorded once), music, art, render",
+      "done": false
+    },
+    {
+      "step": "YouTube master + chapters + wide thumbnail; derived reels",
+      "done": false
+    }
+  ],
+  "budget": {
+    "elevenlabs_chars_left_nov": 27008,
+    "estimate_chars": "15-20k for 2 takes"
+  },
+  "look_options": {
+    "sheet": "studio/series/untold-ramayana/reels/_looks_lf01/*_options.jpg",
+    "brothers": "one look for both (CE 4.12.30-31: Rama could not tell them apart); Vali wears Indra's golden garland, Sugriva the flower creeper",
+    "brothers_1": "golden-brown, crowned, red",
+    "brothers_2": "deep tawny, gold head band, indigo",
+    "brothers_3": "honey-gold, crowned, green",
+    "tara_1": "vanara queen (fur face)",
+    "tara_2": "human face + small monkey ears and tail (baby Hanuman's style)",
+    "tara_3": "fully human queen",
+    "angada_1": "young prince, gold band, saffron",
+    "angada_2": "father's palette, small crown"
+  },
+  "voice_auditions": {
+    "vali": {
+      "line": "[serious] जिसका मुख दूसरी ओर था, उसे मारकर तुम्हें कौन-सा पुण्य मिला? [pause] मैं तो किसी और से युद्ध कर रहा था।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "7eRpHPIAaX3Z8JIv8xfg",
+          "name": "Yatin - Rich, Deep"
+        },
+        {
+          "n": 2,
+          "voice_id": "wbOlq3nIga8HKqcDhASI",
+          "name": "Shivank - Deep, Breathy"
+        },
+        {
+          "n": 3,
+          "voice_id": "7UUQ7nKkAFuNp9HpqSDh",
+          "name": "Niraj - Serious, Compelling"
+        }
+      ]
+    },
+    "sugriva": {
+      "line": "[sadly] आपने कहा था, ललकारो। [pause] अगर बाली को मारना ही नहीं था, तो उसी समय कह देते, प्रभु।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "3AMU7jXQuQa3oRvRqUmb",
+          "name": "Viraj - Rich, Expressive"
+        },
+        {
+          "n": 2,
+          "voice_id": "6Iq2c772ZFrYvSuWijYS",
+          "name": "Taksh - Deep, Clear"
+        },
+        {
+          "n": 3,
+          "voice_id": "Qxb5zQvEo3DYQK2HNnXm",
+          "name": "Kunal Agarwal - Mature"
+        }
+      ]
+    },
+    "tara": {
+      "line": "[gently] हे वीर, सुग्रीव को युवराज बना दीजिए। [pause] अपने भाई से यह वैर छोड़ दीजिए।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "xccfcojYYGnqTTxwZEDU",
+          "name": "Kanika - Soft, Vibrant"
+        },
+        {
+          "n": 2,
+          "voice_id": "9cI5mhBtM4WtQ9Fo6jWQ",
+          "name": "Sara - Warm, Serious"
+        },
+        {
+          "n": 3,
+          "voice_id": "EGQM7bHbTHTb7VUEcOHG",
+          "name": "Shakuntala - Clear"
+        }
+      ]
+    },
+    "angada": {
+      "line": "[softly] पिताजी... [pause] मैं अंगद हूँ।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "X0Kc6dUd5Kws5uwEyOnL",
+          "name": "Laksh - Soft, Emotional"
+        },
+        {
+          "n": 2,
+          "voice_id": "P1bg08DkjqiVEzOn76yG",
+          "name": "Viraj - Rich and Soft"
+        },
+        {
+          "n": 3,
+          "voice_id": "dxhwlBCxCrnzRlP4wDeE",
+          "name": "Arjun - Gentle"
+        }
+      ]
+    }
+  }
+}
