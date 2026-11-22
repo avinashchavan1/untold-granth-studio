@@ -372,7 +372,7 @@
       "done": true
     },
     {
-      "step": "Owner picks Vali, Sugriva, Tara, Angada (looks + voices)",
+      "step": "Owner picks Vali, Sugriva, Tara, Angada (looks + voices): options sent Nov 22",
       "done": false
     },
     {
@@ -395,5 +395,99 @@
   "budget": {
     "elevenlabs_chars_left_nov": 27008,
     "estimate_chars": "15-20k for 2 takes"
+  },
+  "look_options": {
+    "sheet": "studio/series/untold-ramayana/reels/_looks_lf01/*_options.jpg",
+    "brothers": "one look for both (CE 4.12.30-31: Rama could not tell them apart); Vali wears Indra's golden garland, Sugriva the flower creeper",
+    "brothers_1": "golden-brown, crowned, red",
+    "brothers_2": "deep tawny, gold head band, indigo",
+    "brothers_3": "honey-gold, crowned, green",
+    "tara_1": "vanara queen (fur face)",
+    "tara_2": "human face + small monkey ears and tail (baby Hanuman's style)",
+    "tara_3": "fully human queen",
+    "angada_1": "young prince, gold band, saffron",
+    "angada_2": "father's palette, small crown"
+  },
+  "voice_auditions": {
+    "vali": {
+      "line": "[serious] जिसका मुख दूसरी ओर था, उसे मारकर तुम्हें कौन-सा पुण्य मिला? [pause] मैं तो किसी और से युद्ध कर रहा था।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "7eRpHPIAaX3Z8JIv8xfg",
+          "name": "Yatin - Rich, Deep"
+        },
+        {
+          "n": 2,
+          "voice_id": "wbOlq3nIga8HKqcDhASI",
+          "name": "Shivank - Deep, Breathy"
+        },
+        {
+          "n": 3,
+          "voice_id": "7UUQ7nKkAFuNp9HpqSDh",
+          "name": "Niraj - Serious, Compelling"
+        }
+      ]
+    },
+    "sugriva": {
+      "line": "[sadly] आपने कहा था, ललकारो। [pause] अगर बाली को मारना ही नहीं था, तो उसी समय कह देते, प्रभु।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "3AMU7jXQuQa3oRvRqUmb",
+          "name": "Viraj - Rich, Expressive"
+        },
+        {
+          "n": 2,
+          "voice_id": "6Iq2c772ZFrYvSuWijYS",
+          "name": "Taksh - Deep, Clear"
+        },
+        {
+          "n": 3,
+          "voice_id": "Qxb5zQvEo3DYQK2HNnXm",
+          "name": "Kunal Agarwal - Mature"
+        }
+      ]
+    },
+    "tara": {
+      "line": "[gently] हे वीर, सुग्रीव को युवराज बना दीजिए। [pause] अपने भाई से यह वैर छोड़ दीजिए।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "xccfcojYYGnqTTxwZEDU",
+          "name": "Kanika - Soft, Vibrant"
+        },
+        {
+          "n": 2,
+          "voice_id": "9cI5mhBtM4WtQ9Fo6jWQ",
+          "name": "Sara - Warm, Serious"
+        },
+        {
+          "n": 3,
+          "voice_id": "EGQM7bHbTHTb7VUEcOHG",
+          "name": "Shakuntala - Clear"
+        }
+      ]
+    },
+    "angada": {
+      "line": "[softly] पिताजी... [pause] मैं अंगद हूँ।",
+      "voices": [
+        {
+          "n": 1,
+          "voice_id": "X0Kc6dUd5Kws5uwEyOnL",
+          "name": "Laksh - Soft, Emotional"
+        },
+        {
+          "n": 2,
+          "voice_id": "P1bg08DkjqiVEzOn76yG",
+          "name": "Viraj - Rich and Soft"
+        },
+        {
+          "n": 3,
+          "voice_id": "dxhwlBCxCrnzRlP4wDeE",
+          "name": "Arjun - Gentle"
+        }
+      ]
+    }
   }
 }
