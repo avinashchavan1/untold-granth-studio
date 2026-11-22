@@ -52,6 +52,9 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
 - **Secrets:** never ask for keys in chat. They are network secrets on the cloud environment (ElevenLabs, Netlify,
   Supabase, Hugging Face); code uses the placeholder `proxy-injected`. No personal info in external requests.
 - **No model IDs** in commits or code. Commit messages end with the session's attribution lines.
+- **Keep everything updated in git (owner, Nov 22 2026):** commit AND push after every meaningful step (research notes, script, art,
+  timeline, cover, stages, desk rows, cast, engine/app/script changes), not only at the end; never leave untracked or unpushed work.
+  Shared changes also go to the storyreel-studio template right away (template_sync + push). Audio lives in the HF audio packs, not git.
 - **Keep the owner updated**: short progress notes in chat, and the live bar in the app:
   `python3 scripts/status.py set --reel <ID> --step N` (1 research, 2 script, 3 voices, 4 music, 5 art, 6 preview,
   7 masters, 8 cover/upload; it also moves the reel's stage in the app: 1 researching, 2 scripted, 3-5 voiced, 6-8 rendered,
