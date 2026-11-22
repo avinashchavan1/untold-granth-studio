@@ -309,12 +309,12 @@
   }
  ],
  "thumbnail": {
-  "frame": "",
+  "frame": "96s",
   "hook": "Did Lakshmana never sleep?",
   "stamp": "Valmiki says",
   "line": "Rama woke him gently.",
   "badge": "Valmiki Ramayana · Ayodhya 2.50",
-  "art_shift": 0
+  "art_shift": -260
  },
  "score": {
   "engine": "elevenlabs eleven_music_v2_5",
