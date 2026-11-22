@@ -76,3 +76,15 @@ for code, stage in STAGE.items():
     print("synced", code, stage, len(s.get("claims", [])), "claims")
 api("POST", "activity", [{"actor": "claude", "action": "sync", "detail": {"reels": list(STAGE)}}], "return=minimal")
 print("SYNC OK")
+
+# full-length videos: studio/series/<id>/longform/<code>/longform.json -> longform_videos (the app's Long-form page)
+LFD = os.path.join(SER, "longform")
+if os.path.isdir(LFD):
+    lrows = []
+    for code in sorted(os.listdir(LFD)):
+        f = os.path.join(LFD, code, "longform.json")
+        if not os.path.exists(f): continue
+        d = json.load(open(f, encoding="utf-8"))
+        lrows.append({"series_id": SID, "code": d.get("code", code), "title": d["title"], "subtitle": d.get("subtitle"), "stage": d.get("stage", "researching"),
+                      "plan": d, "updated_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()})
+    if lrows: upsert("longform_videos", lrows, "series_id,code"); print(f"longform: {len(lrows)} video(s)")
