@@ -1,5 +1,11 @@
 // ===== storyreel-studio renderer — core: math, colour, gouache painting helpers, post =====
-const W = 1080, H = 1920, FPS = 24, TAU = Math.PI * 2, M = 170; // M = layer margin for camera moves
+// FRAME (from the reel's script.json "frame" or env FRAME): 'tall' = classic 9:16 reel (art world 1080x1920 = the frame);
+// 'wide' = full-length 16:9 video: art is painted once on a 1920x1920 world and the frame is a 1920x1080 band of it;
+// 'tall_from_wide' = a reel derived from a wide production: same 1920x1920 world, frame = its centre 1080x1920 column.
+const FRAME_ = (typeof FRAME !== 'undefined' && FRAME) || 'tall', WORLD_SQ = FRAME_ !== 'tall';
+const W = WORLD_SQ ? 1920 : 1080, H = 1920, FPS = 24, TAU = Math.PI * 2, M = 170; // world size; M = layer margin for camera moves
+const FW = FRAME_ === 'wide' ? 1920 : 1080, FH = FRAME_ === 'wide' ? 1080 : 1920;   // output frame
+const CROP = { x: FRAME_ === 'tall_from_wide' ? 420 : 0, y: FRAME_ === 'wide' ? 560 : 0 };   // default window into the world (a shot may move it: post.crop)
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, t) => a + (b - a) * t;
 const sm = t => { t = clamp(t); return t * t * (3 - 2 * t); };
@@ -83,23 +89,23 @@ function ridge(r, x0, x1, base, amp, steps, rough = 1) {
 const TEX = {};
 function makeTextures() {
   // paper grain
-  const g = mk(W / 2, H / 2), gc = g.getContext('2d'), id = gc.createImageData(W / 2, H / 2), r = rng(7);
+  const g = mk(FW / 2, FH / 2), gc = g.getContext('2d'), id = gc.createImageData(FW / 2, FH / 2), r = rng(7);
   for (let i = 0; i < id.data.length; i += 4) { const v = 128 + (r() - .5) * 70 + (r() - .5) * 30; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
   gc.putImageData(id, 0, 0); TEX.grain = g;
   // brush overlays (3 variants -> gentle boil)
   TEX.brush = [];
   for (let k = 0; k < 3; k++) {
-    const c = mk(W, H), x = c.getContext('2d'), q = rng(100 + k * 31);
-    x.fillStyle = '#808080'; x.fillRect(0, 0, W, H);
+    const c = mk(FW, FH), x = c.getContext('2d'), q = rng(100 + k * 31);
+    x.fillStyle = '#808080'; x.fillRect(0, 0, FW, FH);
     for (let i = 0; i < 900; i++) {
-      const px = q() * W, py = q() * H, a = (q() - .5) * 0.9 + (q() < .5 ? 0 : 0.5), L = 60 + q() * 260, v = q() < .5 ? 255 : 0;
+      const px = q() * FW, py = q() * FH, a = (q() - .5) * 0.9 + (q() < .5 ? 0 : 0.5), L = 60 + q() * 260, v = q() < .5 ? 255 : 0;
       bristle(x, q, px, py, px + Math.cos(a) * L, py + Math.sin(a) * L, 14 + q() * 46, v ? '#ffffff' : '#000000', 0.10 + q() * 0.10, 6);
     }
     TEX.brush.push(c);
   }
   // vignette
-  const v = mk(W, H), vx = v.getContext('2d'), vg = vx.createRadialGradient(W / 2, H * 0.48, H * 0.25, W / 2, H * 0.5, H * 0.72);
-  vg.addColorStop(0, 'rgba(6,8,26,0)'); vg.addColorStop(1, 'rgba(6,8,26,0.62)'); vx.fillStyle = vg; vx.fillRect(0, 0, W, H); TEX.vig = v;
+  const v = mk(FW, FH), vx = v.getContext('2d'), VR = Math.max(FW, FH), vg = vx.createRadialGradient(FW / 2, FH * 0.48, VR * 0.25, FW / 2, FH * 0.5, VR * 0.72);
+  vg.addColorStop(0, 'rgba(6,8,26,0)'); vg.addColorStop(1, 'rgba(6,8,26,0.62)'); vx.fillStyle = vg; vx.fillRect(0, 0, FW, FH); TEX.vig = v;
 }
 
 // ---- camera helper: draw fn in a parallax-transformed space ----

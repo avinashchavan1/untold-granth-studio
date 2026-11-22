@@ -1,0 +1,2185 @@
+{
+ "reel": "LF01",
+ "title": "Vali's Death, as Valmiki Tells It",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "scripted",
+ "frame": "wide",
+ "kind": "longform",
+ "source": "Valmiki Ramayana, Critical Edition, Kishkindha Kanda 4.5, 4.9-4.25; Ramcharitmanas, Kishkindha Kand (dohas 7-11)",
+ "source_card": {
+  "kanda": "KISHKINDHA KANDA",
+  "sarga": "SARGA 17"
+ },
+ "plan": "../../longform/LF01/longform.json",
+ "acts": [
+  {
+   "n": 0,
+   "name": "Cold open"
+  },
+  {
+   "n": 1,
+   "name": "Two brothers",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 1 (two brothers): night-forest mystery; solo bansuri over a tanpura drone and soft low strings, a gentle harp ostinato; a quiet brotherhood theme on cello that will return at the end."
+  },
+  {
+   "n": 2,
+   "name": "Two duels, two garlands",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 2 (two duels, two garlands): the theme grows; strings and soft horns build in long swells, light tabla and timpani rolls (never hard hits) for the duels; hushes for Tara's warning with a tender oboe/sarangi line."
+  },
+  {
+   "n": 3,
+   "name": "The question and the answer",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 3 (the question and the answer): almost still; sustained strings and a low choir pad, sparse harp notes; nearly silent under every quote and verse so the words carry."
+  },
+  {
+   "n": 4,
+   "name": "The goodbye",
+   "music": "Instrumental film score for a spoken documentary (it sits under a narrator). Act 4 (the goodbye): grief and grace; the brotherhood theme returns on solo cello and bansuri, full warm strings swell as the golden garland changes hands, then settle into a peaceful major-key resolve with the rains."
+  }
+ ],
+ "unit_gap": 0.38,
+ "claims": [
+  {
+   "claim": "In the forest of Kishkindha, an arrow flew from behind the trees. And Vali, fallen to the ground, asked Rama a question.",
+   "ref": "Valmiki Ramayana CE 4.16.25; 4.17.13",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "That is: what merit did you gain by striking one whose face was turned away? This question is not a critic's. Valmiki wrote it himself, in Vali's own mouth. And right after it, Rama's full answer. Today we hear both, in their own words. You decide.",
+   "ref": "Valmiki Ramayana CE 4.17.13; 4.18",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva himself tells Rama. Vali was the elder brother, and king of the vanaras. Sugriva lived like his servant.",
+   "ref": "Valmiki Ramayana CE 4.9.1-4.9.3",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "One night, a demon named Mayavi came roaring to the gate of Kishkindha. Vali rushed out to kill him, and Sugriva went with him.",
+   "ref": "Valmiki Ramayana CE 4.9.4-4.9.8",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "The demon ran into a great cave. Vali made Sugriva swear by his feet: wait here, at the mouth.",
+   "ref": "Valmiki Ramayana CE 4.9.11-4.9.14",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And Sugriva waited. A whole year.",
+   "ref": "Valmiki Ramayana CE 4.9.15",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Then foaming red blood flowed out of the cave. He heard demons roaring, and what sounded like his elder brother's cry.",
+   "ref": "Valmiki Ramayana CE 4.9.17-4.9.18",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva believed his brother was dead. He sealed the cave with a mountain-sized rock and came back. The ministers made him king.",
+   "ref": "Valmiki Ramayana CE 4.9.19-4.9.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And then the brother everyone thought was dead walked back into Kishkindha.",
+   "ref": "Valmiki Ramayana CE 4.9.21",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva, with folded hands, gave the kingdom back: \"It was only held in trust. You alone are king.\"",
+   "ref": "Valmiki Ramayana CE 4.10.3-4.10.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"I called again and again, 'Sugriva! Sugriva!' No answer came. I kicked that rock until it broke.\"",
+   "ref": "Valmiki Ramayana CE 4.10.17-4.10.19",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "To Vali, it was betrayal. Sugriva says Vali drove him out with a single garment, and took his wife Ruma.",
+   "ref": "Valmiki Ramayana CE 4.10.20-4.10.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "One rock. Two brothers. Two stories.",
+   "ref": "Valmiki Ramayana CE 4.9.19; 4.10.17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva hid on Mount Rishyamuka, where Vali could not come.",
+   "ref": "Valmiki Ramayana CE 4.10.23",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And there he met a prince who had lost everything too.",
+   "ref": "Valmiki Ramayana CE 4.5.4",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Hanuman brought Rama and Lakshmana to Sugriva. Sugriva held out his hand.",
+   "ref": "Valmiki Ramayana CE 4.5.1-4.5.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"If this friendship pleases you, my lord, here is my hand.\"",
+   "ref": "Valmiki Ramayana CE 4.5.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Hanuman kindled a fire from two sticks. Rama and Sugriva walked around it: a friendship with fire as witness.",
+   "ref": "Valmiki Ramayana CE 4.5.14-4.5.16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "But Sugriva had one fear: could anyone really stand before Vali?",
+   "ref": "Valmiki Ramayana CE 4.12.8-4.12.9",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Rama raised his bow and loosed a single arrow. It pierced seven sala trees, the mountain and the earth, and returned to his quiver.",
+   "ref": "Valmiki Ramayana CE 4.12.1-4.12.4",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"My lord, today itself, kill Vali, my enemy in the form of a brother.\"",
+   "ref": "Valmiki Ramayana CE 4.12.11",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "They all reached Kishkindha and hid among the dense trees. Sugriva roared, and Vali burst out in fury.",
+   "ref": "Valmiki Ramayana CE 4.12.14-4.12.16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "The two brothers fought with fists like thunderbolts. Rama stood with his bow drawn. But the arrow never flew.",
+   "ref": "Valmiki Ramayana CE 4.12.17-4.12.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva lost, and fled bleeding to Rishyamuka.",
+   "ref": "Valmiki Ramayana CE 4.12.21-4.12.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"You told me: challenge him. If you never meant to kill Vali, you should have said so then, my lord.\"",
+   "ref": "Valmiki Ramayana CE 4.12.26-4.12.27",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Sugriva, my friend, let go of your anger. In dress, in build, in gait, in voice, I saw no difference between you two.\"",
+   "ref": "Valmiki Ramayana CE 4.12.29-4.12.32",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Rama said: \"Lakshmana, uproot this flowering gajapushpi creeper and put it around Sugriva's neck.\" Lakshmana did.",
+   "ref": "Valmiki Ramayana CE 4.12.34-4.12.37",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Now notice this. Vali already wore a garland. A golden one, given by his father, Indra.",
+   "ref": "Valmiki Ramayana CE 4.11.37; 4.17.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva roared again at the gates of Kishkindha. Vali, in the inner palace, rose in anger.",
+   "ref": "Valmiki Ramayana CE 4.14.18; 4.15.1-4.15.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "But one person saw the danger. Vali's queen, Tara.",
+   "ref": "Valmiki Ramayana CE 4.15.6",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"The brother who fled in defeat is roaring again so soon. He has not come alone.\"",
+   "ref": "Valmiki Ramayana CE 4.15.9-4.15.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"I have heard it from Angada. His friend is Shri Rama: the refuge of the distressed, protector of all who come to him.\"",
+   "ref": "Valmiki Ramayana CE 4.15.14-4.15.16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"My hero, make Sugriva crown prince. Give up this feud with your brother.\"",
+   "ref": "Valmiki Ramayana CE 4.15.20-4.15.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Rama knows dharma. He is grateful. How could he do a sinful thing?\"",
+   "ref": "Valmiki Ramayana CE 4.16.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Vali swore Tara back by his own life. In tears, she walked around him, chanted prayers for his victory, and went inside.",
+   "ref": "Valmiki Ramayana CE 4.16.8-4.16.10",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Vali tightened his garment and fell on Sugriva. Sugriva struck him with an uprooted sala tree, but slowly Sugriva began to tire.",
+   "ref": "Valmiki Ramayana CE 4.16.14-4.16.24",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Then Rama set an arrow like a venomous serpent to his bow, and struck Vali in the chest.",
+   "ref": "Valmiki Ramayana CE 4.16.25",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Vali fell to the earth like Indra's banner.",
+   "ref": "Valmiki Ramayana CE 4.16.27; 4.17.2",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "But his life did not leave at once. Valmiki says the golden garland Indra gave him held on to his life, his strength and his splendour.",
+   "ref": "Valmiki Ramayana CE 4.17.4-4.17.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Rama and Lakshmana came near. And Vali spoke.",
+   "ref": "Valmiki Ramayana CE 4.17.11-4.17.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"What merit did you gain by striking one whose face was turned away? I was fighting someone else.\"",
+   "ref": "Valmiki Ramayana CE 4.17.13; 4.17.17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"I did no harm to your kingdom or your city. Then why kill an innocent?\"",
+   "ref": "Valmiki Ramayana CE 4.17.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Had you fought me face to face, today you would have met Yama. You struck from hiding, like a snake biting a sleeping man.\"",
+   "ref": "Valmiki Ramayana CE 4.17.39-4.17.40",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"If it was for Sugriva's sake, you should have asked me. I would have dragged Ravana to you by the neck, and found Maithili even in the underworld.\"",
+   "ref": "Valmiki Ramayana CE 4.17.41-4.17.42",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And at the end, Vali himself grants that Sugriva should have the kingdom. But that he was killed by adharma, that is not right.",
+   "ref": "Valmiki Ramayana CE 4.17.43",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Now Rama answers. And in Valmiki, his answer is as long as Vali's accusation.",
+   "ref": "Valmiki Ramayana CE 4.17.13-4.17.45; 4.18.4-4.18.39",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"This earth, these mountains and forests belong to the Ikshvakus. Today the righteous Bharata rules it, and by his command we uphold dharma.\"",
+   "ref": "Valmiki Ramayana CE 4.18.6-4.18.11",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"An elder brother is like a father. A younger brother, like a son.\"",
+   "ref": "Valmiki Ramayana CE 4.18.13-4.18.14",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"And this is the reason you were slain: Sugriva still lives, and you live with his wife, Ruma.\"",
+   "ref": "Valmiki Ramayana CE 4.18.18-4.18.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"And I gave Sugriva my word. How could one like me break a vow?\"",
+   "ref": "Valmiki Ramayana CE 4.18.26-4.18.27",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Rama answers this too, and Valmiki records it unchanged.",
+   "ref": "Valmiki Ramayana CE 4.18.34-4.18.36",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Men catch animals with nets and snares, hidden or in the open, whether they flee or stand still.\"",
+   "ref": "Valmiki Ramayana CE 4.18.34-4.18.35",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Royal sages hunt too. And you are a shakhamriga, a creature of the forest. So, fighting or not fighting, you fell to my arrow.\"",
+   "ref": "Valmiki Ramayana CE 4.18.36",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Vali folded his hands.",
+   "ref": "Valmiki Ramayana CE 4.18.40",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Best of men, what you say is true. Do not hold my harsh words against me.\"",
+   "ref": "Valmiki Ramayana CE 4.18.41-4.18.42",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"I grieve not for myself, nor for Tara, but for my son Angada. Look on Sugriva and Angada as you look on Bharata and Lakshmana.\"",
+   "ref": "Valmiki Ramayana CE 4.18.46-4.18.49",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Just then, Tara reached the battlefield.",
+   "ref": "Valmiki Ramayana CE 4.19.4",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "The vanaras were fleeing in fear. Tara ran the other way.",
+   "ref": "Valmiki Ramayana CE 4.19.5-4.19.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"What is a son to me, or a kingdom, or my own life, when my lord himself is leaving?\"",
+   "ref": "Valmiki Ramayana CE 4.19.18",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Rise, my hero. Kings like you do not sleep on the bare ground. You would not listen to me.\"",
+   "ref": "Valmiki Ramayana CE 4.20.5; 4.20.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "With his last breaths, Vali looked at the brother he had driven out.",
+   "ref": "Valmiki Ramayana CE 4.22.1",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Sugriva, fate never meant us to be happy together. This kingdom is yours now.\"",
+   "ref": "Valmiki Ramayana CE 4.22.4-4.22.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Look at Angada, lying on the ground, full of tears. Now you must protect him.\"",
+   "ref": "Valmiki Ramayana CE 4.22.8-4.22.10",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"And Tara's judgement is never wrong. Whatever she says, do it.\"",
+   "ref": "Valmiki Ramayana CE 4.22.13-4.22.14",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"And Sugriva, wear this divine golden garland. Its splendour would leave it when I die.\"",
+   "ref": "Valmiki Ramayana CE 4.22.16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "That same golden garland. Indra's gift. The one that had held Vali's life until now. Now around Sugriva's neck.",
+   "ref": "Valmiki Ramayana CE 4.17.5; 4.22.18",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And Sugriva's joy turned to grief, like the moon in an eclipse.",
+   "ref": "Valmiki Ramayana CE 4.22.17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Angada, bear both joy and sorrow. Stay obedient to Sugriva.\"",
+   "ref": "Valmiki Ramayana CE 4.22.20-4.22.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And saying this, Vali gave up his life.",
+   "ref": "Valmiki Ramayana CE 4.22.24",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Tara said to Angada: salute your father.",
+   "ref": "Valmiki Ramayana CE 4.23.23",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Father... I am Angada.\"",
+   "ref": "Valmiki Ramayana CE 4.23.24",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Why don't you say today, as you always did: live long, my son?\"",
+   "ref": "Valmiki Ramayana CE 4.23.25",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "A pyre was built on a quiet sandbank of the mountain river. Angada and Sugriva laid Vali upon it.",
+   "ref": "Valmiki Ramayana CE 4.24.30; 4.24.40",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And Rama, sharing Sugriva's grief, saw the last rites through.",
+   "ref": "Valmiki Ramayana CE 4.24.44",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva became king, and Angada crown prince. But Rama did not enter the city: by his father's command, he would enter no town for fourteen years.",
+   "ref": "Valmiki Ramayana CE 4.25.9-4.25.11; 4.25.33-4.25.35",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And the rains began.",
+   "ref": "Valmiki Ramayana CE 4.25.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "In Valmiki there is no such offer. There, Vali, as he goes, gives the golden garland to his brother. Both tellings are told with devotion.",
+   "ref": "Valmiki Ramayana CE 4.17-4.22; 4.22.16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Valmiki wrote down Vali's accusation in full, and Rama's answer too. Which argument weighs most for you? Tell us in the comments.",
+   "ref": "Valmiki Ramayana CE 4.17; 4.18",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Ramcharitmanas: धर्म हेतु अवतरेहु गोसाई। मारेहु मोहि ब्याध की नाईं।।",
+   "ref": "Ramcharitmanas Kishkindha Kand, before doha 9",
+   "verified": true,
+   "sources": [
+    "https://ramcharit.in/kishkindha-kand/ (verbatim)"
+   ]
+  },
+  {
+   "claim": "Ramcharitmanas: अनुज बधू भगिनी सुत नारी। सुनु सठ कन्या सम ए चारी।।",
+   "ref": "Ramcharitmanas Kishkindha Kand, before doha 9",
+   "verified": true,
+   "sources": [
+    "https://ramcharit.in/kishkindha-kand/ (verbatim)"
+   ]
+  },
+  {
+   "claim": "Ramcharitmanas: अचल करौं तनु राखहु प्राना। बालि कहा सुनु कृपानिधाना।।",
+   "ref": "Ramcharitmanas Kishkindha Kand, before doha 10",
+   "verified": true,
+   "sources": [
+    "https://ramcharit.in/kishkindha-kand/ (verbatim)"
+   ]
+  },
+  {
+   "claim": "Valmiki has no offer by Rama to keep Vali alive (absence; whole death scene 4.17-4.22 read)",
+   "ref": "Valmiki Ramayana CE 4.17-4.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 ch 17-22, every verse"
+   ]
+  }
+ ],
+ "thumbnail": {
+  "hook": "WHY FROM HIDING?",
+  "stamp": "VALMIKI'S OWN WORDS",
+  "line": "Vali's question. Rama's answer.",
+  "badge": "KISHKINDHA 4.17-18",
+  "frame": "40s",
+  "wide": true,
+  "side": "right"
+ },
+ "score": {
+  "engine": "elevenlabs music_v1 per act (engine/py/gen_score_acts.py)",
+  "file": "audio/score.wav",
+  "per_act": true,
+  "gain": 1.5,
+  "duck": 0.72
+ },
+ "avoid": [
+  "No verdict on Rama; present Vali's accusation and Rama's answer as the text gives them",
+  "No 'half strength' boon (not in 4.5-4.25; Uttara unread)",
+  "Tulsidas named with respect: both told with devotion"
+ ],
+ "verify_note": "Every line cites CE Kishkindha; character lines are close Hindi renderings of the cited verses. Vali's line 'what merit...' is 4.17.13; Rama's hunting answer is 4.18.34-36.",
+ "caption": "Vali was shot from behind the trees, and as he lay dying he asked Rama: \"What merit did you gain by striking one whose face was turned away?\" (Valmiki Ramayana 4.17.13). Valmiki records his full accusation, and Rama's full answer (4.18). Two brothers, one cave, two garlands, and Tara, whose judgement \"never fails\" (4.22.14). Every line cited from the Critical Edition, with Tulsidas's telling beside it. Which argument weighs most for you?",
+ "youtube_title": "Why Did Rama Shoot Vali From Hiding? Vali's Question & Rama's Answer (Valmiki Ramayana)",
+ "comment_prompt": "Vali's accusation or Rama's answer: which weighs more for you?",
+ "hashtags": [
+  "#Ramayana",
+  "#ValmikiRamayana",
+  "#Vali",
+  "#Sugriva",
+  "#Rama",
+  "#Kishkindha",
+  "#Tara",
+  "#Hanuman",
+  "#UntoldGranth"
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "act": 0,
+   "beat": "B00",
+   "voice": "narrator",
+   "hi": "किष्किन्धा के जंगल में, पेड़ों के पीछे से, एक बाण चला। और धरती पर गिरे बाली ने, राम से, एक सवाल पूछा।",
+   "en": "In the forest of Kishkindha, an arrow flew from behind the trees. And Vali, fallen to the ground, asked Rama a question.",
+   "units": [
+    "[serious] किष्किन्धा के जंगल में, पेड़ों के पीछे से, एक बाण चला।",
+    "[thoughtfully] और धरती पर गिरे बाली ने, राम से, एक सवाल पूछा।"
+   ],
+   "cite": "4.16.25; 4.17.13",
+   "card": [
+    [
+     "ONE ARROW FROM HIDING.",
+     null
+    ],
+    [
+     "ONE QUESTION.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.3,
+   "tail": 0.4
+  },
+  {
+   "id": 2,
+   "act": 0,
+   "beat": "B00",
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सत्रह। पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सत्रह।",
+    "[with deep devotion] [chanting] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "cite": "4.17.13",
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः ।",
+     "यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः ॥"
+    ],
+    "ref": "KISHKINDHA KANDA 4.17.13",
+    "en": "“What merit have you gained by striking one whose face was turned away? Because of you, I, absorbed in battle, have met my death.”",
+    "translit": "parāṅmukhavadhaṃ kṛtvā ko nu prāptastvayā guṇaḥ, yadahaṃ yuddhasaṃrabdhastvatkṛte nidhanaṃ gataḥ"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
+    "t2": "[with deep devotion] [chanting] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
+    "t3": "[solemnly] [expressively] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥"
+   },
+   "force_take": {
+    "1": 1
+   },
+   "sloka_pick": "t1 (reverently/slowly): 9.7 s, pitch movement 4.4 st, median 109 Hz, words intact; t3 moved most (4.7) but peaked near the shouting range"
+  },
+  {
+   "id": 3,
+   "act": 0,
+   "beat": "B00",
+   "voice": "narrator",
+   "hi": "यानी, जिसका मुख दूसरी ओर था, उसे मारकर, तुम्हें कौन-सा पुण्य मिला? ये सवाल, किसी आलोचक का नहीं। ये वाल्मीकि ने खुद लिखा है, बाली के मुख से। और ठीक उसके बाद, राम का पूरा उत्तर भी। आज, दोनों को, उनके अपने शब्दों में सुनेंगे। फ़ैसला, आपका।",
+   "en": "That is: what merit did you gain by striking one whose face was turned away? This question is not a critic's. Valmiki wrote it himself, in Vali's own mouth. And right after it, Rama's full answer. Today we hear both, in their own words. You decide.",
+   "units": [
+    "[thoughtfully] यानी, जिसका मुख दूसरी ओर था, उसे मारकर, तुम्हें कौन-सा पुण्य मिला?",
+    "[serious] ये सवाल, किसी आलोचक का नहीं। ये वाल्मीकि ने खुद लिखा है, बाली के मुख से।",
+    "[warmly] और ठीक उसके बाद, राम का पूरा उत्तर भी।",
+    "[thoughtfully] आज, दोनों को, उनके अपने शब्दों में सुनेंगे। फ़ैसला, आपका।"
+   ],
+   "cite": "4.17.13; 4.18",
+   "unit_gap": 0.4
+  },
+  {
+   "id": 4,
+   "act": 0,
+   "beat": "B00",
+   "voice": "narrator",
+   "hi": "पर ये कहानी, उस बाण से नहीं, एक गुफ़ा से शुरू होती है।",
+   "en": "But this story begins not with that arrow, but with a cave.",
+   "units": [
+    "[softly] पर ये कहानी, उस बाण से नहीं, एक गुफ़ा से शुरू होती है।"
+   ],
+   "link": true
+  },
+  {
+   "id": 5,
+   "act": 1,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "सुग्रीव खुद, राम को बताते हैं। बाली, बड़े भाई थे, और वानरों के राजा। सुग्रीव, उनके सेवक की तरह रहते थे।",
+   "en": "Sugriva himself tells Rama. Vali was the elder brother, and king of the vanaras. Sugriva lived like his servant.",
+   "units": [
+    "[thoughtfully] सुग्रीव खुद, राम को बताते हैं।",
+    "बाली, बड़े भाई थे, और वानरों के राजा। सुग्रीव, उनके सेवक की तरह रहते थे।"
+   ],
+   "cite": "4.9.1-4.9.3"
+  },
+  {
+   "id": 6,
+   "act": 1,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "एक रात, मायावी नाम का असुर, किष्किन्धा के द्वार पर आकर गरजा। बाली, उसे मारने दौड़े। और सुग्रीव भी, साथ गए।",
+   "en": "One night, a demon named Mayavi came roaring to the gate of Kishkindha. Vali rushed out to kill him, and Sugriva went with him.",
+   "units": [
+    "[serious] एक रात, मायावी नाम का असुर, किष्किन्धा के द्वार पर आकर गरजा।",
+    "बाली, उसे मारने दौड़े। और सुग्रीव भी, साथ गए।"
+   ],
+   "cite": "4.9.4-4.9.8"
+  },
+  {
+   "id": 7,
+   "act": 1,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "असुर, एक बड़ी गुफ़ा में घुस गया। बाली ने, सुग्रीव को, अपने चरणों की शपथ दिलाई: यहीं, द्वार पर रुकना।",
+   "en": "The demon ran into a great cave. Vali made Sugriva swear by his feet: wait here, at the mouth.",
+   "units": [
+    "[thoughtfully] असुर, एक बड़ी गुफ़ा में घुस गया।",
+    "बाली ने, सुग्रीव को, अपने चरणों की शपथ दिलाई: यहीं, द्वार पर रुकना।"
+   ],
+   "cite": "4.9.11-4.9.14"
+  },
+  {
+   "id": 8,
+   "act": 1,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "और सुग्रीव रुके। पूरे एक साल।",
+   "en": "And Sugriva waited. A whole year.",
+   "units": [
+    "[softly] और सुग्रीव रुके।",
+    "[thoughtfully] पूरे एक साल।"
+   ],
+   "cite": "4.9.15",
+   "unit_gap": 0.7,
+   "card": [
+    [
+     "ONE FULL YEAR.",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "id": 9,
+   "act": 1,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "फिर, गुफ़ा से, झागदार लाल खून बहकर आया। असुरों की गर्जना सुनाई दी, और बड़े भाई की, चीख़ जैसी आवाज़।",
+   "en": "Then foaming red blood flowed out of the cave. He heard demons roaring, and what sounded like his elder brother's cry.",
+   "units": [
+    "[serious] फिर, गुफ़ा से, झागदार लाल खून बहकर आया।",
+    "असुरों की गर्जना सुनाई दी, और बड़े भाई की, चीख़ जैसी आवाज़।"
+   ],
+   "cite": "4.9.17-4.9.18"
+  },
+  {
+   "id": 10,
+   "act": 1,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "सुग्रीव ने समझा, भाई मारे गए। एक पहाड़ जैसी चट्टान से, उन्होंने गुफ़ा का मुँह बंद किया, और लौट आए। मंत्रियों ने, उन्हें राजा बना दिया।",
+   "en": "Sugriva believed his brother was dead. He sealed the cave with a mountain-sized rock and came back. The ministers made him king.",
+   "units": [
+    "[thoughtfully] सुग्रीव ने समझा, भाई मारे गए।",
+    "एक पहाड़ जैसी चट्टान से, उन्होंने गुफ़ा का मुँह बंद किया, और लौट आए। मंत्रियों ने, उन्हें राजा बना दिया।"
+   ],
+   "cite": "4.9.19-4.9.20"
+  },
+  {
+   "id": 11,
+   "act": 1,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "और फिर, जिसे सब मरा हुआ समझ रहे थे, वही भाई, किष्किन्धा लौट आया।",
+   "en": "And then the brother everyone thought was dead walked back into Kishkindha.",
+   "units": [
+    "[serious] और फिर, जिसे सब मरा हुआ समझ रहे थे,",
+    "वही भाई, किष्किन्धा लौट आया।"
+   ],
+   "cite": "4.9.21",
+   "link": true,
+   "unit_gap": 0.5
+  },
+  {
+   "id": 12,
+   "act": 1,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "सुग्रीव ने, हाथ जोड़कर, राज्य लौटाया। कहा: ये तो आपकी धरोहर थी। आप ही राजा हैं।",
+   "en": "Sugriva, with folded hands, gave the kingdom back: \"It was only held in trust. You alone are king.\"",
+   "units": [
+    "[thoughtfully] सुग्रीव ने, हाथ जोड़कर, राज्य लौटाया।",
+    "कहा: ये तो आपकी धरोहर थी। आप ही राजा हैं।"
+   ],
+   "cite": "4.10.3-4.10.5"
+  },
+  {
+   "id": 13,
+   "act": 1,
+   "beat": "B02",
+   "voice": "vali",
+   "hi": "मैं बार-बार पुकारता रहा, सुग्रीव! सुग्रीव! कोई उत्तर नहीं आया। लातें मार-मारकर, मैंने वो चट्टान तोड़ी।",
+   "en": "\"I called again and again, 'Sugriva! Sugriva!' No answer came. I kicked that rock until it broke.\"",
+   "units": [
+    "[serious] मैं बार-बार पुकारता रहा, सुग्रीव! सुग्रीव! कोई उत्तर नहीं आया।",
+    "लातें मार-मारकर, मैंने वो चट्टान तोड़ी।"
+   ],
+   "cite": "4.10.17-4.10.19"
+  },
+  {
+   "id": 14,
+   "act": 1,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "बाली की नज़र में, ये विश्वासघात था। सुग्रीव बताते हैं, बाली ने उन्हें, सिर्फ़ एक वस्त्र में, राज्य से निकाल दिया, और उनकी पत्नी रुमा को, छीन लिया।",
+   "en": "To Vali, it was betrayal. Sugriva says Vali drove him out with a single garment, and took his wife Ruma.",
+   "units": [
+    "[serious] बाली की नज़र में, ये विश्वासघात था।",
+    "सुग्रीव बताते हैं, बाली ने उन्हें, सिर्फ़ एक वस्त्र में, राज्य से निकाल दिया, और उनकी पत्नी रुमा को, छीन लिया।"
+   ],
+   "cite": "4.10.20-4.10.22"
+  },
+  {
+   "id": 15,
+   "act": 1,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "एक चट्टान। दो भाई। दो कहानियाँ।",
+   "en": "One rock. Two brothers. Two stories.",
+   "units": [
+    "[thoughtfully] एक चट्टान।",
+    "दो भाई।",
+    "दो कहानियाँ।"
+   ],
+   "cite": "4.9.19; 4.10.17",
+   "unit_gap": 0.6,
+   "card": [
+    [
+     "ONE ROCK.",
+     null
+    ],
+    [
+     "TWO STORIES.",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "id": 16,
+   "act": 1,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "सुग्रीव, ऋष्यमूक पर्वत पर जा छिपे, जहाँ बाली नहीं आ सकते थे।",
+   "en": "Sugriva hid on Mount Rishyamuka, where Vali could not come.",
+   "units": [
+    "[softly] सुग्रीव, ऋष्यमूक पर्वत पर जा छिपे, जहाँ बाली नहीं आ सकते थे।"
+   ],
+   "cite": "4.10.23"
+  },
+  {
+   "id": 17,
+   "act": 1,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "और वहीं, उनकी भेंट हुई, एक ऐसे राजकुमार से, जो खुद, सब कुछ खो चुका था।",
+   "en": "And there he met a prince who had lost everything too.",
+   "units": [
+    "[thoughtfully] और वहीं, उनकी भेंट हुई, एक ऐसे राजकुमार से, जो खुद, सब कुछ खो चुका था।"
+   ],
+   "cite": "4.5.4",
+   "link": true
+  },
+  {
+   "id": 18,
+   "act": 1,
+   "beat": "B03",
+   "voice": "narrator",
+   "hi": "हनुमान, राम और लक्ष्मण को, सुग्रीव के पास लाए। सुग्रीव ने हाथ बढ़ाया।",
+   "en": "Hanuman brought Rama and Lakshmana to Sugriva. Sugriva held out his hand.",
+   "units": [
+    "[warmly] हनुमान, राम और लक्ष्मण को, सुग्रीव के पास लाए।",
+    "सुग्रीव ने हाथ बढ़ाया।"
+   ],
+   "cite": "4.5.1-4.5.12"
+  },
+  {
+   "id": 19,
+   "act": 1,
+   "beat": "B03",
+   "voice": "sugriva",
+   "hi": "यदि ये मित्रता आपको स्वीकार है, प्रभु, तो ये रहा मेरा हाथ।",
+   "en": "\"If this friendship pleases you, my lord, here is my hand.\"",
+   "units": [
+    "[warmly] यदि ये मित्रता आपको स्वीकार है, प्रभु, तो ये रहा मेरा हाथ।"
+   ],
+   "cite": "4.5.12"
+  },
+  {
+   "id": 20,
+   "act": 1,
+   "beat": "B03",
+   "voice": "narrator",
+   "hi": "हनुमान ने, दो लकड़ियाँ रगड़कर, अग्नि जलाई। राम और सुग्रीव ने, उस अग्नि की परिक्रमा की। मित्रता, अग्नि को साक्षी मानकर।",
+   "en": "Hanuman kindled a fire from two sticks. Rama and Sugriva walked around it: a friendship with fire as witness.",
+   "units": [
+    "[warmly] हनुमान ने, दो लकड़ियाँ रगड़कर, अग्नि जलाई।",
+    "राम और सुग्रीव ने, उस अग्नि की परिक्रमा की। मित्रता, अग्नि को साक्षी मानकर।"
+   ],
+   "cite": "4.5.14-4.5.16"
+  },
+  {
+   "id": 21,
+   "act": 1,
+   "beat": "B03",
+   "voice": "narrator",
+   "hi": "पर सुग्रीव के मन में, एक डर था। कोई भी, बाली के सामने टिक पाएगा, इस पर उन्हें भरोसा नहीं था।",
+   "en": "But Sugriva had one fear. He could not believe anyone would stand before Vali.",
+   "units": [
+    "[thoughtfully] पर सुग्रीव के मन में, एक डर था।",
+    "[serious] कोई भी, बाली के सामने टिक पाएगा, इस पर उन्हें भरोसा नहीं था।"
+   ],
+   "cite": "4.12.8-4.12.9",
+   "link": true
+  },
+  {
+   "id": 22,
+   "act": 1,
+   "beat": "B04",
+   "voice": "narrator",
+   "hi": "राम ने धनुष उठाया, और एक ही बाण चलाया। वो बाण, साल के सात पेड़ों को भेदकर, पर्वत और धरती को चीरकर, वापस तरकश में लौट आया।",
+   "en": "Rama raised his bow and loosed a single arrow. It pierced seven sala trees, the mountain and the earth, and returned to his quiver.",
+   "units": [
+    "[serious] राम ने धनुष उठाया, और एक ही बाण चलाया।",
+    "वो बाण, साल के सात पेड़ों को भेदकर, पर्वत और धरती को चीरकर, वापस तरकश में लौट आया।"
+   ],
+   "cite": "4.12.1-4.12.4",
+   "card": [
+    [
+     "7 TREES.",
+     null
+    ],
+    [
+     "1 ARROW.",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "id": 23,
+   "act": 1,
+   "beat": "B04",
+   "voice": "sugriva",
+   "hi": "प्रभु, आज ही, उस बाली को मारिए, जो भाई के वेश में, मेरा शत्रु है।",
+   "en": "\"My lord, today itself, kill Vali, my enemy in the form of a brother.\"",
+   "units": [
+    "[warmly] प्रभु, आज ही, उस बाली को मारिए, जो भाई के वेश में, मेरा शत्रु है।"
+   ],
+   "cite": "4.12.11"
+  },
+  {
+   "id": 24,
+   "act": 1,
+   "beat": "B04",
+   "voice": "narrator",
+   "hi": "तो पहला युद्ध, आसान होना चाहिए था। पर ऐसा हुआ नहीं।",
+   "en": "So the first duel should have been easy. It wasn't.",
+   "units": [
+    "[thoughtfully] तो पहला युद्ध, आसान होना चाहिए था।",
+    "[serious] पर ऐसा हुआ नहीं।"
+   ],
+   "link": true,
+   "unit_gap": 0.6
+  },
+  {
+   "id": 25,
+   "act": 2,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "सब किष्किन्धा पहुँचे, और घने पेड़ों के बीच छिप गए। सुग्रीव ने गर्जना की, और बाली, क्रोध में, बाहर निकले।",
+   "en": "They all reached Kishkindha and hid among the dense trees. Sugriva roared, and Vali burst out in fury.",
+   "units": [
+    "[serious] सब किष्किन्धा पहुँचे, और घने पेड़ों के बीच छिप गए।",
+    "सुग्रीव ने गर्जना की, और बाली, क्रोध में, बाहर निकले।"
+   ],
+   "cite": "4.12.14-4.12.16"
+  },
+  {
+   "id": 26,
+   "act": 2,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "दोनों भाई, वज्र जैसे मुक्कों से लड़े। राम, धनुष ताने खड़े थे। पर बाण, नहीं चला।",
+   "en": "The two brothers fought with fists like thunderbolts. Rama stood with his bow drawn. But the arrow never flew.",
+   "units": [
+    "[serious] दोनों भाई, वज्र जैसे मुक्कों से लड़े।",
+    "राम, धनुष ताने खड़े थे।",
+    "[thoughtfully] पर बाण, नहीं चला।"
+   ],
+   "cite": "4.12.17-4.12.20",
+   "unit_gap": 0.5,
+   "reveal": true
+  },
+  {
+   "id": 27,
+   "act": 2,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "सुग्रीव हारे, और खून से लथपथ, ऋष्यमूक की ओर भागे।",
+   "en": "Sugriva lost, and fled bleeding to Rishyamuka.",
+   "units": [
+    "[softly] सुग्रीव हारे, और खून से लथपथ, ऋष्यमूक की ओर भागे।"
+   ],
+   "cite": "4.12.21-4.12.22"
+  },
+  {
+   "id": 28,
+   "act": 2,
+   "beat": "B05",
+   "voice": "sugriva",
+   "hi": "आपने कहा था, ललकारो। अगर बाली को मारना ही नहीं था, तो उसी समय कह देते, प्रभु।",
+   "en": "\"You told me: challenge him. If you never meant to kill Vali, you should have said so then, my lord.\"",
+   "units": [
+    "[sadly] आपने कहा था, ललकारो।",
+    "अगर बाली को मारना ही नहीं था, तो उसी समय कह देते, प्रभु।"
+   ],
+   "cite": "4.12.26-4.12.27"
+  },
+  {
+   "id": 29,
+   "act": 2,
+   "beat": "B05",
+   "voice": "rama",
+   "hi": "मित्र सुग्रीव, क्रोध छोड़ो। वेश में, कद में, चाल में, स्वर में, तुम दोनों में, मुझे कोई अंतर नहीं दिखा।",
+   "en": "\"Sugriva, my friend, let go of your anger. In dress, in build, in gait, in voice, I saw no difference between you two.\"",
+   "units": [
+    "[gently] मित्र सुग्रीव, क्रोध छोड़ो।",
+    "वेश में, कद में, चाल में, स्वर में, तुम दोनों में, मुझे कोई अंतर नहीं दिखा।"
+   ],
+   "cite": "4.12.29-4.12.32"
+  },
+  {
+   "id": 30,
+   "act": 2,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: स्वरेण वर्चसा चैव प्रेक्षितेन च वानर… विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये॥ यानी, स्वर, तेज, दृष्टि, पराक्रम, बोली, किसी में भी, तुम दोनों अलग नहीं दिखे।",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] स्वरेण वर्चसा चैव प्रेक्षितेन च वानर… विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये॥",
+    "[thoughtfully] यानी, स्वर, तेज, दृष्टि, पराक्रम, बोली, किसी में भी, तुम दोनों अलग नहीं दिखे।"
+   ],
+   "cite": "4.12.31",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.12.31 · CRITICAL EDITION",
+    "lines": [
+     "स्वरेण वर्चसा चैव प्रेक्षितेन च वानर ।",
+     "विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये ॥"
+    ],
+    "translit": "svareṇa varcasā caiva prekṣitena ca vānara, vikrameṇa ca vākyaiśca vyaktiṃ vāṃ nopalakṣaye",
+    "en": "“By voice, by radiance, by gaze, by prowess and by words, I see no difference between you two.”"
+   }
+  },
+  {
+   "id": 31,
+   "act": 2,
+   "beat": "B05",
+   "voice": "narrator",
+   "hi": "और इस पहेली का हल, एक फूल था।",
+   "en": "And the answer to this puzzle was a flower.",
+   "units": [
+    "[thoughtfully] और इस पहेली का हल, एक फूल था।"
+   ],
+   "link": true
+  },
+  {
+   "id": 32,
+   "act": 2,
+   "beat": "B06",
+   "voice": "narrator",
+   "hi": "राम ने कहा: लक्ष्मण, ये फूलों वाली गजपुष्पी बेल उखाड़ो, और सुग्रीव के गले में डाल दो। लक्ष्मण ने, वैसा ही किया।",
+   "en": "Rama said: \"Lakshmana, uproot this flowering gajapushpi creeper and put it around Sugriva's neck.\" Lakshmana did.",
+   "units": [
+    "[warmly] राम ने कहा: लक्ष्मण, ये फूलों वाली गजपुष्पी बेल उखाड़ो, और सुग्रीव के गले में डाल दो।",
+    "लक्ष्मण ने, वैसा ही किया।"
+   ],
+   "cite": "4.12.34-4.12.37"
+  },
+  {
+   "id": 33,
+   "act": 2,
+   "beat": "B06",
+   "voice": "narrator",
+   "hi": "अब, ध्यान दीजिए। बाली के गले में, पहले से एक माला थी। सोने की। जो उनके पिता, इंद्र ने दी थी।",
+   "en": "Now notice this. Vali already wore a garland. A golden one, given by his father, Indra.",
+   "units": [
+    "[thoughtfully] अब, ध्यान दीजिए।",
+    "बाली के गले में, पहले से एक माला थी। सोने की। जो उनके पिता, इंद्र ने दी थी।"
+   ],
+   "cite": "4.11.37; 4.17.5",
+   "unit_gap": 0.5,
+   "card": [
+    [
+     "TWO GARLANDS.",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "id": 34,
+   "act": 2,
+   "beat": "B06",
+   "voice": "narrator",
+   "hi": "इस सोने की माला को, याद रखिएगा। कहानी के अंत में, ये फिर लौटेगी।",
+   "en": "Remember that golden garland. It comes back at the end of the story.",
+   "units": [
+    "[softly] इस सोने की माला को, याद रखिएगा।",
+    "कहानी के अंत में, ये फिर लौटेगी।"
+   ],
+   "link": true
+  },
+  {
+   "id": 35,
+   "act": 2,
+   "beat": "B07",
+   "voice": "narrator",
+   "hi": "सुग्रीव ने, दोबारा, किष्किन्धा के द्वार पर गर्जना की। अंतःपुर में बैठे बाली, क्रोध से उठ खड़े हुए।",
+   "en": "Sugriva roared again at the gates of Kishkindha. Vali, in the inner palace, rose in anger.",
+   "units": [
+    "[serious] सुग्रीव ने, दोबारा, किष्किन्धा के द्वार पर गर्जना की।",
+    "अंतःपुर में बैठे बाली, क्रोध से उठ खड़े हुए।"
+   ],
+   "cite": "4.14.18; 4.15.1-4.15.5"
+  },
+  {
+   "id": 36,
+   "act": 2,
+   "beat": "B07",
+   "voice": "narrator",
+   "hi": "पर एक व्यक्ति ने, ख़तरा पहचान लिया। बाली की रानी, तारा।",
+   "en": "But one person saw the danger. Vali's queen, Tara.",
+   "units": [
+    "[thoughtfully] पर एक व्यक्ति ने, ख़तरा पहचान लिया।",
+    "बाली की रानी, तारा।"
+   ],
+   "cite": "4.15.6",
+   "unit_gap": 0.5
+  },
+  {
+   "id": 37,
+   "act": 2,
+   "beat": "B07",
+   "voice": "tara",
+   "hi": "जो भाई, हारकर भागा था, वो इतनी जल्दी, फिर गरज रहा है। वो अकेला नहीं आया है।",
+   "en": "\"The brother who fled in defeat is roaring again so soon. He has not come alone.\"",
+   "units": [
+    "[gently] जो भाई, हारकर भागा था, वो इतनी जल्दी, फिर गरज रहा है।",
+    "वो अकेला नहीं आया है।"
+   ],
+   "cite": "4.15.9-4.15.12"
+  },
+  {
+   "id": 38,
+   "act": 2,
+   "beat": "B07",
+   "voice": "tara",
+   "hi": "मैंने अंगद से सुना है। उसके मित्र, श्रीराम हैं। दुखियों का सहारा, शरणागत के रक्षक।",
+   "en": "\"I have heard it from Angada. His friend is Shri Rama: the refuge of the distressed, protector of all who come to him.\"",
+   "units": [
+    "[serious] मैंने अंगद से सुना है। उसके मित्र, श्रीराम हैं।",
+    "दुखियों का सहारा, शरणागत के रक्षक।"
+   ],
+   "cite": "4.15.14-4.15.16"
+  },
+  {
+   "id": 39,
+   "act": 2,
+   "beat": "B07",
+   "voice": "tara",
+   "hi": "हे वीर, सुग्रीव को युवराज बना दीजिए। अपने भाई से, ये वैर छोड़ दीजिए।",
+   "en": "\"My hero, make Sugriva crown prince. Give up this feud with your brother.\"",
+   "units": [
+    "[gently] हे वीर, सुग्रीव को युवराज बना दीजिए।",
+    "अपने भाई से, ये वैर छोड़ दीजिए।"
+   ],
+   "cite": "4.15.20-4.15.22"
+  },
+  {
+   "id": 40,
+   "act": 2,
+   "beat": "B07",
+   "voice": "narrator",
+   "hi": "बाली का उत्तर, इस पूरे प्रसंग की, सबसे भारी पंक्ति है।",
+   "en": "Vali's reply is the heaviest line in this whole episode.",
+   "units": [
+    "[thoughtfully] बाली का उत्तर, इस पूरे प्रसंग की, सबसे भारी पंक्ति है।"
+   ],
+   "link": true
+  },
+  {
+   "id": 41,
+   "act": 2,
+   "beat": "B08",
+   "voice": "vali",
+   "hi": "राम, धर्म को जानते हैं। कृतज्ञ हैं। वो पाप, कैसे करेंगे?",
+   "en": "\"Rama knows dharma. He is grateful. How could he do a sinful thing?\"",
+   "units": [
+    "[serious] राम, धर्म को जानते हैं। कृतज्ञ हैं।",
+    "वो पाप, कैसे करेंगे?"
+   ],
+   "cite": "4.16.5",
+   "reveal": true
+  },
+  {
+   "id": 42,
+   "act": 2,
+   "beat": "B08",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: न च कार्यो विषादस्ते राघवं प्रति मत्कृते… धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति॥",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] न च कार्यो विषादस्ते राघवं प्रति मत्कृते… धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति॥"
+   ],
+   "cite": "4.16.5",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.16.5 · CRITICAL EDITION",
+    "lines": [
+     "न च कार्यो विषादस्ते राघवं प्रति मत्कृते ।",
+     "धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति ॥"
+    ],
+    "translit": "na ca kāryo viṣādaste rāghavaṃ prati matkṛte, dharmajñaśca kṛtajñaśca kathaṃ pāpaṃ kariṣyati",
+    "en": "“Do not grieve for me on Raghava's account. He knows dharma and he is grateful: how could he do a sinful thing?”"
+   }
+  },
+  {
+   "id": 43,
+   "act": 2,
+   "beat": "B08",
+   "voice": "narrator",
+   "hi": "बाली ने, अपने प्राणों की शपथ देकर, तारा को लौटा दिया। तारा ने, आँसुओं के साथ, उनकी परिक्रमा की, विजय के लिए मंत्र पढ़े, और भीतर चली गईं।",
+   "en": "Vali swore Tara back by his own life. In tears, she walked around him, chanted prayers for his victory, and went inside.",
+   "units": [
+    "[softly] बाली ने, अपने प्राणों की शपथ देकर, तारा को लौटा दिया।",
+    "तारा ने, आँसुओं के साथ, उनकी परिक्रमा की, विजय के लिए मंत्र पढ़े, और भीतर चली गईं।"
+   ],
+   "cite": "4.16.8-4.16.10"
+  },
+  {
+   "id": 44,
+   "act": 2,
+   "beat": "B08",
+   "voice": "narrator",
+   "hi": "कुछ ही देर में, उनका ये भरोसा, परखा जाने वाला था।",
+   "en": "Within moments, that trust would be tested.",
+   "units": [
+    "[thoughtfully] कुछ ही देर में, उनका ये भरोसा, परखा जाने वाला था।"
+   ],
+   "link": true
+  },
+  {
+   "id": 45,
+   "act": 2,
+   "beat": "B09",
+   "voice": "narrator",
+   "hi": "बाली ने वस्त्र कसा, और सुग्रीव पर टूट पड़े। सुग्रीव ने, साल का पेड़ उखाड़कर मारा। पर धीरे-धीरे, सुग्रीव थकने लगे।",
+   "en": "Vali tightened his garment and fell on Sugriva. Sugriva struck him with an uprooted sala tree, but slowly Sugriva began to tire.",
+   "units": [
+    "[serious] बाली ने वस्त्र कसा, और सुग्रीव पर टूट पड़े।",
+    "सुग्रीव ने, साल का पेड़ उखाड़कर मारा। पर धीरे-धीरे, सुग्रीव थकने लगे।"
+   ],
+   "cite": "4.16.14-4.16.24"
+  },
+  {
+   "id": 46,
+   "act": 2,
+   "beat": "B09",
+   "voice": "narrator",
+   "hi": "तभी, राम ने, विषधर सर्प जैसा बाण, धनुष पर चढ़ाया, और बाली की छाती में मारा।",
+   "en": "Then Rama set an arrow like a venomous serpent to his bow, and struck Vali in the chest.",
+   "units": [
+    "[serious] तभी, राम ने, विषधर सर्प जैसा बाण, धनुष पर चढ़ाया,",
+    "और बाली की छाती में मारा।"
+   ],
+   "cite": "4.16.25",
+   "reveal": true
+  },
+  {
+   "id": 47,
+   "act": 2,
+   "beat": "B09",
+   "voice": "narrator",
+   "hi": "बाली, इंद्र के ध्वज की तरह, धरती पर गिरे।",
+   "en": "Vali fell to the earth like Indra's banner.",
+   "units": [
+    "[softly] बाली, इंद्र के ध्वज की तरह, धरती पर गिरे।"
+   ],
+   "cite": "4.16.27; 4.17.2"
+  },
+  {
+   "id": 48,
+   "act": 2,
+   "beat": "B09",
+   "voice": "narrator",
+   "hi": "पर प्राण, तुरंत नहीं गए। वाल्मीकि कहते हैं: इंद्र की दी हुई सोने की माला ने, उनके प्राण, तेज और शोभा को, थामे रखा।",
+   "en": "But his life did not leave at once. Valmiki says the golden garland Indra gave him held on to his life, his strength and his splendour.",
+   "units": [
+    "[thoughtfully] पर प्राण, तुरंत नहीं गए।",
+    "वाल्मीकि कहते हैं: इंद्र की दी हुई सोने की माला ने, उनके प्राण, तेज और शोभा को, थामे रखा।"
+   ],
+   "cite": "4.17.4-4.17.5"
+  },
+  {
+   "id": 49,
+   "act": 2,
+   "beat": "B09",
+   "voice": "narrator",
+   "hi": "और उन बचे हुए पलों में, बाली ने जो कहा, वाल्मीकि ने, उसका एक-एक शब्द लिखा है।",
+   "en": "And what Vali said in those last moments, Valmiki recorded word for word.",
+   "units": [
+    "[serious] और उन बचे हुए पलों में, बाली ने जो कहा,",
+    "वाल्मीकि ने, उसका एक-एक शब्द लिखा है।"
+   ],
+   "link": true
+  },
+  {
+   "id": 50,
+   "act": 3,
+   "beat": "B10",
+   "voice": "narrator",
+   "hi": "राम और लक्ष्मण, पास आए। और बाली, बोले।",
+   "en": "Rama and Lakshmana came near. And Vali spoke.",
+   "units": [
+    "[thoughtfully] राम और लक्ष्मण, पास आए। और बाली, बोले।"
+   ],
+   "cite": "4.17.11-4.17.12"
+  },
+  {
+   "id": 51,
+   "act": 3,
+   "beat": "B10",
+   "voice": "vali",
+   "hi": "जिसका मुख दूसरी ओर था, उसे मारकर, तुम्हें कौन-सा पुण्य मिला? मैं तो, किसी और से युद्ध कर रहा था।",
+   "en": "\"What merit did you gain by striking one whose face was turned away? I was fighting someone else.\"",
+   "units": [
+    "[serious] जिसका मुख दूसरी ओर था, उसे मारकर, तुम्हें कौन-सा पुण्य मिला?",
+    "मैं तो, किसी और से युद्ध कर रहा था।"
+   ],
+   "cite": "4.17.13; 4.17.17"
+  },
+  {
+   "id": 52,
+   "act": 3,
+   "beat": "B10",
+   "voice": "vali",
+   "hi": "न मैंने तुम्हारे राज्य का कुछ बिगाड़ा, न तुम्हारे नगर का। फिर, एक निर्दोष को, क्यों मारा?",
+   "en": "\"I did no harm to your kingdom or your city. Then why kill an innocent?\"",
+   "units": [
+    "[serious] न मैंने तुम्हारे राज्य का कुछ बिगाड़ा, न तुम्हारे नगर का।",
+    "फिर, एक निर्दोष को, क्यों मारा?"
+   ],
+   "cite": "4.17.20"
+  },
+  {
+   "id": 53,
+   "act": 3,
+   "beat": "B10",
+   "voice": "vali",
+   "hi": "अगर सामने आकर लड़ते, तो आज, यमराज के दर्शन करते। तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।",
+   "en": "\"Had you fought me face to face, today you would have met Yama. You struck from hiding, like a snake biting a sleeping man.\"",
+   "units": [
+    "[serious] अगर सामने आकर लड़ते, तो आज, यमराज के दर्शन करते।",
+    "तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।"
+   ],
+   "cite": "4.17.39-4.17.40"
+  },
+  {
+   "id": 54,
+   "act": 3,
+   "beat": "B10",
+   "voice": "vali",
+   "hi": "अगर सुग्रीव के लिए ही करना था, तो मुझसे कहते। मैं रावण को, गले से बाँधकर, तुम्हारे सामने ला देता। और मैथिली को, पाताल से भी, ढूँढ लाता।",
+   "en": "\"If it was for Sugriva's sake, you should have asked me. I would have dragged Ravana to you by the neck, and found Maithili even in the underworld.\"",
+   "units": [
+    "[sadly] अगर सुग्रीव के लिए ही करना था, तो मुझसे कहते।",
+    "मैं रावण को, गले से बाँधकर, तुम्हारे सामने ला देता। और मैथिली को, पाताल से भी, ढूँढ लाता।"
+   ],
+   "cite": "4.17.41-4.17.42"
+  },
+  {
+   "id": 55,
+   "act": 3,
+   "beat": "B10",
+   "voice": "narrator",
+   "hi": "और अंत में, बाली खुद मानते हैं, कि सुग्रीव को राज्य मिलना, उचित है। पर उन्हें, अधर्म से मारा गया, ये उचित नहीं।",
+   "en": "And at the end, Vali himself grants that Sugriva should have the kingdom. But that he was killed by adharma, that is not right.",
+   "units": [
+    "[thoughtfully] और अंत में, बाली खुद मानते हैं, कि सुग्रीव को राज्य मिलना, उचित है।",
+    "[serious] पर उन्हें, अधर्म से मारा गया, ये उचित नहीं।"
+   ],
+   "cite": "4.17.43"
+  },
+  {
+   "id": 56,
+   "act": 3,
+   "beat": "B10",
+   "voice": "narrator",
+   "hi": "अब, राम उत्तर देते हैं। और वाल्मीकि में, ये उत्तर, बाली के आरोप जितना ही लंबा है।",
+   "en": "Now Rama answers. And in Valmiki, his answer is as long as Vali's accusation.",
+   "units": [
+    "[serious] अब, राम उत्तर देते हैं।",
+    "[thoughtfully] और वाल्मीकि में, ये उत्तर, बाली के आरोप जितना ही लंबा है।"
+   ],
+   "cite": "4.17.13-4.17.45; 4.18.4-4.18.39",
+   "link": true
+  },
+  {
+   "id": 57,
+   "act": 3,
+   "beat": "B11",
+   "voice": "rama",
+   "hi": "ये धरती, ये पर्वत, ये वन, इक्ष्वाकुओं के हैं। आज धर्मात्मा भरत, इस पर राज करते हैं। और हम, उनकी आज्ञा से, धर्म की रक्षा करते हैं।",
+   "en": "\"This earth, these mountains and forests belong to the Ikshvakus. Today the righteous Bharata rules it, and by his command we uphold dharma.\"",
+   "units": [
+    "[serious] ये धरती, ये पर्वत, ये वन, इक्ष्वाकुओं के हैं।",
+    "आज धर्मात्मा भरत, इस पर राज करते हैं। और हम, उनकी आज्ञा से, धर्म की रक्षा करते हैं।"
+   ],
+   "cite": "4.18.6-4.18.11"
+  },
+  {
+   "id": 58,
+   "act": 3,
+   "beat": "B11",
+   "voice": "rama",
+   "hi": "बड़ा भाई, पिता के समान है। छोटा भाई, पुत्र के समान।",
+   "en": "\"An elder brother is like a father. A younger brother, like a son.\"",
+   "units": [
+    "[serious] बड़ा भाई, पिता के समान है। छोटा भाई, पुत्र के समान।"
+   ],
+   "cite": "4.18.13-4.18.14"
+  },
+  {
+   "id": 59,
+   "act": 3,
+   "beat": "B11",
+   "voice": "rama",
+   "hi": "और ये है वो कारण, जिसके लिए तुम मारे गए। सुग्रीव अभी जीवित हैं, और तुम, उनकी पत्नी रुमा के साथ रहते हो।",
+   "en": "\"And this is the reason you were slain: Sugriva still lives, and you live with his wife, Ruma.\"",
+   "units": [
+    "[serious] और ये है वो कारण, जिसके लिए तुम मारे गए।",
+    "सुग्रीव अभी जीवित हैं, और तुम, उनकी पत्नी रुमा के साथ रहते हो।"
+   ],
+   "cite": "4.18.18-4.18.20",
+   "reveal": true
+  },
+  {
+   "id": 60,
+   "act": 3,
+   "beat": "B11",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: तदेतत् कारणं पश्य यदर्थं त्वं मया हतः… भ्रातुर्वर्तसि भार्यायां त्यक्त्वा धर्मं सनातनम्॥",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] तदेतत् कारणं पश्य यदर्थं त्वं मया हतः… भ्रातुर्वर्तसि भार्यायां त्यक्त्वा धर्मं सनातनम्॥"
+   ],
+   "cite": "4.18.18",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.18.18 · CRITICAL EDITION",
+    "lines": [
+     "तदेतत् कारणं पश्य यदर्थं त्वं मया हतः ।",
+     "भ्रातुर्वर्तसि भार्यायां त्यक्त्वा धर्मं सनातनम् ॥"
+    ],
+    "translit": "tadetat kāraṇaṃ paśya yadarthaṃ tvaṃ mayā hataḥ, bhrāturvartasi bhāryāyāṃ tyaktvā dharmaṃ sanātanam",
+    "en": "“See the reason for which you were slain by me: abandoning eternal dharma, you live with your brother's wife.”"
+   }
+  },
+  {
+   "id": 61,
+   "act": 3,
+   "beat": "B11",
+   "voice": "rama",
+   "hi": "और मैंने, सुग्रीव को, वचन दिया था। मेरे जैसा व्यक्ति, अपना वचन, कैसे तोड़े?",
+   "en": "\"And I gave Sugriva my word. How could one like me break a vow?\"",
+   "units": [
+    "[serious] और मैंने, सुग्रीव को, वचन दिया था।",
+    "मेरे जैसा व्यक्ति, अपना वचन, कैसे तोड़े?"
+   ],
+   "cite": "4.18.26-4.18.27"
+  },
+  {
+   "id": 62,
+   "act": 3,
+   "beat": "B11",
+   "voice": "narrator",
+   "hi": "पर एक सवाल, अब भी बाकी है। छिपकर, क्यों?",
+   "en": "But one question still remains. Why from hiding?",
+   "units": [
+    "[thoughtfully] पर एक सवाल, अब भी बाकी है।",
+    "[serious] छिपकर, क्यों?"
+   ],
+   "link": true,
+   "unit_gap": 0.6,
+   "card": [
+    [
+     "WHY FROM HIDING?",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "id": 63,
+   "act": 3,
+   "beat": "B12",
+   "voice": "narrator",
+   "hi": "इसका उत्तर भी, राम खुद देते हैं। और वाल्मीकि, इसे बिना बदले, लिखते हैं।",
+   "en": "Rama answers this too, and Valmiki records it unchanged.",
+   "units": [
+    "[thoughtfully] इसका उत्तर भी, राम खुद देते हैं।",
+    "और वाल्मीकि, इसे बिना बदले, लिखते हैं।"
+   ],
+   "cite": "4.18.34-4.18.36"
+  },
+  {
+   "id": 64,
+   "act": 3,
+   "beat": "B12",
+   "voice": "rama",
+   "hi": "मनुष्य, जाल से, फंदे से, छिपकर भी और सामने से भी, पशुओं को पकड़ते हैं। भागते हुए को भी, और ठहरे हुए को भी।",
+   "en": "\"Men catch animals with nets and snares, hidden or in the open, whether they flee or stand still.\"",
+   "units": [
+    "[serious] मनुष्य, जाल से, फंदे से, छिपकर भी और सामने से भी, पशुओं को पकड़ते हैं।",
+    "भागते हुए को भी, और ठहरे हुए को भी।"
+   ],
+   "cite": "4.18.34-4.18.35"
+  },
+  {
+   "id": 65,
+   "act": 3,
+   "beat": "B12",
+   "voice": "rama",
+   "hi": "राजर्षि भी, शिकार करते हैं। और तुम, शाखामृग हो, वन के वानर। इसलिए, लड़ते हुए, या न लड़ते हुए, तुम मेरे बाण से मारे गए।",
+   "en": "\"Royal sages hunt too. And you are a shakhamriga, a creature of the forest. So, fighting or not fighting, you fell to my arrow.\"",
+   "units": [
+    "[serious] राजर्षि भी, शिकार करते हैं। और तुम, शाखामृग हो, वन के वानर।",
+    "इसलिए, लड़ते हुए, या न लड़ते हुए, तुम मेरे बाण से मारे गए।"
+   ],
+   "cite": "4.18.36",
+   "reveal": true
+  },
+  {
+   "id": 66,
+   "act": 3,
+   "beat": "B12",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: तस्मात्त्वं निहतो युद्धे मया बाणेन वानर… अयुध्यन्प्रतियुध्यन् वा यस्माच्छाखामृगो ह्यसि॥",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] तस्मात्त्वं निहतो युद्धे मया बाणेन वानर… अयुध्यन्प्रतियुध्यन् वा यस्माच्छाखामृगो ह्यसि॥"
+   ],
+   "cite": "4.18.36",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.18.36 · CRITICAL EDITION",
+    "lines": [
+     "तस्मात्त्वं निहतो युद्धे मया बाणेन वानर ।",
+     "अयुध्यन्प्रतियुध्यन् वा यस्माच्छाखामृगो ह्यसि ॥"
+    ],
+    "translit": "tasmāttvaṃ nihato yuddhe mayā bāṇena vānara, ayudhyanpratiyudhyan vā yasmācchākhāmṛgo hyasi",
+    "en": "“Therefore, O vanara, you were slain in battle by my arrow, whether you fought or did not fight, for you are a shakhamriga.”"
+   }
+  },
+  {
+   "id": 67,
+   "act": 3,
+   "beat": "B12",
+   "voice": "narrator",
+   "hi": "ये उत्तर, आज के कानों को, कठिन लग सकता है। हम इसे, न बढ़ाते हैं, न छिपाते हैं। वाल्मीकि ने जैसा लिखा, वैसा ही, आपके सामने है।",
+   "en": "This answer may sound hard to today's ears. We neither add to it nor hide it. As Valmiki wrote it, so it is before you.",
+   "units": [
+    "[thoughtfully] ये उत्तर, आज के कानों को, कठिन लग सकता है।",
+    "[serious] हम इसे, न बढ़ाते हैं, न छिपाते हैं। वाल्मीकि ने जैसा लिखा, वैसा ही, आपके सामने है।"
+   ]
+  },
+  {
+   "id": 68,
+   "act": 3,
+   "beat": "B12",
+   "voice": "narrator",
+   "hi": "और फिर, बाली ने, वो किया, जिसकी कोई उम्मीद नहीं करता।",
+   "en": "And then Vali did something no one expects.",
+   "units": [
+    "[thoughtfully] और फिर, बाली ने, वो किया,",
+    "जिसकी कोई उम्मीद नहीं करता।"
+   ],
+   "link": true
+  },
+  {
+   "id": 69,
+   "act": 3,
+   "beat": "B13",
+   "voice": "narrator",
+   "hi": "बाली ने, हाथ जोड़ लिए।",
+   "en": "Vali folded his hands.",
+   "units": [
+    "[softly] बाली ने, हाथ जोड़ लिए।"
+   ],
+   "cite": "4.18.40",
+   "min": 2.6
+  },
+  {
+   "id": 70,
+   "act": 3,
+   "beat": "B13",
+   "voice": "vali",
+   "hi": "हे नरश्रेष्ठ, आप जो कहते हैं, वही सत्य है। मेरे कठोर शब्दों के लिए, मुझे दोष मत दीजिए।",
+   "en": "\"Best of men, what you say is true. Do not hold my harsh words against me.\"",
+   "units": [
+    "[softly] हे नरश्रेष्ठ, आप जो कहते हैं, वही सत्य है।",
+    "मेरे कठोर शब्दों के लिए, मुझे दोष मत दीजिए।"
+   ],
+   "cite": "4.18.41-4.18.42",
+   "reveal": true
+  },
+  {
+   "id": 71,
+   "act": 3,
+   "beat": "B13",
+   "voice": "vali",
+   "hi": "मुझे अपनी चिंता नहीं, न तारा की। चिंता है, मेरे बेटे अंगद की। सुग्रीव और अंगद को, वैसे ही देखिए, जैसे भरत और लक्ष्मण को देखते हैं।",
+   "en": "\"I grieve not for myself, nor for Tara, but for my son Angada. Look on Sugriva and Angada as you look on Bharata and Lakshmana.\"",
+   "units": [
+    "[sadly] मुझे अपनी चिंता नहीं, न तारा की। चिंता है, मेरे बेटे अंगद की।",
+    "सुग्रीव और अंगद को, वैसे ही देखिए, जैसे भरत और लक्ष्मण को देखते हैं।"
+   ],
+   "cite": "4.18.46-4.18.49"
+  },
+  {
+   "id": 72,
+   "act": 3,
+   "beat": "B13",
+   "voice": "narrator",
+   "hi": "तभी, तारा, युद्धभूमि पर पहुँचीं।",
+   "en": "Just then, Tara reached the battlefield.",
+   "units": [
+    "[softly] तभी, तारा, युद्धभूमि पर पहुँचीं।"
+   ],
+   "cite": "4.19.4",
+   "link": true
+  },
+  {
+   "id": 73,
+   "act": 4,
+   "beat": "B14",
+   "voice": "narrator",
+   "hi": "वानर, डरकर भाग रहे थे। तारा, उल्टी दिशा में दौड़ीं।",
+   "en": "The vanaras were fleeing in fear. Tara ran the other way.",
+   "units": [
+    "[softly] वानर, डरकर भाग रहे थे।",
+    "तारा, उल्टी दिशा में दौड़ीं।"
+   ],
+   "cite": "4.19.5-4.19.20"
+  },
+  {
+   "id": 74,
+   "act": 4,
+   "beat": "B14",
+   "voice": "tara",
+   "hi": "पुत्र का क्या करूँ, राज्य का क्या करूँ, अपने इन प्राणों का क्या करूँ, जब मेरे स्वामी ही, जा रहे हैं?",
+   "en": "\"What is a son to me, or a kingdom, or my own life, when my lord himself is leaving?\"",
+   "units": [
+    "[sadly] पुत्र का क्या करूँ, राज्य का क्या करूँ, अपने इन प्राणों का क्या करूँ,",
+    "जब मेरे स्वामी ही, जा रहे हैं?"
+   ],
+   "cite": "4.19.18"
+  },
+  {
+   "id": 75,
+   "act": 4,
+   "beat": "B14",
+   "voice": "tara",
+   "hi": "उठिए, वीर। ऐसे राजा, धरती पर नहीं सोते। आपने, मेरी बात, नहीं मानी।",
+   "en": "\"Rise, my hero. Kings like you do not sleep on the bare ground. You would not listen to me.\"",
+   "units": [
+    "[sadly] उठिए, वीर। ऐसे राजा, धरती पर नहीं सोते।",
+    "आपने, मेरी बात, नहीं मानी।"
+   ],
+   "cite": "4.20.5; 4.20.12"
+  },
+  {
+   "id": 76,
+   "act": 4,
+   "beat": "B14",
+   "voice": "narrator",
+   "hi": "अंतिम साँसों में, बाली ने, उस भाई की ओर देखा, जिसे उन्होंने, निकाल दिया था।",
+   "en": "With his last breaths, Vali looked at the brother he had driven out.",
+   "units": [
+    "[softly] अंतिम साँसों में, बाली ने, उस भाई की ओर देखा,",
+    "जिसे उन्होंने, निकाल दिया था।"
+   ],
+   "cite": "4.22.1",
+   "link": true
+  },
+  {
+   "id": 77,
+   "act": 4,
+   "beat": "B15",
+   "voice": "vali",
+   "hi": "सुग्रीव, हम दोनों के भाग्य में, एक साथ सुख, नहीं लिखा था। ये राज्य, अब तुम्हारा है।",
+   "en": "\"Sugriva, fate never meant us to be happy together. This kingdom is yours now.\"",
+   "units": [
+    "[softly] सुग्रीव, हम दोनों के भाग्य में, एक साथ सुख, नहीं लिखा था।",
+    "ये राज्य, अब तुम्हारा है।"
+   ],
+   "cite": "4.22.4-4.22.5"
+  },
+  {
+   "id": 78,
+   "act": 4,
+   "beat": "B15",
+   "voice": "vali",
+   "hi": "अंगद को देखो। धरती पर पड़ा है, आँसुओं से भरा। अब इसकी रक्षा, तुम करना।",
+   "en": "\"Look at Angada, lying on the ground, full of tears. Now you must protect him.\"",
+   "units": [
+    "[sadly] अंगद को देखो। धरती पर पड़ा है, आँसुओं से भरा।",
+    "अब इसकी रक्षा, तुम करना।"
+   ],
+   "cite": "4.22.8-4.22.10"
+  },
+  {
+   "id": 79,
+   "act": 4,
+   "beat": "B15",
+   "voice": "vali",
+   "hi": "और तारा की बात, कभी गलत नहीं होती। जो वो कहे, वही करना।",
+   "en": "\"And Tara's judgement is never wrong. Whatever she says, do it.\"",
+   "units": [
+    "[softly] और तारा की बात, कभी गलत नहीं होती।",
+    "जो वो कहे, वही करना।"
+   ],
+   "cite": "4.22.13-4.22.14"
+  },
+  {
+   "id": 80,
+   "act": 4,
+   "beat": "B15",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: यदेषा साध्विति ब्रूयात् कार्यं तन्मुक्तसंशयम्… न हि तारामतं किं चिदन्यथा परिवर्तते॥ वही तारा, जिनकी सलाह, बाली ने, युद्ध से पहले, ठुकराई थी।",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] यदेषा साध्विति ब्रूयात् कार्यं तन्मुक्तसंशयम्… न हि तारामतं किं चिदन्यथा परिवर्तते॥",
+    "[thoughtfully] वही तारा, जिनकी सलाह, बाली ने, युद्ध से पहले, ठुकराई थी।"
+   ],
+   "cite": "4.22.14; 4.16.1-4.16.8",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.22.14 · CRITICAL EDITION",
+    "lines": [
+     "यदेषा साध्विति ब्रूयात् कार्यं तन्मुक्तसंशयम् ।",
+     "न हि तारामतं किं चिदन्यथा परिवर्तते ॥"
+    ],
+    "translit": "yadeṣā sādhviti brūyāt kāryaṃ tanmuktasaṃśayam, na hi tārāmataṃ kiṃ cidanyathā parivartate",
+    "en": "“Whatever she declares right, do it without doubt. Tara's judgement never turns out otherwise.”"
+   }
+  },
+  {
+   "id": 81,
+   "act": 4,
+   "beat": "B15",
+   "voice": "vali",
+   "hi": "और सुग्रीव, ये सोने की दिव्य माला, पहन लो। मेरे जाते ही, इसकी शोभा, चली जाएगी।",
+   "en": "\"And Sugriva, wear this divine golden garland. Its splendour would leave it when I die.\"",
+   "units": [
+    "[softly] और सुग्रीव, ये सोने की दिव्य माला, पहन लो।",
+    "मेरे जाते ही, इसकी शोभा, चली जाएगी।"
+   ],
+   "cite": "4.22.16"
+  },
+  {
+   "id": 82,
+   "act": 4,
+   "beat": "B15",
+   "voice": "narrator",
+   "hi": "वही सोने की माला। इंद्र की दी हुई। जिसने अब तक, बाली के प्राण थामे थे। अब, सुग्रीव के गले में।",
+   "en": "That same golden garland. Indra's gift. The one that had held Vali's life until now. Now around Sugriva's neck.",
+   "units": [
+    "[warmly] वही सोने की माला। इंद्र की दी हुई। जिसने अब तक, बाली के प्राण थामे थे।",
+    "[softly] अब, सुग्रीव के गले में।"
+   ],
+   "cite": "4.17.5; 4.22.18",
+   "unit_gap": 0.6,
+   "reveal": true
+  },
+  {
+   "id": 83,
+   "act": 4,
+   "beat": "B15",
+   "voice": "narrator",
+   "hi": "और सुग्रीव की खुशी, दुःख में बदल गई, जैसे ग्रहण में, चाँद।",
+   "en": "And Sugriva's joy turned to grief, like the moon in an eclipse.",
+   "units": [
+    "[softly] और सुग्रीव की खुशी, दुःख में बदल गई, जैसे ग्रहण में, चाँद।"
+   ],
+   "cite": "4.22.17"
+  },
+  {
+   "id": 84,
+   "act": 4,
+   "beat": "B16",
+   "voice": "vali",
+   "hi": "अंगद, सुख और दुःख, दोनों को सहना। सुग्रीव की आज्ञा में, रहना।",
+   "en": "\"Angada, bear both joy and sorrow. Stay obedient to Sugriva.\"",
+   "units": [
+    "[softly] अंगद, सुख और दुःख, दोनों को सहना।",
+    "सुग्रीव की आज्ञा में, रहना।"
+   ],
+   "cite": "4.22.20-4.22.22"
+  },
+  {
+   "id": 85,
+   "act": 4,
+   "beat": "B16",
+   "voice": "narrator",
+   "hi": "और ये कहकर, बाली ने, प्राण त्याग दिए।",
+   "en": "And saying this, Vali gave up his life.",
+   "units": [
+    "[softly] और ये कहकर, बाली ने, प्राण त्याग दिए।"
+   ],
+   "cite": "4.22.24",
+   "min": 3.2
+  },
+  {
+   "id": 86,
+   "act": 4,
+   "beat": "B16",
+   "voice": "narrator",
+   "hi": "तारा ने, अंगद से कहा: पिता को, प्रणाम करो।",
+   "en": "Tara said to Angada: salute your father.",
+   "units": [
+    "[softly] तारा ने, अंगद से कहा: पिता को, प्रणाम करो।"
+   ],
+   "cite": "4.23.23"
+  },
+  {
+   "id": 87,
+   "act": 4,
+   "beat": "B16",
+   "voice": "angada",
+   "hi": "पिताजी... मैं अंगद हूँ।",
+   "en": "\"Father... I am Angada.\"",
+   "units": [
+    "[softly] पिताजी... मैं अंगद हूँ।"
+   ],
+   "cite": "4.23.24",
+   "min": 3.0
+  },
+  {
+   "id": 88,
+   "act": 4,
+   "beat": "B16",
+   "voice": "tara",
+   "hi": "आज, पहले की तरह, ये क्यों नहीं कहते, कि बेटा, चिरंजीवी हो?",
+   "en": "\"Why don't you say today, as you always did: live long, my son?\"",
+   "units": [
+    "[sadly] आज, पहले की तरह, ये क्यों नहीं कहते,",
+    "कि बेटा, चिरंजीवी हो?"
+   ],
+   "cite": "4.23.25"
+  },
+  {
+   "id": 89,
+   "act": 4,
+   "beat": "B17",
+   "voice": "narrator",
+   "hi": "पहाड़ी नदी के एकांत तट पर, चिता बनी। अंगद और सुग्रीव ने, बाली को, चिता पर रखा।",
+   "en": "A pyre was built on a quiet sandbank of the mountain river. Angada and Sugriva laid Vali upon it.",
+   "units": [
+    "[softly] पहाड़ी नदी के एकांत तट पर, चिता बनी।",
+    "अंगद और सुग्रीव ने, बाली को, चिता पर रखा।"
+   ],
+   "cite": "4.24.30; 4.24.40"
+  },
+  {
+   "id": 90,
+   "act": 4,
+   "beat": "B17",
+   "voice": "narrator",
+   "hi": "और राम, सुग्रीव के दुःख में दुखी होकर, अंतिम संस्कार करवाते रहे।",
+   "en": "And Rama, sharing Sugriva's grief, saw the last rites through.",
+   "units": [
+    "[warmly] और राम, सुग्रीव के दुःख में दुखी होकर, अंतिम संस्कार करवाते रहे।"
+   ],
+   "cite": "4.24.44"
+  },
+  {
+   "id": 91,
+   "act": 4,
+   "beat": "B17",
+   "voice": "narrator",
+   "hi": "सुग्रीव राजा बने, और अंगद, युवराज। पर राम, नगर में नहीं गए। पिता की आज्ञा थी: चौदह वर्ष, किसी नगर में, प्रवेश नहीं।",
+   "en": "Sugriva became king, and Angada crown prince. But Rama did not enter the city: by his father's command, he would enter no town for fourteen years.",
+   "units": [
+    "[thoughtfully] सुग्रीव राजा बने, और अंगद, युवराज।",
+    "पर राम, नगर में नहीं गए। पिता की आज्ञा थी: चौदह वर्ष, किसी नगर में, प्रवेश नहीं।"
+   ],
+   "cite": "4.25.9-4.25.11; 4.25.33-4.25.35"
+  },
+  {
+   "id": 92,
+   "act": 4,
+   "beat": "B17",
+   "voice": "narrator",
+   "hi": "और वर्षा ऋतु, शुरू हो गई।",
+   "en": "And the rains began.",
+   "units": [
+    "[softly] और वर्षा ऋतु, शुरू हो गई।"
+   ],
+   "cite": "4.25.12",
+   "min": 2.6
+  },
+  {
+   "id": 93,
+   "act": 4,
+   "beat": "B18",
+   "voice": "narrator",
+   "hi": "गोस्वामी तुलसीदास जी की रामचरितमानस में भी, ये प्रसंग है। वहाँ बाली कहते हैं: धर्म हेतु अवतरेहु गोसाई… मारेहु मोहि ब्याध की नाईं॥",
+   "en": "",
+   "units": [
+    "[thoughtfully] गोस्वामी तुलसीदास जी की रामचरितमानस में भी, ये प्रसंग है। वहाँ बाली कहते हैं:",
+    "[softly] धर्म हेतु अवतरेहु गोसाई… मारेहु मोहि ब्याध की नाईं॥"
+   ],
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "RAMCHARITMANAS · GOSWAMI TULSIDAS",
+    "ref": "KISHKINDHA KAND · BEFORE DOHA 9",
+    "lines": [
+     "धर्म हेतु अवतरेहु गोसाई। मारेहु मोहि ब्याध की नाईं।।"
+    ],
+    "translit": "dharma hetu avatarehu gosāī, mārehu mohi byādha kī nāīṃ",
+    "en": "“Lord, you came down for the sake of dharma, yet you killed me like a hunter.”"
+   }
+  },
+  {
+   "id": 94,
+   "act": 4,
+   "beat": "B18",
+   "voice": "narrator",
+   "hi": "और राम का उत्तर: अनुज बधू भगिनी सुत नारी… सुनु सठ कन्या सम ए चारी॥",
+   "en": "",
+   "units": [
+    "[thoughtfully] और राम का उत्तर:",
+    "[softly] अनुज बधू भगिनी सुत नारी… सुनु सठ कन्या सम ए चारी॥"
+   ],
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "RAMCHARITMANAS · GOSWAMI TULSIDAS",
+    "ref": "KISHKINDHA KAND · BEFORE DOHA 9",
+    "lines": [
+     "अनुज बधू भगिनी सुत नारी। सुनु सठ कन्या सम ए चारी।।"
+    ],
+    "translit": "anuja badhū bhaginī suta nārī, sunu saṭha kanyā sama e cārī",
+    "en": "“A younger brother's wife, a sister, a son's wife and a daughter: hear, O fool, these four are alike.”"
+   }
+  },
+  {
+   "id": 95,
+   "act": 4,
+   "beat": "B18",
+   "voice": "narrator",
+   "hi": "मानस में, राम, बाली को जीवन देने की बात भी कहते हैं: अचल करौं तनु राखहु प्राना… और बाली, प्रभु के सामने ही, शरीर छोड़ना चुनते हैं।",
+   "en": "",
+   "units": [
+    "[thoughtfully] मानस में, राम, बाली को जीवन देने की बात भी कहते हैं:",
+    "[softly] अचल करौं तनु राखहु प्राना…",
+    "[thoughtfully] और बाली, प्रभु के सामने ही, शरीर छोड़ना चुनते हैं।"
+   ],
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "RAMCHARITMANAS · GOSWAMI TULSIDAS",
+    "ref": "KISHKINDHA KAND · BEFORE DOHA 10",
+    "lines": [
+     "अचल करौं तनु राखहु प्राना। बालि कहा सुनु कृपानिधाना।।"
+    ],
+    "translit": "acala karauṃ tanu rākhahu prānā, bāli kahā sunu kṛpānidhānā",
+    "en": "“I will make your body whole; keep your life.” Vali said: “Hear me, O treasure of mercy.”"
+   }
+  },
+  {
+   "id": 96,
+   "act": 4,
+   "beat": "B18",
+   "voice": "narrator",
+   "hi": "वाल्मीकि में, ऐसा कोई प्रस्ताव नहीं है। वहाँ बाली, जाते-जाते, सोने की माला, अपने भाई को दे जाते हैं। दोनों कथाएँ, भक्ति से कही गई हैं।",
+   "en": "In Valmiki there is no such offer. There, Vali, as he goes, gives the golden garland to his brother. Both tellings are told with devotion.",
+   "units": [
+    "[warmly] वाल्मीकि में, ऐसा कोई प्रस्ताव नहीं है।",
+    "वहाँ बाली, जाते-जाते, सोने की माला, अपने भाई को दे जाते हैं।",
+    "[softly] दोनों कथाएँ, भक्ति से कही गई हैं।"
+   ],
+   "cite": "4.17-4.22; 4.22.16",
+   "unit_gap": 0.45
+  },
+  {
+   "id": 97,
+   "act": 4,
+   "beat": "B18",
+   "voice": "narrator",
+   "hi": "वाल्मीकि ने, बाली का आरोप भी पूरा लिखा, और राम का उत्तर भी। आपको कौन-सा तर्क, सबसे भारी लगता है? कमेंट में, ज़रूर बताइए।",
+   "en": "Valmiki wrote down Vali's accusation in full, and Rama's answer too. Which argument weighs most for you? Tell us in the comments.",
+   "units": [
+    "[thoughtfully] वाल्मीकि ने, बाली का आरोप भी पूरा लिखा, और राम का उत्तर भी।",
+    "आपको कौन-सा तर्क, सबसे भारी लगता है? कमेंट में, ज़रूर बताइए।"
+   ],
+   "cite": "4.17; 4.18"
+  },
+  {
+   "id": 98,
+   "act": 4,
+   "beat": "B18",
+   "voice": "narrator",
+   "hi": "रामायण की ऐसी और अनसुनी कहानियों के लिए, सब्सक्राइब करें।",
+   "en": "",
+   "units": [
+    "[warmly] रामायण की ऐसी और अनसुनी कहानियों के लिए, सब्सक्राइब करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.9,
+   "min": 3.7,
+   "cta": true,
+   "hi_youtube": "रामायण की ऐसी और अनसुनी कहानियों के लिए, सब्सक्राइब करें।"
+  }
+ ]
+}

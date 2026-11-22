@@ -1,0 +1,354 @@
+{
+ "series": "untold-ramayana",
+ "fps": 24,
+ "source": "Valmiki Ramayana, Critical Edition, Kishkindha Kanda 4.5, 4.9-4.25; Ramcharitmanas, Kishkindha Kand (dohas 7-11)",
+ "unit_gap": 0.38,
+ "avoid": [
+  "No verdict on Rama; present Vali's accusation and Rama's answer as the text gives them",
+  "No 'half strength' boon (not in 4.5-4.25; Uttara unread)",
+  "Tulsidas named with respect: both told with devotion"
+ ],
+ "verify_note": "Every line cites CE Kishkindha; character lines are close Hindi renderings of the cited verses. Vali's line 'what merit...' is 4.17.13; Rama's hunting answer is 4.18.34-36.",
+ "reel": "A36",
+ "title": "Tara Warned Vali",
+ "status": "scripted",
+ "frame": "tall_from_wide",
+ "derived_from": "LF01",
+ "source_card": {
+  "kanda": "KISHKINDHA KANDA",
+  "sarga": "SARGA 17"
+ },
+ "claims": [
+  {
+   "claim": "Sugriva roared again at the gates of Kishkindha. Vali, in the inner palace, rose in anger.",
+   "ref": "Valmiki Ramayana CE 4.14.18; 4.15.1-4.15.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "But one person saw the danger. Vali's queen, Tara.",
+   "ref": "Valmiki Ramayana CE 4.15.6",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"The brother who fled in defeat is roaring again so soon. He has not come alone.\"",
+   "ref": "Valmiki Ramayana CE 4.15.9-4.15.12",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"I have heard it from Angada. His friend is Shri Rama: the refuge of the distressed, protector of all who come to him.\"",
+   "ref": "Valmiki Ramayana CE 4.15.14-4.15.16",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"My hero, make Sugriva crown prince. Give up this feud with your brother.\"",
+   "ref": "Valmiki Ramayana CE 4.15.20-4.15.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Rama knows dharma. He is grateful. How could he do a sinful thing?\"",
+   "ref": "Valmiki Ramayana CE 4.16.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Vali swore Tara back by his own life. In tears, she walked around him, chanted prayers for his victory, and went inside.",
+   "ref": "Valmiki Ramayana CE 4.16.8-4.16.10",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Then Rama set an arrow like a venomous serpent to his bow, and struck Vali in the chest.",
+   "ref": "Valmiki Ramayana CE 4.16.25",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"And Tara's judgement is never wrong. Whatever she says, do it.\"",
+   "ref": "Valmiki Ramayana CE 4.22.13-4.22.14",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  }
+ ],
+ "score": {
+  "engine": "excerpt of the wide production's score",
+  "file": "audio/score.wav",
+  "gain": 1.5,
+  "duck": 0.72
+ },
+ "thumbnail": {
+  "hook": "SHE WARNED HIM.",
+  "stamp": "VALMIKI 4.15",
+  "line": "Tara's counsel, and Vali's reply",
+  "badge": "KISHKINDHA 4.15-16",
+  "frame": "4.2s"
+ },
+ "caption": "Before Vali went out to fight, his queen Tara held him back: Sugriva has not come alone; his ally is Rama; make Sugriva crown prince and end the feud (Valmiki Ramayana 4.15). Vali's answer: \"Rama knows dharma; how could he do wrong?\" (4.16.5). As he died, Vali told Sugriva: Tara's judgement never fails (4.22.14).",
+ "youtube_title": "Tara Warned Vali Before His Last Fight (Valmiki Ramayana) #shorts",
+ "hashtags": [
+  "#Ramayana",
+  "#ValmikiRamayana",
+  "#Vali",
+  "#Rama",
+  "#Sugriva",
+  "#Kishkindha",
+  "#UntoldGranth",
+  "#Tara"
+ ],
+ "comment_prompt": "Should Vali have listened to Tara?",
+ "shots": [
+  {
+   "voice": "narrator",
+   "hi": "युद्ध से पहले, बाली को, एक चेतावनी मिली थी। और वो चेतावनी, उनकी रानी तारा ने दी थी।",
+   "en": "Before the duel, Vali was warned. And the warning came from his queen, Tara.",
+   "units": [
+    "[serious] युद्ध से पहले, बाली को, एक चेतावनी मिली थी।",
+    "[thoughtfully] और वो चेतावनी, उनकी रानी तारा ने दी थी।"
+   ],
+   "card": [
+    [
+     "SHE WARNED HIM.",
+     null
+    ],
+    [
+     "HE DIDN'T LISTEN.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "4.15.6-4.15.23",
+   "lead": 0.3,
+   "tail": 0.4,
+   "min": 2.8,
+   "id": 1,
+   "art_from": 39
+  },
+  {
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सोलह। न च कार्यो विषादस्ते राघवं प्रति मत्कृते । धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति ॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सोलह।",
+    "[with deep devotion] [chanting] न च कार्यो विषादस्ते राघवं प्रति मत्कृते… धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "cite": "4.16.5",
+   "art_from": 2,
+   "sloka": {
+    "lines": [
+     "न च कार्यो विषादस्ते राघवं प्रति मत्कृते ।",
+     "धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति ॥"
+    ],
+    "ref": "KISHKINDHA KANDA 4.16.5",
+    "en": "“Do not grieve for me on Raghava's account. He knows dharma and he is grateful: how could he do a sinful thing?”",
+    "translit": "na ca kāryo viṣādaste rāghavaṃ prati matkṛte, dharmajñaśca kṛtajñaśca kathaṃ pāpaṃ kariṣyati"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly] न च कार्यो विषादस्ते राघवं प्रति मत्कृते… धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति॥",
+    "t2": "[with deep devotion] [chanting] न च कार्यो विषादस्ते राघवं प्रति मत्कृते… धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति॥",
+    "t3": "[solemnly] [expressively] न च कार्यो विषादस्ते राघवं प्रति मत्कृते… धर्मज्ञश्च कृतज्ञश्च कथं पापं करिष्यति॥"
+   },
+   "id": 2,
+   "force_take": {
+    "1": 1
+   },
+   "sloka_pick": "t1 [reverently] [slowly]: ~4.3 st movement, calm median ~112 Hz, words intact; t3 moved most but peaked above 200 Hz"
+  },
+  {
+   "id": 3,
+   "beat": "B07",
+   "voice": "narrator",
+   "hi": "सुग्रीव ने, दोबारा, किष्किन्धा के द्वार पर गर्जना की। अंतःपुर में बैठे बाली, क्रोध से उठ खड़े हुए।",
+   "en": "Sugriva roared again at the gates of Kishkindha. Vali, in the inner palace, rose in anger.",
+   "units": [
+    "[serious] सुग्रीव ने, दोबारा, किष्किन्धा के द्वार पर गर्जना की।",
+    "अंतःपुर में बैठे बाली, क्रोध से उठ खड़े हुए।"
+   ],
+   "cite": "4.14.18; 4.15.1-4.15.5",
+   "art_from": 35
+  },
+  {
+   "id": 4,
+   "beat": "B07",
+   "voice": "narrator",
+   "hi": "पर एक व्यक्ति ने, ख़तरा पहचान लिया। बाली की रानी, तारा।",
+   "en": "But one person saw the danger. Vali's queen, Tara.",
+   "units": [
+    "[thoughtfully] पर एक व्यक्ति ने, ख़तरा पहचान लिया।",
+    "बाली की रानी, तारा।"
+   ],
+   "cite": "4.15.6",
+   "unit_gap": 0.5,
+   "art_from": 36
+  },
+  {
+   "id": 5,
+   "beat": "B07",
+   "voice": "tara",
+   "hi": "जो भाई, हारकर भागा था, वो इतनी जल्दी, फिर गरज रहा है। वो अकेला नहीं आया है।",
+   "en": "\"The brother who fled in defeat is roaring again so soon. He has not come alone.\"",
+   "units": [
+    "[gently] जो भाई, हारकर भागा था, वो इतनी जल्दी, फिर गरज रहा है।",
+    "वो अकेला नहीं आया है।"
+   ],
+   "cite": "4.15.9-4.15.12",
+   "art_from": 37
+  },
+  {
+   "id": 6,
+   "beat": "B07",
+   "voice": "tara",
+   "hi": "मैंने अंगद से सुना है। उसके मित्र, श्रीराम हैं। दुखियों का सहारा, शरणागत के रक्षक।",
+   "en": "\"I have heard it from Angada. His friend is Shri Rama: the refuge of the distressed, protector of all who come to him.\"",
+   "units": [
+    "[serious] मैंने अंगद से सुना है। उसके मित्र, श्रीराम हैं।",
+    "दुखियों का सहारा, शरणागत के रक्षक।"
+   ],
+   "cite": "4.15.14-4.15.16",
+   "art_from": 38
+  },
+  {
+   "id": 7,
+   "beat": "B07",
+   "voice": "tara",
+   "hi": "हे वीर, सुग्रीव को युवराज बना दीजिए। अपने भाई से, ये वैर छोड़ दीजिए।",
+   "en": "\"My hero, make Sugriva crown prince. Give up this feud with your brother.\"",
+   "units": [
+    "[gently] हे वीर, सुग्रीव को युवराज बना दीजिए।",
+    "अपने भाई से, ये वैर छोड़ दीजिए।"
+   ],
+   "cite": "4.15.20-4.15.22",
+   "art_from": 39
+  },
+  {
+   "id": 8,
+   "beat": "B07",
+   "voice": "narrator",
+   "hi": "बाली का उत्तर, इस पूरे प्रसंग की, सबसे भारी पंक्ति है।",
+   "en": "Vali's reply is the heaviest line in this whole episode.",
+   "units": [
+    "[thoughtfully] बाली का उत्तर, इस पूरे प्रसंग की, सबसे भारी पंक्ति है।"
+   ],
+   "link": true,
+   "art_from": 40
+  },
+  {
+   "id": 9,
+   "beat": "B08",
+   "voice": "vali",
+   "hi": "राम, धर्म को जानते हैं। कृतज्ञ हैं। वो पाप, कैसे करेंगे?",
+   "en": "\"Rama knows dharma. He is grateful. How could he do a sinful thing?\"",
+   "units": [
+    "[serious] राम, धर्म को जानते हैं। कृतज्ञ हैं।",
+    "वो पाप, कैसे करेंगे?"
+   ],
+   "cite": "4.16.5",
+   "reveal": true,
+   "art_from": 41
+  },
+  {
+   "id": 10,
+   "beat": "B08",
+   "voice": "narrator",
+   "hi": "बाली ने, अपने प्राणों की शपथ देकर, तारा को लौटा दिया। तारा ने, आँसुओं के साथ, उनकी परिक्रमा की, विजय के लिए मंत्र पढ़े, और भीतर चली गईं।",
+   "en": "Vali swore Tara back by his own life. In tears, she walked around him, chanted prayers for his victory, and went inside.",
+   "units": [
+    "[softly] बाली ने, अपने प्राणों की शपथ देकर, तारा को लौटा दिया।",
+    "तारा ने, आँसुओं के साथ, उनकी परिक्रमा की, विजय के लिए मंत्र पढ़े, और भीतर चली गईं।"
+   ],
+   "cite": "4.16.8-4.16.10",
+   "art_from": 43
+  },
+  {
+   "id": 11,
+   "beat": "B09",
+   "voice": "narrator",
+   "hi": "तभी, राम ने, विषधर सर्प जैसा बाण, धनुष पर चढ़ाया, और बाली की छाती में मारा।",
+   "en": "Then Rama set an arrow like a venomous serpent to his bow, and struck Vali in the chest.",
+   "units": [
+    "[serious] तभी, राम ने, विषधर सर्प जैसा बाण, धनुष पर चढ़ाया,",
+    "और बाली की छाती में मारा।"
+   ],
+   "cite": "4.16.25",
+   "reveal": true,
+   "art_from": 46
+  },
+  {
+   "id": 12,
+   "beat": "B15",
+   "voice": "vali",
+   "hi": "और तारा की बात, कभी गलत नहीं होती। जो वो कहे, वही करना।",
+   "en": "\"And Tara's judgement is never wrong. Whatever she says, do it.\"",
+   "units": [
+    "[softly] और तारा की बात, कभी गलत नहीं होती।",
+    "जो वो कहे, वही करना।"
+   ],
+   "cite": "4.22.13-4.22.14",
+   "art_from": 79
+  },
+  {
+   "id": 13,
+   "beat": "B15",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: यदेषा साध्विति ब्रूयात् कार्यं तन्मुक्तसंशयम्… न हि तारामतं किं चिदन्यथा परिवर्तते॥ वही तारा, जिनकी सलाह, बाली ने, युद्ध से पहले, ठुकराई थी।",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] यदेषा साध्विति ब्रूयात् कार्यं तन्मुक्तसंशयम्… न हि तारामतं किं चिदन्यथा परिवर्तते॥",
+    "[thoughtfully] वही तारा, जिनकी सलाह, बाली ने, युद्ध से पहले, ठुकराई थी।"
+   ],
+   "cite": "4.22.14; 4.16.1-4.16.8",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.22.14 · CRITICAL EDITION",
+    "lines": [
+     "यदेषा साध्विति ब्रूयात् कार्यं तन्मुक्तसंशयम् ।",
+     "न हि तारामतं किं चिदन्यथा परिवर्तते ॥"
+    ],
+    "translit": "yadeṣā sādhviti brūyāt kāryaṃ tanmuktasaṃśayam, na hi tārāmataṃ kiṃ cidanyathā parivartate",
+    "en": "“Whatever she declares right, do it without doubt. Tara's judgement never turns out otherwise.”"
+   },
+   "art_from": 80
+  },
+  {
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true,
+   "id": 14,
+   "art_from": 98
+  }
+ ]
+}

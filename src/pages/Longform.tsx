@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import { CheckCircle2, Circle } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
-import { Card, ErrorNote, SectionTitle, Spinner, StageBadge } from "../components/ui";
+import { Card, CopyButton, ErrorNote, SectionTitle, Spinner, StageBadge } from "../components/ui";
 import { mediaUrl } from "../lib/api";
 import { supabase } from "../lib/supabase";
 import type { Stage } from "../lib/types";
@@ -22,6 +22,7 @@ type Plan = {
   characters_needed?: { key: string; tier: string; status: string }[];
   progress?: { step: string; done: boolean }[];
   budget?: Record<string, unknown>;
+  thumb_path?: string | null; youtube_description?: string | null; length?: string; master?: string;
 };
 type Row = { id: string; code: string; title: string; subtitle: string | null; stage: string; plan: Plan; preview_path: string | null; updated_at: string };
 
@@ -66,6 +67,7 @@ const Header = () => (
 function Detail({ row, many }: { row: Row; many: boolean }) {
   const p = row.plan;
   const preview = useQuery({ enabled: !!row.preview_path, queryKey: ["media-path", row.preview_path], queryFn: () => mediaUrl({ store: "supabase", path: row.preview_path!, url: null }) });
+  const thumb = useQuery({ enabled: !!p.thumb_path, queryKey: ["media-path", p.thumb_path], queryFn: () => mediaUrl({ store: "supabase", path: p.thumb_path!, url: null }) });
   const beatTitle = Object.fromEntries((p.acts ?? []).flatMap((a) => a.beats).map((b) => [b.id, b.title]));
   const done = (p.progress ?? []).filter((s) => s.done).length;
   return (
@@ -75,10 +77,16 @@ function Detail({ row, many }: { row: Row; many: boolean }) {
         <div className="mt-1 flex flex-wrap items-center gap-3"><span className="font-mono text-sm">{row.code}</span><StageBadge stage={row.stage as Stage} /><span className="text-xs text-ink-soft dark:text-parchment/50">updated {new Date(row.updated_at).toLocaleString()}</span></div>
         <h1 className="mt-1 font-display text-3xl font-extrabold tracking-wide">{p.title}</h1>
         {p.subtitle && <p className="mt-1 max-w-3xl text-ink-soft dark:text-parchment/70">{p.subtitle}</p>}
-        <p className="mt-2 text-sm text-ink-soft dark:text-parchment/60">{[p.frame, p.target_min && `${p.target_min} min`].filter(Boolean).join(" · ")}</p>
+        <p className="mt-2 text-sm text-ink-soft dark:text-parchment/60">{[p.length ? `${p.length} long` : null, p.frame, !p.length && p.target_min ? `${p.target_min} min` : null].filter(Boolean).join(" · ")}</p>
       </div>
 
-      {preview.data && <Card><SectionTitle>Preview</SectionTitle><video controls src={preview.data} className="aspect-video w-full rounded-xl bg-black" /></Card>}
+      {preview.data && <Card><SectionTitle>Preview (review copy, 480p)</SectionTitle><video controls src={preview.data} className="aspect-video w-full rounded-xl bg-black" />{p.master && <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Upload master: {p.master}</p>}</Card>}
+      {(thumb.data || p.youtube_description) && (
+        <div className="grid gap-6 xl:grid-cols-2">
+          {thumb.data && <Card><SectionTitle>YouTube thumbnail</SectionTitle><img src={thumb.data} alt="Wide YouTube thumbnail" className="aspect-video w-full rounded-xl" /></Card>}
+          {p.youtube_description && <Card><SectionTitle right={<CopyButton text={p.youtube_description} label="Copy" />}>YouTube description + chapters</SectionTitle><pre className="max-h-96 overflow-auto whitespace-pre-wrap text-sm">{p.youtube_description}</pre></Card>}
+        </div>
+      )}
 
       <div className="grid gap-6 xl:grid-cols-2">
         <Card>

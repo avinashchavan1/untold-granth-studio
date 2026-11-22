@@ -8,14 +8,16 @@ const LAYERS = [path.join(REEL, 'src'), path.join(SERIES, 'art'), path.join(ENGI
 const resolve = u => { const [, dir, ...rest] = u.split('/'); const name = rest.join('/'); const roots = dir === 'fonts' ? FONTS : dir === 'x' ? LAYERS : [];
   for (const r of roots) { const f = path.join(r, name); if (f.startsWith(r) && fs.existsSync(f)) return f; } return null; };
 fs.mkdirSync(path.join(REEL, 'frames'), { recursive: true });
+const SCRIPT_ = (() => { try { return JSON.parse(fs.readFileSync(path.join(REEL, 'src', 'script.json'), 'utf8')); } catch (e) { return {}; } })();
+const FRAME = process.env.FRAME || SCRIPT_.frame || 'tall';   // tall | wide | tall_from_wide (see core.js)
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.ttf': 'font/ttf', '.png': 'image/png' };
 (async () => {
   const srv = http.createServer((q, s) => { const u = decodeURIComponent(q.url.split('?')[0]);
-    if (u === '/x/series.js') { s.writeHead(200, { 'Content-Type': 'text/javascript' }); s.end('const SERIES = ' + fs.readFileSync(path.join(SERIES, 'series.json'), 'utf8') + ';\nconst PLATFORM = ' + JSON.stringify(process.env.PLATFORM || 'instagram') + ';'); return; }
+    if (u === '/x/series.js') { s.writeHead(200, { 'Content-Type': 'text/javascript' }); s.end('const SERIES = ' + fs.readFileSync(path.join(SERIES, 'series.json'), 'utf8') + ';\nconst PLATFORM = ' + JSON.stringify(process.env.PLATFORM || 'instagram') + ';\nconst FRAME = ' + JSON.stringify(FRAME) + ';'); return; }
     if (u === '/x/timeline.json' && process.env.TIMELINE) { s.writeHead(200, { 'Content-Type': 'application/json' }); s.end(fs.readFileSync(path.join(REEL, 'src', process.env.TIMELINE))); return; }   // short cut
     const f = resolve(u); if (!f) { s.writeHead(404); s.end(); return; } fs.readFile(f, (e, d) => { if (e) { s.writeHead(404); s.end(); return; } s.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream' }); s.end(d); }); });
   await new Promise(r => srv.listen(0, '127.0.0.1', r)); const port = srv.address().port;
-  const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 } });
+  const br = await chromium.launch(); const pg = await br.newPage({ viewport: FRAME === 'wide' ? { width: 1920, height: 1080 } : { width: 1080, height: 1920 } });
   pg.on('console', m => console.log('[page]', m.text())); pg.on('pageerror', e => console.log('[pageerror]', e.message, e.stack));
   await pg.goto(`http://127.0.0.1:${port}/x/index.html`); await pg.waitForFunction('window.READY===true', null, { timeout: 180000 });
   const mode = process.argv[2];

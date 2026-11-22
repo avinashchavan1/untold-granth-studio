@@ -93,8 +93,8 @@ def draft(reel):
     for sh in s["shots"]:
         sp = len(re.sub(r"[\s,।?!…]", "", sh["hi"])) / 11.0 if sh.get("voice") else 0.0      # Rudra's dramatic pace ~11 chars/s
         d = round(max(sh.get("min", 0), sh.get("lead", 0.3) + sp + sh.get("tail", 0.3)) * 24) / 24
-        shots.append({**{k: sh[k] for k in ("id", "voice", "en", "hi", "card", "label", "scene", "cite") if k in sh}, "start": round(t, 4), "dur": d, "vStart": round(t + sh.get("lead", 0.3), 4), "speech": round(sp, 3), "sent": [0.0]}); t += d
-    json.dump({"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "reel": s["reel"], "draft": True}, open(os.path.join(reel, "src", "timeline.json"), "w"), ensure_ascii=False, indent=1)
+        shots.append({**{k: sh[k] for k in ("id", "voice", "en", "hi", "card", "label", "scene", "cite", "quote", "sloka", "act", "beat", "link", "units", "cta", "reveal", "art_from") if k in sh}, "start": round(t, 4), "dur": d, "vStart": round(t + sh.get("lead", 0.3), 4), "speech": round(sp, 3), "sent": [0.0]}); t += d
+    json.dump({"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "acts": s.get("acts"), "frame": s.get("frame", "tall"), "reel": s["reel"], "draft": True}, open(os.path.join(reel, "src", "timeline.json"), "w"), ensure_ascii=False, indent=1)
     print(f"draft timeline {t:.1f}s")
 
 def sheet(reel):
@@ -154,9 +154,9 @@ def draft_timeline(reel):
         sent, acc = [], 0.0
         for i, L in enumerate(lens): sent.append(round(acc, 3)); acc += L + (sh.get("unit_gap", 0.35) if i < len(lens) - 1 else 0)
         lead, tail = sh.get("lead", 0.25), sh.get("tail", 0.3); dur = max(sh.get("min", 0), lead + acc + tail)
-        shots.append({k: sh[k] for k in ("id", "voice", "en", "hi", "card", "quote", "cta") if k in sh} | {"env": [], "sent": sent, "start": round(t, 4), "dur": round(dur, 4), "vStart": round(t + lead, 4), "aStart": round(t + lead, 4), "speech": round(acc, 3)})
+        shots.append({k: sh[k] for k in ("id", "voice", "en", "hi", "card", "label", "scene", "cite", "quote", "sloka", "act", "beat", "link", "units", "cta", "reveal", "art_from") if k in sh} | {"env": [], "sent": sent, "start": round(t, 4), "dur": round(dur, 4), "vStart": round(t + lead, 4), "aStart": round(t + lead, 4), "speech": round(acc, 3)})
         t += dur
-    tl = {"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "reel": s["reel"], "draft": True}
+    tl = {"fps": 24, "shots": shots, "total": round(t, 4), "source_card": s.get("source_card"), "acts": s.get("acts"), "frame": s.get("frame", "tall"), "reel": s["reel"], "draft": True}
     json.dump(tl, open(os.path.join(reel, "src", "timeline.json"), "w"), ensure_ascii=False); print(f"draft timeline {t:.1f}s (estimated; `pick` writes the real one)")
 
 # ---- resumable renders: a finished piece gets <file>.done holding a stamp of its inputs; a re-run skips it while the stamp matches
@@ -199,6 +199,12 @@ def render(reel):
     if not os.path.exists(os.path.join(reel, "audio", "mix.wav")): audio(reel)
     stamp = _stamp(reel); ch = _chunks(nf)
     rid = json.load(open(os.path.join(reel, "src", "script.json")))["reel"]; final = f"{out}/{rid}_final.mp4"
+    if json.load(open(os.path.join(reel, "src", "script.json"))).get("frame") == "wide":   # full-length 16:9: one lossless render -> YouTube 4K master -> preview
+        if not _done(final, stamp):
+            yt = master(reel)
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", yt, "-vf", "scale=1920:1080:flags=lanczos,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "23", "-maxrate", "4500k", "-bufsize", "9000k",
+                            "-g", "48", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", final], check=True); _mark(final, stamp)
+        print("FINAL", final); return
     if _done(final, stamp):                                  # preview already made for these exact inputs: go straight to the masters
         master(reel); print("FINAL", final); return
     names = [f"{out}/seg{i:02d}.mp4" for i in range(len(ch))]
@@ -259,6 +265,17 @@ def master(reel, short=False):
     # every chunk once (Instagram's FOLLOW end card); the chunks holding the end card again for YouTube (SUBSCRIBE)
     cta = next((s_ for s_ in tl["shots"] if s_.get("cta")), tl["shots"][-1]); cta_f = int(cta["start"] * 24)
     ch = _chunks(nf); stamp = _stamp(reel)
+    if json.load(open(os.path.join(reel, "src", "script.json"))).get("frame") == "wide":   # full-length 16:9 is YouTube only: every chunk once (SUBSCRIBE), 3840x2160 master
+        names = [f"{tmp}/w{i:02d}.mkv" for i in range(len(ch))]; yt = f"{out}/{rid}_YOUTUBE_MASTER.mp4"
+        json.dump({"lossless": [os.path.basename(n) for n in names], "frames": {os.path.basename(n): b_ - a_ for n, (a_, b_) in zip(names, ch)}}, open(f"{tmp}/plan.json", "w"))
+        _run_chunks([(n, a_, b_, dict(env("youtube"), LOSSLESS="0"), n[:-4] + ".log") for n, (a_, b_) in zip(names, ch)], stamp)   # CRF 15 chunks: lossless 14 min of 1080p would not fit the disk
+        open(f"{tmp}/list.txt", "w").write("".join(f"file '{os.path.basename(n)}'\n" for n in names))
+        mix = os.path.join(reel, "audio", "mix_youtube.wav"); mix = mix if os.path.exists(mix) else os.path.join(reel, "audio", "mix.wav")
+        if not _done(yt, stamp): subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt", "-i", mix, "-map", "0:v", "-map", "1:a",
+                        "-vf", "scale=3840:2160:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "medium", "-crf", "16", "-tune", "grain", "-profile:v", "high", "-level:v", "5.2",
+                        "-g", "48", "-bf", "2", "-af", "alimiter=limit=0.80:attack=3:release=60:level=disabled", "-ar", "48000", "-ac", "2", "-c:a", "aac", "-b:a", "384k",
+                        "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", "-shortest", yt], check=True)
+        _mark(yt, stamp); print("MASTER", yt, f"{os.path.getsize(yt) / 1e6:.0f} MB"); subprocess.run(["rm", "-rf", tmp]); return yt
     ig_names = [f"{tmp}/k{i:02d}.mkv" for i in range(len(ch))]
     yt_names = [f"{tmp}/k{i:02d}_youtube.mkv" if b_ > cta_f else ig_names[i] for i, (a_, b_) in enumerate(ch)]
     jobs = [(n, a_, b_, env("instagram"), n[:-4] + ".log") for n, (a_, b_) in zip(ig_names, ch)]

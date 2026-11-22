@@ -21,3 +21,6 @@ studio/**/audio/pick_log.txt
 studio/**/audio/pick.out
 studio/**/audio/*.log
 studio/series/untold-ramayana/cast/audition/
+studio/**/audio/score.wav
+studio/**/audio/score_acts/
+studio/**/audio/music_sample*.mp3

@@ -1,0 +1,312 @@
+{
+ "series": "untold-ramayana",
+ "fps": 24,
+ "source": "Valmiki Ramayana, Critical Edition, Kishkindha Kanda 4.5, 4.9-4.25; Ramcharitmanas, Kishkindha Kand (dohas 7-11)",
+ "unit_gap": 0.38,
+ "avoid": [
+  "No verdict on Rama; present Vali's accusation and Rama's answer as the text gives them",
+  "No 'half strength' boon (not in 4.5-4.25; Uttara unread)",
+  "Tulsidas named with respect: both told with devotion"
+ ],
+ "verify_note": "Every line cites CE Kishkindha; character lines are close Hindi renderings of the cited verses. Vali's line 'what merit...' is 4.17.13; Rama's hunting answer is 4.18.34-36.",
+ "reel": "A35",
+ "title": "Why Rama Shot Vali From Hiding: His Own Answer",
+ "status": "scripted",
+ "frame": "tall_from_wide",
+ "derived_from": "LF01",
+ "source_card": {
+  "kanda": "KISHKINDHA KANDA",
+  "sarga": "SARGA 17"
+ },
+ "claims": [
+  {
+   "claim": "\"Had you fought me face to face, today you would have met Yama. You struck from hiding, like a snake biting a sleeping man.\"",
+   "ref": "Valmiki Ramayana CE 4.17.39-4.17.40",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And at the end, Vali himself grants that Sugriva should have the kingdom. But that he was killed by adharma, that is not right.",
+   "ref": "Valmiki Ramayana CE 4.17.43",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"And this is the reason you were slain: Sugriva still lives, and you live with his wife, Ruma.\"",
+   "ref": "Valmiki Ramayana CE 4.18.18-4.18.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Men catch animals with nets and snares, hidden or in the open, whether they flee or stand still.\"",
+   "ref": "Valmiki Ramayana CE 4.18.34-4.18.35",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"Royal sages hunt too. And you are a shakhamriga, a creature of the forest. So, fighting or not fighting, you fell to my arrow.\"",
+   "ref": "Valmiki Ramayana CE 4.18.36",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  }
+ ],
+ "score": {
+  "engine": "excerpt of the wide production's score",
+  "file": "audio/score.wav",
+  "gain": 1.5,
+  "duck": 0.72
+ },
+ "thumbnail": {
+  "hook": "WHY FROM HIDING?",
+  "stamp": "VALMIKI 4.18",
+  "line": "Rama's own answer, word for word",
+  "badge": "KISHKINDHA 4.17-18",
+  "frame": "30s"
+ },
+ "caption": "Vali, struck from hiding, asked Rama: what merit is there in striking one whose face was turned away? (Valmiki Ramayana 4.17.13). Valmiki also records Rama's answer: the law of Bharata's kingdom, the wrong done to Sugriva's wife Ruma (4.18.18), and why from hiding (4.18.34-36). Both sides, in Valmiki's own words. Full 14-min video on our YouTube.",
+ "youtube_title": "Why Did Rama Shoot Vali From Hiding? Rama's Own Answer #shorts",
+ "hashtags": [
+  "#Ramayana",
+  "#ValmikiRamayana",
+  "#Vali",
+  "#Rama",
+  "#Sugriva",
+  "#Kishkindha",
+  "#UntoldGranth"
+ ],
+ "comment_prompt": "Vali's question or Rama's answer: which weighs more for you?",
+ "shots": [
+  {
+   "voice": "narrator",
+   "hi": "राम ने, बाली को, छिपकर मारा। और इसका कारण, राम ने खुद बताया था।",
+   "en": "Rama struck Vali from hiding. And Rama himself gave the reason.",
+   "units": [
+    "[serious] राम ने, बाली को, छिपकर मारा।",
+    "[thoughtfully] और इसका कारण, राम ने खुद बताया था।"
+   ],
+   "card": [
+    [
+     "WHY FROM HIDING?",
+     null
+    ],
+    [
+     "RAMA'S OWN ANSWER.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "4.16.25; 4.18.36",
+   "lead": 0.3,
+   "tail": 0.4,
+   "min": 2.8,
+   "id": 1,
+   "art_from": 46
+  },
+  {
+   "id": 2,
+   "beat": "B00",
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सत्रह। पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सत्रह।",
+    "[with deep devotion] [chanting] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "cite": "4.17.13",
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः ।",
+     "यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः ॥"
+    ],
+    "ref": "KISHKINDHA KANDA 4.17.13",
+    "en": "“What merit have you gained by striking one whose face was turned away? Because of you, I, absorbed in battle, have met my death.”",
+    "translit": "parāṅmukhavadhaṃ kṛtvā ko nu prāptastvayā guṇaḥ, yadahaṃ yuddhasaṃrabdhastvatkṛte nidhanaṃ gataḥ"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
+    "t2": "[with deep devotion] [chanting] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
+    "t3": "[solemnly] [expressively] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥"
+   },
+   "force_take": {
+    "1": 1
+   },
+   "sloka_pick": "t1 (reverently/slowly): 9.7 s, pitch movement 4.4 st, median 109 Hz, words intact; t3 moved most (4.7) but peaked near the shouting range",
+   "art_from": 2
+  },
+  {
+   "id": 3,
+   "beat": "B10",
+   "voice": "vali",
+   "hi": "अगर सामने आकर लड़ते, तो आज, यमराज के दर्शन करते। तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।",
+   "en": "\"Had you fought me face to face, today you would have met Yama. You struck from hiding, like a snake biting a sleeping man.\"",
+   "units": [
+    "[serious] अगर सामने आकर लड़ते, तो आज, यमराज के दर्शन करते।",
+    "तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।"
+   ],
+   "cite": "4.17.39-4.17.40",
+   "art_from": 53
+  },
+  {
+   "id": 4,
+   "beat": "B10",
+   "voice": "narrator",
+   "hi": "और अंत में, बाली खुद मानते हैं, कि सुग्रीव को राज्य मिलना, उचित है। पर उन्हें, अधर्म से मारा गया, ये उचित नहीं।",
+   "en": "And at the end, Vali himself grants that Sugriva should have the kingdom. But that he was killed by adharma, that is not right.",
+   "units": [
+    "[thoughtfully] और अंत में, बाली खुद मानते हैं, कि सुग्रीव को राज्य मिलना, उचित है।",
+    "[serious] पर उन्हें, अधर्म से मारा गया, ये उचित नहीं।"
+   ],
+   "cite": "4.17.43",
+   "art_from": 55
+  },
+  {
+   "id": 5,
+   "beat": "B11",
+   "voice": "rama",
+   "hi": "और ये है वो कारण, जिसके लिए तुम मारे गए। सुग्रीव अभी जीवित हैं, और तुम, उनकी पत्नी रुमा के साथ रहते हो।",
+   "en": "\"And this is the reason you were slain: Sugriva still lives, and you live with his wife, Ruma.\"",
+   "units": [
+    "[serious] और ये है वो कारण, जिसके लिए तुम मारे गए।",
+    "सुग्रीव अभी जीवित हैं, और तुम, उनकी पत्नी रुमा के साथ रहते हो।"
+   ],
+   "cite": "4.18.18-4.18.20",
+   "reveal": true,
+   "art_from": 59
+  },
+  {
+   "id": 6,
+   "beat": "B11",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: तदेतत् कारणं पश्य यदर्थं त्वं मया हतः… भ्रातुर्वर्तसि भार्यायां त्यक्त्वा धर्मं सनातनम्॥",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] तदेतत् कारणं पश्य यदर्थं त्वं मया हतः… भ्रातुर्वर्तसि भार्यायां त्यक्त्वा धर्मं सनातनम्॥"
+   ],
+   "cite": "4.18.18",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.18.18 · CRITICAL EDITION",
+    "lines": [
+     "तदेतत् कारणं पश्य यदर्थं त्वं मया हतः ।",
+     "भ्रातुर्वर्तसि भार्यायां त्यक्त्वा धर्मं सनातनम् ॥"
+    ],
+    "translit": "tadetat kāraṇaṃ paśya yadarthaṃ tvaṃ mayā hataḥ, bhrāturvartasi bhāryāyāṃ tyaktvā dharmaṃ sanātanam",
+    "en": "“See the reason for which you were slain by me: abandoning eternal dharma, you live with your brother's wife.”"
+   },
+   "art_from": 60
+  },
+  {
+   "id": 7,
+   "beat": "B11",
+   "voice": "narrator",
+   "hi": "पर एक सवाल, अब भी बाकी है। छिपकर, क्यों?",
+   "en": "But one question still remains. Why from hiding?",
+   "units": [
+    "[thoughtfully] पर एक सवाल, अब भी बाकी है।",
+    "[serious] छिपकर, क्यों?"
+   ],
+   "link": true,
+   "unit_gap": 0.6,
+   "card": [
+    [
+     "WHY FROM HIDING?",
+     "#f6c244"
+    ]
+   ],
+   "art_from": 62
+  },
+  {
+   "id": 8,
+   "beat": "B12",
+   "voice": "rama",
+   "hi": "मनुष्य, जाल से, फंदे से, छिपकर भी और सामने से भी, पशुओं को पकड़ते हैं। भागते हुए को भी, और ठहरे हुए को भी।",
+   "en": "\"Men catch animals with nets and snares, hidden or in the open, whether they flee or stand still.\"",
+   "units": [
+    "[serious] मनुष्य, जाल से, फंदे से, छिपकर भी और सामने से भी, पशुओं को पकड़ते हैं।",
+    "भागते हुए को भी, और ठहरे हुए को भी।"
+   ],
+   "cite": "4.18.34-4.18.35",
+   "art_from": 64
+  },
+  {
+   "id": 9,
+   "beat": "B12",
+   "voice": "rama",
+   "hi": "राजर्षि भी, शिकार करते हैं। और तुम, शाखामृग हो, वन के वानर। इसलिए, लड़ते हुए, या न लड़ते हुए, तुम मेरे बाण से मारे गए।",
+   "en": "\"Royal sages hunt too. And you are a shakhamriga, a creature of the forest. So, fighting or not fighting, you fell to my arrow.\"",
+   "units": [
+    "[serious] राजर्षि भी, शिकार करते हैं। और तुम, शाखामृग हो, वन के वानर।",
+    "इसलिए, लड़ते हुए, या न लड़ते हुए, तुम मेरे बाण से मारे गए।"
+   ],
+   "cite": "4.18.36",
+   "reveal": true,
+   "art_from": 65
+  },
+  {
+   "id": 10,
+   "beat": "B12",
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: तस्मात्त्वं निहतो युद्धे मया बाणेन वानर… अयुध्यन्प्रतियुध्यन् वा यस्माच्छाखामृगो ह्यसि॥",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] तस्मात्त्वं निहतो युद्धे मया बाणेन वानर… अयुध्यन्प्रतियुध्यन् वा यस्माच्छाखामृगो ह्यसि॥"
+   ],
+   "cite": "4.18.36",
+   "unit_gap": 0.42,
+   "quote": {
+    "source": "VALMIKI RAMAYANA",
+    "ref": "KISHKINDHA KANDA 4.18.36 · CRITICAL EDITION",
+    "lines": [
+     "तस्मात्त्वं निहतो युद्धे मया बाणेन वानर ।",
+     "अयुध्यन्प्रतियुध्यन् वा यस्माच्छाखामृगो ह्यसि ॥"
+    ],
+    "translit": "tasmāttvaṃ nihato yuddhe mayā bāṇena vānara, ayudhyanpratiyudhyan vā yasmācchākhāmṛgo hyasi",
+    "en": "“Therefore, O vanara, you were slain in battle by my arrow, whether you fought or did not fight, for you are a shakhamriga.”"
+   },
+   "art_from": 66
+  },
+  {
+   "id": 11,
+   "beat": "B12",
+   "voice": "narrator",
+   "hi": "ये उत्तर, आज के कानों को, कठिन लग सकता है। हम इसे, न बढ़ाते हैं, न छिपाते हैं। वाल्मीकि ने जैसा लिखा, वैसा ही, आपके सामने है।",
+   "en": "This answer may sound hard to today's ears. We neither add to it nor hide it. As Valmiki wrote it, so it is before you.",
+   "units": [
+    "[thoughtfully] ये उत्तर, आज के कानों को, कठिन लग सकता है।",
+    "[serious] हम इसे, न बढ़ाते हैं, न छिपाते हैं। वाल्मीकि ने जैसा लिखा, वैसा ही, आपके सामने है।"
+   ],
+   "art_from": 67
+  },
+  {
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true,
+   "id": 12,
+   "art_from": 98
+  }
+ ]
+}

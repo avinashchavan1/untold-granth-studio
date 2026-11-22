@@ -49,22 +49,22 @@
    "jambavan",
    "janaka",
    "parashurama",
-   "dasharatha"
+   "dasharatha",
+   "vali",
+   "sugriva",
+   "tara",
+   "angada"
   ],
   "ask_user_when_first_needed": [
    "ravana",
    "bharata",
    "kaikeyi",
    "kaushalya",
-   "sugriva",
-   "vali",
    "vibhishana",
    "kumbhakarna",
    "mandodari",
    "indrajit",
    "vishvamitra",
-   "tara",
-   "angada",
    "shurpanakha"
   ],
   "minor_examples": [
@@ -186,6 +186,34 @@
    "rig": "CH.dasharatha (drawFigure) in art/chars.js",
    "look": "king of Ayodhya: grey-black hair and beard (greying, not white), gold crown with red jewel, saffron dhoti, red sash, gold ornaments",
    "rule": "Show the user any change as stills first."
+  },
+  "vali": {
+   "approved_by": "user",
+   "reel": "LF01",
+   "rig": "CH.vali (drawFigure) in art/chars.js",
+   "look": "golden-brown vanara, gold crown, red dhoti, Indra's golden garland (4.17.5)",
+   "rule": "Show the owner any change as stills first."
+  },
+  "sugriva": {
+   "approved_by": "user",
+   "reel": "LF01",
+   "rig": "CH.sugriva (drawFigure) in art/chars.js",
+   "look": "identical to Vali (4.12.30-31) but no crown in exile; gajapushpi flower creeper from 4.12.36; Vali's golden garland from 4.22.18; crown after 4.25.33",
+   "rule": "Show the owner any change as stills first."
+  },
+  "tara": {
+   "approved_by": "user",
+   "reel": "LF01",
+   "rig": "CH.tara (drawFigure) in art/chars.js",
+   "look": "fully human queen: teal sari with gold border, gold ornaments, black hair",
+   "rule": "Show the owner any change as stills first."
+  },
+  "angada": {
+   "approved_by": "user",
+   "reel": "LF01",
+   "rig": "CH.angada (drawFigure) in art/chars.js",
+   "look": "young vanara prince: lighter golden fur, gold head band, saffron dhoti, red sash, golden armlets (4.18.46)",
+   "rule": "Show the owner any change as stills first."
   }
  },
  "experiments": {
@@ -224,7 +252,11 @@
    "ravana": "Ravana",
    "guha": "Guha",
    "nala": "Nala",
-   "dasharatha": "Dasharatha"
+   "dasharatha": "Dasharatha",
+   "vali": "Vali",
+   "sugriva": "Sugriva",
+   "tara": "Tara",
+   "angada": "Angada"
   },
   "first_reel": {
    "narrator": "A01",
@@ -234,7 +266,11 @@
    "maricha": "A01",
    "shabari": "A02",
    "gautama": "A03",
-   "dasharatha": "A82"
+   "dasharatha": "A82",
+   "vali": "LF01",
+   "sugriva": "LF01",
+   "tara": "LF01",
+   "angada": "LF01"
   },
   "rig_keys": {
    "lakshmana": "lak",
@@ -316,5 +352,6 @@
    "builder": "buildPampa(tod)",
    "description": "Lotus lake, hut, sages' glowing altar, wet bark robes, fruit basket."
   }
- ]
+ ],
+ "score_style": "Symphonic and pleasing to the ear (owner, Nov 22 2026): a warm full orchestra (legato strings, soft horns, harp, woodwinds, gentle choir pads) with Indian colour woven in (bansuri, sitar or santoor, tanpura drone, soft tabla). Melodic, with a clear recurring theme; smooth dynamics that swell and settle; no harsh or sudden hits, no distorted or booming drums, no shrill highs, no trailer-style impacts; leaves room for a spoken voice."
 }

@@ -158,7 +158,7 @@ def voice_track(sid, s, ulist, var=""):
 
 timeline = {"fps": FPS, "shots": []}; t = 0.0; log = []
 for s in script["shots"]:
-    sid = s["id"]; entry = {"id": sid, "voice": s["voice"], "en": s["en"], "hi": s["hi"], **{k: s[k] for k in ("card", "label", "scene", "cite") if k in s}}; speech = 0.0
+    sid = s["id"]; entry = {"id": sid, "voice": s["voice"], "en": s["en"], "hi": s["hi"], **{k: s[k] for k in ("card", "label", "scene", "cite", "quote", "sloka", "act", "beat", "link", "units", "cta", "reveal", "art_from") if k in s}}; speech = 0.0
     if s["voice"]:
         tr, speech = voice_track(sid, s, UNITS[sid]); entry.update(tr)
         if s.get("cta"):                 # YouTube says "subscribe" instead of "follow": second set of takes, same shot length
@@ -168,7 +168,7 @@ for s in script["shots"]:
             else: log.append(f"s{sid:02d} cta: no YouTube takes (s{sid:02d}y_*) yet: run make_reel.py narration <reel> api, then import")
     lead = s.get("lead", 0.3); tail = s.get("tail", 0.3); dur = max(s.get("min", 0), lead + speech + tail); dur = round(np.ceil(dur * FPS) / FPS, 4)
     entry.update(start=round(t, 4), dur=dur, vStart=round(t + lead, 4), aStart=round(t + lead, 4), speech=round(speech, 3)); timeline["shots"].append(entry); t += dur
-timeline["total"] = round(t, 4); timeline["source_card"] = SCRIPT.get("source_card"); timeline["reel"] = SCRIPT["reel"]
+timeline["total"] = round(t, 4); timeline["source_card"] = SCRIPT.get("source_card"); timeline["acts"] = SCRIPT.get("acts"); timeline["frame"] = SCRIPT.get("frame", "tall"); timeline["reel"] = SCRIPT["reel"]
 json.dump(timeline, open(os.path.join(ROOT, "src/timeline.json"), "w"), ensure_ascii=False, indent=1)
 open(os.path.join(ROOT, "audio/pick_log.txt"), "w").write("\n".join(log))
 print("\n".join(log))

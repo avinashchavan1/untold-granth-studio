@@ -42,6 +42,9 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   never all at once; vary rhythm (short lines, a [pause] before each reveal, a character's own voice or a quote card every 20-30 s in
   reels, every 60-90 s in long-form); music rises toward the climax and drops under verses. Calm tags still apply: engaging comes from
   the writing and pacing, not from shouting. Check retention in YouTube/Instagram analytics after 48 h and note where viewers drop.
+- **Music is symphonic and pleasing to the ear (owner, Nov 22 2026):** orchestra (legato strings, horns, harp, woodwinds, soft choir) with
+  Indian colour (bansuri, sitar/santoor, tanpura, soft tabla), a recurring melody, smooth swells; never harsh hits, booming or distorted drums,
+  or shrill highs. `series.json → score_style` is appended to every score prompt (`engine/py/gen_score.py`). Pick the take that sounds best, not only the loudest arc.
 - **Calm narrator:** only the tags [softly] [warmly] [curious] [serious] [thoughtfully] [pause]. Never [dramatically] or [excited]
   (they made him shout). The picker drops takes that rise more than 40 Hz above 125 Hz.
   **A/B TEST (owner, Nov 21 2026): the NEXT 2 reels (A17, A82) use `"narration_energy": "hook_reveal"`:** energetic tags
