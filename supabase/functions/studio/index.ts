@@ -149,8 +149,9 @@ Deno.serve(async (req) => {
       case "publish": {
         const { reel_id, platform } = body;
         if (!["youtube", "instagram"].includes(platform)) return json({ error: "Auto-posting is available for Instagram and YouTube" }, 400);
-        const { data: reel } = await admin.from("reels").select("id,code,reviewed").eq("id", reel_id).single();
+        const { data: reel } = await admin.from("reels").select("id,code,reviewed,kind").eq("id", reel_id).single();
         if (!reel) return json({ error: "reel not found" }, 404);
+        if (reel.kind === "longform" && platform !== "youtube") return json({ error: "Full-length videos post to YouTube only" }, 400);
         if (!reel.reviewed) return json({ error: "Tick the citation check before posting" }, 400);
         const kind = platform === "youtube" ? "master_youtube" : "master_instagram";
         const { data: master } = await admin.from("files").select("id").eq("reel_id", reel_id).eq("kind", kind).maybeSingle();

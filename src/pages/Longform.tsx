@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { CheckCircle2, Circle } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { Card, CopyButton, ErrorNote, SectionTitle, Spinner, StageBadge } from "../components/ui";
-import { mediaUrl } from "../lib/api";
+import { mediaUrl, usePublications, useReel } from "../lib/api";
 import { supabase } from "../lib/supabase";
 import type { Stage } from "../lib/types";
 
@@ -80,6 +80,7 @@ function Detail({ row, many }: { row: Row; many: boolean }) {
         <p className="mt-2 text-sm text-ink-soft dark:text-parchment/60">{[p.length ? `${p.length} long` : null, p.frame, !p.length && p.target_min ? `${p.target_min} min` : null].filter(Boolean).join(" · ")}</p>
       </div>
 
+      <PostCard code={row.code} />
       {preview.data && <Card><SectionTitle>Preview (review copy, 480p)</SectionTitle><video controls src={preview.data} className="aspect-video w-full rounded-xl bg-black" />{p.master && <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Upload master: {p.master}</p>}</Card>}
       {(thumb.data || p.youtube_description) && (
         <div className="grid gap-6 xl:grid-cols-2">
@@ -173,5 +174,24 @@ function Detail({ row, many }: { row: Row; many: boolean }) {
         </Card>
       )}
     </div>
+  );
+}
+
+// Approve + post: a full-length video has a reels row (kind "longform", same code) so it uses the same review, masters and publisher as reels.
+function PostCard({ code }: { code: string }) {
+  const reel = useReel(code); const pubs = usePublications(reel.data?.id);
+  if (!reel.data) return null;
+  const yt = pubs.data?.find((p) => p.platform === "youtube");
+  return (
+    <Card className="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <div className="font-display text-lg font-semibold">Review & post on YouTube</div>
+        <p className="text-sm text-ink-soft dark:text-parchment/70">
+          {reel.data.stage === "published" ? "Posted." : reel.data.reviewed ? "Approved: ready to post (4K master attached)." : "Watch it, tick the citation check, then post. The 4K master, title, description with chapters and thumbnail are attached."}
+          {yt?.post_url && <> · <a href={yt.post_url} target="_blank" rel="noreferrer" className="text-gold underline">Open on YouTube</a></>}
+        </p>
+      </div>
+      <Link to={`/reels/${code}`} className="rounded-xl bg-gold px-4 py-2 font-semibold text-night-950 hover:brightness-110">{yt?.state === "posted" ? "View post" : "Review & post →"}</Link>
+    </Card>
   );
 }

@@ -45,8 +45,8 @@ export default function ReelDetail() {
 
       <div className="grid gap-6 lg:grid-cols-[minmax(240px,320px)_minmax(0,1fr)]">
         <div className="mx-auto grid w-full max-w-[300px] content-start gap-3 lg:mx-0 lg:max-w-none">
-          <Preview preview={preview} poster={poster} />
-          <Cover cover={cover} />
+          <Preview preview={preview} poster={poster} wide={r.kind === "longform"} />
+          <Cover cover={cover} wide={r.kind === "longform"} />
           <div className="flex flex-wrap items-center gap-2 text-sm text-ink-soft dark:text-parchment/60"><StageBadge stage={r.stage} /> <span className="tabular">{fmtLen(r.length_s)}</span> {r.updated_at && <span>· updated {fmtDate(r.updated_at)}</span>}</div>
         </div>
         <div className="min-w-0">
@@ -67,12 +67,13 @@ export default function ReelDetail() {
   );
 }
 
-function Preview({ preview, poster }: { preview?: FileRow; poster?: FileRow }) {
+function Preview({ preview, poster, wide }: { preview?: FileRow; poster?: FileRow; wide?: boolean }) {
+  const asp = wide ? "aspect-video" : "aspect-[9/16]";
   const v = useMediaUrl(preview);
   const p = useMediaUrl(poster);
-  if (!preview) return <div className="grid aspect-[9/16] w-full place-items-center rounded-2xl border border-dashed border-parchment-deep text-sm text-ink-soft dark:border-night-700">No video yet</div>;
-  if (v.isLoading) return <div className="aspect-[9/16] w-full animate-pulse rounded-2xl bg-night-800" />;
-  return <video controls playsInline preload="metadata" poster={p.data ?? undefined} src={v.data ?? undefined} className="aspect-[9/16] w-full rounded-2xl bg-black" />;
+  if (!preview) return <div className={`grid ${asp} w-full place-items-center rounded-2xl border border-dashed border-parchment-deep text-sm text-ink-soft dark:border-night-700`}>No video yet</div>;
+  if (v.isLoading) return <div className={`${asp} w-full animate-pulse rounded-2xl bg-night-800`} />;
+  return <video controls playsInline preload="metadata" poster={p.data ?? undefined} src={v.data ?? undefined} className={`${asp} w-full rounded-2xl bg-black`} />;
 }
 
 function YouTubeEdit({ r }: { r: Reel }) {
@@ -101,13 +102,13 @@ function YouTubeEdit({ r }: { r: Reel }) {
   );
 }
 
-function Cover({ cover }: { cover?: FileRow }) {
+function Cover({ cover, wide }: { cover?: FileRow; wide?: boolean }) {
   const img = useMediaUrl(cover);
   const dl = useMediaUrl(cover, true);
   if (!cover) return <p className="rounded-xl border border-dashed border-parchment-deep p-3 text-xs text-ink-soft dark:border-night-700">No cover yet. Every reel gets one (<code>make_reel.py thumb</code>).</p>;
   return (
     <div className="flex items-center gap-3 rounded-xl border border-parchment-deep p-2.5 dark:border-night-700">
-      {img.data ? <img src={img.data} alt="Reel cover" className="aspect-[9/16] w-16 shrink-0 rounded-lg object-cover" /> : <div className="aspect-[9/16] w-16 shrink-0 animate-pulse rounded-lg bg-night-800" />}
+      {img.data ? <img src={img.data} alt="Reel cover" className={wide ? "aspect-video w-28 shrink-0 rounded-lg object-cover" : "aspect-[9/16] w-16 shrink-0 rounded-lg object-cover"} /> : <div className="aspect-[9/16] w-16 shrink-0 animate-pulse rounded-lg bg-night-800" />}
       <div className="min-w-0 text-sm">
         <p className="font-semibold">Cover · thumbnail</p>
         <p className="text-xs text-ink-soft dark:text-parchment/60">Sent automatically as the Instagram cover and the YouTube thumbnail.</p>
@@ -145,7 +146,7 @@ function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
         <div className="rounded-2xl border border-parchment-deep p-3 text-sm dark:border-night-700">Want one-tap posting? Finish <Link to="/settings#connections" className="font-semibold text-gold-deep underline dark:text-gold">Settings → Connections</Link> once; then <b>Post now</b> appears here.</div>
       )}
       <div className="grid gap-4 xl:grid-cols-3">
-        {PLATFORMS.map((pl) => <Lane key={pl.key} r={r} platform={pl} pub={pubs.data?.find((x) => x.platform === pl.key)} master={masters[pl.master]}
+        {PLATFORMS.filter((pl) => r.kind !== "longform" || pl.key === "youtube").map((pl) => <Lane key={pl.key} r={r} platform={pl} pub={pubs.data?.find((x) => x.platform === pl.key)} master={masters[pl.master]}
           auto={!!canAuto[pl.key]} job={jobs.data?.find((j) => j.platform === pl.key)} providers={p} />)}
       </div>
     </div>
@@ -174,7 +175,7 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
   };
   return (
     <Card className="grid content-start gap-3 !p-4">
-      <div className="flex items-center justify-between gap-2"><h3 className="font-bold">{platform.label}</h3><PubBadge state={active ? "posting" : state} /></div>
+      <div className="flex items-center justify-between gap-2"><h3 className="font-bold">{r.kind === "longform" ? "YouTube · full-length video" : platform.label}</h3><PubBadge state={active ? "posting" : state} /></div>
       {master ? <MasterLink f={master} /> : <div className="rounded-lg bg-black/[.04] p-2 text-xs text-ink-soft dark:bg-white/5">Master file: not attached yet</div>}
 
       {job && (job.status !== "done" || state !== "posted") && <JobCard job={job} />}

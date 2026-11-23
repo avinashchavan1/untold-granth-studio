@@ -1,5 +1,5 @@
 export type Stage = "idea" | "researching" | "scripted" | "voiced" | "rendered" | "review" | "approved" | "published" | "dropped";
-export type ReelKind = "myth_buster" | "reveal" | "dialogue";
+export type ReelKind = "myth_buster" | "reveal" | "dialogue" | "longform";
 export type Platform = "instagram" | "youtube" | "facebook" | "threads" | "moj" | "sharechat" | "josh" | "whatsapp";
 export type PubState = "todo" | "scheduled" | "posting" | "posted" | "failed" | "skipped";
 
@@ -13,7 +13,7 @@ export const STAGES: { key: Stage; label: string; hint: string }[] = [
   { key: "approved", label: "Approved", hint: "Ready to post" },
   { key: "published", label: "Published", hint: "Live on the platforms" },
 ];
-export const KIND_LABEL: Record<ReelKind, string> = { myth_buster: "Myth-buster", reveal: "Reveal", dialogue: "Dialogue" };
+export const KIND_LABEL: Record<ReelKind, string> = { myth_buster: "Myth-buster", reveal: "Reveal", dialogue: "Dialogue", longform: "Full-length video" };
 export const PLATFORMS: { key: Platform; label: string; uploadUrl: string; capField: string; titleField?: string; master: "instagram" | "youtube" }[] = [
   { key: "instagram", label: "Instagram Reels", uploadUrl: "https://www.instagram.com/", capField: "instagram", master: "instagram" },
   { key: "youtube", label: "YouTube Shorts", uploadUrl: "https://www.youtube.com/upload", capField: "youtube_description", titleField: "youtube_title", master: "youtube" },
