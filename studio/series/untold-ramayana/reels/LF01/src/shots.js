@@ -121,7 +121,7 @@ function cardBg(ctx, t, u) { lfScene(ctx, 'card', { z: lerp(1.02, 1.08, Math.min
 function wideQuote(ctx, u, t, post, Q, enAt) {
   cardBg(ctx, t, u); const Y = TALL ? 330 : 0, LM = TALL ? MW : 1700;
   post.ui = c => {
-    const q0 = ease(u, 0.05, 0.4); if (q0 > 0) { textFit(c, Q.source, CX, 150 + Y, { size: 60, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 8, shadow: 30 }, TALL ? MW : 1240); textFit(c, Q.ref, CX, 205 + Y, { size: 30, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }, TALL ? MW : 9999); }
+    const q0 = ease(u, 0.05, 0.4); if (q0 > 0) { textFit(c, Q.source, CX, 150 + Y, { size: 60, weight: 900, color: C_GOLD, ls: 6, alpha: q0, stroke: 8, shadow: 30 }, TALL ? MW : 960); textFit(c, Q.ref, CX, 205 + Y, { size: 30, font: 'Montserrat', weight: 800, color: C_IVORY, ls: 5, alpha: q0, stroke: 5 }, TALL ? MW : 9999); }
     const q1 = ease(u, 0.2, 0.7); if (q1 > 0) { Q.lines.forEach((l, i) => textFit(c, l, CX, 350 + Y + i * 104 + (1 - q1) * 12, { size: 80, font: 'Mukta', weight: 700, color: C_GOLD, alpha: q1, stroke: 8, shadow: 30 }, LM));
       const tl = Q.translit.length > 90 && Q.translit.includes(', ') ? Q.translit.split(', ') : [Q.translit]; tl.forEach((l, i) => textFit(c, l + (i < tl.length - 1 ? ',' : ''), CX, 350 + Y + Q.lines.length * 104 + 10 + i * 42, { size: 32, font: 'Montserrat', weight: 600, color: C_IVORY, alpha: 0.85 * q1, stroke: 5 }, LM)); }
     const q2 = ease(u, enAt, enAt + 0.45); if (q2 > 0) enLines(c, Q.en, 350 + Y + Q.lines.length * 104 + 150, q2);

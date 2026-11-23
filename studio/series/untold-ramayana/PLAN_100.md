@@ -124,6 +124,8 @@
 | A93 | The ring Rama gave Hanuman | R | Kishkindha · 44 | ● | ★ |
 | A94 | Rama waited out the monsoon | R | Kishkindha · 27–28 | ● | ★ Rama's grief in the rains |
 | A95 | Dundubhi's skeleton | R | Kishkindha · 11 | ●● | ★ |
+| A103 | The year Sugriva waited at the cave | R | Kishkindha · 9–10 | ● (from LF01) | ★★ Derived from LF01. A full year at the cave mouth (4.9.15); the same rock, two stories (4.9.19; 4.10.17–19) |
+| A104 | Vali's last gift: the golden garland | R | Kishkindha · 12; 17; 22 | ● (from LF01) | ★★ Derived from LF01. Indra's garland held his life (4.17.5); he gives it to Sugriva (4.22.16) |
 | A96 | Ravana's warning dream: Trijata vs. Ravana's own court | R | Yuddha (various) | ●● | ★ ⚠ verify which omens are in the CE |
 | A98 | Hanuman's report: the speech that saved the mission | D | Sundara · 65–67 | ● | ★ |
 | A99 | What "Rama Rajya" actually says | R | Yuddha · 128 | ● | ★ The text's own description |

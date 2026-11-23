@@ -1,0 +1,354 @@
+{
+ "series": "untold-ramayana",
+ "fps": 24,
+ "source": "Valmiki Ramayana, Critical Edition, Kishkindha Kanda 4.5, 4.9-4.25; Ramcharitmanas, Kishkindha Kand (dohas 7-11)",
+ "unit_gap": 0.38,
+ "avoid": [
+  "No verdict on Rama; present Vali's accusation and Rama's answer as the text gives them",
+  "No 'half strength' boon (not in 4.5-4.25; Uttara unread)",
+  "Tulsidas named with respect: both told with devotion"
+ ],
+ "verify_note": "Every line cites CE Kishkindha; character lines are close Hindi renderings of the cited verses. Vali's line 'what merit...' is 4.17.13; Rama's hunting answer is 4.18.34-36.",
+ "reel": "A103",
+ "title": "The Year Sugriva Waited at the Cave",
+ "status": "scripted",
+ "frame": "tall_from_wide",
+ "derived_from": "LF01",
+ "source_card": {
+  "kanda": "KISHKINDHA KANDA",
+  "sarga": "SARGA 17"
+ },
+ "claims": [
+  {
+   "claim": "One night, a demon named Mayavi came roaring to the gate of Kishkindha. Vali rushed out to kill him, and Sugriva went with him.",
+   "ref": "Valmiki Ramayana CE 4.9.4-4.9.8",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "The demon ran into a great cave. Vali made Sugriva swear by his feet: wait here, at the mouth.",
+   "ref": "Valmiki Ramayana CE 4.9.11-4.9.14",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And Sugriva waited. A whole year.",
+   "ref": "Valmiki Ramayana CE 4.9.15",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Then foaming red blood flowed out of the cave. He heard demons roaring, and what sounded like his elder brother's cry.",
+   "ref": "Valmiki Ramayana CE 4.9.17-4.9.18",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva believed his brother was dead. He sealed the cave with a mountain-sized rock and came back. The ministers made him king.",
+   "ref": "Valmiki Ramayana CE 4.9.19-4.9.20",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "And then the brother everyone thought was dead walked back into Kishkindha.",
+   "ref": "Valmiki Ramayana CE 4.9.21",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "Sugriva, with folded hands, gave the kingdom back: \"It was only held in trust. You alone are king.\"",
+   "ref": "Valmiki Ramayana CE 4.10.3-4.10.5",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "\"I called again and again, 'Sugriva! Sugriva!' No answer came. I kicked that rock until it broke.\"",
+   "ref": "Valmiki Ramayana CE 4.10.17-4.10.19",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "To Vali, it was betrayal. Sugriva says Vali drove him out with a single garment, and took his wife Ruma.",
+   "ref": "Valmiki Ramayana CE 4.10.20-4.10.22",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  },
+  {
+   "claim": "One rock. Two brothers. Two stories.",
+   "ref": "Valmiki Ramayana CE 4.9.19; 4.10.17",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit.com book-4 (CE), read Nov 22 2026"
+   ]
+  }
+ ],
+ "score": {
+  "engine": "excerpt of the wide production's score",
+  "file": "audio/score.wav",
+  "gain": 1.5,
+  "duck": 0.72
+ },
+ "thumbnail": {
+  "hook": "HE WAITED A YEAR.",
+  "stamp": "VALMIKI 4.9",
+  "line": "One rock, two brothers, two stories",
+  "badge": "KISHKINDHA 4.9-10",
+  "frame": "20s"
+ },
+ "caption": "Vali chased the demon Mayavi into a cave and made Sugriva swear to wait at its mouth. A full year passed (Valmiki Ramayana 4.9.15). Then blood flowed out, Sugriva sealed the cave with a rock and was made king (4.9.19-20). Vali's side: he called \"Sugriva!\" again and again and had to kick the rock open (4.10.17-19). One rock, two stories. Full 14-min video on our YouTube.",
+ "youtube_title": "Sugriva Waited a Whole Year at the Cave (Valmiki Ramayana) #shorts",
+ "hashtags": [
+  "#Ramayana",
+  "#ValmikiRamayana",
+  "#Vali",
+  "#Sugriva",
+  "#Kishkindha",
+  "#UntoldGranth"
+ ],
+ "comment_prompt": "Whose side of the story do you believe: Sugriva's or Vali's?",
+ "shots": [
+  {
+   "voice": "narrator",
+   "hi": "सुग्रीव, एक गुफ़ा के मुहाने पर, पूरे एक साल बैठे रहे। फिर, उन्होंने वो गुफ़ा, एक चट्टान से बंद कर दी।",
+   "en": "Sugriva sat at the mouth of a cave for a whole year. Then he sealed it with a rock.",
+   "units": [
+    "[serious] सुग्रीव, एक गुफ़ा के मुहाने पर, पूरे एक साल बैठे रहे।",
+    "[thoughtfully] फिर, उन्होंने वो गुफ़ा, एक चट्टान से बंद कर दी।"
+   ],
+   "card": [
+    [
+     "ONE CAVE. ONE YEAR.",
+     null
+    ],
+    [
+     "ONE ROCK.",
+     "#f6c244"
+    ]
+   ],
+   "cite": "4.9.15; 4.9.19",
+   "lead": 0.3,
+   "tail": 0.4,
+   "min": 2.8,
+   "id": 1,
+   "art_from": 8
+  },
+  {
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग नौ। तस्य प्रविष्टस्य बिलं साग्रः संवत्सरो गतः । स्थितस्य च मम द्वारि स कालो व्यत्यवर्तत ॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग नौ।",
+    "[with deep devotion] [chanting] तस्य प्रविष्टस्य बिलं साग्रः संवत्सरो गतः… स्थितस्य च मम द्वारि स कालो व्यत्यवर्तत॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "cite": "4.9.15",
+   "art_from": 2,
+   "sloka": {
+    "lines": [
+     "तस्य प्रविष्टस्य बिलं साग्रः संवत्सरो गतः ।",
+     "स्थितस्य च मम द्वारि स कालो व्यत्यवर्तत ॥"
+    ],
+    "ref": "KISHKINDHA KANDA 4.9.15",
+    "en": "“A full year passed after he entered the cave, and all that time I stayed at its mouth.”",
+    "translit": "tasya praviṣṭasya bilaṃ sāgraḥ saṃvatsaro gataḥ, sthitasya ca mama dvāri sa kālo vyatyavartata"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly] तस्य प्रविष्टस्य बिलं साग्रः संवत्सरो गतः… स्थितस्य च मम द्वारि स कालो व्यत्यवर्तत॥",
+    "t2": "[with deep devotion] [chanting] तस्य प्रविष्टस्य बिलं साग्रः संवत्सरो गतः… स्थितस्य च मम द्वारि स कालो व्यत्यवर्तत॥",
+    "t3": "[solemnly] [expressively] तस्य प्रविष्टस्य बिलं साग्रः संवत्सरो गतः… स्थितस्य च मम द्वारि स कालो व्यत्यवर्तत॥"
+   },
+   "id": 2,
+   "force_take": {
+    "1": 3
+   },
+   "sloka_pick": "t3 [solemnly] [expressively]: most pitch movement (4.77 st), median 125 Hz (under the guard), words intact"
+  },
+  {
+   "id": 3,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "एक रात, मायावी नाम का असुर, किष्किन्धा के द्वार पर आकर गरजा। बाली, उसे मारने दौड़े। और सुग्रीव भी, साथ गए।",
+   "en": "One night, a demon named Mayavi came roaring to the gate of Kishkindha. Vali rushed out to kill him, and Sugriva went with him.",
+   "units": [
+    "[serious] एक रात, मायावी नाम का असुर, किष्किन्धा के द्वार पर आकर गरजा।",
+    "बाली, उसे मारने दौड़े। और सुग्रीव भी, साथ गए।"
+   ],
+   "cite": "4.9.4-4.9.8",
+   "art_from": 6
+  },
+  {
+   "id": 4,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "असुर, एक बड़ी गुफ़ा में घुस गया। बाली ने, सुग्रीव को, अपने चरणों की शपथ दिलाई: यहीं, द्वार पर रुकना।",
+   "en": "The demon ran into a great cave. Vali made Sugriva swear by his feet: wait here, at the mouth.",
+   "units": [
+    "[thoughtfully] असुर, एक बड़ी गुफ़ा में घुस गया।",
+    "बाली ने, सुग्रीव को, अपने चरणों की शपथ दिलाई: यहीं, द्वार पर रुकना।"
+   ],
+   "cite": "4.9.11-4.9.14",
+   "art_from": 7
+  },
+  {
+   "id": 5,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "और सुग्रीव रुके। पूरे एक साल।",
+   "en": "And Sugriva waited. A whole year.",
+   "units": [
+    "[softly] और सुग्रीव रुके।",
+    "[thoughtfully] पूरे एक साल।"
+   ],
+   "cite": "4.9.15",
+   "unit_gap": 0.7,
+   "card": [
+    [
+     "ONE FULL YEAR.",
+     "#f6c244"
+    ]
+   ],
+   "art_from": 8
+  },
+  {
+   "id": 6,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "फिर, गुफ़ा से, झागदार लाल खून बहकर आया। असुरों की गर्जना सुनाई दी, और बड़े भाई की, चीख़ जैसी आवाज़।",
+   "en": "Then foaming red blood flowed out of the cave. He heard demons roaring, and what sounded like his elder brother's cry.",
+   "units": [
+    "[serious] फिर, गुफ़ा से, झागदार लाल खून बहकर आया।",
+    "असुरों की गर्जना सुनाई दी, और बड़े भाई की, चीख़ जैसी आवाज़।"
+   ],
+   "cite": "4.9.17-4.9.18",
+   "art_from": 9
+  },
+  {
+   "id": 7,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "सुग्रीव ने समझा, भाई मारे गए। एक पहाड़ जैसी चट्टान से, उन्होंने गुफ़ा का मुँह बंद किया, और लौट आए। मंत्रियों ने, उन्हें राजा बना दिया।",
+   "en": "Sugriva believed his brother was dead. He sealed the cave with a mountain-sized rock and came back. The ministers made him king.",
+   "units": [
+    "[thoughtfully] सुग्रीव ने समझा, भाई मारे गए।",
+    "एक पहाड़ जैसी चट्टान से, उन्होंने गुफ़ा का मुँह बंद किया, और लौट आए। मंत्रियों ने, उन्हें राजा बना दिया।"
+   ],
+   "cite": "4.9.19-4.9.20",
+   "art_from": 10
+  },
+  {
+   "id": 8,
+   "beat": "B01",
+   "voice": "narrator",
+   "hi": "और फिर, जिसे सब मरा हुआ समझ रहे थे, वही भाई, किष्किन्धा लौट आया।",
+   "en": "And then the brother everyone thought was dead walked back into Kishkindha.",
+   "units": [
+    "[serious] और फिर, जिसे सब मरा हुआ समझ रहे थे,",
+    "वही भाई, किष्किन्धा लौट आया।"
+   ],
+   "cite": "4.9.21",
+   "link": true,
+   "unit_gap": 0.5,
+   "art_from": 11
+  },
+  {
+   "id": 9,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "सुग्रीव ने, हाथ जोड़कर, राज्य लौटाया। कहा: ये तो आपकी धरोहर थी। आप ही राजा हैं।",
+   "en": "Sugriva, with folded hands, gave the kingdom back: \"It was only held in trust. You alone are king.\"",
+   "units": [
+    "[thoughtfully] सुग्रीव ने, हाथ जोड़कर, राज्य लौटाया।",
+    "कहा: ये तो आपकी धरोहर थी। आप ही राजा हैं।"
+   ],
+   "cite": "4.10.3-4.10.5",
+   "art_from": 12
+  },
+  {
+   "id": 10,
+   "beat": "B02",
+   "voice": "vali",
+   "hi": "मैं बार-बार पुकारता रहा, सुग्रीव! सुग्रीव! कोई उत्तर नहीं आया। लातें मार-मारकर, मैंने वो चट्टान तोड़ी।",
+   "en": "\"I called again and again, 'Sugriva! Sugriva!' No answer came. I kicked that rock until it broke.\"",
+   "units": [
+    "[serious] मैं बार-बार पुकारता रहा, सुग्रीव! सुग्रीव! कोई उत्तर नहीं आया।",
+    "लातें मार-मारकर, मैंने वो चट्टान तोड़ी।"
+   ],
+   "cite": "4.10.17-4.10.19",
+   "art_from": 13
+  },
+  {
+   "id": 11,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "बाली की नज़र में, ये विश्वासघात था। सुग्रीव बताते हैं, बाली ने उन्हें, सिर्फ़ एक वस्त्र में, राज्य से निकाल दिया, और उनकी पत्नी रुमा को, छीन लिया।",
+   "en": "To Vali, it was betrayal. Sugriva says Vali drove him out with a single garment, and took his wife Ruma.",
+   "units": [
+    "[serious] बाली की नज़र में, ये विश्वासघात था।",
+    "सुग्रीव बताते हैं, बाली ने उन्हें, सिर्फ़ एक वस्त्र में, राज्य से निकाल दिया, और उनकी पत्नी रुमा को, छीन लिया।"
+   ],
+   "cite": "4.10.20-4.10.22",
+   "art_from": 14
+  },
+  {
+   "id": 12,
+   "beat": "B02",
+   "voice": "narrator",
+   "hi": "एक चट्टान। दो भाई। दो कहानियाँ।",
+   "en": "One rock. Two brothers. Two stories.",
+   "units": [
+    "[thoughtfully] एक चट्टान।",
+    "दो भाई।",
+    "दो कहानियाँ।"
+   ],
+   "cite": "4.9.19; 4.10.17",
+   "unit_gap": 0.6,
+   "card": [
+    [
+     "ONE ROCK.",
+     null
+    ],
+    [
+     "TWO STORIES.",
+     "#f6c244"
+    ]
+   ],
+   "art_from": 15
+  },
+  {
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true,
+   "id": 13,
+   "art_from": 98
+  }
+ ]
+}
