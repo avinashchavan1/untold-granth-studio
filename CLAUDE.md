@@ -28,6 +28,10 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   pick the take with the most pitch movement and intact words, pin it with `force_take`; the shouting guard still applies.
   Reference: A07 and A89 shot 2 (`slokaSource` in studio/engine/art/templates.js).
   The śloka is recited by the narrator Rudra (owner's pick after a 6-voice audition); no separate śloka voice.
+  **A/B TEST (owner, Nov 27 2026): śloka position.** A35 + A34 use the "proof" format (no opening verse; right after the first reveal
+  the narrator says "वाल्मीकि के शब्द:" and recites ONE half-verse ~5 s over the story art, verse band visible from frame 1;
+  `derive_reel.py` spec `proof`); A36 + A103 keep the opening śloka. Post alternating A35, A36, A34, A103; compare at 48 h on the
+  Dashboard ("Śloka format test": avg % viewed, watching at 0:05 / 0:20). Every other reel keeps the opening śloka until the owner decides.
 - **Length follows the information:** 60–90 s is typical, up to ~120 s is fine when the evidence needs it. Never cut a quote,
   a citation or a step of the story just to be shorter.
 - **Ask before choosing anything about a MAJOR character** (look OR voice). Major = `series.json → major_characters`

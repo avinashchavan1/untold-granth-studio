@@ -133,7 +133,7 @@ Deno.serve(async (req) => {
           const u = new URL("https://accounts.google.com/o/oauth2/v2/auth");
           u.search = new URLSearchParams({ client_id: app.client_id, redirect_uri: `${FN_URL}/oauth/youtube`, response_type: "code", access_type: "offline", prompt: "consent", include_granted_scopes: "true",
             // youtube = manage the channel (banner, description, watermark, playlists); youtube.upload = post videos
-            scope: "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl", state }).toString();
+            scope: "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl https://www.googleapis.com/auth/yt-analytics.readonly", state }).toString();
           return json({ url: u.toString() });
         }
         if (body.provider === "instagram") {
@@ -212,6 +212,19 @@ Deno.serve(async (req) => {
               const it = (await (await fetch(`${YT}/videos?part=statistics,status,contentDetails&id=${p.external_id}`, { headers: { Authorization: `Bearer ${ytTok}` } })).json()).items?.[0] ?? {};
               const v = it.statistics ?? {}, st = it.status ?? {};
               stats = { views: +v.viewCount || 0, likes: +v.likeCount || 0, comments: +v.commentCount || 0 };
+              // retention (YouTube Analytics; needs the yt-analytics.readonly scope: "Reconnect YouTube" once): average % viewed, average view time,
+              // and the audience-retention curve (share of viewers still watching at each 1% of the video), for format tests like the śloka position
+              try {
+                const A = "https://youtubeanalytics.googleapis.com/v2/reports", end = new Date().toISOString().slice(0, 10), base = `ids=channel==MINE&startDate=2024-01-01&endDate=${end}&filters=video==${p.external_id}`;
+                const sum = await (await fetch(`${A}?${base}&metrics=views,averageViewDuration,averageViewPercentage`, { headers: { Authorization: `Bearer ${ytTok}` } })).json();
+                if (sum.error) (stats as Record<string, unknown>).analytics_error = String(sum.error.message ?? sum.error).slice(0, 200);
+                else {
+                  const r0 = sum.rows?.[0]; if (r0) { stats.avg_view_s = r0[1]; stats.avg_view_pct = r0[2]; }
+                  const cur = await (await fetch(`${A}?${base}&metrics=audienceWatchRatio,relativeRetentionPerformance&dimensions=elapsedVideoTimeRatio&sort=elapsedVideoTimeRatio`, { headers: { Authorization: `Bearer ${ytTok}` } })).json();
+                  if (cur.rows) (stats as Record<string, unknown>).retention = cur.rows.map((r: number[]) => [r[0], Math.round(r[1] * 1000) / 1000, Math.round(r[2] * 1000) / 1000]);
+                  const dur = it.contentDetails?.duration; if (dur) (stats as Record<string, unknown>).duration = dur;
+                }
+              } catch (e) { (stats as Record<string, unknown>).analytics_error = e instanceof Error ? e.message : String(e); }
               (stats as Record<string, unknown>).status = { privacy: st.privacyStatus, upload: st.uploadStatus, made_for_kids: st.madeForKids, self_declared_kids: st.selfDeclaredMadeForKids,
                 age_restricted: it.contentDetails?.contentRating?.ytRating === "ytAgeRestricted", rejection: st.rejectionReason ?? null, license: st.license };
             } else if (p.platform === "instagram") {
