@@ -242,7 +242,13 @@
     "A103": "opening"
    },
    "post_order": "alternate: A35, A36, A34, A103 (similar topics: all from the Vali long-form)",
-   "measure": "at 48 h on YouTube (Dashboard → Śloka format test; Refresh stats): average % viewed, share still watching at 0:05 and 0:20 (audience retention), views; Instagram when insights work. Decide after the 4 reels; until then every OTHER reel keeps the opening śloka."
+   "measure": "at 48 h on YouTube (Dashboard → Śloka format test; Refresh stats): average % viewed, share still watching at 0:05 and 0:20 (audience retention), views; Instagram when insights work. Decide after the 4 reels; until then every OTHER reel keeps the opening śloka.",
+   "post_queue": [
+    "A35",
+    "A36",
+    "A34",
+    "A103"
+   ]
   }
  },
  "source_title": "Valmiki Ramayana",

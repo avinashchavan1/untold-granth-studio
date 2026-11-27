@@ -74,9 +74,18 @@ export const confidence = (obs: Obs[], p: Main) => { const n = obs.filter((o) =>
 // festival match (lib/occasions.ts, calendar.json) + weekly theme days + audience pull (★ in the plan), with a small pull towards plan order.
 // A reel with "follows" only goes the day after its pair; scheduled posts stay where they are.
 export interface Slot { reel: Reel; day: number; fixed?: Date; why: string[] }
-export function planDays(queue: Reel[], firstDay: number, fixedFor: (r: Reel) => Date | null): Slot[] {
+// tests: series.json → experiments.<name>.post_queue lists reels that go first, one a day, in that exact order (A/B tests need them
+// back to back so their numbers are comparable); they skip the scoring below.
+export interface TestQueue { name: string; codes: string[]; label: (code: string) => string }
+export function planDays(queue: Reel[], firstDay: number, fixedFor: (r: Reel) => Date | null, tests: TestQueue[] = []): Slot[] {
   const fixed: Slot[] = [], left: Reel[] = [], taken = new Set<number>();
   for (const r of queue) { const f = fixedFor(r); if (f) { const d = istParts(f).day; fixed.push({ reel: r, day: d, fixed: f, why: ["Scheduled"] }); taken.add(d); } else left.push(r); }
+  const testSlots: Slot[] = []; let td = firstDay;
+  for (const tq of tests) for (const code of tq.codes) {
+    const i = left.findIndex((r) => r.code === code); if (i < 0) continue;
+    while (taken.has(td)) td++;
+    testSlots.push({ reel: left[i], day: td, why: [tq.label(code)] }); taken.add(td); left.splice(i, 1);
+  }
   const days: number[] = []; for (let d = firstDay; days.length < left.length; d++) if (!taken.has(d)) days.push(d);
   const order = (r: Reel) => queue.indexOf(r), n = left.length;
   // total value of posting left[perm[k]] on days[k]: festival/weekly-day fit, strong reels a little earlier, small cost for leaving plan order;
@@ -105,5 +114,5 @@ export function planDays(queue: Reel[], firstDay: number, fixedFor: (r: Reel) =>
     if ((days[k] + 4) % 7 === 0 && pullOf(r) >= 3) why.push("Sunday: the biggest audience of the week, for a ★★★ reel");
     if (!why.length && pullOf(r) >= 3) why.push("Strong pull (★★★): everyone knows the popular version");
     return { reel: r, day: days[k], why }; });
-  return [...fixed, ...slots].sort((a, b) => a.day - b.day);
+  return [...fixed, ...testSlots, ...slots].sort((a, b) => a.day - b.day);
 }

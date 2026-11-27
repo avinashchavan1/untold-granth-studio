@@ -3,10 +3,10 @@ import { CalendarClock, CheckCircle2, Clapperboard, Clock, Flame, Hammer, Lightb
 import { useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ErrorNote, Spinner, StageBadge, fmtLen } from "../components/ui";
-import { useAllFiles, useMediaUrl, usePublications, useReels } from "../lib/api";
+import { useAllFiles, useMediaUrl, usePublications, useReels, useSeries } from "../lib/api";
 import { KIND_LABEL, type FileRow, type Publication, type Reel } from "../lib/types";
 import { doubleCandidate, weeklyOn, MAJOR, MIN_BACKLOG, occasionsOn, upcoming } from "../lib/occasions";
-import { bestHour, confidence, dayName, fmtHour, istParts, observations, planDays, type Main, type Obs } from "../lib/bestTime";
+import { bestHour, confidence, dayName, fmtHour, istParts, observations, planDays, type Main, type Obs, type TestQueue } from "../lib/bestTime";
 
 // All dates are India time. Posting days and times are suggestions from lib/bestTime.ts.
 const TZ = "Asia/Kolkata";
@@ -16,6 +16,7 @@ const MAIN = ["youtube", "instagram"] as const;
 
 export default function Timeline() {
   const reels = useReels();
+  const series = useSeries();
   const pubs = usePublications();
   const files = useAllFiles();
   const [allIdeas, setAllIdeas] = useState(false);
@@ -47,7 +48,11 @@ export default function Timeline() {
   const fixedFor = (r: Reel) => { const sch = (byReel[r.id] ?? []).map((p) => p.scheduled_for).filter(Boolean).sort()[0]; return sch ? new Date(sch) : null; };
   const todayTags = [...weeklyOn(todayN).map((w) => w.text), ...occasionsOn(todayN).map((o) => o.name)];
   const fest = upcoming(all, todayN, 183);
-  const plan = planDays(ready, firstDay, fixedFor).map((s) => {
+  // A/B tests (series.json → experiments.<name>.post_queue): their reels go first, back to back, in the set order
+  const exps = ((series.data?.[0]?.config as Record<string, unknown> | undefined)?.experiments ?? {}) as Record<string, { post_queue?: string[]; formats?: Record<string, string>; test_reels?: Record<string, string> }>;
+  const tests: TestQueue[] = Object.entries(exps).filter(([, e]) => e.post_queue?.length).map(([name, e]) => ({ name, codes: e.post_queue!,
+    label: (code: string) => `A/B test (${name.replace(/_/g, " ")}): ${e.test_reels?.[code] === "proof" ? "half-verse after the reveal" : e.test_reels?.[code] === "opening" ? "opening śloka" : "test reel"}, posted back to back so the numbers compare` }));
+  const plan = planDays(ready, firstDay, fixedFor, tests).map((s) => {
     const dbl = doubleCandidate(s.day, s.reel, ready);
     const am = dbl ? bestHour("instagram", s.day, obs, now, 9, 11.5) : null;
     return { ...s, ig: bestHour("instagram", s.day, obs, now), yt: bestHour("youtube", s.day, obs, now), dbl: dbl && am !== null ? { ...dbl, am } : null };
