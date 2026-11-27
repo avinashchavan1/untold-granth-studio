@@ -1,0 +1,750 @@
+{
+ "series": "untold-ramayana",
+ "hf_repo": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters",
+ "storage_bucket": "reel-media (private)",
+ "reels": [
+  {
+   "code": "A01",
+   "title": "There Was No Lakshmana Rekha",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A01",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A01/A01_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A01/A01_INSTAGRAM_MASTER.mp4",
+     "mb": 322,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A01/A01_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A01/A01_YOUTUBE_MASTER.mp4",
+     "mb": 646,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A01/A01_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A01/A01_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A01/A01_final.mp4",
+    "thumbnail": "untold-ramayana/A01/A01_cover.jpg",
+    "citations": "untold-ramayana/A01/A01_citations.md",
+    "caption": "untold-ramayana/A01/A01_caption.txt"
+   },
+   "posts": {
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/Df6uESsiqNp/",
+     "posted_at": "2026-11-19T09:07:22.761+00:00"
+    },
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/XN6ARvMREOw",
+     "posted_at": "2026-11-18T16:56:15.332+00:00"
+    }
+   }
+  },
+  {
+   "code": "A02",
+   "title": "Shabari Never Tasted the Berries",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A02",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A02/A02_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A02/A02_INSTAGRAM_MASTER.mp4",
+     "mb": 295,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A02/A02_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A02/A02_YOUTUBE_MASTER.mp4",
+     "mb": 589,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A02/A02_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A02/A02_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A02/A02_final.mp4",
+    "thumbnail": "untold-ramayana/A02/A02_cover.jpg",
+    "citations": "untold-ramayana/A02/A02_citations.md",
+    "caption": "untold-ramayana/A02/A02_caption.txt"
+   },
+   "posts": {
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/aF5rw29wH8M",
+     "posted_at": "2026-11-19T09:14:38.587+00:00"
+    },
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/Df7X-ioESMp/",
+     "posted_at": "2026-11-19T15:13:38.693+00:00"
+    }
+   }
+  },
+  {
+   "code": "A03",
+   "title": "Ahalya Was Never Stone",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A03",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A03/A03_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A03/A03_INSTAGRAM_MASTER.mp4",
+     "mb": 280,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A03/A03_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A03/A03_YOUTUBE_MASTER.mp4",
+     "mb": 552,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A03/A03_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A03/A03_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A03/A03_final.mp4",
+    "thumbnail": "untold-ramayana/A03/A03_cover.jpg",
+    "citations": "untold-ramayana/A03/A03_citations.md",
+    "caption": "untold-ramayana/A03/A03_caption.txt"
+   },
+   "posts": {
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/pQ322G-DroE",
+     "posted_at": "2026-11-20T12:01:08.12+00:00"
+    },
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/Df9nIAGFZF1/",
+     "posted_at": "2026-11-20T12:04:13.255+00:00"
+    }
+   }
+  },
+  {
+   "code": "A04",
+   "title": "No Squirrel at Rama's Bridge",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A04",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A04/A04_INSTAGRAM_SHORT.mp4?download=true",
+     "path": "untold-ramayana/A04/A04_INSTAGRAM_SHORT.mp4",
+     "mb": 217,
+     "spec": "SHORT CUT · 1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A04/A04_YOUTUBE_SHORT.mp4?download=true",
+     "path": "untold-ramayana/A04/A04_YOUTUBE_SHORT.mp4",
+     "mb": 408,
+     "spec": "SHORT CUT · 2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A04/A04_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A04/A04_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A04/A04_final.mp4",
+    "thumbnail": "untold-ramayana/A04/A04_cover.jpg",
+    "citations": "untold-ramayana/A04/A04_citations.md",
+    "caption": "untold-ramayana/A04/A04_caption.txt"
+   },
+   "posts": {
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/DgBzI5wDJ2y/",
+     "posted_at": "2026-11-22T03:07:37.881+00:00"
+    },
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/TYHl0kinvFg",
+     "posted_at": "2026-11-22T02:58:42.522+00:00"
+    }
+   }
+  },
+  {
+   "code": "A06",
+   "title": "No Boatman Washed Rama's Feet",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A06",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A06/A06_INSTAGRAM_SHORT.mp4?download=true",
+     "path": "untold-ramayana/A06/A06_INSTAGRAM_SHORT.mp4",
+     "mb": 239,
+     "spec": "SHORT CUT · 1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A06/A06_YOUTUBE_SHORT.mp4?download=true",
+     "path": "untold-ramayana/A06/A06_YOUTUBE_SHORT.mp4",
+     "mb": 459,
+     "spec": "SHORT CUT · 2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A06/A06_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A06/A06_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A06/A06_final.mp4",
+    "thumbnail": "untold-ramayana/A06/A06_cover.jpg",
+    "citations": "untold-ramayana/A06/A06_citations.md",
+    "caption": "untold-ramayana/A06/A06_caption.txt"
+   },
+   "posts": {
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/DgIC5U3Dey4/",
+     "posted_at": "2026-11-24T13:20:52.571+00:00"
+    },
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/xEygpt_Wbyo",
+     "posted_at": "2026-11-24T12:07:15.778+00:00"
+    }
+   }
+  },
+  {
+   "code": "A07",
+   "title": "Hanuman Thought Mandodari Was Sita",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A07",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A07/A07_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A07/A07_INSTAGRAM_MASTER.mp4",
+     "mb": 207,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A07/A07_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A07/A07_YOUTUBE_MASTER.mp4",
+     "mb": 413,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A07/A07_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A07/A07_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A07/A07_final.mp4",
+    "thumbnail": "untold-ramayana/A07/A07_cover.jpg",
+    "citations": "untold-ramayana/A07/A07_citations.md",
+    "caption": "untold-ramayana/A07/A07_caption.txt"
+   },
+   "posts": {
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/DgFcl4kiGuJ/",
+     "posted_at": "2026-11-23T13:07:51.797+00:00"
+    },
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/EDB-Dqii-aI",
+     "posted_at": "2026-11-23T11:15:33.492+00:00"
+    }
+   }
+  },
+  {
+   "code": "A101",
+   "title": "Who Struck Lakshmana? The Second Mountain",
+   "stage": "approved",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A101",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A101/A101_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A101/A101_INSTAGRAM_MASTER.mp4",
+     "mb": 287,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A101/A101_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A101/A101_YOUTUBE_MASTER.mp4",
+     "mb": 552,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A101/A101_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A101/A101_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A101/A101_final.mp4",
+    "thumbnail": "untold-ramayana/A101/A101_cover.jpg",
+    "citations": "untold-ramayana/A101/A101_citations.md",
+    "caption": "untold-ramayana/A101/A101_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A102",
+   "title": "Did Lakshmana Never Sleep?",
+   "stage": "review",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A102",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A102/A102_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A102/A102_INSTAGRAM_MASTER.mp4",
+     "mb": 350,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A102/A102_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A102/A102_YOUTUBE_MASTER.mp4",
+     "mb": 670,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A102/A102_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A102/A102_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A102/A102_final.mp4",
+    "thumbnail": "untold-ramayana/A102/A102_cover.jpg",
+    "citations": "untold-ramayana/A102/A102_citations.md",
+    "caption": "untold-ramayana/A102/A102_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A103",
+   "title": "The Year Sugriva Waited at the Cave",
+   "stage": "review",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A103",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A103/A103_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A103/A103_INSTAGRAM_MASTER.mp4",
+     "mb": 356,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A103/A103_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A103/A103_YOUTUBE_MASTER.mp4",
+     "mb": 665,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A103/A103_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A103/A103_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A103/A103_final.mp4",
+    "thumbnail": "untold-ramayana/A103/A103_cover.jpg",
+    "citations": "untold-ramayana/A103/A103_citations.md",
+    "caption": "untold-ramayana/A103/A103_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A104",
+   "title": "Vali's Last Gift: the Golden Garland",
+   "stage": "review",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A104",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A104/A104_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A104/A104_INSTAGRAM_MASTER.mp4",
+     "mb": 374,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A104/A104_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A104/A104_YOUTUBE_MASTER.mp4",
+     "mb": 719,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A104/A104_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A104/A104_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A104/A104_final.mp4",
+    "thumbnail": "untold-ramayana/A104/A104_cover.jpg",
+    "citations": "untold-ramayana/A104/A104_citations.md",
+    "caption": "untold-ramayana/A104/A104_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A17",
+   "title": "Did Urmila Sleep for 14 Years?",
+   "stage": "approved",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A17",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A17/A17_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A17/A17_INSTAGRAM_MASTER.mp4",
+     "mb": 229,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A17/A17_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A17/A17_YOUTUBE_MASTER.mp4",
+     "mb": 437,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A17/A17_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A17/A17_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A17/A17_final.mp4",
+    "thumbnail": "untold-ramayana/A17/A17_cover.jpg",
+    "citations": "untold-ramayana/A17/A17_citations.md",
+    "caption": "untold-ramayana/A17/A17_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A18",
+   "title": "No Swayamvara at the Bow",
+   "stage": "approved",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A18",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A18/A18_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A18/A18_INSTAGRAM_MASTER.mp4",
+     "mb": 379,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A18/A18_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A18/A18_YOUTUBE_MASTER.mp4",
+     "mb": 715,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A18/A18_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A18/A18_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A18/A18_final.mp4",
+    "thumbnail": "untold-ramayana/A18/A18_cover.jpg",
+    "citations": "untold-ramayana/A18/A18_citations.md",
+    "caption": "untold-ramayana/A18/A18_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A23",
+   "title": "Hanuman Took the Mountain Back",
+   "stage": "approved",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A23",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A23/A23_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A23/A23_INSTAGRAM_MASTER.mp4",
+     "mb": 384,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A23/A23_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A23/A23_YOUTUBE_MASTER.mp4",
+     "mb": 743,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A23/A23_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A23/A23_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A23/A23_preview.mp4",
+    "thumbnail": "untold-ramayana/A23/A23_cover.jpg",
+    "citations": "untold-ramayana/A23/A23_citations.md",
+    "caption": "untold-ramayana/A23/A23_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A34",
+   "title": "Seven Trees, One Arrow: Then Nothing",
+   "stage": "review",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A34",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A34/A34_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A34/A34_INSTAGRAM_MASTER.mp4",
+     "mb": 303,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A34/A34_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A34/A34_YOUTUBE_MASTER.mp4",
+     "mb": 561,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A34/A34_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A34/A34_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A34/A34_final.mp4",
+    "thumbnail": "untold-ramayana/A34/A34_cover.jpg",
+    "citations": "untold-ramayana/A34/A34_citations.md",
+    "caption": "untold-ramayana/A34/A34_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A35",
+   "title": "Why Rama Shot Vali From Hiding: His Own Answer",
+   "stage": "review",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A35",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A35/A35_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A35/A35_INSTAGRAM_MASTER.mp4",
+     "mb": 327,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A35/A35_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A35/A35_YOUTUBE_MASTER.mp4",
+     "mb": 616,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A35/A35_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A35/A35_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A35/A35_final.mp4",
+    "thumbnail": "untold-ramayana/A35/A35_cover.jpg",
+    "citations": "untold-ramayana/A35/A35_citations.md",
+    "caption": "untold-ramayana/A35/A35_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A36",
+   "title": "Tara Warned Vali",
+   "stage": "approved",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A36",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A36/A36_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A36/A36_INSTAGRAM_MASTER.mp4",
+     "mb": 354,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A36/A36_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A36/A36_YOUTUBE_MASTER.mp4",
+     "mb": 658,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A36/A36_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A36/A36_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A36/A36_final.mp4",
+    "thumbnail": "untold-ramayana/A36/A36_cover.jpg",
+    "citations": "untold-ramayana/A36/A36_citations.md",
+    "caption": "untold-ramayana/A36/A36_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A53",
+   "title": "How Ravana Actually Died",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A53",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A53/A53_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A53/A53_INSTAGRAM_MASTER.mp4",
+     "mb": 239,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A53/A53_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A53/A53_YOUTUBE_MASTER.mp4",
+     "mb": 482,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A53/A53_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A53/A53_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A53/A53_final.mp4",
+    "thumbnail": "untold-ramayana/A53/A53_cover.jpg",
+    "citations": "untold-ramayana/A53/A53_citations.md",
+    "caption": "untold-ramayana/A53/A53_caption.txt"
+   },
+   "posts": {
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/DgNjxLYzYDz/",
+     "posted_at": "2026-11-26T16:44:15.274+00:00"
+    },
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/mbUTmPIdAV4",
+     "posted_at": "2026-11-26T14:32:16.797+00:00"
+    }
+   }
+  },
+  {
+   "code": "A82",
+   "title": "Who Was Shanta?",
+   "stage": "review",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A82",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A82/A82_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A82/A82_INSTAGRAM_MASTER.mp4",
+     "mb": 413,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A82/A82_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A82/A82_YOUTUBE_MASTER.mp4",
+     "mb": 758,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A82/A82_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A82/A82_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A82/A82_preview_web.mp4",
+    "thumbnail": "untold-ramayana/A82/A82_cover.jpg",
+    "citations": "untold-ramayana/A82/A82_citations.md",
+    "caption": "untold-ramayana/A82/A82_caption.txt"
+   },
+   "posts": {}
+  },
+  {
+   "code": "A89",
+   "title": "Did Baby Hanuman Swallow the Sun?",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A89",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A89/A89_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A89/A89_INSTAGRAM_MASTER.mp4",
+     "mb": 289,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A89/A89_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A89/A89_YOUTUBE_MASTER.mp4",
+     "mb": 554,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A89/A89_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A89/A89_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A89/A89_final.mp4",
+    "thumbnail": "untold-ramayana/A89/A89_cover.jpg",
+    "citations": "untold-ramayana/A89/A89_citations.md",
+    "caption": "untold-ramayana/A89/A89_caption.txt"
+   },
+   "posts": {
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/DgAb2wxAOxH/",
+     "posted_at": "2026-11-21T14:26:30.279+00:00"
+    },
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/YanV4HGeup0",
+     "posted_at": "2026-11-21T12:08:52.888+00:00"
+    }
+   }
+  },
+  {
+   "code": "A92",
+   "title": "Ravana Never Taught Lakshmana",
+   "stage": "published",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/A92",
+   "masters": {
+    "instagram_facebook": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A92/A92_INSTAGRAM_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A92/A92_INSTAGRAM_MASTER.mp4",
+     "mb": 209,
+     "spec": "1080×1920 · H.264 High CRF 12 · AAC 320k · Instagram & Facebook"
+    },
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A92/A92_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/A92/A92_YOUTUBE_MASTER.mp4",
+     "mb": 405,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/A92/A92_audio.tar.gz?download=true",
+    "path": "untold-ramayana/A92/A92_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/A92/A92_final.mp4",
+    "thumbnail": "untold-ramayana/A92/A92_cover.jpg",
+    "citations": "untold-ramayana/A92/A92_citations.md",
+    "caption": "untold-ramayana/A92/A92_caption.txt"
+   },
+   "posts": {
+    "youtube": {
+     "state": "posted",
+     "post_url": "https://youtube.com/shorts/jLi4SnR45C0",
+     "posted_at": "2026-11-25T15:13:13.614+00:00"
+    },
+    "instagram": {
+     "state": "posted",
+     "post_url": "https://www.instagram.com/reel/DgK1-keM7vO/",
+     "posted_at": "2026-11-25T15:25:42.555+00:00"
+    }
+   }
+  },
+  {
+   "code": "LF01",
+   "title": "Vali's Death, as Valmiki Tells It",
+   "stage": "review",
+   "app": "https://untold-granth-studio.avinashchavan.com/reels/LF01",
+   "masters": {
+    "youtube": {
+     "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/LF01/LF01_YOUTUBE_MASTER.mp4?download=true",
+     "path": "untold-ramayana/LF01/LF01_YOUTUBE_MASTER.mp4",
+     "mb": 3901,
+     "spec": "2160×3840 (4K) · H.264 High CRF 14 · AAC 384k · YouTube"
+    }
+   },
+   "audio_pack": {
+    "url": "https://huggingface.co/datasets/Avinash1443/untold-granth-masters/resolve/main/untold-ramayana/LF01/LF01_audio.tar.gz?download=true",
+    "path": "untold-ramayana/LF01/LF01_audio.tar.gz"
+   },
+   "storage": {
+    "preview": "untold-ramayana/LF01/LF01_review.mp4",
+    "thumbnail": "untold-ramayana/LF01/LF01_thumb_wide.jpg",
+    "citations": "untold-ramayana/LF01/LF01_citations.md"
+   },
+   "posts": {}
+  }
+ ]
+}

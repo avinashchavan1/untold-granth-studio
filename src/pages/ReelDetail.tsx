@@ -3,10 +3,12 @@ import { ArrowLeft, CheckCircle2, Download, ExternalLink, FileText, Loader2, Pen
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Card, Code, CopyButton, Empty, ErrorNote, LinkButton, PubBadge, SectionTitle, Spinner, StageBadge, fmtBytes, fmtDate, fmtLen } from "../components/ui";
-import { mediaUrl, studio, type ProviderStatus, useClaims, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
+import { mediaUrl, studio, type ProviderStatus, useConnections, useFiles, useJobs, useMediaUrl, usePublications, usePublishNow, useReel, useSaveCaptions, useSetStage, useUpdateReel, useUpsertPublication, type PublishJob } from "../lib/api";
 import { Target } from "../components/Target";
+import { fmtIST, PostEverywhere } from "../components/PostEverywhere";
+import { FactCheck, HookOptions, StoryKit, useClaimProgress } from "../components/ReelExtras";
 import { KIND_LABEL, PLATFORMS, STAGES, type FileRow, type Publication, type Reel, type Stage } from "../lib/types";
-import { CHANNEL, IG } from "../lib/channel";
+import { CHANNEL, IG, W } from "../lib/channel";
 
 const TABS = ["Publish", "Script", "Citations", "Files", "Notes"] as const;
 type Tab = (typeof TABS)[number];
@@ -58,7 +60,7 @@ export default function ReelDetail() {
           </div>
           {tab === "Publish" && (produced ? <PublishTab r={r} files={files.data ?? []} /> : <Empty>This reel is still in the plan. Publishing opens once it's rendered.</Empty>)}
           {tab === "Script" && (r.script ? <ScriptTab r={r} /> : <Empty>No script yet. Plan note: {r.plan_note || "—"}</Empty>)}
-          {tab === "Citations" && <ClaimsTab r={r} />}
+          {tab === "Citations" && <FactCheck r={r} />}
           {tab === "Files" && <FilesTab files={files.data ?? []} loading={files.isLoading} />}
           {tab === "Notes" && <NotesTab r={r} />}
         </div>
@@ -74,6 +76,21 @@ function Preview({ preview, poster, wide }: { preview?: FileRow; poster?: FileRo
   if (!preview) return <div className={`grid ${asp} w-full place-items-center rounded-2xl border border-dashed border-parchment-deep text-sm text-ink-soft dark:border-night-700`}>No video yet</div>;
   if (v.isLoading) return <div className={`${asp} w-full animate-pulse rounded-2xl bg-night-800`} />;
   return <video controls playsInline preload="metadata" poster={p.data ?? undefined} src={v.data ?? undefined} className={`${asp} w-full rounded-2xl bg-black`} />;
+}
+
+function YouTubeCover({ r }: { r: Reel }) {
+  const [st, setSt] = useState<{ busy?: boolean; ok?: string; err?: string }>({});
+  return (
+    <div className="grid gap-1">
+      <Button size="sm" disabled={st.busy} onClick={async () => {
+        setSt({ busy: true });
+        try { const res = await studio<{ ok: boolean; results: { ok: boolean; detail: string }[] }>("youtube_set_covers", { reel_id: r.id }); res.ok ? setSt({ ok: "Cover set on YouTube." }) : setSt({ err: res.results.map((x) => x.detail).join("; ") }); }
+        catch (e) { setSt({ err: (e as Error).message }); }
+      }}>{st.busy ? <Loader2 size={14} className="animate-spin" /> : null} Set this cover on YouTube</Button>
+      {st.ok && <p className="text-xs text-emerald-700 dark:text-emerald-300">{st.ok}</p>}
+      {st.err && <p className="text-xs text-vermilion">{st.err}</p>}
+    </div>
+  );
 }
 
 function YouTubeEdit({ r }: { r: Reel }) {
@@ -123,6 +140,7 @@ function Cover({ cover, wide }: { cover?: FileRow; wide?: boolean }) {
 
 function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
   const pubs = usePublications(r.id);
+  const cp = useClaimProgress(r);
   const update = useUpdateReel();
   const jobs = useJobs(r.id);
   const conn = useConnections();
@@ -131,20 +149,26 @@ function PublishTab({ r, files }: { r: Reel; files: FileRow[] }) {
   const canAuto: Record<string, boolean> = {
     youtube: ["github", "huggingface", "google_app", "youtube"].every((k) => p[k]?.connected),
     instagram: ["github", "huggingface", "instagram"].every((k) => p[k]?.connected),
+    facebook: ["github", "huggingface", "instagram", "facebook"].every((k) => p[k]?.connected),
   };
   return (
     <div className="grid gap-4">
       <label className={clsx("flex items-start gap-3 rounded-2xl border p-4", r.reviewed ? "border-emerald-300 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40" : "border-amber-300 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/40")}>
-        <input id="reviewed" type="checkbox" className="mt-1 h-5 w-5 accent-[#a8741a]" checked={r.reviewed}
-          onChange={(e) => update.mutate({ reel: r, patch: { reviewed: e.target.checked, reviewed_at: e.target.checked ? new Date().toISOString() : null, stage: e.target.checked && r.stage === "review" ? "approved" : r.stage }, action: e.target.checked ? "citations reviewed" : "review cleared" })} />
+        <input id="reviewed" type="checkbox" className="mt-1 h-5 w-5 accent-gold-deep" checked={r.reviewed}
+          onChange={(e) => { const on = e.target.checked, now = new Date().toISOString();
+            // one tick = every claim checked (the per-claim ticks on the Citations tab are optional)
+            const checks = on ? Object.fromEntries(cp.list.map((c) => [c.claim, cp.checks[c.claim] ?? now])) : cp.checks;
+            update.mutate({ reel: r, patch: { reviewed: on, reviewed_at: on ? now : null, claim_checks: checks, stage: on && r.stage === "review" ? "approved" : r.stage }, action: on ? "citations reviewed" : "review cleared" }); }} />
         <span className="text-sm">
-          <b className="flex items-center gap-1.5"><ShieldCheck size={16} /> I checked the citations against the text</b>
-          {r.reviewed ? <span className="text-emerald-800 dark:text-emerald-300">Reviewed {fmtDate(r.reviewed_at)}. Posting is unlocked.</span> : <span>Open the Citations tab, read each claim against its verse, then tick this. Posting stays locked until then.</span>}
+          <b className="flex items-center gap-1.5"><ShieldCheck size={16} /> I checked the citations against {W.text}</b>
+          {r.reviewed ? <span className="text-emerald-800 dark:text-emerald-300">Reviewed {fmtDate(r.reviewed_at)}. Posting is unlocked.</span> : <span>Read the claims and their sources on the Citations tab ({cp.total} claim{cp.total === 1 ? "" : "s"}), then tick this once. It marks them all checked and unlocks posting.</span>}
         </span>
       </label>
       {!canAuto.youtube && !canAuto.instagram && !conn.isLoading && (
         <div className="rounded-2xl border border-parchment-deep p-3 text-sm dark:border-night-700">Want one-tap posting? Finish <Link to="/settings#connections" className="font-semibold text-gold-deep underline dark:text-gold">Settings → Connections</Link> once; then <b>Post now</b> appears here.</div>
       )}
+      <PostEverywhere r={r} pubs={pubs.data ?? []} files={files} auto={canAuto} />
+      {(pubs.data ?? []).some((p) => p.state === "posted") && <StoryKit r={r} cover={files.find((f) => f.kind === "thumbnail")} />}
       <div className="grid gap-4 xl:grid-cols-3">
         {PLATFORMS.filter((pl) => r.kind !== "longform" || pl.key === "youtube").map((pl) => <Lane key={pl.key} r={r} platform={pl} pub={pubs.data?.find((x) => x.platform === pl.key)} master={masters[pl.master]}
           auto={!!canAuto[pl.key]} job={jobs.data?.find((j) => j.platform === pl.key)} providers={p} />)}
@@ -178,6 +202,8 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
       <div className="flex items-center justify-between gap-2"><h3 className="font-bold">{r.kind === "longform" ? "YouTube · full-length video" : platform.label}</h3><PubBadge state={active ? "posting" : state} /></div>
       {master ? <MasterLink f={master} /> : <div className="rounded-lg bg-black/[.04] p-2 text-xs text-ink-soft dark:bg-white/5">Master file: not attached yet</div>}
 
+      {state === "scheduled" && pub?.scheduled_for && <div className="rounded-lg bg-sky-50 p-2 text-xs font-semibold text-sky-900 dark:bg-sky-950/50 dark:text-sky-200">Scheduled for {fmtIST(pub.scheduled_for)}</div>}
+      {state === "failed" && pub?.last_error && <div className="rounded-lg bg-vermilion/10 p-2 text-xs text-vermilion">{pub.last_error}</div>}
       {job && (job.status !== "done" || state !== "posted") && <JobCard job={job} />}
 
       {state === "posted" && !active ? (
@@ -185,6 +211,8 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
           <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300"><CheckCircle2 size={16} /> Posted {fmtDate(pub?.posted_at)}</div>
           {pub?.post_url && <a href={pub.post_url} target="_blank" rel="noreferrer" className="break-all text-gold-deep underline dark:text-gold">{pub.post_url}</a>}
           {platform.key === "youtube" && pub?.external_id && <YouTubeEdit r={r} />}
+          {platform.key === "youtube" && pub?.external_id && <YouTubeCover r={r} />}
+          {platform.key === "instagram" && <p className="rounded-lg bg-black/[.04] p-2 text-xs text-ink-soft dark:bg-white/5">Cover: sent with this post. Instagram does not let apps change a cover after posting; to change it, open the reel in the Instagram app → Edit → Edit cover.</p>}
           <Button size="sm" variant="ghost" onClick={() => upsert.mutate({ reel: r, platform: platform.key, patch: { state: "todo", posted_at: null } })}>Mark as not posted</Button>
         </div>
       ) : editing ? (
@@ -206,9 +234,10 @@ function Lane({ r, platform, pub, master, auto, job, providers }: { r: Reel; pla
             <CopyButton text={caption} label={platform.titleField ? "Copy description" : "Copy caption"} />
           </div>
 
-          {auto && platform.key !== "facebook" ? (
+          {auto ? (
             <div className="grid gap-2 rounded-xl border border-gold-deep/40 bg-gold-soft/40 p-3 dark:border-gold/30 dark:bg-gold/5">
               {(platform.key === "instagram" || platform.key === "youtube") && <Target platform={platform.key} providers={providers} />}
+              {platform.key === "facebook" && providers.facebook?.name && <p className="text-xs font-semibold">Posts to the Page: {providers.facebook.name}</p>}
               {platform.key === "youtube" && (
                 <label className="flex items-center gap-2 text-xs font-semibold">Visibility
                   <select id="yt-privacy" value={privacy} onChange={(e) => setPrivacy(e.target.value)} className="rounded-md border border-parchment-deep bg-white/80 px-2 py-1 text-xs dark:border-night-700 dark:bg-night-950">
@@ -267,10 +296,11 @@ function ScriptTab({ r }: { r: Reel }) {
   const shots = r.script?.shots ?? [];
   return (
     <div className="grid gap-2">
+      <HookOptions r={r} />
       {r.script?.source && <p className="text-sm text-ink-soft dark:text-parchment/60">Source: {r.script.source}</p>}
       <div className="overflow-x-auto rounded-2xl border border-parchment-deep dark:border-night-700">
         <table className="w-full min-w-[640px] text-sm">
-          <thead className="bg-black/[.03] text-left text-xs uppercase tracking-wider text-ink-soft dark:bg-white/5 dark:text-parchment/60"><tr><th className="p-3">#</th><th className="p-3">Voice</th><th className="p-3">Line (Hindi / English)</th><th className="p-3">Verse</th></tr></thead>
+          <thead className="bg-black/[.03] text-left text-xs uppercase tracking-wider text-ink-soft dark:bg-white/5 dark:text-parchment/60"><tr><th className="p-3">#</th><th className="p-3">Voice</th><th className="p-3">Line (Hindi / English)</th><th className="p-3">{W.ref}</th></tr></thead>
           <tbody>
             {shots.map((s) => (
               <tr key={s.id} className="border-t border-parchment-deep align-top dark:border-night-800">
@@ -283,28 +313,6 @@ function ScriptTab({ r }: { r: Reel }) {
           </tbody>
         </table>
       </div>
-    </div>
-  );
-}
-
-function ClaimsTab({ r }: { r: Reel }) {
-  const claims = useClaims(r.id);
-  if (claims.isLoading) return <Spinner />;
-  if (!claims.data?.length) return <Empty>No claims recorded yet. Every factual claim needs a verse reference before the reel can be scripted.</Empty>;
-  return (
-    <div className="grid gap-3">
-      {claims.data.map((c) => (
-        <Card key={c.id} className="!p-4">
-          <div className="flex flex-wrap items-start justify-between gap-2">
-            <p className="font-semibold">{c.claim}</p>
-            <span className={clsx("shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold", c.verified ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300" : "bg-amber-100 text-amber-900")}>{c.verified ? "Verified" : "Unverified"}</span>
-          </div>
-          <div className="mt-1 font-mono text-xs text-gold-deep dark:text-gold">{c.ref}</div>
-          {c.quote_sa && <p className="mt-2 rounded-lg bg-black/[.04] p-3 text-[15px] leading-relaxed dark:bg-white/5">{c.quote_sa}</p>}
-          {c.sources.length > 0 && <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Checked against: {c.sources.join(" · ")}</p>}
-        </Card>
-      ))}
-      {r.verify_note && <p className="text-sm text-ink-soft dark:text-parchment/60">{r.verify_note}</p>}
     </div>
   );
 }

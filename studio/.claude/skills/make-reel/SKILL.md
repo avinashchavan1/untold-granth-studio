@@ -10,7 +10,7 @@ S = `series/<series id>` (channel.json → series.id); R = `S/reels/<ID>`. Keep 
 `python3 scripts/status.py set --reel <ID> --step N` (1 research … 8 cover/upload).
 
 ## 1. Research (step 1)
-- Topic = next `idea` row of the series plan (★★★ first) unless the owner names one; check `S/research/` notes.
+- Topic = first reel in the owner's request queue (`python3 scripts/request_queue.py`, from the repo root; read any note), else the next `idea` row of the series plan (★★★ first), unless the owner names one; check `S/research/` notes.
 - Read the base text itself: `python3 scripts/source_verse.py <book> <chapter> <verses>` (URL pattern in channel.json → source.verse_url).
   Read the whole episode, not just the verse you expect. Grep the translations for the key words. Save original text + translation of every verse you cite.
 - The popular version: find its real source text and copy its exact words (never from memory).
@@ -26,6 +26,7 @@ S = `series/<series id>` (channel.json → series.id); R = `S/reels/<ID>`. Keep 
   "[serious] <'this is the real story' in the narration language>"], `"sloka_unit": 1`, `"sloka": {lines, ref, en, translit}`; shots.js `slokaSource(...)`.
   Record the verse 3 ways (tags [reverently] [slowly] / [with deep devotion] [chanting] / [solemnly] [expressively]) as s02_1_t1..t3, measure pitch
   movement (librosa pyin, std in semitones) + ASR, pin the best take that stays under the shouting guard: `"force_take": {"1": k}`.
+- Hook options: write 3 claim-first hooks in `hook_options` ([{hi, en, card}], option 1 = your pick), run `python3 scripts/hook_options.py <ID>` from the repo root, and use the owner's pick (app Script tab → `reels.hook_choice`) if there is one.
 - Narrator `units` with calm tags only; `unit_gap` between units; short shots get `"min"`. A one-word unit after a pause can get dropped: give it its own unit.
 - Also: `source`, `source_card`, `avoid`, `verify_note`, `caption`, `youtube_title`, `comment_prompt`, `hashtags`,
   `thumbnail{hook,stamp,line,badge,frame,art_shift}`, `score{engine,file,duration_s,gain,duck,prompt}`, optional `"follows": "<ID>"`.

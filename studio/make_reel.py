@@ -62,11 +62,14 @@ def check(reel):
     EXPRESSIVE = {"reverently", "solemnly", "chanting", "with devotion", "with deep devotion", "slowly", "expressively", "majestically", "with feeling"}   # śloka line only (sloka_unit); the pitch guard still drops shouted takes
     ENERGY = {"excited", "dramatically", "intense", "energetic", "urgently", "with energy"}   # narration_energy test: hook + reveal only
     energy_on = s.get("narration_energy") == "hook_reveal"                               # owner's A/B test (Nov 21 2026); shouting guard still applies
+    HOUSE = ENERGY | {"amazed", "laughs", "playfully", "impressed", "curious", "surprised"}   # series.json → narration_energy "excited": a lively house style (owner's choice)
+    house_on = ser_.get("narration_energy") == "excited"
     for sh in s["shots"]:
         if sh.get("voice") != "narrator": continue
         for ui, u in enumerate(sh.get("units") or []):
             ok_tags = CALM | (EXPRESSIVE if ui == sh.get("sloka_unit") else set())   # the opening śloka may be recited with feeling (owner's request)
             if energy_on and (sh["id"] == s["shots"][0]["id"] or sh.get("reveal")): ok_tags = ok_tags | ENERGY
+            if house_on: ok_tags = ok_tags | HOUSE
             for tag in re.findall(r"\[([^\]]+)\]", u if isinstance(u, str) else u.get("say", "")):
                 if tag.strip().lower() not in ok_tags: probs.append(f"shot {sh['id']}: narrator tag [{tag}] makes him shout; use one of {sorted(ok_tags)}")
     th = s.get("thumbnail") or {}
@@ -75,6 +78,8 @@ def check(reel):
     if not s["shots"][0].get("card"): probs.append("shot 1 has no 'card': the hook must be on screen in the first second, not only in the subtitle")
     for c in s.get("claims", []):
         if not c.get("verified"): probs.append(f"UNVERIFIED claim: {c['claim']} ({c.get('ref')})")
+        if not CHN.get("source", {}).get("verse_url") and not any(str(x).startswith("http") for x in c.get("sources", [])):   # no single base text (e.g. a facts channel): every claim links its source
+            probs.append(f"claim without a source link: {c['claim']} (add 'sources': [url, ...])")
     print(f"{s['reel']} — {s['title']}\n  shots {len(s['shots'])} · est. length {est:.0f}s (target 60-90, up to ~120 when the evidence needs it) · ElevenLabs chars/take {narr}")
     for p in probs: print("  ⚠", p)
     if not probs: print("  ✓ script passes")
@@ -118,9 +123,12 @@ def desk_row(reel, preview_id="", poster_id=""):
     tl = json.load(open(os.path.join(reel, "src", "timeline.json"))); secs = round(tl["total"])
     ask = s.get("comment_prompt", "")                                                            # ends the caption with a question to drive comments
     # English is the main language for every written word (captions, titles, covers); the narration stays Hindi
-    ig = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}📜 Source: {src}\n🎧 {LANG} narration · English subtitles\n\n{CHN['captions']['instagram_follow'].format(instagram=CHN['handles']['instagram']['handle'], name=CHN['name'])}\n\n{tags}"
+    # the caption's own first line is the hook (<=125 chars, v2); the comment question appears once, at the end of the story part
+    body = cap if cap else hook_en
+    if ask and ask.split("?")[0].lower().strip(" 👇") not in body.lower(): body += f"\n\n{ask}"
+    ig = f"{body}\n\n📜 Source: {src}\n🎧 {LANG} narration · English subtitles\n\n{CHN['captions']['instagram_follow'].format(instagram=CHN['handles']['instagram']['handle'], name=CHN['name'])}\n\n{tags}"
     yt_title = (s.get("youtube_title") or f"{s['title']} | " + CHN["captions"]["youtube_title_suffix"].format(book=CHN["series"]["book"]))[:100]   # a question title beats a statement
-    yt = f"{hook_en}\n\n{cap}\n\n{ask + chr(10) + chr(10) if ask else ''}Source: {src}\nVerses:\n{refs}\n\n{LANG} narration · English subtitles.\n{CHN['captions']['youtube_subscribe'].format(name=CHN['name'])}\n\n{tags} #Shorts"
+    yt = f"{body}\n\nSource: {src}\n{CHN['captions'].get('refs_label', 'Verses')}:\n{refs}\n\n{LANG} narration · English subtitles.\n{CHN['captions']['youtube_subscribe'].format(name=CHN['name'])}\n\n{tags} #Shorts"
     row = {"title": s["title"], "series": ser.get("series_name", "").title(), "source": src, "length": f"{secs // 60}:{secs % 60:02d}",
            "captions": {"instagram": ig, "facebook": ig.replace(CHN["handles"]["instagram"]["handle"], CHN["name"]), "youtube_title": yt_title, "youtube_description": yt, **({"first_comment": ask} if ask else {})},
            "claims": [{"claim": c["claim"], "ref": c["ref"]} for c in s.get("claims", [])], "verify_note": s.get("verify_note", ""),
@@ -304,6 +312,15 @@ def master(reel, short=False):
 if __name__ == "__main__":
     if len(sys.argv) < 3: sys.exit(__doc__)
     cmd, reel, rest = sys.argv[1], sys.argv[2], sys.argv[3:]
+    # live status in the app (scripts/status.py): every step reports itself; a render also starts the frame watcher
+    AUTO = {"narration": (3, "Recording the voice"), "pick": (3, "Picking the best takes"), "audio": (4, "Mixing voice and music"),
+            "draft-timeline": (5, "Drawing the art"), "stills": (5, "Checking the art (stills)"), "render": (6, "Rendering the preview"),
+            "thumb": (8, "Making the cover"), "sheet": (8, "Final checks"), "desk": (8, "Final checks")}
+    code = os.path.basename(os.path.normpath(reel)); ST = os.path.join(os.path.dirname(HERE), "scripts", "status.py")
+    if cmd in AUTO and os.path.exists(ST) and not os.environ.get("NO_STATUS") and "/example/" not in os.path.abspath(reel) and not (cmd == "narration" and rest[:1] in (["list"], ["chars"], [])):
+        step, task = AUTO[cmd]
+        subprocess.run(["python3", ST, "auto", code, str(step), task], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
+        if cmd == "render": subprocess.Popen(["python3", ST, "watch-render", code], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
     if cmd == "new": new(reel, rest[0], rest[1])
     elif cmd == "check": sys.exit(0 if check(reel) else 1)
     elif cmd == "voices": run([CBPY, os.path.join(PY, "cb_generate.py")] + rest, reel)

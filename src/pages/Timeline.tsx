@@ -2,11 +2,14 @@ import clsx from "clsx";
 import { CalendarClock, CheckCircle2, Clapperboard, Clock, Flame, Hammer, Lightbulb } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ErrorNote, Spinner, StageBadge, fmtLen } from "../components/ui";
-import { useAllFiles, useMediaUrl, usePublications, useReels, useSeries } from "../lib/api";
+import { Button, ErrorNote, Spinner, StageBadge, fmtLen } from "../components/ui";
+import { useQueryClient } from "@tanstack/react-query";
+import { studio, useAllFiles, useConnections, useFollowers, useMediaUrl, usePublications, useReels, useSeries } from "../lib/api";
 import { KIND_LABEL, type FileRow, type Publication, type Reel } from "../lib/types";
 import { doubleCandidate, weeklyOn, MAJOR, MIN_BACKLOG, occasionsOn, upcoming } from "../lib/occasions";
-import { bestHour, confidence, dayName, fmtHour, istParts, observations, planDays, type Main, type Obs, type TestQueue } from "../lib/bestTime";
+import { bestHour, confidence, dayName, explain, fmtHour, istDate, istParts, isTestTurn, observations, planDays, testHour, type Main, type ObsSet, type TestQueue } from "../lib/bestTime";
+import calendarCfg from "../../calendar.json";
+const SHOW_FEST = (calendarCfg as { festival_plan?: boolean }).festival_plan !== false;   // calendar.json → festival_plan: false hides the Festival plan
 
 // All dates are India time. Posting days and times are suggestions from lib/bestTime.ts.
 const TZ = "Asia/Kolkata";
@@ -19,6 +22,7 @@ export default function Timeline() {
   const series = useSeries();
   const pubs = usePublications();
   const files = useAllFiles();
+  const fol = useFollowers();
   const [allIdeas, setAllIdeas] = useState(false);
 
   const covers = useMemo(() => Object.fromEntries((files.data ?? []).filter((f) => f.kind === "thumbnail" && f.reel_id).map((f) => [f.reel_id!, f])), [files.data]);
@@ -41,7 +45,7 @@ export default function Timeline() {
 
   // suggested days (one a day; themed reels on their weekly days, calendar.json; paired reels back to back) and best times per platform
   const now = new Date();
-  const obs = observations(pubs.data ?? [], all);
+  const obs = observations(pubs.data ?? [], all, fol.data ?? []);
   const todayN = istParts(now).day, lastDayN = live.length ? istParts(firstPost(live[live.length - 1])).day : -1;
   const eveningLeft = bestHour("instagram", todayN, obs, now) !== null;
   const firstDay = lastDayN >= todayN || !eveningLeft ? todayN + 1 : todayN;
@@ -55,7 +59,7 @@ export default function Timeline() {
   const plan = planDays(ready, firstDay, fixedFor, tests).map((s) => {
     const dbl = doubleCandidate(s.day, s.reel, ready);
     const am = dbl ? bestHour("instagram", s.day, obs, now, 9, 11.5) : null;
-    return { ...s, ig: bestHour("instagram", s.day, obs, now), yt: bestHour("youtube", s.day, obs, now), dbl: dbl && am !== null ? { ...dbl, am } : null };
+    return { ...s, ig: bestHour("instagram", s.day, obs, now), yt: bestHour("youtube", s.day, obs, now), fb: bestHour("facebook", s.day, obs, now), dbl: dbl && am !== null ? { ...dbl, am } : null };
   });
 
   const total = all.length;
@@ -63,7 +67,7 @@ export default function Timeline() {
     <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <div>
         <h1 className="font-display text-3xl font-extrabold tracking-wide">Timeline</h1>
-        <p className="mt-1 text-sm text-ink-soft dark:text-parchment/60">Where the series stands today and what comes next, in posting order. Dates and times are India time, one reel a day, at the suggested best time for each platform.</p>
+        <p className="mt-1 text-sm text-ink-soft dark:text-parchment/60">Where the series stands today and what comes next, in posting order. Dates and times are India time, one reel per posting day (calendar.json → post_days), at the suggested best time for each platform.</p>
       </div>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -88,18 +92,20 @@ export default function Timeline() {
           <span className="rounded-full bg-gold px-3 py-1 text-xs font-extrabold uppercase tracking-widest text-night-950 shadow">Today · {dayLabel(now)}</span>
           <span className="h-px flex-1 bg-gold/60" />
         </li>
-        {(todayTags.length > 0) && <li className="-mt-2 mb-3 flex flex-wrap gap-1.5">{todayTags.map((t) => <span key={t} className="flex items-center gap-1 rounded-full bg-vermilion/10 px-2.5 py-0.5 text-xs font-semibold text-vermilion"><Flame size={12} />{t}</span>)}</li>}
+        {SHOW_FEST && (todayTags.length > 0) && <li className="-mt-2 mb-3 flex flex-wrap gap-1.5">{todayTags.map((t) => <span key={t} className="flex items-center gap-1 rounded-full bg-vermilion/10 px-2.5 py-0.5 text-xs font-semibold text-vermilion"><Flame size={12} />{t}</span>)}</li>}
 
         <Phase icon={<CalendarClock size={16} />} tone="amber" title="Ready to post" note="Watch it, check the citations, then post from the reel page" />
         {ready.length === 0 && <Empty>Nothing waiting. The next reel is in production.</Empty>}
+        {ready.length > 0 && <AutoFill plan={plan} byReel={byReel} todayN={todayN} obs={obs} pubs={pubs.data ?? []} />}
         {ready.length > 0 && <BestTimeCard obs={obs} />}
         {plan.map((s) => <Item key={s.reel.id} r={s.reel} cover={covers[s.reel.id]} when={`Post ${dayName(s.day)}`} pubs={byReel[s.reel.id]} dot="amber" hint={!s.reel.reviewed ? "Waiting for your check" : undefined}
-          best={<><BestTimes ig={s.ig} yt={s.yt} why={s.why} />{s.dbl && <div className="mt-1.5 rounded-lg border border-dashed border-amber-400 px-2 py-1 text-[11px] text-amber-900 dark:text-amber-200"><b>Optional 2nd post, {fmtHour(s.dbl.am)}:</b> {s.dbl.reel.code} {s.dbl.reel.title} also fits {s.dbl.occasion.name}. Space it from the evening post; skip it if fewer than {MIN_BACKLOG} reels are ready.</div>}</>} />)}
+          best={<><BestTimes ig={s.ig} yt={s.yt} fb={s.fb} why={s.why} />{s.dbl && <div className="mt-1.5 rounded-lg border border-dashed border-amber-400 px-2 py-1 text-[11px] text-amber-900 dark:text-amber-200"><b>Optional 2nd post, {fmtHour(s.dbl.am)}:</b> {s.dbl.reel.code} {s.dbl.reel.title} also fits {s.dbl.occasion.name}. Space it from the evening post; skip it if fewer than {MIN_BACKLOG} reels are ready.</div>}</>} />)}
 
         <Phase icon={<Hammer size={16} />} tone="violet" title="In production" note="Being researched, voiced or rendered now" />
         {making.length === 0 && <Empty>Starting the next one from the plan.</Empty>}
         {making.map((r) => <Item key={r.id} r={r} cover={covers[r.id]} when="Being made" dot="violet" />)}
 
+        {SHOW_FEST && <>
         <Phase icon={<Flame size={16} />} tone="amber" title="Festival plan" note="Occasions in the next 6 months and the reels that fit them (make them in time)" />
         {fest.map(({ o, day, reels: rs }) => {
           const daysTo = day - todayN, need = rs.filter((r) => r.stage === "idea" || PRODUCTION.includes(r.stage));
@@ -114,6 +120,7 @@ export default function Timeline() {
             </li>
           );
         })}
+        </>}
 
         <Phase icon={<Lightbulb size={16} />} tone="stone" title="Coming up" note="From the plan, strongest audience pull first" />
         {(allIdeas ? ideas : ideas.slice(0, 10)).map((r, i) => <Item key={r.id} r={r} when={i === 0 && making.length === 0 ? "Next" : `#${r.plan_no ?? "–"}`} dot="stone" compact />)}
@@ -182,30 +189,33 @@ function Item({ r, cover, when, pubs, dot, hint, compact, best }: { r: Reel; cov
   );
 }
 
-const PLAT: Record<Main, string> = { instagram: "Instagram", youtube: "YouTube" };
-function BestTimes({ ig, yt, why }: { ig: number | null; yt: number | null; why: string[] }) {
+const PLAT: Record<Main, string> = { instagram: "Instagram", youtube: "YouTube", facebook: "Facebook" };
+function BestTimes({ ig, yt, fb, why }: { ig: number | null; yt: number | null; fb: number | null; why: string[] }) {
   return (
     <div className="mt-1.5 grid gap-1">
       <div className="flex flex-wrap items-center gap-1.5 text-[12px] font-semibold">
         <Clock size={13} className="text-gold-deep dark:text-gold" />
         {ig !== null && <span className="rounded-full bg-gold/15 px-2 py-0.5 text-gold-deep dark:text-gold">Instagram {fmtHour(ig)}</span>}
         {yt !== null && <span className="rounded-full bg-gold/15 px-2 py-0.5 text-gold-deep dark:text-gold">YouTube {fmtHour(yt)}</span>}
+        {fb !== null && <span className="rounded-full bg-gold/15 px-2 py-0.5 text-gold-deep dark:text-gold">Facebook {fmtHour(fb)}</span>}
       </div>
       {why.map((w) => <div key={w} className="text-[11px] text-ink-soft dark:text-parchment/60">• {w}</div>)}
     </div>
   );
 }
-function BestTimeCard({ obs }: { obs: Obs[] }) {
-  const rows = (["youtube", "instagram"] as Main[]).map((p) => ({ p, list: obs.filter((o) => o.platform === p).sort((a, b) => b.ratio - a.ratio), conf: confidence(obs, p) }));
+function BestTimeCard({ obs }: { obs: ObsSet }) {
+  const rows = (["instagram", "youtube", "facebook"] as Main[]).map((p) => ({ p, list: obs.filter((o) => o.platform === p).sort((a, b) => b.ratio - a.ratio), conf: confidence(obs, p) }));
   return (
     <li className="mb-3 rounded-xl border border-gold/50 bg-gold/5 p-3 text-sm">
       <div className="flex items-center gap-2 font-semibold"><Clock size={15} className="text-gold-deep dark:text-gold" /> How the best times are picked</div>
       <p className="mt-1 text-xs leading-relaxed text-ink-soft dark:text-parchment/70">
-        A starting pattern for Indian, Hindi-speaking viewers (evening peak, a lunch bump, late mornings at weekends), adjusted by how your own posts did:
-        each post's reach is divided by the square root of its age, so a 6-hour-old post compares fairly with a 2-day-old one. The more you post, the more your own results count.
-        Reels with a weekly theme (calendar.json → weekly) go on their days. Press <b>Refresh stats</b> on the Dashboard to update.
+        Three layers: <b>research</b> (published studies per platform, shifted to the Indian evening peak; presets/best_times.json), <b>your audience</b>
+        (when your Instagram followers are online{obs.aud?.days ? `, ${obs.aud.days} days recorded` : ", recorded daily once the account has 100+ followers"}) and <b>your results</b>
+        (each post's speed vs the posts around it, by weekday and hour). The more you post, the more your own data counts; every few posts Auto-fill tries a
+        <b> test slot</b> so it keeps learning. Full picture on the <Link to="/stats" className="underline">Stats</Link> page.
+        Reels with a weekly theme (calendar.json → weekly) go on their days.
       </p>
-      <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+      <div className="mt-2 grid gap-1.5 sm:grid-cols-3">
         {rows.map(({ p, list, conf }) => (
           <div key={p} className="rounded-lg bg-white/60 p-2 text-xs dark:bg-night-900">
             <div className="mb-1 flex items-center justify-between font-semibold"><span>{PLAT[p]} so far</span><span className="text-[11px] font-normal text-ink-soft">confidence: {conf}</span></div>
@@ -219,6 +229,54 @@ function BestTimeCard({ obs }: { obs: Obs[] }) {
           </div>
         ))}
       </div>
+    </li>
+  );
+}
+
+// #5 Auto-fill: turn the suggested days into real schedules (the server's timer posts them)
+function AutoFill({ plan, byReel, todayN, obs, pubs }: { plan: { reel: Reel; day: number; ig: number | null; yt: number | null; fb: number | null }[]; byReel: Record<string, Publication[]>; todayN: number; obs: ObsSet; pubs: Publication[] }) {
+  const conn = useConnections();
+  const qc = useQueryClient();
+  const [weeks, setWeeks] = useState(2);
+  const [st, setSt] = useState<{ busy?: boolean; msg?: string; errs?: string[] }>({});
+  const p = conn.data?.providers ?? {};
+  const on = { instagram: !!p.instagram?.connected, youtube: !!p.youtube?.connected, facebook: !!p.facebook?.connected };
+  const inRange = plan.filter((x) => x.day < todayN + weeks * 7);
+  const free = (r: Reel, k: string) => !(byReel[r.id] ?? []).some((q) => q.platform === k && ["posted", "posting", "scheduled"].includes(q.state));
+  const todo = inRange.filter((x) => x.reel.reviewed && (["instagram", "youtube", "facebook"] as const).some((k) => on[k] && free(x.reel, k)));
+  const waiting = inRange.filter((x) => !x.reel.reviewed);
+  const run = async () => {
+    setSt({ busy: true }); const errs: string[] = []; let n = 0;
+    const added: Record<string, number> = {};
+    for (const x of todo) {
+      // each platform at its own time; every few posts a test slot (≥ 2 h away, where we know least) so the results layer keeps learning
+      for (const k of ["instagram", "facebook", "youtube"] as Main[]) {
+        if (!on[k] || !free(x.reel, k)) continue;
+        const best = k === "instagram" ? x.ig : k === "youtube" ? x.yt ?? x.ig : x.fb ?? x.ig; if (best === null) continue;
+        const test = isTestTurn(k, pubs, obs, added[k] ?? 0), th = test ? testHour(k, x.day, obs) : null, h = th ?? best;
+        const e = explain(k, x.day, h, obs), platforms = [k];
+        const slot = { kind: th !== null ? "test" : "best", hour_ist: h, best_hour_ist: best, research: +e.research.toFixed(3), audience: e.audience === null ? null : +e.audience.toFixed(3), results: +e.results.toFixed(3), weights: { audience: +e.wA.toFixed(2), results: +e.wL.toFixed(2) }, posts: e.posts, at: new Date().toISOString() };
+        added[k] = (added[k] ?? 0) + 1;
+        try {
+          const r = await studio<{ results: Record<string, { ok: boolean; error?: string }> }>("schedule", { reel_id: x.reel.id, platforms, at: istDate(x.day, h).toISOString(), options: { privacy: "public", slot } });
+          for (const [k, v] of Object.entries(r.results)) v.ok ? n++ : errs.push(`${x.reel.code} ${k}: ${v.error}`);
+        } catch (e) { errs.push(`${x.reel.code}: ${(e as Error).message}`); }
+      }
+    }
+    setSt({ msg: n ? `Scheduled ${n} post${n > 1 ? "s" : ""}. The server posts them on time, even with the app closed.` : "Nothing new to schedule.", errs });
+    qc.invalidateQueries({ queryKey: ["pubs"] });
+  };
+  return (
+    <li className="mb-3 grid gap-2 rounded-2xl border border-gold-deep/50 bg-gold-soft/40 p-4 text-sm dark:border-gold/30 dark:bg-gold/5">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <b className="flex items-center gap-2"><CalendarClock size={16} /> Auto-fill the calendar</b>
+        <label className="flex items-center gap-2 text-xs font-semibold">Next
+          <select id="autofill-weeks" value={weeks} onChange={(e) => setWeeks(+e.target.value)} className="rounded-md border border-parchment-deep bg-white/80 px-2 py-1 dark:border-night-700 dark:bg-night-950"><option value={1}>1 week</option><option value={2}>2 weeks</option><option value={4}>4 weeks</option></select></label>
+      </div>
+      <p>Schedules every <b>checked</b> reel below on its suggested day, each platform at its own best time (Instagram, YouTube{on.facebook ? ", Facebook" : ""}); about one post in five goes to a <b>test slot</b> so the timing keeps learning. {todo.length} reel{todo.length === 1 ? "" : "s"} ready to schedule{waiting.length ? `; ${waiting.length} waiting for your citation check (${waiting.slice(0, 5).map((x) => x.reel.code).join(", ")})` : ""}.</p>
+      <div><Button variant="primary" size="sm" disabled={!todo.length || st.busy} onClick={run}><CalendarClock size={14} /> {st.busy ? "Scheduling…" : `Schedule ${todo.length} reel${todo.length === 1 ? "" : "s"}`}</Button></div>
+      {st.msg && <p className="text-emerald-700 dark:text-emerald-300">{st.msg}</p>}
+      {st.errs?.map((e) => <p key={e} className="text-vermilion">{e}</p>)}
     </li>
   );
 }

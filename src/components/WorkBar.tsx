@@ -1,15 +1,12 @@
 import clsx from "clsx";
-import { Check, ChevronDown, ChevronUp, Circle, Hand, ListOrdered, Loader2 } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Circle, Hand, ListOrdered, Loader2, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useWorkStatus, type WorkStatus } from "../lib/api";
 
 // The live work panel: what Claude is doing, on which reel, how far along and how long is left, plus the render phases,
-// the queue of reels and recent events. Collapses into a small corner pill (remembered per browser).
+// the queue of reels and recent events. Every page shows a small strip/pill; tapping it opens the full view on its own page (/live).
 const STEPS = ["Research", "Script", "Voices", "Music", "Art", "Preview", "Masters", "Cover & upload"];
-const KEY = "workbar-collapsed";
-const readCollapsed = () => { try { return localStorage.getItem(KEY) === "1"; } catch { return false; } };
-const writeCollapsed = (v: boolean) => { try { localStorage.setItem(KEY, v ? "1" : "0"); } catch { /* private mode: not remembered */ } };
 
 const mins = (m: number | null | undefined) => {
   if (m === null || m === undefined || !isFinite(Number(m))) return null;
@@ -21,14 +18,34 @@ const ago = (iso: string) => {
   return s < 60 ? `${s}s ago` : s < 3600 ? `${Math.round(s / 60)} min ago` : `${Math.round(s / 3600)} h ago`;
 };
 
+const useTick = () => { const [, tick] = useState(0); useEffect(() => { const i = setInterval(() => tick((n) => n + 1), 5000); return () => clearInterval(i); }, []); };
+
 export default function WorkBar() {
   const { data: s } = useWorkStatus();
-  const [collapsed, setCollapsed] = useState(readCollapsed);
-  const [, tick] = useState(0);
-  useEffect(() => { const i = setInterval(() => tick((n) => n + 1), 5000); return () => clearInterval(i); }, []);
-  if (!s || s.state === "idle") return null;
-  const toggle = (v: boolean) => { setCollapsed(v); writeCollapsed(v); };
-  return collapsed ? <Pill s={s} onOpen={() => toggle(false)} /> : <Panel s={s} onClose={() => toggle(true)} />;
+  const nav = useNavigate(), loc = useLocation();
+  useTick();
+  if (!s || s.state === "idle" || loc.pathname === "/live") return null;
+  return <Pill s={s} onOpen={() => nav("/live")} />;
+}
+
+// the full live view, as its own page
+export function WorkPage() {
+  const { data: s, isLoading } = useWorkStatus();
+  const nav = useNavigate();
+  useTick();
+  const back = () => (window.history.length > 1 ? nav(-1) : nav("/"));
+  return (
+    <div className="grid gap-4">
+      <button onClick={back} className="flex w-fit items-center gap-1.5 text-sm font-semibold text-ink-soft hover:text-ink dark:text-parchment/60"><ArrowLeft size={16} /> Back</button>
+      <h1 className="font-display text-2xl font-extrabold tracking-wide sm:text-3xl">Live studio</h1>
+      <p className="-mt-2 text-sm text-ink-soft dark:text-parchment/60">What Claude is making right now, step by step.</p>
+      {isLoading ? <div className="h-40 animate-pulse rounded-3xl bg-night-900/20" />
+        : !s || s.state === "idle" ? (
+          <div className="flex items-center gap-3 rounded-3xl bg-night-900 p-6 text-parchment"><Moon size={22} className="text-gold" />
+            <div><div className="font-semibold">Nothing running right now.</div><div className="text-sm opacity-75">When Claude starts on reels, the live progress shows up here.</div></div></div>
+        ) : <Panel s={s} />}
+    </div>
+  );
 }
 
 function useMeta(s: WorkStatus) {
@@ -42,33 +59,34 @@ function useMeta(s: WorkStatus) {
 function Pill({ s, onOpen }: { s: WorkStatus; onOpen: () => void }) {
   const { waiting, stale, pct, left } = useMeta(s);
   const icon = (size: number) => waiting ? <Hand size={size} className="shrink-0" /> : <Loader2 size={size} className={clsx("shrink-0 text-gold", !stale && "animate-spin")} />;
-  const label = <span className="min-w-0 truncate">{waiting ? "Needs you" : s.reel_code ?? "Working"}{!waiting && s.task ? ` · ${s.task}` : ""}</span>;
+  const b = batchOf(s);
+  const label = <span className="min-w-0 truncate">{waiting ? "Needs you" : s.reel_code ?? "Working"}{!waiting && s.task ? ` · ${s.task}` : ""}{!waiting && b ? ` · reel ${b.doneN + (b.doneN < b.total ? 1 : 0)}/${b.total}` : ""}</span>;
   const nums = !waiting && <>{pct !== null && <span className="tabular shrink-0 opacity-80">{pct}%</span>}{left && <span className="shrink-0 opacity-70">· ~{left}</span>}</>;
   const tone = waiting ? "bg-amber-100 text-amber-950 dark:bg-amber-900 dark:text-amber-50" : "bg-night-900 text-parchment";
   return (
     <>
       <button onClick={onOpen} aria-label="Show what Claude is doing"
         className={clsx("flex w-full items-center gap-2 border-b px-4 py-1 text-[12px] font-semibold lg:hidden", tone, waiting ? "border-amber-300 dark:border-amber-700" : "border-gold/30")}>
-        {icon(13)}{label}{nums}<ChevronDown size={14} className="ml-auto shrink-0 opacity-70" />
+        {icon(13)}{label}{nums}<ChevronRight size={14} className="ml-auto shrink-0 opacity-70" />
       </button>
       <button onClick={onOpen} aria-label="Show what Claude is doing"
         className={clsx("fixed bottom-4 right-4 z-50 hidden max-w-md items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold shadow-lg ring-1 transition hover:scale-[1.02] lg:flex", tone, waiting ? "ring-amber-300 dark:ring-amber-700" : "ring-gold/40")}>
-        {icon(15)}{label}{nums}<ChevronUp size={15} className="shrink-0 opacity-70" />
+        {icon(15)}{label}{nums}<ChevronRight size={15} className="shrink-0 opacity-70" />
       </button>
     </>
   );
 }
 
-// expanded: the full panel under the header
-function Panel({ s, onClose }: { s: WorkStatus; onClose: () => void }) {
+// the full view (on /work)
+function Panel({ s }: { s: WorkStatus }) {
   const { waiting, stale, pct, left, queueLeft, since } = useMeta(s);
   const info = s.info ?? {};
   const elapsed = s.started_at ? mins((Date.now() - new Date(s.started_at).getTime()) / 60000) : null;
-  const phases = info.phases ?? [], queue = info.queue ?? [], events = (info.events ?? []).slice(-5).reverse();
+  const phases = info.phases ?? [], queue = info.queue ?? [], events = (info.events ?? []).slice(-12).reverse();
   return (
     <div role="status" aria-live="polite"
-      className={clsx("border-b px-4 py-3 text-[13px] sm:px-6 lg:px-10", waiting ? "border-amber-300 bg-amber-50 text-amber-950 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100" : "border-gold/40 bg-night-900 text-parchment")}>
-      <div className="mx-auto max-w-7xl">
+      className={clsx("rounded-3xl px-4 py-4 text-[13px] ring-1 sm:px-6", waiting ? "ring-amber-300 bg-amber-50 text-amber-950 dark:ring-amber-800 dark:bg-amber-950 dark:text-amber-100" : "ring-gold/40 bg-night-900 text-parchment")}>
+      <div>
         {/* headline */}
         <div className="flex items-start gap-2.5">
           {waiting ? <Hand size={18} className="mt-0.5 shrink-0" /> : <Loader2 size={18} className={clsx("mt-0.5 shrink-0 text-gold", !stale && "animate-spin")} />}
@@ -81,18 +99,16 @@ function Panel({ s, onClose }: { s: WorkStatus; onClose: () => void }) {
             <div className="mt-0.5 text-[15px] font-semibold">{s.task}</div>
             {s.detail && <div className="mt-0.5 text-xs opacity-75">{s.detail}</div>}
           </div>
-          <button onClick={onClose} className="flex shrink-0 items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold opacity-80 ring-1 ring-current/30 hover:opacity-100" aria-label="Hide the work panel">
-            Hide <ChevronDown size={14} />
-          </button>
         </div>
+
+        {/* batch: every reel of the current run, with its 8 steps */}
+        {info.batch && info.reels && <Batch info={info} current={s.reel_code} />}
 
         {/* progress */}
         {!waiting && (
           <div className="mt-2.5">
             <div className="flex items-center gap-2">
-              <div className="h-2 min-w-[80px] flex-1 overflow-hidden rounded-full bg-white/15">
-                <div className="h-full rounded-full bg-gold transition-[width] duration-700" style={{ width: `${Math.max(2, pct ?? 2)}%` }} />
-              </div>
+              <Bar pct={pct} />
               {pct !== null && <span className="tabular w-11 shrink-0 text-right text-xs font-semibold">{pct}%</span>}
             </div>
             <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] opacity-75">
@@ -160,6 +176,57 @@ function Panel({ s, onClose }: { s: WorkStatus; onClose: () => void }) {
             )}
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// overall batch numbers
+function batchOf(s: WorkStatus) {
+  const r = s.info?.reels, b = s.info?.batch; if (!r || !b) return null;
+  const codes = b.codes.filter((c) => r[c]); const doneN = codes.filter((c) => r[c].state === "done").length;
+  return { codes, doneN, total: codes.length, pct: Math.round(Number(s.info?.batch_pct ?? 0)), title: b.title };
+}
+
+// progress bar: animated stripes while working; a shimmer when there is no exact percentage yet
+function Bar({ pct, big = false }: { pct: number | null; big?: boolean }) {
+  return (
+    <div className={clsx("relative min-w-[80px] flex-1 overflow-hidden rounded-full bg-white/15 ring-1 ring-black/20", big ? "h-4" : "h-2.5")}>
+      {pct === null ? <div className="progress-shimmer absolute inset-0" />
+        : <div className="progress-stripes h-full rounded-full bg-gold transition-[width] duration-700" style={{ width: `${Math.max(3, pct)}%` }} />}
+    </div>
+  );
+}
+
+function Batch({ info, current }: { info: NonNullable<WorkStatus["info"]>; current: string | null }) {
+  const reels = info.reels ?? {}, codes = (info.batch?.codes ?? []).filter((c) => reels[c]);
+  const doneN = codes.filter((c) => reels[c].state === "done").length, pct = Math.round(Number(info.batch_pct ?? 0));
+  return (
+    <div className="mt-3 rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <div className="text-xs font-black uppercase tracking-wider text-gold">{info.batch?.title}</div>
+        <div className="text-xs font-semibold opacity-80"><span className="tabular">{doneN}</span> of <span className="tabular">{codes.length}</span> reels ready · <span className="tabular">{pct}%</span></div>
+      </div>
+      <div className="mt-2 flex items-center gap-2"><Bar pct={pct} big /></div>
+      <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
+        {codes.map((c) => {
+          const r = reels[c], st = r.state ?? "queued", step = r.step ?? 0, live = c === current && st === "running";
+          return (
+            <Link key={c} to={`/reels/${c}`} className={clsx("block rounded-xl p-2.5 ring-1 transition hover:ring-gold/60",
+              st === "done" ? "bg-gold/15 ring-gold/40" : live ? "bg-white/10 ring-gold" : "bg-white/5 ring-white/10")}>
+              <div className="flex items-center gap-1.5">
+                {st === "done" ? <Check size={14} className="text-gold" /> : live ? <Loader2 size={14} className="animate-spin text-gold" /> : <Circle size={11} className="opacity-60" />}
+                <span className="font-mono text-xs font-bold text-gold">{c}</span>
+                <span className="ml-auto text-[10px] font-semibold uppercase tracking-wider opacity-70">{st === "done" ? "Ready" : st === "queued" ? "Queued" : `Step ${step}/8`}</span>
+              </div>
+              <div className="mt-1 truncate text-[12px] font-semibold">{st === "done" ? "Ready for your review" : r.task ?? "Queued"}</div>
+              <div className="mt-2 flex gap-1" aria-label={`step ${step} of 8`}>
+                {STEPS.map((name, i) => { const n = i + 1, on = st === "done" || n < step, now = st !== "done" && n === step;
+                  return <span key={name} title={name} className={clsx("h-1.5 flex-1 rounded-full", on ? "bg-gold" : now ? (live ? "progress-stripes bg-gold/80" : "bg-gold/50") : "bg-white/15")} />; })}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

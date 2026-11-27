@@ -76,6 +76,31 @@ export async function instagramToken(): Promise<{ token: string; user_id: string
   return { token: ig.access_token, user_id: ig.user_id, api_base: ig.api_base ?? IG_API };
 }
 
+/** The Facebook Page the reels go to: the Page linked to the connected Instagram account (or FB_PAGE_ID).
+ *  Exchanges the Meta login for a long-lived user token once, then keeps the Page token (Page tokens from a
+ *  long-lived user token do not expire). Needs pages_show_list + pages_manage_posts + pages_read_engagement. */
+export async function facebookPage(refresh = false): Promise<{ page_id: string; page_name: string; token: string }> {
+  const cached = await getIntegration("facebook");
+  if (cached?.page_token && !refresh) return { page_id: cached.page_id, page_name: cached.page_name, token: cached.page_token };
+  const ig = await getIntegration("instagram"), app = await getIntegration("meta_app");
+  if (!ig?.access_token) throw new Error("Connect Instagram first: the Facebook Page uses the same Meta login");
+  let user = ig.access_token as string;
+  if (app?.app_id && app?.app_secret) {
+    const q = new URLSearchParams({ grant_type: "fb_exchange_token", client_id: app.app_id, client_secret: app.app_secret, fb_exchange_token: user });
+    const t = await (await fetch(`${FB_GRAPH}/oauth/access_token?${q}`)).json();
+    if (t.access_token) user = t.access_token;
+  }
+  const r = await (await fetch(`${FB_GRAPH}/me/accounts?fields=id,name,access_token,tasks,instagram_business_account{id}&limit=50&access_token=${encodeURIComponent(user)}`)).json();
+  if (r.error) throw new Error(`Meta refused to list your Pages: ${r.error.message}`);
+  const pages = (r.data ?? []) as any[];
+  const want = Deno.env.get("FB_PAGE_ID");
+  const page = pages.find((p) => want && p.id === want) ?? pages.find((p) => p.instagram_business_account?.id === ig.user_id) ?? (pages.length === 1 ? pages[0] : null);
+  if (!page?.access_token) throw new Error(pages.length ? `Found Pages ${pages.map((p) => p.name).join(", ")} but none is linked to @${ig.username ?? "your Instagram"}` : "This Meta login shares no Facebook Page. Reconnect Instagram and pick your channel's Facebook Page (with pages_manage_posts allowed).");
+  if (Array.isArray(page.tasks) && !page.tasks.some((t: string) => t === "CREATE_CONTENT" || t === "MANAGE")) throw new Error(`You can't post on ${page.name}: ask for a content role on the Page`);
+  await setIntegration("facebook", { page_id: page.id, page_name: page.name, page_token: page.access_token, username: page.name, user_id: page.id });
+  return { page_id: page.id, page_name: page.name, token: page.access_token };
+}
+
 /** Find + verify the Instagram professional account a Meta token can publish to.
  *  Order: account ID given by the user → assets granted to this token (debug_token granular scopes)
  *  → Pages' linked Instagram accounts → Instagram accounts owned by the token's business portfolios. */
@@ -86,6 +111,8 @@ export async function resolveInstagramFromToken(token: string, givenId?: string)
   const candidates: string[] = [];
   const notes: string[] = [];
   if (givenId) candidates.push(givenId.trim());
+  const known = Deno.env.get("IG_USER_ID");   // the channel's own Instagram account ID, tried directly
+  if (known) candidates.push(known.trim());
   const app = await getIntegration("meta_app");
   if (app?.app_id && app?.app_secret) {
     const dbg = await (await fetch(`${FB_GRAPH}/debug_token?input_token=${encodeURIComponent(token)}&access_token=${encodeURIComponent(`${app.app_id}|${app.app_secret}`)}`)).json();
@@ -93,9 +120,11 @@ export async function resolveInstagramFromToken(token: string, givenId?: string)
     notes.push(`granted: ${scopes.map((x) => `${x.scope}(${(x.target_ids ?? []).length})`).join(", ") || dbg.error?.message || "none"}`);
     for (const sc of scopes) if (/^instagram/.test(sc.scope)) for (const id of sc.target_ids ?? []) candidates.push(id);
   }
-  const pages = await g("me/accounts?fields=instagram_business_account{id,username}&limit=50");
+  const pages = await g("me/accounts?fields=name,instagram_business_account{id,username}&limit=50");
+  notes.push(`pages: ${pages.error ? pages.error.message : (pages.data ?? []).map((p: any) => `${p.name}${p.instagram_business_account ? "+IG" : ""}`).join("/") || "none"}`);
   for (const p of pages.data ?? []) if (p.instagram_business_account?.id) candidates.push(p.instagram_business_account.id);
   const biz = await g("me/businesses?fields=id&limit=10");
+  notes.push(`businesses: ${biz.error ? biz.error.message : (biz.data ?? []).length}`);
   for (const b of biz.data ?? []) {
     for (const edge of ["owned_instagram_accounts", "instagram_business_accounts", "instagram_accounts"]) {
       const r = await g(`${b.id}/${edge}?fields=id,username&limit=25`);
@@ -107,5 +136,5 @@ export async function resolveInstagramFromToken(token: string, givenId?: string)
     if (a.id && !a.error) return { user_id: String(a.id), username: a.username ?? null };
     notes.push(`${id}: ${a.error?.message ?? "no access"}`);
   }
-  throw new Error(`No Instagram account is attached to this login. When Meta asks which assets to share, pick ${IG_HANDLE} under "Instagram account". (${notes.join("; ").slice(0, 300)})`);
+  throw new Error(`No Instagram account is attached to this login. When Meta asks which assets to share, pick ${IG_HANDLE} under "Instagram account". (${notes.join("; ").slice(0, 600)})`);
 }

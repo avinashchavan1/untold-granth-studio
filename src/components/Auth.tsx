@@ -40,7 +40,7 @@ const Shell = ({ children }: { children: ReactNode }) => (
   <div className="grid min-h-full place-items-center bg-night-950 px-4 py-10 text-parchment">
     <div className="w-full max-w-md rounded-3xl border border-night-700 bg-night-900 p-8 shadow-2xl">
       <div className="mb-6 flex items-center gap-3">
-        <img src="/favicon.svg" alt="" className="h-10 w-10" />
+        <img src={__APP_ICON__} alt="" className="h-10 w-10 rounded-lg" />
         <div>
           <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">Studio</div>
           <div className="font-display text-xl font-extrabold tracking-wider">{CHANNEL.name}</div>

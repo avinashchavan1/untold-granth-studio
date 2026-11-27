@@ -1,14 +1,21 @@
 import clsx from "clsx";
-import { BadgeCheck, CalendarRange, BookOpen, Clapperboard, Lightbulb, LayoutDashboard, ListOrdered, LogOut, Menu, MonitorPlay, MoreHorizontal, Settings, Users, X } from "lucide-react";
-import { useState } from "react";
+import { Activity, BadgeCheck, BarChart3, Radar, CalendarRange, BookOpen, Clapperboard, Lightbulb, LayoutDashboard, ListOrdered, LogOut, Menu, MonitorPlay, MoreHorizontal, Settings, Users, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { setPeerLayer } from "../lib/bestTime";
 import { NavLink, Outlet } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { useSession } from "./Auth";
 import WorkBar from "./WorkBar";
+import HealthBanner from "./HealthBanner";
+import { useWorkStatus } from "../lib/api";
 import { CHANNEL } from "../lib/channel";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/live", label: "Live studio", icon: Activity },
+  { to: "/stats", label: "Stats", icon: BarChart3 },
+  { to: "/best-time", label: "Best time", icon: Radar },
   { to: "/timeline", label: "Timeline", icon: CalendarRange },
   { to: "/reels", label: "Reels", icon: Clapperboard },
   { to: "/ideas", label: "Ideas", icon: Lightbulb },
@@ -30,13 +37,18 @@ const TABS = [
 export default function Layout() {
   const session = useSession();
   const [open, setOpen] = useState(false);
+  const ws = useWorkStatus().data;
+  // similar-channels layer for every best-time decision in the app (Timeline auto-fill, Post everywhere, Stats panel)
+  const tm = useQuery({ queryKey: ["timing_model"], staleTime: 30 * 60e3, queryFn: async () => { const { data } = await supabase.from("timing_model").select("platform,grid,parts"); return data ?? []; } });
+  useEffect(() => { if (tm.data) setPeerLayer(tm.data as never); }, [tm.data]);
+  const live = !!ws && ws.state !== "idle";
   const nav = (
     <nav className="grid gap-1">
       {NAV.map(({ to, label, icon: Icon, end }) => (
         <NavLink key={to} to={to} end={end} onClick={() => setOpen(false)}
           className={({ isActive }) => clsx("flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-semibold transition",
             isActive ? "bg-gold text-night-950" : "text-parchment/80 hover:bg-night-800 hover:text-parchment")}>
-          <Icon size={18} /> {label}
+          <Icon size={18} /> {label}{to === "/live" && live && <span className="ml-auto flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-vermilion opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-vermilion" /></span>{ws?.state === "waiting" ? "you" : "on"}</span>}
         </NavLink>
       ))}
     </nav>
@@ -58,6 +70,7 @@ export default function Layout() {
         </header>
         <WorkBar />
         </div>
+        <HealthBanner />
         {open && (
           <div className="fixed inset-0 z-30 bg-black/50 lg:hidden" onClick={() => setOpen(false)}>
             <div className="h-full w-72 bg-night-950 p-5 text-parchment" onClick={(e) => e.stopPropagation()}>
@@ -84,7 +97,7 @@ export default function Layout() {
 
 const Brand = () => (
   <div className="flex items-center gap-3">
-    <img src="/favicon.svg" alt="" className="h-9 w-9" />
+    <img src={__APP_ICON__} alt="" className="h-9 w-9 rounded-lg" />
     <div className="leading-tight">
       <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">Studio</div>
       <div className="font-display text-lg font-extrabold tracking-wider">{CHANNEL.name}</div>

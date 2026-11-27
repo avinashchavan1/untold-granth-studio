@@ -21,6 +21,7 @@ s = json.load(open(os.path.join(REEL, "src", "script.json"), encoding="utf-8"));
 T = s.get("thumbnail") or sys.exit("script.json has no 'thumbnail' block (see engine/py/thumbnail.py)")
 pal = ser.get("palette", {}); GOLD = pal.get("gold", "#f6c244"); IVORY = pal.get("ivory", "#fbf3df"); RED = pal.get("red", "#c81e1e"); INK = pal.get("ink", "#07061a")
 W, H, SAFE_TOP, SAFE_BOT = 1080, 1920, 240, 1680
+CV = ser.get("cover", {}); TF, TV = CV.get("title_font", "Cinzel.ttf"), CV.get("title_var")   # series.json → cover: {title_font, title_var, mark: "diya"|"eyes"}
 
 def font(name, size, var=None):
     for d in FONTS:
@@ -88,9 +89,15 @@ img.alpha_composite(Image.composite(Image.new("RGBA", (W, H), rgb(INK)), Image.n
 d = ImageDraw.Draw(img)
 
 # series label with the diya mark
-lab = (ser.get("series_name") or ser.get("logo", "")).upper(); fl = font("Cinzel.ttf", 34, "Bold")
-lw = d.textlength(lab, font=fl) + 6 * len(lab); x0 = (W - lw - 46) / 2
-diya(d, x0 + 16, SAFE_TOP + 52, 16, rgb(GOLD)); xx = x0 + 46
+lab = (ser.get("series_name") or ser.get("logo", "")).upper(); fl = font(TF, 34, TV or "Bold")
+mw = 70 if CV.get("mark") == "eyes" else 46
+lw = d.textlength(lab, font=fl) + 6 * len(lab); x0 = (W - lw - mw) / 2
+if CV.get("mark") == "eyes":
+    for ex in (x0 + 14, x0 + 46):
+        d.ellipse((ex - 14, SAFE_TOP + 31, ex + 14, SAFE_TOP + 59), fill=rgb(IVORY), outline=rgb(INK), width=4)
+        d.ellipse((ex - 2, SAFE_TOP + 35, ex + 10, SAFE_TOP + 47), fill=rgb(INK))
+else: diya(d, x0 + 16, SAFE_TOP + 52, 16, rgb(GOLD))
+xx = x0 + mw
 for ch in lab: d.text((xx, SAFE_TOP + 30), ch, font=fl, fill=rgb(GOLD)); xx += d.textlength(ch, font=fl) + 6
 y = SAFE_TOP + 96
 
@@ -113,7 +120,7 @@ if T.get("stamp"):
     img.alpha_composite(shd.filter(ImageFilter.GaussianBlur(10))); img.alpha_composite(st, (int((W - st.width) / 2), y + 12)); d = ImageDraw.Draw(img)
 
 # payoff line + verse badge at the bottom of the safe area
-fe, el = fit(d, T.get("line", "").upper(), "Cinzel.ttf", "Black", 62, 950, 2)
+fe, el = fit(d, T.get("line", "").upper(), TF, TV or "Black", 62, 950, 2)
 fb = font("Montserrat.ttf", 31, "SemiBold"); badge = T.get("badge") or s.get("source", "")
 bw, bh = d.textlength(badge, font=fb) + 70, 70; by = SAFE_BOT - 40 - bh
 ey = by - 34 - len(el) * int(fe.size * 1.16)

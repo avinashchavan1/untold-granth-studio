@@ -1,5 +1,8 @@
 // Admin actions from the app: connections, OAuth start, "Post now", and "Apply brand to YouTube".
-import { admin, cors, FB_GRAPH, FN_URL, getIntegration, instagramToken, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256, youtubeAccessToken } from "../_shared/util.ts";
+import { healthCheck, refreshStats } from "../_shared/stats.ts";
+import { addPeer, buildModel, discoverPeers, runAutopilot, scanPeers } from "../_shared/timing.ts";
+import { checkPublish, PLATFORMS, PublishError, startPublish } from "../_shared/publish.ts";
+import { admin, cors, facebookPage, FB_GRAPH, FN_URL, getIntegration, instagramToken, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256, youtubeAccessToken } from "../_shared/util.ts";
 
 const YT = "https://www.googleapis.com/youtube/v3";
 const YT_UP = "https://www.googleapis.com/upload/youtube/v3";
@@ -43,7 +46,7 @@ async function applyYouTubeBrand(email: string): Promise<Step[]> {
     await yt("PUT", `${YT}/channels?part=brandingSettings`, JSON.stringify({ id: ch.id, brandingSettings: { ...b, channel, ...(image ? { image } : {}) } }));
     return `${p.description.length} chars, ${p.keywords.length} keywords`;
   });
-  await run("Video watermark (diya, top-right corner)", async () => {
+  await run("Video watermark (logo, top-right corner)", async () => {
     const img = new Uint8Array(await (await file("youtube_watermark_300.png")).arrayBuffer());
     const meta = JSON.stringify({ timing: { type: "offsetFromStart", offsetMs: 0 }, position: { type: "corner", cornerPosition: "topRight" } });
     const boundary = "ugb" + randomToken(8);
@@ -65,6 +68,42 @@ async function applyYouTubeBrand(email: string): Promise<Step[]> {
   });
   await admin.from("channels").update({ applied: { at: new Date().toISOString(), by: email, steps } }).eq("platform", "youtube");
   await admin.from("activity").insert({ actor: email, action: "youtube: brand applied", detail: { ok: steps.filter((s) => s.ok).length, of: steps.length } });
+  return steps;
+}
+
+/** Facebook Page branding through the Page API: intro (about), description, website, cover photo, profile picture.
+ *  Each step reports on its own (Meta can refuse one field and accept the others). Needs pages_manage_metadata
+ *  (settings) and pages_manage_posts (photo uploads) on the Meta login. */
+async function applyFacebookBrand(email: string) {
+  const steps: { step: string; ok: boolean; detail?: string }[] = [];
+  const pg = await facebookPage(true);
+  const { data: row } = await admin.from("channels").select("profile").eq("platform", "facebook").single();
+  const p = (row?.profile ?? {}) as Record<string, any>;
+  if (!p.intro) throw new Error("No Facebook profile saved yet: run scripts/brand.py");
+  const fb = async (method: string, path: string, params: Record<string, string>) => {
+    const r = await fetch(`${FB_GRAPH}/${path}`, { method, headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ ...params, access_token: pg.token }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || j.error) {
+      const m = j.error?.message ?? `${r.status}`;
+      throw new Error(/permission|\(#(200|10|3)\)/i.test(m) ? `${m}. Add pages_manage_metadata (and pages_manage_posts) to the Meta login, then press Connect Instagram again.` : m);
+    }
+    return j;
+  };
+  const signed = async (name: string) => { const { data } = await admin.storage.from("reel-media").createSignedUrl(`brand/${name}`, 3600); if (!data?.signedUrl) throw new Error(`brand/${name} missing: run scripts/brand.py`); return data.signedUrl; };
+  const run = async (step: string, fn: () => Promise<string | undefined>) => {
+    try { steps.push({ step, ok: true, detail: await fn() }); } catch (e) { steps.push({ step, ok: false, detail: e instanceof Error ? e.message : String(e) }); }
+  };
+  await run("Intro (bio)", async () => { await fb("POST", pg.page_id, { about: p.intro }); return `${[...p.intro].length}/101 chars`; });
+  await run("About / description", async () => { await fb("POST", pg.page_id, { description: p.about }); return `${p.about.length} chars`; });
+  await run("Website", async () => { await fb("POST", pg.page_id, { website: p.website }); return p.website; });
+  await run("Cover photo (1640×924)", async () => {
+    const ph = await fb("POST", `${pg.page_id}/photos`, { url: await signed("facebook_cover_1640x924.jpg"), published: "false" });
+    await fb("POST", pg.page_id, { cover: ph.id, no_feed_story: "true" });
+    return "set";
+  });
+  await run("Profile picture", async () => { await fb("POST", `${pg.page_id}/picture`, { picture: await signed("avatar_1080.png") }); return "set"; });
+  await admin.from("channels").update({ applied: { at: new Date().toISOString(), by: email, steps, page: pg.page_name } }).eq("platform", "facebook");
+  await admin.from("activity").insert({ actor: email, action: "facebook: brand applied", detail: { ok: steps.filter((s) => s.ok).length, of: steps.length } });
   return steps;
 }
 
@@ -119,6 +158,10 @@ Deno.serve(async (req) => {
           return json({ ok: true, username: ig.username });
         } catch (e) { return json({ error: e instanceof Error ? e.message : String(e) }, 400); }
       }
+      case "facebook_page": {      // find (or re-find) the Facebook Page from the Instagram/Meta login
+        try { const pg = await facebookPage(true); await admin.from("activity").insert({ actor: email, action: "connected facebook page", detail: { page: pg.page_name } }); return json({ ok: true, page: pg.page_name }); }
+        catch (e) { return json({ error: e instanceof Error ? e.message : String(e) }, 400); }
+      }
       case "disconnect": {
         await admin.from("integrations").delete().eq("provider", body.provider);
         await admin.from("activity").insert({ actor: email, action: `disconnected ${body.provider}` });
@@ -146,42 +189,43 @@ Deno.serve(async (req) => {
         }
         return json({ error: "unknown provider" }, 400);
       }
-      case "publish": {
-        const { reel_id, platform } = body;
-        if (!["youtube", "instagram"].includes(platform)) return json({ error: "Auto-posting is available for Instagram and YouTube" }, 400);
-        const { data: reel } = await admin.from("reels").select("id,code,reviewed,kind").eq("id", reel_id).single();
-        if (!reel) return json({ error: "reel not found" }, 404);
-        if (reel.kind === "longform" && platform !== "youtube") return json({ error: "Full-length videos post to YouTube only" }, 400);
-        if (!reel.reviewed) return json({ error: "Tick the citation check before posting" }, 400);
-        const kind = platform === "youtube" ? "master_youtube" : "master_instagram";
-        const { data: master } = await admin.from("files").select("id").eq("reel_id", reel_id).eq("kind", kind).maybeSingle();
-        if (!master) return json({ error: `No ${platform} master attached to ${reel.code}` }, 400);
-        const need = platform === "youtube" ? ["github", "huggingface", "google_app", "youtube"] : ["github", "huggingface", "instagram"];
-        for (const p of need) if (!(await getIntegration(p))) return json({ error: `Connect ${p.replace("_app", "")} first (Settings → Connections)` }, 400);
-        const { data: running } = await admin.from("publish_jobs").select("id").eq("reel_id", reel_id).eq("platform", platform).in("status", ["queued", "running"]).maybeSingle();
-        if (running) return json({ error: "Already posting this reel to " + platform }, 409);
-
-        const token = randomToken();
-        const { data: job, error } = await admin.from("publish_jobs").insert({
-          reel_id, platform, requested_by: email, token_hash: await sha256(token), token_expires_at: new Date(Date.now() + 3 * 3600e3).toISOString(),
-          options: { privacy: body.options?.privacy ?? "public" }, step: "queued", log: `Queued by ${email}\n`,
-        }).select("id").single();
-        if (error || !job) return json({ error: error?.message ?? "could not create job" }, 500);
-        await admin.from("publications").upsert({ reel_id, platform, state: "posting" }, { onConflict: "reel_id,platform" });
-        const gh = await getIntegration("github");
-        const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/publish.yml/dispatches`, {
-          method: "POST",
-          headers: { Authorization: `Bearer ${gh!.token}`, Accept: "application/vnd.github+json", "User-Agent": "storyreel-studio", "Content-Type": "application/json" },
-          body: JSON.stringify({ ref: "main", inputs: { job_id: job.id, job_token: token, api: `${FN_URL}/job` } }),
-        });
-        if (!r.ok) {
-          const msg = `GitHub did not start the publisher (${r.status}): ${(await r.text()).slice(0, 200)}`;
-          await admin.from("publish_jobs").update({ status: "failed", step: "dispatch", log: msg, finished_at: new Date().toISOString(), token_hash: null }).eq("id", job.id);
-          await admin.from("publications").upsert({ reel_id, platform, state: "failed" }, { onConflict: "reel_id,platform" });
-          return json({ error: msg }, 502);
+      case "publish": {              // one platform, now
+        try { return json({ ok: true, job_id: await startPublish(body.reel_id, body.platform, body.options ?? {}, email) }); }
+        catch (e) { return json({ error: e instanceof Error ? e.message : String(e) }, e instanceof PublishError ? e.status : 500); }
+      }
+      case "publish_all": {          // several platforms, now; each one succeeds or fails on its own
+        const results: Record<string, { ok: boolean; job_id?: string; error?: string }> = {};
+        for (const pl of (body.platforms ?? []) as string[]) {
+          try { results[pl] = { ok: true, job_id: await startPublish(body.reel_id, pl, body.options ?? {}, email) }; }
+          catch (e) { results[pl] = { ok: false, error: e instanceof Error ? e.message : String(e) }; }
         }
-        await admin.from("activity").insert({ actor: email, reel_id, action: `${platform}: posting started`, detail: { code: reel.code, job: job.id } });
-        return json({ ok: true, job_id: job.id });
+        return json({ ok: Object.values(results).every((r) => r.ok), results });
+      }
+      case "schedule": {             // several platforms, at one time (the timer starts them; see runDue)
+        const at = new Date(String(body.at ?? ""));
+        if (isNaN(at.getTime())) return json({ error: "Pick a date and time" }, 400);
+        if (at.getTime() < Date.now() + 60_000) return json({ error: "Pick a time at least a minute from now (or use Post now)" }, 400);
+        const results: Record<string, { ok: boolean; error?: string }> = {};
+        for (const pl of (body.platforms ?? []) as string[]) {
+          try {
+            await checkPublish(body.reel_id, pl);
+            const { data: cur } = await admin.from("publications").select("state").eq("reel_id", body.reel_id).eq("platform", pl).maybeSingle();
+            if (cur?.state === "posted" || cur?.state === "posting") throw new Error(cur.state === "posted" ? "Already posted" : "Posting right now");
+            const { error } = await admin.from("publications").upsert({ reel_id: body.reel_id, platform: pl, state: "scheduled", scheduled_for: at.toISOString(),
+              schedule_options: body.options ?? {}, scheduled_by: email, last_error: null }, { onConflict: "reel_id,platform" });
+            if (error) throw new Error(error.message);
+            results[pl] = { ok: true };
+          } catch (e) { results[pl] = { ok: false, error: e instanceof Error ? e.message : String(e) }; }
+        }
+        const okN = Object.values(results).filter((r) => r.ok).length;
+        if (okN) await admin.from("activity").insert({ actor: email, reel_id: body.reel_id, action: `scheduled for ${at.toISOString()}`, detail: { platforms: Object.keys(results).filter((k) => results[k].ok) } });
+        return json({ ok: okN === Object.keys(results).length, results, at: at.toISOString() });
+      }
+      case "unschedule": {
+        const pls = (body.platforms ?? [...PLATFORMS]) as string[];
+        await admin.from("publications").update({ state: "todo", scheduled_for: null, scheduled_by: null }).eq("reel_id", body.reel_id).eq("state", "scheduled").in("platform", pls);
+        await admin.from("activity").insert({ actor: email, reel_id: body.reel_id, action: "schedule cancelled", detail: { platforms: pls } });
+        return json({ ok: true });
       }
       case "youtube_update": {      // push the app's title/description/tags to an already-posted YouTube video
         const { data: reel } = await admin.from("reels").select("id,code,title,captions,hashtags").eq("id", body.reel_id).single();
@@ -200,51 +244,45 @@ Deno.serve(async (req) => {
         await admin.from("activity").insert({ actor: email, reel_id: reel.id, action: "youtube: title/description updated", detail: { code: reel.code } });
         return json({ ok: true });
       }
-      case "refresh_stats": {       // views / likes / comments for every posted reel (trial comparison on the Dashboard)
-        const { data: pubs } = await admin.from("publications").select("id,platform,external_id").eq("state", "posted").not("external_id", "is", null);
-        const out: Record<string, unknown>[] = [];
-        let ytTok: string | null = null, ig: { token: string; api_base: string } | null = null;
-        for (const p of pubs ?? []) {
-          try {
-            let stats: Record<string, number | null> = {};
-            if (p.platform === "youtube") {
-              ytTok ??= await youtubeAccessToken();
-              const it = (await (await fetch(`${YT}/videos?part=statistics,status,contentDetails&id=${p.external_id}`, { headers: { Authorization: `Bearer ${ytTok}` } })).json()).items?.[0] ?? {};
-              const v = it.statistics ?? {}, st = it.status ?? {};
-              stats = { views: +v.viewCount || 0, likes: +v.likeCount || 0, comments: +v.commentCount || 0 };
-              // retention (YouTube Analytics; needs the yt-analytics.readonly scope: "Reconnect YouTube" once): average % viewed, average view time,
-              // and the audience-retention curve (share of viewers still watching at each 1% of the video), for format tests like the śloka position
-              try {
-                const A = "https://youtubeanalytics.googleapis.com/v2/reports", end = new Date().toISOString().slice(0, 10), base = `ids=channel==MINE&startDate=2024-01-01&endDate=${end}&filters=video==${p.external_id}`;
-                const sum = await (await fetch(`${A}?${base}&metrics=views,averageViewDuration,averageViewPercentage`, { headers: { Authorization: `Bearer ${ytTok}` } })).json();
-                if (sum.error) (stats as Record<string, unknown>).analytics_error = String(sum.error.message ?? sum.error).slice(0, 200);
-                else {
-                  const r0 = sum.rows?.[0]; if (r0) { stats.avg_view_s = r0[1]; stats.avg_view_pct = r0[2]; }
-                  const cur = await (await fetch(`${A}?${base}&metrics=audienceWatchRatio,relativeRetentionPerformance&dimensions=elapsedVideoTimeRatio&sort=elapsedVideoTimeRatio`, { headers: { Authorization: `Bearer ${ytTok}` } })).json();
-                  if (cur.rows) (stats as Record<string, unknown>).retention = cur.rows.map((r: number[]) => [r[0], Math.round(r[1] * 1000) / 1000, Math.round(r[2] * 1000) / 1000]);
-                  const dur = it.contentDetails?.duration; if (dur) (stats as Record<string, unknown>).duration = dur;
-                }
-              } catch (e) { (stats as Record<string, unknown>).analytics_error = e instanceof Error ? e.message : String(e); }
-              (stats as Record<string, unknown>).status = { privacy: st.privacyStatus, upload: st.uploadStatus, made_for_kids: st.madeForKids, self_declared_kids: st.selfDeclaredMadeForKids,
-                age_restricted: it.contentDetails?.contentRating?.ytRating === "ytAgeRestricted", rejection: st.rejectionReason ?? null, license: st.license };
-            } else if (p.platform === "instagram") {
-              if (!ig) { const t = await instagramToken(); ig = { token: t.token, api_base: t.api_base }; }
-              const q = (path: string) => fetch(`${ig!.api_base}/${path}${path.includes("?") ? "&" : "?"}access_token=${encodeURIComponent(ig!.token)}`).then((r) => r.json());
-              const m = await q(`${p.external_id}?fields=like_count,comments_count`);
-              stats = { likes: m.like_count ?? null, comments: m.comments_count ?? null };
-              const ins = await q(`${p.external_id}/insights?metric=views,reach,saved,shares`);
-              for (const d of ins.data ?? []) stats[d.name] = d.values?.[0]?.value ?? d.total_value?.value ?? null;
-              if (ins.error) (stats as Record<string, unknown>).insights_error = String(ins.error.message ?? ins.error).slice(0, 200);
-            } else continue;
-            await admin.from("publications").update({ stats, stats_at: new Date().toISOString() }).eq("id", p.id);
-            out.push({ id: p.id, ...stats });
-          } catch (e) { out.push({ id: p.id, error: e instanceof Error ? e.message : String(e) }); }
-        }
-        return json({ ok: true, updated: out });
+      case "refresh_stats": {       // "Refresh now": everything, at most once per 10 minutes (the timer refreshes hourly anyway)
+        const { data: ch } = await admin.from("channels").select("stats_refreshed_at").eq("platform", "youtube").maybeSingle();
+        const ago = ch?.stats_refreshed_at ? Date.now() - new Date(ch.stats_refreshed_at).getTime() : Infinity;
+        if (ago < 10 * 60e3) return json({ ok: true, cooldown: Math.ceil((10 * 60e3 - ago) / 60e3), note: "Refreshed less than 10 minutes ago" });
+        await admin.from("channels").update({ stats_refreshed_at: new Date().toISOString() }).eq("platform", "youtube");
+        return json({ ok: true, ...(await refreshStats(false)) });
       }
-      case "youtube_set_covers": {   // after channel verification: put our designed cover on every posted YouTube video
+      case "timing_rescan": {        // Best time page → "Rescan now" (at most every 10 minutes: YouTube quota + Meta limits)
+        const { data: last } = await admin.from("timing_model").select("updated_at").order("updated_at", { ascending: false }).limit(1).maybeSingle();
+        if (last?.updated_at && Date.now() - new Date(last.updated_at).getTime() < 10 * 60e3 && !body.force_discover) return json({ ok: true, cooldown: true });
+        if (body.force_discover) await discoverPeers();
+        return json({ ok: true, scanned: await scanPeers(), model: await buildModel() });
+      }
+      case "peer_add": {
+        try { const name = await addPeer(body.platform, String(body.handle ?? "")); return json({ ok: true, name }); }
+        catch (e) { return json({ error: e instanceof Error ? e.message : String(e) }, 400); }
+      }
+      case "peer_toggle": {
+        await admin.from("peers").update({ active: !!body.active }).eq("id", body.id);
+        return json({ ok: true });
+      }
+      case "autopilot_set": {
+        const patch: Record<string, unknown> = { updated_by: email, updated_at: new Date().toISOString() };
+        for (const k of ["enabled", "platforms", "days_ahead", "post_days"]) if (k in body) patch[k] = body[k];
+        await admin.from("autopilot").update(patch).eq("id", 1);
+        await admin.from("activity").insert({ actor: email, action: `autopilot ${body.enabled === false ? "turned off" : body.enabled ? "turned on" : "settings changed"}`, detail: patch });
+        return json({ ok: true, ...(body.enabled ? { run: await runAutopilot() } : {}) });
+      }
+      case "autopilot_run": {
+        return json({ ok: true, ...(await runAutopilot()) });
+      }
+      case "health": {              // connection / token / failed-post checks for the banner (also runs daily)
+        return json({ ok: true, ...(await healthCheck()) });
+      }
+      case "youtube_set_covers": {   // put our designed cover on ONE posted YouTube video (reel_id); the app calls it per reel
+        if (!body.reel_id) return json({ error: "reel_id required: covers are set one video at a time" }, 400);
         const tok = await youtubeAccessToken();
-        const { data: pubs } = await admin.from("publications").select("reel_id,external_id").eq("platform", "youtube").eq("state", "posted").not("external_id", "is", null);
+        const { data: pubs } = await admin.from("publications").select("reel_id,external_id").eq("platform", "youtube").eq("state", "posted").eq("reel_id", body.reel_id).not("external_id", "is", null);
+        if (!pubs?.length) return json({ error: "This reel has no posted YouTube video yet" }, 400);
         const out: Record<string, unknown>[] = [];
         for (const p of pubs ?? []) {
           const { data: f } = await admin.from("files").select("path").eq("reel_id", p.reel_id).eq("kind", "thumbnail").eq("store", "supabase").order("created_at", { ascending: false }).limit(1).maybeSingle();
@@ -254,8 +292,12 @@ Deno.serve(async (req) => {
           const r = await fetch(`${YT_UP}/thumbnails/set?videoId=${p.external_id}&uploadType=media`, { method: "POST", headers: { Authorization: `Bearer ${tok}`, "Content-Type": "image/jpeg" }, body: img });
           out.push({ video: p.external_id, ok: r.ok, detail: r.ok ? "cover set" : ((await r.json().catch(() => ({}))).error?.message ?? r.status) });
         }
-        await admin.from("activity").insert({ actor: email, action: "youtube: covers applied", detail: { results: out } });
+        await admin.from("activity").insert({ actor: email, action: "youtube: cover applied", detail: { reel_id: body.reel_id, results: out } });
         return json({ ok: out.every((o) => o.ok), results: out });
+      }
+      case "facebook_brand": {
+        const steps = await applyFacebookBrand(email);
+        return json({ ok: steps.every((s) => s.ok), steps });
       }
       case "youtube_brand": {
         const steps = await applyYouTubeBrand(email);
