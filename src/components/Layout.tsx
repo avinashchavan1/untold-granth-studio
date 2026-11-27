@@ -27,11 +27,12 @@ const NAV = [
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 
-const TABS = [
+const TABS = [   // phone: the pages used most (Ideas and the rest are under More)
   { to: "/", label: "Home", icon: LayoutDashboard, end: true },
+  { to: "/live", label: "Live", icon: Activity },
   { to: "/timeline", label: "Timeline", icon: CalendarRange },
   { to: "/reels", label: "Reels", icon: Clapperboard },
-  { to: "/ideas", label: "Ideas", icon: Lightbulb },
+  { to: "/stats", label: "Stats", icon: BarChart3 },
 ];
 
 export default function Layout() {
@@ -82,7 +83,7 @@ export default function Layout() {
         )}
         <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-28 pt-5 sm:px-6 lg:px-10 lg:py-10"><Outlet /></main>
         {/* phone: thumb-reach tab bar with the pages used most */}
-        <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t border-night-800 bg-night-950/95 text-parchment backdrop-blur lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-label="Main">
+        <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-6 border-t border-night-800 bg-night-950/95 text-parchment backdrop-blur lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-label="Main">
           {TABS.map(({ to, label, icon: Icon, end }) => (
             <NavLink key={to} to={to} end={end} className={({ isActive }) => clsx("flex flex-col items-center gap-0.5 py-2 text-[11px] font-semibold", isActive ? "text-gold" : "text-parchment/70")}>
               <Icon size={22} /> {label}
