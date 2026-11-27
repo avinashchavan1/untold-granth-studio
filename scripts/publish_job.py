@@ -160,11 +160,13 @@ def instagram(spec, path):
             except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ConnectionError) as e:
                 return (e.read().decode(errors="replace") if isinstance(e, urllib.error.HTTPError) else f"{type(e).__name__}: {e}")[:300]
     errors = []
-    def wait_processing(cid):
+    # a link (video_url) container has no video_status field: asking for it gives "Invalid parameter" (error_subcode 2207065)
+    q_link = lambda cid: call("GET", f"{IG}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
+    def wait_processing(cid, link=False):
         t0 = time.time(); st, proc = {}, None
         while time.time() - t0 < 30 * 60:                 # processing usually takes ~30 s; check once a minute (Meta's advice, and its request limit)
             time.sleep(20 if time.time() - t0 < 60 else 60)
-            st = q(cid); proc = ((st.get("video_status") or {}).get("processing_phase") or {}).get("status"); waited = int((time.time() - t0) / 60)
+            st = q_link(cid) if link else q(cid); proc = ((st.get("video_status") or {}).get("processing_phase") or {}).get("status"); waited = int((time.time() - t0) / 60)
             report(step=f"Instagram processing ({st.get('status_code')}, {waited} min)")
             if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED") or proc == "error": break
         return st, proc
@@ -179,7 +181,8 @@ def instagram(spec, path):
             except RuntimeError as e:
                 if "cover_url" not in params: raise
                 report(log=f"Instagram refused the cover ({e}); posting with its default cover"); params.pop("cover_url"); c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
-            st, proc = wait_processing(c["id"])
+            report(log=f"Container {c['id']} created from the link; Instagram is downloading and processing it")
+            st, proc = wait_processing(c["id"], link=True)
             if st.get("status_code") == "FINISHED": cid = c["id"]; report(log="Link route worked: Instagram fetched and processed the video")
             else:
                 errors.append(f"link container {c['id']}: {st.get('status_code')}: {st.get('status')}")
