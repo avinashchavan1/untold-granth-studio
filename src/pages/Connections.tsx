@@ -42,9 +42,9 @@ export default function Connections() {
       </Step>
 
       <Step n={2} title="Master files (Hugging Face)" done={!!p.huggingface?.connected} detail={p.huggingface?.name ? `Signed in as ${p.huggingface.name}` : undefined}>
-        <p>Lets the publisher read the masters in your private repo.</p>
+        <p>Lets the publisher read the masters in your private repo and hand Instagram the video by link.</p>
         <ol className="list-decimal space-y-1 pl-5">
-          <li>Open <A href="https://huggingface.co/settings/tokens/new?tokenType=read">Hugging Face → new token</A>, type <b>Read</b>, name <code>{CHANNEL.id}-publisher</code>.</li>
+          <li>Open <A href="https://huggingface.co/settings/tokens/new?tokenType=write">Hugging Face → new token</A>, type <b>Write</b>, name <code>{CHANNEL.id}-publisher</code>. (Write: the publisher also shares the Instagram file through a short-lived public drop.)</li>
           <li>Copy and paste below.</li>
         </ol>
         <SaveForm provider="huggingface" fields={[["token", "Hugging Face token"]]} />
@@ -88,6 +88,17 @@ export default function Connections() {
           <li>Press <b>Connect Instagram</b> above again and pick the Page and {IG.handle}. Or, if those were already allowed, press <b>Find my Page</b>.</li>
         </ol>
         <FindPage />
+      </Step>
+
+      <Step n={6} title="Telegram alerts" done={!!p.telegram?.connected} detail={p.telegram?.name ? `Bot @${p.telegram.name}` : undefined}>
+        <p>Post results, anything that needs you, and a summary every morning at 8:17, on your phone.</p>
+        <ol className="list-decimal space-y-1 pl-5">
+          <li>In Telegram, open <A href="https://t.me/BotFather">@BotFather</A> → send <code>/newbot</code> → pick a name (e.g. <b>{CHANNEL.name} Studio</b>) and a username ending in <code>bot</code>.</li>
+          <li>BotFather replies with a <b>token</b> (looks like <code>123456:ABC…</code>). Paste it below and Save.</li>
+          <li>Open your new bot in Telegram and press <b>Start</b>. Then press <b>Send test</b>.</li>
+        </ol>
+        <SaveForm provider="telegram" fields={[["bot_token", "Telegram bot token"]]} />
+        <TelegramTest />
       </Step>
       <p className="text-xs text-ink-soft dark:text-parchment/60">Tokens are stored only on the studio's server; this page never shows them again.</p>
     </section>
@@ -168,4 +179,12 @@ function FindPage() {
       {st.err && <p className="text-xs text-vermilion">{st.err}</p>}
     </div>
   );
+}
+
+function TelegramTest() {
+  const [st, setSt] = useState<{ busy?: boolean; msg?: string; err?: string }>({});
+  return <div className="mt-2 flex flex-wrap items-center gap-2">
+    <Button size="sm" disabled={st.busy} onClick={async () => { setSt({ busy: true }); try { await studio("telegram_test"); setSt({ msg: "Sent. Check Telegram." }); } catch (e) { setSt({ err: e instanceof Error ? e.message : String(e) }); } }}>Send test</Button>
+    {st.msg && <span className="text-sm text-emerald-600">{st.msg}</span>}{st.err && <span className="text-sm text-vermilion">{st.err}</span>}
+  </div>;
 }

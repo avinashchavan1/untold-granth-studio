@@ -1,6 +1,7 @@
 // Admin actions from the app: connections, OAuth start, "Post now", and "Apply brand to YouTube".
 import { healthCheck, refreshStats } from "../_shared/stats.ts";
 import { addPeer, buildModel, discoverPeers, runAutopilot, scanPeers } from "../_shared/timing.ts";
+import { notify, telegramChat } from "../_shared/notify.ts";
 import { checkPublish, PLATFORMS, PublishError, startPublish } from "../_shared/publish.ts";
 import { admin, cors, facebookPage, FB_GRAPH, FN_URL, getIntegration, instagramToken, json, randomToken, REPO, requireAdmin, resolveInstagramFromToken, setIntegration, sha256, youtubeAccessToken } from "../_shared/util.ts";
 
@@ -109,7 +110,8 @@ async function applyFacebookBrand(email: string) {
 
 const SIMPLE: Record<string, string[]> = {
   github: ["token"],                         // fine-grained PAT: Actions read & write on the repo
-  huggingface: ["token"],                    // read access to the masters repo
+  huggingface: ["token"],                    // WRITE token: reads the masters, and shares the Instagram file through the public drop
+  telegram: ["bot_token"],                   // Telegram alerts: a bot from @BotFather
   google_app: ["client_id", "client_secret"],// Google Cloud OAuth client (Web)
   meta_app: ["app_id", "app_secret", "config_id"], // Meta app (App settings → Basic) + Unified-login configuration ID
 };
@@ -130,6 +132,12 @@ Deno.serve(async (req) => {
         }
         return json({ providers: out, redirect_uris: { youtube: `${FN_URL}/oauth/youtube`, instagram: `${FN_URL}/oauth/instagram` } });
       }
+      case "telegram_test": {         // find the owner's chat (they sent /start to the bot) and send a test message
+        const c = await telegramChat();
+        if (!c) return json({ error: "Open Telegram, find your bot, press Start (or send it any message), then press Send test again." }, 400);
+        const ok = await notify("🪔 Studio alerts are on. You'll get post results, anything that needs you, and a summary every morning at 8:17.");
+        return json(ok ? { ok: true } : { error: "Telegram didn't accept the message" }, ok ? 200 : 400);
+      }
       case "save": {
         const keys = SIMPLE[body.provider];
         if (!keys) return json({ error: "unknown provider" }, 400);
@@ -138,6 +146,11 @@ Deno.serve(async (req) => {
         if (body.provider === "github") {
           const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows`, { headers: { Authorization: `Bearer ${values.token}`, Accept: "application/vnd.github+json", "User-Agent": "storyreel-studio" } });
           if (!r.ok) return json({ error: `GitHub refused this token (${r.status}). It needs Actions: read & write on ${REPO}.` }, 400);
+        }
+        if (body.provider === "telegram") {
+          const r = await fetch(`https://api.telegram.org/bot${values.bot_token}/getMe`).then((x) => x.json()).catch(() => null);
+          if (!r?.ok) return json({ error: "Telegram refused this bot token. Copy it again from @BotFather." }, 400);
+          values.username = r.result.username;
         }
         if (body.provider === "huggingface") {
           const r = await fetch("https://huggingface.co/api/whoami-v2", { headers: { Authorization: `Bearer ${values.token}` } });

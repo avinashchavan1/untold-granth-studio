@@ -1,7 +1,8 @@
 // Job API for the GitHub Actions publisher. Auth: header x-job-token (one-time, expires in 3 h).
 //   GET  ?job_id=…   → everything the runner needs (captions, master URL, short-lived platform tokens)
 //   POST {job_id, status?, step?, log?, result_url?, external_id?} → progress / result
-import { runDue } from "../_shared/publish.ts";
+import { MAYBE_LIVE, NO_RETRY, RETRY_MAX, RETRY_WINDOW_H, runDue } from "../_shared/publish.ts";
+import { dailySummary, notifyPostResult } from "../_shared/notify.ts";
 import { healthCheck, inQuietHours, refreshStats } from "../_shared/stats.ts";
 import { dailyTiming } from "../_shared/timing.ts";
 import { backupDatabase } from "../_shared/backup.ts";
@@ -23,7 +24,7 @@ Deno.serve(async (req) => {
       if (!secret || req.headers.get("x-cron-secret") !== secret) return json({ error: "not allowed" }, 403);
       const which = new URL(req.url).searchParams.get("cron");
       if (which === "backup") return json({ ok: true, backup: await backupDatabase() });   // weekly: the database, minus secrets, to the private HF dataset
-      if (which === "daily") return json({ ok: true, timing: await dailyTiming(), health: await healthCheck() });   // timing first: autopilot fills the week, then health checks it
+      if (which === "daily") { const timing = await dailyTiming(), health = await healthCheck(); await dailySummary(health.issues as { level: string; text: string }[]); return json({ ok: true, timing, health }); }   // timing first: autopilot fills the week, then health checks it
       if (which === "stats") return json(inQuietHours() ? { ok: true, skipped: "quiet hours (00:00-08:00 IST)" } : { ok: true, stats: await refreshStats(true) });   // hourly: only the posts whose turn it is
       return json({ ok: true, started: await runDue() });
     }
@@ -70,6 +71,14 @@ Deno.serve(async (req) => {
         await admin.from("publications").upsert(pub, { onConflict: "reel_id,platform" });
         await admin.from("activity").insert({ actor: "publisher", reel_id: job.reel_id, action: `${job.platform}: ${b.status === "done" ? "posted" : "posting failed"}`, detail: { url: b.result_url ?? null } });
         // "published" is set by the database trigger publications_mark_published once Instagram AND YouTube are posted
+        // Telegram: every success; a failure only when the automatic retries can't or won't fix it
+        let willRetry: string | null = null;
+        if (b.status === "failed") {
+          const log = `${job.log ?? ""}${b.log ?? ""}`;
+          const { count } = await admin.from("publish_jobs").select("id", { count: "exact", head: true }).eq("reel_id", job.reel_id).eq("platform", job.platform).eq("status", "failed").gte("created_at", new Date(Date.now() - RETRY_WINDOW_H * 3600e3).toISOString());
+          if (!NO_RETRY.test(log) && !MAYBE_LIVE.test(log) && (count ?? 0) + 1 < RETRY_MAX) willRetry = "auto";
+        }
+        await notifyPostResult(job.reel_id, job.platform, b.status === "done", b.result_url ?? null, willRetry);
       }
       await admin.from("publish_jobs").update(patch).eq("id", job.id);
       return json({ ok: true });
