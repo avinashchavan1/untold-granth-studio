@@ -113,42 +113,6 @@
   },
   {
    "id": 2,
-   "beat": "B00",
-   "voice": "narrator",
-   "hi": "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सत्रह। पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥ ये है असली कहानी।",
-   "en": "",
-   "units": [
-    "वाल्मीकि रामायण, किष्किन्धा कांड, सर्ग सत्रह।",
-    "[with deep devotion] [chanting] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
-    "[serious] ये है असली कहानी।"
-   ],
-   "cite": "4.17.13",
-   "unit_gap": 0.5,
-   "lead": 0.18,
-   "tail": 0.12,
-   "sloka_unit": 1,
-   "sloka": {
-    "lines": [
-     "पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः ।",
-     "यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः ॥"
-    ],
-    "ref": "KISHKINDHA KANDA 4.17.13",
-    "en": "“What merit have you gained by striking one whose face was turned away? Because of you, I, absorbed in battle, have met my death.”",
-    "translit": "parāṅmukhavadhaṃ kṛtvā ko nu prāptastvayā guṇaḥ, yadahaṃ yuddhasaṃrabdhastvatkṛte nidhanaṃ gataḥ"
-   },
-   "sloka_takes": {
-    "t1": "[reverently] [slowly] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
-    "t2": "[with deep devotion] [chanting] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥",
-    "t3": "[solemnly] [expressively] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः… यदहं युद्धसंरब्धस्त्वत्कृते निधनं गतः॥"
-   },
-   "force_take": {
-    "1": 1
-   },
-   "sloka_pick": "t1 (reverently/slowly): 9.7 s, pitch movement 4.4 st, median 109 Hz, words intact; t3 moved most (4.7) but peaked near the shouting range",
-   "art_from": 2
-  },
-  {
-   "id": 3,
    "beat": "B10",
    "voice": "vali",
    "hi": "अगर सामने आकर लड़ते, तो आज, यमराज के दर्शन करते। तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।",
@@ -158,6 +122,30 @@
     "तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।"
    ],
    "cite": "4.17.39-4.17.40",
+   "art_from": 53
+  },
+  {
+   "voice": "narrator",
+   "hi": "वाल्मीकि के शब्द: पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः।",
+   "en": "",
+   "units": [
+    "[thoughtfully] वाल्मीकि के शब्द:",
+    "[softly] पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः।"
+   ],
+   "unit_gap": 0.35,
+   "lead": 0.2,
+   "tail": 0.45,
+   "sloka_unit": 1,
+   "cite": "4.17.13",
+   "proof": {
+    "lines": [
+     "पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः।"
+    ],
+    "ref": "4.17.13",
+    "en": "“What merit have you gained by striking one whose face was turned away?”",
+    "translit": "parāṅmukhavadhaṃ kṛtvā ko nu prāptastvayā guṇaḥ"
+   },
+   "id": 3,
    "art_from": 53
   },
   {
