@@ -1,0 +1,95 @@
+{
+ "code": "LF06",
+ "title": "Ravana's Brothers: the Two Who Warned Him",
+ "subtitle": "Vibhishana's advice and exile, Rama's refuge, Kumbhakarna's rebuke, and 'enmity ends at death'",
+ "stage": "idea",
+ "frame": "16:9 wide + derived 9:16",
+ "target_min": "10-14",
+ "arc": "Yuddha Kanda: Vibhishana advises Ravana and is driven out; Rama's promise of refuge; Kumbhakarna woken, tells Ravana he was wrong, and fights for him anyway; after the war Rama tells Vibhishana to honour his brother's funeral",
+ "base_text": "Valmiki Ramayana, Critical Edition (enjoylearningsanskrit.com)",
+ "why": "Answers the 'ghar ka bhedi' debate from the text itself; strong opinions = comments; fits Dussehra season if held until then",
+ "candidate_beats": [
+  "Vibhishana's advice in the court (verify in the CE before scripting)",
+  "Driven out, not a traitor (verify in the CE before scripting)",
+  "Rama: 'I would shelter even Ravana' (verify in the CE before scripting)",
+  "Kumbhakarna tells Ravana he was wrong, then fights (verify in the CE before scripting)",
+  "'Enmity ends at death': Rama on Ravana's funeral (verify in the CE before scripting)"
+ ],
+ "popular_compare": [
+  "'Ghar ka bhedi Lanka dhaye' (proverb) — find the real source text or present it as a saying only",
+  "Ramcharitmanas Lanka Kand (Vibhishana's refuge) — copy verbatim"
+ ],
+ "derived_reels": [
+  {
+   "id": "A97",
+   "title": "Vibhishana was kicked out, not a traitor"
+  },
+  {
+   "id": "A19",
+   "title": "Rama: 'I'd shelter even Ravana if he came'"
+  },
+  {
+   "id": "A26",
+   "title": "Kumbhakarna told Ravana he was wrong"
+  },
+  {
+   "id": "A20",
+   "title": "'Enmity ends at death': Rama on Ravana's funeral"
+  }
+ ],
+ "characters_needed": [
+  {
+   "key": "ravana",
+   "tier": "major",
+   "status": "from LF02"
+  },
+  {
+   "key": "vibhishana",
+   "tier": "major",
+   "status": "ASK OWNER"
+  },
+  {
+   "key": "kumbhakarna",
+   "tier": "major",
+   "status": "ASK OWNER"
+  },
+  {
+   "key": "rama / lakshmana / sugriva / hanuman",
+   "tier": "major",
+   "status": "locked"
+  }
+ ],
+ "progress": [
+  {
+   "step": "Research: read every sarga of the arc in the CE (source_verse.py) and save cited verses",
+   "done": false
+  },
+  {
+   "step": "Popular version: copy the exact lines (Ramcharitmanas / Hanuman Chalisa) to compare",
+   "done": false
+  },
+  {
+   "step": "Owner picks looks + voices: vibhishana, kumbhakarna",
+   "done": false
+  },
+  {
+   "step": "Script: beats in 3-4 acts, every line cited; retention plan (question in the first seconds, reveal steps)",
+   "done": false
+  },
+  {
+   "step": "Voices (ElevenLabs, ~15-20k characters), per-act score",
+   "done": false
+  },
+  {
+   "step": "Art (16:9 + 9:16 from one drawing), render, 4K master, wide thumbnail",
+   "done": false
+  },
+  {
+   "step": "Derived 9:16 reels, review, then Autopilot posts it on YouTube (Sunday 11 AM slot)",
+   "done": false
+  }
+ ],
+ "budget": "~15-20k ElevenLabs characters (2 takes) + per-act music; about one full-length video a month",
+ "suggested_slot": "May 2027, or hold for Dussehra 2027 (check calendar.json)",
+ "planned": "2026-11-27 (plan only, nothing researched or generated yet)"
+}

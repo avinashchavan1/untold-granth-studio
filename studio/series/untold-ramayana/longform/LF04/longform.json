@@ -1,0 +1,95 @@
+{
+ "code": "LF04",
+ "title": "Lanka Burns: the Tail, the Fire and the Fear",
+ "subtitle": "Hanuman's capture, Ravana's court, the burning tail, and the moment Hanuman feared he had burned Sita",
+ "stage": "idea",
+ "frame": "16:9 wide + derived 9:16",
+ "target_min": "10-14",
+ "arc": "Sundara Kanda, later sargas: the grove destroyed, Akshaya, Indrajit's binding weapon, Hanuman before Ravana, the tail set on fire, Sita's prayer to Agni, Lanka burning, Hanuman's panic and relief, the honey garden on the way home",
+ "base_text": "Valmiki Ramayana, Critical Edition (enjoylearningsanskrit.com)",
+ "why": "Lanka Dahan is iconic; the two quiet moments (Sita's prayer, Hanuman's fear) are almost never told",
+ "candidate_beats": [
+  "Captured by Indrajit's weapon (verify in the CE before scripting)",
+  "Hanuman in Ravana's court (verify in the CE before scripting)",
+  "Sita asks Fire to be cool on Hanuman's tail (verify in the CE before scripting)",
+  "Hanuman fears he has burned Sita (verify in the CE before scripting)",
+  "The monkeys raid the honey garden (verify in the CE before scripting)"
+ ],
+ "popular_compare": [
+  "Hanuman Chalisa / Sundar Kand lines on Lanka's burning — copy verbatim"
+ ],
+ "derived_reels": [
+  {
+   "id": "A46",
+   "title": "Sita asked Fire to be cool on Hanuman's tail"
+  },
+  {
+   "id": "A47",
+   "title": "Hanuman panicked that he burned Sita"
+  },
+  {
+   "id": "A48",
+   "title": "The monkeys raided the honey garden"
+  }
+ ],
+ "characters_needed": [
+  {
+   "key": "hanuman",
+   "tier": "major",
+   "status": "locked"
+  },
+  {
+   "key": "ravana",
+   "tier": "major",
+   "status": "from LF02"
+  },
+  {
+   "key": "indrajit",
+   "tier": "major",
+   "status": "ASK OWNER"
+  },
+  {
+   "key": "vibhishana",
+   "tier": "major",
+   "status": "ASK OWNER if he speaks in the court (verify)"
+  },
+  {
+   "key": "akshaya / court rakshasas",
+   "tier": "minor",
+   "status": "Claude chooses"
+  }
+ ],
+ "progress": [
+  {
+   "step": "Research: read every sarga of the arc in the CE (source_verse.py) and save cited verses",
+   "done": false
+  },
+  {
+   "step": "Popular version: copy the exact lines (Ramcharitmanas / Hanuman Chalisa) to compare",
+   "done": false
+  },
+  {
+   "step": "Owner picks looks + voices: indrajit, vibhishana",
+   "done": false
+  },
+  {
+   "step": "Script: beats in 3-4 acts, every line cited; retention plan (question in the first seconds, reveal steps)",
+   "done": false
+  },
+  {
+   "step": "Voices (ElevenLabs, ~15-20k characters), per-act score",
+   "done": false
+  },
+  {
+   "step": "Art (16:9 + 9:16 from one drawing), render, 4K master, wide thumbnail",
+   "done": false
+  },
+  {
+   "step": "Derived 9:16 reels, review, then Autopilot posts it on YouTube (Sunday 11 AM slot)",
+   "done": false
+  }
+ ],
+ "budget": "~15-20k ElevenLabs characters (2 takes) + per-act music; about one full-length video a month",
+ "suggested_slot": "March 2027",
+ "planned": "2026-11-27 (plan only, nothing researched or generated yet)"
+}

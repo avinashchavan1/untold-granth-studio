@@ -1,0 +1,90 @@
+{
+ "code": "LF03",
+ "title": "Sita in the Ashoka Grove: Her Own Words",
+ "subtitle": "Trijata's dream, Hanuman's choice of language, the crow, and why Sita would not escape",
+ "stage": "idea",
+ "frame": "16:9 wide + derived 9:16",
+ "target_min": "10-14",
+ "arc": "Sundara Kanda, middle sargas: Sita among the rakshasis, Ravana's threat, Trijata's dream, Hanuman's careful approach and the language he chooses, their meeting, the ring, the crow story only Rama and Sita knew, and Sita's reasons for refusing to leave with Hanuman",
+ "base_text": "Valmiki Ramayana, Critical Edition (enjoylearningsanskrit.com)",
+ "why": "Sita's own words are rarely quoted and land strongly; Sita is already locked; little-known facts in every beat",
+ "candidate_beats": [
+  "Ravana's ultimatum in the grove (verify in the CE before scripting)",
+  "Trijata's dream (verify in the CE before scripting)",
+  "Hanuman decides how to speak so she won't fear him (verify in the CE before scripting)",
+  "The crow story as a token of recognition (verify in the CE before scripting)",
+  "Why Sita refuses to escape with Hanuman, in her words (verify in the CE before scripting)"
+ ],
+ "popular_compare": [
+  "Ramcharitmanas Sundar Kand (Ashoka vatika) — copy verbatim"
+ ],
+ "derived_reels": [
+  {
+   "id": "A45",
+   "title": "Trijata's dream"
+  },
+  {
+   "id": "A08",
+   "title": "Hanuman chose which language to speak to Sita"
+  },
+  {
+   "id": "A10",
+   "title": "The crow story only Rama and Sita knew"
+  },
+  {
+   "id": "A09",
+   "title": "Why Sita refused to escape with Hanuman"
+  }
+ ],
+ "characters_needed": [
+  {
+   "key": "sita",
+   "tier": "major",
+   "status": "locked"
+  },
+  {
+   "key": "hanuman",
+   "tier": "major",
+   "status": "locked"
+  },
+  {
+   "key": "ravana",
+   "tier": "major",
+   "status": "from LF02"
+  },
+  {
+   "key": "trijata",
+   "tier": "minor",
+   "status": "Claude chooses"
+  }
+ ],
+ "progress": [
+  {
+   "step": "Research: read every sarga of the arc in the CE (source_verse.py) and save cited verses",
+   "done": false
+  },
+  {
+   "step": "Popular version: copy the exact lines (Ramcharitmanas / Hanuman Chalisa) to compare",
+   "done": false
+  },
+  {
+   "step": "Script: beats in 3-4 acts, every line cited; retention plan (question in the first seconds, reveal steps)",
+   "done": false
+  },
+  {
+   "step": "Voices (ElevenLabs, ~15-20k characters), per-act score",
+   "done": false
+  },
+  {
+   "step": "Art (16:9 + 9:16 from one drawing), render, 4K master, wide thumbnail",
+   "done": false
+  },
+  {
+   "step": "Derived 9:16 reels, review, then Autopilot posts it on YouTube (Sunday 11 AM slot)",
+   "done": false
+  }
+ ],
+ "budget": "~15-20k ElevenLabs characters (2 takes) + per-act music; about one full-length video a month",
+ "suggested_slot": "February 2027",
+ "planned": "2026-11-27 (plan only, nothing researched or generated yet)"
+}
