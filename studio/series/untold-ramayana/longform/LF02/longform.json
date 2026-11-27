@@ -61,8 +61,9 @@
  ],
  "progress": [
   {
-   "step": "Research: read every sarga of the arc in the CE (source_verse.py) and save cited verses",
-   "done": false
+   "step": "Research: CE 5.1–5.12 read and saved (Maināka, Surasā, Siṃhikā, night entry, Mandodarī); no Laṅkinī in CE 5.2–5.4",
+   "done": false,
+   "partial": true
   },
   {
    "step": "Popular version: copy the exact lines (Ramcharitmanas / Hanuman Chalisa) to compare",
@@ -91,5 +92,6 @@
  ],
  "budget": "~15-20k ElevenLabs characters (2 takes) + per-act music; owner's pace: 2 full-length videos a month",
  "suggested_slot": "Jan 2027, 1st half (Sunday 11 AM)",
- "planned": "2026-11-27 (plan only, nothing researched or generated yet)"
+ "planned": "2026-11-27 (plan only, nothing researched or generated yet)",
+ "research_note": "longform/LF02/research/README.md"
 }
