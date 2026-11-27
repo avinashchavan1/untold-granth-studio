@@ -5,7 +5,7 @@ Gets everything from the studio job API using a one-time job token, then:
   Instagram: Reels via the Instagram API with Instagram Login (resumable upload, then media_publish)
   Facebook : Reels on the channel's Page (video_reels start → rupload → finish PUBLISHED)
 Progress and the final post link are reported back to the app."""
-import json, os, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
+import json, os, re, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
 
 API, JOB_ID, TOKEN = os.environ["JOB_API"], os.environ["JOB_ID"], os.environ["JOB_TOKEN"]
 print(f"::add-mask::{TOKEN}")
@@ -107,6 +107,36 @@ def instagram_fit(path):
     if size > IG_MAX: raise RuntimeError(f"Instagram file is still {size / 1e6:.0f} MB (limit 300 MB)")
     return out
 
+def drop_link(spec, path):
+    """Owner-approved (Nov 27 2026): put the Instagram file in a PUBLIC Hugging Face dataset next to the private masters ("<masters repo>-drop")
+    for a few minutes so Instagram fetches it itself (video_url), then delete it. Instagram's upload server often refuses pushed bytes
+    (ProcessingFailedError → FILE_NOT_FOUND, 0 bytes stored), as other publishers report too. Returns (link, cleanup) or (None, None)."""
+    tok = spec.get("hf_token"); m = re.search(r"/datasets/([^/]+/[^/]+)/resolve/", (spec.get("master") or {}).get("url", ""))
+    if not tok or not m: return None, None
+    try:
+        from huggingface_hub import HfApi
+    except ImportError:
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "huggingface_hub"], check=False)
+        try: from huggingface_hub import HfApi
+        except ImportError: return None, None
+    repo = m.group(1) + "-drop"; name = f"{spec.get('code', 'reel')}_{int(time.time())}.mp4"
+    api = HfApi(token=tok)
+    def cleanup():
+        try:
+            for f in api.list_repo_files(repo, repo_type="dataset"):
+                if f.endswith(".mp4"): api.delete_file(f, repo_id=repo, repo_type="dataset", commit_message=f"posted: remove {f}")
+            report(log="Removed the file from the public drop")
+        except Exception as e: report(log=f"Could not empty the drop ({type(e).__name__}); the next post tries again")
+    try:
+        api.create_repo(repo, repo_type="dataset", private=False, exist_ok=True)
+        report(step="sharing the file with Instagram", log=f"Putting the Instagram file in the public drop {repo} for a few minutes (deleted after posting)")
+        api.upload_file(path_or_fileobj=path, path_in_repo=name, repo_id=repo, repo_type="dataset", commit_message=f"drop {name}")
+        url = f"https://huggingface.co/datasets/{repo}/resolve/main/{name}"
+        with urllib.request.urlopen(urllib.request.Request(url, method="HEAD"), timeout=60) as r: url = r.geturl()   # the final file host (short-lived link)
+        return url, cleanup
+    except Exception as e:
+        report(log=f"Could not share the file by link ({type(e).__name__}: {str(e)[:200]}); uploading it directly instead"); cleanup(); return None, None
+
 def instagram(spec, path):
     ig = spec["instagram"]; tok = ig["access_token"]; uid = ig["user_id"]; print(f"::add-mask::{tok}")
     IG = ig.get("api_base") or IG_API; ver = IG.rsplit("/", 1)[-1]
@@ -129,7 +159,35 @@ def instagram(spec, path):
             except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ConnectionError) as e:
                 return (e.read().decode(errors="replace") if isinstance(e, urllib.error.HTTPError) else f"{type(e).__name__}: {e}")[:300]
     errors = []
-    for attempt in (1, 2):                                # a new container only if 4 sends to this one never stored the file
+    def wait_processing(cid):
+        t0 = time.time(); st, proc = {}, None
+        while time.time() - t0 < 30 * 60:                 # processing usually takes ~30 s; check once a minute (Meta's advice, and its request limit)
+            time.sleep(20 if time.time() - t0 < 60 else 60)
+            st = q(cid); proc = ((st.get("video_status") or {}).get("processing_phase") or {}).get("status"); waited = int((time.time() - t0) / 60)
+            report(step=f"Instagram processing ({st.get('status_code')}, {waited} min)")
+            if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED") or proc == "error": break
+        return st, proc
+    # 1) link route: Instagram downloads the file itself. Automatic; if Instagram refuses the link we fall back to the direct upload (2).
+    cid = None; link, cleanup = drop_link(spec, path)
+    if link:
+        try:
+            params = {"media_type": "REELS", "video_url": link, "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok}
+            if spec.get("cover_url"): params["cover_url"] = spec["cover_url"]
+            report(step="creating Instagram reel", log=f"Creating Reels container from a link ({size / 1e6:.0f} MB); Instagram downloads it itself")
+            try: c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
+            except RuntimeError as e:
+                if "cover_url" not in params: raise
+                report(log=f"Instagram refused the cover ({e}); posting with its default cover"); params.pop("cover_url"); c = call("POST", f"{IG}/{uid}/media?{urllib.parse.urlencode(params)}")
+            st, proc = wait_processing(c["id"])
+            if st.get("status_code") == "FINISHED": cid = c["id"]; report(log="Link route worked: Instagram fetched and processed the video")
+            else:
+                errors.append(f"link container {c['id']}: {st.get('status_code')}: {st.get('status')}")
+                report(log=f"Instagram could not use the link ({st.get('status_code')}: {st.get('status')}); uploading directly instead")
+        except Exception as e:
+            errors.append(f"link route: {type(e).__name__}: {str(e)[:200]}"); report(log=f"Link route failed ({type(e).__name__}: {str(e)[:200]}); uploading directly instead")
+        finally: cleanup()
+    done = cid is not None
+    for attempt in ((1, 2) if not done else ()):       # 2) direct upload; a new container only if 4 sends to this one never stored the file
         report(step="creating Instagram reel", log=f"Creating Reels container ({size / 1e6:.0f} MB){' (new container, attempt 2)' if attempt > 1 else ''}")
         params = {"media_type": "REELS", "upload_type": "resumable", "caption": ig["caption"][:2200], "share_to_feed": "true", "access_token": tok}
         if spec.get("cover_url"): params["cover_url"] = spec["cover_url"]      # our designed cover instead of a random frame
@@ -153,16 +211,11 @@ def instagram(spec, path):
             offset = got if 0 < got < size else 0         # resume from what it kept; after a failed (0-byte) send, start again from 0
         if not stored: report(log=f"Instagram's upload server did not store the file in container {cid}"); continue
         report(log="All bytes stored; Instagram is processing the video")
-        t0 = time.time()
-        while time.time() - t0 < 30 * 60:                 # processing usually takes ~30 s; check once a minute (Meta's advice, and its request limit)
-            time.sleep(20 if time.time() - t0 < 60 else 60)
-            st = q(cid); proc = ((st.get("video_status") or {}).get("processing_phase") or {}).get("status"); waited = int((time.time() - t0) / 60)
-            report(step=f"Instagram processing ({st.get('status_code')}, {waited} min)")
-            if st.get("status_code") in ("FINISHED", "ERROR", "EXPIRED") or proc == "error": break
-        if st.get("status_code") == "FINISHED": break
+        st, proc = wait_processing(cid)
+        if st.get("status_code") == "FINISHED": done = True; break
         errors.append(f"container {cid} processing: {st.get('status_code')}: {st.get('status')} (processing {proc})")
         report(log=f"Instagram could not process container {cid}: {st.get('status')} (processing {proc})")
-    else:
+    if not done:
         raise RuntimeError("Instagram's upload server did not take the video (it stored 0 bytes on every try; this is on Instagram's side). "
                            "Try again later. Details: " + " || ".join(errors)[:1300])
     p = call("POST", f"{IG}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
