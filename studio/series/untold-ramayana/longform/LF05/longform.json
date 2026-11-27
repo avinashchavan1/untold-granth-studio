@@ -1,0 +1,85 @@
+{
+ "code": "LF05",
+ "title": "Jatayu and Sampati: the Two Brothers of the Sky",
+ "subtitle": "Dasharatha's old friend, his last fight, and the brother who showed the way to Lanka",
+ "stage": "idea",
+ "frame": "16:9 wide + derived 9:16",
+ "target_min": "10-14",
+ "arc": "Aranya Kanda (Jatayu meets Rama as Dasharatha's friend; his fight with Ravana's chariot; his death and Rama's rites) and Kishkindha Kanda, last sargas (the search party lost in a cave, Sampati, his burned wings, and how he sees Lanka)",
+ "base_text": "Valmiki Ramayana, Critical Edition (enjoylearningsanskrit.com)",
+ "why": "Two brothers, two halves of one story, both famous but rarely told in full; mostly minor characters, so few owner decisions",
+ "candidate_beats": [
+  "Jatayu was Dasharatha's friend (verify in the CE before scripting)",
+  "An old bird against Ravana's chariot (verify in the CE before scripting)",
+  "Rama performs Jatayu's last rites (verify in the CE before scripting)",
+  "The cave of Swayamprabha (verify in the CE before scripting)",
+  "Sampati burned his wings saving his brother; he sees Sita in Lanka (verify in the CE before scripting)"
+ ],
+ "popular_compare": [
+  "Ramcharitmanas Aranya Kand (Jatayu) — copy verbatim"
+ ],
+ "derived_reels": [
+  {
+   "id": "A27",
+   "title": "Jatayu was Dasharatha's friend"
+  },
+  {
+   "id": "A28",
+   "title": "Jatayu's last fight"
+  },
+  {
+   "id": "A40",
+   "title": "The cave of Swayamprabha"
+  },
+  {
+   "id": "A39",
+   "title": "Sampati burned his wings saving his brother"
+  }
+ ],
+ "characters_needed": [
+  {
+   "key": "rama / lakshmana / sita / hanuman / jambavan / angada",
+   "tier": "major",
+   "status": "locked"
+  },
+  {
+   "key": "ravana",
+   "tier": "major",
+   "status": "from LF02"
+  },
+  {
+   "key": "jatayu / sampati / swayamprabha",
+   "tier": "minor",
+   "status": "Claude chooses"
+  }
+ ],
+ "progress": [
+  {
+   "step": "Research: read every sarga of the arc in the CE (source_verse.py) and save cited verses",
+   "done": false
+  },
+  {
+   "step": "Popular version: copy the exact lines (Ramcharitmanas / Hanuman Chalisa) to compare",
+   "done": false
+  },
+  {
+   "step": "Script: beats in 3-4 acts, every line cited; retention plan (question in the first seconds, reveal steps)",
+   "done": false
+  },
+  {
+   "step": "Voices (ElevenLabs, ~15-20k characters), per-act score",
+   "done": false
+  },
+  {
+   "step": "Art (16:9 + 9:16 from one drawing), render, 4K master, wide thumbnail",
+   "done": false
+  },
+  {
+   "step": "Derived 9:16 reels, review, then Autopilot posts it on YouTube (Sunday 11 AM slot)",
+   "done": false
+  }
+ ],
+ "budget": "~15-20k ElevenLabs characters (2 takes) + per-act music; about one full-length video a month",
+ "suggested_slot": "April 2027",
+ "planned": "2026-11-27 (plan only, nothing researched or generated yet)"
+}

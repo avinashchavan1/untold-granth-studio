@@ -1,0 +1,95 @@
+{
+ "code": "LF02",
+ "title": "Hanuman's Leap to Lanka, as Valmiki Tells It",
+ "subtitle": "Mainaka, Surasa, Simhika, Lankini and the night search of Lanka",
+ "stage": "idea",
+ "frame": "16:9 wide + derived 9:16",
+ "target_min": "10-14",
+ "arc": "Sundara Kanda, opening sargas: the leap from Mahendra, the mountain that rose to rest him, Surasa's test, Simhika the shadow-catcher, Lankini at the gate, the night search of Ravana's palace and the moment Hanuman mistakes Mandodari for Sita",
+ "base_text": "Valmiki Ramayana, Critical Edition (enjoylearningsanskrit.com)",
+ "why": "Hanuman reels are the channel's strongest (★★★, Tue/Sat theme); the popular version comes from the Hanuman Chalisa and Sundar Kand, so the contrast is easy to show with quote cards",
+ "candidate_beats": [
+  "The leap and Mainaka (verify in the CE before scripting)",
+  "Surasa: Hanuman becomes tiny (verify in the CE before scripting)",
+  "Simhika, who caught shadows (verify in the CE before scripting)",
+  "Lankini at Lanka's gate (verify in the CE before scripting)",
+  "The night search; 'is this Sita?' (Mandodari) and his self-correction (verify in the CE before scripting)"
+ ],
+ "popular_compare": [
+  "Hanuman Chalisa (Surasa / Lanka lines) — copy verbatim",
+  "Ramcharitmanas Sundar Kand opening dohas — copy verbatim"
+ ],
+ "derived_reels": [
+  {
+   "id": "A41",
+   "title": "The mountain that rose to rest Hanuman"
+  },
+  {
+   "id": "A42",
+   "title": "Surasa: Hanuman becomes tiny"
+  },
+  {
+   "id": "A43",
+   "title": "Simhika, who caught shadows"
+  },
+  {
+   "id": "A44",
+   "title": "Lankini, guardian of Lanka"
+  }
+ ],
+ "characters_needed": [
+  {
+   "key": "hanuman",
+   "tier": "major",
+   "status": "locked"
+  },
+  {
+   "key": "ravana",
+   "tier": "major",
+   "status": "ASK OWNER first (look + voice; needed by LF02-LF06)"
+  },
+  {
+   "key": "mandodari",
+   "tier": "major",
+   "status": "ASK OWNER (check the look used in A07 first)"
+  },
+  {
+   "key": "surasa / simhika / lankini / mainaka",
+   "tier": "minor",
+   "status": "Claude chooses"
+  }
+ ],
+ "progress": [
+  {
+   "step": "Research: read every sarga of the arc in the CE (source_verse.py) and save cited verses",
+   "done": false
+  },
+  {
+   "step": "Popular version: copy the exact lines (Ramcharitmanas / Hanuman Chalisa) to compare",
+   "done": false
+  },
+  {
+   "step": "Owner picks looks + voices: ravana, mandodari",
+   "done": false
+  },
+  {
+   "step": "Script: beats in 3-4 acts, every line cited; retention plan (question in the first seconds, reveal steps)",
+   "done": false
+  },
+  {
+   "step": "Voices (ElevenLabs, ~15-20k characters), per-act score",
+   "done": false
+  },
+  {
+   "step": "Art (16:9 + 9:16 from one drawing), render, 4K master, wide thumbnail",
+   "done": false
+  },
+  {
+   "step": "Derived 9:16 reels, review, then Autopilot posts it on YouTube (Sunday 11 AM slot)",
+   "done": false
+  }
+ ],
+ "budget": "~15-20k ElevenLabs characters (2 takes) + per-act music; about one full-length video a month",
+ "suggested_slot": "first: January 2027 (posts on a Sunday; Hanuman reels on Tue/Sat around it)",
+ "planned": "2026-11-27 (plan only, nothing researched or generated yet)"
+}

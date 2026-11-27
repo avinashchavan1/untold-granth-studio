@@ -25,3 +25,19 @@ major-character rule in CLAUDE.md applies to both.
 
 ## Budget
 - ~10–12 min narration ≈ 15–20k ElevenLabs characters for 2 takes (plan: 40k/month). Expect ~1 full-length video per month alongside a few reels.
+
+## Next five (planned Nov 27 2026, plan only: nothing researched or generated yet)
+Each has `longform/<code>/longform.json` (stage "idea", visible on the app's Long-form page). Every beat says "verify in the CE before scripting".
+Posting: Autopilot puts an approved long-form video on YouTube on a Sunday at 11 AM IST (the channel's best long-form slot), never on a day
+that already has a long-form video; reels keep their own one-a-day evening slot.
+
+| Code | Title | Arc | Derived reels (plan IDs) | Owner decisions first | Suggested |
+|---|---|---|---|---|---|
+| LF02 | Hanuman's Leap to Lanka | Sundara, opening sargas | A41, A42, A43, A44 | **Ravana** (look + voice, needed by LF02-LF06), Mandodari (check A07's look) | Jan 2027 |
+| LF03 | Sita in the Ashoka Grove: Her Own Words | Sundara, middle sargas | A45, A08, A10, A09 | none new | Feb 2027 |
+| LF04 | Lanka Burns: the Tail, the Fire and the Fear | Sundara, later sargas | A46, A47, A48 | Indrajit; Vibhishana if he speaks | Mar 2027 |
+| LF05 | Jatayu and Sampati: the Two Brothers of the Sky | Aranya (Jatayu) + Kishkindha end (Sampati) | A27, A28, A40, A39 | none new | Apr 2027 |
+| LF06 | Ravana's Brothers: the Two Who Warned Him | Yuddha (Vibhishana, Kumbhakarna, Ravana's funeral) | A97, A19, A26, A20 | Vibhishana, Kumbhakarna | May 2027 or Dussehra |
+
+Why this order: Hanuman arcs perform best and share sets (Lanka) and characters, so LF02-LF04 reuse art; LF05 needs almost no new
+decisions; LF06 needs the most owner picks and suits Dussehra. Start a session with "long-form: LF02".

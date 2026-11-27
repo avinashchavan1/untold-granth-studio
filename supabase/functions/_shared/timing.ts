@@ -187,7 +187,8 @@ async function bestHourOn(p: P, dateIst: Date, minLeadH = 2) {
  *  5. Otherwise the calendar (calendar.json, same as the Timeline): theme days (+3), festivals (+weight), ★ pull, with a pull towards plan order;
  *     a reel matching a big festival (weight >= 4) within 21 days waits for it. Only CHECKED reels (citations ticked); never longform.
  *  6. Facebook: the day's reel the same evening, plus the backlog (reels already live elsewhere, oldest first) 1 a day at 11:00 IST until caught up.
- *  7. Never moves, replaces or doubles anything already scheduled, posting or posted. */
+ *  7. Long-form: an approved full-length video on YouTube, Sunday 11:00 IST, at most one a week (doesn't take the reel's slot).
+ *  8. Never moves, replaces or doubles anything already scheduled, posting or posted. */
 const MAIN: P[] = ["youtube", "instagram"];
 const istKey = (iso: string) => new Date(new Date(iso).getTime() + IST * 3600e3).toISOString().slice(0, 10);
 export async function runAutopilot() {
@@ -204,7 +205,8 @@ export async function runAutopilot() {
   const live = (x: { state: string }) => ["scheduled", "posting", "posted"].includes(x.state);
   const P_ = pubs ?? [];
   const when = (r: { id: string }, p: string) => { const x = P_.find((y) => y.reel_id === r.id && y.platform === p && live(y)); return x ? istKey((x.scheduled_for ?? x.posted_at) as string) : null; };
-  const busy = (p: string, key: string) => P_.some((x) => x.platform === p && live(x) && (x.scheduled_for ?? x.posted_at) && istKey((x.scheduled_for ?? x.posted_at) as string) === key);
+  const isLf = (id: string) => (reels ?? []).some((r) => r.id === id && r.kind === "longform");
+  const busy = (p: string, key: string) => P_.some((x) => x.platform === p && live(x) && !isLf(x.reel_id) && (x.scheduled_for ?? x.posted_at) && istKey((x.scheduled_for ?? x.posted_at) as string) === key);
   const untouched = (r: { id: string }) => mains.every((p) => !when(r, p));            // not on any main platform yet
   // rule 2: the test queue, in order
   const exps = ((ser?.config ?? {}) as { experiments?: Record<string, { post_queue?: string[] }> }).experiments ?? {};
@@ -264,6 +266,18 @@ export async function runAutopilot() {
         }
       }
     }
+    // ---- long-form (owner, Nov 27 2026): an approved full-length video goes to YouTube on Sunday at 11:00 IST (the channel's best
+    //      YouTube slot in the model), at most one a week, never on top of another long-form video; it doesn't take the reel's evening slot ----
+    if (platforms.includes("youtube") && day.getUTCDay() === 0) {
+      const lf = (reels ?? []).filter((r) => r.kind === "longform" && r.reviewed && r.stage !== "published" && !when(r, "youtube"));
+      const weekHasLf = P_.some((x) => x.platform === "youtube" && live(x) && (reels ?? []).some((r) => r.kind === "longform" && r.id === x.reel_id) &&
+        Math.abs(Date.parse(istKey((x.scheduled_for ?? x.posted_at) as string)) - Date.parse(key)) < 7 * 864e5);
+      const at = new Date(Date.UTC(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate(), 11) - IST * 3600e3);
+      if (lf[0] && !weekHasLf && at.getTime() > Date.now() + 30 * 60e3) {
+        const { error } = await admin.from("publications").upsert({ reel_id: lf[0].id, platform: "youtube", state: "scheduled", scheduled_for: at.toISOString(), schedule_options: { privacy: "public" }, scheduled_by: "autopilot", last_error: null }, { onConflict: "reel_id,platform" });
+        if (!error) { made.push(`${lf[0].code} youtube (long-form) ${key} 05:30Z`); P_.push({ reel_id: lf[0].id, platform: "youtube", state: "scheduled", scheduled_for: at.toISOString(), posted_at: null }); }
+      }
+    }
     // ---- Facebook: (a) the day's reel, same evening as YouTube/Instagram; (b) the backlog of reels already live elsewhere,
     //      1 a day at 11:00 IST until Facebook has caught up (owner, Nov 27 2026: "Facebook must catch up") ----
     if (platforms.includes("facebook")) {
@@ -273,7 +287,7 @@ export async function runAutopilot() {
         if (!error) { made.push(`${r.code} facebook ${key} ${at.toISOString().slice(11, 16)}Z`); P_.push({ reel_id: r.id, platform: "facebook", state: "scheduled", scheduled_for: at.toISOString(), posted_at: null }); }
       };
       // (a) the reel YouTube/Instagram get that day
-      const todays = P_.find((x) => MAIN.includes(x.platform as P) && live(x) && (x.scheduled_for ?? x.posted_at) && istKey((x.scheduled_for ?? x.posted_at) as string) === key);
+      const todays = P_.find((x) => MAIN.includes(x.platform as P) && live(x) && !isLf(x.reel_id) && (x.scheduled_for ?? x.posted_at) && istKey((x.scheduled_for ?? x.posted_at) as string) === key);
       const tr = todays && all.find((r) => r.id === todays.reel_id);
       if (tr && tr.reviewed && !when(tr, "facebook")) { const at = await bestHourOn("facebook", day); if (at) await schedFb(tr, at); }
       // (b) backlog: oldest first, reels already POSTED on YouTube or Instagram, at most 1 extra a day (owner: one is enough)
