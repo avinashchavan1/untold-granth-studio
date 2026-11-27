@@ -16,6 +16,8 @@ def api(method, path, body=None, prefer=None):
 def upsert(table, rows, on): return api("POST", f"{table}?on_conflict={on}", rows, "resolution=merge-duplicates,return=representation")
 
 sj = json.load(open(os.path.join(SER, "series.json")))
+_cal = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "calendar.json")   # Autopilot reads the same calendar as the Timeline page
+if os.path.exists(_cal): sj = {**sj, "calendar": json.load(open(_cal))}
 upsert("series", [{"id": SID, "name": C["series"]["name"], "book": C["series"]["book"], "edition": sj["source"]["edition"], "config": sj}], "id")
 upsert("channels", [{"platform": p, "handle": h["handle"], "url": h["url"]} for p, h in HANDLES.items()], "platform")
 META = sj.get("cast_meta", {})          # series.json: { names: {key: display name}, first_reel: {key: code}, rig_keys: {key: CH key}, major_extra: [keys] }
