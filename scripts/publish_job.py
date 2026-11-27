@@ -128,7 +128,8 @@ def drop_link(spec, path):
             report(log="Removed the file from the public drop")
         except Exception as e: report(log=f"Could not empty the drop ({type(e).__name__}); the next post tries again")
     try:
-        api.create_repo(repo, repo_type="dataset", private=False, exist_ok=True)
+        try: api.create_repo(repo, repo_type="dataset", private=False, exist_ok=True)
+        except Exception: pass                            # created once by the owner's account; the app's token may not create repos, only upload to them
         report(step="sharing the file with Instagram", log=f"Putting the Instagram file in the public drop {repo} for a few minutes (deleted after posting)")
         api.upload_file(path_or_fileobj=path, path_in_repo=name, repo_id=repo, repo_type="dataset", commit_message=f"drop {name}")
         url = f"https://huggingface.co/datasets/{repo}/resolve/main/{name}"
