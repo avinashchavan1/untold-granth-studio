@@ -1969,7 +1969,15 @@
    "dur": 7.125,
    "vStart": 70.2001,
    "aStart": 70.2001,
-   "speech": 6.448
+   "speech": 6.448,
+   "proof": {
+    "lines": [
+     "विक्रमेण च वाक्यैश्च व्यक्तिं वां नोपलक्षये॥"
+    ],
+    "ref": "4.12.31",
+    "en": "“...by prowess and by words, I see no difference between you two.”",
+    "translit": "vikrameṇa ca vākyaiśca vyaktiṃ vāṃ nopalakṣaye"
+   }
   },
   {
    "id": 10,

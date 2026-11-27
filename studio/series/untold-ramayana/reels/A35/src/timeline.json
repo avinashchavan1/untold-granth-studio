@@ -635,7 +635,15 @@
    "dur": 7.375,
    "vStart": 17.7,
    "aStart": 17.7,
-   "speech": 6.698
+   "speech": 6.698,
+   "proof": {
+    "lines": [
+     "पराङ्मुखवधं कृत्वा को नु प्राप्तस्त्वया गुणः।"
+    ],
+    "ref": "4.17.13",
+    "en": "“What merit have you gained by striking one whose face was turned away?”",
+    "translit": "parāṅmukhavadhaṃ kṛtvā ko nu prāptastvayā guṇaḥ"
+   }
   },
   {
    "id": 4,
