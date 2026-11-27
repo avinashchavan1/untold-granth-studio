@@ -4,6 +4,7 @@
 import { runDue } from "../_shared/publish.ts";
 import { healthCheck, inQuietHours, refreshStats } from "../_shared/stats.ts";
 import { dailyTiming } from "../_shared/timing.ts";
+import { backupDatabase } from "../_shared/backup.ts";
 import { admin, cors, facebookPage, FB_GRAPH, getIntegration, instagramToken, json, sha256, youtubeAccessToken } from "../_shared/util.ts";
 
 async function loadJob(req: Request, jobId: string) {
@@ -21,6 +22,7 @@ Deno.serve(async (req) => {
       const secret = Deno.env.get("CRON_SECRET");
       if (!secret || req.headers.get("x-cron-secret") !== secret) return json({ error: "not allowed" }, 403);
       const which = new URL(req.url).searchParams.get("cron");
+      if (which === "backup") return json({ ok: true, backup: await backupDatabase() });   // weekly: the database, minus secrets, to the private HF dataset
       if (which === "daily") return json({ ok: true, timing: await dailyTiming(), health: await healthCheck() });   // timing first: autopilot fills the week, then health checks it
       if (which === "stats") return json(inQuietHours() ? { ok: true, skipped: "quiet hours (00:00-08:00 IST)" } : { ok: true, stats: await refreshStats(true) });   // hourly: only the posts whose turn it is
       return json({ ok: true, started: await runDue() });

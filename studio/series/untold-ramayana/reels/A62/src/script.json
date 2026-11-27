@@ -364,7 +364,8 @@
   "duration_s": 139,
   "gain": 1.9,
   "duck": 0.72,
-  "prompt": "Tender, sorrowful devotional underscore, instrumental only, built to sit under a spoken Hindi voice. Night rain on a river: soft tanpura drone, a lonely bansuri melody, gentle rain-like santoor; very quiet and still under a recited Sanskrit verse; a tense hush with low strings for a hunt in the dark; a sudden stop, then aching sarangi and legato strings for a dying son; warm swell with harp and soft choir as a soul rises to heaven; grave low horns for a curse; ends in a quiet, grieving resolve."
+  "prompt": "Tender, sorrowful devotional underscore, instrumental only, built to sit under a spoken Hindi voice. Night rain on a river: soft tanpura drone, a lonely bansuri melody, gentle rain-like santoor; very quiet and still under a recited Sanskrit verse; a tense hush with low strings for a hunt in the dark; a sudden stop, then aching sarangi and legato strings for a dying son; warm swell with harp and soft choir as a soul rises to heaven; grave low horns for a curse; ends in a quiet, grieving resolve.",
+  "take": "take 1: quieter under the verse, rises through the hunt, hush at the reveal, peak at the payoff (take 2 rejected: mostly silent, 52 s under -45 dB)"
  },
  "hook_options": [
   {
