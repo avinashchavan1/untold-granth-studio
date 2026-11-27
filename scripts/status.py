@@ -221,7 +221,7 @@ if __name__ == "__main__":
     ap.add_argument("--step", type=int); ap.add_argument("--pct", type=float); ap.add_argument("--eta", type=float)
     a = ap.parse_args()
     if a.cmd == "idle":
-        info = load_info(); info.update({"queue": [], "phases": [], "title": None, "phase": None, "overall_eta_min": None}); event(info, "Idle")
+        info = load_info(); info.update({"queue": [], "phases": [], "title": None, "phase": None, "overall_eta_min": None, "batch": None, "reels": {}, "batch_pct": None}); event(info, "Idle")
         patch({"state": "idle", "reel_code": None, "task": None, "detail": None, "step": None, "steps": None, "pct": None, "eta_min": None}, info)
     elif a.cmd == "set": set_status(a.state or "working", a.reel, a.step, a.task, a.detail, a.pct, a.eta, now())
     elif a.cmd == "batch":

@@ -317,7 +317,8 @@ if __name__ == "__main__":
             "draft-timeline": (5, "Drawing the art"), "stills": (5, "Checking the art (stills)"), "render": (6, "Rendering the preview"),
             "thumb": (8, "Making the cover"), "sheet": (8, "Final checks"), "desk": (8, "Final checks")}
     code = os.path.basename(os.path.normpath(reel)); ST = os.path.join(os.path.dirname(HERE), "scripts", "status.py")
-    if cmd in AUTO and os.path.exists(ST) and not os.environ.get("NO_STATUS") and "/example/" not in os.path.abspath(reel) and not (cmd == "narration" and rest[:1] in (["list"], ["chars"], [])):
+    finished = os.path.exists(os.path.join(reel, "out", f"{code}_YOUTUBE_MASTER.mp4.done"))   # a check on a finished reel (stills/cover/sheet) is not new work
+    if cmd in AUTO and not (finished and cmd in ("stills", "thumb", "sheet", "desk")) and os.path.exists(ST) and not os.environ.get("NO_STATUS") and "/example/" not in os.path.abspath(reel) and not (cmd == "narration" and rest[:1] in (["list"], ["chars"], [])):
         step, task = AUTO[cmd]
         subprocess.run(["python3", ST, "auto", code, str(step), task], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
         if cmd == "render": subprocess.Popen(["python3", ST, "watch-render", code], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
