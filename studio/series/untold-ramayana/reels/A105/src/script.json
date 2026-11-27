@@ -1,0 +1,402 @@
+{
+ "reel": "A105",
+ "title": "The Curse That Came True That Night",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1 (part 2 of 2, follows A62): CE 2.57-58 read in full; voices wait for the ElevenLabs quota (resets 21 Dec 2026)",
+ "source": "Valmiki Ramayana, Ayodhya Kanda 2.57-58 (Critical Edition; vulgate 2.63-64)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "AYODHYA KANDA  ·  CHAPTER 58",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "He asks Dasharatha to tell his father and to pull out the arrow; Dasharatha does, and he dies",
+   "ref": "2.57.34-39",
+   "quote_sa": "पितुस्त्वमेव मे गत्वा शीघ्रमाचक्ष्व राघव । … विशल्यं कुरु मां राजन् …",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Hunting at night on the Sarayu he heard a sound like a pot filling, took it for an elephant and shot at the sound",
+   "ref": "2.57.14-17; 2.58.13",
+   "quote_sa": "द्विपो ऽयमिति मत्वा हि बाणेनाभिहतो मया ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Dasharatha tells the story himself, to Kausalya, at midnight, remembering his old misdeed",
+   "ref": "2.57.3",
+   "quote_sa": "अर्धरात्रे दशरथः संस्मरन्दुष्कृतं कृतम् । कौसल्यां पुत्रशोकार्तामिदं वचनमब्रवीत् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The blind father: 'Son, why are you late? Bring the water quickly'; 'you are the eyes of the blind'",
+   "ref": "2.58.5; 2.58.8",
+   "quote_sa": "किं चिरायसि मे पुत्र पानीयं क्षिप्रमानय ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Sage: had you not told me yourself your head would have split in a hundred thousand pieces; because it was unknowing, you live",
+   "ref": "2.58.19; 2.58.21",
+   "quote_sa": "यद्येतदशुभं कर्म न स्म मे कथयेः स्वयम् । फलेन्मूर्धा स्म ते राजन् सद्यः शतसहस्रधा ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "After the water offering the son appears in divine form, says he won a great state by serving them, and rises to heaven in a vimana",
+   "ref": "2.58.39-42",
+   "quote_sa": "स्थानमस्मि महत् प्राप्तो भवतोः परिचारणात् ॥ … आरुरोह दिवं क्षिप्रं मुनिपुत्रो जितेन्द्रियः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The curse: you too will die of grief for a son",
+   "ref": "2.58.46",
+   "quote_sa": "पुत्रव्यसनजं दुःखं यदेतन्मम साम्प्रतम् । एवं त्वं पुत्रशोकेन राजन् कालं करिष्यसि ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "That night, after midnight, Dasharatha dies crying 'O Raghava'",
+   "ref": "2.58.56-57",
+   "quote_sa": "हा राघव महाबाहो … गते ऽर्धरात्रे … जहौ प्राणमुदारदर्शनः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "The young man is never named in Valmiki: only तापस / तपस्विन् / मुनिपुत्र / 'your son' (whole of CE 2.57-58 read; parents unnamed too)",
+   "ref": "2.57-58 (whole episode)",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE): full read of both sargas"
+   ]
+  }
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "जिस श्राप से राजा दशरथ मरे, वो उसी रात पूरा हुआ, जिस रात उन्होंने ये कथा सुनाई। पर श्राप दिया किसने था?",
+   "en": "The curse that killed Dasharatha came true the very night he told this story. But who spoke it?",
+   "units": [
+    "[serious] जिस श्राप से राजा दशरथ मरे, वो उसी रात पूरा हुआ, जिस रात उन्होंने ये कथा सुनाई।",
+    "[curious] पर श्राप दिया किसने था?"
+   ],
+   "unit_gap": 0.4,
+   "card": [
+    [
+     "THE CURSE",
+     null
+    ],
+    [
+     "CAME TRUE THAT NIGHT.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.5,
+   "min": 5.0,
+   "reveal": true
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, अयोध्या कांड, सर्ग अट्ठावन। पुत्रव्यसनजं दुःखं यदेतन्मम साम्प्रतम्। एवं त्वं पुत्रशोकेन राजन् कालं करिष्यसि॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, अयोध्या कांड, सर्ग अट्ठावन।",
+    "[reverently] [slowly] पुत्रव्यसनजं दुःखं, यदेतन्मम साम्प्रतम्… एवं त्वं पुत्रशोकेन, राजन् कालं करिष्यसि॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "पुत्रव्यसनजं दुःखं यदेतन्मम साम्प्रतम् ।",
+     "एवं त्वं पुत्रशोकेन राजन् कालं करिष्यसि ॥"
+    ],
+    "translit": "putravyasanajaṃ duḥkhaṃ yadetanmama sāmpratam, evaṃ tvaṃ putraśokena rājan kālaṃ kariṣyasi",
+    "en": "“As I now grieve the loss of my son, so you too, O King, will die of grief for a son.”",
+    "ref": "AYODHYA KANDA 2.58.46"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   }
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "पिछले भाग में: युवराज दशरथ ने, रात में, आवाज़ पर बाण चलाया। और पानी भरने आया, एक युवा तपस्वी, गिर पड़ा।",
+   "en": "Last time: in the night, Prince Dasharatha shot at a sound, and a young ascetic who had come for water fell.",
+   "units": [
+    "[thoughtfully] पिछले भाग में:",
+    "युवराज दशरथ ने, रात में, आवाज़ पर बाण चलाया।",
+    "और पानी भरने आया, एक युवा तपस्वी, गिर पड़ा।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.57.14-18",
+   "card": [
+    [
+     "PART 1:",
+     null
+    ],
+    [
+     "THE ARROW IN THE DARK.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 4,
+   "voice": "narrator",
+   "hi": "फिर उसने खुद कहा: ये बाण निकाल दो, और जाकर मेरे पिता को बताओ। दशरथ ने बाण निकाला, और उसने प्राण त्याग दिए।",
+   "en": "Then he himself asked: take this arrow out, and go tell my father. Dasharatha drew out the arrow, and he died.",
+   "units": [
+    "[softly] फिर उसने खुद कहा: ये बाण निकाल दो, और जाकर मेरे पिता को बताओ।",
+    "दशरथ ने बाण निकाला… और उसने प्राण त्याग दिए।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.57.34-38",
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "दशरथ, पानी का भरा घड़ा लेकर, आश्रम पहुँचे। कदमों की आहट सुनकर, बूढ़े पिता बोले:",
+   "en": "Dasharatha carried the filled water pot to the ashram. Hearing footsteps, the old father said:",
+   "units": [
+    "[softly] दशरथ, पानी का भरा घड़ा लेकर, आश्रम पहुँचे।",
+    "कदमों की आहट सुनकर, बूढ़े पिता बोले:"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.58.2-5",
+   "lead": 0.25,
+   "tail": 0.2
+  },
+  {
+   "id": 6,
+   "voice": "andhamuni",
+   "hi": "बेटा, इतनी देर क्यों? पानी जल्दी लाओ। तुम ही तो, हम अंधों की आँखें हो।",
+   "en": "\"Son, why so late? Bring the water quickly. You are the eyes of us blind ones.\"",
+   "units": [
+    "बेटा, इतनी देर क्यों? पानी जल्दी लाओ।",
+    "तुम ही तो, हम अंधों की आँखें हो।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "2.58.5; 2.58.8",
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 7,
+   "voice": "narrator",
+   "hi": "दशरथ ने सब सच बता दिया। मुनि बोले: अगर तुम खुद न बताते, तो तुम्हारा सिर, सौ हज़ार टुकड़ों में फट जाता। अनजाने में हुआ, इसीलिए तुम जीवित हो।",
+   "en": "Dasharatha told him everything. The sage said: had you not told me yourself, your head would have burst into a hundred thousand pieces. It was done unknowingly; that is why you live.",
+   "units": [
+    "[serious] दशरथ ने सब सच बता दिया।",
+    "मुनि बोले: अगर तुम खुद न बताते, तो तुम्हारा सिर… सौ हज़ार टुकड़ों में फट जाता।",
+    "अनजाने में हुआ, इसीलिए तुम जीवित हो।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.58.11-21",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 8,
+   "voice": "narrator",
+   "hi": "दूसरा सच, जो कम लोग जानते हैं: माता-पिता के जल देने पर, वो बेटा, दिव्य रूप में प्रकट हुआ। बोला: आपकी सेवा से, मुझे महान लोक मिला है। और दिव्य विमान में, स्वर्ग चला गया।",
+   "en": "",
+   "units": [
+    "[thoughtfully] दूसरा सच, जो कम लोग जानते हैं:",
+    "माता-पिता के जल देने पर, वो बेटा, दिव्य रूप में प्रकट हुआ।",
+    "बोला: आपकी सेवा से, मुझे महान लोक मिला है।",
+    "[warmly] और दिव्य विमान में, स्वर्ग चला गया।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "2.58.39-42",
+   "card": [
+    [
+     "HE ROSE",
+     null
+    ],
+    [
+     "TO HEAVEN.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.35,
+   "reveal": true
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "hi": "फिर बूढ़े पिता ने, दशरथ से कहा: जैसे आज मैं, पुत्र के दुख में हूँ, वैसे ही तुम भी, पुत्र-शोक में प्राण त्यागोगे।",
+   "en": "Then the old father told Dasharatha: as I grieve for my son today, so you too will die of grief for a son.",
+   "units": [
+    "[serious] फिर बूढ़े पिता ने, दशरथ से कहा:",
+    "जैसे आज मैं, पुत्र के दुख में हूँ… वैसे ही तुम भी, पुत्र-शोक में प्राण त्यागोगे।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "2.58.44-46",
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "बरसों बाद, श्रीराम वन चले गए। और जिस रात दशरथ ने, कौसल्या को ये कथा सुनाई, उसी आधी रात, श्राप पूरा हुआ। हा राघव कहते हुए, उन्होंने प्राण त्याग दिए।",
+   "en": "And on the night Dasharatha told this story, at that very midnight, the curse came true. Crying 'O Raghava', he gave up his life.",
+   "units": [
+    "[softly] बरसों बाद, श्रीराम वन चले गए।",
+    "और जिस रात दशरथ ने, कौसल्या को ये कथा सुनाई… उसी आधी रात, श्राप पूरा हुआ।",
+    "हा राघव कहते हुए, उन्होंने प्राण त्याग दिए।"
+   ],
+   "unit_gap": 0.45,
+   "cite": "2.57.3; 2.58.56-57",
+   "lead": 0.25,
+   "tail": 0.45,
+   "card": [
+    [
+     "THE SAME",
+     null
+    ],
+    [
+     "MIDNIGHT.",
+     "#f6c244"
+    ]
+   ],
+   "reveal": true
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "thumbnail": {
+  "frame": "40s",
+  "hook": "Who cursed Dasharatha?",
+  "stamp": "Valmiki 2.58",
+  "line": "The same midnight",
+  "badge": "Valmiki Ramayana · Ayodhya 2.58",
+  "art_shift": 0
+ },
+ "score": {
+  "engine": "elevenlabs eleven_music_v2_5",
+  "file": "audio/score.mp3",
+  "duration_s": 120,
+  "gain": 1.9,
+  "duck": 0.72,
+  "prompt": "Tender, sorrowful devotional underscore, instrumental only, built to sit under a spoken Hindi voice. Night rain on a river: soft tanpura drone, a lonely bansuri melody, gentle rain-like santoor; very quiet and still under a recited Sanskrit verse; a tense hush with low strings for a hunt in the dark; a sudden stop, then aching sarangi and legato strings for a dying son; warm swell with harp and soft choir as a soul rises to heaven; grave low horns for a curse; ends in a quiet, grieving resolve."
+ },
+ "hook_options": [
+  {
+   "hi": "जिस श्राप से राजा दशरथ मरे, वो उसी रात पूरा हुआ, जिस रात उन्होंने ये कथा सुनाई। पर श्राप दिया किसने था?",
+   "en": "The curse that killed Dasharatha came true the very night he told this story. But who spoke it?",
+   "card": [
+    [
+     "THE CURSE",
+     null
+    ],
+    [
+     "CAME TRUE THAT NIGHT.",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "hi": "राजा दशरथ, पुत्र-शोक में मरे। पर ये श्राप, उन्हें किसने दिया था? और क्यों?",
+   "en": "King Dasharatha died of grief for his son. But who cursed him to it? And why?",
+   "card": [
+    [
+     "WHO CURSED",
+     null
+    ],
+    [
+     "DASHARATHA?",
+     "#f6c244"
+    ]
+   ],
+   "score": 49,
+   "why": "weak · weakest: address (third person, nobody in the room)"
+  },
+  {
+   "hi": "दशरथ के बाण से मरा वो बेटा, मरकर स्वर्ग गया। वाल्मीकि बताते हैं कैसे।",
+   "en": "The son Dasharatha's arrow killed rose to heaven. Valmiki tells how.",
+   "card": [
+    [
+     "HE ROSE",
+     null
+    ],
+    [
+     "TO HEAVEN.",
+     "#f6c244"
+    ]
+   ],
+   "score": 58,
+   "why": "ok · weakest: address (third person, nobody in the room)"
+  }
+ ],
+ "avoid": [
+  "calling the Shravan Kumar story wrong or fake: both are told with devotion",
+  "naming a specific later text as the source of the name 'Shravan' (not checked)",
+  "his birth (2.57.37): accurate but not needed and easy to sensationalise",
+  "saying what happened to the parents after the curse",
+  "'sixth night' (only in a translation; the Sanskrit says midnight)"
+ ],
+ "verify_note": "CE 2.57-58 read in full (enjoylearningsanskrit book-2 ch 57-58, saved in research/A62/). No personal name anywhere: तापस 2.57.27/2.58.14, तपस्विन् 2.57.18, मुनिपुत्र 2.58.40/42. Parents in their ashram (2.57.35, 2.58.2-4). Manas: ramcharit.in/ayodhya-kand, chaupai before doha 155, 'तापस अंध साप सुधि आई। कौसल्यहि सब कथा सुनाई।।'. Notes: research/A62_young_ascetic.md",
+ "caption": "Part 2 of 2. King Dasharatha died of grief for his son, as a curse had said. In Valmiki's Ramayana (Critical Edition, Ayodhya 2.58), Dasharatha carried the young ascetic's water pot to his blind parents' ashram and told them the truth himself. The sage said: had you not told me yourself, your head would have split; because it was done unknowingly, you live. The son appeared in divine form, said he had won a great state by serving his parents, and rose to heaven. Then the father spoke the curse: \"As I grieve for my son, so you too will die of grief for a son.\" Years later, on the night Dasharatha told this story to Kausalya, at that same midnight, he died. Both tellings are told with devotion.",
+ "youtube_title": "Who Cursed King Dasharatha? The Curse That Came True That Night | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Did you know the son rose to heaven in Valmiki's telling? Tell us 👇 Jai Shri Ram!",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Dasharatha",
+  "#ShravanKumar",
+  "#Ramayana",
+  "#Valmiki",
+  "#Ayodhya",
+  "#Curse",
+  "#JaiShriRam"
+ ],
+ "follows": "A62"
+}

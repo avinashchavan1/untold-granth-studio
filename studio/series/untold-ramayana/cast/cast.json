@@ -264,6 +264,28 @@
    "character": "Angada: young prince, Vali's son",
    "chosen": "USER choice (major character), ElevenLabs audition Nov 22 2026 (option 1 of 3; LF01_CAST_AUDITION.mp4)",
    "audition": "cast/audition/angada/"
+  },
+  "muniputra": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "aqhrgpzMH7hJ3RDltbP7",
+   "name": "Aman - Soft & Expressive (ElevenLabs library)",
+   "character": "The young ascetic (muniputra) Dasharatha's arrow killed (A62/A105); unnamed in Valmiki",
+   "chosen": "Claude (minor character), Nov 27 2026: 4 library previews compared; young (~143 Hz), most expressive (6.8 st), clear Hindi"
+  },
+  "andhamuni": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "iLpGCYkFnnGoa4bBSlqm",
+   "name": "Nazir Qureshi - Senior Matured Narrator (ElevenLabs library)",
+   "character": "The blind old sage, the young ascetic's father (A105)",
+   "chosen": "Claude (minor character), Nov 27 2026: 3 elder previews compared; calm, aged, dignified (~121 Hz); the 'husky elderly' option sounded like a caricature"
   }
  },
  "fx": {
