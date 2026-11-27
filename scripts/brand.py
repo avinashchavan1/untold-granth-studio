@@ -12,6 +12,13 @@ if os.path.isdir(SOCIAL): ASSETS += [os.path.join("kit", "social", f) for f in s
 
 if "--no-render" not in sys.argv:
     subprocess.run([sys.executable, "make_brand.py"], cwd=BRAND, check=True)
+# Facebook cover (1640x924, 16:9 like the YouTube banner, whose centre safe area fits Facebook's desktop crop): made from the banner when the kit has none
+FB_COVER = os.path.join(SOCIAL, "facebook_cover_1640x924.jpg"); BANNER = os.path.join(BRAND, "youtube_banner_2560x1440.jpg")
+if os.path.exists(BANNER) and (not os.path.exists(FB_COVER) or os.path.getmtime(FB_COVER) < os.path.getmtime(BANNER)):
+    from PIL import Image
+    os.makedirs(SOCIAL, exist_ok=True); Image.open(BANNER).convert("RGB").resize((1640, 924), Image.LANCZOS).save(FB_COVER, quality=92)
+    if os.path.join("kit", "social", os.path.basename(FB_COVER)) not in ASSETS: ASSETS.append(os.path.join("kit", "social", os.path.basename(FB_COVER)))
+    print("made", FB_COVER)
 for name in ASSETS:
     path = os.path.join(BRAND, name); ctype = mimetypes.guess_type(path)[0] or "application/octet-stream"
     rq = urllib.request.Request(f"{BASE}/storage/v1/object/reel-media/brand/{os.path.basename(name)}", open(path, "rb").read(),
