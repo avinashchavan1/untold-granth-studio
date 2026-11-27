@@ -184,7 +184,8 @@ async function bestHourOn(p: P, dateIst: Date, minLeadH = 2) {
  *  2. A/B test reels first, in the exact order of series.json → experiments.<name>.post_queue (unposted ones only).
  *  3. A reel with "follows": X goes ONLY on the day right after X's day; the day after X is kept for it.
  *  4. A reel with "post_on": "YYYY-MM-DD" (festival) goes ONLY on that date, and that date is kept for it.
- *  5. Otherwise plan order. Only CHECKED reels (citations ticked); never longform.
+ *  5. Otherwise the calendar (calendar.json, same as the Timeline): theme days (+3), festivals (+weight), ★ pull, with a pull towards plan order;
+ *     a reel matching a big festival (weight >= 4) within 21 days waits for it. Only CHECKED reels (citations ticked); never longform.
  *  6. Facebook: the day's reel the same evening, plus the backlog (reels already live elsewhere, oldest first) 1 a day at 11:00 IST until caught up.
  *  7. Never moves, replaces or doubles anything already scheduled, posting or posted. */
 const MAIN: P[] = ["youtube", "instagram"];
@@ -195,7 +196,7 @@ export async function runAutopilot() {
   const postDays: number[] = ap.post_days ?? [0, 1, 2, 3, 4, 5, 6];
   const platforms = ((ap.platforms ?? MAIN) as P[]);
   const mains = MAIN.filter((p) => platforms.includes(p));
-  const { data: reels } = await admin.from("reels").select("id,code,plan_no,reviewed,stage,kind,follows:script->>follows,post_on:script->>post_on").neq("stage", "dropped").order("plan_no");
+  const { data: reels } = await admin.from("reels").select("id,code,title,plan_note,hashtags,plan_no,reviewed,stage,kind,follows:script->>follows,post_on:script->>post_on").neq("stage", "dropped").order("plan_no");
   const { data: pubs } = await admin.from("publications").select("reel_id,platform,state,scheduled_for,posted_at");
   const { data: ser } = await admin.from("series").select("config").limit(1).maybeSingle();
   const all = (reels ?? []).filter((r) => r.kind !== "longform");
@@ -209,6 +210,18 @@ export async function runAutopilot() {
   const exps = ((ser?.config ?? {}) as { experiments?: Record<string, { post_queue?: string[] }> }).experiments ?? {};
   const testCodes = Object.values(exps).flatMap((e) => e.post_queue ?? []);
   const order = [...testCodes.map((c) => byCode[c]).filter(Boolean), ...all.filter((r) => !testCodes.includes(r.code))];
+  // the same calendar as the Timeline page (calendar.json, synced into series.config.calendar): theme days and festivals
+  const cal = ((ser?.config ?? {}) as { calendar?: { themes?: [string, string][]; weekly?: { theme: string; days: number[]; label: string }[]; occasions?: { date: string; name: string; themes: string[]; weight: number }[] } }).calendar ?? {};
+  const RX = (cal.themes ?? []).map(([k, rx]) => [k, new RegExp(rx, "i")] as const);
+  const themesOf = (r: { title?: string | null; plan_note?: string | null; hashtags?: string[] | null }) => { const t = `${r.title ?? ""} ${r.plan_note ?? ""} ${(r.hashtags ?? []).join(" ")}`; return new Set(RX.filter(([, rx]) => rx.test(t)).map(([k]) => k)); };
+  const pullOf = (r: { plan_note?: string | null }) => ((r.plan_note ?? "").match(/★+/)?.[0].length ?? 1);
+  const fitOn = (r: typeof all[number], key: string, dow: number) => { const th = themesOf(r); let f = 0;
+    for (const w of cal.weekly ?? []) if (w.days.includes(dow) && th.has(w.theme)) f += 3;
+    for (const o of cal.occasions ?? []) if (o.date === key && o.themes.some((t) => th.has(t))) f += o.weight;
+    return f; };
+  // a reel that matches a big festival (weight >= 4) in the next 21 days waits for that day
+  const heldFor = (r: typeof all[number], key: string) => { const th = themesOf(r), d0 = Date.parse(key);
+    return (cal.occasions ?? []).find((o) => o.weight >= 4 && o.themes.some((t) => th.has(t)) && Date.parse(o.date) > d0 && Date.parse(o.date) - d0 <= 21 * 864e5); };
   const made: string[] = [], notes: string[] = [];
   const todayIst = new Date(Date.now() + IST * 3600e3);
   const fixedDates = new Set(all.filter((r) => r.post_on && untouched(r)).map((r) => r.post_on as string));
@@ -226,7 +239,14 @@ export async function runAutopilot() {
       if (fixed) pick = fixed.reviewed ? fixed : undefined;
       else if (follower) { pick = follower.reviewed ? follower : undefined; if (!pick) notes.push(`${key}: kept for ${follower.code} (follows ${follower.follows}) but it isn't checked yet`); }
       else if (!fixedDates.has(key)) {
-        pick = order.find((r) => r.reviewed && untouched(r) && !r.post_on && !r.follows && r.stage !== "published");
+        // theme days + festivals + strong reels, with a pull towards plan/test order (same idea as the Timeline page)
+        const cands = order.filter((r) => r.reviewed && untouched(r) && !r.post_on && !r.follows && r.stage !== "published");
+        const testFirst = cands.find((r) => testCodes.includes(r.code));
+        const scored = cands.filter((r) => !heldFor(r, key) || fitOn(r, key, day.getUTCDay()) > 0)
+          .map((r, k) => ({ r, s: fitOn(r, key, day.getUTCDay()) + 0.25 * pullOf(r) - 0.6 * k }));
+        scored.sort((a, b) => b.s - a.s);
+        pick = testFirst ?? scored[0]?.r;
+        for (const r of cands) { const h = heldFor(r, key); if (h && r !== pick && !notes.some((n) => n.includes(r.code))) notes.push(`${r.code} held for ${h.name} (${h.date})`); }
         // a parent whose follower is checked but whose next day is taken would break the pair: skip it today
         const nextKey = new Date(day.getTime() + 864e5).toISOString().slice(0, 10);
         while (pick && all.some((f) => f.follows === pick!.code && untouched(f)) && (mains.some((p) => busy(p, nextKey)) || fixedDates.has(nextKey))) {
