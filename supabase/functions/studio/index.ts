@@ -135,7 +135,7 @@ Deno.serve(async (req) => {
       case "telegram_test": {         // find the owner's chat (they sent /start to the bot) and send a test message
         const c = await telegramChat();
         if (!c) return json({ error: "Open Telegram, find your bot, press Start (or send it any message), then press Send test again." }, 400);
-        const ok = await notify("🪔 Untold Granth alerts are on. You'll get post results, anything that needs you, and a summary every morning at 8:17.");
+        const ok = await notify("🪔 Studio alerts are on. You'll get post results, anything that needs you, and a summary every morning at 8:17.");
         return json(ok ? { ok: true } : { error: "Telegram didn't accept the message" }, ok ? 200 : 400);
       }
       case "save": {
