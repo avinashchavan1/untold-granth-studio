@@ -69,7 +69,8 @@ def youtube(spec, path):
                  {"Authorization": f"Bearer {tok}", "Content-Type": "image/jpeg"})
             note += "; thumbnail set"
         except Exception as e: note += f"; thumbnail skipped ({e})"
-    return f"https://youtube.com/shorts/{vid}", vid, f"Uploaded video {vid}{note}"
+    link = f"https://www.youtube.com/watch?v={vid}" if spec.get("longform") else f"https://youtube.com/shorts/{vid}"   # full-length 16:9 videos are normal videos, not Shorts
+    return link, vid, f"Uploaded video {vid}{note}"
 
 def mp4_boxes(path):
     """Top-level MP4 box order and the raw moov box."""

@@ -12,9 +12,9 @@ const REEL_LIST = "id,series_id,code,plan_no,title,kind,stage,source_ref,art_cos
 
 // the pipeline: every reel except dropped / merged ones
 export const useReels = () =>
-  useQuery({ queryKey: ["reels"], queryFn: () => must<Reel[]>(supabase.from("reels").select(REEL_LIST).neq("stage", "dropped").order("plan_no", { ascending: true, nullsFirst: false })) });
+  useQuery({ queryKey: ["reels"], queryFn: () => must<Reel[]>(supabase.from("reels").select(REEL_LIST).neq("stage", "dropped").or("kind.is.null,kind.neq.longform").order("plan_no", { ascending: true, nullsFirst: false })) });
 export const useDroppedReels = () =>
-  useQuery({ queryKey: ["reels", "dropped"], queryFn: () => must<Reel[]>(supabase.from("reels").select(REEL_LIST).eq("stage", "dropped").order("plan_no", { ascending: true })) });
+  useQuery({ queryKey: ["reels", "dropped"], queryFn: () => must<Reel[]>(supabase.from("reels").select(REEL_LIST).eq("stage", "dropped").or("kind.is.null,kind.neq.longform").order("plan_no", { ascending: true })) });
 
 export const useReel = (code: string) =>
   useQuery({ queryKey: ["reel", code], queryFn: () => must<Reel>(supabase.from("reels").select("*").eq("code", code).single()) });

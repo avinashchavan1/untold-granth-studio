@@ -17,17 +17,17 @@ Deno.serve(async (req) => {
       const jobId = new URL(req.url).searchParams.get("job_id") ?? "";
       const job = await loadJob(req, jobId);
       if (!job) return json({ error: "invalid or expired job token" }, 401);
-      const { data: reel } = await admin.from("reels").select("id,code,title,captions,hashtags,hook_en").eq("id", job.reel_id).single();
+      const { data: reel } = await admin.from("reels").select("id,code,title,captions,hashtags,hook_en,kind").eq("id", job.reel_id).single();
       const kind = job.platform === "youtube" ? "master_youtube" : "master_instagram";
       const { data: master } = await admin.from("files").select("url,bytes,path").eq("reel_id", job.reel_id).eq("kind", kind).single();
       const hf = await getIntegration("huggingface");
       const caps = (reel!.captions ?? {}) as Record<string, string>;
-      const out: Record<string, unknown> = { job_id: job.id, platform: job.platform, options: job.options, code: reel!.code, master: master, hf_token: hf?.token ?? null };
+      const out: Record<string, unknown> = { job_id: job.id, platform: job.platform, options: job.options, code: reel!.code, master: master, hf_token: hf?.token ?? null, longform: reel!.kind === "longform" };
       // cover (out/<ID>_cover.jpg): Instagram fetches it by URL, YouTube gets it via thumbnails.set; signed for the job's lifetime
       const { data: thumb } = await admin.from("files").select("path").eq("reel_id", job.reel_id).eq("kind", "thumbnail").eq("store", "supabase").order("created_at", { ascending: false }).limit(1).maybeSingle();
       if (thumb?.path) out.cover_url = (await admin.storage.from("reel-media").createSignedUrl(thumb.path, 3 * 3600)).data?.signedUrl ?? null;
       if (job.platform === "youtube") {
-        out.youtube = { access_token: await youtubeAccessToken(), title: caps.youtube_title || `${reel!.title} #Shorts`, description: caps.youtube_description || caps.instagram || "",
+        out.youtube = { access_token: await youtubeAccessToken(), title: caps.youtube_title || (reel!.kind === "longform" ? reel!.title : `${reel!.title} #Shorts`), description: caps.youtube_description || caps.instagram || "",
           tags: (reel!.hashtags ?? []).map((t: string) => t.replace(/^#/, "")), playlist_id: (await getIntegration("youtube"))?.playlist_id ?? null };
       } else {
         const ig = await instagramToken();

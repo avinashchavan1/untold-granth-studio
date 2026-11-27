@@ -226,6 +226,29 @@
    "compare_with": "calm reels of similar fame: A23 (Sanjeevani), A18 (swayamvara), A89 (baby Hanuman)",
    "measure": "YouTube views and Instagram views/reach at 48 h after posting (Dashboard → Refresh stats); Instagram views need the instagram_manage_insights permission",
    "decide": "after both test reels reach 48 h: keep calm, adopt hook/reveal energy, or test more"
+  },
+  "sloka_position": {
+   "started": "2026-11-27",
+   "owner": "approved (do all four: shorten, move after the first reveal, over story art, A/B test)",
+   "question": "Does the opening śloka (shot 2, ~15 s of source card + verse before the story) cost viewers in the first 20 s?",
+   "formats": {
+    "opening": "shot 2 = source + full śloka + 'ये है असली कहानी' (owner's Nov 21 format)",
+    "proof": "no opening verse; right after the first reveal (~0:15-0:20) the narrator says 'वाल्मीकि के शब्द:' and recites ONE half-verse (~5 s) over the story art; source + Devanagari + translit + English visible from the first frame (derive_reel.py 'proof')"
+   },
+   "test_reels": {
+    "A35": "proof",
+    "A36": "opening",
+    "A34": "proof",
+    "A103": "opening"
+   },
+   "post_order": "alternate: A35, A36, A34, A103 (similar topics: all from the Vali long-form)",
+   "measure": "at 48 h on YouTube (Dashboard → Śloka format test; Refresh stats): average % viewed, share still watching at 0:05 and 0:20 (audience retention), views; Instagram when insights work. Decide after the 4 reels; until then every OTHER reel keeps the opening śloka.",
+   "post_queue": [
+    "A35",
+    "A36",
+    "A34",
+    "A103"
+   ]
   }
  },
  "source_title": "Valmiki Ramayana",

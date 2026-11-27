@@ -158,7 +158,7 @@ def voice_track(sid, s, ulist, var=""):
 
 timeline = {"fps": FPS, "shots": []}; t = 0.0; log = []
 for s in script["shots"]:
-    sid = s["id"]; entry = {"id": sid, "voice": s["voice"], "en": s["en"], "hi": s["hi"], **{k: s[k] for k in ("card", "label", "scene", "cite", "quote", "sloka", "act", "beat", "link", "units", "cta", "reveal", "art_from") if k in s}}; speech = 0.0
+    sid = s["id"]; entry = {"id": sid, "voice": s["voice"], "en": s["en"], "hi": s["hi"], **{k: s[k] for k in ("card", "label", "scene", "cite", "quote", "sloka", "act", "beat", "link", "units", "cta", "reveal", "art_from", "proof") if k in s}}; speech = 0.0
     if s["voice"]:
         tr, speech = voice_track(sid, s, UNITS[sid]); entry.update(tr)
         if s.get("cta"):                 # YouTube says "subscribe" instead of "follow": second set of takes, same shot length

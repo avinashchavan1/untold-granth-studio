@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Empty, ErrorNote, SectionTitle, Spinner, StageBadge, fmtDate } from "../components/ui";
 import { Target } from "../components/Target";
-import { studio, useActivity, useChannels, useConnections, usePublications, useReels } from "../lib/api";
+import { studio, useActivity, useChannels, useConnections, usePublications, useReels, useSeries } from "../lib/api";
 import type { Publication, Reel } from "../lib/types";
 import { STAGES, type Stage } from "../lib/types";
 import { CHANNEL } from "../lib/channel";
@@ -39,6 +39,7 @@ export default function Dashboard() {
       </div>
 
       <Results reels={all} pubs={pubs.data ?? []} />
+      <SlokaTest reels={all} pubs={pubs.data ?? []} />
 
       {conn.data && (conn.data.providers.instagram?.connected || conn.data.providers.youtube?.connected) && (
         <div className="grid gap-2 sm:grid-cols-2">
@@ -155,6 +156,37 @@ function Results({ reels, pubs }: { reels: Reel[]; pubs: Publication[] }) {
         </table>
       </div>
       <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">Trial (A04, A06, A07): ~55 s short cut on both platforms, question title, question in the caption and as the first comment. {last ? `Updated ${fmtDate(last)}.` : "Press Refresh stats after posting."}{st.err && <span className="text-vermilion"> {st.err}</span>}{st.msg && <span className="text-emerald-700 dark:text-emerald-300"> {st.msg}</span>}</p>
+    </Card>
+  );
+}
+
+// Owner's A/B test (series.json → experiments.sloka_position): opening śloka (shot 2) vs a half-verse "proof" over the story after the first reveal.
+// Retention comes from YouTube Analytics (Refresh stats; needs "Reconnect YouTube" once for the analytics permission).
+function SlokaTest({ reels, pubs }: { reels: Reel[]; pubs: Publication[] }) {
+  const series = useSeries();
+  const ex = ((series.data?.[0]?.config as Record<string, unknown> | undefined)?.experiments as Record<string, { test_reels?: Record<string, string>; question?: string }> | undefined)?.sloka_position;
+  if (!ex?.test_reels) return null;
+  type St = { views?: number; avg_view_pct?: number; avg_view_s?: number; retention?: [number, number, number][]; analytics_error?: string };
+  const at = (r: Reel, st: St | undefined, sec: number) => { const L = r.length_s ?? 0; if (!st?.retention?.length || !L) return null; const row = st.retention.find((x) => x[0] >= sec / L) ?? st.retention[st.retention.length - 1]; return Math.round(row[1] * 100); };
+  const rows = Object.entries(ex.test_reels).map(([code, fmt]) => { const r = reels.find((x) => x.code === code); const p = r && pubs.find((x) => x.reel_id === r.id && x.platform === "youtube" && x.state === "posted"); return { code, fmt, r, st: p?.stats as St | undefined, posted: !!p }; });
+  const err = rows.find((x) => x.st?.analytics_error)?.st?.analytics_error;
+  return (
+    <Card>
+      <SectionTitle>Śloka format test</SectionTitle>
+      <p className="-mt-2 mb-3 text-sm text-ink-soft dark:text-parchment/60">{ex.question} Post them alternating, then compare at 48 h.</p>
+      {err && <p className="mb-3 rounded-xl bg-amber-100 p-2 text-sm text-amber-900 dark:bg-amber-950 dark:text-amber-300">Retention needs one more YouTube permission: Settings → Connections → Reconnect YouTube. ({err})</p>}
+      <div className="overflow-x-auto"><table className="w-full min-w-[520px] text-sm">
+        <thead className="text-left text-xs uppercase tracking-wider text-ink-soft dark:text-parchment/60"><tr><th className="p-2">Reel</th><th className="p-2">Format</th><th className="p-2 text-right">YT views</th><th className="p-2 text-right">Avg % viewed</th><th className="p-2 text-right">Watching at 0:05</th><th className="p-2 text-right">at 0:20</th></tr></thead>
+        <tbody className="tabular">{rows.map(({ code, fmt, r, st, posted }) => (
+          <tr key={code} className="border-t border-parchment-deep dark:border-night-700">
+            <td className="p-2">{r ? <Link to={`/reels/${code}`} className="font-semibold hover:underline"><span className="mr-1.5 font-mono text-xs">{code}</span>{r.title}</Link> : code}</td>
+            <td className="p-2">{fmt === "proof" ? "Half-verse after the reveal" : "Opening śloka"}</td>
+            <td className="p-2 text-right">{posted ? (st?.views ?? "–") : "not posted"}</td>
+            <td className="p-2 text-right">{st?.avg_view_pct != null ? `${Math.round(st.avg_view_pct)}%` : "–"}</td>
+            <td className="p-2 text-right">{r && at(r, st, 5) != null ? `${at(r, st, 5)}%` : "–"}</td>
+            <td className="p-2 text-right">{r && at(r, st, 20) != null ? `${at(r, st, 20)}%` : "–"}</td>
+          </tr>))}</tbody>
+      </table></div>
     </Card>
   );
 }
