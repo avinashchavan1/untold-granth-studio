@@ -54,6 +54,8 @@
   "appears_in": [
    "A07",
    "A101",
+   "A103",
+   "A104",
    "A23",
    "A34",
    "A35",
@@ -91,6 +93,8 @@
    "A06",
    "A101",
    "A102",
+   "A103",
+   "A104",
    "A17",
    "A18",
    "A23",
@@ -121,6 +125,8 @@
   "portrait": "untold-ramayana/cast/maricha.jpg",
   "appears_in": [
    "A01",
+   "A103",
+   "A104",
    "A34",
    "A35",
    "A36",
@@ -170,6 +176,8 @@
    "A06",
    "A101",
    "A102",
+   "A103",
+   "A104",
    "A17",
    "A18",
    "A23",
@@ -190,7 +198,7 @@
   "voice_sample": "untold-ramayana/cast/voice_rama.mp3",
   "voice_line": {
    "reel": "A34",
-   "shot": 9,
+   "shot": 8,
    "hi": "मित्र सुग्रीव, क्रोध छोड़ो। वेश में, कद में, चाल में, स्वर में, तुम दोनों में, मुझे कोई अंतर नहीं दिखा।",
    "en": "\"Sugriva, my friend, let go of your anger. In dress, in build, in gait, in voice, I saw no difference between you two.\""
   }
@@ -250,6 +258,8 @@
   "appears_in": [
    "A04",
    "A101",
+   "A103",
+   "A104",
    "A23",
    "A34",
    "A35",
@@ -287,10 +297,10 @@
  "narrator": {
   "voice_sample": "untold-ramayana/cast/voice_narrator.mp3",
   "voice_line": {
-   "reel": "A34",
+   "reel": "A103",
    "shot": 1,
-   "hi": "एक बाण ने, सात पेड़ भेद दिए। फिर भी पहले युद्ध में, राम का बाण, नहीं चला।",
-   "en": "One arrow pierced seven trees. Yet in the first duel, Rama's arrow never flew."
+   "hi": "सुग्रीव, एक गुफ़ा के मुहाने पर, पूरे एक साल बैठे रहे। फिर, उन्होंने वो गुफ़ा, एक चट्टान से बंद कर दी।",
+   "en": "Sugriva sat at the mouth of a cave for a whole year. Then he sealed it with a rock."
   },
   "appears_in": [
    "A01",
@@ -301,6 +311,9 @@
    "A07",
    "A101",
    "A102",
+   "A103",
+   "A104",
+   "A105",
    "A17",
    "A18",
    "A23",
@@ -308,21 +321,37 @@
    "A35",
    "A36",
    "A53",
+   "A62",
    "A82",
    "A89",
    "A92",
    "LF01"
   ]
  },
+ "dasharatha": {
+  "voice_sample": "untold-ramayana/cast/voice_dasharatha.mp3",
+  "voice_line": {
+   "reel": "A62",
+   "shot": 5,
+   "hi": "देवी, तब तुम्हारा विवाह भी नहीं हुआ था, और मैं युवराज था। वर्षा ऋतु थी।",
+   "en": "\"My queen, you were not even married then, and I was the crown prince. It was the rainy season.\""
+  },
+  "appears_in": [
+   "A62",
+   "A82"
+  ]
+ },
  "vali": {
   "voice_sample": "untold-ramayana/cast/voice_vali.mp3",
   "voice_line": {
-   "reel": "A35",
-   "shot": 3,
-   "hi": "अगर सामने आकर लड़ते, तो आज, यमराज के दर्शन करते। तुमने छिपकर मारा। जैसे सोए हुए आदमी को, साँप डस ले।",
-   "en": "\"Had you fought me face to face, today you would have met Yama. You struck from hiding, like a snake biting a sleeping man.\""
+   "reel": "A103",
+   "shot": 10,
+   "hi": "मैं बार-बार पुकारता रहा, सुग्रीव! सुग्रीव! कोई उत्तर नहीं आया। लातें मार-मारकर, मैंने वो चट्टान तोड़ी।",
+   "en": "\"I called again and again, 'Sugriva! Sugriva!' No answer came. I kicked that rock until it broke.\""
   },
   "appears_in": [
+   "A103",
+   "A104",
    "A35",
    "A36",
    "LF01"
@@ -332,7 +361,7 @@
   "voice_sample": "untold-ramayana/cast/voice_sugriva.mp3",
   "voice_line": {
    "reel": "A34",
-   "shot": 4,
+   "shot": 3,
    "hi": "प्रभु, आज ही, उस बाली को मारिए, जो भाई के वेश में, मेरा शत्रु है।",
    "en": "\"My lord, today itself, kill Vali, my enemy in the form of a brother.\""
   },
@@ -364,6 +393,30 @@
   },
   "appears_in": [
    "LF01"
+  ]
+ },
+ "muniputra": {
+  "voice_sample": "untold-ramayana/cast/voice_muniputra.mp3",
+  "voice_line": {
+   "reel": "A62",
+   "shot": 7,
+   "hi": "हाय! मुझ जैसे तपस्वी पर, शस्त्र कैसे गिरा?",
+   "en": "\"Ah! How could a weapon fall on an ascetic like me?\""
+  },
+  "appears_in": [
+   "A62"
+  ]
+ },
+ "andhamuni": {
+  "voice_sample": "untold-ramayana/cast/voice_andhamuni.mp3",
+  "voice_line": {
+   "reel": "A105",
+   "shot": 6,
+   "hi": "बेटा, इतनी देर क्यों? पानी जल्दी लाओ। तुम ही तो, हम अंधों की आँखें हो।",
+   "en": "\"Son, why so late? Bring the water quickly. You are the eyes of us blind ones.\""
+  },
+  "appears_in": [
+   "A105"
   ]
  }
 }

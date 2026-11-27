@@ -351,12 +351,12 @@
   }
  ],
  "thumbnail": {
-  "frame": "40s",
+  "frame": "119s",
   "hook": "Shravan Kumar?",
   "stamp": "Not in Valmiki",
   "line": "Only \"the sage's son\"",
   "badge": "Valmiki Ramayana · Ayodhya 2.57–58",
-  "art_shift": 0
+  "art_shift": 300
  },
  "score": {
   "engine": "elevenlabs eleven_music_v2_5",
