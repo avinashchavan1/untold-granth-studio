@@ -185,7 +185,7 @@ async function bestHourOn(p: P, dateIst: Date, minLeadH = 2) {
  *  3. A reel with "follows": X goes ONLY on the day right after X's day; the day after X is kept for it.
  *  4. A reel with "post_on": "YYYY-MM-DD" (festival) goes ONLY on that date, and that date is kept for it.
  *  5. Otherwise plan order. Only CHECKED reels (citations ticked); never longform.
- *  6. Facebook: one reel a day, oldest first, only reels already live on YouTube or Instagram (the Page catches up in order).
+ *  6. Facebook: the day's reel the same evening, plus the backlog (reels already live elsewhere, oldest first) 1 a day at 11:00 IST until caught up.
  *  7. Never moves, replaces or doubles anything already scheduled, posting or posted. */
 const MAIN: P[] = ["youtube", "instagram"];
 const istKey = (iso: string) => new Date(new Date(iso).getTime() + IST * 3600e3).toISOString().slice(0, 10);
@@ -244,12 +244,27 @@ export async function runAutopilot() {
         }
       }
     }
-    // ---- Facebook: catch up in order with reels already live elsewhere ----
-    if (platforms.includes("facebook") && !busy("facebook", key)) {
-      const fbPick = all.find((r) => r.reviewed && !when(r, "facebook") && mains.some((p) => P_.some((x) => x.reel_id === r.id && x.platform === p && x.state === "posted")));
-      if (fbPick) { const at = await bestHourOn("facebook", day);
-        if (at) { const { error } = await admin.from("publications").upsert({ reel_id: fbPick.id, platform: "facebook", state: "scheduled", scheduled_for: at.toISOString(), schedule_options: { privacy: "public" }, scheduled_by: "autopilot", last_error: null }, { onConflict: "reel_id,platform" });
-          if (!error) { made.push(`${fbPick.code} facebook ${key} ${at.toISOString().slice(11, 16)}Z`); P_.push({ reel_id: fbPick.id, platform: "facebook", state: "scheduled", scheduled_for: at.toISOString(), posted_at: null }); } } }
+    // ---- Facebook: (a) the day's reel, same evening as YouTube/Instagram; (b) the backlog of reels already live elsewhere,
+    //      1 a day at 11:00 IST until Facebook has caught up (owner, Nov 27 2026: "Facebook must catch up") ----
+    if (platforms.includes("facebook")) {
+      const fbOn = (k: string) => P_.filter((x) => x.platform === "facebook" && live(x) && (x.scheduled_for ?? x.posted_at) && istKey((x.scheduled_for ?? x.posted_at) as string) === k);
+      const schedFb = async (r: { id: string; code: string }, at: Date) => {
+        const { error } = await admin.from("publications").upsert({ reel_id: r.id, platform: "facebook", state: "scheduled", scheduled_for: at.toISOString(), schedule_options: { privacy: "public" }, scheduled_by: "autopilot", last_error: null }, { onConflict: "reel_id,platform" });
+        if (!error) { made.push(`${r.code} facebook ${key} ${at.toISOString().slice(11, 16)}Z`); P_.push({ reel_id: r.id, platform: "facebook", state: "scheduled", scheduled_for: at.toISOString(), posted_at: null }); }
+      };
+      // (a) the reel YouTube/Instagram get that day
+      const todays = P_.find((x) => MAIN.includes(x.platform as P) && live(x) && (x.scheduled_for ?? x.posted_at) && istKey((x.scheduled_for ?? x.posted_at) as string) === key);
+      const tr = todays && all.find((r) => r.id === todays.reel_id);
+      if (tr && tr.reviewed && !when(tr, "facebook")) { const at = await bestHourOn("facebook", day); if (at) await schedFb(tr, at); }
+      // (b) backlog: oldest first, reels already POSTED on YouTube or Instagram, at most 1 extra a day (owner: one is enough)
+      for (const hh of [11]) {
+        if (fbOn(key).length >= 2) break;
+        const at = new Date(Date.UTC(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate(), hh) - IST * 3600e3);
+        if (at.getTime() < Date.now() + 30 * 60e3) continue;
+        if (fbOn(key).some((x) => Math.abs(new Date(x.scheduled_for as string).getTime() - at.getTime()) < 60 * 60e3)) continue;
+        const back = all.find((r) => r.reviewed && !when(r, "facebook") && mains.some((p) => P_.some((x) => x.reel_id === r.id && x.platform === p && x.state === "posted")));
+        if (back) await schedFb(back, at);
+      }
     }
   }
   await admin.from("autopilot").update({ last_run: { at: new Date().toISOString(), scheduled: made, notes } }).eq("id", 1);
