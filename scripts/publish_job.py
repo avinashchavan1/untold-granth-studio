@@ -55,6 +55,7 @@ def youtube(spec, path):
             sent = end + 1
             report(step=f"uploading to YouTube {sent * 100 // size}%")
     vid = video["id"]; st = video.get("status", {})
+    report(log=f"YouTube has the video {vid} (it is live or processing; never upload it again)")
     note = "" if st.get("privacyStatus") == privacy else f" (YouTube set privacy to {st.get('privacyStatus')}; unverified API apps upload as private until Google audits the app)"
     if yt.get("playlist_id"):                       # series playlist (created by "Apply brand to YouTube"); never fails the post
         try:
@@ -224,6 +225,7 @@ def instagram(spec, path):
                            "Try again later. Details: " + " || ".join(errors)[:1300])
     p = call("POST", f"{IG}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
     mid = p["id"]
+    report(log=f"Instagram published media {mid} (never publish it again)")
     link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or os.environ.get("IG_PROFILE_URL", "")
     return link, mid, f"Published reel {mid}"
 
