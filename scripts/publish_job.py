@@ -226,6 +226,11 @@ def instagram(spec, path):
     p = call("POST", f"{IG}/{uid}/media_publish?{urllib.parse.urlencode({'creation_id': cid, 'access_token': tok})}")
     mid = p["id"]
     report(log=f"Instagram published media {mid} (never publish it again)")
+    try:   # confirm the cover: Instagram serves the reel's cover as thumbnail_url
+        th = call("GET", f"{IG}/{mid}?fields=thumbnail_url&access_token={urllib.parse.quote(tok)}").get("thumbnail_url")
+        report(log=("Cover: our designed cover was sent and Instagram reports a cover image" if spec.get("cover_url") and th else
+                    "Cover: Instagram used a frame from the video (no designed cover was sent)" if th else "Cover: Instagram reports no cover image yet"))
+    except Exception as e: report(log=f"Cover check skipped ({str(e)[:120]})")
     link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or os.environ.get("IG_PROFILE_URL", "")
     return link, mid, f"Published reel {mid}"
 

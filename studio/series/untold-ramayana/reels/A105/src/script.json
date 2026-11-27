@@ -148,7 +148,11 @@
     "t1": "[reverently] [slowly]",
     "t2": "[with deep devotion] [chanting]",
     "t3": "[solemnly] [expressively]"
-   }
+   },
+   "force_take": {
+    "1": 1
+   },
+   "sloka_pick": "take 1 [reverently] [slowly]: 4.41 st, p95 163 Hz, all words heard; t2 p95 166 Hz, t3 p95 199 Hz (over the shouting guard)"
   },
   {
    "id": 3,
