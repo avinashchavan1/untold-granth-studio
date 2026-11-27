@@ -71,12 +71,12 @@ export async function runDue() {
   return out;
 }
 
-const RETRY_MAX = 8, RETRY_WINDOW_H = 24;
+export const RETRY_MAX = 8, RETRY_WINDOW_H = 24;
 const RETRY_WAIT_MIN = (n: number) => (n <= 1 ? 15 : n === 2 ? 30 : 60);       // after the 1st failure 15 min, then 30, then hourly
 // failures a retry cannot fix: leave them for the owner (they show in the health banner)
-const NO_RETRY = /Tick the citation check|No \w+ master attached|Connect \w+ first|Cancelled by the owner|reel not found|post to YouTube only|Auto-posting is available/i;
+export const NO_RETRY = /Tick the citation check|No \w+ master attached|Connect \w+ first|Cancelled by the owner|reel not found|post to YouTube only|Auto-posting is available/i;
 // a job that got this far may already be live: never retry it (no duplicate posts)
-const MAYBE_LIVE = /YouTube has the video|Uploaded video|Instagram published media|Published reel|Published Facebook reel|Upload complete; Facebook is processing|first comment posted/i;
+export const MAYBE_LIVE = /YouTube has the video|Uploaded video|Instagram published media|Published reel|Published Facebook reel|Upload complete; Facebook is processing|first comment posted/i;
 export async function retryFailed() {
   const out: { reel_id: string; platform: string; ok: boolean; detail: string }[] = [];
   const since = new Date(Date.now() - RETRY_WINDOW_H * 3600e3).toISOString();
