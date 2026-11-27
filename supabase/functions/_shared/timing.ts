@@ -179,32 +179,82 @@ async function bestHourOn(p: P, dateIst: Date, minLeadH = 2) {
 }
 
 // ---------- Autopilot ----------
-/** Fill the next N days: on each posting day without a post, schedule the next CHECKED reel at that day's best time per platform. */
+/** Fill the next N posting days, strictly (owner, Nov 27 2026: "good and rigid"). Rules, in order:
+ *  1. ONE reel per day, and the SAME reel on every main platform (YouTube + Instagram): never two reels a day, never split.
+ *  2. A/B test reels first, in the exact order of series.json → experiments.<name>.post_queue (unposted ones only).
+ *  3. A reel with "follows": X goes ONLY on the day right after X's day; the day after X is kept for it.
+ *  4. A reel with "post_on": "YYYY-MM-DD" (festival) goes ONLY on that date, and that date is kept for it.
+ *  5. Otherwise plan order. Only CHECKED reels (citations ticked); never longform.
+ *  6. Facebook: one reel a day, oldest first, only reels already live on YouTube or Instagram (the Page catches up in order).
+ *  7. Never moves, replaces or doubles anything already scheduled, posting or posted. */
+const MAIN: P[] = ["youtube", "instagram"];
+const istKey = (iso: string) => new Date(new Date(iso).getTime() + IST * 3600e3).toISOString().slice(0, 10);
 export async function runAutopilot() {
   const { data: ap } = await admin.from("autopilot").select("*").eq("id", 1).single();
   if (!ap?.enabled) return { skipped: "autopilot is off" };
-  const postDays: number[] = ap.post_days ?? [1, 2, 4, 5];
-  const { data: reels } = await admin.from("reels").select("id,code,plan_no,reviewed,stage").eq("reviewed", true).neq("stage", "dropped").order("plan_no");
+  const postDays: number[] = ap.post_days ?? [0, 1, 2, 3, 4, 5, 6];
+  const platforms = ((ap.platforms ?? MAIN) as P[]);
+  const mains = MAIN.filter((p) => platforms.includes(p));
+  const { data: reels } = await admin.from("reels").select("id,code,plan_no,reviewed,stage,kind,follows:script->>follows,post_on:script->>post_on").neq("stage", "dropped").order("plan_no");
   const { data: pubs } = await admin.from("publications").select("reel_id,platform,state,scheduled_for,posted_at");
-  const used = (p: string, dayKey: string) => (pubs ?? []).some((x) => x.platform === p && (x.state === "scheduled" || x.state === "posted" || x.state === "posting") && ((x.scheduled_for ?? x.posted_at) ?? "").length && new Date(new Date((x.scheduled_for ?? x.posted_at) as string).getTime() + IST * 3600e3).toISOString().slice(0, 10) === dayKey);
-  const free = (r: { id: string }, p: string) => !(pubs ?? []).some((x) => x.reel_id === r.id && x.platform === p && ["scheduled", "posted", "posting"].includes(x.state));
-  const made: string[] = [];
+  const { data: ser } = await admin.from("series").select("config").limit(1).maybeSingle();
+  const all = (reels ?? []).filter((r) => r.kind !== "longform");
+  const byCode = Object.fromEntries(all.map((r) => [r.code, r]));
+  const live = (x: { state: string }) => ["scheduled", "posting", "posted"].includes(x.state);
+  const P_ = pubs ?? [];
+  const when = (r: { id: string }, p: string) => { const x = P_.find((y) => y.reel_id === r.id && y.platform === p && live(y)); return x ? istKey((x.scheduled_for ?? x.posted_at) as string) : null; };
+  const busy = (p: string, key: string) => P_.some((x) => x.platform === p && live(x) && (x.scheduled_for ?? x.posted_at) && istKey((x.scheduled_for ?? x.posted_at) as string) === key);
+  const untouched = (r: { id: string }) => mains.every((p) => !when(r, p));            // not on any main platform yet
+  // rule 2: the test queue, in order
+  const exps = ((ser?.config ?? {}) as { experiments?: Record<string, { post_queue?: string[] }> }).experiments ?? {};
+  const testCodes = Object.values(exps).flatMap((e) => e.post_queue ?? []);
+  const order = [...testCodes.map((c) => byCode[c]).filter(Boolean), ...all.filter((r) => !testCodes.includes(r.code))];
+  const made: string[] = [], notes: string[] = [];
   const todayIst = new Date(Date.now() + IST * 3600e3);
+  const fixedDates = new Set(all.filter((r) => r.post_on && untouched(r)).map((r) => r.post_on as string));
+  const keptFor = (key: string) => all.find((r) => r.post_on === key && untouched(r));
   for (let i = 0; i < (ap.days_ahead ?? 7); i++) {
     const day = new Date(Date.UTC(todayIst.getUTCFullYear(), todayIst.getUTCMonth(), todayIst.getUTCDate() + i));
     if (!postDays.includes(day.getUTCDay())) continue;
-    const key = day.toISOString().slice(0, 10);
-    for (const p of ap.platforms as P[]) {
-      if (used(p, key)) continue;
-      const reel = (reels ?? []).find((r) => free(r, p)); if (!reel) continue;
-      const at = await bestHourOn(p, day); if (!at) continue;
-      const { error } = await admin.from("publications").upsert({ reel_id: reel.id, platform: p, state: "scheduled", scheduled_for: at.toISOString(), schedule_options: { privacy: "public" }, scheduled_by: "autopilot", last_error: null }, { onConflict: "reel_id,platform" });
-      if (!error) { made.push(`${reel.code} ${p} ${key} ${at.toISOString().slice(11, 16)}Z`); (pubs ?? []).push({ reel_id: reel.id, platform: p, state: "scheduled", scheduled_for: at.toISOString(), posted_at: null }); }
+    const key = day.toISOString().slice(0, 10), prev = new Date(day.getTime() - 864e5).toISOString().slice(0, 10);
+    // ---- main platforms: one reel, all of them ----
+    if (mains.length && !mains.some((p) => busy(p, key))) {
+      let pick: typeof all[number] | undefined;
+      const fixed = keptFor(key);
+      // rule 3: the follower of yesterday's reel, if it is checked
+      const follower = all.find((r) => r.follows && untouched(r) && byCode[r.follows] && mains.some((p) => when(byCode[r.follows!], p) === prev));
+      if (fixed) pick = fixed.reviewed ? fixed : undefined;
+      else if (follower) { pick = follower.reviewed ? follower : undefined; if (!pick) notes.push(`${key}: kept for ${follower.code} (follows ${follower.follows}) but it isn't checked yet`); }
+      else if (!fixedDates.has(key)) {
+        pick = order.find((r) => r.reviewed && untouched(r) && !r.post_on && !r.follows && r.stage !== "published");
+        // a parent whose follower is checked but whose next day is taken would break the pair: skip it today
+        const nextKey = new Date(day.getTime() + 864e5).toISOString().slice(0, 10);
+        while (pick && all.some((f) => f.follows === pick!.code && untouched(f)) && (mains.some((p) => busy(p, nextKey)) || fixedDates.has(nextKey))) {
+          const cur: typeof all[number] = pick; pick = order.find((r) => r.reviewed && untouched(r) && !r.post_on && !r.follows && r.stage !== "published" && order.indexOf(r) > order.indexOf(cur));
+        }
+      }
+      if (pick) {
+        const times = await Promise.all(mains.map((p) => bestHourOn(p, day)));
+        if (times.every(Boolean)) {
+          for (let k = 0; k < mains.length; k++) {
+            const p = mains[k], at = times[k]!;
+            const { error } = await admin.from("publications").upsert({ reel_id: pick.id, platform: p, state: "scheduled", scheduled_for: at.toISOString(), schedule_options: { privacy: "public" }, scheduled_by: "autopilot", last_error: null }, { onConflict: "reel_id,platform" });
+            if (!error) { made.push(`${pick.code} ${p} ${key} ${at.toISOString().slice(11, 16)}Z`); P_.push({ reel_id: pick.id, platform: p, state: "scheduled", scheduled_for: at.toISOString(), posted_at: null }); }
+          }
+        }
+      }
+    }
+    // ---- Facebook: catch up in order with reels already live elsewhere ----
+    if (platforms.includes("facebook") && !busy("facebook", key)) {
+      const fbPick = all.find((r) => r.reviewed && !when(r, "facebook") && mains.some((p) => P_.some((x) => x.reel_id === r.id && x.platform === p && x.state === "posted")));
+      if (fbPick) { const at = await bestHourOn("facebook", day);
+        if (at) { const { error } = await admin.from("publications").upsert({ reel_id: fbPick.id, platform: "facebook", state: "scheduled", scheduled_for: at.toISOString(), schedule_options: { privacy: "public" }, scheduled_by: "autopilot", last_error: null }, { onConflict: "reel_id,platform" });
+          if (!error) { made.push(`${fbPick.code} facebook ${key} ${at.toISOString().slice(11, 16)}Z`); P_.push({ reel_id: fbPick.id, platform: "facebook", state: "scheduled", scheduled_for: at.toISOString(), posted_at: null }); } } }
     }
   }
-  await admin.from("autopilot").update({ last_run: { at: new Date().toISOString(), scheduled: made } }).eq("id", 1);
-  if (made.length) await admin.from("activity").insert({ actor: "autopilot", action: `autopilot scheduled ${made.length} post${made.length > 1 ? "s" : ""}`, detail: { made } });
-  return { scheduled: made };
+  await admin.from("autopilot").update({ last_run: { at: new Date().toISOString(), scheduled: made, notes } }).eq("id", 1);
+  if (made.length) await admin.from("activity").insert({ actor: "autopilot", action: `autopilot scheduled ${made.length} post${made.length > 1 ? "s" : ""}`, detail: { made, notes } });
+  return { scheduled: made, notes };
 }
 
 /** The daily job: discover peers once, scan, read audience, rebuild the model, run autopilot. */

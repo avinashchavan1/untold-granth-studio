@@ -66,5 +66,37 @@ export async function runDue() {
       out.push({ reel_id: p.reel_id, platform: p.platform, ok: false, detail: msg });
     }
   }
+  // automatic retries (owner, Nov 27 2026: "keep retrying so I don't have to press publish again")
+  for (const r of await retryFailed()) out.push(r);
+  return out;
+}
+
+const RETRY_MAX = 8, RETRY_WINDOW_H = 24;
+const RETRY_WAIT_MIN = (n: number) => (n <= 1 ? 15 : n === 2 ? 30 : 60);       // after the 1st failure 15 min, then 30, then hourly
+// failures a retry cannot fix: leave them for the owner (they show in the health banner)
+const NO_RETRY = /Tick the citation check|No \w+ master attached|Connect \w+ first|Cancelled by the owner|reel not found|post to YouTube only|Auto-posting is available/i;
+// a job that got this far may already be live: never retry it (no duplicate posts)
+const MAYBE_LIVE = /YouTube has the video|Uploaded video|Instagram published media|Published reel|Published Facebook reel|Upload complete; Facebook is processing|first comment posted/i;
+export async function retryFailed() {
+  const out: { reel_id: string; platform: string; ok: boolean; detail: string }[] = [];
+  const since = new Date(Date.now() - RETRY_WINDOW_H * 3600e3).toISOString();
+  const { data: failed } = await admin.from("publications").select("reel_id,platform,schedule_options,scheduled_by,last_error").eq("state", "failed").limit(20);
+  for (const p of failed ?? []) {
+    const { data: jobs } = await admin.from("publish_jobs").select("status,step,log,finished_at,created_at").eq("reel_id", p.reel_id).eq("platform", p.platform)
+      .gte("created_at", since).order("created_at", { ascending: false }).limit(RETRY_MAX + 1);
+    const js = jobs ?? []; const last = js[0];
+    if (!last || last.status !== "failed") continue;                              // nothing failed recently (or one is running)
+    const why = `${p.last_error ?? ""} ${last.log ?? ""}`;
+    if (NO_RETRY.test(why) || MAYBE_LIVE.test(last.log ?? "")) continue;
+    const n = js.filter((j) => j.status === "failed").length;
+    if (n >= RETRY_MAX) continue;
+    const waitMs = RETRY_WAIT_MIN(n) * 60e3, endedAt = new Date(last.finished_at ?? last.created_at).getTime();
+    if (Date.now() - endedAt < waitMs) continue;
+    try {
+      const id = await startPublish(p.reel_id, p.platform, p.schedule_options ?? {}, `auto-retry ${n + 1} of ${RETRY_MAX} (for ${p.scheduled_by ?? "owner"})`);
+      await admin.from("activity").insert({ actor: "scheduler", reel_id: p.reel_id, action: `${p.platform}: automatic retry ${n + 1}`, detail: { job: id } });
+      out.push({ reel_id: p.reel_id, platform: p.platform, ok: true, detail: `retry ${n + 1}: ${id}` });
+    } catch (e) { out.push({ reel_id: p.reel_id, platform: p.platform, ok: false, detail: `retry: ${e instanceof Error ? e.message : String(e)}` }); }
+  }
   return out;
 }
