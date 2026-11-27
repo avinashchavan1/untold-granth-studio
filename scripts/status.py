@@ -104,7 +104,10 @@ def plan_progress(folder, key, mix):
         total += fr.get(n, 0)
         if os.path.exists(os.path.join(folder, n + ".done")): done += fr.get(n, 0); nd += 1; continue
         log = os.path.join(folder, (n[:-4] + ".log") if key == "lossless" else ("r" + n[3:-4] + ".log"))
-        if os.path.exists(log) and os.path.getmtime(log) >= os.path.getmtime(pf) - 5: done += min(fr.get(n, 0), frames([log])[0])   # ignore logs left by an older run
+        if os.path.exists(log) and os.path.getmtime(log) >= os.path.getmtime(pf) - 5:   # ignore logs left by an older run
+            # the renderer logs ABSOLUTE frame numbers ("2256 / 2520" = frame 2256, chunk ends at 2520): count from the chunk's start
+            d, t = frames([log]); start = max(0, t - fr.get(n, 0))
+            done += max(0, min(fr.get(n, 0), d - start))
     return done, total, nd, len(names)
 
 def phase_of(studio, code):
