@@ -60,6 +60,8 @@ def advance_stage(reel, step, info):
     if not reel or not want or info.setdefault("stage_sent", {}).get(reel) == want: return
     try:
         from channel import SER
+        if want == "voiced" and not glob.glob(os.path.join(SER, "reels", reel, "audio", "*.wav")) and not glob.glob(os.path.join(SER, "reels", reel, "audio", "takes", "*")):
+            return                                        # art can be drawn before any voice exists: don't call the reel "voiced" yet
         sp = os.path.join(SER, "reels", "stages.json"); st = json.load(open(sp)) if os.path.exists(sp) else {}
         if os.path.isdir(os.path.join(SER, "reels", reel)) and (st.get(reel) not in ORDER or ORDER.index(st[reel]) < ORDER.index(want)):
             st[reel] = want; json.dump(st, open(sp, "w"), indent=1); open(sp, "a").write("\n")     # git copy, read by sync.py
