@@ -52,7 +52,7 @@ export default function Timing() {
       <AutopilotCard a={auto.data!} best={byP} />
 
       <div className="grid gap-6 xl:grid-cols-3">
-        {["instagram", "youtube", "facebook"].map((p) => byP[p] && <Heat key={p} m={byP[p]} />)}
+        {["instagram", "youtube", "facebook"].map((p) => byP[p]?.grid?.length === 7 && <Heat key={p} m={byP[p]} />)}
       </div>
 
       <PeersCard peers={peers.data ?? []} n={n} />
@@ -69,7 +69,7 @@ export default function Timing() {
 // ---- weekday × hour heatmap, one hue (more = darker), with hover values
 function Heat({ m }: { m: Model }) {
   const [hi, setHi] = useState<{ d: number; h: number } | null>(null);
-  const max = Math.max(...m.grid.flatMap((r) => r.slice(H0, H1 + 1)));
+  const max = Math.max(0.01, ...m.grid.flatMap((r) => (r ?? []).slice(H0, H1 + 1)));
   const p = m.parts ?? {};
   const src = [`studies`, p.peers?.posts ? `${p.peers.posts} posts from ${p.peers.channels} similar channel${p.peers.channels === 1 ? "" : "s"}` : null, p.audience?.available ? "our audience's online hours" : null, p.own?.posts ? `${p.own.posts} of our posts` : null].filter(Boolean).join(" + ");
   return (
@@ -86,11 +86,11 @@ function Heat({ m }: { m: Model }) {
         </div>
       </div>
       <div className="mt-2 flex items-center justify-between gap-2 text-[11px] text-ink-soft dark:text-parchment/60">
-        <span>{hi ? `${DAYS[hi.d]} ${hh(hi.h)} IST · ${m.grid[hi.d][hi.h].toFixed(2)}× an average hour` : "Hover a cell for its score"}</span>
+        <span>{hi ? `${DAYS[hi.d]} ${hh(hi.h)} IST · ${(m.grid[hi.d]?.[hi.h] ?? 0).toFixed(2)}× an average hour` : "Hover a cell for its score"}</span>
         <span className="flex items-center gap-1">less <span className="h-2 w-16 rounded bg-gradient-to-r from-ink/5 to-ink dark:from-gold/10 dark:to-gold" /> more</span>
       </div>
       <p className="mt-3 text-sm font-semibold">Top slots</p>
-      <ol className="mt-1 grid gap-0.5 text-sm">{m.top.slice(0, 4).map((t, i) => <li key={i} className="flex justify-between"><span>{i + 1}. {DAYS[t.dow]} {hh(t.hour)}</span><span className="tabular text-ink-soft dark:text-parchment/60">{t.score.toFixed(1)}×</span></li>)}</ol>
+      <ol className="mt-1 grid gap-0.5 text-sm">{(m.top ?? []).slice(0, 4).map((t, i) => <li key={i} className="flex justify-between"><span>{i + 1}. {DAYS[t.dow]} {hh(t.hour)}</span><span className="tabular text-ink-soft dark:text-parchment/60">{t.score.toFixed(1)}×</span></li>)}</ol>
     </Card>
   );
 }
@@ -98,8 +98,8 @@ function Row({ d, m, max, hi, setHi }: { d: number; m: Model; max: number; hi: {
   return (
     <>
       <span className="pr-1 text-right text-[11px] font-semibold leading-5">{DAYS[d]}</span>
-      {Array.from({ length: H1 - H0 + 1 }, (_, i) => { const h = H0 + i, v = m.grid[d][h] / max, on = hi?.d === d && hi?.h === h;
-        return <span key={h} onMouseEnter={() => setHi({ d, h })} title={`${DAYS[d]} ${hh(h)} · ${m.grid[d][h].toFixed(2)}×`}
+      {Array.from({ length: H1 - H0 + 1 }, (_, i) => { const h = H0 + i, v = (m.grid[d]?.[h] ?? 0) / max, on = hi?.d === d && hi?.h === h;
+        return <span key={h} onMouseEnter={() => setHi({ d, h })} title={`${DAYS[d]} ${hh(h)} · ${(m.grid[d]?.[h] ?? 0).toFixed(2)}×`}
           className={`h-5 rounded-[3px] ${on ? "ring-2 ring-vermilion" : ""}`} style={{ background: `rgb(var(--heat) / ${(0.06 + 0.94 * Math.pow(Math.max(0, v), 1.4)).toFixed(3)})` }} />; })}
     </>
   );
