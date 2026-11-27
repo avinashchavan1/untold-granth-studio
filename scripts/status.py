@@ -5,6 +5,9 @@
   python3 scripts/status.py idle
   python3 scripts/status.py watch-queue A18 A23 A101 [--studio DIR]   # follows renders reel by reel until every master is done
   python3 scripts/status.py watch-render A89                          # one reel (same as watch-queue with one code)
+  python3 scripts/status.py batch R006 R007 R008 R009 --task "Next 4 reels"   # start a batch: the panel tracks every reel's step
+  python3 scripts/status.py done R006                                 # a reel of the batch is finished (uploaded for review)
+  python3 scripts/status.py auto R006 3 "Recording the voice"         # quiet best-effort update (used by make_reel.py)
 
 Steps of a reel (shown as "step N of 8"):
   1 Research the verses · 2 Write the script · 3 Record the voices · 4 Compose the music
@@ -67,10 +70,42 @@ def advance_stage(reel, step, info):
         info["stage_sent"][reel] = want
     except Exception as e: print("stage not updated:", e, file=sys.stderr)   # the work panel still updates
 
+def batch_progress(info, reel=None, step=None, task=None, pct=None):
+    """info.reels = {code: {step, task, state}} for the current batch; info.batch_pct = overall % (8 steps per reel)."""
+    reels = info.get("reels") or {}
+    if reel in reels and step:
+        r = reels[reel]
+        if r.get("state") != "done": r.update({"step": max(step, r.get("step") or 0) if step <= len(STEPS) else step, "task": task or r.get("task"), "state": "running", "pct": pct})
+        for c, o in reels.items():                      # one reel runs at a time; others keep their place
+            if c != reel and o.get("state") == "running":
+                o["state"] = "paused"
+                if (o.get("step") or 0) >= 6: o.update({"step": 8, "task": "Rendered · waiting for upload", "pct": 0})
+    if reels:
+        tot = 0.0
+        for o in reels.values():
+            if o.get("state") == "done": tot += 1
+            elif o.get("step"): tot += (o["step"] - 1 + (o.get("pct") or 0) / 100) / len(STEPS)
+        info["batch_pct"] = round(100 * tot / len(reels), 1)
+
+def adopt_reel(info, reel):
+    """The reel being worked on always shows in the batch grid: a finished batch is replaced by a new one for this reel,
+    an unfinished batch gets the reel added at the end (otherwise the panel kept showing an old, finished batch)."""
+    if not reel or reel in (info.get("reels") or {}): return
+    reels = info.get("reels") or {}
+    if not reels or all(o.get("state") == "done" for o in reels.values()):
+        info["batch"] = {"title": f"{reel}", "codes": [reel], "started": now()}; info["reels"] = {}
+        try: info["batch"]["title"] = f"{reel} · {title_of(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'studio'), reel)}"
+        except Exception: pass
+    else:
+        info.setdefault("batch", {}).setdefault("codes", []).append(reel)
+    info["reels"][reel] = {"step": 0, "task": "Queued", "state": "queued"}
+
 def set_status(state="working", reel=None, step=None, task=None, detail=None, pct=None, eta=None, started=None, info=None, log=True):
     info = info if info is not None else load_info()
+    if state == "working": adopt_reel(info, reel)
     advance_stage(reel, step, info)
     task = task or (STEPS[step - 1] if step else None)
+    batch_progress(info, reel, step, task, pct)
     if log and task: event(info, f"{reel + ': ' if reel else ''}{task}" + (f" ({detail})" if detail and len(detail) < 70 else ""))
     if state == "waiting": info["phases"] = []
     patch({"state": state, "reel_code": reel, "step": step, "steps": len(STEPS) if step else None, "task": task, "detail": detail,
@@ -150,6 +185,10 @@ def watch_queue(codes, studio):
     info = load_info(); started = now(); t0 = time.time(); hist = {}
     info["events"] = info.get("events", [])
     while True:
+        # re-read the shared parts every loop: other commands (batch, done, set) change them while this watcher runs,
+        # and writing back a stale copy brought back old, finished batches
+        fresh = load_info()
+        for k in ("batch", "reels", "batch_pct", "events"): info[k] = fresh.get(k, info.get(k))
         queue, total_left, cur = [], 0.0, None
         for c in codes:
             key, frac, det = phase_of(studio, c); secs = secs_of(studio, c)
@@ -185,6 +224,25 @@ if __name__ == "__main__":
         info = load_info(); info.update({"queue": [], "phases": [], "title": None, "phase": None, "overall_eta_min": None}); event(info, "Idle")
         patch({"state": "idle", "reel_code": None, "task": None, "detail": None, "step": None, "steps": None, "pct": None, "eta_min": None}, info)
     elif a.cmd == "set": set_status(a.state or "working", a.reel, a.step, a.task, a.detail, a.pct, a.eta, now())
+    elif a.cmd == "batch":
+        info = load_info(); info["batch"] = {"title": a.task or f"{len(a.codes)} reels", "codes": a.codes, "started": now()}
+        info["reels"] = {c: {"step": 0, "task": "Queued", "state": "queued"} for c in a.codes}; info["batch_pct"] = 0.0
+        event(info, f"Batch started: {info['batch']['title']} ({', '.join(a.codes)})")
+        patch({"state": "working", "reel_code": a.codes[0] if a.codes else None, "task": info["batch"]["title"], "detail": "starting", "step": None, "pct": 0, "started_at": now()}, info)
+    elif a.cmd == "done":
+        info = load_info()
+        for c in a.codes:
+            if c in (info.get("reels") or {}): info["reels"][c].update({"state": "done", "step": len(STEPS), "task": "Ready for your review", "pct": 100})
+            event(info, f"{c}: uploaded, ready for your review")
+        batch_progress(info)
+        left = [c for c, o in (info.get("reels") or {}).items() if o.get("state") != "done"]
+        if info.get("reels") and not left:
+            event(info, f"Batch finished: {info.get('batch', {}).get('title', '')}")
+            patch({"state": "idle", "task": None, "detail": None, "step": None, "pct": None, "eta_min": None}, info)
+        else: patch({"task": f"{a.codes[-1]} done · next: {left[0]}" if left else "Done"}, info)
+    elif a.cmd == "auto":                                    # never fails the caller (make_reel.py)
+        try: set_status("working", a.codes[0], int(a.codes[1]), " ".join(a.codes[2:]) or None, a.detail, None, None, None)
+        except Exception as e: print("status not updated:", e, file=sys.stderr)
     elif a.cmd in ("watch-queue", "watch-render"): watch_queue(a.codes, a.studio)
     else: sys.exit(__doc__)
     print("status:", a.cmd, " ".join(a.codes) or a.reel or "")

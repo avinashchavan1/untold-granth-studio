@@ -32,7 +32,9 @@ elif cmd == "api":
         for k in range(1, takes + 1):
             p = take_path(sid, i, k, "mp3", "narrator", var)
             if os.path.exists(p): continue
-            body = json.dumps({"text": say, "model_id": c["model"], "language_code": c.get("language", "hi")}).encode()
+            req = {"text": say, "model_id": c["model"], "language_code": c.get("language", "hi")}
+            if c.get("voice_settings"): req["voice_settings"] = c["voice_settings"]          # cast.json → voice_settings (e.g. stability) when the owner picked one
+            body = json.dumps(req).encode()
             rq = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{c['voice_id']}?output_format=mp3_44100_128", body,
                                         {"xi-api-key": key, "Content-Type": "application/json"})
             data = urllib.request.urlopen(rq, timeout=120).read(); open(p, "wb").write(data); print("saved", p, flush=True)   # fetch first: a refused request must not leave an empty file

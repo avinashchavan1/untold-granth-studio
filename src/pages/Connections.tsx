@@ -22,9 +22,10 @@ export default function Connections() {
     <section id="connections" className="grid gap-4">
       <SectionTitle>Posting connections</SectionTitle>
       {flash && <div className={clsx("rounded-xl p-3 text-sm", flash.ok ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-300" : "bg-vermilion/10 text-vermilion")}>{flash.ok ? `${flash.provider} connected.` : `${flash.provider} didn't connect: ${flash.msg}`}</div>}
-      <div className="grid gap-2 sm:grid-cols-2">
+      <div className="grid gap-2 sm:grid-cols-3">
         <Ready label="Post to YouTube from the app" ok={ready(["github", "huggingface", "google_app", "youtube"])} />
         <Ready label="Post to Instagram from the app" ok={ready(["github", "huggingface", "instagram"])} />
+        <Ready label="Post to the Facebook Page from the app" ok={ready(["github", "huggingface", "instagram", "facebook"])} />
       </div>
       {(p.instagram?.connected || p.youtube?.connected) && (
         <div className="grid gap-2 sm:grid-cols-2"><Target platform="instagram" providers={p} className="border border-parchment-deep dark:border-night-700" /><Target platform="youtube" providers={p} className="border border-parchment-deep dark:border-night-700" /></div>
@@ -79,7 +80,16 @@ export default function Connections() {
         <ConnectButton provider="instagram" label="Connect Instagram" disabled={!p.meta_app?.connected} connected={!!p.instagram?.connected} />
         <p className="text-xs text-ink-soft dark:text-parchment/60">This creates a system-user token that never expires, so you won't need to reconnect.</p>
       </Step>
-      <p className="text-xs text-ink-soft dark:text-parchment/60">Tokens are stored only on the studio's server; this page never shows them again. Facebook Reels stays a manual post for now.</p>
+      <Step n={5} title="Facebook Page" done={!!p.facebook?.connected} detail={p.facebook?.connected ? `${p.facebook.name ?? "Page"}${p.facebook.account_id ? ` · ID ${p.facebook.account_id}` : ""}` : undefined}>
+        <p>Posts each reel as a Facebook Reel on your Page too. It uses the same Meta login as Instagram, so there's nothing new to paste.</p>
+        <ol className="list-decimal space-y-1 pl-5">
+          <li>Link the Page to {IG.handle} (Page → Settings → Linked accounts → Instagram) and give yourself full control of it in the <A href="https://business.facebook.com/latest/settings/pages">business portfolio</A>.</li>
+          <li>In <A href="https://developers.facebook.com/apps/">Meta for Developers</A> → <b>{CHANNEL.app_title}</b>, make sure the login configuration also asks for <code>pages_show_list</code>, <code>pages_read_engagement</code> and <code>pages_manage_posts</code>.</li>
+          <li>Press <b>Connect Instagram</b> above again and pick the Page and {IG.handle}. Or, if those were already allowed, press <b>Find my Page</b>.</li>
+        </ol>
+        <FindPage />
+      </Step>
+      <p className="text-xs text-ink-soft dark:text-parchment/60">Tokens are stored only on the studio's server; this page never shows them again.</p>
     </section>
   );
 }
@@ -143,3 +153,19 @@ function ConnectButton({ provider, label, disabled, connected }: { provider: str
 }
 
 export type { Conn };
+
+function FindPage() {
+  const qc = useQueryClient();
+  const [st, setSt] = useState<{ busy?: boolean; ok?: string; err?: string }>({});
+  return (
+    <div className="grid gap-1">
+      <Button size="sm" disabled={st.busy} onClick={async () => {
+        setSt({ busy: true });
+        try { const r = await studio<{ page: string }>("facebook_page"); setSt({ ok: `Connected to the Page "${r.page}".` }); qc.invalidateQueries({ queryKey: ["connections"] }); }
+        catch (e) { setSt({ err: (e as Error).message }); }
+      }}><Link2 size={14} /> {st.busy ? "Looking…" : "Find my Page"}</Button>
+      {st.ok && <p className="text-xs text-emerald-700 dark:text-emerald-300">{st.ok}</p>}
+      {st.err && <p className="text-xs text-vermilion">{st.err}</p>}
+    </div>
+  );
+}

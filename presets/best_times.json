@@ -1,0 +1,45 @@
+{
+ "_doc": "Layer 1 of the best-time system (src/lib/bestTime.ts): what published studies say about when short vertical videos do best, per platform, in the AUDIENCE's local time (the app uses the channel's posting timezone, calendar.json → timezone_offset_min). Each day is a sum of bumps {at: hour, w: width in hours, h: height}; day_weight scales whole days (index 0 = Sunday). This is only the starting guess: Instagram's 'followers online' (layer 2) and the channel's own post results (layer 3) take over as data comes in. Studies disagree a lot (see notes), so this layer is deliberately gentle. Re-check the sources about once a year and update 'updated'.",
+ "updated": "2026-11-26",
+ "audience": "India, Hindi/Hinglish-speaking, mobile-first (evening-heavy); weekday studies from US/global data shifted to the evening peak that India-focused guides agree on",
+ "platforms": {
+  "instagram": {
+   "label": "Instagram Reels",
+   "weekday": [{ "at": 9, "w": 1.0, "h": 0.25 }, { "at": 13, "w": 1.0, "h": 0.55 }, { "at": 20, "w": 1.8, "h": 1.0 }],
+   "weekend": [{ "at": 11.5, "w": 1.3, "h": 0.75 }, { "at": 15, "w": 2.0, "h": 0.3 }, { "at": 20, "w": 1.8, "h": 1.0 }],
+   "day_weight": [0.95, 0.95, 1.0, 1.0, 1.0, 0.95, 0.9],
+   "summary": "Evenings 6-10 PM IST are the most agreed window for India; a smaller lunch bump; Tue-Thu slightly stronger.",
+   "sources": [
+    { "name": "India guides (Influencer Metric, MyDigitalSevak, Sociolyzer)", "url": "https://influencermetric.in/blog/best-time-to-post-india", "finding": "6-10 PM IST evenings, Tue-Thu strongest" },
+    { "name": "SocialPilot (~250k Reels)", "url": "https://www.socialpilot.co/insights/best-time-to-post-reels-on-instagram", "finding": "weekday mornings 8 AM-12 PM, Mon-Thu" },
+    { "name": "Later (975k Reels)", "url": "https://napoleoncat.com/blog/best-time-to-post-reels-on-instagram/", "finding": "very early hours (5 AM) best on average" },
+    { "name": "Adobe (22k Reels from top creators)", "url": "https://www.shortimize.com/blog/best-time-to-post-on-instagram-reels", "finding": "noon most common; no universal best time, varies by category" }
+   ]
+  },
+  "youtube": {
+   "label": "YouTube Shorts",
+   "weekday": [{ "at": 9, "w": 1.0, "h": 0.2 }, { "at": 13, "w": 1.1, "h": 0.5 }, { "at": 19.5, "w": 1.9, "h": 1.0 }],
+   "weekend": [{ "at": 11, "w": 1.5, "h": 0.8 }, { "at": 15, "w": 2.0, "h": 0.35 }, { "at": 19.5, "w": 1.9, "h": 1.0 }],
+   "day_weight": [0.92, 0.9, 0.92, 0.93, 0.96, 1.0, 0.98],
+   "summary": "Late afternoon to evening (4-9 PM local) in most studies; Friday, then Saturday and Thursday, are the strongest days.",
+   "sources": [
+    { "name": "Buffer (1.8M videos)", "url": "https://buffer.com/resources/best-time-to-post-on-youtube/", "finding": "Shorts: top slots Friday 4, 6 and 7 PM; then Saturday, Thursday" },
+    { "name": "Adobe Express (24k Shorts)", "url": "https://flowshorts.app/blog/best-time-to-post-youtube-shorts", "finding": "Tuesday most likes; 4 PM strong" },
+    { "name": "Metricool 2025", "url": "https://schedulenchill.com/blog/best-time-to-post-youtube-shorts", "finding": "1 AM highest average views (outlier)" },
+    { "name": "YouTube (via study round-ups)", "url": "https://schedulenchill.com/blog/best-time-to-post-youtube-shorts", "finding": "publish time is not known to affect long-term performance; it mostly shapes the first hours" }
+   ]
+  },
+  "facebook": {
+   "label": "Facebook Reels",
+   "weekday": [{ "at": 9.5, "w": 1.2, "h": 0.55 }, { "at": 13, "w": 1.2, "h": 0.65 }, { "at": 19.5, "w": 1.9, "h": 1.0 }],
+   "weekend": [{ "at": 11, "w": 1.5, "h": 0.6 }, { "at": 19.5, "w": 1.9, "h": 0.85 }],
+   "day_weight": [0.88, 0.94, 0.97, 1.0, 0.98, 0.92, 0.85],
+   "summary": "Midweek beats weekends (Wednesday best, Saturday weakest); daytime windows in global studies, evening for an Indian audience.",
+   "sources": [
+    { "name": "Buffer (14M posts)", "url": "https://buffer.com/resources/best-time-to-post-on-facebook/", "finding": "Thursday 9 AM best slot; Wednesday best day; Saturday worst" },
+    { "name": "Sprout Social 2025 (2.7B engagements)", "url": "https://socialk.it/en/best-time-to-post/facebook", "finding": "8-9 AM to 6 PM, Mon-Thu; newer edition Tue-Wed 12-8 PM" },
+    { "name": "Hootsuite 2025", "url": "https://digitaltreed.com/timing-is-key-finding-the-best-time-to-post-on-facebook", "finding": "Tuesday 5 AM by engagement rate" }
+   ]
+  }
+ }
+}

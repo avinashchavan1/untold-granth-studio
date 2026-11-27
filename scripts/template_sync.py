@@ -12,7 +12,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHARED = ["studio/engine/py", "studio/engine/js", "studio/engine/art", "studio/engine/fonts", "studio/make_reel.py", "studio/STYLE_GUIDE.md",
           "studio/package.json", "studio/.claude/skills", ".claude/skills", "src", "supabase", "scripts", "presets", "PLAYBOOK.md", "index.html",
           "package.json", "vite.config.ts", "tailwind.config.js", "postcss.config.js", "tsconfig.json", "netlify.toml", ".github", "public", "brand/make_brand.py"]
-SKIP = re.compile(r"(__pycache__|\.pyc$|node_modules|/frames/|/out/)")
+SKIP = re.compile(r"(__pycache__|\.pyc$|node_modules|/frames/|/out/|/\.temp$|\.temp/)")
 
 def copy(src, dst):
     if os.path.isdir(src):

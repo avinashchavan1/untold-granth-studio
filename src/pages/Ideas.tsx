@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Card, Empty, ErrorNote, Spinner, fmtDate } from "../components/ui";
 import { supabase } from "../lib/supabase";
 import { useAddReel, useIdeaMutations, useIdeas, useReels, type Idea } from "../lib/api";
-import { SERIES_ID } from "../lib/channel";
+import { SERIES_ID, W } from "../lib/channel";
 
 const tagsOf = (s: string) => [...new Set((s.match(/#[\p{L}\p{N}_-]+/gu) ?? []).map((t) => t.slice(1).toLowerCase()))];
 
@@ -24,7 +24,7 @@ export default function Ideas() {
     <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <div>
         <h1 className="font-display text-3xl font-extrabold tracking-wide">Ideas</h1>
-        <p className="mt-1 text-sm text-ink-soft dark:text-parchment/60">Jot anything: a myth to check, a verse, a character, a hook. Add <code>#tags</code> to group them. Promote one to the plan when it's ready to become a reel.</p>
+        <p className="mt-1 text-sm text-ink-soft dark:text-parchment/60">Jot anything: {W.idea}. Add <code>#tags</code> to group them. Promote one to the plan when it's ready to become a reel.</p>
       </div>
       <Card>
         <form onSubmit={(e) => { e.preventDefault(); save(); }} className="grid gap-2">

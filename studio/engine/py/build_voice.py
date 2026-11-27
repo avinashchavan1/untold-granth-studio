@@ -23,6 +23,7 @@ POST = {v: c.get("post", []) for v, c in CAST.items()}
 ASRCUT = {v: c.get("asr_cut", True) for v, c in CAST.items()}
 NOCUT = {(i, int(u)) for i, sh in SH.items() for u in sh.get("no_cut", [])}
 NOCUT |= {(i, int(sh["sloka_unit"])) for i, sh in SH.items() if "sloka_unit" in sh}                  # the śloka: ASR can't spell Sanskrit, never cut it
+NOCUT |= {(i, j) for i, us in UNITS.items() for j, (txt, v, ex, cfg) in enumerate(us) if re.search(r"[A-Za-z]", re.sub(r"\[[^\]]*\]", "", txt))}   # Latin words (Hinglish: "twist", "facts"): a Hindi ASR drops them, so never ASR-cut such a line
 NOCUT |= {(i, u) for i, sh in SH.items() if "quote" in sh for u in range(len(sh.get("units", [])))}   # quote-card lines (Sanskrit/Awadhi)   # units whose last word ASR mishears: keep the whole take (A23 "इकसठ")
 TEMPO = 1.0   # never speed up the narrator (user rule)
 asr = WhisperModel("small", device="cpu", compute_type="int8")

@@ -6,6 +6,7 @@ import { Card, CopyButton, ErrorNote, SectionTitle, Spinner, StageBadge } from "
 import { mediaUrl, usePublications, useReel } from "../lib/api";
 import { supabase } from "../lib/supabase";
 import type { Stage } from "../lib/types";
+import { W } from "../lib/channel";
 
 // Long-form: full-length 16:9 videos (~10-12 min) and the 9:16 reels derived from them.
 // Data: studio/series/<id>/longform/<code>/longform.json, synced by scripts/sync.py into longform_videos.
@@ -23,6 +24,7 @@ type Plan = {
   progress?: { step: string; done: boolean }[];
   budget?: Record<string, unknown>;
   thumb_path?: string | null; youtube_description?: string | null; length?: string; master?: string;
+  category?: string; month?: number; beats_plan?: string[]; derived_target?: number; related_reels?: string[];
 };
 type Row = { id: string; code: string; title: string; subtitle: string | null; stage: string; plan: Plan; preview_path: string | null; updated_at: string };
 
@@ -50,6 +52,8 @@ export default function Longform() {
             <div className="flex items-center justify-between gap-2"><span className="font-mono text-sm">{r.code}</span><StageBadge stage={r.stage as Stage} /></div>
             <div className="mt-1 font-display text-xl font-bold">{r.title}</div>
             {r.subtitle && <p className="mt-1 text-sm text-ink-soft dark:text-parchment/70">{r.subtitle}</p>}
+            <Progress p={r.plan} />
+            <p className="mt-2 text-xs text-ink-soft dark:text-parchment/60">{r.plan.beats_plan?.length ?? r.plan.acts?.flatMap((a) => a.beats).length ?? 0} beats · {r.plan.derived_reels?.length ?? 0}/{r.plan.derived_target ?? r.plan.derived_reels?.length ?? 0} derived reels{r.plan.related_reels?.length ? ` · builds on ${r.plan.related_reels.join(", ")}` : ""}</p>
           </Card></Link>
         ))}
       </div>
@@ -60,7 +64,7 @@ export default function Longform() {
 const Header = () => (
   <div>
     <h1 className="font-display text-3xl font-extrabold tracking-wide">Long-form</h1>
-    <p className="mt-1 max-w-2xl text-sm text-ink-soft dark:text-parchment/60">Full-length 16:9 videos for YouTube (~10–12 min). Each is a new production; 4–6 reels are cut from its beats.</p>
+    <p className="mt-1 max-w-2xl text-sm text-ink-soft dark:text-parchment/60">Full-length 16:9 videos for YouTube (~10–12 min), one a month. Each is a new production; 4–6 reels are cut from its beats. To start one, add it to a session: "make long video L01".</p>
   </div>
 );
 
@@ -106,13 +110,25 @@ function Detail({ row, many }: { row: Row; many: boolean }) {
 
       {p.opening_sloka && (
         <Card>
-          <SectionTitle>Opening śloka · Valmiki Ramayana {p.opening_sloka.ref}</SectionTitle>
+          <SectionTitle>{W.opening} {p.opening_sloka.ref}</SectionTitle>
           <div className="font-[Mukta] text-xl leading-relaxed">{p.opening_sloka.lines.map((l, i) => <div key={i}>{l}</div>)}</div>
           {p.opening_sloka.translit && <p className="mt-2 text-sm italic text-ink-soft dark:text-parchment/60">{p.opening_sloka.translit}</p>}
           <p className="mt-2">{p.opening_sloka.en}</p>
           {p.opening_sloka.why && <p className="mt-2 text-sm text-ink-soft dark:text-parchment/60">{p.opening_sloka.why}</p>}
         </Card>
       )}
+
+      {(p.beats_plan?.length || p.related_reels?.length || p.derived_target) ? (
+        <div className="grid gap-6 xl:grid-cols-2">
+          {p.beats_plan?.length ? <Card><SectionTitle>Planned beats</SectionTitle><ol className="list-decimal space-y-1 pl-5 text-sm">{p.beats_plan.map((b) => <li key={b}>{b}</li>)}</ol></Card> : null}
+          <Card>
+            <SectionTitle>Shorts from this video</SectionTitle>
+            <p className="text-sm">{p.derived_reels?.length ?? 0} of {p.derived_target ?? 0} derived reels made.</p>
+            {(p.derived_reels ?? []).map((d) => <p key={d.id} className="mt-1 text-sm"><Link className="font-mono text-gold-deep dark:text-gold" to={`/reels/${d.id}`}>{d.id}</Link> {d.title}</p>)}
+            {p.related_reels?.length ? <p className="mt-3 text-sm text-ink-soft dark:text-parchment/60">Already made reels on the same topics (reuse their research and art): {p.related_reels.map((c) => <Link key={c} className="mr-1.5 font-mono text-gold-deep dark:text-gold" to={`/reels/${c}`}>{c}</Link>)}</p> : null}
+          </Card>
+        </div>
+      ) : null}
 
       <section>
         <SectionTitle>Beats</SectionTitle>
@@ -173,6 +189,18 @@ function Detail({ row, many }: { row: Row; many: boolean }) {
           {p.sargas_read && <p className="mt-1 text-sm"><span className="font-semibold">Read: </span>{p.sargas_read}</p>}
         </Card>
       )}
+    </div>
+  );
+}
+
+function Progress({ p }: { p: Plan }) {
+  const steps = p.progress ?? [], done = steps.filter((s) => s.done).length;
+  if (!steps.length) return null;
+  const next = steps.find((s) => !s.done);
+  return (
+    <div className="mt-3">
+      <div className="flex gap-1" aria-label={`${done} of ${steps.length} steps done`}>{steps.map((s, i) => <span key={i} title={s.step} className={clsx("h-1.5 flex-1 rounded-full", s.done ? "bg-emerald-600" : "bg-black/10 dark:bg-white/15")} />)}</div>
+      <p className="mt-1 text-xs text-ink-soft dark:text-parchment/60">{done}/{steps.length} · {next ? `next: ${next.step}` : "done"}</p>
     </div>
   );
 }

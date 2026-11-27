@@ -1,5 +1,5 @@
 // OAuth callbacks: /functions/v1/oauth/youtube and /functions/v1/oauth/instagram
-import { admin, APP_URL, FB_GRAPH, FN_URL, getIntegration, resolveInstagramFromToken, setIntegration } from "../_shared/util.ts";
+import { admin, APP_URL, FB_GRAPH, FN_URL, getIntegration, facebookPage, resolveInstagramFromToken, setIntegration } from "../_shared/util.ts";
 
 const ALLOWED = [APP_URL, ...(Deno.env.get("APP_URL_ALT") ?? "").split(",").filter(Boolean), "http://localhost:5173"];   // APP_URL_ALT: extra allowed app addresses, comma-separated
 let returnTo = APP_URL;   // the app address the user started from (must be one of ALLOWED)
@@ -32,6 +32,7 @@ Deno.serve(async (req) => {
       if (!t.access_token) return back("error", provider, t.error?.message ?? "Meta returned no token");
       const ig = await resolveInstagramFromToken(t.access_token, app!.ig_user_id);
       await setIntegration("instagram", { access_token: t.access_token, user_id: ig.user_id, username: ig.username, api_base: FB_GRAPH, system_user: true });
+      try { await facebookPage(true); } catch (_) { /* Page posting is optional; the app shows how to enable it */ }
     } else return back("error", provider, "unknown provider");
     await admin.from("activity").insert({ actor: "owner", action: `connected ${provider}` });
     return back("ok", provider);

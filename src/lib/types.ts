@@ -5,7 +5,7 @@ export type PubState = "todo" | "scheduled" | "posting" | "posted" | "failed" | 
 
 export const STAGES: { key: Stage; label: string; hint: string }[] = [
   { key: "idea", label: "Idea", hint: "In the plan, not started" },
-  { key: "researching", label: "Researching", hint: "Reading the verses, filling claims" },
+  { key: "researching", label: "Researching", hint: "Reading the sources, filling claims" },
   { key: "scripted", label: "Scripted", hint: "Script written and checked" },
   { key: "voiced", label: "Voiced", hint: "Narrator and character takes picked" },
   { key: "rendered", label: "Rendered", hint: "Video and masters built" },
@@ -29,10 +29,12 @@ export interface Reel {
   length_s: number | null; script: Script | null; captions: Record<string, string>; hashtags: string[]; verify_note: string | null;
   reviewed: boolean; reviewed_at: string | null; notes: string | null; created_at: string; updated_at: string;
   follows?: string | null;   // script.json "follows": post the day after this reel
+  category?: string | null; hook_score?: string | number | null; claim_checks?: Record<string, string>; hook_choice?: Record<string, unknown> | null;
+  requested_at?: string | null; request_pos?: number | null; request_note?: string | null; requested_by?: string | null;
 }
 export interface Claim { id: string; reel_id: string; position: number; claim: string; ref: string; quote_sa: string | null; verified: boolean; sources: string[]; }
 export interface FileRow { id: string; reel_id: string | null; kind: string; store: "supabase" | "github_release" | "github_repo" | "external"; path: string | null; url: string | null; bytes: number | null; spec: string | null; created_at: string; }
-export interface Publication { external_id?: string | null; stats?: Record<string, number | null>; stats_at?: string | null; id: string; reel_id: string; platform: Platform; state: PubState; post_url: string | null; posted_at: string | null; scheduled_for: string | null; notes: string | null; }
+export interface Publication { external_id?: string | null; stats?: Record<string, number | null>; stats_at?: string | null; id: string; reel_id: string; platform: Platform; state: PubState; post_url: string | null; posted_at: string | null; scheduled_for: string | null; notes: string | null; last_error?: string | null; schedule_options?: Record<string, unknown>; }
 export interface Character { id: string; series_id: string; key: string; name: string; tier: "major" | "minor"; status: "needed" | "audition" | "provisional" | "locked"; voice: Record<string, unknown>; look: Record<string, unknown>; notes: string | null; first_reel: string | null; }
 export interface Location { id: string; key: string; name: string; builder: string | null; description: string | null; }
 export interface Doc { id: string; series_id: string | null; slug: string; title: string; kind: string; body_md: string; updated_at: string; }

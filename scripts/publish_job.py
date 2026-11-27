@@ -3,6 +3,7 @@
 Gets everything from the studio job API using a one-time job token, then:
   YouTube  : resumable upload of the 4K master (videos.insert), Shorts metadata
   Instagram: Reels via the Instagram API with Instagram Login (resumable upload, then media_publish)
+  Facebook : Reels on the channel's Page (video_reels start → rupload → finish PUBLISHED)
 Progress and the final post link are reported back to the app."""
 import json, os, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
 
@@ -169,6 +170,51 @@ def instagram(spec, path):
     link = call("GET", f"{IG}/{mid}?fields=permalink&access_token={urllib.parse.quote(tok)}").get("permalink") or os.environ.get("IG_PROFILE_URL", "")
     return link, mid, f"Published reel {mid}"
 
+def facebook(spec, path):
+    """Facebook Reels on the Page: start an upload session, send the file to rupload, then finish with PUBLISHED and wait
+    until Facebook has processed and published it. Uses the same H.264 file as Instagram (Reels spec, <=90 s)."""
+    fb = spec["facebook"]; tok = fb["access_token"]; page = fb["page_id"]; print(f"::add-mask::{tok}")
+    G = fb.get("api_base") or "https://graph.facebook.com/v21.0"
+    path = instagram_fit(path); size = os.path.getsize(path)
+    report(step="creating Facebook reel", log=f"Starting a Reels upload on the Page {fb.get('page_name') or page} ({size / 1e6:.0f} MB)")
+    st = call("POST", f"{G}/{page}/video_reels?{urllib.parse.urlencode({'upload_phase': 'start', 'access_token': tok})}")
+    vid, uri = st["video_id"], st.get("upload_url") or f"https://rupload.facebook.com/video-upload/{G.rsplit('/', 1)[-1]}/{st['video_id']}"
+    for tryno in (1, 2, 3):
+        report(step="uploading to Facebook", log=f"Video {vid}: sending {size / 1e6:.0f} MB (try {tryno} of 3)")
+        with open(path, "rb") as f:
+            req = urllib.request.Request(uri, data=f, method="POST", headers={"Authorization": f"OAuth {tok}", "offset": "0", "file_size": str(size),
+                                                                               "Content-Length": str(size), "Content-Type": "application/octet-stream"})
+            try:
+                with urllib.request.urlopen(req, timeout=1800) as r: reply = json.loads(r.read() or b"{}")
+            except urllib.error.HTTPError as e: reply = {"error": e.read().decode(errors="replace")[:300]}
+            except (urllib.error.URLError, TimeoutError, ConnectionError) as e: reply = {"error": f"{type(e).__name__}: {e}"}
+        if reply.get("success"): break
+        report(log=f"Upload reply: {str(reply)[:300]}"); time.sleep(30 * tryno)
+    else:
+        raise RuntimeError(f"Facebook did not take the video upload: {str(reply)[:300]}")
+    params = {"upload_phase": "finish", "video_id": vid, "video_state": "PUBLISHED", "description": fb.get("description", "")[:2200], "access_token": tok}
+    call("POST", f"{G}/{page}/video_reels?{urllib.parse.urlencode(params)}")
+    report(log="Upload complete; Facebook is processing and publishing the reel")
+    t0, last = time.time(), {}
+    while time.time() - t0 < 30 * 60:
+        time.sleep(20 if time.time() - t0 < 60 else 60)
+        last = call("GET", f"{G}/{vid}?fields=status&access_token={urllib.parse.quote(tok)}").get("status") or {}
+        vs = last.get("video_status"); pub = (last.get("publishing_phase") or {}).get("status"); proc = (last.get("processing_phase") or {}).get("status")
+        report(step=f"Facebook processing ({vs}, {int((time.time() - t0) / 60)} min)")
+        if vs == "error" or proc == "error" or pub == "error": raise RuntimeError(f"Facebook could not publish the reel: {str(last)[:600]}")
+        if pub == "complete" or vs == "published": break
+    else:
+        raise RuntimeError(f"Facebook was still processing after 30 min: {str(last)[:400]}")
+    if spec.get("cover_url"):                                 # our designed cover; never fails the post
+        try:
+            img = urllib.request.urlopen(spec["cover_url"], timeout=60).read(); bnd = "kbfcover"
+            body = (f"--{bnd}\r\nContent-Disposition: form-data; name=\"is_preferred\"\r\n\r\ntrue\r\n--{bnd}\r\nContent-Disposition: form-data; name=\"source\"; filename=\"cover.jpg\"\r\n"
+                    f"Content-Type: image/jpeg\r\n\r\n").encode() + img + f"\r\n--{bnd}--\r\n".encode()
+            call("POST", f"{G}/{vid}/thumbnails?access_token={urllib.parse.quote(tok)}", body, {"Content-Type": f"multipart/form-data; boundary={bnd}"})
+            report(log="Cover set on the Facebook reel")
+        except Exception as e: report(log=f"Facebook kept its own cover ({str(e)[:200]})")
+    return f"https://www.facebook.com/reel/{vid}", vid, f"Published Facebook reel {vid} on {fb.get('page_name') or page}"
+
 def first_comment(spec, ext_id):
     """Post the reel's question as the first comment (starts the conversation in the first minutes). Never fails the post."""
     text = (spec.get("first_comment") or "").strip()
@@ -179,6 +225,9 @@ def first_comment(spec, ext_id):
             call("POST", "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet",
                  {"snippet": {"videoId": ext_id, "topLevelComment": {"snippet": {"textOriginal": text[:9000]}}}},
                  {"Authorization": f"Bearer {tok}", "Content-Type": "application/json"})
+        elif spec["platform"] == "facebook":
+            fb = spec["facebook"]; G = fb.get("api_base") or "https://graph.facebook.com/v21.0"
+            call("POST", f"{G}/{ext_id}/comments?{urllib.parse.urlencode({'message': text[:2200], 'access_token': fb['access_token']})}")
         else:
             ig = spec["instagram"]; IG = ig.get("api_base") or IG_API
             call("POST", f"{IG}/{ext_id}/comments?{urllib.parse.urlencode({'message': text[:2200], 'access_token': ig['access_token']})}")
@@ -191,8 +240,10 @@ def main():
         spec = call("GET", f"{API}?job_id={JOB_ID}", headers={"x-job-token": TOKEN})
         for k in ("hf_token",):
             if spec.get(k): print(f"::add-mask::{spec[k]}")
+        for sec in ("youtube", "instagram", "facebook"):
+            if (spec.get(sec) or {}).get("access_token"): print(f"::add-mask::{spec[sec]['access_token']}")
         path = download(spec, f"/tmp/{spec['code']}_{spec['platform']}.mp4")
-        url, ext_id, msg = (youtube if spec["platform"] == "youtube" else instagram)(spec, path)
+        url, ext_id, msg = {"youtube": youtube, "facebook": facebook}.get(spec["platform"], instagram)(spec, path)
         msg += first_comment(spec, ext_id)
         report(status="done", step="posted", result_url=url, external_id=ext_id, log=f"{msg} → {url}")
     except Exception as e:

@@ -46,7 +46,7 @@ rows += [{"series_id": SID, "key": k, "name": k.title(), "tier": "major", "statu
 upsert("characters", rows, "series_id,key")
 upsert("locations", [{"series_id": SID, "key": L["key"], "name": L["name"], "builder": L["builder"], "description": L.get("description", "")} for L in sj.get("locations", [])], "series_id,key")   # series.json → locations
 upsert("docs", [{"series_id": sid, "slug": slug, "title": t, "kind": kind, "body_md": open(p).read()} for slug, t, kind, p, sid in [
-    ("style-guide", "Studio style guide", "style_guide", os.path.join(ST, "STYLE_GUIDE.md"), None),
+    ("style-guide", "Studio style guide", "style_guide", os.path.join(SER, "STYLE_GUIDE.md") if os.path.exists(os.path.join(SER, "STYLE_GUIDE.md")) else os.path.join(ST, "STYLE_GUIDE.md"), None),   # a series may ship its own guide
     ("make-reel-skill", "make-reel workflow", "skill", os.path.join(ST, ".claude/skills/make-reel/SKILL.md"), None),
     ("studio-readme", "Studio engine README", "readme", os.path.join(ST, "README.md"), None),
     ("plan", C["series"]["name"] + " — the plan", "plan", os.path.join(SER, sj.get("plan_file", "PLAN.md")), SID)]], "slug")
@@ -64,8 +64,9 @@ for code, stage in STAGE.items():
     tlp = os.path.join(SER, "reels", code, "src", "timeline.json"); tl = json.load(open(tlp)) if os.path.exists(tlp) else {}
     rowp = os.path.join(ST, "publish", "desk", "rows", code + ".json"); caps = json.load(open(rowp))["captions"] if os.path.exists(rowp) else {}
     rendered = stage not in ("idea", "researching", "scripted", "voiced")
-    cur = api("GET", f"reels?select=stage,captions&series_id=eq.{SID}&code=eq.{code}") or [{}]
-    if cur[0].get("captions"): caps = cur[0]["captions"]                       # captions edited in the app win
+    cur = api("GET", f"reels?select=id,stage,captions&series_id=eq.{SID}&code=eq.{code}") or [{}]
+    edited = cur[0].get("id") and api("GET", f"activity?select=id&reel_id=eq.{cur[0]['id']}&action=eq.captions%20edited&limit=1")
+    if cur[0].get("captions") and (edited or not caps): caps = cur[0]["captions"]   # captions edited in the app win; otherwise the studio's latest
     if cur[0].get("stage") in ORDER and stage in ORDER and ORDER.index(cur[0]["stage"]) > ORDER.index(stage): stage = cur[0]["stage"]   # never move a reel backwards
     extra = {"kind": "longform"} if s.get("kind") == "longform" else {}   # full-length videos: posted from the app like reels, YouTube only
     rec = upsert("reels", [{**extra, "series_id": SID, "code": code, "title": s["title"], "stage": stage, "hook_hi": s["shots"][0]["hi"], "hook_en": s["shots"][0]["en"],

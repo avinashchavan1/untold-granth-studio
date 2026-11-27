@@ -67,3 +67,24 @@ Each rule has a mechanism in the engine; keep both.
     the normal reel pipeline (stages, covers, masters, owner review).
 28. **Budget:** ~10–12 min of narration is ~15–20k TTS characters for two takes; plan the month around it (about one full-length video
     per month on a 40k-character plan, plus a few reels). The channel's plan and current pilot live in its series folder (`LONGFORM.md`).
+
+## Live status (baked into the pipeline)
+29. **The app's work panel updates itself.** `make_reel.py` reports every step (narration, pick, audio, stills, render, thumb) to
+    `scripts/status.py`, and a render starts the frame watcher (phases, %, time left). For several reels, open a batch first:
+    `python3 scripts/status.py batch R006 R007 --task "Next 2 reels"`; `scripts/upload_reel.sh` marks each reel done after upload.
+    Research and script steps are set by hand (`status.py set --reel X --step 1|2`). Set `NO_STATUS=1` to silence it.
+30. **Upload each reel as soon as it renders.** In a batch, run `render` then `scripts/upload_reel.sh <ID>` per reel inside the loop, never render all first and upload at the end: finished reels must reach the app right away (owner's rule).
+31. **Posting runs from the app, on a timer.** Each reel page has **Post everywhere** (Instagram, YouTube, Facebook Page; now or at a time), the
+    Timeline has **Auto-fill** (schedules every checked reel at the best times), and the server timer (`scripts/schedule_setup.py`, pg_cron every 5 min)
+    starts due posts with the app closed. A daily timer refreshes **Stats** (views, followers, weekly report) and the **health banner**.
+    One tick ("I checked the citations") reviews the whole reel and marks every claim; per-claim ticks are optional. The owner's **request queue** (`python3 scripts/request_queue.py`) comes
+    before the plan order; every new script carries 3 scored `hook_options` (`python3 scripts/hook_options.py <ID>`) and the owner's pick wins.
+32. **One or two reels at a time (owner's rule).** Render (and record) at most 1–2 reels at once, in small batches, each uploaded as soon as it finishes
+    (rule 30), so the machine never overloads and the owner sees reels completing one by one in Live studio. Never start a long chain of many renders in parallel.
+33. **Best time + Autopilot.** Every morning the server studies similar channels' real posts (YouTube Data API, Instagram Business Discovery;
+    no scraping; Instagram hashtag data needs Meta's Public Content Access review), our Instagram audience's online hours (100+ followers) and our
+    own results, and builds a weekday × hour score per platform (Best time page). Autopilot, off until the owner turns it on, schedules only
+    CHECKED reels into the best slot of each posting day. Similar channels: found once from `autopilot.peer_search`, editable on the page.
+34. **Every link is in git.** `studio/series/<id>/MEDIA.md` (+ `media.json`) lists each reel's Hugging Face masters, audio pack, Storage paths
+    (preview, cover, citations, caption) and live post links. `upload_reel.sh` rewrites it; after posts, `bootstrap.sh` runs `python3 scripts/media_index.py --commit`
+    at the start of a session so the live links are committed too. Never hand-edit it.
