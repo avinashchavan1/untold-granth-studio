@@ -199,16 +199,18 @@ function Bar({ pct, big = false }: { pct: number | null; big?: boolean }) {
 }
 
 function Batch({ info, current }: { info: NonNullable<WorkStatus["info"]>; current: string | null }) {
-  const reels = info.reels ?? {}, codes = (info.batch?.codes ?? []).filter((c) => reels[c]);
-  const doneN = codes.filter((c) => reels[c].state === "done").length, pct = Math.round(Number(info.batch_pct ?? 0));
+  const reels = info.reels ?? {}, all = Array.from(new Set([...(info.batch?.codes ?? []), ...Object.keys(reels)])).filter((c) => reels[c]);
+  const done = all.filter((c) => reels[c].state === "done"), codes = all.filter((c) => reels[c].state !== "done");   // finished reels leave the queue (owner)
+  const doneN = done.length, pct = Math.round(Number(info.batch_pct ?? 0));
   return (
     <div className="mt-3 rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <div className="text-xs font-black uppercase tracking-wider text-gold">{info.batch?.title}</div>
-        <div className="text-xs font-semibold opacity-80"><span className="tabular">{doneN}</span> of <span className="tabular">{codes.length}</span> reels ready · <span className="tabular">{pct}%</span></div>
+        <div className="text-xs font-semibold opacity-80"><span className="tabular">{codes.length}</span> left in the queue · <span className="tabular">{pct}%</span></div>
       </div>
       <div className="mt-2 flex items-center gap-2"><Bar pct={pct} big /></div>
-      <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
+      {doneN > 0 && <Link to="/reels" className="mt-2 block text-xs font-semibold text-gold underline">{doneN} uploaded · in review: {done.join(", ")} →</Link>}
+      {codes.length === 0 ? <p className="mt-2 text-sm opacity-75">Nothing left in the queue.</p> : <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
         {codes.map((c) => {
           const r = reels[c], st = r.state ?? "queued", step = r.step ?? 0, live = c === current && st === "running";
           return (
@@ -227,7 +229,7 @@ function Batch({ info, current }: { info: NonNullable<WorkStatus["info"]>; curre
             </Link>
           );
         })}
-      </div>
+      </div>}
     </div>
   );
 }
