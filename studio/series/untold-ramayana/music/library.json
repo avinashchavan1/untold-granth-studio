@@ -92,6 +92,15 @@
    "source": null,
    "note": "composed for the library (150 s)",
    "used_by": []
+  },
+  {
+   "style": "night_mystery",
+   "name": "night_mystery_01",
+   "path": "music/night_mystery/night_mystery_01.mp3",
+   "seconds": 150.0,
+   "source": null,
+   "note": "composed for the library (150 s)",
+   "used_by": []
   }
  ]
 }

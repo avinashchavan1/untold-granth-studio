@@ -25,3 +25,4 @@ studio/**/audio/score.wav
 studio/**/audio/score_acts/
 studio/**/audio/music_sample*.mp3
 studio/series/*/music/files/
+studio/series/*/music/_new_*.mp3
