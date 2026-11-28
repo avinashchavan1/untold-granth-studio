@@ -92,3 +92,12 @@ Each rule has a mechanism in the engine; keep both.
 34. **Every link is in git.** `studio/series/<id>/MEDIA.md` (+ `media.json`) lists each reel's Hugging Face masters, audio pack, Storage paths
     (preview, cover, citations, caption) and live post links. `upload_reel.sh` rewrites it; after posts, `bootstrap.sh` runs `python3 scripts/media_index.py --commit`
     at the start of a session so the live links are committed too. Never hand-edit it.
+
+35. **Narrator house style.** `series.json → narration_energy: "storytelling"` makes the narrator an energetic storyteller (cast.json
+    voice_settings ≈ stability 0.32, style 0.6, speed 1.18; tags [storytelling] [engaged] [intense] [confident] [serious] [curious] [warmly] [pause]).
+    `make_reel.py check` rejects [softly]/[thoughtfully] and "…" inside narrator lines in that style (they made the voice slow and moaning);
+    the picker's guard is the narrator's `f0_hz + f0_max_rise` (set it from an audition). Audition a new style on 3 lines before switching.
+36. **Preparing long-form videos.** Plan each as `longform/<code>/longform.json` (stage "idea": arc, candidate beats marked "verify in the
+    base text", derived reels, characters to ask about) so it shows on the Long-form page. Then research one video at a time: save every
+    chapter of the arc (`source_verse.py`), pin each beat to its verse (`python3 scripts/verse_find.py "<word>" "<saved pages>"`), note page gaps,
+    and write `longform/<code>/research/README.md`. An absence claim ("X is not in the text") needs every chapter of the episode complete on the page.
