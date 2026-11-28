@@ -62,7 +62,9 @@ S = `series/<series id>` (channel.json → series.id); R = `S/reels/<ID>`. Keep 
 - `python3 make_reel.py thumb R 2s,20s,...` → pick a frame, set `thumbnail.frame` (+ `art_shift`), `python3 make_reel.py thumb R`, LOOK at the cover.
 - `python3 make_reel.py sheet R`, `python3 make_reel.py desk R`; set `S/reels/stages.json → <ID>: "review"`.
 - From the repo root: `python3 scripts/sync.py`, `python3 scripts/media.py <ID> preview|thumbnail|citations|caption <file>`, `python3 scripts/masters.py <ID>`,
-  `python3 scripts/audiopack.py push <ID>`, `python3 scripts/cast_media.py` if a character appeared or changed, `python3 scripts/status.py idle`.
+  `python3 scripts/audiopack.py push <ID>`, `python3 scripts/cast_media.py` if a character appeared or changed, `python3 scripts/status.py done <ID>`
+  (marks it uploaded on Live studio; `status.py queued <ID>` for reels waiting their turn), `python3 scripts/status.py idle` when nothing is left.
+- ONE reel at a time (owner): finish render → check → upload → tell the owner, then start the next. No background recording or chained renders.
 - Commit + push. Send the owner the preview + cover with a short summary (claims checked, what to review).
 
 ## Changing an existing reel
