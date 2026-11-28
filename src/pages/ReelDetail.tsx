@@ -19,7 +19,7 @@ export default function ReelDetail() {
   const [tab, setTab] = useState<Tab>("Publish");
   const files = useFiles(reel.data?.id);
   const setStage = useSetStage();
-  if (reel.isLoading) return <Spinner />;
+  if (reel.isLoading) return <Spinner label="Loading the reel…" />;
   if (reel.error || !reel.data) return <ErrorNote error={reel.error ?? "Reel not found"} />;
   const r = reel.data;
   const preview = files.data?.find((f) => f.kind === "preview");
@@ -318,7 +318,7 @@ function ScriptTab({ r }: { r: Reel }) {
 }
 
 function FilesTab({ files, loading }: { files: FileRow[]; loading: boolean }) {
-  if (loading) return <Spinner />;
+  if (loading) return <Spinner size="sm" label="Loading files…" />;
   if (!files.length) return <Empty>No files yet.</Empty>;
   return (
     <ul className="grid gap-2">

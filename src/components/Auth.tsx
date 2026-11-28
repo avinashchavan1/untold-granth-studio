@@ -22,9 +22,9 @@ export function AuthGate({ children }: { children: ReactNode }) {
     else setAdmin(undefined);
   }, [session]);
 
-  if (session === undefined) return <div className="grid h-full place-items-center"><Spinner label="Opening the studio…" /></div>;
+  if (session === undefined) return <div className="grid h-full place-items-center"><Spinner size="screen" label="Opening the studio…" /></div>;
   if (!session) return <Login />;
-  if (admin === undefined) return <div className="grid h-full place-items-center"><Spinner label="Checking access…" /></div>;
+  if (admin === undefined) return <div className="grid h-full place-items-center"><Spinner size="screen" label="Checking access…" /></div>;
   if (!admin)
     return (
       <Shell>

@@ -15,7 +15,7 @@ export default function Reels() {
   const view = params.get("view") ?? (typeof window !== "undefined" && window.innerWidth < 640 ? "list" : "board");
   const stage = (params.get("stage") as Stage | null) ?? null;
   const rows = useMemo(() => (data ?? []).filter((r) => (!stage || r.stage === stage) && (!q || `${r.code} ${r.title} ${r.source_ref ?? ""}`.toLowerCase().includes(q.toLowerCase()))), [data, stage, q]);
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner label="Loading reels…" />;
   if (error) return <ErrorNote error={error} />;
   const set = (k: string, v: string | null) => { const p = new URLSearchParams(params); v ? p.set(k, v) : p.delete(k); setParams(p, { replace: true }); };
 

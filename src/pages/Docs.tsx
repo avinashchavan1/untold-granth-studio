@@ -13,7 +13,7 @@ export default function Docs() {
   const [body, setBody] = useState("");
   const current = docs.data?.find((d) => d.slug === (slug ?? "style-guide")) ?? docs.data?.[0];
   useEffect(() => { setBody(current?.body_md ?? ""); setEdit(false); }, [current?.id, current?.body_md]);
-  if (docs.isLoading) return <Spinner />;
+  if (docs.isLoading) return <Spinner label="Loading docs…" />;
   if (docs.error) return <ErrorNote error={docs.error} />;
 
   return (

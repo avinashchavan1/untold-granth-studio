@@ -13,7 +13,7 @@ export default function Plan() {
   const add = useAddReel();
   const [open, setOpen] = useState(false);
   const [f, setF] = useState({ title: "", kind: "myth_buster", source_ref: "", plan_note: "" });
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner label="Loading the plan…" />;
   if (error) return <ErrorNote error={error} />;
   const reels = data ?? [];
   const nextNo = Math.max(0, ...reels.map((r) => r.plan_no ?? 0)) + 1;

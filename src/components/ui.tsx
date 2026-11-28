@@ -78,8 +78,26 @@ export function CopyButton({ text, label }: { text: string; label: string }) {
   );
 }
 
-export const Spinner = ({ label = "Loading…" }: { label?: string }) => (
-  <div className="flex items-center gap-2 py-8 text-sm text-ink-soft dark:text-parchment/60"><Loader2 className="animate-spin" size={16} /> {label}</div>
+// Loader: two googly eyes looking around + a label. size "page" (default) fills the page with placeholder cards under it,
+// so a refresh never shows a blank screen or misleading zeros; size "sm" is for a section inside a page.
+const Eyes = ({ px }: { px: number }) => (
+  <span className="loader-eyes inline-flex gap-[0.18em]" style={{ fontSize: px }} aria-hidden>
+    <span className="loader-eye"><span className="loader-pupil" /></span><span className="loader-eye"><span className="loader-pupil" /></span>
+  </span>
+);
+export const Spinner = ({ label = "Loading…", size = "page" }: { label?: string; size?: "page" | "sm" | "screen" }) => size === "screen" ? (
+  <div role="status" className="flex flex-col items-center gap-4"><Eyes px={72} /><div className="flex items-center gap-2 text-sm font-semibold text-ink-soft dark:text-parchment/70"><Loader2 className="animate-spin" size={15} /> {label}</div></div>
+) : size === "sm" ? (
+  <div role="status" className="flex items-center gap-2.5 py-6 text-sm font-semibold text-ink-soft dark:text-parchment/70"><Eyes px={22} /> {label}</div>
+) : (
+  <div role="status" aria-live="polite" className="grid gap-6">
+    <div className="flex min-h-[28vh] flex-col items-center justify-center gap-4">
+      <Eyes px={64} />
+      <div className="flex items-center gap-2 text-sm font-semibold text-ink-soft dark:text-parchment/70"><Loader2 className="animate-spin" size={15} /> {label}</div>
+    </div>
+    <div className="grid gap-3 sm:grid-cols-3">{[0, 1, 2].map((i) => <div key={i} className="h-24 animate-pulse rounded-2xl bg-black/5 dark:bg-white/5" style={{ animationDelay: `${i * 150}ms` }} />)}</div>
+    <div className="h-48 animate-pulse rounded-2xl bg-black/5 dark:bg-white/5" />
+  </div>
 );
 
 export const ErrorNote = ({ error }: { error: unknown }) => (

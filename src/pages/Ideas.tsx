@@ -50,7 +50,7 @@ export default function Ideas() {
         {allTags.map((t) => <button key={t} onClick={() => setTag(tag === t ? null : t)} aria-pressed={tag === t} className={`rounded-full px-2.5 py-1 text-xs font-semibold ${tag === t ? "bg-gold text-night-950" : "bg-black/5 text-ink-soft dark:bg-white/10 dark:text-parchment/70"}`}>#{t}</button>)}
       </div>
 
-      {ideas.isLoading ? <Spinner /> : ideas.error ? <ErrorNote error={ideas.error} /> : rows.length === 0 ? <Empty>{view === "new" ? "No ideas yet. Write the first one above." : "Nothing here."}</Empty> : (
+      {ideas.isLoading ? <Spinner size="sm" /> : ideas.error ? <ErrorNote error={ideas.error} /> : rows.length === 0 ? <Empty>{view === "new" ? "No ideas yet. Write the first one above." : "Nothing here."}</Empty> : (
         <ul className="grid gap-2">{rows.map((i) => <IdeaRow key={i.id} idea={i} />)}</ul>
       )}
     </div>

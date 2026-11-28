@@ -59,7 +59,7 @@ export function useClaimProgress(r: Reel) {
 export function FactCheck({ r }: { r: Reel }) {
   const update = useUpdateReel();
   const { claims, checks, list, done, total } = useClaimProgress(r);
-  if (claims.isLoading) return <Spinner />;
+  if (claims.isLoading) return <Spinner size="sm" label="Loading the claims…" />;
   if (!list.length) return <Empty>No claims recorded yet. {W.needRef}</Empty>;
   const toggle = (claim: string) => {
     const next = { ...checks }; if (next[claim]) delete next[claim]; else next[claim] = new Date().toISOString();

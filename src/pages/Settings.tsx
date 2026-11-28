@@ -24,7 +24,7 @@ export default function SettingsPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <SectionTitle>Brand</SectionTitle>
-          {series.isLoading ? <Spinner /> : s && (
+          {series.isLoading ? <Spinner size="sm" /> : s && (
             <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm">
               <dt className="text-ink-soft dark:text-parchment/60">Channel</dt><dd className="font-display font-semibold tracking-wider">{String(cfg.logo ?? "")}</dd>
               <dt className="text-ink-soft dark:text-parchment/60">Series</dt><dd>{s.name} · {s.book}</dd>

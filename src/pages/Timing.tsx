@@ -26,7 +26,7 @@ export default function Timing() {
   const counts = useQuery({ queryKey: ["peer_counts"], queryFn: () => q<{ peer_id: string }[]>("peer_posts", "peer_id") });
   const qc = useQueryClient();
   const [st, setSt] = useState<{ busy?: boolean; msg?: string; err?: string }>({});
-  if (models.isLoading || peers.isLoading || auto.isLoading) return <Spinner />;
+  if (models.isLoading || peers.isLoading || auto.isLoading) return <Spinner label="Loading best times…" />;
   if (models.error) return <ErrorNote error={models.error} />;
   const byP = Object.fromEntries((models.data ?? []).map((m) => [m.platform, m]));
   const n = (id: string) => (counts.data ?? []).filter((x) => x.peer_id === id).length;

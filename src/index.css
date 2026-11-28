@@ -60,3 +60,11 @@ body { font-family: theme(fontFamily.sans); -webkit-font-smoothing: antialiased;
 .progress-stripes { background-image: linear-gradient(45deg, rgb(255 255 255 / .28) 25%, transparent 25%, transparent 50%, rgb(255 255 255 / .28) 50%, rgb(255 255 255 / .28) 75%, transparent 75%, transparent); background-size: 28px 28px; animation: progress-stripes 1s linear infinite; }
 @keyframes progress-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .progress-shimmer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, theme(colors.gold.DEFAULT / 70%), transparent); animation: progress-shimmer 1.4s ease-in-out infinite; }
+
+/* Loader eyes (components/ui.tsx Spinner, and the first-paint loader in index.html) */
+.loader-eye { position: relative; width: 1em; height: 1em; border-radius: 9999px; background: #fff; border: .1em solid #14123a; display: inline-block; }
+.loader-pupil { position: absolute; width: .42em; height: .42em; border-radius: 9999px; background: #14123a; left: 50%; top: 50%; margin: -.21em 0 0 -.21em; animation: loader-look 2.4s ease-in-out infinite; }
+.loader-eyes { animation: loader-blink 3.2s infinite; transform-origin: center; }
+@keyframes loader-look { 0%,100% { transform: translate(-.16em,-.1em); } 30% { transform: translate(.16em,-.1em); } 55% { transform: translate(.14em,.14em); } 80% { transform: translate(-.14em,.12em); } }
+@keyframes loader-blink { 0%,92%,100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+@media (prefers-reduced-motion: reduce) { .loader-pupil, .loader-eyes { animation: none; } }

@@ -37,7 +37,7 @@ const useLongform = () => useQuery({ queryKey: ["longform"], queryFn: async () =
 export default function Longform() {
   const { code } = useParams();
   const q = useLongform();
-  if (q.isLoading) return <Spinner />;
+  if (q.isLoading) return <Spinner label="Loading long videos…" />;
   if (q.error) return <ErrorNote error={q.error} />;
   const rows = q.data ?? [];
   const row = code ? rows.find((r) => r.code === code) : rows.length === 1 ? rows[0] : undefined;
