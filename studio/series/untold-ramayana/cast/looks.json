@@ -47,7 +47,14 @@
   ],
   "posted_in": [],
   "look_chosen": "claude",
-  "note": null
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_guha.mp3",
+  "voice_line": {
+   "reel": "A102",
+   "shot": 6,
+   "hi": "राजकुमार, ये शय्या आपके लिए है, आराम से सोइए। हम रात भर पहरा देंगे।",
+   "en": "\"Prince, this bed is for you. Sleep in comfort. We will keep watch all night.\""
+  }
  },
  "hanuman": {
   "portrait": "untold-ramayana/cast/hanuman.jpg",
@@ -64,7 +71,14 @@
   ],
   "posted_in": [],
   "look_chosen": "claude",
-  "note": null
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_hanuman.mp3",
+  "voice_line": {
+   "reel": "A101",
+   "shot": 7,
+   "hi": "मैं उन औषधियों को पहचानता नहीं। इसलिए, पूरा शिखर ही ले आया हूँ।",
+   "en": "\"I don't know those herbs. So I have brought the whole peak.\""
+  }
  },
  "hanuman_child": {
   "portrait": "untold-ramayana/cast/hanuman_child.jpg",
@@ -110,7 +124,14 @@
    "A03"
   ],
   "look_chosen": "seen",
-  "note": null
+  "note": null,
+  "voice_sample": "untold-ramayana/cast/voice_lakshmana.mp3",
+  "voice_line": {
+   "reel": "A102",
+   "shot": 7,
+   "hi": "जब भैया, माता सीता के साथ, धरती पर सो रहे हैं, तो मुझे नींद कैसे आए? जीवन, या सुख भी कैसे?",
+   "en": "\"While my brother lies on the bare ground with Sita, how could I sleep? How could I live, or know any comfort?\""
+  }
  },
  "mandodari": {
   "portrait": "untold-ramayana/cast/mandodari.jpg",
@@ -197,10 +218,10 @@
   "note": null,
   "voice_sample": "untold-ramayana/cast/voice_rama.mp3",
   "voice_line": {
-   "reel": "A34",
-   "shot": 8,
-   "hi": "मित्र सुग्रीव, क्रोध छोड़ो। वेश में, कद में, चाल में, स्वर में, तुम दोनों में, मुझे कोई अंतर नहीं दिखा।",
-   "en": "\"Sugriva, my friend, let go of your anger. In dress, in build, in gait, in voice, I saw no difference between you two.\""
+   "reel": "A102",
+   "shot": 9,
+   "hi": "लक्ष्मण, आज से रातों में, हम दोनों को जागना होगा। सीता की रक्षा, हम दोनों पर है।",
+   "en": "\"Lakshmana, from today, we two must stay awake at night. Sita's safety rests on us both.\""
   }
  },
  "ravana": {
@@ -297,10 +318,10 @@
  "narrator": {
   "voice_sample": "untold-ramayana/cast/voice_narrator.mp3",
   "voice_line": {
-   "reel": "A103",
+   "reel": "A101",
    "shot": 1,
-   "hi": "सुग्रीव, एक गुफ़ा के मुहाने पर, पूरे एक साल बैठे रहे। फिर, उन्होंने वो गुफ़ा, एक चट्टान से बंद कर दी।",
-   "en": "Sugriva sat at the mouth of a cave for a whole year. Then he sealed it with a rock."
+   "hi": "लक्ष्मण पर वो शक्ति, किसने चलाई थी?",
+   "en": "Who really struck Lakshmana with that spear?"
   },
   "appears_in": [
    "A01",
@@ -326,6 +347,18 @@
    "A89",
    "A92",
    "LF01"
+  ]
+ },
+ "jambavan": {
+  "voice_sample": "untold-ramayana/cast/voice_jambavan.mp3",
+  "voice_line": {
+   "reel": "A23",
+   "shot": 6,
+   "hi": "क्या वानरश्रेष्ठ हनुमान, कहीं जीवित है?",
+   "en": "\"Does Hanuman, the best of the vanaras, still live?\""
+  },
+  "appears_in": [
+   "A23"
   ]
  },
  "dasharatha": {
