@@ -64,7 +64,7 @@ def check(reel):
     energy_on = s.get("narration_energy") == "hook_reveal"                               # owner's A/B test (Nov 21 2026); shouting guard still applies
     HOUSE = ENERGY | {"amazed", "laughs", "playfully", "impressed", "curious", "surprised"}   # series.json → narration_energy "excited": a lively house style (owner's choice)
     house_on = ser_.get("narration_energy") == "excited"
-    STORY = {"storytelling", "engaged", "intense", "confident", "serious", "curious", "pause", "warmly"}   # series.json → narration_energy "storytelling" (owner's pick, Nov 28 2026)
+    STORY = {"storytelling", "engaged", "intense", "confident", "serious", "curious", "pause", "warmly", "excited", "dramatically", "energetic"}   # series.json → narration_energy "storytelling" (owner's pick, Nov 28 2026)
     story_on = ser_.get("narration_energy") == "storytelling"
     for sh in s["shots"]:
         if sh.get("voice") != "narrator": continue
