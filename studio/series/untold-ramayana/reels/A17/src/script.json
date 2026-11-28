@@ -246,13 +246,47 @@
   "art_shift": 0
  },
  "score": {
-  "engine": "elevenlabs eleven_music_v2_5",
+  "engine": "library",
+  "style": "heroic_strings",
+  "cues": [
+   {
+    "shot": 1,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 2,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 3,
+    "style": "tender_sorrow"
+   },
+   {
+    "shot": 5,
+    "style": "royal_court"
+   },
+   {
+    "shot": 6,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 7,
+    "style": "heroic_strings"
+   }
+  ],
   "file": "audio/score.mp3",
-  "duration_s": 90,
-  "gain": 1.9,
-  "duck": 0.72,
-  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
-  "take": "take 1: steady build, peak 50-70 s (vs take 2 flatter)"
+  "gain": 2.3,
+  "duck": 0.6,
+  "take": "0-4 s night_mystery/night_mystery_01 · 4-22 s devotional_glow/devotional_glow_01 · 22-47 s tender_sorrow/tender_sorrow_01 · 47-62 s royal_court/a18_main · 62-74 s devotional_glow/devotional_glow_01 · 74-86 s heroic_strings/a104_alt",
+  "previous": {
+   "engine": "elevenlabs eleven_music_v2_5",
+   "file": "audio/score.mp3",
+   "duration_s": 90,
+   "gain": 1.9,
+   "duck": 0.72,
+   "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
+   "take": "take 1: steady build, peak 50-70 s (vs take 2 flatter)"
+  }
  },
  "avoid": [
   "calling the Urmila story 'fake' or mocking it: it is a later, loving telling of her sacrifice",

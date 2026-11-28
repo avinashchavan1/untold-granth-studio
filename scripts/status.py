@@ -272,7 +272,10 @@ if __name__ == "__main__":
         try: voice_budget()                                  # after voice/music steps the ElevenLabs usage changed
         except Exception: pass
     elif a.cmd == "ask":                                     # a thing only the owner can do -> the app's "For you" page
-        title = " ".join(a.codes); key = a.key or re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:60]
+        title = " ".join(a.codes)
+        if re.match(r"(re-?)?approve\b", title, re.I) or re.search(r"-(re)?approve$", a.key or ""):
+            print("skipped: approvals are listed automatically on the For you page (a reel in review) and clear when the owner approves"); sys.exit(0)
+        key = a.key or re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:60]
         row = {"key": key, "title": title, "detail": a.detail, "link": a.link, "reel_code": a.reel, "priority": a.pri, "due": a.due, "done_at": None, "done_by": None}
         rq = urllib.request.Request(f"{BASE}/rest/v1/owner_actions?on_conflict=key", json.dumps(row).encode(),
                                     {**H, "Content-Type": "application/json", "Prefer": "resolution=merge-duplicates,return=minimal"}, method="POST")

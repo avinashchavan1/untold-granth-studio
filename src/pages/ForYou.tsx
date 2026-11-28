@@ -33,7 +33,7 @@ export function useForYou() {
       if (r.stage !== "review") continue;
       const next = (pubs.data ?? []).filter((p) => p.reel_id === r.id && p.state === "scheduled" && p.scheduled_for).map((p) => p.scheduled_for!).sort()[0];
       const h = next ? (new Date(next).getTime() - now) / 36e5 : null;
-      out.push({ id: `review-${r.code}`, pri: h !== null && h < 72 ? 1 : next ? 2 : 3, icon: Stamp, title: `Watch and approve ${r.code}: ${r.title}`,
+      out.push({ id: `review-${r.code}`, pri: h !== null && h < 72 ? 1 : next ? 2 : 3, icon: Stamp, title: `Watch and approve ${r.code}: ${r.title}`,   // gone as soon as you press Approve on the reel
         detail: next ? `Scheduled ${IST(next)}. It won't post until you approve it.` : "Not scheduled yet: approve it and Autopilot gives it a slot.", link: `/reels/${r.code}`, when: next });
     }
     // 2. posts that failed after every retry
@@ -50,7 +50,8 @@ export function useForYou() {
     if (vb?.limit && vb.limit - vb.used < 0.15 * vb.limit && !(acts.data ?? []).some((a) => !a.done_at && /elevenlabs/i.test(a.title)))
       out.push({ id: "budget", pri: 1, icon: Mic, title: `ElevenLabs almost used up: ${((vb.limit - vb.used) / 1000).toFixed(1)}k left`, detail: "Upgrade the plan or add a new key when Claude asks.", link: "/settings" });
     // 6. Claude's asks
-    for (const a of acts.data ?? []) if (!a.done_at) out.push({ id: `ask-${a.id}`, pri: (Math.min(3, Math.max(1, a.priority)) as 1 | 2 | 3), icon: Circle, title: a.title, detail: a.detail, link: a.link ?? (a.reel_code ? `/reels/${a.reel_code}` : null), when: a.due, action: a });
+    // approvals are never asks: the reel's own review item above appears and disappears with its stage (owner, Nov 28 2026)
+    for (const a of acts.data ?? []) if (!a.done_at && !/-(re)?approve$/.test(a.key ?? "") && !/^(re-?)?approve\b/i.test(a.title)) out.push({ id: `ask-${a.id}`, pri: (Math.min(3, Math.max(1, a.priority)) as 1 | 2 | 3), icon: Circle, title: a.title, detail: a.detail, link: a.link ?? (a.reel_code ? `/reels/${a.reel_code}` : null), when: a.due, action: a });
     return out.sort((a, b) => a.pri - b.pri || (a.when ?? "9").localeCompare(b.when ?? "9"));
   }, [reels.data, pubs.data, acts.data, health.data, ws.data]);
   return { items, loading: reels.isLoading || pubs.isLoading || acts.isLoading, error: reels.error || pubs.error || acts.error, done: (acts.data ?? []).filter((a) => a.done_at).slice(0, 8) };
