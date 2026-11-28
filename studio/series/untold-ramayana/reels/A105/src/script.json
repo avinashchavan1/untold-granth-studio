@@ -160,7 +160,7 @@
    "hi": "पिछले भाग में: युवराज दशरथ ने, रात में, आवाज़ पर बाण चलाया। और पानी भरने आया, एक युवा तपस्वी, गिर पड़ा।",
    "en": "Last time: in the night, Prince Dasharatha shot at a sound, and a young ascetic who had come for water fell.",
    "units": [
-    "[thoughtfully] पिछले भाग में:",
+    "[engaged] पिछले भाग में:",
     "युवराज दशरथ ने, रात में, आवाज़ पर बाण चलाया।",
     "और पानी भरने आया, एक युवा तपस्वी, गिर पड़ा।"
    ],
@@ -185,8 +185,8 @@
    "hi": "फिर उसने खुद कहा: ये बाण निकाल दो, और जाकर मेरे पिता को बताओ। दशरथ ने बाण निकाला, और उसने प्राण त्याग दिए।",
    "en": "Then he himself asked: take this arrow out, and go tell my father. Dasharatha drew out the arrow, and he died.",
    "units": [
-    "[softly] फिर उसने खुद कहा: ये बाण निकाल दो, और जाकर मेरे पिता को बताओ।",
-    "दशरथ ने बाण निकाला… और उसने प्राण त्याग दिए।"
+    "[storytelling] फिर उसने खुद कहा: ये बाण निकाल दो, और जाकर मेरे पिता को बताओ।",
+    "दशरथ ने बाण निकाला, और उसने प्राण त्याग दिए।"
    ],
    "unit_gap": 0.35,
    "cite": "2.57.34-38",
@@ -199,7 +199,7 @@
    "hi": "दशरथ, पानी का भरा घड़ा लेकर, आश्रम पहुँचे। कदमों की आहट सुनकर, बूढ़े पिता बोले:",
    "en": "Dasharatha carried the filled water pot to the ashram. Hearing footsteps, the old father said:",
    "units": [
-    "[softly] दशरथ, पानी का भरा घड़ा लेकर, आश्रम पहुँचे।",
+    "[storytelling] दशरथ, पानी का भरा घड़ा लेकर, आश्रम पहुँचे।",
     "कदमों की आहट सुनकर, बूढ़े पिता बोले:"
    ],
    "unit_gap": 0.35,
@@ -228,7 +228,7 @@
    "en": "Dasharatha told him everything. The sage said: had you not told me yourself, your head would have burst into a hundred thousand pieces. It was done unknowingly; that is why you live.",
    "units": [
     "[serious] दशरथ ने सब सच बता दिया।",
-    "मुनि बोले: अगर तुम खुद न बताते, तो तुम्हारा सिर… सौ हज़ार टुकड़ों में फट जाता।",
+    "मुनि बोले: अगर तुम खुद न बताते, तो तुम्हारा सिर, सौ हज़ार टुकड़ों में फट जाता।",
     "अनजाने में हुआ, इसीलिए तुम जीवित हो।"
    ],
    "unit_gap": 0.35,
@@ -242,7 +242,7 @@
    "hi": "दूसरा सच, जो कम लोग जानते हैं: माता-पिता के जल देने पर, वो बेटा, दिव्य रूप में प्रकट हुआ। बोला: आपकी सेवा से, मुझे महान लोक मिला है। और दिव्य विमान में, स्वर्ग चला गया।",
    "en": "",
    "units": [
-    "[thoughtfully] दूसरा सच, जो कम लोग जानते हैं:",
+    "[engaged] दूसरा सच, जो कम लोग जानते हैं:",
     "माता-पिता के जल देने पर, वो बेटा, दिव्य रूप में प्रकट हुआ।",
     "बोला: आपकी सेवा से, मुझे महान लोक मिला है।",
     "[warmly] और दिव्य विमान में, स्वर्ग चला गया।"
@@ -270,7 +270,7 @@
    "en": "Then the old father told Dasharatha: as I grieve for my son today, so you too will die of grief for a son.",
    "units": [
     "[serious] फिर बूढ़े पिता ने, दशरथ से कहा:",
-    "जैसे आज मैं, पुत्र के दुख में हूँ… वैसे ही तुम भी, पुत्र-शोक में प्राण त्यागोगे।"
+    "जैसे आज मैं, पुत्र के दुख में हूँ, वैसे ही तुम भी, पुत्र-शोक में प्राण त्यागोगे।"
    ],
    "unit_gap": 0.4,
    "cite": "2.58.44-46",
@@ -283,8 +283,8 @@
    "hi": "बरसों बाद, श्रीराम वन चले गए। और जिस रात दशरथ ने, कौसल्या को ये कथा सुनाई, उसी आधी रात, श्राप पूरा हुआ। हा राघव कहते हुए, उन्होंने प्राण त्याग दिए।",
    "en": "And on the night Dasharatha told this story, at that very midnight, the curse came true. Crying 'O Raghava', he gave up his life.",
    "units": [
-    "[softly] बरसों बाद, श्रीराम वन चले गए।",
-    "और जिस रात दशरथ ने, कौसल्या को ये कथा सुनाई… उसी आधी रात, श्राप पूरा हुआ।",
+    "[storytelling] बरसों बाद, श्रीराम वन चले गए।",
+    "और जिस रात दशरथ ने, कौसल्या को ये कथा सुनाई, उसी आधी रात, श्राप पूरा हुआ।",
     "हा राघव कहते हुए, उन्होंने प्राण त्याग दिए।"
    ],
    "unit_gap": 0.45,
@@ -331,7 +331,8 @@
   "duration_s": 125,
   "gain": 1.9,
   "duck": 0.72,
-  "prompt": "Tender, sorrowful devotional underscore, instrumental only, built to sit under a spoken Hindi voice. Night rain on a river: soft tanpura drone, a lonely bansuri melody, gentle rain-like santoor; very quiet and still under a recited Sanskrit verse; a tense hush with low strings for a hunt in the dark; a sudden stop, then aching sarangi and legato strings for a dying son; warm swell with harp and soft choir as a soul rises to heaven; grave low horns for a curse; ends in a quiet, grieving resolve."
+  "prompt": "Tender, sorrowful devotional underscore, instrumental only, built to sit under a spoken Hindi voice. Night rain on a river: soft tanpura drone, a lonely bansuri melody, gentle rain-like santoor; very quiet and still under a recited Sanskrit verse; a tense hush with low strings for a hunt in the dark; a sudden stop, then aching sarangi and legato strings for a dying son; warm swell with harp and soft choir as a soul rises to heaven; grave low horns for a curse; ends in a quiet, grieving resolve.",
+  "take": "take 1: gentle under the ashram, rises as the son goes to heaven, peak at the curse, settles at midnight (take 2: more silent gaps)"
  },
  "hook_options": [
   {
