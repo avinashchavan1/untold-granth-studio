@@ -128,8 +128,9 @@ Each rule has a mechanism in the engine; keep both.
 42. **The owner's "For you" page.** Everything only the owner can do is on one page (`/for-you`, badge in the menu): reels to approve before
     their slot, failed posts, connection problems, Claude waiting on a choice, a low voice budget (all derived live), plus Claude's asks:
     `python3 scripts/status.py ask "<what to do>" --key <id> --detail "<why/where>" --link /page --reel <ID> --pri 1|2|3 --due YYYY-MM-DD`
-    (re-asking the same key updates it; `status.py asked <key>` closes it). Whenever you need the owner (approve, re-approve after a
-    re-render, pick a look, connect something, top up credits), add it there as well as saying it in chat.
+    (re-asking the same key updates it; `status.py asked <key>` closes it). NEVER add an ask for an approval: a reel in review is listed
+    automatically and clears the moment the owner approves it (status.py refuses approve asks; lesson Nov 28 2026). Ask for the rest
+    (pick a look, connect something, top up credits) there as well as in chat.
 43. **Spend credits where they are heard (owner, Nov 28 2026).** Voices: `series.json → voice_takes` sets takes per line (default 1,
     hook 2, reveal shots 2, śloka/proof 3); `narration api` follows it (`api N` forces N). Music: a LIBRARY, composed once per style
     (`scripts/music_lib.py compose <style>`), fitted to each reel (`music_lib.py use <ID> [style]`: least-used track that is long enough,
