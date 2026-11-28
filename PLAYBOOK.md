@@ -130,3 +130,7 @@ Each rule has a mechanism in the engine; keep both.
     `python3 scripts/status.py ask "<what to do>" --key <id> --detail "<why/where>" --link /page --reel <ID> --pri 1|2|3 --due YYYY-MM-DD`
     (re-asking the same key updates it; `status.py asked <key>` closes it). Whenever you need the owner (approve, re-approve after a
     re-render, pick a look, connect something, top up credits), add it there as well as saying it in chat.
+43. **Spend credits where they are heard (owner, Nov 28 2026).** Voices: `series.json → voice_takes` sets takes per line (default 1,
+    hook 2, reveal shots 2, śloka/proof 3); `narration api` follows it (`api N` forces N). Music: a LIBRARY, composed once per style
+    (`scripts/music_lib.py compose <style>`), fitted to each reel (`music_lib.py use <ID> [style]`: least-used track that is long enough,
+    faded at the end, or extended by a crossfaded repeat; 0 credits). Compose a reel-specific score only when the owner asks for one.

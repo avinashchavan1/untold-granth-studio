@@ -46,6 +46,10 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   never all at once; vary rhythm (short lines, a [pause] before each reveal, a character's own voice or a quote card every 20-30 s in
   reels, every 60-90 s in long-form); music rises toward the climax and drops under verses. Calm tags still apply: engaging comes from
   the writing and pacing, not from shouting. Check retention in YouTube/Instagram analytics after 48 h and note where viewers drop.
+- **Music follows the situation, from a LIBRARY (owner, Nov 28 2026):** every reel gets a music plan by shot (`score.cues`: hook, verse,
+  night, chase, sorrow, climax...), built from library tracks (`python3 scripts/music_lib.py use <ID> --cues "1:epic_pulse,2:night_mystery,8:heroic_strings"`,
+  0 credits). Heroic strings (A23) carries the climaxes; `epic_pulse` (owner's reference track: 123 BPM drums + deep bass) for hooks, chases,
+  battles. New styles are composed ONCE (`music_lib.py compose <style>`). Voices: `series.json → voice_takes` (1 take; 2 hook/reveal; 3 śloka).
 - **Music: a palette, more of it (owner, Nov 28 2026).** The owner loves A23's soaring strings and wants variety: `series.json → score_styles`
   (heroic_strings = A23, devotional_glow, royal_court, night_mystery, battle_epic, tender_sorrow, symphonic); each reel sets `score.style` to fit
   its story, styles rotate across reels, add new ones the owner likes. Music a little louder: `score_defaults` gain 2.3, duck 0.6. Earlier rule, still true:

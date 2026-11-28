@@ -101,13 +101,13 @@
   }
  ],
  "score": {
-  "engine": "elevenlabs music_v1",
-  "file": "audio/score.mp3",
+  "engine": "library",
   "style": "heroic_strings",
-  "duration_s": 122,
+  "track": "a104_alt",
+  "file": "audio/score.mp3",
   "gain": 2.3,
   "duck": 0.6,
-  "prompt": "An ancient legend of two brothers: a hush under the opening verse, a dark night pulse as a demon roars at the city gate, chase energy into a deep cave, a long still waiting passage, a sorrowful fall as the cave is sealed, a heroic shock as the lost brother returns alive, a tense confrontation, then a quiet two-sided ending.",
+  "take": "library heroic_strings/a104_alt (125 s) fitted to 121 s",
   "previous": {
    "engine": "excerpt of the wide production's score",
    "file": "audio/score.wav",
