@@ -379,5 +379,19 @@
  ],
  "score_style": "Devotional-heroic Indian film score, like reel A23 (owner's favourite, Nov 28 2026): soaring legato strings (violins and cellos) carry a clear recurring theme, with low brass and a full orchestra, Indian colour woven in (tanpura drone, bansuri, santoor or sitar, dhol and soft tabla), warm choir pads. Quiet and still under recited verses and quotes; builds in steps toward the story's climax, where the strings soar; settles into a warm, glowing resolution. Melodic and pleasing to the ear, crisp modern film production; no distorted or booming drums, no shrill highs; leaves room for a spoken voice.",
  "narration_energy": "storytelling",
- "score_style_reference": "reels/A23 score (ElevenLabs music_v1, take 2): rising heroic build with dhol, low brass and strings at ~20 s, peak ~55 s"
+ "score_style_reference": "reels/A23 score (ElevenLabs music_v1, take 2): rising heroic build with dhol, low brass and strings at ~20 s, peak ~55 s",
+ "score_styles": {
+  "heroic_strings": "Devotional-heroic Indian film score, like reel A23 (owner's favourite, Nov 28 2026): soaring legato strings (violins and cellos) carry a clear recurring theme, with low brass and a full orchestra, Indian colour woven in (tanpura drone, bansuri, santoor or sitar, dhol and soft tabla), warm choir pads. Quiet and still under recited verses and quotes; builds in steps toward the story's climax, where the strings soar; settles into a warm, glowing resolution. Melodic and pleasing to the ear, crisp modern film production; no distorted or booming drums, no shrill highs; leaves room for a spoken voice.",
+  "devotional_glow": "Warm devotional score: bansuri and santoor over a tanpura drone, soft tabla, gentle strings and harp, a tender recurring melody; luminous and peaceful, swelling softly at the reveal; quiet under verses; no harsh hits.",
+  "royal_court": "Stately royal Indian score: shehnai and sitar with harp, plucked strings and soft dhol, a dignified processional theme, brass swells for grand moments; quiet under verses; elegant, never booming.",
+  "night_mystery": "Suspenseful night score: low cellos and sarangi, a pulsing tanpura, sparse frame drums and distant choir, a haunting recurring motif that builds tension step by step and releases at the reveal; quiet under verses; no jump-scare hits.",
+  "battle_epic": "Epic battle score: driving strings ostinato, heroic brass, dhol and tabla rhythms, choir swells at the climax, a strong recurring theme; powerful but clean and melodic; quiet under verses; no distorted or booming drums.",
+  "tender_sorrow": "Tender, sorrowful score: solo cello and sarangi, soft piano-like santoor, a slow aching melody over warm strings, gentle swells; quiet under verses; resolves with quiet hope.",
+  "symphonic": "Symphonic and pleasing to the ear: a warm full orchestra (legato strings, soft horns, harp, woodwinds, gentle choir pads) with Indian colour (bansuri, sitar or santoor, tanpura, soft tabla); melodic with a recurring theme; smooth swells; no harsh hits; leaves room for a spoken voice."
+ },
+ "score_style_note": "Each reel's script.json → score.style picks one of score_styles (fit the story; try different ones and note in score.take how each lands); score_style is the default. Owner (Nov 28 2026): loves A23's strings, wants variety and a little more music.",
+ "score_defaults": {
+  "gain": 2.3,
+  "duck": 0.6
+ }
 }

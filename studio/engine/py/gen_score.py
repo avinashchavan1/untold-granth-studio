@@ -8,7 +8,9 @@ import json, os, sys, urllib.request
 reel = sys.argv[1]; n = int(sys.argv[2]) if len(sys.argv) > 2 else 2
 s = json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8"))["score"]
 ser = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(reel))), "series.json")
-style = json.load(open(ser, encoding="utf-8")).get("score_style", "") if os.path.exists(ser) else ""   # series.json → score_style: the sound every score shares
+_ser = json.load(open(ser, encoding="utf-8")) if os.path.exists(ser) else {}
+# series.json → score_styles: a palette; script.json → score.style picks one (falls back to score_style, the series default sound)
+style = (_ser.get("score_styles") or {}).get(s.get("style") or "", "") or _ser.get("score_style", "")
 prompt = s["prompt"] + ("" if not style or style[:40] in s["prompt"] else " " + style); ms = int(1000 * s.get("duration_s", 72))
 out = os.path.join(reel, "audio", "score_takes"); os.makedirs(out, exist_ok=True)
 for k in range(1, n + 1):

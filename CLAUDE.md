@@ -46,9 +46,9 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   never all at once; vary rhythm (short lines, a [pause] before each reveal, a character's own voice or a quote card every 20-30 s in
   reels, every 60-90 s in long-form); music rises toward the climax and drops under verses. Calm tags still apply: engaging comes from
   the writing and pacing, not from shouting. Check retention in YouTube/Instagram analytics after 48 h and note where viewers drop.
-- **Music = A23's sound (owner, Nov 28 2026): devotional-heroic film score with soaring strings** (violins/cellos carry the theme, low brass,
-  dhol, tanpura, bansuri, choir pads; quiet under verses, builds to a soaring climax). `series.json → score_style` + `score_style_reference`.
-  Experiment with this sound on more reels and note in `score.take` how each lands. Earlier rule, still true:
+- **Music: a palette, more of it (owner, Nov 28 2026).** The owner loves A23's soaring strings and wants variety: `series.json → score_styles`
+  (heroic_strings = A23, devotional_glow, royal_court, night_mystery, battle_epic, tender_sorrow, symphonic); each reel sets `score.style` to fit
+  its story, styles rotate across reels, add new ones the owner likes. Music a little louder: `score_defaults` gain 2.3, duck 0.6. Earlier rule, still true:
 - **Music is symphonic and pleasing to the ear (owner, Nov 22 2026):** orchestra (legato strings, horns, harp, woodwinds, soft choir) with
   Indian colour (bansuri, sitar/santoor, tanpura, soft tabla), a recurring melody, smooth swells; never harsh hits, booming or distorted drums,
   or shrill highs. `series.json → score_style` is appended to every score prompt (`engine/py/gen_score.py`). Pick the take that sounds best, not only the loudest arc.
