@@ -196,7 +196,7 @@ export function useIdeaMutations() {
 export interface WorkPhase { name: string; state: "done" | "running" | "todo"; pct?: number }
 export interface WorkQueueItem { code: string; title: string; state: "done" | "running" | "queued"; note?: string }
 export interface WorkReel { step?: number; task?: string | null; state?: "queued" | "running" | "paused" | "done"; pct?: number | null }
-export interface WorkInfo { batch?: { title: string; codes: string[]; started: string } | null; reels?: Record<string, WorkReel>; batch_pct?: number | null; title?: string | null; phase?: string | null; phases?: WorkPhase[]; queue?: WorkQueueItem[]; events?: { at: string; text: string }[]; overall_eta_min?: number | null; elapsed_min?: number | null }
+export interface WorkInfo { batch?: { title: string; codes: string[]; started: string } | null; reels?: Record<string, WorkReel>; batch_pct?: number | null; title?: string | null; phase?: string | null; phases?: WorkPhase[]; queue?: WorkQueueItem[]; events?: { at: string; text: string }[]; overall_eta_min?: number | null; elapsed_min?: number | null; voice_budget?: { used: number; limit: number; tier?: string; at: string; reset?: string | null } | null }
 export interface WorkStatus { lane: string; state: "working" | "waiting" | "idle"; reel_code: string | null; task: string | null; detail: string | null; step: number | null; steps: number | null; pct: number | null; eta_min: number | null; started_at: string | null; updated_at: string; info: WorkInfo | null }
 export const useWorkStatus = () =>
   useQuery({ queryKey: ["work_status"], refetchInterval: 5_000, refetchIntervalInBackground: false, staleTime: 5_000,
