@@ -197,7 +197,7 @@ export async function runAutopilot() {
   const postDays: number[] = ap.post_days ?? [0, 1, 2, 3, 4, 5, 6];
   const platforms = ((ap.platforms ?? MAIN) as P[]);
   const mains = MAIN.filter((p) => platforms.includes(p));
-  const { data: reels } = await admin.from("reels").select("id,code,title,plan_note,hashtags,plan_no,reviewed,stage,kind,follows:script->>follows,post_on:script->>post_on").neq("stage", "dropped").order("plan_no");
+  const { data: reels } = await admin.from("reels").select("id,code,title,plan_note,hashtags,plan_no,reviewed,stage,kind,source_ref,follows:script->>follows,post_on:script->>post_on").neq("stage", "dropped").order("plan_no");
   const { data: pubs } = await admin.from("publications").select("reel_id,platform,state,scheduled_for,posted_at");
   const { data: ser } = await admin.from("series").select("config").limit(1).maybeSingle();
   const all = (reels ?? []).filter((r) => r.kind !== "longform");
@@ -224,6 +224,12 @@ export async function runAutopilot() {
   // a reel that matches a big festival (weight >= 4) in the next 21 days waits for that day
   const heldFor = (r: typeof all[number], key: string) => { const th = themesOf(r), d0 = Date.parse(key);
     return (cal.occasions ?? []).find((o) => o.weight >= 4 && o.themes.some((t) => th.has(t)) && Date.parse(o.date) > d0 && Date.parse(o.date) - d0 <= 21 * 864e5); };
+  // opt-in fair rotation (calendar.json → "rotation": "fair"): the category (plan column → reels.source_ref) that has waited longest since its
+  // last post or scheduled post gets a boost, so every category gets a fair chance; never posted = waited the longest
+  const fair = (cal as { rotation?: string }).rotation === "fair";
+  const catOf = (id: string) => (reels ?? []).find((r) => r.id === id)?.source_ref ?? "Other";
+  const waited = (cat: string, key: string) => { const ts = P_.filter((x) => live(x) && catOf(x.reel_id) === cat && (x.scheduled_for ?? x.posted_at)).map((x) => istKey((x.scheduled_for ?? x.posted_at) as string)).filter((k) => k < key).sort();
+    return ts.length ? (Date.parse(key) - Date.parse(ts[ts.length - 1])) / 864e5 : 365; };
   const made: string[] = [], notes: string[] = [];
   const todayIst = new Date(Date.now() + IST * 3600e3);
   const fixedDates = new Set(all.filter((r) => r.post_on && untouched(r)).map((r) => r.post_on as string));
@@ -245,7 +251,7 @@ export async function runAutopilot() {
         const cands = order.filter((r) => r.reviewed && untouched(r) && !r.post_on && !r.follows && r.stage !== "published");
         const testFirst = cands.find((r) => testCodes.includes(r.code));
         const scored = cands.filter((r) => !heldFor(r, key) || fitOn(r, key, day.getUTCDay()) > 0)
-          .map((r, k) => ({ r, s: fitOn(r, key, day.getUTCDay()) + 0.25 * pullOf(r) - 0.6 * k }));
+          .map((r, k) => ({ r, s: fitOn(r, key, day.getUTCDay()) + 0.25 * pullOf(r) - (fair ? 0.05 : 0.6) * k + (fair ? 0.5 * Math.min(waited(r.source_ref ?? "Other", key), 30) : 0) }));
         scored.sort((a, b) => b.s - a.s);
         pick = testFirst ?? scored[0]?.r;
         for (const r of cands) { const h = heldFor(r, key); if (h && r !== pick && !notes.some((n) => n.includes(r.code))) notes.push(`${r.code} held for ${h.name} (${h.date})`); }
@@ -269,7 +275,7 @@ export async function runAutopilot() {
     // ---- long-form (owner, Nov 27 2026): an approved full-length video goes to YouTube on Sunday at 11:00 IST (the channel's best
     //      YouTube slot in the model), at most one a week, never on top of another long-form video; it doesn't take the reel's evening slot ----
     if (platforms.includes("youtube") && day.getUTCDay() === 0) {
-      const lf = (reels ?? []).filter((r) => r.kind === "longform" && r.reviewed && r.stage !== "published" && !when(r, "youtube"));
+      const lf = (reels ?? []).filter((r) => r.kind === "longform" && r.reviewed && r.stage !== "published" && !when(r, "youtube") && (!r.post_on || r.post_on === key));   // a planned date (post_on, e.g. the 1st/3rd Sunday) is kept
       const weekHasLf = P_.some((x) => x.platform === "youtube" && live(x) && (reels ?? []).some((r) => r.kind === "longform" && r.id === x.reel_id) &&
         Math.abs(Date.parse(istKey((x.scheduled_for ?? x.posted_at) as string)) - Date.parse(key)) < 7 * 864e5);
       const at = new Date(Date.UTC(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate(), 11) - IST * 3600e3);

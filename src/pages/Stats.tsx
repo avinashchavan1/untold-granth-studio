@@ -37,7 +37,7 @@ export default function Stats() {
   const [st, setSt] = useState<{ busy?: boolean; err?: string; note?: string }>({});
   const [range, setRange] = useState<(typeof RANGES)[number]["key"]>("all");
   useEffect(() => { const i = setInterval(() => qc.invalidateQueries({ queryKey: ["pubs"] }), 60e3); return () => clearInterval(i); }, [qc]);
-  if (reels.isLoading || pubs.isLoading) return <Spinner />;
+  if (reels.isLoading || pubs.isLoading) return <Spinner label="Loading stats…" />;
   if (reels.error || pubs.error) return <ErrorNote error={reels.error ?? pubs.error} />;
   const byId = Object.fromEntries((reels.data ?? []).map((r) => [r.id, r]));
   const since = now - RANGES.find((x) => x.key === range)!.days * 864e5;

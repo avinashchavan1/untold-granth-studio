@@ -15,7 +15,7 @@ export default function Dashboard() {
   const act = useActivity();
   const ch = useChannels();
   const conn = useConnections();
-  if (reels.isLoading) return <Spinner />;
+  if (reels.isLoading) return <Spinner label="Loading the studio…" />;
   if (reels.error) return <ErrorNote error={reels.error} />;
   const all = reels.data ?? [];
   const count = (s: Stage) => all.filter((r) => r.stage === s).length;
@@ -83,7 +83,7 @@ export default function Dashboard() {
 
       <Card>
         <SectionTitle>Recent activity</SectionTitle>
-        {act.isLoading ? <Spinner /> : (act.data ?? []).length === 0 ? <Empty>No activity yet.</Empty> : (
+        {act.isLoading ? <Spinner size="sm" /> : (act.data ?? []).length === 0 ? <Empty>No activity yet.</Empty> : (
           <ul className="divide-y divide-parchment-deep text-sm dark:divide-night-700">
             {(act.data ?? []).map((a) => (
               <li key={a.id} className="flex flex-wrap justify-between gap-2 py-2">

@@ -15,7 +15,7 @@ const useStorage = (path?: string) => useQuery({ enabled: !!path, queryKey: ["me
 export default function World() {
   const chars = useCharacters();
   const locs = useLocations();
-  if (chars.isLoading) return <Spinner />;
+  if (chars.isLoading) return <Spinner label="Loading characters…" />;
   if (chars.error) return <ErrorNote error={chars.error} />;
   const all = chars.data ?? [];
   const look = (c: Character) => c.look as Look;

@@ -22,7 +22,7 @@ const HIGHLIGHTS: [string, string][] = [["START", "start_here"], ["SCIENCE", "sc
 export default function Profiles() {
   const ch = useChannels();
   const conn = useConnections();
-  if (ch.isLoading) return <Spinner />;
+  if (ch.isLoading) return <Spinner label="Loading profiles…" />;
   if (ch.error) return <ErrorNote error={ch.error} />;
   const by = Object.fromEntries((ch.data ?? []).map((c) => [c.platform, c]));
   const ig = (by.instagram?.profile ?? {}) as Record<string, any>;
