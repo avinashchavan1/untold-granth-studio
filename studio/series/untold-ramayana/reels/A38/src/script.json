@@ -143,12 +143,11 @@
   {
    "id": 3,
    "voice": "narrator",
-   "hi": "गोस्वामी तुलसीदास लिखते हैं, समुद्र के किनारे, जामवंत ने हनुमान जी से कहा: कहइ रीछपति सुनु हनुमाना। का चुप साधि रहेहु बलवाना। यानी, हे बलवान हनुमान, तुम चुप क्यों बैठे हो?",
+   "hi": "तुलसीदास जी लिखते हैं, जामवंत ने कहा: कहइ रीछपति सुनु हनुमाना… का चुप साधि रहेहु बलवाना।",
    "en": "",
    "units": [
-    "[warmly] गोस्वामी तुलसीदास लिखते हैं, समुद्र के किनारे, जामवंत ने हनुमान जी से कहा:",
-    "[serious] कहइ रीछपति सुनु हनुमाना… का चुप साधि रहेहु बलवाना।",
-    "यानी, हे बलवान हनुमान, तुम चुप क्यों बैठे हो?"
+    "[warmly] तुलसीदास जी लिखते हैं, जामवंत ने कहा:",
+    "[serious] कहइ रीछपति सुनु हनुमाना… का चुप साधि रहेहु बलवाना।"
    ],
    "unit_gap": 0.45,
    "cite": "Ramcharitmanas, Kishkindha Kand (after doha 29)",
@@ -182,12 +181,12 @@
   {
    "id": 5,
    "voice": "narrator",
-   "hi": "ये सुनकर, हनुमान जी का शरीर बढ़ने लगा। पर सवाल ये है: वो अपना बल भूले क्यों थे? इसका जवाब, वाल्मीकि बहुत बाद में देते हैं, उत्तर कांड में।",
-   "en": "Hearing this, Hanuman began to grow. But why had he forgotten his strength? Valmiki answers much later, in the Uttara Kanda.",
+   "hi": "ये सुनकर, हनुमान जी का शरीर बढ़ने लगा। पर वो अपना बल भूले क्यों थे? जवाब, उत्तर कांड में है।",
+   "en": "Hearing this, Hanuman began to grow. But why had he forgotten his strength? The answer is in the Uttara Kanda.",
    "units": [
     "[engaged] ये सुनकर, हनुमान जी का शरीर बढ़ने लगा।",
-    "[curious] पर सवाल ये है: वो अपना बल भूले क्यों थे?",
-    "[storytelling] इसका जवाब, वाल्मीकि बहुत बाद में देते हैं, उत्तर कांड में।"
+    "[curious] पर वो अपना बल भूले क्यों थे?",
+    "[storytelling] जवाब, उत्तर कांड में है।"
    ],
    "unit_gap": 0.4,
    "cite": "4.66.1",
@@ -211,12 +210,11 @@
   {
    "id": 7,
    "voice": "narrator",
-   "hi": "तब अगस्त्य मुनि, हनुमान जी के बचपन की कथा सुनाते हैं। देवताओं के वरदान पाकर, वो बालक बल से भर गया था, और निडर होकर, ऋषियों के आश्रमों में शरारत करता था।",
-   "en": "Then the sage Agastya tells of Hanuman's childhood: full of strength from the gods' boons, the fearless child made mischief in the sages' hermitages.",
+   "hi": "अगस्त्य मुनि बताते हैं: देवताओं के वरदानों से भरा वो बालक, निडर होकर, ऋषियों के आश्रमों में शरारत करता था।",
+   "en": "Agastya tells Rama: full of the gods' boons, the fearless child made mischief in the sages' hermitages.",
    "units": [
-    "[storytelling] तब अगस्त्य मुनि, हनुमान जी के बचपन की कथा सुनाते हैं।",
-    "देवताओं के वरदान पाकर, वो बालक बल से भर गया था,",
-    "[engaged] और निडर होकर, ऋषियों के आश्रमों में शरारत करता था।"
+    "[storytelling] अगस्त्य मुनि बताते हैं: देवताओं के वरदानों से भरा वो बालक,",
+    "[engaged] निडर होकर, ऋषियों के आश्रमों में शरारत करता था।"
    ],
    "unit_gap": 0.35,
    "cite": "7.36.27-31",
@@ -251,12 +249,11 @@
   {
    "id": 9,
    "voice": "narrator",
-   "hi": "इसीलिए, जब बाली, सुग्रीव को सता रहा था, तब हनुमान जी को, अपना ही बल पता नहीं था। ये उत्तर, अगस्त्य मुनि ने खुद श्रीराम को दिया।",
+   "hi": "इसीलिए, जब बाली, सुग्रीव को सता रहा था, तब हनुमान जी को, अपना ही बल पता नहीं था।",
    "en": "",
    "units": [
     "[serious] इसीलिए, जब बाली, सुग्रीव को सता रहा था,",
-    "[dramatically] तब हनुमान जी को, अपना ही बल पता नहीं था।",
-    "[storytelling] ये उत्तर, अगस्त्य मुनि ने खुद श्रीराम को दिया।"
+    "[dramatically] तब हनुमान जी को, अपना ही बल पता नहीं था।"
    ],
    "unit_gap": 0.4,
    "cite": "7.36.39-40",
@@ -277,12 +274,11 @@
   {
    "id": 10,
    "voice": "narrator",
-   "hi": "और एक बात, जो बहुत कम लोग जानते हैं: अगस्त्य बताते हैं, हनुमान जी ने, सूर्य की ओर मुँह करके, उलटे चलते हुए, उदय से अस्त तक, व्याकरण सीखा था।",
+   "hi": "और एक अनसुनी बात: हनुमान जी ने, सूर्य की ओर मुँह करके, उलटे चलते हुए, व्याकरण सीखा था।",
    "en": "",
    "units": [
-    "[curious] और एक बात, जो बहुत कम लोग जानते हैं:",
-    "[engaged] अगस्त्य बताते हैं, हनुमान जी ने, सूर्य की ओर मुँह करके, उलटे चलते हुए,",
-    "उदय से अस्त तक, व्याकरण सीखा था।"
+    "[curious] और एक अनसुनी बात:",
+    "[engaged] हनुमान जी ने, सूर्य की ओर मुँह करके, उलटे चलते हुए, व्याकरण सीखा था।"
    ],
    "unit_gap": 0.35,
    "cite": "7.36.42",
@@ -302,11 +298,11 @@
   {
    "id": 11,
    "voice": "narrator",
-   "hi": "तुलसीदास में, जामवंत याद दिलाते हैं। वाल्मीकि में, उसके पीछे का कारण भी है: ऋषियों का श्राप। दोनों कथाएँ, भक्ति से सुनाई जाती हैं।",
+   "hi": "तुलसीदास में, जामवंत याद दिलाते हैं। वाल्मीकि, कारण भी बताते हैं: ऋषियों का श्राप। दोनों कथाएँ, भक्ति से सुनाई जाती हैं।",
    "en": "",
    "units": [
     "[serious] तुलसीदास में, जामवंत याद दिलाते हैं।",
-    "[engaged] वाल्मीकि में, उसके पीछे का कारण भी है: ऋषियों का श्राप।",
+    "[engaged] वाल्मीकि, कारण भी बताते हैं: ऋषियों का श्राप।",
     "[warmly] दोनों कथाएँ, भक्ति से सुनाई जाती हैं।"
    ],
    "unit_gap": 0.35,
@@ -337,13 +333,63 @@
   "art_shift": 0
  },
  "score": {
-  "engine": "elevenlabs music_v1",
-  "file": "audio/score.mp3",
+  "engine": "library",
   "style": "heroic_strings",
-  "duration_s": 120,
+  "cues": [
+   {
+    "shot": 1,
+    "style": "epic_pulse"
+   },
+   {
+    "shot": 2,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 3,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 5,
+    "style": "heroic_strings"
+   },
+   {
+    "shot": 6,
+    "style": "royal_court"
+   },
+   {
+    "shot": 7,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 8,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 9,
+    "style": "heroic_strings"
+   },
+   {
+    "shot": 10,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 11,
+    "style": "heroic_strings"
+   }
+  ],
+  "file": "audio/score.mp3",
   "gain": 2.3,
   "duck": 0.6,
-  "prompt": "Hanuman's hidden strength: a hush on the seashore under the recited verse, a warm rising theme as Jambavan speaks and Hanuman grows, a gentle playful passage for the child in the sages' hermitages, a darker hush for the curse, then the soaring strings return for the reveal and resolve warmly."
+  "take": "0-9 s epic_pulse/epic_pulse_01 · 9-27 s night_mystery/night_mystery_01 · 27-47 s devotional_glow/devotional_glow_01 · 47-56 s heroic_strings/a34_alt · 56-66 s royal_court/a18_alt · 66-75 s devotional_glow/devotional_glow_01 · 75-87 s night_mystery/night_mystery_01 · 87-95 s heroic_strings/a34_alt · 95-104 s devotional_glow/devotional_glow_01 · 104-120 s heroic_strings/a34_alt",
+  "previous": {
+   "engine": "elevenlabs music_v1",
+   "file": "audio/score.mp3",
+   "style": "heroic_strings",
+   "duration_s": 120,
+   "gain": 2.3,
+   "duck": 0.6,
+   "prompt": "Hanuman's hidden strength: a hush on the seashore under the recited verse, a warm rising theme as Jambavan speaks and Hanuman grows, a gentle playful passage for the child in the sages' hermitages, a darker hush for the curse, then the soaring strings return for the reveal and resolve warmly."
+  }
  },
  "hook_options": [
   {

@@ -62,7 +62,9 @@
    "seconds": 96.0,
    "source": "A34",
    "note": null,
-   "used_by": []
+   "used_by": [
+    "A38"
+   ]
   },
   {
    "style": "royal_court",
@@ -82,7 +84,9 @@
    "seconds": 126.1,
    "source": "A18",
    "note": null,
-   "used_by": []
+   "used_by": [
+    "A38"
+   ]
   },
   {
    "style": "epic_pulse",
@@ -92,7 +96,8 @@
    "source": null,
    "note": "composed for the library (150 s)",
    "used_by": [
-    "A103"
+    "A103",
+    "A38"
    ]
   },
   {
@@ -103,7 +108,8 @@
    "source": null,
    "note": "composed for the library (150 s)",
    "used_by": [
-    "A103"
+    "A103",
+    "A38"
    ]
   },
   {
@@ -124,7 +130,9 @@
    "seconds": 150.0,
    "source": null,
    "note": "composed for the library (150 s)",
-   "used_by": []
+   "used_by": [
+    "A38"
+   ]
   }
  ]
 }
