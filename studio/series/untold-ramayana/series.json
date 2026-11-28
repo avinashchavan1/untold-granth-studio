@@ -225,7 +225,8 @@
    "how": "script.json \"narration_energy\": \"hook_reveal\"; energetic tags ([excited] [dramatically] [intense]) ONLY on shot 1 (hook) and shots marked \"reveal\": true; everything else calm; the opening śloka as usual; the shouting guard stays on",
    "compare_with": "calm reels of similar fame: A23 (Sanjeevani), A18 (swayamvara), A89 (baby Hanuman)",
    "measure": "YouTube views and Instagram views/reach at 48 h after posting (Dashboard → Refresh stats); Instagram views need the instagram_manage_insights permission",
-   "decide": "after both test reels reach 48 h: keep calm, adopt hook/reveal energy, or test more"
+   "decide": "after both test reels reach 48 h: keep calm, adopt hook/reveal energy, or test more",
+   "status": "superseded Nov 28 2026: the owner chose the storytelling house style (option D) for all new recordings"
   },
   "sloka_position": {
    "started": "2026-11-27",

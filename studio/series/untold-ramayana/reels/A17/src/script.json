@@ -64,7 +64,7 @@
    "hi": "क्या उर्मिला सच में, चौदह साल सोती रहीं?",
    "en": "Did Urmila really sleep for fourteen years?",
    "units": [
-    "[serious] [intense] क्या उर्मिला सच में… चौदह साल सोती रहीं?"
+    "[serious] [intense] क्या उर्मिला सच में, चौदह साल सोती रहीं?"
    ],
    "card": [
     [
@@ -122,7 +122,7 @@
     "[warmly] एक प्रसिद्ध कथा कहती है:",
     "वनवास की पहली रात, निद्रा देवी, लक्ष्मण के पास आईं।",
     "लक्ष्मण ने कहा, चौदह साल, मुझे भैया की रक्षा करनी है।",
-    "[softly] तब उनकी नींद, उर्मिला ने ले ली… और वो चौदह साल सोती रहीं।"
+    "[storytelling] तब उनकी नींद, उर्मिला ने ले ली, और वो चौदह साल सोती रहीं।"
    ],
    "unit_gap": 0.4,
    "cite": "Later folk tellings",
@@ -156,7 +156,7 @@
    "en": "",
    "units": [
     "[warmly] वाल्मीकि में उर्मिला का नाम आता है, उनके विवाह में। राजा जनक कहते हैं:",
-    "[softly] सीतां रामाय भद्रं ते… ऊर्मिलां लक्ष्मणाय च।",
+    "[serious] सीतां रामाय भद्रं ते… ऊर्मिलां लक्ष्मणाय च।",
     "यानी, सीता राम को, और उर्मिला, लक्ष्मण को।"
    ],
    "unit_gap": 0.45,
@@ -180,9 +180,9 @@
    "hi": "फिर एक बार, वन में, जब सीता अपने विवाह की बात बताती हैं। पूरी रामायण में, बस इतना ही। न निद्रा देवी, न चौदह साल की नींद।",
    "en": "Then once more, in the forest, when Sita tells of her wedding. In the whole Ramayana, that's all. No Nidra Devi. No fourteen-year sleep.",
    "units": [
-    "[thoughtfully] फिर एक बार, वन में, जब सीता अपने विवाह की बात बताती हैं।",
+    "[engaged] फिर एक बार, वन में, जब सीता अपने विवाह की बात बताती हैं।",
     "[serious] पूरी रामायण में, बस इतना ही।",
-    "न निद्रा देवी… न चौदह साल की नींद।"
+    "न निद्रा देवी, न चौदह साल की नींद।"
    ],
    "unit_gap": 0.4,
    "cite": "2.110.51; whole text",
@@ -205,7 +205,7 @@
    "hi": "अब बात, लक्ष्मण की रातों की। क्या वो सच में, कभी नहीं सोए। ये, अगले भाग में।",
    "en": "Now, Lakshmana's nights. Did he really never sleep? That's in part 2.",
    "units": [
-    "[softly] अब बात, लक्ष्मण की रातों की। क्या वो सच में, कभी नहीं सोए।",
+    "[storytelling] अब बात, लक्ष्मण की रातों की। क्या वो सच में, कभी नहीं सोए।",
     "[warmly] ये, अगले भाग में।"
    ],
    "unit_gap": 0.4,
@@ -254,7 +254,6 @@
   "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
   "take": "take 1: steady build, peak 50-70 s (vs take 2 flatter)"
  },
- "narration_energy": "hook_reveal",
  "avoid": [
   "calling the Urmila story 'fake' or mocking it: it is a later, loving telling of her sacrifice",
   "naming or quoting a specific later text for the Nidra legend (none verified)",

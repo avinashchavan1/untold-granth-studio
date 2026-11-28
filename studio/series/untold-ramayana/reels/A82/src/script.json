@@ -91,7 +91,7 @@
    "hi": "क्या श्रीराम की, एक बहन थीं, शांता?",
    "en": "Did Rama have a sister named Shanta?",
    "units": [
-    "[serious] [intense] क्या श्रीराम की, एक बहन थीं… शांता?"
+    "[serious] [intense] क्या श्रीराम की, एक बहन थीं, शांता?"
    ],
    "card": [
     [
@@ -147,7 +147,7 @@
    "en": "A famous story says: Shanta was King Dasharatha's daughter, Rama's elder sister.",
    "units": [
     "[warmly] एक प्रसिद्ध कथा कहती है:",
-    "शांता, राजा दशरथ की बेटी थीं… श्रीराम की बड़ी बहन।"
+    "शांता, राजा दशरथ की बेटी थीं, श्रीराम की बड़ी बहन।"
    ],
    "unit_gap": 0.35,
    "cite": "Later tellings",
@@ -167,7 +167,7 @@
    "en": "",
    "units": [
     "[warmly] श्रीमद्भागवत कहता है:",
-    "[softly] रोमपाद इति ख्यातस्तस्मै दशरथः सखा… शान्तां स्वकन्यां प्रायच्छत्।",
+    "[serious] रोमपाद इति ख्यातस्तस्मै दशरथः सखा… शान्तां स्वकन्यां प्रायच्छत्।",
     "यानी, दशरथ ने, अपनी कन्या शांता, मित्र रोमपाद को दे दी।"
    ],
    "unit_gap": 0.35,
@@ -191,7 +191,7 @@
    "hi": "पर वाल्मीकि की कथा, कुछ और है।",
    "en": "But Valmiki tells it differently.",
    "units": [
-    "[curious] पर वाल्मीकि की कथा… कुछ और है।"
+    "[curious] पर वाल्मीकि की कथा, कुछ और है।"
    ],
    "cite": "—",
    "lead": 0.25,
@@ -204,7 +204,7 @@
    "en": "In Anga, under King Lomapada, a terrible drought fell. The Brahmins said: bring the sage Rishyashringa, and give him the maiden Shanta in marriage.",
    "units": [
     "[serious] अंग देश में, राजा लोमपाद के समय, भयंकर सूखा पड़ा।",
-    "[thoughtfully] ब्राह्मणों ने कहा: ऋष्यशृंग मुनि को लाइए, और उन्हें कन्या शांता ब्याह दीजिए।"
+    "[engaged] ब्राह्मणों ने कहा: ऋष्यशृंग मुनि को लाइए, और उन्हें कन्या शांता ब्याह दीजिए।"
    ],
    "unit_gap": 0.35,
    "cite": "1.8.11-16",
@@ -223,7 +223,7 @@
    "hi": "मुनि आए, वर्षा हुई, और अंग के राजा ने, शांता का विवाह उनसे कर दिया।",
    "en": "The sage came, the rain fell, and the king of Anga gave Shanta to him in marriage.",
    "units": [
-    "[warmly] मुनि आए, वर्षा हुई… और अंग के राजा ने, शांता का विवाह उनसे कर दिया।"
+    "[warmly] मुनि आए, वर्षा हुई, और अंग के राजा ने, शांता का विवाह उनसे कर दिया।"
    ],
    "unit_gap": 0.35,
    "cite": "1.9.28-32",
@@ -236,9 +236,9 @@
    "hi": "अयोध्या में, सुमंत्र दशरथ को, एक पुरानी भविष्यवाणी सुनाते हैं: अङ्गराजेन सख्यं च तस्य राज्ञो भविष्यति, कन्या चास्य महाभागा शान्ता नाम भविष्यति। यानी, अंग के राजा की, एक बेटी होगी, शांता।",
    "en": "",
    "units": [
-    "[thoughtfully] अयोध्या में, सुमंत्र दशरथ को, एक पुरानी भविष्यवाणी सुनाते हैं:",
-    "[softly] अङ्गराजेन सख्यं च तस्य राज्ञो भविष्यति… कन्या चास्य महाभागा शान्ता नाम भविष्यति।",
-    "यानी, अंग के राजा की, एक बेटी होगी… शांता।"
+    "[engaged] अयोध्या में, सुमंत्र दशरथ को, एक पुरानी भविष्यवाणी सुनाते हैं:",
+    "[serious] अङ्गराजेन सख्यं च तस्य राज्ञो भविष्यति… कन्या चास्य महाभागा शान्ता नाम भविष्यति।",
+    "यानी, अंग के राजा की, एक बेटी होगी, शांता।"
    ],
    "unit_gap": 0.35,
    "cite": "1.8.4-6; 1.10.3",
@@ -261,7 +261,7 @@
    "hi": "उसी में, दशरथ लोमपाद से कहते हैं: मैं निःसंतान हूँ। शांता के पति, मेरा यज्ञ करवाएँ।",
    "en": "In that same prophecy, Dasharatha tells Lomapada: I am childless. Let Shanta's husband perform my sacrifice.",
    "units": [
-    "[serious] उसी में, दशरथ लोमपाद से कहते हैं: मैं निःसंतान हूँ… शांता के पति, मेरा यज्ञ करवाएँ।"
+    "[serious] उसी में, दशरथ लोमपाद से कहते हैं: मैं निःसंतान हूँ, शांता के पति, मेरा यज्ञ करवाएँ।"
    ],
    "unit_gap": 0.35,
    "cite": "1.10.5",
@@ -280,7 +280,7 @@
    "hi": "दशरथ अंग जाते हैं, और लोमपाद से कहते हैं:",
    "en": "Dasharatha goes to Anga and says to Lomapada:",
    "units": [
-    "[thoughtfully] दशरथ अंग जाते हैं, और लोमपाद से कहते हैं:"
+    "[engaged] दशरथ अंग जाते हैं, और लोमपाद से कहते हैं:"
    ],
    "cite": "1.10.13-18",
    "lead": 0.25,
@@ -307,8 +307,8 @@
    "hi": "सुना आपने? तव सुता, आपकी पुत्री। दशरथ स्वयं, शांता को, लोमपाद की बेटी कहते हैं।",
    "en": "",
    "units": [
-    "[serious] [intense] सुना आपने? तव सुता… आपकी पुत्री।",
-    "[serious] [intense] दशरथ स्वयं, शांता को… लोमपाद की बेटी कहते हैं।"
+    "[serious] [intense] सुना आपने? तव सुता, आपकी पुत्री।",
+    "[serious] [intense] दशरथ स्वयं, शांता को, लोमपाद की बेटी कहते हैं।"
    ],
    "unit_gap": 0.35,
    "cite": "1.10.19",
@@ -332,7 +332,7 @@
    "en": "Ayodhya welcomes Shanta with love. After the sacrifice she leaves with her husband, and Rama is born.",
    "units": [
     "[warmly] अयोध्या में, शांता का प्रेम से स्वागत होता है।",
-    "यज्ञ के बाद, वो पति के साथ लौटती हैं… और श्रीराम का जन्म होता है।"
+    "यज्ञ के बाद, वो पति के साथ लौटती हैं, और श्रीराम का जन्म होता है।"
    ],
    "unit_gap": 0.35,
    "cite": "1.10.28-29; 1.17.5-6",
@@ -395,7 +395,6 @@
   "prompt": "Warm devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one bright curious hit and a tanpura drone with a bansuri phrase; very quiet and still under a recited Sanskrit verse; a dry, tense passage with low frame drums and sparse sarangi for a land in drought; then a joyful release with rain-like santoor shimmer and soft strings; a stately royal court mood with shehnai colour and gentle dhol; around three quarters through a bright rising lift with strings and choir pads for a reveal; then a warm, peaceful resolve. Sparse mid-range, no vocals, nothing that fights the voice.",
   "take": "take 1 of the second generation: continuous, lift at 80-110 s under the reveal (first two takes rejected: long silences)"
  },
- "narration_energy": "hook_reveal",
  "avoid": [
   "calling the Bhagavata or the popular story 'wrong' or 'fake': it is a later, devotional telling",
   "the courtesans' episode in detail (1.9.5-27): only 'the sage came'",
