@@ -377,6 +377,7 @@
    "description": "Lotus lake, hut, sages' glowing altar, wet bark robes, fruit basket."
   }
  ],
- "score_style": "Symphonic and pleasing to the ear (owner, Nov 22 2026): a warm full orchestra (legato strings, soft horns, harp, woodwinds, gentle choir pads) with Indian colour woven in (bansuri, sitar or santoor, tanpura drone, soft tabla). Melodic, with a clear recurring theme; smooth dynamics that swell and settle; no harsh or sudden hits, no distorted or booming drums, no shrill highs, no trailer-style impacts; leaves room for a spoken voice.",
- "narration_energy": "storytelling"
+ "score_style": "Devotional-heroic Indian film score, like reel A23 (owner's favourite, Nov 28 2026): soaring legato strings (violins and cellos) carry a clear recurring theme, with low brass and a full orchestra, Indian colour woven in (tanpura drone, bansuri, santoor or sitar, dhol and soft tabla), warm choir pads. Quiet and still under recited verses and quotes; builds in steps toward the story's climax, where the strings soar; settles into a warm, glowing resolution. Melodic and pleasing to the ear, crisp modern film production; no distorted or booming drums, no shrill highs; leaves room for a spoken voice.",
+ "narration_energy": "storytelling",
+ "score_style_reference": "reels/A23 score (ElevenLabs music_v1, take 2): rising heroic build with dhol, low brass and strings at ~20 s, peak ~55 s"
 }
