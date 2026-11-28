@@ -317,13 +317,55 @@
   "art_shift": 300
  },
  "score": {
-  "engine": "elevenlabs eleven_music_v2_5",
+  "engine": "library",
+  "style": "heroic_strings",
+  "cues": [
+   {
+    "shot": 1,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 2,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 3,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 5,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 7,
+    "style": "heroic_strings"
+   },
+   {
+    "shot": 8,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 10,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 11,
+    "style": "heroic_strings"
+   }
+  ],
   "file": "audio/score.mp3",
-  "duration_s": 95,
-  "gain": 1.9,
-  "duck": 0.72,
-  "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
-  "take": "A17's take 2 (same session prompt): gentle and even, suits the calm part 2"
+  "gain": 2.3,
+  "duck": 0.6,
+  "take": "0-5 s night_mystery/night_mystery_01 · 5-23 s devotional_glow/devotional_glow_01 · 23-43 s night_mystery/night_mystery_01 · 43-56 s devotional_glow/devotional_glow_01 · 56-64 s heroic_strings/a104_main · 64-77 s night_mystery/night_mystery_01 · 77-96 s devotional_glow/devotional_glow_01 · 96-113 s heroic_strings/a104_main",
+  "previous": {
+   "engine": "elevenlabs eleven_music_v2_5",
+   "file": "audio/score.mp3",
+   "duration_s": 95,
+   "gain": 1.9,
+   "duck": 0.72,
+   "prompt": "Gentle devotional Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with one soft bright hit and a tanpura drone with a lone bansuri phrase, moonlit palace night; very quiet and still under a recited Sanskrit verse; a tender, loving santoor and strings passage like a lullaby; then a calm night-river mood, soft frame drum heartbeat, crickets-like shimmer, building patience and devotion; around three quarters through a warm rising lift with strings and soft choir pads as dawn breaks over a river; then a warm, peaceful resolve for the ending. Sparse mid-range, no vocals, nothing that fights the voice.",
+   "take": "A17's take 2 (same session prompt): gentle and even, suits the calm part 2"
+  }
  },
  "avoid": [
   "calling the Urmila story 'fake' or mocking it: it is a later, loving telling of her sacrifice",

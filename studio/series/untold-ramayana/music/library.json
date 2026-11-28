@@ -30,7 +30,8 @@
    "source": "A104",
    "note": null,
    "used_by": [
-    "A104"
+    "A104",
+    "A102"
    ]
   },
   {
@@ -41,7 +42,8 @@
    "source": "A104",
    "note": null,
    "used_by": [
-    "A103"
+    "A103",
+    "A17"
    ]
   },
   {
@@ -74,7 +76,8 @@
    "source": "A18",
    "note": null,
    "used_by": [
-    "A18"
+    "A18",
+    "A17"
    ]
   },
   {
@@ -97,7 +100,8 @@
    "note": "composed for the library (150 s)",
    "used_by": [
     "A103",
-    "A38"
+    "A38",
+    "A101"
    ]
   },
   {
@@ -109,7 +113,10 @@
    "note": "composed for the library (150 s)",
    "used_by": [
     "A103",
-    "A38"
+    "A38",
+    "A101",
+    "A17",
+    "A102"
    ]
   },
   {
@@ -120,7 +127,8 @@
    "source": null,
    "note": "composed for the library (150 s)",
    "used_by": [
-    "A103"
+    "A103",
+    "A17"
    ]
   },
   {
@@ -131,7 +139,10 @@
    "source": null,
    "note": "composed for the library (150 s)",
    "used_by": [
-    "A38"
+    "A38",
+    "A101",
+    "A17",
+    "A102"
    ]
   }
  ]

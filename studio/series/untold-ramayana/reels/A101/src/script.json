@@ -301,13 +301,51 @@
   "art_shift": 220
  },
  "score": {
-  "engine": "elevenlabs music_v1",
+  "engine": "library",
+  "style": "heroic_strings",
+  "cues": [
+   {
+    "shot": 1,
+    "style": "epic_pulse"
+   },
+   {
+    "shot": 2,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 3,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 5,
+    "style": "epic_pulse"
+   },
+   {
+    "shot": 6,
+    "style": "heroic_strings"
+   },
+   {
+    "shot": 8,
+    "style": "devotional_glow"
+   },
+   {
+    "shot": 9,
+    "style": "heroic_strings"
+   }
+  ],
   "file": "audio/score.mp3",
-  "duration_s": 105,
-  "gain": 1.9,
-  "prompt": "Devotional-heroic Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with a soft tanpura drone and a low bansuri phrase over a night battlefield hush; slow frame drums enter as a search by torchlight; around one third through, a rising heroic build with dhol, low brass and strings as the hero leaps into the sky, and one huge bright impact hit with choir pads as a mountain is lifted toward the sun; then it settles into a warm, quiet passage; a second, smaller build in the last third; it ends in a calm, glowing, devotional resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
-  "take": "take 1 of 2 (A23's unused take; same prompt): energy from 20 s to 75 s under the spear and the healing",
-  "duck": 0.72
+  "gain": 2.3,
+  "duck": 0.6,
+  "take": "0-4 s epic_pulse/epic_pulse_01 · 4-20 s night_mystery/night_mystery_01 · 20-44 s devotional_glow/devotional_glow_01 · 44-55 s epic_pulse/epic_pulse_01 · 55-70 s heroic_strings/a23_alt · 70-85 s devotional_glow/devotional_glow_01 · 85-105 s heroic_strings/a23_alt",
+  "previous": {
+   "engine": "elevenlabs music_v1",
+   "file": "audio/score.mp3",
+   "duration_s": 105,
+   "gain": 1.9,
+   "prompt": "Devotional-heroic Indian film underscore, instrumental only, built to sit under a spoken voice. Opens with a soft tanpura drone and a low bansuri phrase over a night battlefield hush; slow frame drums enter as a search by torchlight; around one third through, a rising heroic build with dhol, low brass and strings as the hero leaps into the sky, and one huge bright impact hit with choir pads as a mountain is lifted toward the sun; then it settles into a warm, quiet passage; a second, smaller build in the last third; it ends in a calm, glowing, devotional resolution. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
+   "take": "take 1 of 2 (A23's unused take; same prompt): energy from 20 s to 75 s under the spear and the healing",
+   "duck": 0.72
+  }
  },
  "avoid": [
   "any disrespect to the Hanuman Chalisa or Goswami Tulsidas: both are told with devotion; we only add what Valmiki tells",
