@@ -8,6 +8,9 @@
   python3 scripts/status.py batch R006 R007 R008 R009 --task "Next 4 reels"   # start a batch: the panel tracks every reel's step
   python3 scripts/status.py done R006                                 # a reel of the batch is finished (uploaded for review)
   python3 scripts/status.py auto R006 3 "Recording the voice"         # quiet best-effort update (used by make_reel.py)
+  python3 scripts/status.py ask "Pick Ravana's look" --key ravana-look --detail "..." --link /world --reel LF02 --pri 1 --due 2026-12-05
+                                                                      # adds/updates a row on the owner's "For you" page
+  python3 scripts/status.py asked ravana-look                         # mark it done (the owner can also tick it in the app)
 
 Steps of a reel (shown as "step N of 8"):
   1 Research the verses · 2 Write the script · 3 Record the voices · 4 Compose the music
@@ -232,6 +235,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("codes", nargs="*")
     ap.add_argument("--studio", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "studio"))
     for k in ("reel", "task", "detail", "state"): ap.add_argument("--" + k)
+    for k in ("key", "link", "due"): ap.add_argument("--" + k)
+    ap.add_argument("--pri", type=int, default=2)
     ap.add_argument("--step", type=int); ap.add_argument("--pct", type=float); ap.add_argument("--eta", type=float)
     a = ap.parse_args()
     if a.cmd == "idle":
@@ -266,6 +271,14 @@ if __name__ == "__main__":
         except Exception as e: print("status not updated:", e, file=sys.stderr)
         try: voice_budget()                                  # after voice/music steps the ElevenLabs usage changed
         except Exception: pass
+    elif a.cmd == "ask":                                     # a thing only the owner can do -> the app's "For you" page
+        title = " ".join(a.codes); key = a.key or re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:60]
+        row = {"key": key, "title": title, "detail": a.detail, "link": a.link, "reel_code": a.reel, "priority": a.pri, "due": a.due, "done_at": None, "done_by": None}
+        rq = urllib.request.Request(f"{BASE}/rest/v1/owner_actions?on_conflict=key", json.dumps(row).encode(),
+                                    {**H, "Content-Type": "application/json", "Prefer": "resolution=merge-duplicates,return=minimal"}, method="POST")
+        urllib.request.urlopen(rq, timeout=30).read()
+    elif a.cmd == "asked":
+        for k in a.codes: api("PATCH", f"owner_actions?key=eq.{k}", {"done_at": now(), "done_by": "claude"})
     elif a.cmd == "voice-budget":
         print(voice_budget(force=True))
     elif a.cmd in ("watch-queue", "watch-render"): watch_queue(a.codes, a.studio)

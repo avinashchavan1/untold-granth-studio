@@ -63,7 +63,7 @@ S = `series/<series id>` (channel.json → series.id); R = `S/reels/<ID>`. Keep 
 - `python3 make_reel.py thumb R 2s,20s,...` → pick a frame, set `thumbnail.frame` (+ `art_shift`), `python3 make_reel.py thumb R`, LOOK at the cover.
 - `python3 make_reel.py sheet R`, `python3 make_reel.py desk R`; set `S/reels/stages.json → <ID>: "review"`.
 - From the repo root: `python3 scripts/sync.py`, `python3 scripts/media.py <ID> preview|thumbnail|citations|caption <file>`, `python3 scripts/masters.py <ID>`,
-  `python3 scripts/audiopack.py push <ID>`, `python3 scripts/cast_media.py` if a character appeared or changed, `python3 scripts/status.py done <ID>`
+  `python3 scripts/audiopack.py push <ID>`, `python3 scripts/cast_media.py` if a character appeared or changed, `python3 scripts/status.py done <ID>`; anything the owner must do (approve, re-approve, pick a look) → `python3 scripts/status.py ask "..." --reel <ID> --pri 1` (their For you page)
   (marks it uploaded on Live studio; `status.py queued <ID>` for reels waiting their turn), `python3 scripts/status.py idle` when nothing is left.
 - ONE RENDER at a time (owner): never two renders at once; research, scripts, art, recording, checks and uploads can run alongside.
 - Commit + push. Send the owner the preview + cover with a short summary (claims checked, what to review).

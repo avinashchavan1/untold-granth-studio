@@ -6,6 +6,7 @@ import { Button, Card, Empty, ErrorNote, SectionTitle, Spinner } from "../compon
 import { studio, useFollowers, usePublications, useReels, useStatsDaily, useStatsLog, type FollowerDay, type StatDay, type StatLog } from "../lib/api";
 import type { Publication, Reel } from "../lib/types";
 import { BestTimePanel } from "../components/BestTimePanel";
+import { VoiceBudget } from "../components/VoiceBudget";
 
 // Stats: what's working.
 // Refresh rhythm (kept small on purpose: Meta and YouTube rate-limit per account, and posting shares those limits):
@@ -76,6 +77,7 @@ export default function Stats() {
           <Button size="sm" disabled={st.busy} onClick={refresh}><RefreshCw size={14} className={st.busy ? "animate-spin" : ""} /> {st.busy ? "Updating…" : "Refresh now"}</Button>
         </div>
       </div>
+      <VoiceBudget />
       {st.err && <p className="text-sm text-vermilion">{st.err}</p>}
       {st.note && <p className="text-sm text-ink-soft dark:text-parchment/70">{st.note}</p>}
 

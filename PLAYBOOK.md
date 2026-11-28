@@ -122,3 +122,11 @@ Each rule has a mechanism in the engine; keep both.
     its story, and styles rotate across reels (add the ones the owner loves). `score_defaults` sets the music level (gain/duck). When the
     owner changes the sound, re-score the UNRELEASED reels in posting order, one at a time (score → pick → audio → render → check → upload),
     tracked in `studio/series/<id>/RESCORE.md`; leave posted reels and running A/B tests alone; check the ElevenLabs limit before each one.
+    When the owner names ONE sound for all unreleased reels, that overrides the palette for those reels: do exactly that.
+    Music prompts carry moods only, never names, reel ids or dates (the music API's copyright filter rejects them); `score.file`
+    in script.json is the file the mixer uses. Two ~95 s takes cost ~2.4k ElevenLabs credits.
+42. **The owner's "For you" page.** Everything only the owner can do is on one page (`/for-you`, badge in the menu): reels to approve before
+    their slot, failed posts, connection problems, Claude waiting on a choice, a low voice budget (all derived live), plus Claude's asks:
+    `python3 scripts/status.py ask "<what to do>" --key <id> --detail "<why/where>" --link /page --reel <ID> --pri 1|2|3 --due YYYY-MM-DD`
+    (re-asking the same key updates it; `status.py asked <key>` closes it). Whenever you need the owner (approve, re-approve after a
+    re-render, pick a look, connect something, top up credits), add it there as well as saying it in chat.

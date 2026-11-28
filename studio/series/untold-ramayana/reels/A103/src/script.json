@@ -101,10 +101,19 @@
   }
  ],
  "score": {
-  "engine": "excerpt of the wide production's score",
-  "file": "audio/score.wav",
-  "gain": 1.5,
-  "duck": 0.72
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "style": "heroic_strings",
+  "duration_s": 122,
+  "gain": 2.3,
+  "duck": 0.6,
+  "prompt": "An ancient legend of two brothers: a hush under the opening verse, a dark night pulse as a demon roars at the city gate, chase energy into a deep cave, a long still waiting passage, a sorrowful fall as the cave is sealed, a heroic shock as the lost brother returns alive, a tense confrontation, then a quiet two-sided ending.",
+  "previous": {
+   "engine": "excerpt of the wide production's score",
+   "file": "audio/score.wav",
+   "gain": 1.5,
+   "duck": 0.72
+  }
  },
  "thumbnail": {
   "hook": "HE WAITED A YEAR.",

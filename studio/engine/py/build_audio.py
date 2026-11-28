@@ -148,7 +148,9 @@ else: default_bed()
 
 # ---------------- composed score (ElevenLabs Music): audio/score.mp3|wav replaces the synthesized music ----------------
 # Same loudness as the synthesized bed the mix was tuned for; still ducked under every line; sfx (sound.py) stay.
-for _f in ("score.wav", "score.mp3"):
+# script.json → score.file wins (a re-score writes score.mp3 next to an older score.wav; lesson Nov 28 2026)
+_sf = os.path.basename(json.load(open(os.path.join(ROOT, "src", "script.json"), encoding="utf-8")).get("score", {}).get("file") or "")
+for _f in ([_sf] if _sf and os.path.exists(os.path.join(ROOT, "audio", _sf)) else ["score.wav", "score.mp3"]):
     _p = os.path.join(ROOT, "audio", _f)
     if not os.path.exists(_p): continue
     _off = float(json.load(open(os.path.join(ROOT, "src", "script.json"), encoding="utf-8")).get("score", {}).get("offset_s", 0))   # skip a quiet intro

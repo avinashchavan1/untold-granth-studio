@@ -1,4 +1,5 @@
 import { Trash2 } from "lucide-react";
+import { VoiceBudget } from "../components/VoiceBudget";
 import { useState } from "react";
 import { useSession } from "../components/Auth";
 import { Button, Card, SectionTitle, Spinner, fmtDate } from "../components/ui";
@@ -20,6 +21,7 @@ export default function SettingsPage() {
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] gap-6">
       <h1 className="font-display text-3xl font-extrabold tracking-wide">Settings</h1>
+      <VoiceBudget />
       <Card><Connections /></Card>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Activity, BadgeCheck, BarChart3, Radar, CalendarRange, BookOpen, Clapperboard, Lightbulb, LayoutDashboard, ListOrdered, LogOut, Menu, MonitorPlay, MoreHorizontal, Settings, Users, X } from "lucide-react";
+import { Activity, BadgeCheck, Inbox, BarChart3, Radar, CalendarRange, BookOpen, Clapperboard, Lightbulb, LayoutDashboard, ListOrdered, LogOut, Menu, MonitorPlay, MoreHorizontal, Settings, Users, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { setPeerLayer } from "../lib/bestTime";
@@ -10,9 +10,11 @@ import WorkBar from "./WorkBar";
 import HealthBanner from "./HealthBanner";
 import { useWorkStatus } from "../lib/api";
 import { CHANNEL } from "../lib/channel";
+import { useForYou } from "../pages/ForYou";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/for-you", label: "For you", icon: Inbox },
   { to: "/live", label: "Live studio", icon: Activity },
   { to: "/stats", label: "Stats", icon: BarChart3 },
   { to: "/best-time", label: "Best time", icon: Radar },
@@ -29,6 +31,7 @@ const NAV = [
 
 const TABS = [   // phone: the pages used most (Ideas and the rest are under More)
   { to: "/", label: "Home", icon: LayoutDashboard, end: true },
+  { to: "/for-you", label: "For you", icon: Inbox },
   { to: "/live", label: "Live", icon: Activity },
   { to: "/timeline", label: "Timeline", icon: CalendarRange },
   { to: "/reels", label: "Reels", icon: Clapperboard },
@@ -43,13 +46,15 @@ export default function Layout() {
   const tm = useQuery({ queryKey: ["timing_model"], staleTime: 30 * 60e3, queryFn: async () => { const { data } = await supabase.from("timing_model").select("platform,grid,parts"); return data ?? []; } });
   useEffect(() => { if (tm.data) setPeerLayer(tm.data as never); }, [tm.data]);
   const live = !!ws && ws.state !== "idle";
+  const todo = useForYou().items.filter((i) => i.pri < 3).length;   // badge: things to do first / soon
+  const Badge = ({ phone }: { phone?: boolean }) => todo ? <span className={clsx("rounded-full bg-vermilion px-1.5 text-[10px] font-bold leading-4 text-white", phone ? "absolute -right-2 -top-1" : "ml-auto")}>{todo}</span> : null;
   const nav = (
     <nav className="grid gap-1">
       {NAV.map(({ to, label, icon: Icon, end }) => (
         <NavLink key={to} to={to} end={end} onClick={() => setOpen(false)}
           className={({ isActive }) => clsx("flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-semibold transition",
             isActive ? "bg-gold text-night-950" : "text-parchment/80 hover:bg-night-800 hover:text-parchment")}>
-          <Icon size={18} /> {label}{to === "/live" && live && <span className="ml-auto flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-vermilion opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-vermilion" /></span>{ws?.state === "waiting" ? "you" : "on"}</span>}
+          <Icon size={18} /> {label}{to === "/for-you" && <Badge />}{to === "/live" && live && <span className="ml-auto flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-vermilion opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-vermilion" /></span>{ws?.state === "waiting" ? "you" : "on"}</span>}
         </NavLink>
       ))}
     </nav>
@@ -83,13 +88,13 @@ export default function Layout() {
         )}
         <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-28 pt-5 sm:px-6 lg:px-10 lg:py-10"><Outlet /></main>
         {/* phone: thumb-reach tab bar with the pages used most */}
-        <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-6 border-t border-night-800 bg-night-950/95 text-parchment backdrop-blur lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-label="Main">
+        <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-7 border-t border-night-800 bg-night-950/95 text-parchment backdrop-blur lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-label="Main">
           {TABS.map(({ to, label, icon: Icon, end }) => (
-            <NavLink key={to} to={to} end={end} className={({ isActive }) => clsx("flex flex-col items-center gap-0.5 py-2 text-[11px] font-semibold", isActive ? "text-gold" : "text-parchment/70")}>
-              <Icon size={22} /> {label}
+            <NavLink key={to} to={to} end={end} className={({ isActive }) => clsx("flex flex-col items-center gap-0.5 py-2 text-[10px] font-semibold", isActive ? "text-gold" : "text-parchment/70")}>
+              <span className="relative"><Icon size={22} />{to === "/for-you" && <Badge phone />}</span> {label}
             </NavLink>
           ))}
-          <button onClick={() => setOpen(true)} className="flex flex-col items-center gap-0.5 py-2 text-[11px] font-semibold text-parchment/70" aria-label="More pages"><MoreHorizontal size={22} /> More</button>
+          <button onClick={() => setOpen(true)} className="flex flex-col items-center gap-0.5 py-2 text-[10px] font-semibold text-parchment/70" aria-label="More pages"><MoreHorizontal size={22} /> More</button>
         </nav>
       </div>
     </div>
