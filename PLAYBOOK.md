@@ -117,3 +117,8 @@ Each rule has a mechanism in the engine; keep both.
     `uptime` and `pgrep -af make_reel`, and resume renders (they continue from the last finished chunk). (d) Before pushing to the
     template, pull its newer files into the channel; `template_sync.py` keeps the template's version of any file that is newer there
     or only there, and lists it. (e) Ask before spending voice budget on re-recording; posted reels keep their audio.
+
+41. **Music palette and re-scoring.** `series.json → score_styles` is a palette of named sounds; each reel's `score.style` picks one to fit
+    its story, and styles rotate across reels (add the ones the owner loves). `score_defaults` sets the music level (gain/duck). When the
+    owner changes the sound, re-score the UNRELEASED reels in posting order, one at a time (score → pick → audio → render → check → upload),
+    tracked in `studio/series/<id>/RESCORE.md`; leave posted reels and running A/B tests alone; check the ElevenLabs limit before each one.
