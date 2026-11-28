@@ -139,7 +139,7 @@
    "en": "Vali wore a golden garland. And as he died, he gave it to the very brother he had driven out.",
    "units": [
     "[serious] बाली के गले में, एक सोने की माला थी।",
-    "[thoughtfully] और मरते समय, उन्होंने वो माला, उसी भाई को दे दी, जिसे उन्होंने निकाला था।"
+    "[engaged] और मरते समय, उन्होंने वो माला, उसी भाई को दे दी, जिसे उन्होंने निकाला था।"
    ],
    "card": [
     [
@@ -213,7 +213,7 @@
    "hi": "अब, ध्यान दीजिए। बाली के गले में, पहले से एक माला थी। सोने की। जो उनके पिता, इंद्र ने दी थी।",
    "en": "Now notice this. Vali already wore a garland. A golden one, given by his father, Indra.",
    "units": [
-    "[thoughtfully] अब, ध्यान दीजिए।",
+    "[engaged] अब, ध्यान दीजिए।",
     "बाली के गले में, पहले से एक माला थी। सोने की। जो उनके पिता, इंद्र ने दी थी।"
    ],
    "cite": "4.11.37; 4.17.5",
@@ -233,7 +233,7 @@
    "hi": "इस सोने की माला को, याद रखिएगा। कहानी के अंत में, ये फिर लौटेगी।",
    "en": "Remember that golden garland. It comes back at the end of the story.",
    "units": [
-    "[softly] इस सोने की माला को, याद रखिएगा।",
+    "[storytelling] इस सोने की माला को, याद रखिएगा।",
     "कहानी के अंत में, ये फिर लौटेगी।"
    ],
    "link": true,
@@ -246,7 +246,7 @@
    "hi": "पर प्राण, तुरंत नहीं गए। वाल्मीकि कहते हैं: इंद्र की दी हुई सोने की माला ने, उनके प्राण, तेज और शोभा को, थामे रखा।",
    "en": "But his life did not leave at once. Valmiki says the golden garland Indra gave him held on to his life, his strength and his splendour.",
    "units": [
-    "[thoughtfully] पर प्राण, तुरंत नहीं गए।",
+    "[engaged] पर प्राण, तुरंत नहीं गए।",
     "वाल्मीकि कहते हैं: इंद्र की दी हुई सोने की माला ने, उनके प्राण, तेज और शोभा को, थामे रखा।"
    ],
    "cite": "4.17.4-4.17.5",
@@ -312,7 +312,7 @@
    "en": "That same golden garland. Indra's gift. The one that had held Vali's life until now. Now around Sugriva's neck.",
    "units": [
     "[warmly] वही सोने की माला। इंद्र की दी हुई। जिसने अब तक, बाली के प्राण थामे थे।",
-    "[softly] अब, सुग्रीव के गले में।"
+    "[storytelling] अब, सुग्रीव के गले में।"
    ],
    "cite": "4.17.5; 4.22.18",
    "unit_gap": 0.6,
@@ -326,7 +326,7 @@
    "hi": "और सुग्रीव की खुशी, दुःख में बदल गई, जैसे ग्रहण में, चाँद।",
    "en": "And Sugriva's joy turned to grief, like the moon in an eclipse.",
    "units": [
-    "[softly] और सुग्रीव की खुशी, दुःख में बदल गई, जैसे ग्रहण में, चाँद।"
+    "[storytelling] और सुग्रीव की खुशी, दुःख में बदल गई, जैसे ग्रहण में, चाँद।"
    ],
    "cite": "4.22.17",
    "art_from": 83
@@ -351,7 +351,7 @@
    "hi": "और ये कहकर, बाली ने, प्राण त्याग दिए।",
    "en": "And saying this, Vali gave up his life.",
    "units": [
-    "[softly] और ये कहकर, बाली ने, प्राण त्याग दिए।"
+    "[storytelling] और ये कहकर, बाली ने, प्राण त्याग दिए।"
    ],
    "cite": "4.22.24",
    "min": 3.2,
