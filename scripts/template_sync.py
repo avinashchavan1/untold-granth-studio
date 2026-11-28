@@ -35,6 +35,20 @@ if __name__ == "__main__":
     for p in SHARED:
         s = os.path.join(ROOT, p)
         if os.path.exists(s): copy(s, os.path.join(T, p))
+    # never undo another session's work (lesson, Nov 28 2026): a template file that is NEWER than the channel's copy, or that the
+    # channel doesn't have at all, is restored and listed; pull those into the channel first (copy them over, test, commit), then sync again.
+    git = lambda repo, *a: subprocess.run(["git", "-C", repo, *a], capture_output=True, text=True).stdout.strip()
+    kept = []
+    for line in git(T, "status", "--porcelain").splitlines():
+        code, path = line[:2], line[3:].strip()
+        if "D" in code:
+            git(T, "checkout", "HEAD", "--", path); kept.append(f"{path} (only in the template)"); continue
+        if "M" not in code: continue
+        t_time = int(git(T, "log", "-1", "--format=%ct", "HEAD", "--", path) or 0)
+        c_file = os.path.join(ROOT, path)
+        c_time = max(int(git(ROOT, "log", "-1", "--format=%ct", "--", path) or 0), int(os.path.getmtime(c_file)) if os.path.exists(c_file) else 0)
+        if t_time > c_time: git(T, "checkout", "HEAD", "--", path); kept.append(f"{path} (newer in the template)")
+    if kept: print("KEPT the template's version (pull these into the channel first):\n  " + "\n  ".join(kept))
     words = guard_words(); hits = []
     for d, _, fs in os.walk(T):
         if ".git" in d or "node_modules" in d or "presets" in d: continue
