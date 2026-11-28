@@ -64,14 +64,20 @@ def check(reel):
     energy_on = s.get("narration_energy") == "hook_reveal"                               # owner's A/B test (Nov 21 2026); shouting guard still applies
     HOUSE = ENERGY | {"amazed", "laughs", "playfully", "impressed", "curious", "surprised"}   # series.json → narration_energy "excited": a lively house style (owner's choice)
     house_on = ser_.get("narration_energy") == "excited"
+    STORY = {"storytelling", "engaged", "intense", "confident", "serious", "curious", "pause", "warmly"}   # series.json → narration_energy "storytelling" (owner's pick, Nov 28 2026)
+    story_on = ser_.get("narration_energy") == "storytelling"
     for sh in s["shots"]:
         if sh.get("voice") != "narrator": continue
         for ui, u in enumerate(sh.get("units") or []):
             ok_tags = CALM | (EXPRESSIVE if ui == sh.get("sloka_unit") else set())   # the opening śloka may be recited with feeling (owner's request)
             if energy_on and (sh["id"] == s["shots"][0]["id"] or sh.get("reveal")): ok_tags = ok_tags | ENERGY
             if house_on: ok_tags = ok_tags | HOUSE
+            if story_on:
+                ok_tags = (ok_tags - {"softly", "thoughtfully", "sadly", "gently", "whispers"}) | STORY
+                if ui != sh.get("sloka_unit") and not sh.get("quote") and "…" in (u if isinstance(u, str) else u.get("say", "")):
+                    probs.append(f"shot {sh['id']}: '…' inside a narrator line makes him drag (storytelling style): use a comma or split the unit")
             for tag in re.findall(r"\[([^\]]+)\]", u if isinstance(u, str) else u.get("say", "")):
-                if tag.strip().lower() not in ok_tags: probs.append(f"shot {sh['id']}: narrator tag [{tag}] makes him shout; use one of {sorted(ok_tags)}")
+                if tag.strip().lower() not in ok_tags: probs.append(f"shot {sh['id']}: narrator tag [{tag}] isn't in the house style (it shouts or drags); use one of {sorted(ok_tags)}")
     th = s.get("thumbnail") or {}
     if not (th.get("hook") and th.get("line") and th.get("badge")): probs.append("no 'thumbnail' block (hook, stamp, line, badge, frame): every reel ships with a cover")
     if not any(sh.get("cta") for sh in s["shots"]): probs.append("no call-to-action shot (\"cta\": true on the closing line): YouTube needs its 'subscribe' version")
