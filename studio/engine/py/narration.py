@@ -18,18 +18,30 @@ def narr_units():
             for i, (txt, v, say, ex, cfg) in enumerate(us):
                 if CAST[v].get("engine") == "elevenlabs": yield sh["id"], i, v, say, var
 
+# takes per line (credits!): series.json → voice_takes, e.g. {"default": 1, "hook": 2, "reveal": 2, "sloka": 3}
+# (owner, Nov 28 2026: one take for ordinary lines, more only where the delivery matters). `api N` forces N for every line.
+_VT = {"default": 2, **(SER.get("voice_takes") or {})}
+_SH = {sh["id"]: sh for sh in SCRIPT["shots"]}
+def takes_for(sid, i):
+    sh = _SH.get(sid, {})
+    if sh.get("sloka_unit") == i or sh.get("proof"): return _VT.get("sloka", _VT["default"])
+    if sid == SCRIPT["shots"][0]["id"]: return _VT.get("hook", _VT["default"])
+    if sh.get("reveal"): return _VT.get("reveal", _VT["default"])
+    return _VT["default"]
+
 cmd = sys.argv[1] if len(sys.argv) > 1 else "list"
 if cmd == "list":
     for sid, i, v, say, var in narr_units():
         c = CAST[v]; print(json.dumps({"file": f"audio/narrator/s{sid:02d}{var}_{i}_t1.mp3", "voice_id": c["voice_id"], "model_id": c["model"], "prompt": say}, ensure_ascii=False))
 elif cmd == "chars":
-    n = sum(len(say) for sid, i, v, say, var in narr_units()); print(n, "characters (x takes)")
+    n = sum(len(say) for sid, i, v, say, var in narr_units()); t = sum(len(say) * takes_for(sid, i) for sid, i, v, say, var in narr_units())
+    print(n, "characters per take ·", t, "with the take rule (series.json → voice_takes)")
 elif cmd == "api":
-    takes = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+    force = int(sys.argv[2]) if len(sys.argv) > 2 else None
     key = os.environ.get("ELEVENLABS_API_KEY", "proxy-injected")
     for sid, i, v, say, var in narr_units():
         c = CAST[v]
-        for k in range(1, takes + 1):
+        for k in range(1, (force or takes_for(sid, i)) + 1):
             p = take_path(sid, i, k, "mp3", "narrator", var)
             if os.path.exists(p): continue
             req = {"text": say, "model_id": c["model"], "language_code": c.get("language", "hi")}

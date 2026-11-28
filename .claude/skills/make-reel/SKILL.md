@@ -38,7 +38,8 @@ S = `series/<series id>` (channel.json → series.id); R = `S/reels/<ID>`. Keep 
 - `ELEVENLABS_API_KEY=proxy-injected nohup sh -c "python3 make_reel.py narration R api 2 && python3 make_reel.py narration R import" > R/out/narr.log 2>&1 &`
   (record the verse's 3 takes first so `api` skips them).
 - New MAJOR character → audition 3 library voices on one of its lines (`/v1/shared-voices` search), send them, the owner picks. Minor: you pick.
-- Music: `nohup python3 engine/py/gen_score.py R 2 &` → `R/audio/score_takes/take{1,2}.mp3`; pick by the energy curve vs. the story beats
+- Music (default, 0 credits): `python3 ../scripts/music_lib.py use <ID> <style>` → fits a library track to the reel (PLAYBOOK 43); then `make_reel.py audio`.
+  Only for a reel-specific score: `nohup python3 engine/py/gen_score.py R 2 &` → `R/audio/score_takes/take{1,2}.mp3`; pick by the energy curve vs. the story beats
   (quiet under the verse, peak at the climax), copy to `R/audio/score.mp3`, note it in `score.take`. Music sits high (owner: viewers should hear it): `score.gain` ~2.3, `score.duck` ~0.6
   (series.json → score_defaults). Pick `score.style` from series.json → score_styles to fit the story, vary it across reels, and note in `score.take` how it lands.
 

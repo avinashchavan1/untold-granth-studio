@@ -44,8 +44,8 @@ const SHOTS = {
   2(ctx, u, p, sh, t, post) { slokaSource(ctx, u, p, sh, t, post, SLOKA); },
   // 3 — Tulsidas: on the seashore Jambavan asks Hanuman why he sits silent (quote card from the 2nd sentence)
   3(ctx, u, p, sh, t, post) {
-    const st = sentenceStarts(sh, 3), qa = st[1] - 0.25;
-    if (u >= qa) return quoteCard(ctx, u - qa, sh, t, post, Object.assign({ enAt: Math.max(2.5, st[2] - qa - 0.1) }, MANAS));
+    const st = sentenceStarts(sh, 2), qa = st[1] - 0.25;
+    if (u >= qa) return quoteCard(ctx, u - qa, sh, t, post, Object.assign({ enAt: 3.2 }, MANAS));
     const bg = BG.sh, cam = { z: lerp(1.3, 1.36, p), x: 0, y: 300 };
     shore(ctx, bg, cam, t, c => {
       fig(c, CH.jambavan, { sit: 1, aN: [0.24, 0.0], handN: 'palm', eye: 0.3, brow: 0.5, gaze: [0.4, -0.1] }, 330, SHORE_Y + 20, 560, 1, L_DUSK);
@@ -88,7 +88,7 @@ const SHOTS = {
   },
   // 7 — Agastya tells of the child: glowing with the gods' boons, fearless, playing pranks in the sages' hermitages (7.36.27-31)
   7(ctx, u, p, sh, t, post) {
-    const st = sentenceStarts(sh, 3), bg = BG.her, cam = { z: lerp(1.15, 1.22, p), x: 0, y: 80 }, boon = ease(u, st[1], st[1] + 0.8), play = ease(u, st[2], st[2] + 0.4);
+    const st = sentenceStarts(sh, 2), bg = BG.her, cam = { z: lerp(1.15, 1.22, p), x: 0, y: 80 }, boon = ease(u, st[0] + 1.5, st[0] + 2.3), play = ease(u, st[1], st[1] + 0.4);
     hermitage(ctx, bg, cam, t, c => {
       fig(c, CH.bhrigu, { sit: 1, aN: [0.1, 0.16], aF: [0.08, 0.2], eye: 0.1, head: 0.05, gaze: [0.3, 0.3] }, 840, HG + 20, 480, -1, L_DAY);
       const hop = Math.abs(Math.sin(u * 5)) * 120 * play, bx = lerp(300, 560 + Math.sin(u * 2.5) * 200, play);
@@ -96,7 +96,7 @@ const SHOTS = {
       BH(c, bx, HG - 70 - hop, 150, t, { pose: play > 0.3 && Math.sin(u * 5) > 0 ? 'reach' : 'sit', smile: 1, eye: blink(t, 3), glow: 0.3 + 0.5 * boon });
       leaves(c, t * 0.5, 3, 5);
     });
-    post.ui = c => { const q = ease(u, st[1] + 0.1, st[1] + 0.5) * (1 - ease(u, st[2] - 0.2, st[2] + 0.1)); if (q > 0) text(c, "THE GODS' BOONS", 540, 420, { size: 84, weight: 900, color: C_GOLD, ls: 6, alpha: q, stroke: 9, shadow: 30 }); };
+    post.ui = c => { const q = ease(u, st[0] + 1.6, st[0] + 2.0) * (1 - ease(u, st[1] - 0.2, st[1] + 0.1)); if (q > 0) text(c, "THE GODS' BOONS", 540, 420, { size: 84, weight: 900, color: C_GOLD, ls: 6, alpha: q, stroke: 9, shadow: 30 }); };
   },
   // 8 — Agastya: the Bhrigu and Angiras sages cursed him; the child's glow fades (7.36.32-34)
   8(ctx, u, p, sh, t, post) {
@@ -113,7 +113,7 @@ const SHOTS = {
   },
   // 9 — so, when Vali hounded Sugriva, Hanuman didn't know his own strength: Agastya's answer to Rama (7.36.39-40)
   9(ctx, u, p, sh, t, post) {
-    const st = sentenceStarts(sh, 3), bg = BG.herD, cam = { z: lerp(1.1, 1.18, p), x: 0, y: 40 }, inC = u >= st[2] - 0.15;
+    const st = sentenceStarts(sh, 2), bg = BG.herD, cam = { z: lerp(1.1, 1.18, p), x: 0, y: 40 }, inC = false;
     if (!inC) {
       hermitage(ctx, bg, cam, t, c => {
         chase(c, u, t, -300, SIL);
@@ -130,11 +130,11 @@ const SHOTS = {
   },
   // 10 — and few know: he learned grammar facing the sun, moving backwards from its rising to its setting (7.36.42)
   10(ctx, u, p, sh, t, post) {
-    const st = sentenceStarts(sh, 3), go = map(u, st[1], sh.dur), sx = lerp(980, 720, go), sy = 520 + Math.sin(go * Math.PI) * -120, hx = lerp(560, 280, go);   // facing the sun, moving backwards ahead of it (east to west)
+    const st = sentenceStarts(sh, 2), go = map(u, st[1], sh.dur), sx = lerp(980, 720, go), sy = 520 + Math.sin(go * Math.PI) * -120, hx = lerp(560, 280, go);   // facing the sun, moving backwards ahead of it (east to west)
     skyHigh(ctx, { z: 1.0, y: 0 }, t, sx, sy, c => {
       fig(c, CH.hanuman, { lean: -0.15, aN: [0.24, -0.1], aF: [0.2, -0.06], handN: 'namaste', handF: 'none', lN: [0.1, 0.04], lF: [-0.06, 0.04], eye: blink(t, 4), smile: 0.4, gaze: [0.5, -0.4], tail: Math.sin(t * 2) }, hx, 1350, 520, sx < hx ? -1 : 1, { rim: '#ffe0a0', rimA: 0.9, dir: sx < hx ? -1 : 1 });
     });
-    post.ui = c => { const q = ease(u, st[2], st[2] + 0.4); if (q > 0) cardUI(c, u, sh.card || [], st[2]); const q0 = ease(u, st[0], st[0] + 0.4) * (1 - ease(u, st[1] - 0.2, st[1] + 0.1)); if (q0 > 0) text(c, 'FEW KNOW THIS', 540, 470, { size: 84, weight: 900, color: C_IVORY, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); };
+    post.ui = c => { const q = ease(u, st[1] + 1.2, st[1] + 1.6); if (q > 0) cardUI(c, u, sh.card || [], st[1] + 1.2); const q0 = ease(u, st[0], st[0] + 0.4) * (1 - ease(u, st[1] - 0.2, st[1] + 0.1)); if (q0 > 0) text(c, 'FEW KNOW THIS', 540, 470, { size: 84, weight: 900, color: C_IVORY, ls: 6, alpha: q0, stroke: 9, shadow: 30 }); };
   },
   // 11 — payoff: Tulsidas = Jambavan's reminder; Valmiki = the reason too, the sages' curse. Both told with devotion.
   11(ctx, u, p, sh, t, post) {

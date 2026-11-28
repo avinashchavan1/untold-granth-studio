@@ -101,13 +101,38 @@
   }
  ],
  "score": {
-  "engine": "elevenlabs music_v1",
-  "file": "audio/score.mp3",
+  "engine": "library",
   "style": "heroic_strings",
-  "duration_s": 122,
+  "cues": [
+   {
+    "shot": 1,
+    "style": "epic_pulse"
+   },
+   {
+    "shot": 2,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 4,
+    "style": "epic_pulse"
+   },
+   {
+    "shot": 5,
+    "style": "night_mystery"
+   },
+   {
+    "shot": 6,
+    "style": "tender_sorrow"
+   },
+   {
+    "shot": 8,
+    "style": "heroic_strings"
+   }
+  ],
+  "file": "audio/score.mp3",
   "gain": 2.3,
   "duck": 0.6,
-  "prompt": "An ancient legend of two brothers: a hush under the opening verse, a dark night pulse as a demon roars at the city gate, chase energy into a deep cave, a long still waiting passage, a sorrowful fall as the cave is sealed, a heroic shock as the lost brother returns alive, a tense confrontation, then a quiet two-sided ending.",
+  "take": "0-10 s epic_pulse/epic_pulse_01 · 10-36 s night_mystery/night_mystery_01 · 36-46 s epic_pulse/epic_pulse_01 · 46-51 s night_mystery/night_mystery_01 · 51-73 s tender_sorrow/tender_sorrow_01 · 73-121 s heroic_strings/a104_alt",
   "previous": {
    "engine": "excerpt of the wide production's score",
    "file": "audio/score.wav",

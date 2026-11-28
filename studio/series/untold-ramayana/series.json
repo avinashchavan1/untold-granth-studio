@@ -387,11 +387,22 @@
   "night_mystery": "Suspenseful night score: low cellos and sarangi, a pulsing tanpura, sparse frame drums and distant choir, a haunting recurring motif that builds tension step by step and releases at the reveal; quiet under verses; no jump-scare hits.",
   "battle_epic": "Epic battle score: driving strings ostinato, heroic brass, dhol and tabla rhythms, choir swells at the climax, a strong recurring theme; powerful but clean and melodic; quiet under verses; no distorted or booming drums.",
   "tender_sorrow": "Tender, sorrowful score: solo cello and sarangi, soft piano-like santoor, a slow aching melody over warm strings, gentle swells; quiet under verses; resolves with quiet hope.",
-  "symphonic": "Symphonic and pleasing to the ear: a warm full orchestra (legato strings, soft horns, harp, woodwinds, gentle choir pads) with Indian colour (bansuri, sitar or santoor, tanpura, soft tabla); melodic with a recurring theme; smooth swells; no harsh hits; leaves room for a spoken voice."
+  "symphonic": "Symphonic and pleasing to the ear: a warm full orchestra (legato strings, soft horns, harp, woodwinds, gentle choir pads) with Indian colour (bansuri, sitar or santoor, tanpura, soft tabla); melodic with a recurring theme; smooth swells; no harsh hits; leaves room for a spoken voice.",
+  "epic_pulse": "Modern epic Indian trailer score at 123 BPM in D minor: a deep sub-bass pulse under a low drone, driving percussion (dhol, big toms, frame drums, claps) on a steady groove from the first seconds, short dark string ostinatos and low brass stabs, a rising build every eight bars, energetic, confident and powerful; punchy and clean, not distorted; keeps the midrange open for a spoken voice."
  },
  "score_style_note": "Each reel's script.json → score.style picks one of score_styles (fit the story; try different ones and note in score.take how each lands); score_style is the default. Owner (Nov 28 2026): loves A23's strings, wants variety and a little more music.",
  "score_defaults": {
   "gain": 2.3,
   "duck": 0.6
+ },
+ "voice_takes": {
+  "default": 1,
+  "hook": 2,
+  "reveal": 2,
+  "sloka": 3,
+  "_note": "Owner, Nov 28 2026 (credits): one take for ordinary lines; 2 for the hook and reveal shots; 3 for the śloka/proof verse. narration.py api uses this; `api N` forces N."
+ },
+ "score_style_notes": {
+  "epic_pulse": "Owner's reference (Nov 28 2026): a 30 s instrumental reel track, 123 BPM, bass- and drum-heavy, loud and even (-14.6 LUFS, LRA 4), D minor. Use for hooks, battles, chases, climaxes 'whenever needed'. Never use the reference itself (copyright)."
  }
 }

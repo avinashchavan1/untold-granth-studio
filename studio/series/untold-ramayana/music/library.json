@@ -1,0 +1,138 @@
+{
+ "tracks": [
+  {
+   "style": "heroic_strings",
+   "name": "a23_main",
+   "path": "music/heroic_strings/a23_main.mp3",
+   "seconds": 110.1,
+   "source": "A23",
+   "note": "the reference (owner's favourite), take 2",
+   "used_by": [
+    "A23"
+   ]
+  },
+  {
+   "style": "heroic_strings",
+   "name": "a23_alt",
+   "path": "music/heroic_strings/a23_alt.mp3",
+   "seconds": 110.1,
+   "source": "A23",
+   "note": "A23 take 1, same prompt",
+   "used_by": [
+    "A101"
+   ]
+  },
+  {
+   "style": "heroic_strings",
+   "name": "a104_main",
+   "path": "music/heroic_strings/a104_main.mp3",
+   "seconds": 120.0,
+   "source": "A104",
+   "note": null,
+   "used_by": [
+    "A104"
+   ]
+  },
+  {
+   "style": "heroic_strings",
+   "name": "a104_alt",
+   "path": "music/heroic_strings/a104_alt.mp3",
+   "seconds": 125.0,
+   "source": "A104",
+   "note": null,
+   "used_by": [
+    "A103"
+   ]
+  },
+  {
+   "style": "heroic_strings",
+   "name": "a34_main",
+   "path": "music/heroic_strings/a34_main.mp3",
+   "seconds": 96.0,
+   "source": "A34",
+   "note": null,
+   "used_by": [
+    "A34"
+   ]
+  },
+  {
+   "style": "heroic_strings",
+   "name": "a34_alt",
+   "path": "music/heroic_strings/a34_alt.mp3",
+   "seconds": 96.0,
+   "source": "A34",
+   "note": null,
+   "used_by": [
+    "A38"
+   ]
+  },
+  {
+   "style": "royal_court",
+   "name": "a18_main",
+   "path": "music/royal_court/a18_main.mp3",
+   "seconds": 126.1,
+   "source": "A18",
+   "note": null,
+   "used_by": [
+    "A18"
+   ]
+  },
+  {
+   "style": "royal_court",
+   "name": "a18_alt",
+   "path": "music/royal_court/a18_alt.mp3",
+   "seconds": 126.1,
+   "source": "A18",
+   "note": null,
+   "used_by": [
+    "A38"
+   ]
+  },
+  {
+   "style": "epic_pulse",
+   "name": "epic_pulse_01",
+   "path": "music/epic_pulse/epic_pulse_01.mp3",
+   "seconds": 140.0,
+   "source": null,
+   "note": "composed for the library (150 s)",
+   "used_by": [
+    "A103",
+    "A38"
+   ]
+  },
+  {
+   "style": "night_mystery",
+   "name": "night_mystery_01",
+   "path": "music/night_mystery/night_mystery_01.mp3",
+   "seconds": 150.0,
+   "source": null,
+   "note": "composed for the library (150 s)",
+   "used_by": [
+    "A103",
+    "A38"
+   ]
+  },
+  {
+   "style": "tender_sorrow",
+   "name": "tender_sorrow_01",
+   "path": "music/tender_sorrow/tender_sorrow_01.mp3",
+   "seconds": 150.0,
+   "source": null,
+   "note": "composed for the library (150 s)",
+   "used_by": [
+    "A103"
+   ]
+  },
+  {
+   "style": "devotional_glow",
+   "name": "devotional_glow_01",
+   "path": "music/devotional_glow/devotional_glow_01.mp3",
+   "seconds": 150.0,
+   "source": null,
+   "note": "composed for the library (150 s)",
+   "used_by": [
+    "A38"
+   ]
+  }
+ ]
+}
