@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Empty, ErrorNote, SectionTitle, Spinner, StageBadge, fmtDate } from "../components/ui";
 import { Target } from "../components/Target";
-import { VoiceBudget } from "../components/VoiceBudget";
 import { studio, useActivity, useChannels, useConnections, usePublications, useReels, useSeries } from "../lib/api";
 import type { Publication, Reel } from "../lib/types";
 import { STAGES, type Stage } from "../lib/types";
@@ -29,7 +28,6 @@ export default function Dashboard() {
 
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] gap-8">
-      <VoiceBudget />
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="min-w-0">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-deep sm:text-xs sm:tracking-[0.25em] dark:text-gold">{CHANNEL.series.name} · {CHANNEL.series.book}, {CHANNEL.series.edition}</div>
