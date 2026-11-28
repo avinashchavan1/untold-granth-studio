@@ -226,6 +226,13 @@ if __name__ == "__main__":
         info = load_info(); info.update({"queue": [], "phases": [], "title": None, "phase": None, "overall_eta_min": None, "batch": None, "reels": {}, "batch_pct": None}); event(info, "Idle")
         patch({"state": "idle", "reel_code": None, "task": None, "detail": None, "step": None, "steps": None, "pct": None, "eta_min": None}, info)
     elif a.cmd == "set": set_status(a.state or "working", a.reel, a.step, a.task, a.detail, a.pct, a.eta, now())
+    elif a.cmd in ("done", "queued"):        # done <ID…>: uploaded, in review · queued <ID…>: voice ready, waiting its turn to render
+        info = load_info(); reels = info.setdefault("reels", {})
+        for c in a.codes:
+            reels[c] = {"step": 8, "task": "Uploaded · in review", "state": "done", "pct": 100} if a.cmd == "done" else {"step": 5, "task": a.task or "Voice ready · waiting its turn", "state": "queued", "pct": 0}
+            if a.cmd == "done": event(info, f"{c}: uploaded, in review")
+        if a.task and a.cmd == "done": info.setdefault("batch", {})["title"] = a.task
+        batch_progress(info); patch({}, info)
     elif a.cmd == "batch":
         info = load_info(); info["batch"] = {"title": a.task or f"{len(a.codes)} reels", "codes": a.codes, "started": now()}
         info["reels"] = {c: {"step": 0, "task": "Queued", "state": "queued"} for c in a.codes}; info["batch_pct"] = 0.0
