@@ -111,8 +111,8 @@ Each rule has a mechanism in the engine; keep both.
     chapter of the arc (`source_verse.py`), pin each beat to its verse (`python3 scripts/verse_find.py "<word>" "<saved pages>"`), note page gaps,
     and write `longform/<code>/research/README.md`. An absence claim ("X is not in the text") needs every chapter of the episode complete on the page.
 
-40. **Lessons learned (Nov 28 2026), not optional.** (a) ONE reel at a time: render → check → upload → tell the owner, then the next;
-    no background recording, no chained renders. (b) After every upload run `python3 scripts/status.py done <ID>` so Live studio shows it
+40. **Lessons learned (Nov 28 2026), not optional.** (a) ONE RENDER at a time (the machine overloads otherwise); research, scripts, art, recording,
+    checks and uploads may run alongside it (owner clarified, Nov 28 2026). (b) After every upload run `python3 scripts/status.py done <ID>` so Live studio shows it
     as uploaded; reels waiting their turn: `status.py queued <ID>`. (c) The cloud machine can restart: after any pause check
     `uptime` and `pgrep -af make_reel`, and resume renders (they continue from the last finished chunk). (d) Before pushing to the
     template, pull its newer files into the channel; `template_sync.py` keeps the template's version of any file that is newer there

@@ -1,3 +1,4 @@
+import { VoiceBudget } from "./VoiceBudget";
 import clsx from "clsx";
 import { ArrowLeft, Check, ChevronRight, Circle, Hand, ListOrdered, Loader2, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -44,6 +45,7 @@ export function WorkPage() {
           <div className="flex items-center gap-3 rounded-3xl bg-night-900 p-6 text-parchment"><Moon size={22} className="text-gold" />
             <div><div className="font-semibold">Nothing running right now.</div><div className="text-sm opacity-75">When Claude starts on reels, the live progress shows up here.</div></div></div>
         ) : <Panel s={s} />}
+      <VoiceBudget />
     </div>
   );
 }

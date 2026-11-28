@@ -109,10 +109,14 @@
   }
  ],
  "score": {
-  "engine": "excerpt of the wide production's score",
-  "file": "audio/score.wav",
-  "gain": 1.5,
-  "duck": 0.72
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "gain": 2.3,
+  "duck": 0.6,
+  "style": "heroic_strings",
+  "duration_s": 125,
+  "prompt": "Vali's last moments: a hush of grief under the recited verse, the dying king's dignity, a slow rising theme as he gives his son and his brother their last advice, the soaring strings peak when he takes off Indra's golden garland and gives it to Sugriva, then a noble, quiet resolution.",
+  "take": "heroic_strings take 2 (Nov 28 2026): quiet under the verse, no gaps, peaks ~91 s as Vali gives the garland; take 1 louder under the verse, 5 silent gaps"
  },
  "thumbnail": {
   "hook": "HIS LAST GIFT.",

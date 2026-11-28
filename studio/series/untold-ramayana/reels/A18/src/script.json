@@ -409,11 +409,12 @@
  "score": {
   "engine": "elevenlabs music_v1",
   "file": "audio/score.mp3",
-  "duration_s": 105,
-  "gain": 1.9,
-  "prompt": "Auspicious Indian wedding-temple underscore, instrumental only, built to sit under a spoken voice. Opens with soft shehnai-like woodwind and tanpura drone, gentle temple bells; a warm royal court feel with soft strings and light tabla; around 60 percent through, a building tension with low drums and one huge thunder-like impact hit; then a bright, joyful, devotional resolution with bells and warm strings. Sparse mid-range, no vocals, no lead melody fighting the narration, crisp modern film production.",
-  "take": "take 2 of 2: quiet first 15 s under the śloka, peaks from 55 s (the bow breaks)",
-  "duck": 0.72
+  "duration_s": 126,
+  "gain": 2.3,
+  "prompt": "Royal Mithila court for a bride-price challenge: a stately processional theme, quiet and still under the recited verse and quotes, a hush of anticipation as the great bow of Shiva is brought out, rising tension as Rama lifts and strings it, a grand swell when the bow breaks, then a warm, joyful, glowing resolution for Sita's wedding.",
+  "take": "royal_court take 1 (Nov 28 2026): builds through the court, peaks ~96 s at the climax; take 2 peaked in the first second",
+  "duck": 0.6,
+  "style": "royal_court"
  },
  "avoid": [
   "any disrespect to Goswami Tulsidas or the Ramcharitmanas; both are told with devotion",

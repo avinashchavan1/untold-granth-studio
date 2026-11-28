@@ -102,6 +102,18 @@ def adopt_reel(info, reel):
         info.setdefault("batch", {}).setdefault("codes", []).append(reel)
     info["reels"][reel] = {"step": 0, "task": "Queued", "state": "queued"}
 
+def voice_budget(force=False):
+    """ElevenLabs characters used/limit (the key is a network secret here, so the app can't ask itself): stored in work_status.info.voice_budget
+    for the Dashboard and Live studio. At most once every 5 minutes unless forced."""
+    info = load_info(); vb = info.get("voice_budget") or {}
+    if not force and vb.get("at") and time.time() - datetime.fromisoformat(vb["at"]).timestamp() < 300: return vb
+    rq = urllib.request.Request("https://api.elevenlabs.io/v1/user/subscription", headers={"xi-api-key": "proxy-injected"})
+    d = json.loads(urllib.request.urlopen(rq, timeout=20).read())
+    vb = {"used": d.get("character_count"), "limit": d.get("character_limit"), "tier": d.get("tier"), "at": now(),
+          "reset": datetime.fromtimestamp(d["next_character_count_reset_unix"], timezone.utc).isoformat() if d.get("next_character_count_reset_unix") else None}
+    info["voice_budget"] = vb; save_info(info); api("PATCH", "work_status?lane=eq.main", {"info": info})
+    return vb
+
 def set_status(state="working", reel=None, step=None, task=None, detail=None, pct=None, eta=None, started=None, info=None, log=True):
     info = info if info is not None else load_info()
     if state == "working": adopt_reel(info, reel)
@@ -252,6 +264,10 @@ if __name__ == "__main__":
     elif a.cmd == "auto":                                    # never fails the caller (make_reel.py)
         try: set_status("working", a.codes[0], int(a.codes[1]), " ".join(a.codes[2:]) or None, a.detail, None, None, None)
         except Exception as e: print("status not updated:", e, file=sys.stderr)
+        try: voice_budget()                                  # after voice/music steps the ElevenLabs usage changed
+        except Exception: pass
+    elif a.cmd == "voice-budget":
+        print(voice_budget(force=True))
     elif a.cmd in ("watch-queue", "watch-render"): watch_queue(a.codes, a.studio)
     else: sys.exit(__doc__)
     print("status:", a.cmd, " ".join(a.codes) or a.reel or "")
