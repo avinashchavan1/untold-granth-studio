@@ -103,7 +103,7 @@ Each rule has a mechanism in the engine; keep both.
     so old reels render unchanged; aim for something moving or changing every 2-3 s.
 
 38. **Narrator house style.** `series.json → narration_energy: "storytelling"` makes the narrator an energetic storyteller (cast.json
-    voice_settings ≈ stability 0.32, style 0.6, speed 1.18; tags [storytelling] [engaged] [intense] [confident] [serious] [curious] [warmly] [pause]).
+    voice_settings ≈ stability 0.32, style 0.6, speed 1.18; tags [storytelling] [engaged] [intense] [confident] [serious] [curious] [warmly] [pause], and [excited] [dramatically] [energetic] for big moments).
     `make_reel.py check` rejects [softly]/[thoughtfully] and "…" inside narrator lines in that style (they made the voice slow and moaning);
     the picker's guard is the narrator's `f0_hz + f0_max_rise` (set it from an audition). Audition a new style on 3 lines before switching.
 39. **Preparing long-form videos.** Plan each as `longform/<code>/longform.json` (stage "idea": arc, candidate beats marked "verify in the

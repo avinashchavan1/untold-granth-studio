@@ -13,8 +13,8 @@
    "fx": "highpass=f=45,acompressor=threshold=-20dB:ratio=2:attack=15:release=200:makeup=1,aecho=0.9:0.12:35|60:0.05|0.03",
    "mix_gain": 1.0,
    "f0_hz": 125,
-   "f0_max_rise": 100,
-   "calm_rule": "Storytelling house style (owner, Nov 28 2026, option D of an A/B/C/D audition): energetic storyteller. Tags [storytelling] [engaged] [intense] [confident] [serious] [curious] [pause]; no [softly]/[thoughtfully] and no '…' inside lines (they made him slow and moaning). The picker drops takes whose median pitch is above f0_hz + f0_max_rise (225 Hz).",
+   "f0_max_rise": 175,
+   "calm_rule": "Storytelling house style (owner, Nov 28 2026, option D of an A/B/C/D audition): energetic storyteller. Tags [storytelling] [engaged] [intense] [confident] [serious] [curious] [pause]; no [softly]/[thoughtfully] and no '…' inside lines (they made him slow and moaning). The picker drops takes whose median pitch is above f0_hz + f0_max_rise (300 Hz: owner, Nov 28 2026: 'some shouting is fine'; only screeches/broken takes are dropped). [excited] and [dramatically] are allowed for hooks, reveals and climaxes.",
    "sloka": "USER choice (Nov 21 2026): the narrator Rudra also recites the Sanskrit ślokas, after an audition against Shardul K, Hari Kavi, Sudhir, Shrey and Kanika (cast/audition/sloka/).",
    "voice_settings": {
     "stability": 0.32,

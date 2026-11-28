@@ -51,8 +51,8 @@ The owner reviews and posts from the app: https://untold-granth-studio.avinashch
   or shrill highs. `series.json → score_style` is appended to every score prompt (`engine/py/gen_score.py`). Pick the take that sounds best, not only the loudest arc.
 - **Narrator = energetic storyteller (owner, Nov 28 2026; replaces the old calm rule, which sounded slow and moaning):** series.json
   `narration_energy: "storytelling"`, cast.json voice_settings (stability 0.32, style 0.6, speed 1.18). Tags: [storytelling] [engaged] [intense]
-  [confident] [serious] [curious] [warmly] [pause]. Never [softly]/[thoughtfully], never '…' inside a line, never [dramatically]/[excited].
-  The picker drops takes whose median pitch is above 225 Hz (shouting). Posted reels keep their audio.
+  [confident] [serious] [curious] [warmly] [pause], plus [excited] [dramatically] for hooks, reveals and climaxes (owner: "some shouting is fine").
+  Never [softly]/[thoughtfully], never '…' inside a line. The picker drops only takes whose median pitch is above 300 Hz (screeches). Posted reels keep their audio.
   **A/B TEST (owner, Nov 21 2026): the NEXT 2 reels (A17, A82) use `"narration_energy": "hook_reveal"`:** energetic tags
   ([excited] [dramatically] [intense]) only on shot 1 and shots marked `"reveal": true`, rest calm, shouting guard on. Details and how to
   compare: `series.json → experiments.narration_energy`. Every other reel stays calm until the owner decides.
