@@ -74,6 +74,13 @@ def use(code, style=None, track=None, avoid=()):
     json.dump(s, open(sp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     t["used_by"].append(code); save(m); print(f"{code}: {style}/{t['name']} ({t['seconds']:.0f} s) → {need:.0f} s · now run: make_reel.py audio")
 
+def body_start(p):
+    """first second where the track reaches its working level (within 6 dB of its median), so a style entering mid-reel lands with energy"""
+    import numpy as np
+    a = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", p, "-ac", "1", "-ar", "8000", "-f", "s16le", "-"], capture_output=True).stdout, np.int16).astype(float)
+    db = np.array([20 * np.log10(np.sqrt(np.mean(a[i:i + 8000] ** 2)) / 32768 + 1e-9) for i in range(0, len(a) - 8000, 8000)])
+    ok = np.where(db >= np.median(db) - 6)[0]; return float(min(ok[0], 30)) if len(ok) else 0.0
+
 def cued(code, cues, avoid=()):
     reel = os.path.join(REELS, code); sp = os.path.join(reel, "src", "script.json"); s = json.load(open(sp, encoding="utf-8"))
     ser = json.load(open(os.path.join(SER, "series.json"), encoding="utf-8")); dfl = ser.get("score_defaults") or {}
@@ -88,7 +95,7 @@ def cued(code, cues, avoid=()):
         if st not in chosen:
             pool = [t for t in m["tracks"] if t["style"] == st and t["name"] not in avoid]
             if not pool: sys.exit(f"no {st} track in the library (music_lib.py compose {st})")
-            chosen[st] = min(pool, key=lambda t: (len(t["used_by"]), -t["seconds"])); pos[st] = 0.0
+            chosen[st] = min(pool, key=lambda t: (len(t["used_by"]), -t["seconds"])); pos[st] = 0.0 if not i else body_start(fetch(chosen[st]))   # mid-reel: skip a quiet intro
         t = chosen[st]; L = (b - a) + (XF if i + 1 < len(cues) else 0)
         off = pos[st] if pos[st] + L <= t["seconds"] else max(0.0, t["seconds"] - L)   # continue the style; else its last stretch
         segs.append((fetch(t), off, L, st, t["name"], a, b)); pos[st] = off + (b - a)

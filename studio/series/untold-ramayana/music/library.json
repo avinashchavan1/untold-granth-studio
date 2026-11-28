@@ -91,12 +91,36 @@
    "seconds": 140.0,
    "source": null,
    "note": "composed for the library (150 s)",
-   "used_by": []
+   "used_by": [
+    "A103"
+   ]
   },
   {
    "style": "night_mystery",
    "name": "night_mystery_01",
    "path": "music/night_mystery/night_mystery_01.mp3",
+   "seconds": 150.0,
+   "source": null,
+   "note": "composed for the library (150 s)",
+   "used_by": [
+    "A103"
+   ]
+  },
+  {
+   "style": "tender_sorrow",
+   "name": "tender_sorrow_01",
+   "path": "music/tender_sorrow/tender_sorrow_01.mp3",
+   "seconds": 150.0,
+   "source": null,
+   "note": "composed for the library (150 s)",
+   "used_by": [
+    "A103"
+   ]
+  },
+  {
+   "style": "devotional_glow",
+   "name": "devotional_glow_01",
+   "path": "music/devotional_glow/devotional_glow_01.mp3",
    "seconds": 150.0,
    "source": null,
    "note": "composed for the library (150 s)",
