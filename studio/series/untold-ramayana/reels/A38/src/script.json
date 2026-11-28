@@ -1,0 +1,411 @@
+{
+ "reel": "A38",
+ "title": "Why Didn't Hanuman Defeat Vali?",
+ "series": "untold-ramayana",
+ "fps": 24,
+ "status": "DRAFT v1: Uttara 7.35-36 and Kishkindha 4.65-66 read; Manas lines checked; voices wait for the ElevenLabs top-up",
+ "source": "Valmiki Ramayana, Uttara Kanda 7.35-36 and Kishkindha Kanda 4.65-66 (Critical Edition)",
+ "source_card": {
+  "title": [
+   "VALMIKI",
+   "RAMAYANA"
+  ],
+  "sub": "UTTARA KANDA  ·  CHAPTERS 35–36",
+  "edition": "CRITICAL EDITION"
+ },
+ "claims": [
+  {
+   "claim": "Rama asks Agastya why Hanuman, so mighty, did not burn Vali like a creeper when the feud with Sugriva arose",
+   "ref": "7.35.2; 7.35.11",
+   "quote_sa": "किमर्थं वाली चैतेन सुग्रीवप्रियकाम्यया । तदा वैरे समुत्पन्ने न दग्धो वीरुधो यथा ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "With the gods' boons the child was full of strength and fearlessly troubled the sages' hermitages",
+   "ref": "7.36.27-31",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Sages of the Bhrigu and Angiras lines cursed him: he would not know his strength for a long time; his vigour was taken and he became gentle",
+   "ref": "7.36.32-34",
+   "quote_sa": "बाधसे यत् समाश्रित्य बलमस्मान्प्लवंगम । तद्दीर्घकालं वेत्तासि नास्माकं शापमोहितः ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Because of the curse Hanuman did not know his strength when the Vali-Sugriva feud arose, even while Sugriva was being hounded",
+   "ref": "7.36.39-40",
+   "quote_sa": "एष शापवशादेव न वेद बलमात्मनः । वालिसुग्रीवयोर्वैरं यदा राम समुत्थितम् ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE); subject eṣa = Hanuman (the page's English says Sugriva)"
+   ]
+  },
+  {
+   "claim": "He learned grammar facing the sun, moving backwards from the rising to the setting mountain",
+   "ref": "7.36.42",
+   "quote_sa": "असौ पुरा व्याकरणं ग्रहीष्यन् सूर्योन्मुखः पृष्ठगमः कपीन्द्रः ।",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Jambavan: in strength, wisdom, brilliance and courage you surpass all beings; why do you not know yourself?",
+   "ref": "4.65.7",
+   "quote_sa": "बलं बुद्धिश्च तेजश्च सत्त्वं च हरिसत्तम । विशिष्टं सर्वभूतेषु किमात्मानं न बुध्यसे ॥",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Praised, Hanuman grew in size",
+   "ref": "4.66.1",
+   "verified": true,
+   "sources": [
+    "enjoylearningsanskrit (CE)"
+   ]
+  },
+  {
+   "claim": "Ramcharitmanas: 'कहइ रीछपति सुनु हनुमाना। का चुप साधि रहेहु बलवाना।।' (no curse given)",
+   "ref": "Ramcharitmanas, Kishkindha Kand, after doha 29",
+   "quote_sa": "कहइ रीछपति सुनु हनुमाना। का चुप साधि रहेहु बलवाना।।",
+   "verified": true,
+   "sources": [
+    "ramcharit.in/kishkindha-kand (verbatim)"
+   ]
+  }
+ ],
+ "shots": [
+  {
+   "id": 1,
+   "voice": "narrator",
+   "hi": "हनुमान जी इतने बलवान थे, तो सुग्रीव को बाली से क्यों नहीं बचाया? ये सवाल, खुद श्रीराम ने पूछा था।",
+   "en": "Hanuman was so mighty, so why didn't he save Sugriva from Vali? Rama himself asked this.",
+   "units": [
+    "[intense] हनुमान जी इतने बलवान थे, तो सुग्रीव को बाली से क्यों नहीं बचाया?",
+    "[curious] ये सवाल, खुद श्रीराम ने पूछा था।"
+   ],
+   "unit_gap": 0.4,
+   "card": [
+    [
+     "WHY NOT VALI?",
+     null
+    ],
+    [
+     "RAMA ASKED.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.28,
+   "tail": 0.5,
+   "min": 5.0,
+   "reveal": true
+  },
+  {
+   "id": 2,
+   "voice": "narrator",
+   "hi": "वाल्मीकि रामायण, उत्तर कांड, सर्ग छत्तीस। बाधसे यत् समाश्रित्य बलमस्मान्प्लवंगम। तद्दीर्घकालं वेत्तासि नास्माकं शापमोहितः॥ ये है असली कहानी।",
+   "en": "",
+   "units": [
+    "वाल्मीकि रामायण, उत्तर कांड, सर्ग छत्तीस।",
+    "[reverently] [slowly] बाधसे यत् समाश्रित्य, बलमस्मान्प्लवंगम… तद्दीर्घकालं वेत्तासि, नास्माकं शापमोहितः॥",
+    "[serious] ये है असली कहानी।"
+   ],
+   "unit_gap": 0.5,
+   "lead": 0.18,
+   "tail": 0.12,
+   "sloka_unit": 1,
+   "sloka": {
+    "lines": [
+     "बाधसे यत् समाश्रित्य बलमस्मान्प्लवंगम ।",
+     "तद्दीर्घकालं वेत्तासि नास्माकं शापमोहितः ॥"
+    ],
+    "ref": "UTTARA KANDA 7.36.33",
+    "en": "“O monkey, the strength you lean on to harass us, you will not know it for a long time, bewildered by our curse.”",
+    "translit": "bādhase yat samāśritya balamasmānplavaṃgama, taddīrghakālaṃ vettāsi nāsmākaṃ śāpamohitaḥ"
+   },
+   "sloka_takes": {
+    "t1": "[reverently] [slowly]",
+    "t2": "[with deep devotion] [chanting]",
+    "t3": "[solemnly] [expressively]"
+   }
+  },
+  {
+   "id": 3,
+   "voice": "narrator",
+   "hi": "गोस्वामी तुलसीदास लिखते हैं, समुद्र के किनारे, जामवंत ने हनुमान जी से कहा: कहइ रीछपति सुनु हनुमाना। का चुप साधि रहेहु बलवाना। यानी, हे बलवान हनुमान, तुम चुप क्यों बैठे हो?",
+   "en": "",
+   "units": [
+    "[warmly] गोस्वामी तुलसीदास लिखते हैं, समुद्र के किनारे, जामवंत ने हनुमान जी से कहा:",
+    "[serious] कहइ रीछपति सुनु हनुमाना… का चुप साधि रहेहु बलवाना।",
+    "यानी, हे बलवान हनुमान, तुम चुप क्यों बैठे हो?"
+   ],
+   "unit_gap": 0.45,
+   "cite": "Ramcharitmanas, Kishkindha Kand (after doha 29)",
+   "lead": 0.25,
+   "tail": 0.4,
+   "quote": {
+    "source": "RAMCHARITMANAS",
+    "ref": "TULSIDAS · KISHKINDHA KAND · AFTER DOHA 29",
+    "lines": [
+     "कहइ रीछपति सुनु हनुमाना।",
+     "का चुप साधि रहेहु बलवाना।।"
+    ],
+    "translit": "kahai rīchhapati sunu hanumānā, kā chup sādhi rahehu balavānā",
+    "en": "“Said the king of bears: listen, Hanuman, O mighty one, why do you sit silent?”"
+   }
+  },
+  {
+   "id": 4,
+   "voice": "jambavan",
+   "hi": "हे वानरश्रेष्ठ, बल, बुद्धि, तेज और साहस, सबमें तुम सबसे आगे हो। फिर तुम खुद को क्यों नहीं पहचानते?",
+   "en": "\"O best of monkeys, in strength, wisdom, brilliance and courage you surpass all. Why do you not know yourself?\"",
+   "units": [
+    "हे वानरश्रेष्ठ, बल, बुद्धि, तेज और साहस, सबमें तुम सबसे आगे हो।",
+    "फिर तुम खुद को क्यों नहीं पहचानते?"
+   ],
+   "unit_gap": 0.4,
+   "cite": "4.65.7",
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 5,
+   "voice": "narrator",
+   "hi": "ये सुनकर, हनुमान जी का शरीर बढ़ने लगा। पर सवाल ये है: वो अपना बल भूले क्यों थे? इसका जवाब, वाल्मीकि बहुत बाद में देते हैं, उत्तर कांड में।",
+   "en": "Hearing this, Hanuman began to grow. But why had he forgotten his strength? Valmiki answers much later, in the Uttara Kanda.",
+   "units": [
+    "[engaged] ये सुनकर, हनुमान जी का शरीर बढ़ने लगा।",
+    "[curious] पर सवाल ये है: वो अपना बल भूले क्यों थे?",
+    "[storytelling] इसका जवाब, वाल्मीकि बहुत बाद में देते हैं, उत्तर कांड में।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "4.66.1",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 6,
+   "voice": "rama",
+   "hi": "मुनिवर, जब बाली और सुग्रीव में बैर हुआ, तब हनुमान ने, सुग्रीव के लिए, बाली को एक बेल की तरह क्यों नहीं जला दिया?",
+   "en": "\"Great sage, when the feud between Vali and Sugriva arose, why did Hanuman not burn Vali down like a creeper, for Sugriva's sake?\"",
+   "units": [
+    "मुनिवर, जब बाली और सुग्रीव में बैर हुआ,",
+    "तब हनुमान ने, सुग्रीव के लिए, बाली को एक बेल की तरह क्यों नहीं जला दिया?"
+   ],
+   "unit_gap": 0.3,
+   "cite": "7.35.11",
+   "lead": 0.25,
+   "tail": 0.4
+  },
+  {
+   "id": 7,
+   "voice": "narrator",
+   "hi": "तब अगस्त्य मुनि, हनुमान जी के बचपन की कथा सुनाते हैं। देवताओं के वरदान पाकर, वो बालक बल से भर गया था, और निडर होकर, ऋषियों के आश्रमों में शरारत करता था।",
+   "en": "Then the sage Agastya tells of Hanuman's childhood: full of strength from the gods' boons, the fearless child made mischief in the sages' hermitages.",
+   "units": [
+    "[storytelling] तब अगस्त्य मुनि, हनुमान जी के बचपन की कथा सुनाते हैं।",
+    "देवताओं के वरदान पाकर, वो बालक बल से भर गया था,",
+    "[engaged] और निडर होकर, ऋषियों के आश्रमों में शरारत करता था।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "7.36.27-31",
+   "lead": 0.25,
+   "tail": 0.3
+  },
+  {
+   "id": 8,
+   "voice": "agastya",
+   "hi": "तब भृगु और अंगिरा वंश के महर्षियों ने उसे श्राप दिया: जिस बल के भरोसे तुम हमें सताते हो, उसे तुम, बहुत समय तक, जान नहीं पाओगे।",
+   "en": "\"Then the great sages of the Bhrigu and Angiras lines cursed him: the strength you lean on to harass us, you will not know it for a long time.\"",
+   "units": [
+    "तब भृगु और अंगिरा वंश के महर्षियों ने उसे श्राप दिया:",
+    "जिस बल के भरोसे तुम हमें सताते हो, उसे तुम, बहुत समय तक, जान नहीं पाओगे।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "7.36.32-34",
+   "card": [
+    [
+     "THE SAGES'",
+     null
+    ],
+    [
+     "CURSE.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.4,
+   "reveal": true
+  },
+  {
+   "id": 9,
+   "voice": "narrator",
+   "hi": "इसीलिए, जब बाली, सुग्रीव को सता रहा था, तब हनुमान जी को, अपना ही बल पता नहीं था। ये उत्तर, अगस्त्य मुनि ने खुद श्रीराम को दिया।",
+   "en": "",
+   "units": [
+    "[serious] इसीलिए, जब बाली, सुग्रीव को सता रहा था,",
+    "[dramatically] तब हनुमान जी को, अपना ही बल पता नहीं था।",
+    "[storytelling] ये उत्तर, अगस्त्य मुनि ने खुद श्रीराम को दिया।"
+   ],
+   "unit_gap": 0.4,
+   "cite": "7.36.39-40",
+   "card": [
+    [
+     "HE DIDN'T KNOW",
+     null
+    ],
+    [
+     "HIS OWN STRENGTH.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.35,
+   "reveal": true
+  },
+  {
+   "id": 10,
+   "voice": "narrator",
+   "hi": "और एक बात, जो बहुत कम लोग जानते हैं: अगस्त्य बताते हैं, हनुमान जी ने, सूर्य की ओर मुँह करके, उलटे चलते हुए, उदय से अस्त तक, व्याकरण सीखा था।",
+   "en": "",
+   "units": [
+    "[curious] और एक बात, जो बहुत कम लोग जानते हैं:",
+    "[engaged] अगस्त्य बताते हैं, हनुमान जी ने, सूर्य की ओर मुँह करके, उलटे चलते हुए,",
+    "उदय से अस्त तक, व्याकरण सीखा था।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "7.36.42",
+   "card": [
+    [
+     "GRAMMAR",
+     null
+    ],
+    [
+     "FROM THE SUN.",
+     "#f6c244"
+    ]
+   ],
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 11,
+   "voice": "narrator",
+   "hi": "तुलसीदास में, जामवंत याद दिलाते हैं। वाल्मीकि में, उसके पीछे का कारण भी है: ऋषियों का श्राप। दोनों कथाएँ, भक्ति से सुनाई जाती हैं।",
+   "en": "",
+   "units": [
+    "[serious] तुलसीदास में, जामवंत याद दिलाते हैं।",
+    "[engaged] वाल्मीकि में, उसके पीछे का कारण भी है: ऋषियों का श्राप।",
+    "[warmly] दोनों कथाएँ, भक्ति से सुनाई जाती हैं।"
+   ],
+   "unit_gap": 0.35,
+   "cite": "7.36.32-40; 4.65",
+   "lead": 0.25,
+   "tail": 0.35
+  },
+  {
+   "id": 12,
+   "voice": "narrator",
+   "hi": "ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।",
+   "en": "",
+   "units": [
+    "[warmly] ऐसी और अनसुनी कहानियों के लिए, फ़ॉलो करें।"
+   ],
+   "lead": 0.43,
+   "tail": 0.68,
+   "min": 3.7,
+   "cta": true
+  }
+ ],
+ "thumbnail": {
+  "frame": "60s",
+  "hook": "Why didn't Hanuman stop Vali?",
+  "stamp": "Valmiki 7.36",
+  "line": "The sages' curse",
+  "badge": "Valmiki Ramayana · Uttara 7.35–36",
+  "art_shift": 0
+ },
+ "score": {
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "style": "heroic_strings",
+  "duration_s": 120,
+  "gain": 2.3,
+  "duck": 0.6,
+  "prompt": "Hanuman's hidden strength: a hush on the seashore under the recited verse, a warm rising theme as Jambavan speaks and Hanuman grows, a gentle playful passage for the child in the sages' hermitages, a darker hush for the curse, then the soaring strings return for the reveal and resolve warmly."
+ },
+ "hook_options": [
+  {
+   "hi": "हनुमान जी इतने बलवान थे, तो सुग्रीव को बाली से क्यों नहीं बचाया? ये सवाल, खुद श्रीराम ने पूछा था।",
+   "en": "Hanuman was so mighty, so why didn't he save Sugriva from Vali? Rama himself asked this.",
+   "card": [
+    [
+     "WHY NOT VALI?",
+     null
+    ],
+    [
+     "RAMA ASKED.",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "hi": "हनुमान जी अपना बल क्यों भूले थे? वाल्मीकि इसका कारण बताते हैं: एक श्राप।",
+   "en": "Why had Hanuman forgotten his strength? Valmiki gives the reason: a curse.",
+   "card": [
+    [
+     "WHY DID HE",
+     null
+    ],
+    [
+     "FORGET?",
+     "#f6c244"
+    ]
+   ]
+  },
+  {
+   "hi": "श्रीराम ने पूछा: हनुमान ने बाली को क्यों नहीं हराया? जवाब, एक बचपन का श्राप था।",
+   "en": "Rama asked: why didn't Hanuman defeat Vali? The answer was a childhood curse.",
+   "card": [
+    [
+     "A CHILDHOOD",
+     null
+    ],
+    [
+     "CURSE.",
+     "#f6c244"
+    ]
+   ]
+  }
+ ],
+ "avoid": [
+  "'until someone reminds him' as Valmiki's words (7.36.33 says 'for a long time')",
+  "mocking the Manas; both told with devotion",
+  "presenting Uttara as the same layer as Kishkindha: say 'in the Uttara Kanda, Agastya tells Rama'"
+ ],
+ "verify_note": "Uttara 7.35.1-15 and 7.36 (46 verses), Kishkindha 4.65-66 read (research/A38/). Page English mislabels the subject in 7.35.11 (says Rama; etena = Hanuman) and 7.36.39 (says Sugriva; eṣa = Hanuman). Manas: ramcharit.in, after doha 29. Notes: research/A38_hanuman_forgot.md",
+ "caption": "Hanuman was so mighty, so why didn't he save Sugriva from Vali? In Valmiki's Ramayana (Critical Edition), Rama himself asks this of the sage Agastya (Uttara 7.35.11). Agastya's answer: as a fearless child, full of the gods' boons, Hanuman troubled the sages' hermitages, and the sages of the Bhrigu and Angiras lines cursed him: \"the strength you lean on, you will not know it for a long time\" (7.36.33). That is why he didn't act when Vali hounded Sugriva (7.36.39-40). In the Ramcharitmanas, Jambavan reminds him: \"का चुप साधि रहेहु बलवाना\". Both tellings are told with devotion.",
+ "youtube_title": "Why Didn't Hanuman Defeat Vali? Rama Asked This Himself | Valmiki Ramayana #Shorts",
+ "comment_prompt": "Did you know Rama himself asked why Hanuman didn't stop Vali? 👇 Jai Shri Ram! Jai Hanuman!",
+ "hashtags": [
+  "#UntoldGranth",
+  "#Hanuman",
+  "#Jambavan",
+  "#Vali",
+  "#Ramayana",
+  "#Valmiki",
+  "#Ramcharitmanas",
+  "#JaiHanuman"
+ ]
+}

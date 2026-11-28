@@ -293,6 +293,17 @@
    "name": "Nazir Qureshi - Senior Matured Narrator (ElevenLabs library)",
    "character": "The blind old sage, the young ascetic's father (A105)",
    "chosen": "Claude (minor character), Nov 27 2026: 3 elder previews compared; calm, aged, dignified (~121 Hz); the 'husky elderly' option sounded like a caricature"
+  },
+  "agastya": {
+   "engine": "elevenlabs",
+   "model": "eleven_v4",
+   "language": "hi",
+   "fx": "highpass=f=70,acompressor=threshold=-22dB:ratio=2:attack=10:release=150:makeup=1.5",
+   "mix_gain": 1.0,
+   "voice_id": "m6ybhpNPDDgyT2aEYE04",
+   "name": "Danish Khan - Rich, Poetic Narrator (ElevenLabs library)",
+   "character": "Sage Agastya (A38), telling Rama of Hanuman's childhood (Uttara)",
+   "chosen": "Claude (minor character), Nov 28 2026: deep poetic elder storyteller, distinct from the narrator and from andhamuni"
   }
  },
  "fx": {
