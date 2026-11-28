@@ -77,10 +77,20 @@
   }
  ],
  "score": {
-  "engine": "excerpt of the wide production's score",
-  "file": "audio/score.wav",
-  "gain": 1.5,
-  "duck": 0.72
+  "engine": "elevenlabs music_v1",
+  "file": "audio/score.mp3",
+  "style": "heroic_strings",
+  "duration_s": 96,
+  "gain": 2.3,
+  "duck": 0.6,
+  "prompt": "An ancient forest legend: a hush under the recited verse, a bright heroic swell as one arrow pierces seven great trees, a confident rising theme as two allies march to a mountain city, tension in a duel where the hero holds back his arrow, a tender aching passage of reproach and explanation, then a gentle lift as a flowering garland gives the answer; warm resolution.",
+  "previous": {
+   "engine": "excerpt of the wide production's score",
+   "file": "audio/score.wav",
+   "gain": 1.5,
+   "duck": 0.72
+  },
+  "take": "heroic_strings take 2 of 2 (Nov 28 2026): quiet open, builds through the march and the duel, peak 50-75 s, settles for the flower answer"
  },
  "thumbnail": {
   "hook": "WHY DIDN'T HE SHOOT?",
