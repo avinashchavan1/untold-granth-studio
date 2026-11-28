@@ -57,7 +57,7 @@ function useMeta(s: WorkStatus) {
 
 // collapsed: on phones a thin one-line strip at the top (away from the thumbs); on computers a small pill in the corner
 function Pill({ s, onOpen }: { s: WorkStatus; onOpen: () => void }) {
-  const { waiting, stale, pct, left } = useMeta(s);
+  const { waiting, stale, pct, left, since } = useMeta(s);
   const icon = (size: number) => waiting ? <Hand size={size} className="shrink-0" /> : <Loader2 size={size} className={clsx("shrink-0 text-gold", !stale && "animate-spin")} />;
   const b = batchOf(s);
   const label = stale ? <span className="min-w-0 truncate text-amber-400">⚠ {s.reel_code ?? "Work"} · stopped? no update for {Math.round(since / 60)} min</span> : <span className="min-w-0 truncate">{waiting ? "Needs you" : s.reel_code ?? "Working"}{!waiting && s.task ? ` · ${s.task}` : ""}{!waiting && b ? ` · reel ${b.doneN + (b.doneN < b.total ? 1 : 0)}/${b.total}` : ""}</span>;
