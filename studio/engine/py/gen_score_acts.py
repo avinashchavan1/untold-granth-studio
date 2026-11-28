@@ -7,7 +7,7 @@ Then build_audio uses audio/score.wav like any reel's score (score.gain / score.
 import json, os, subprocess, sys, urllib.request
 reel = os.path.abspath(sys.argv[1]); cmd = sys.argv[2] if len(sys.argv) > 2 else "all"
 S = json.load(open(os.path.join(reel, "src", "script.json"), encoding="utf-8")); TL = json.load(open(os.path.join(reel, "src", "timeline.json")))
-ser = json.load(open(os.path.join(os.path.dirname(os.path.dirname(reel)), "series.json"), encoding="utf-8")); style = ser.get("score_style", "")
+ser = json.load(open(os.path.join(os.path.dirname(os.path.dirname(reel)), "series.json"), encoding="utf-8")); style = (ser.get("score_styles") or {}).get((S.get("score") or {}).get("style") or "", "") or ser.get("score_style", "")
 acts = {a["n"]: a for a in S.get("acts", [])}; act_of = {sh["id"]: sh.get("act", 0) for sh in S["shots"]}
 spans = {}
 for sh in TL["shots"]:
