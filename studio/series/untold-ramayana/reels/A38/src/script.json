@@ -325,12 +325,12 @@
   }
  ],
  "thumbnail": {
-  "frame": "60s",
+  "frame": "51s",
   "hook": "Why didn't Hanuman stop Vali?",
   "stamp": "Valmiki 7.36",
   "line": "The sages' curse",
   "badge": "Valmiki Ramayana · Uttara 7.35–36",
-  "art_shift": 0
+  "art_shift": 330
  },
  "score": {
   "engine": "library",
