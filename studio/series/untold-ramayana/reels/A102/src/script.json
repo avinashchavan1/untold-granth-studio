@@ -314,7 +314,7 @@
   "stamp": "Valmiki says",
   "line": "Rama woke him gently.",
   "badge": "Valmiki Ramayana · Ayodhya 2.50",
-  "art_shift": -260
+  "art_shift": 300
  },
  "score": {
   "engine": "elevenlabs eleven_music_v2_5",
