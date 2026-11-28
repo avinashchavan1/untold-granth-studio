@@ -14,7 +14,7 @@ Prompts: describe the story's moods WITHOUT names, reel ids or dates (the music 
 | Order | Reel | Posts (IST) | Status |
 |---|---|---|---|
 | — | A36 | Nov 28, 7 PM | not possible (posted before the score could be made) |
-| 1 | A34 | Nov 29 | take 2 picked; rendering Nov 28 → owner re-approves |
+| 1 | A34 | Nov 29 | done (take 2), uploaded Nov 28 → owner re-approves |
 | 2 | A103 | Nov 30 | prompt ready; waits for credits |
 | — | A23 | Dec 1 | already the heroic strings sound (the reference) |
 | 3 | A101 | Dec 2 | waits for credits |
